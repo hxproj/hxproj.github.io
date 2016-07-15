@@ -16,7 +16,11 @@
   		$('.ui.dropdown').dropdown();
 
   		$('.right.item a').click(function(){
-  			$('.ui.modal').modal('show');
+  			$('#MedicalRecords').modal('show');
+  		});
+
+  		$('.extra .right.button').click(function(){
+  			$('#ChiefComplaint').modal('show');
   		});
   	});
   	</script>
@@ -67,33 +71,31 @@
 						<div class="ui hidden divider"></div>
 						<div class="extra">
 							<div class="ui header">
-								上前牙：
+								上前牙（颜色变化、10天前）：
 								<div class="ui icon small buttons">
-									<button class="ui blue button">主诉</button>
-									<button class="ui blue button">现病史</button>
-									<button class="ui blue button">口腔检查</button>
-									<button class="ui button">诊断</button>
-									<button class="ui button">难度评估</button>
-									<button class="ui button">处置</button>
-									<button class="ui button">龋病预后管理</button>
-									<button class="ui button">USPHS评估</button>
-									<button class="ui icon orange button"><i class="remove icon"></i></button>
+									<a class="ui blue button">现病史</a>
+									<a class="ui blue button">口腔检查</a>
+									<a class="ui button">诊断</a>
+									<a class="ui button">难度评估</a>
+									<a class="ui button">处置</a>
+									<a class="ui button">龋病预后管理</a>
+									<a class="ui button">USPHS评估</a>
+									<a class="ui icon orange button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
 						<div class="extra">
 							<div class="ui header">
-								下前牙：
+								下前牙（有洞、1年前）：
 								<div class="ui icon small buttons">
-									<button class="ui blue button">主诉</button>
-									<button class="ui button">现病史</button>
-									<button class="ui button">口腔检查</button>
-									<button class="ui button">诊断</button>
-									<button class="ui button">难度评估</button>
-									<button class="ui button">处置</button>
-									<button class="ui button">龋病预后管理</button>
-									<button class="ui button">USPHS评估</button>
-									<button class="ui icon orange button"><i class="remove icon"></i></button>
+									<a class="ui button">现病史</a>
+									<a class="ui button">口腔检查</a>
+									<a class="ui button">诊断</a>
+									<a class="ui button">难度评估</a>
+									<a class="ui button">处置</a>
+									<a class="ui button">龋病预后管理</a>
+									<a class="ui button">USPHS评估</a>
+									<a class="ui icon orange button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
@@ -122,33 +124,16 @@
 						<div class="ui hidden divider"></div>
 						<div class="extra">
 							<div class="ui header">
-								上前牙：
+								口内多颗牙（折裂、20天前）：
 								<div class="ui icon small buttons">
-									<button class="ui blue button">主诉</button>
-									<button class="ui blue button">现病史</button>
-									<button class="ui blue button">口腔检查</button>
-									<button class="ui blue button">诊断</button>
-									<button class="ui blue button">难度评估</button>
-									<button class="ui button">处置</button>
-									<button class="ui button">龋病预后管理</button>
-									<button class="ui button">USPHS评估</button>
-									<button class="ui icon orange button"><i class="remove icon"></i></button>
-								</div>
-							</div>
-						</div>
-						<div class="extra">
-							<div class="ui header">
-								下前牙：
-								<div class="ui icon small buttons">
-									<button class="ui blue button">主诉</button>
-									<button class="ui blue button">现病史</button>
-									<button class="ui blue button">口腔检查</button>
-									<button class="ui button">诊断</button>
-									<button class="ui button">难度评估</button>
-									<button class="ui button">处置</button>
-									<button class="ui button">龋病预后管理</button>
-									<button class="ui button">USPHS评估</button>
-									<button class="ui icon orange button"><i class="remove icon"></i></button>
+									<a class="ui blue button">现病史</a>
+									<a class="ui blue button">口腔检查</a>
+									<a class="ui blue blue button">诊断</a>
+									<a class="ui blue button">难度评估</a>
+									<a class="ui button">处置</a>
+									<a class="ui button">龋病预后管理</a>
+									<a class="ui button">USPHS评估</a>
+									<a class="ui icon orange button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
@@ -163,11 +148,73 @@
 		</div>
   	</div>
 
-	<div class="ui modal">
+	<div class="ui modal" id="ChiefComplaint">
+		<div class="header">添加牙位</div>
+		<div class="content">
+		    <div class="description">
+				<form class="ui clearing form">
+			    	<h3 class="ui blue header">基本信息</h3>
+				    <div class="three fields">
+				    	<div class="field">
+				    		<label>牙齿部位</label>
+				    		<select name="dropdown" class="ui dropdown">
+			                <option value="">选择</option>
+							<option value="上前牙">上前牙</option>
+							<option value="下前牙">下前牙</option>
+							<option value="左上前牙">左上前牙</option>
+							<option value="左下前牙">左下前牙</option>
+							<option value="右上前牙">右上前牙</option>
+							<option value="右下前牙">右下前牙</option>
+							<option value="上后牙">上后牙</option>
+							<option value="下后牙">下后牙</option>
+							<option value="左上后牙">左上后牙</option>
+							<option value="左下后牙">左下后牙</option>
+							<option value="右上后牙">右上后牙</option>
+							<option value="右下后牙">右下后牙</option>
+							<option value="口内多颗牙">口内多颗牙</option>
+			              	</select>
+				    	</div>
+				    	<div class="field">
+				    		<label>症状</label>
+				    		<select name="dropdown" class="ui dropdown">
+			                <option value="">选择</option>
+			                <option value="颜色变化">颜色变化</option>
+			                <option value="有洞">有洞</option>
+			                <option value="冷热敏感">冷热敏感</option>
+			                <option value="充填体松动">充填体松动</option>
+			                <option value="充填体脱落">充填体脱落</option>
+			                <option value="食物嵌塞">食物嵌塞</option>
+			                <option value="折裂">折裂</option>
+			                <option value="咬合痛">咬合痛</option>
+			              	</select>
+				    	</div>
+				    	<div class="field">
+				    		<label>病发时间(此处UI有待进一步设计)</label>
+				    		<select name="dropdown" class="ui dropdown">
+			                <option value="">选择</option>
+			                <option value="2016">1-10天前</option>
+			                <option value="2015">1-10月前</option>
+			                <option value="2015">几年前</option>
+			              	</select>
+				    	</div>
+				    </div>	
+				</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui blue right labeled icon submit button">
+				添加<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui modal" id="MedicalRecords">
 		<div class="header">添加病例</div>
 		<div class="content">
 		    <div class="description">
 				<form class="ui clearing form">
+			    	<h3 class="ui blue header">基本信息</h3>
 				    <div class="three fields">
 				    	<div class="field">
 				    		<label>姓名</label>
@@ -198,8 +245,7 @@
 				    	</div>
 				    </div>
 
-				   	<h2 class="ui blue header">个人史</h2>	
-			    	<h3 class="ui header">饮食习惯:</h3>
+			    	<h3 class="ui blue header">饮食习惯</h3>
 			    	<div class="three fields">
 				    	<div class="field">
 				    		<label>是/否多甜食、多蛋白质类食物</label>
@@ -211,7 +257,6 @@
 				    	<div class="field">
 				    		<label>食用量</label>
 				    		<select name="dropdown" class="ui dropdown">
-				            <option value="">选择</option>
 				            <option value="124"><125g</option>
 				            <option value="125">125-249g</option>
 				            <option value="250">250-500g</option>
@@ -221,7 +266,6 @@
 				    	<div class="field">
 				    		<label>频率</label>
 				    		<select name="dropdown" class="ui dropdown">
-				            <option value="">选择</option>
 				            <option value="1">小于1次/天</option>
 				            <option value="2">2次/天</option>
 				            <option value="3">3次/天</option>
@@ -249,7 +293,7 @@
 						</div>
 					</div>
 
-			    	<h3 class="ui header">口腔卫生维护:</h3>
+			    	<h3 class="ui blue header">口腔卫生维护</h3>
 					<div class="three fields">
 				    	<div class="field">
 				    		<label>每天刷牙次数</label>
@@ -303,7 +347,7 @@
 						</div>
 					</div>
 			    	
-			    	<h3 class="ui header">宿主易感性:</h3>
+			    	<h3 class="ui blue header">宿主易感性</h3>
 			    	<div class="three fields">
 				    	<div class="field">
 							<div class="ui toggle checkbox">
