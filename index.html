@@ -19,7 +19,7 @@
   			$('#MedicalRecords').modal('show');
   		});
 
-  		$('.extra .right.button').click(function(){
+  		$('.add.button').click(function(){
   			$('#ChiefComplaint').modal('show');
   		});
   	});
@@ -59,7 +59,7 @@
 
 		<div class="ui segment">
 			<a class="ui orange ribbon label">个人史</a>
-		    <div class="ui link items">
+		    <div class="ui items">
 				<div class="item">
 					<div class="content">
 						<a class="ui large header">李狗蛋</a>      
@@ -72,23 +72,28 @@
 						<div class="ui hidden divider"></div>
 						<div class="extra">
 							<div class="ui header">
-								口内多颗牙（折裂、20天前）：
+								口内多颗牙【折裂、20天前】
 								<div class="ui icon small buttons">
 									<a class="ui blue button" href="PresentIllness.html">现病史</a>
 									<a class="ui blue button" href="MouthExamination.html">口腔检查</a>
 									<a class="ui blue blue button" href="Diagnose.html">诊断</a>
 									<a class="ui blue button" href="DifficultyAssessment.html">难度评估（Ⅱ级）</a>
-									<a class="ui button" href="Cure.html">处置</a>
-									<a class="ui button" href="Manage.html">龋病预后管理（低风险）</a>
-									<a class="ui button" href="USPHS.html">USPHS评估</a>
-									<a class="ui icon orange button"><i class="remove icon"></i></a>
+									<a class="ui disabled button" href="Cure.html">处置</a>
+									<a class="ui disabled button" href="Manage.html">龋病预后管理（低风险）</a>
+									<a class="ui disabled button" href="USPHS.html">USPHS评估</a>
+									<a class="ui icon button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
 
+						<div class="ui horizontal divider">Or </div>
+
+						<div class="ui center aligned basic segment">
+							<div class="ui teal labeled icon add button">添加牙位<i class="add icon"></i></div>
+						</div>
+
 				      	<div class="extra">
-				      		<div class="ui label">添加时间：2016-07-14 11:15</div>
-							<div class="ui right floated button"><i class="plus icon"></i>添加牙位</div>
+				      		<div class="ui label">病历添加时间：2016-07-14 11:20</div>
 				      	</div>
 					</div>
 				</div>
@@ -97,7 +102,7 @@
 		
 		<div class="ui segment">
 			<a class="ui orange ribbon label">个人史</a>
-		    <div class="ui link items">
+		    <div class="ui items">
 				<div class="item">
 					<div class="content">
 						<a class="ui large header">张三全蛋</a>      
@@ -110,38 +115,43 @@
 						<div class="ui hidden divider"></div>
 						<div class="extra">
 							<div class="ui header">
-								上前牙（颜色变化、10天前）：
+								上前牙【颜色变化、10天前】
 								<div class="ui icon small buttons">
 									<a class="ui blue button">现病史</a>
 									<a class="ui blue button">口腔检查</a>
-									<a class="ui button">诊断</a>
-									<a class="ui button">难度评估</a>
-									<a class="ui button">处置</a>
-									<a class="ui button">龋病预后管理</a>
-									<a class="ui button">USPHS评估</a>
-									<a class="ui icon orange button"><i class="remove icon"></i></a>
+									<a class="ui blue button">诊断</a>
+									<a class="ui disabled button">难度评估</a>
+									<a class="ui disabled button">处置</a>
+									<a class="ui disabled button">龋病预后管理</a>
+									<a class="ui disabled button">USPHS评估</a>
+									<a class="ui icon button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
 						<div class="extra">
 							<div class="ui header">
-								下前牙（有洞、1年前）：
+								下前牙【有洞、1年前】
 								<div class="ui icon small buttons">
-									<a class="ui button">现病史</a>
-									<a class="ui button">口腔检查</a>
-									<a class="ui button">诊断</a>
-									<a class="ui button">难度评估</a>
-									<a class="ui button">处置</a>
-									<a class="ui button">龋病预后管理</a>
-									<a class="ui button">USPHS评估</a>
-									<a class="ui icon orange button"><i class="remove icon"></i></a>
+									<a class="ui blue button">现病史</a>
+									<a class="ui disabled button">口腔检查</a>
+									<a class="ui disabled button">诊断</a>
+									<a class="ui disabled button">难度评估</a>
+									<a class="ui disabled button">处置</a>
+									<a class="ui disabled button">龋病预后管理</a>
+									<a class="ui disabled button">USPHS评估</a>
+									<a class="ui icon button"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
 
+						<div class="ui horizontal divider">Or </div>
+
+						<div class="ui center aligned basic segment">
+							<div class="ui teal labeled icon add button">添加牙位<i class="add icon"></i></div>
+						</div>
+
 				      	<div class="extra">
-				      		<div class="ui label">添加时间：2016-07-14 11:20</div>
-							<div class="ui right floated button"><i class="plus icon"></i>添加牙位</div>
+				      		<div class="ui label">病历添加时间：2016-07-14 11:20</div>
 				      	</div>
 					</div>
 				</div>
@@ -251,8 +261,8 @@
 				    	<div class="field">
 				    		<label>是/否多甜食、多蛋白质类食物</label>
 				    		<select name="dropdown" class="ui dropdown">
-				            <option value="NO">否</option>
-				            <option value="YES">是</option>
+				            <option value="否">否</option>
+				            <option value="是">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
@@ -261,7 +271,7 @@
 				            <option value="124"><125g</option>
 				            <option value="125">125-249g</option>
 				            <option value="250">250-500g</option>
-				            <option value="500">>125g</option>
+				            <option value="500">>500g</option>
 				          	</select>
 						</div>
 				    	<div class="field">
@@ -288,14 +298,21 @@
 				    	<div class="field">
 				    		<label>正餐间进食是否含碳酸</label>
 				    		<select name="dropdown" class="ui dropdown">
-				            <option value="NO">否</option>
-				            <option value="YES">是</option>
+				            <option value="否">否</option>
+				            <option value="是">是</option>
 				          	</select>
 						</div>
 					</div>
 
 			    	<h3 class="ui blue header">口腔卫生维护</h3>
 					<div class="three fields">
+				    	<div class="field">
+				    		<label>是否使用牙线</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
 				    	<div class="field">
 				    		<label>每天刷牙次数</label>
 				    		<select name="dropdown" class="ui dropdown">
@@ -305,72 +322,85 @@
 				          	</select>
 						</div>
 				    	<div class="field">
+				    		<label>每天刷牙次数</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="早间刷牙">早间刷牙</option>
+				            <option value="中午刷牙">中午刷牙</option>
+				            <option value="睡前刷牙">睡前刷牙</option>
+				          	</select>
+						</div>
+			    	</div>
+
+					<div class="three fields">
+				    	<div class="field">
 				    		<label>刷牙时长</label>
 				    		<input type="text" name="name" placeholder="刷牙时长">
 				    	</div>
+				    	<div class="field">
+				    		<label>是否使用电动牙刷</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+				    	<div class="field">
+				    		<label>刷牙方法是否正确</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
 			    	</div>
 
-			    	<div class="three fields">
-				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否使用牙线</label>
-							</div>
-						</div>
-
-				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否使用电动牙刷，刷牙方法</label>
-							</div>
-						</div>
-
-				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>牙膏是/否含氟</label>
-							</div>
-						</div>
-					</div>    	
 					<div class="three fields">
 				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否口腔定期检查</label>
-							</div>
+				    		<label>牙膏是否含氟</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
 						</div>
-
 				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否定期牙周洁治</label>
-							</div>
+				    		<label>口腔定期是否检查</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
 						</div>
-					</div>
+				    	<div class="field">
+				    		<label>是否定期牙周洁治</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+			    	</div>
 			    	
 			    	<h3 class="ui blue header">宿主易感性</h3>
-			    	<div class="three fields">
-				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否有唾液腺疾病</label>
-							</div>
-						</div>
 
+					<div class="three fields">
 				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否自觉唾液流量减少，减少时间</label>
-							</div>
+				    		<label>是否有唾液腺疾病【病名】</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
 						</div>
-
 				    	<div class="field">
-							<div class="ui toggle checkbox">
-							  <input type="checkbox" name="public">
-							  <label>是/否有干燥综合征</label>
-							</div>
+				    		<label>是否有干燥综合征</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
 						</div>
-					</div>
+				    	<div class="field">
+				    		<label>是否自觉唾液流量减少【时间】</label>
+				    		<select name="dropdown" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+			    	</div>
 				</form>
 		    </div>
 	  	</div>
