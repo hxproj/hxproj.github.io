@@ -54,47 +54,49 @@
 	<div class="ui main container">
 		<h2 class="ui orange header">诊断（李狗蛋）</h2>
 
-		<div class="ui info message">
-			<div class="header">检查结果</div>
-			<h5>1. 牙体情况: 牙位51-48，龋坏累及唇面，浅龋，冷(+)，热(-)，探(+-)，叩（+），无继发龋，色棕褐，质软，复合树脂填充体，牙齿活力值14</h5>
-			<h5>2. 牙周情况: 牙龈充血，龈上牙石(2级)，龈下牙石(1级)，BOP(+)，牙周袋深度(3.5-5.5mm)，根分叉病变(3级)，唇面，牙齿松动度(Ⅱ)，牙龈无瘘道，牙龈有溢脓</h5>
-			<h5>3. 龋失补指数: 30</h5>
-			<h5>4. 牙齿发育情况: 釉质发育不全</h5>
-			<h5>5. 患牙与邻牙接触关系: 与邻牙关系正常，牙列不拥挤，患牙有对合牙，牙体形态(结合牙)</h5>
-			<h5>6. 患牙修复治疗情况: 树脂充填体，树脂充填体</h5>
-			<h5>7. X线片表现: 近中邻面，本质浅层，高密度充填体影像，根尖周组织无明显异常，CT表现(xxx)，咬翼片表现(xxx)</h5>
+		<div class="ui segment">
+			<form class="ui clearing basic segment form">
+				<h3 class="ui blue header">上前牙、累及唇面</h3>
+				<div class="two fields">
+					<div class="field">
+						<label>龋损程度（检查已选择此项）</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="浅龋">浅龋</option>
+						<option value="中龋">中龋</option>
+						<option value="深龋">深龋</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>龋齿病种</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="猛性龋">猛性龋</option>
+						<option value="隐匿性龋">隐匿性龋</option>
+						<option value="根面龋">根面龋</option>
+						<option value="继发龋">继发龋</option>
+						<option value="静止龋">静止龋</option>
+						<option value="酸蚀症">酸蚀症</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui red header">添加诊断图片（与检查图片对焦不同）</h3>
+			    <button class="ui right floated blue button">提交</button>
+			</form> 
+			<div class="ui info message">
+				<div class="header">检查结果</div>
+				<h5>1. 牙体情况: 牙位51-48，龋坏累及唇面，浅龋，冷(+)，热(-)，探(+-)，叩（+），无继发龋，色棕褐，质软，复合树脂填充体，牙齿活力值14</h5>
+				<h5>2. 牙周情况: 牙龈充血，龈上牙石(2级)，龈下牙石(1级)，BOP(+)，牙周袋深度(3.5-5.5mm)，根分叉病变(3级)，唇面，牙齿松动度(Ⅱ)，牙龈无瘘道，牙龈有溢脓</h5>
+				<h5>3. 龋失补指数: 30</h5>
+				<h5>4. 牙齿发育情况: 釉质发育不全</h5>
+				<h5>5. 患牙与邻牙接触关系: 与邻牙关系正常，牙列不拥挤，患牙有对合牙，牙体形态(结合牙)</h5>
+				<h5>6. 患牙修复治疗情况: 树脂充填体，树脂充填体</h5>
+				<h5>7. X线片表现: 近中邻面，本质浅层，高密度充填体影像，根尖周组织无明显异常，CT表现(xxx)，咬翼片表现(xxx)</h5>
+			</div>
 		</div>
 
-		<form class="ui clearing segment form">
-			<h3 class="ui blue header">上前牙、累及唇面</h3>
-			<div class="two fields">
-				<div class="field">
-					<label>龋损程度（检查已选择此项）</label>
-					<select name="dropdown" class="ui dropdown">
-					<option value="">选择</option>
-					<option value="浅龋">浅龋</option>
-					<option value="中龋">中龋</option>
-					<option value="深龋">深龋</option>
-					</select>
-				</div>
-
-				<div class="field">
-					<label>龋齿病种</label>
-					<select name="dropdown" class="ui dropdown">
-					<option value="">选择</option>
-					<option value="猛性龋">猛性龋</option>
-					<option value="隐匿性龋">隐匿性龋</option>
-					<option value="根面龋">根面龋</option>
-					<option value="继发龋">继发龋</option>
-					<option value="静止龋">静止龋</option>
-					<option value="酸蚀症">酸蚀症</option>
-					</select>
-				</div>
-			</div>
-
-			<h3 class="ui red header">添加诊断图片（与检查图片对焦不同）</h3>
-		    <button class="ui right floated blue button">提交</button>
-		</form> 
   	</div>
 
 </body>
