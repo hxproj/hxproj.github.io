@@ -58,23 +58,24 @@
 	<div class="ui main container">
 
 		<div class="ui segment">
-			<a class="ui orange ribbon label">个人史</a>
 		    <div class="ui items">
+				<a class="ui orange ribbon label">个人史</a>
 				<div class="item">
 					<div class="content">
-						<a class="ui large header">李狗蛋</a>      
-						<div class="meta">
-							<span>男</span>
-							<span>23岁</span>
-							<span>系统架构师</span>
-							<span class="stay">15608041015</span>
+
+						<div class="ui center aligned vertical basic segment">
+							<a class="ui large header">李狗蛋</a>      
+							<div class="meta">
+								<span>男</span>
+								<span>23岁</span>
+								<span>系统架构师</span>
+								<span class="stay">15608041015</span>
+					      	</div>
+							<div class="ui divider"></div>
+							<div class="ui teal labeled icon add small button">添加牙位<i class="add icon"></i></div>
 				      	</div>
 
-						<div class="ui basic segment">
-							<div class="ui teal labeled icon add button">添加牙位<i class="add icon"></i></div>
-						</div>
 
-						<div class="ui hidden divider"></div>
 						<div class="extra">
 							<div class="ui header">
 								口内多颗牙【折裂、20天前】
@@ -91,7 +92,7 @@
 							</div>
 						</div>
 
-						<div class="ui horizontal divider">Or </div>
+						<div class="ui hidden divider"></div>
 
 				      	<div class="extra">
 				      		<div class="ui right floated label">病历添加时间：2016-07-14 11:20</div>
@@ -106,14 +107,19 @@
 		    <div class="ui items">
 				<div class="item">
 					<div class="content">
-						<a class="ui large header">张三全蛋</a>      
-						<div class="meta">
-							<span>男</span>
-							<span>30岁</span>
-							<span>软件工程师</span>
-							<span class="stay">15123564841</span>
+
+						<div class="ui center aligned basic segment">
+							<a class="ui large header">张三全蛋</a>      
+							<div class="meta">
+								<span>男</span>
+								<span>30岁</span>
+								<span>软件工程师</span>
+								<span class="stay">15123564841</span>
+					      	</div>
+							<div class="ui divider"></div>
+							<div class="ui teal labeled icon add small button">添加牙位<i class="add icon"></i></div>
 				      	</div>
-						<div class="ui hidden divider"></div>
+
 						<div class="extra">
 							<div class="ui header">
 								上前牙【颜色变化、10天前】
@@ -143,12 +149,6 @@
 									<a class="ui icon button"><i class="remove icon"></i></a>
 								</div>
 							</div>
-						</div>
-
-						<div class="ui horizontal divider">Or </div>
-
-						<div class="ui center aligned basic segment">
-							<div class="ui teal labeled icon add button">添加牙位<i class="add icon"></i></div>
 						</div>
 
 				      	<div class="extra">
@@ -323,13 +323,12 @@
 				          	</select>
 						</div>
 				    	<div class="field">
-				    		<label>刷牙时间点</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<label>刷牙时间点【需对应刷牙次数有效性】</label>
+				    		<select name="dropdown" class="ui fluid search multiple dropdown">
+				    		<option value="">选择刷牙时间点</option>
 				            <option value="早间刷牙">早间刷牙</option>
 				            <option value="中午刷牙">中午刷牙</option>
 				            <option value="睡前刷牙">睡前刷牙</option>
-				            <option value="饭前刷牙">饭前刷牙</option>
-				            <option value="饭后刷牙">饭后刷牙</option>
 				          	</select>
 						</div>
 			    	</div>
