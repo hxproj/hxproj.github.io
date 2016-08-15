@@ -18,16 +18,37 @@
   			$('#MedicalRecords').modal({
   				closable: false,
   				onDeny  : function(){
+  					/*
   					if (confirm("确定取消？"))
   						return true;
   					else
   						return false;
+  					*/
   				},
 				onApprove : function() {
-					window.alert('Approved!');
+					$("#MedicalRecords .ui.form").form('submit');
 				}
   			}).modal('show');
   		});
+
+  		$('.detail .dropdown').dropdown({
+  			onChange: function(Value, Text, $Choice){
+  				$This  = $(this).parents('.detail');
+  				$Popup = $This.next('.popup');
+  				if (Text == "是") {
+  					$This.popup({
+  						hoverable: false,
+    					on       : 'manual',
+    					inline   : true,
+  						popup    : $Popup
+  					}).popup('show');
+  				}
+  				else {
+  					$This.popup('hide');
+  				}
+  			}
+  		});
+
 
   		$('.add.button').click(function(){
   			$('#ChiefComplaint').modal('show');
@@ -231,7 +252,7 @@
 		</div>
 	</div>
 
-	<div class="ui modal" id="MedicalRecords">
+	<div class="ui first coupled modal" id="MedicalRecords">
 		<div class="header">添加病历</div>
 		<div class="content">
 		    <div class="description">
@@ -334,7 +355,7 @@
 						</div>
 				    	<div class="field">
 				    		<label>刷牙时间点【需对应刷牙次数有效性】</label>
-				    		<select name="dropdown" class="ui fluid search multiple dropdown">
+				    		<select name="dropdown" class="ui fluid search multiple dropdown" multiple="">
 				    		<option value="">选择刷牙时间点</option>
 				            <option value="早间刷牙">早间刷牙</option>
 				            <option value="中午刷牙">中午刷牙</option>
@@ -391,12 +412,22 @@
 			    	<h3 class="ui blue header">宿主易感性</h3>
 
 					<div class="three fields">
-				    	<div class="field">
+				    	<div class="detail field">
 				    		<label>是否有唾液腺疾病【病名】</label>
 				    		<select name="dropdown" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
+						</div>
+						<div class="ui custom top left hidden fluid popup">
+							<div class="field">
+					    		<label>唾液腺疾病名</label>
+					    		<div class="ui action input">
+						    		<input type="text" placeholder="输入病名">
+	  								<div class="ui blue button">确定</div>
+	  								<div class="ui orange button">取消</div>
+								</div>
+							</div>
 						</div>
 				    	<div class="field">
 				    		<label>是否有干燥综合征</label>
@@ -405,12 +436,22 @@
 				            <option value="是">是</option>
 				          	</select>
 						</div>
-				    	<div class="field">
+				    	<div class="detail field">
 				    		<label>是否自觉唾液流量减少【时间】</label>
 				    		<select name="dropdown" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
+						</div>
+						<div class="ui custom top right hidden fluid popup">
+							<div class="field">
+					    		<label>自觉唾液流量减少时间</label>
+					    		<div class="ui action input">
+						    		<input type="text" placeholder="输入时间">
+	  								<div class="ui blue button">确定</div>
+	  								<div class="ui orange button">取消</div>
+								</div>
+							</div>
 						</div>
 			    	</div>
 				</form>
