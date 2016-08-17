@@ -9,7 +9,6 @@
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-  	<script src="dist/jquery.serializejson.min.js"></script>
 
   	<script type="text/javascript">
   	$(document).ready(function(){
@@ -19,19 +18,23 @@
   			$('#MedicalRecords').modal({
   				closable: false,
 				onApprove : function() {
-  				alert(JSON.stringify($("#MedicalRecords .ui.form").serializeJSON()));
+					var IsOK = true;
 					$.ajax({
-						url: "http://192.168.18.1",
+						url: "http://127.0.0.1:9000/medical-case-of-illness/user/",
 						type: "post",
-						data: $("#MedicalRecords .ui.form").serialize(),
+						async: false, 
+						data: $("#basicinfoform").serialize(),
 						dataType: "json",
 						error: function(){
+							IsOK = false;
 							alert("网络连接错误...");
 						},
 						success: function(data){
 							alert("OK");
 						}
 					});
+
+					return IsOK;
 				}
   			}).modal('show');
   		});
@@ -273,7 +276,7 @@
 		<div class="header">添加病历</div>
 		<div class="content">
 		    <div class="description">
-				<form class="ui clearing form" action="http://127.0.0.1:8080/medical-case-of-illness/user/3" method="post">
+				<form class="ui clearing form" id="basicinfoform">
 			    	<h3 class="ui blue header">基本信息</h3>
 				    <div class="three fields">
 				    	<div class="field">
@@ -282,29 +285,32 @@
 				    	</div>
 				    	<div class="field">
 				    		<label>性别</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="gender" class="ui dropdown">
 			                <option value="">选择</option>
-			                <option value="male">男</option>
-			                <option value="female">女</option>
+			                <option value="1">男</option>
+			                <option value="0">女</option>
 			              	</select>
 				    	</div>
 				    	<div class="field">
 				    		<label>年龄</label>
-				    		<input type="text" name="name" placeholder="年龄">
+				    		<input type="text" name="age" placeholder="年龄">
 				    	</div>
 				    </div>	
-
 				    <div class="three fields">
 				    	<div class="field">
 				    		<label>职业</label>
-				    		<input type="text" name="name" placeholder="职业">
+				    		<input type="text" name="occupation" placeholder="职业">
 				    	</div>
 				    	<div class="field">
 				    		<label>电话</label>
-				    		<input type="text" name="name" placeholder="电话">
+				    		<input type="text" name="contact" placeholder="电话">
 				    	</div>
 				    </div>
+				</form>
 
+				<div class="ui hidden divider"></div>
+
+				<form class="ui clearing form">
 			    	<h3 class="ui blue header">饮食习惯</h3>
 			    	<div class="three fields">
 				    	<div class="field">
