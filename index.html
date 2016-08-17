@@ -9,6 +9,7 @@
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
+  	<script src="dist/jquery.serializejson.min.js"></script>
 
   	<script type="text/javascript">
   	$(document).ready(function(){
@@ -17,16 +18,20 @@
   		$('.right.item a').click(function(){
   			$('#MedicalRecords').modal({
   				closable: false,
-  				onDeny  : function(){
-  					/*
-  					if (confirm("确定取消？"))
-  						return true;
-  					else
-  						return false;
-  					*/
-  				},
 				onApprove : function() {
-					$("#MedicalRecords .ui.form").form('submit');
+  				alert(JSON.stringify($("#MedicalRecords .ui.form").serializeJSON()));
+					$.ajax({
+						url: "http://192.168.18.1",
+						type: "post",
+						data: $("#MedicalRecords .ui.form").serialize(),
+						dataType: "json",
+						error: function(){
+							alert("网络连接错误...");
+						},
+						success: function(data){
+							alert("OK");
+						}
+					});
 				}
   			}).modal('show');
   		});
@@ -40,13 +45,24 @@
   						hoverable: false,
     					on       : 'manual',
     					inline   : true,
-    					exclusive: true,
   						popup    : $Popup
   					}).popup('show');
   				}
   				else {
   					$This.popup('hide');
   				}
+  			}
+  		});
+
+  		$('.popup .button').click(function(){
+  			if ($(this).text() == "确定"){
+  				alert("确定");
+  			} else {
+  				var PopupName = $(this).parents('.popup').prop('id');
+  				$Select = $("select[name='" + PopupName + "']");
+  				$Select.parents(".detail.field").popup('hide');
+  				// 将选择框置为否
+  				$Select.dropdown('set selected', '否');
   			}
   		});
 
@@ -468,6 +484,7 @@
 	  	</div>
 		<div class="actions">
 			<div class="ui orange deny button">取消</div>
+			<div class="ui teal right labeled icon button">重置<i class="refresh icon"></i></div>
 			<div class="ui primary approve right labeled icon button">
 				添加<i class="checkmark icon"></i>
 			</div>
