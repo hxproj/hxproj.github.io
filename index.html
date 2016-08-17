@@ -33,6 +33,20 @@
 							alert("OK");
 						}
 					});
+					$.ajax({
+						url: "http://127.0.0.1:9000/medical-case-of-illness/personal-history/",
+						type: "post",
+						async: false, 
+						data: $("#personalhistoryform").serialize(),
+						dataType: "json",
+						error: function(){
+							IsOK = false;
+							alert("网络连接错误...");
+						},
+						success: function(data){
+							alert("OK");
+						}
+					});
 
 					return IsOK;
 				}
@@ -310,7 +324,7 @@
 
 				<div class="ui hidden divider"></div>
 
-				<form class="ui clearing form">
+				<form class="ui clearing form" id="personalhistoryform">
 			    	<h3 class="ui blue header">饮食习惯</h3>
 			    	<div class="three fields">
 				    	<div class="field">
