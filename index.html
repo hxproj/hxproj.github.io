@@ -19,8 +19,9 @@
   				closable: false,
 				onApprove : function() {
 					var IsOK = true;
+					var UserInfo;
 					$.ajax({
-						url: "http://127.0.0.1:9000/medical-case-of-illness/user/",
+						url: "http://127.0.0.1:9000/medical-case-of-illness/user",
 						type: "post",
 						async: false, 
 						data: $("#basicinfoform").serialize(),
@@ -30,23 +31,26 @@
 							alert("网络连接错误...");
 						},
 						success: function(data){
-							alert("OK");
+							UserInfo = data;
 						}
 					});
-					$.ajax({
-						url: "http://127.0.0.1:9000/medical-case-of-illness/personal-history/",
-						type: "post",
-						async: false, 
-						data: $("#personalhistoryform").serialize(),
-						dataType: "json",
-						error: function(){
-							IsOK = false;
-							alert("网络连接错误...");
-						},
-						success: function(data){
-							alert("OK");
-						}
-					});
+
+					if (IsOK){
+						$.ajax({
+							url: "http://127.0.0.1:9000/medical-case-of-illness/personal-history",
+							type: "post",
+							async: false, 
+							data: "user_id=" + UserInfo.user_id + "&" + $("#personalhistoryform").serialize(),
+							dataType: "text",
+							error: function(){
+								IsOK = false;
+								alert("网络连接错误...");
+							},
+							success: function(data){
+								alert("OK");
+							}
+						});
+					}
 
 					return IsOK;
 				}
@@ -307,17 +311,17 @@
 				    	</div>
 				    	<div class="field">
 				    		<label>年龄</label>
-				    		<input type="text" name="age" placeholder="年龄">
+				    		<input type="text" name="age" placeholder="年龄" value="22">
 				    	</div>
 				    </div>	
 				    <div class="three fields">
 				    	<div class="field">
 				    		<label>职业</label>
-				    		<input type="text" name="occupation" placeholder="职业">
+				    		<input type="text" name="occupation" placeholder="职业" value="软件工程师">
 				    	</div>
 				    	<div class="field">
 				    		<label>电话</label>
-				    		<input type="text" name="contact" placeholder="电话">
+				    		<input type="text" name="contact" placeholder="电话" value="10086">
 				    	</div>
 				    </div>
 				</form>
@@ -329,14 +333,14 @@
 			    	<div class="three fields">
 				    	<div class="field">
 				    		<label>是否多甜食、多蛋白质类食物</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="more_sweet" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>食用量</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="consumption_of_sweet" class="ui dropdown">
 				            <option value="124"><125g</option>
 				            <option value="125">125-249g</option>
 				            <option value="250">250-500g</option>
@@ -345,7 +349,7 @@
 						</div>
 				    	<div class="field">
 				    		<label>食用频率</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="frequency_of_sweet" class="ui dropdown">
 				            <option value="1">小于1次/天</option>
 				            <option value="2">2次/天</option>
 				            <option value="3">3次/天</option>
@@ -358,7 +362,7 @@
 			    	<div class="three fields">
 				    	<div class="field">
 				    		<label>正餐间进食频率</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="frequency_of_meal" class="ui dropdown">
 				            <option value="1">≤1</option>
 				            <option value="2">1＜频率≤2</option>
 				            <option value="3">≥3</option>
@@ -366,9 +370,9 @@
 						</div>
 				    	<div class="field">
 				    		<label>正餐间进食是否含碳酸</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_carbonic_acid" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 					</div>
@@ -377,14 +381,14 @@
 					<div class="three fields">
 				    	<div class="field">
 				    		<label>是否使用牙线</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_floss" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>每天刷牙次数</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="times_of_teeth_brush" class="ui dropdown">
 				            <option value="1">1</option>
 				            <option value="2">2</option>
 				            <option value="3">3</option>
@@ -392,7 +396,7 @@
 						</div>
 				    	<div class="field">
 				    		<label>刷牙时间点【需对应刷牙次数有效性】</label>
-				    		<select name="dropdown" class="ui fluid search multiple dropdown" multiple="">
+				    		<select name="time_of_teeth_brush" class="ui fluid dropdown" multiple="" value="早间刷牙">
 				    		<option value="">选择刷牙时间点</option>
 				            <option value="早间刷牙">早间刷牙</option>
 				            <option value="中午刷牙">中午刷牙</option>
@@ -404,20 +408,20 @@
 					<div class="three fields">
 				    	<div class="field">
 				    		<label>刷牙时长</label>
-				    		<input type="text" name="name" placeholder="刷牙时长">
+				    		<input type="text" name="long_of_teeth_brush" placeholder="刷牙时长">
 				    	</div>
 				    	<div class="field">
 				    		<label>是否使用电动牙刷</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="electric_tooth_brush" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>刷牙方法是否正确</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="method_of_tooth_brush" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 			    	</div>
@@ -425,23 +429,23 @@
 					<div class="three fields">
 				    	<div class="field">
 				    		<label>牙膏是否含氟</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_fluorine" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>口腔定期是否检查</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_cavity_examination" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>是否定期牙周洁治</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_periodontal_treatment" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 			    	</div>
@@ -450,23 +454,23 @@
 					<div class="three fields">
 				    	<div class="detail field">
 				    		<label>是否有唾液腺疾病【病名】</label>
-				    		<select name="illness" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_salivary_gland_disease" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>是否有干燥综合征</label>
-				    		<select name="dropdown" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="sjogren_syndrome" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 				    	<div class="detail field">
 				    		<label>是否自觉唾液流量减少【时间】</label>
-				    		<select name="time" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
+				    		<select name="is_consciously_reduce_salivary_flow" class="ui dropdown">
+				            <option value="0">否</option>
+				            <option value="1">是</option>
 				          	</select>
 						</div>
 			    	</div>
@@ -477,7 +481,7 @@
 								<div class="field">
 						    		<label>唾液腺疾病名</label>
 						    		<div class="ui action input">
-							    		<input type="text" placeholder="输入病名">
+							    		<input type="text" name="salivary_gland_disease" placeholder="输入病名">
 		  								<div class="ui blue button">确定</div>
 		  								<div class="ui orange button">取消</div>
 									</div>
@@ -490,7 +494,7 @@
 								<div class="field">
 						    		<label>自觉唾液流量减少时间</label>
 						    		<div class="ui action input">
-							    		<input type="text" placeholder="输入时间">
+							    		<input type="text" name="consciously_reduce_salivary_flow" placeholder="输入时间">
 		  								<div class="ui blue button">确定</div>
 		  								<div class="ui orange button">取消</div>
 									</div>
