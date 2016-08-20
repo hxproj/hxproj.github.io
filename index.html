@@ -6,98 +6,9 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
-
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-  		$('.ui.dropdown').dropdown();
-
-  		$('.right.item a').click(function(){
-  			$('#MedicalRecords').modal({
-  				closable: false,
-				onApprove : function() {
-					var IsOK = true;
-					var UserInfo;
-					$.ajax({
-						url: "http://127.0.0.1:9000/medical-case-of-illness/user",
-						type: "post",
-						async: false, 
-						data: $("#basicinfoform").serialize(),
-						dataType: "json",
-						error: function(){
-							IsOK = false;
-							alert("网络连接错误...");
-						},
-						success: function(data){
-							UserInfo = data;
-						}
-					});
-
-					if (IsOK){
-						$.ajax({
-							url: "http://127.0.0.1:9000/medical-case-of-illness/personal-history",
-							type: "post",
-							async: false, 
-							data: "user_id=" + UserInfo.user_id + "&" + $("#personalhistoryform").serialize(),
-							dataType: "text",
-							error: function(){
-								IsOK = false;
-								alert("网络连接错误...");
-							},
-							success: function(data){
-								alert("OK");
-							}
-						});
-					}
-
-					return IsOK;
-				}
-  			}).modal('show');
-  		});
-
-  		$('.detail .dropdown').dropdown({
-  			onChange: function(Value, Text, $Choice){
-  				$This  = $(this).parents('.detail');
-  				$Popup = $("#" + $(this).parent().find('select').prop('name'));
-  				if (Text == "是") {
-  					$This.popup({
-  						hoverable: false,
-    					on       : 'manual',
-    					inline   : true,
-  						popup    : $Popup
-  					}).popup('show');
-  				}
-  				else {
-  					$This.popup('hide');
-  				}
-  			}
-  		});
-
-  		$('.popup .button').click(function(){
-  			if ($(this).text() == "确定"){
-  				alert("确定");
-  			} else {
-  				var PopupName = $(this).parents('.popup').prop('id');
-  				$Select = $("select[name='" + PopupName + "']");
-  				$Select.parents(".detail.field").popup('hide');
-  				// 将选择框置为否
-  				$Select.dropdown('set selected', '否');
-  			}
-  		});
-
-
-  		$('.add.button').click(function(){
-  			$('#ChiefComplaint').modal('show');
-  		});
-
-  		$('#context .menu .item').tab({
-    		context: $('#context')
-		});
-  	});
-  	</script>
-
+  	<script src="dist/index.js"></script>
 
   	<style type="text/css">
 		.main.container {
@@ -113,14 +24,6 @@
 		<div class="ui container">
 		    <a class="active item" href="index.html">病历</a>
 		    <a class="item" href="mouthexamination.html">搜索</a>
-
-	      	<div class="ui simple dropdown item">
-	        	期待更多功能... <i class="dropdown icon"></i>
-		        <div class="menu">
-		          <a class="item" href="#">更多功能1</a>
-		          <a class="item" href="#">更多功能2</a>
-		        </div>
-	      	</div>
 
 	      	<div class="right item">
 		        <a href="#"><i class="plus icon"></i>添加病历</a>
@@ -161,7 +64,7 @@
 									<a class="ui blue button" href="Manage.html">龋病预后管理（低风险）</a>
 									<a class="ui blue button" href="USPHS.html">USPHS评估</a>
 									<a class="ui teal button" href="">预览</a>
-									<a class="ui icon button"><i class="remove icon"></i></a>
+									<a class="ui icon button" data-tooltip="删除当前牙位"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
@@ -236,7 +139,7 @@
 		</div> 
   	</div>
 
-	<div class="ui modal" id="ChiefComplaint">
+	<div class="ui modal" id="add_tooth">
 		<div class="header">添加牙位</div>
 		<div class="content">
 		    <div class="description">
@@ -250,7 +153,7 @@
 						    <div class="three fields">
 						    	<div class="field">
 						    		<label>牙齿部位</label>
-						    		<select name="dropdown" class="ui dropdown">
+						    		<select name="tooth_location" class="ui dropdown">
 					                <option value="">选择</option>
 									<option value="上前牙">上前牙</option>
 									<option value="下前牙">下前牙</option>
@@ -269,7 +172,7 @@
 						    	</div>
 						    	<div class="field">
 						    		<label>症状</label>
-						    		<select name="dropdown" class="ui dropdown">
+						    		<select name="symptom" class="ui dropdown">
 					                <option value="">选择</option>
 					                <option value="颜色变化">颜色变化</option>
 					                <option value="有洞">有洞</option>
@@ -283,7 +186,7 @@
 						    	</div>
 						    	<div class="field">
 						    		<label>病发时间(此处UI有待进一步设计)</label>
-						    		<select name="dropdown" class="ui dropdown">
+						    		<select name="time_of_occurrence" class="ui dropdown">
 					                <option value="">选择</option>
 					                <option value="2016">1-10天前</option>
 					                <option value="2015">1-10月前</option>
@@ -291,15 +194,15 @@
 					              	</select>
 						    	</div>
 						    </div>	
+						    <input name="is_fill_tooth" type="hidden" value="0">
 						</form>
 					</div>
 					<div class="ui tab clearing basic segment" data-tab="2">
-					
 						<form class="ui clearing form">
 						    <div class="two fields">
 						    	<div class="field">
 						    		<label>补牙部位</label>
-						    		<select name="dropdown" class="ui dropdown">
+						    		<select name="tooth_location" class="ui dropdown">
 					                <option value="">选择</option>
 									<option value="上前牙">上前牙</option>
 									<option value="下前牙">下前牙</option>
@@ -317,6 +220,9 @@
 					              	</select>
 						    	</div>
 						    </div>	
+						    <input name="is_fill_tooth" type="hidden" value="1">
+						    <input name="symptom" type="hidden" value="">
+						    <input name="time_of_occurrence" type="hidden" value="">
 						</form>
 					</div>
 				</div>
@@ -324,7 +230,7 @@
 	  	</div>
 		<div class="actions">
 			<div class="ui orange deny button">取消</div>
-			<div class="ui blue right labeled icon submit button">
+			<div class="ui primary approve right labeled icon button">
 				添加<i class="checkmark icon"></i>
 			</div>
 		</div>

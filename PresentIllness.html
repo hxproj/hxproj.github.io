@@ -10,18 +10,7 @@
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-  		$('.ui.dropdown').dropdown();
-  		$('.ui.accordion').accordion();
-  		
-  		$('#context .menu .item').tab({
-    		context: $('#context')
-		});
-  	});
-  	</script>
-
+  	<script src="dist/PresentIllness.js"></script>  
 
   	<style type="text/css">
 		.main.container {
@@ -37,18 +26,6 @@
 		<div class="ui container">
 		    <a class="active item" href="index.html">病历</a>
 		    <a class="item" href="mouthexamination.html">搜索</a>
-
-	      	<div class="ui simple dropdown item">
-	        	Others <i class="dropdown icon"></i>
-		        <div class="menu">
-		          <a class="item" href="#">Link Item</a>
-		          <a class="item" href="#">Link Item</a>
-		        </div>
-	      	</div>
-
-	      	<div class="right item">
-		        <a href="#"><i class="plus icon"></i>添加病历</a>
-	        </div>
 		</div> 
 	</div> 
 
@@ -58,31 +35,30 @@
 		<div id="context">
 	  		<div class="ui blue pointing fluid two item menu">
 				<a class="active item" data-tab="1">原发性龋病</a>
-				<a class="item" data-tab="2">有治疗史的龋病</a>
+				<a class="item" data-tab="2">有治疗史龋病</a>
 	  		</div>
 
 	  		<div class="ui tab clearing segment active" data-tab="1">
 	  			<form class="ui clearing form" action="" method="get">
-
 			    	<h3 class="ui blue header">上前牙一年前发现折裂</h3>
 					<div class="three fields">
 				    	<div class="field">
 				    		<label>症状是否加重</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_very_bad" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>有无自发痛或夜间痛</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_night_pain_self_pain" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>是否服用药物【名称】</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_medicine" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
@@ -91,21 +67,25 @@
 			    	<div class="three fields">
 				    	<div class="field">
 				    		<label>是否做过治疗</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_treatment" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>症状是否缓解</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_relief" class="ui dropdown">
 				            <option value="">选择</option>
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
 					</div>
-		    		<button class="ui right floated blue button">提交</button>
+
+					<input name="is_primary" type="hidden" value="0">
+					<input name="medicine_name" type="hidden" value="">
+					<input name="fill_type" type="hidden" value="">
+		    		<div class="ui right floated submit blue button">提交</div>
 				</form>
 	  		</div>
 
@@ -115,7 +95,7 @@
 		  			<div class="three fields">
 				    	<div class="field">
 				    		<label>修复治疗充填体类型</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="fill_type" class="ui dropdown">
 			                <option value="">选择</option>
 			                <option value="树脂充填体">树脂充填体</option>
 			                <option value="玻璃离子充填体">玻璃离子充填体</option>
@@ -129,14 +109,14 @@
 				    	</div>
 				    	<div class="field">
 				    		<label>是否服用药物【名称】</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_medicine" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
 				    	<div class="field">
 				    		<label>症状是否缓解</label>
-				    		<select name="dropdown" class="ui dropdown">
+				    		<select name="is_relief" class="ui dropdown">
 				            <option value="">选择</option>
 				            <option value="否">否</option>
 				            <option value="是">是</option>
@@ -144,7 +124,12 @@
 						</div>
 					</div>
 
-		    		<button class="ui right floated blue button">提交</button>
+					<input name="is_primary" type="hidden" value="1">
+					<input name="is_treatment" type="hidden" value="">
+					<input name="is_night_pain_self_pain" type="hidden" value="">
+					<input name="is_very_bad" type="hidden" value="">
+					<input name="medicine_name" type="hidden" value="">
+		    		<div class="ui right floated blue submit button">提交</div>
 				</form>
 	  		</div>
   		</div>

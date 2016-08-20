@@ -13,10 +13,48 @@
 
   	<script type="text/javascript">
   	$(document).ready(function(){
+		var SERVER_URL    = "http://127.0.0.1:9000";
+		var ADD_MOUTHEXAM_URL = SERVER_URL + "/medical-case-of-illness/oral-examination";
+
   		$('.ui.dropdown').dropdown();
 
   		$('.right.item a').click(function(){
   			$('.ui.modal').modal('show');
+  		});
+
+  		$('form').form({
+  			fields: {
+  				vitality_value_of_teeth: {
+  					rules: [
+  						{
+  							type: 'empty',
+  							prompt : '牙齿活力值不能为空'
+  						}
+  					]
+  				}
+  			},
+  			inline: true,
+  			onSuccess: function() {
+				var UserID    = 5;
+				var ToothID   = 1;
+			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
+
+			    $.ajax({
+		      		url: ADD_MOUTHEXAM_URL,
+		      		type: "post",
+		      		data: AdditionStr + $(this).serialize(),
+		      		dataType: "json",
+		      		error: function(){
+			        	IsOK = false;
+			        	alert("网络连接错误...");
+		      		},
+		      		success: function(data){
+		        		alert("OK");
+		      		}
+		    	});
+		    	
+  				return false;
+  			}
   		});
   	});
   	</script>
@@ -58,7 +96,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>牙位【UI有待进一步设计】</label>
-					<select name="dropdown" class="ui fluid search multiple dropdown">
+					<select name="tooth_location" class="ui fluid search multiple dropdown">
 					<option value="">选择</option>
 					<option value="11">11</option>
 					<option value="12">12</option>
@@ -71,7 +109,7 @@
 				</div>
 				<div class="field">
 					<label>龋坏累及牙面</label>
-					<select name="dropdown" class="ui fluid search multiple dropdown">
+					<select name="caries_tired" class="ui fluid search multiple dropdown">
 					<option value="">选择</option>
 					<option value="唇面">唇面</option>
 					<option value="舌面">舌面</option>
@@ -84,7 +122,7 @@
 				</div>
 				<div class="field">
 					<label>深度</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="depth" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="浅龋">浅龋</option>
 					<option value="中龋">中龋</option>
@@ -95,53 +133,53 @@
 			<div class="three fields">
 				<div class="field">
 					<label>冷</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="cold" class="ui dropdown">
 					<option value="">选择</option>
-					<option value="-">-</option>
-					<option value="+-">+-</option>
-					<option value="+">+</option>
-					<option value="++">++</option>
-					<option value="+++">+++</option>
+					<option value="1">-</option>
+					<option value="2">+-</option>
+					<option value="3">+</option>
+					<option value="4">++</option>
+					<option value="5">+++</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>热</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="hot" class="ui dropdown">
 					<option value="">选择</option>
-					<option value="-">-</option>
-					<option value="+-">+-</option>
-					<option value="+">+</option>
-					<option value="++">++</option>
-					<option value="+++">+++</option>
+					<option value="1">-</option>
+					<option value="2">+-</option>
+					<option value="3">+</option>
+					<option value="4">++</option>
+					<option value="5">+++</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>探</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="touch" class="ui dropdown">
 					<option value="">选择</option>
-					<option value="-">-</option>
-					<option value="+-">+-</option>
-					<option value="+">+</option>
-					<option value="++">++</option>
-					<option value="+++">+++</option>
+					<option value="1">-</option>
+					<option value="2">+-</option>
+					<option value="3">+</option>
+					<option value="4">++</option>
+					<option value="5">+++</option>
 					</select>
 				</div>
 			</div>
 			<div class="three fields">
 				<div class="field">
 					<label>叩</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="bite" class="ui dropdown">
 					<option value="">选择</option>
-					<option value="-">-</option>
-					<option value="+-">+-</option>
-					<option value="+">+</option>
-					<option value="++">++</option>
-					<option value="+++">+++</option>
+					<option value="1">-</option>
+					<option value="2">+-</option>
+					<option value="3">+</option>
+					<option value="4">++</option>
+					<option value="5">+++</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>色</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="color_of_caries" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="棕褐">棕褐</option>
 					<option value="黑">黑</option>
@@ -149,7 +187,7 @@
 				</div>
 				<div class="field">
 					<label>质</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="flex_of_caries" class="ui dropdown">
 					<option value="硬">硬</option>
 					<option value="软">软</option>
 					</select>
@@ -158,14 +196,14 @@
 			<div class="three fields">
 				<div class="field">
 					<label>有无继发龋</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="secondary" class="ui dropdown">
 					<option value="NO">无</option>
 					<option value="YES">有</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>原填充体</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="fill" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="复合树脂">复合树脂</option>
 					<option value="银汞合金">银汞合金</option>
@@ -176,7 +214,7 @@
 				</div>
 				<div class="field">
 					<label>牙齿活力值</label>
-					<input type="text" name="name" placeholder="填写牙齿活力值">
+					<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
 				</div>
 			</div>
 
@@ -184,14 +222,14 @@
 			<div class="three fields">
 				<div class="field">
 					<label>牙龈是否充血</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="gingival_hyperemia" class="ui dropdown">
 					<option value="否">否</option>
 					<option value="是">是</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>龈上牙石</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="tartar_up" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="1级">1级</option>
 					<option value="2级">2级</option>
@@ -200,7 +238,7 @@
 				</div>
 				<div class="field">
 					<label>龈下牙石</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="tartar_down" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="1级">1级</option>
 					<option value="2级">2级</option>
@@ -211,7 +249,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>BOP</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="bop" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="+">+</option>
 					<option value="-">-</option>
@@ -219,7 +257,7 @@
 				</div>
 				<div class="field">
 					<label>牙周袋深度</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="periodontal_pocket_depth" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="3.5mm">3.5mm</option>
 					<option value="3.5-5.5mm">3.5-5.5mm</option>
@@ -229,7 +267,7 @@
 				</div>
 				<div class="field">
 					<label>根分叉病变</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="furcation" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="1级">1级</option>
 					<option value="2级">2级</option>
@@ -241,7 +279,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>位置</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="location" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="唇侧">唇侧</option>
 					<option value="颊侧">颊侧</option>
@@ -253,7 +291,7 @@
 				</div>
 				<div class="field">
 					<label>牙齿松动度</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="mobility" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="Ⅰ">Ⅰ</option>
 					<option value="Ⅱ">Ⅱ</option>
@@ -262,7 +300,7 @@
 				</div>
 				<div class="field">
 					<label>牙龈有无瘘道</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="fistula" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="有">有</option>
 					</select>
@@ -271,7 +309,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>牙龈有无溢脓</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="overflow_pus" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="有">有</option>
 					</select>
@@ -282,7 +320,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>龋失补指数</label>
-					<input type="text" name="name" placeholder="0-32">
+					<input type="text" name="loss_caries_index_up" placeholder="0-32">
 				</div>
 			</div>
 
@@ -290,7 +328,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>牙齿发育情况</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="development_of_the_situation" class="ui dropdown">
 					<option value="无异常情况">无异常情况</option>
 					<option value="釉质发育不全">釉质发育不全</option>
 					<option value="牙本质发育不全">牙本质发育不全</option>
@@ -306,21 +344,21 @@
 			<div class="three fields">
 				<div class="field">
 					<label>患牙与邻牙接触关系是否正常</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="relations_between_teeth" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="否">否</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>牙列是否拥挤</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="is_teeth_crowd" class="ui dropdown">
 					<option value="否">否</option>
 					<option value="是">是</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>患牙有无对合牙</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="involution_teeth" class="ui dropdown">
 					<option value="有">有</option>
 					<option value="无">无</option>
 					</select>
@@ -329,7 +367,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>牙体形态</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="tooth_shape" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="畸形舌侧沟">畸形舌侧沟</option>
 					<option value="畸形中央尖">畸形中央尖</option>
@@ -349,7 +387,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>患牙修复治疗情况</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="treatment" class="ui dropdown">
 					<option value="没有做过修复治疗">没有做过修复治疗</option>
 					<option value="树脂充填体">树脂充填体</option>
 					<option value="玻璃离子充填体">玻璃离子充填体</option>
@@ -363,7 +401,7 @@
 				</div>
 				<div class="field">
 					<label>是否有正畸治疗史</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="orthodontic" class="ui dropdown">
 					<option value="否">否</option>
 					<option value="是">是</option>
 					</select>
@@ -374,7 +412,7 @@
 			<div class="three fields">
 				<div class="field">
 					<label>部位</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="X_Ray_location" class="ui dropdown">
 					<option value="近中邻面">近中邻面</option>
 					<option value="远中邻面">远中邻面</option>
 					<option value="合面">合面</option>
@@ -382,7 +420,7 @@
 				</div>
 				<div class="field">
 					<label>程度</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="X_Ray_depth" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="釉质">釉质</option>
 					<option value="本质浅层">本质浅层</option>
@@ -392,7 +430,7 @@
 				</div>
 				<div class="field">
 					<label>充填体影像</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="X_Ray_fill_quality" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="低密度影">低密度充填体影像</option>
 					<option value="高密度充填体影像">高密度充填体影像</option>
@@ -402,11 +440,11 @@
 			<div class="three fields">
 				<div class="field">
 					<label>CT表现</label>
-					<input type="text" name="name" placeholder="CT表现">
+					<input type="text" name="CT_shows" placeholder="CT表现">
 				</div>
 				<div class="field">
 					<label>咬翼片表现</label>
-					<input type="text" name="name" placeholder="咬翼片表现">
+					<input type="text" name="piece" placeholder="咬翼片表现">
 				</div>
 			</div>
 

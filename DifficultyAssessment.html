@@ -13,10 +13,34 @@
 
   	<script type="text/javascript">
   	$(document).ready(function(){
+
   		$('.ui.dropdown').dropdown();
 
-  		$('.right.item a').click(function(){
-  			$('.ui.modal').modal('show');
+		var SERVER_URL    = "http://127.0.0.1:9000";
+		var ADD_DIFFICULTY_URL = SERVER_URL + "/medical-case-of-illness/difficulty-assessment";
+
+  		$('#DifficultyForm').form({
+  			onSuccess: function(){
+				var UserID    = 5;
+				var ToothID   = 1;
+			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
+
+			    $.ajax({
+		      		url: ADD_DIFFICULTY_URL,
+		      		type: "post",
+		      		data: AdditionStr + $(this).serialize(),
+		      		dataType: "json",
+		      		error: function(){
+			        	IsOK = false;
+			        	alert("网络连接错误...");
+		      		},
+		      		success: function(data){
+		        		alert("OK");
+		      		}
+		    	});
+
+  				return false;
+  			}
   		});
   	});
   	</script>
@@ -36,30 +60,18 @@
 		<div class="ui container">
 		    <a class="active item" href="index.html">病历</a>
 		    <a class="item" href="mouthexamination.html">搜索</a>
-
-	      	<div class="ui simple dropdown item">
-	        	Others <i class="dropdown icon"></i>
-		        <div class="menu">
-		          <a class="item" href="#">Link Item</a>
-		          <a class="item" href="#">Link Item</a>
-		        </div>
-	      	</div>
-
-	      	<div class="right item">
-		        <a href="#"><i class="plus icon"></i>添加病历</a>
-	        </div>
 		</div> 
 	</div> 
 
 	<div class="ui main container">
 		<h2 class="ui orange header">难度评估（李狗蛋）</h2>
 
-		<form class="ui clearing segment form">
+		<form class="ui clearing segment form" id="DifficultyForm">
 			<h3 class="ui blue header">龋损因素</h3>
 			<div class="two fields">
 				<div class="field">
 					<label>累及牙面及部位</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="tooth_surface_and_location" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="Ⅰ类洞">Ⅰ类洞</option>
 					<option value="Ⅱ类洞">Ⅱ类洞</option>
@@ -77,8 +89,8 @@
 					</select>
 				</div>
 				<div class="field">
-					<label>龋损深度【此处信息与检查部分重复，待商榷】</label>
-					<select name="dropdown" class="ui dropdown">
+					<label>龋损深度</label>
+					<select name="caries_depth" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="浅龋">浅龋</option>
 					<option value="中龋">中龋</option>
@@ -91,14 +103,23 @@
 			<h3 class="ui blue header">技术因素</h3>
 			<div class="two fields">
 				<div class="field">
-					<label>技术类型【此处数据设计有问题】</label>
-					<select name="dropdown" class="ui dropdown">
+					<label>技术类型【后牙修复没有“微创”?】</label>
+					<select name="technology_type" class="ui dropdown">
 					<option value="">选择</option>
-					<option value="后牙直接修复">后牙复合树脂修复（后牙直接修复）</option>
-					<option value="后牙直接修复">后牙银汞合金修复（后牙直接修复）</option>
-					<option value="龋病微创修复技术">龋病微创修复技术</option>
+					<option value="后牙复合树脂修复">后牙复合树脂修复（后牙直接修复）</option>
+					<option value="后牙银汞合金修复">后牙银汞合金修复（后牙直接修复）</option>
+					<option value="ART修复">ART修复（龋病微创修复技术）</option>
+					<option value="预防性填充">预防性填充（龋病微创修复技术）</option>
+					<option value="玻璃离子过渡性修复">玻璃离子过渡性修复（龋病微创修复技术）</option>
+					<option value="釉质成型术">釉质成型术（龋病微创修复技术）</option>
+					<option value="微创磨术">微创磨术（龋病微创修复技术）</option>
 					<option value="前牙复合树脂修复">前牙复合树脂修复</option>
-					<option value="前牙美容修复">前牙美容修复</option>
+					<option value="前牙无创美容修复">前牙无创美容修复（前牙美容修复）</option>
+					<option value="前牙无创美容修复">前牙无创美容修复（前牙美容修复）</option>
+					<option value="前牙微创复合树脂分层修复">前牙微创复合树脂分层修复（前牙美容修复）</option>
+					<option value="前牙微创CAD/CAM瓷贴面修复">前牙微创CAD/CAM瓷贴面修复（前牙美容修复）</option>
+					<option value="后牙复合树脂嵌体">后牙复合树脂嵌体（后牙嵌体修复）</option>
+					<option value="后牙CAD/CAM瓷嵌体修复">后牙CAD/CAM瓷嵌体修复（后牙嵌体修复）</option>
 					</select>
 				</div>
 			</div>
@@ -107,7 +128,7 @@
 			<div class="two fields">
 				<div class="field">
 					<label>充填修复史及充填失败史</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="history_of_fill" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="患牙有充填修复史，但龋坏未累及旧修复体">患牙有充填修复史，但龋坏未累及旧修复体</option>
 					<option value="龋坏累及旧修复体或旧修复体首次折裂">龋坏累及旧修复体或旧修复体首次折裂</option>
@@ -120,7 +141,7 @@
 			<div class="two fields">
 				<div class="field">
 					<label>张口度</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="mouth_opening" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="3指宽">3指宽</option>
 					<option value="2指宽">2指宽</option>
@@ -129,7 +150,7 @@
 				</div>
 				<div class="field">
 					<label>咽反射</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="gag_reflex" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="有">有</option>
 					<option value="强烈">强烈</option>
@@ -139,7 +160,7 @@
 			<div class="two fields">
 				<div class="field">
 					<label>唾液分泌量</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="saliva" class="ui dropdown">
 					<option value="正常">正常</option>
 					<option value="较多">较多</option>
 					<option value="非常多">非常多</option>
@@ -147,7 +168,7 @@
 				</div>
 				<div class="field">
 					<label>牙科恐惧症</label>
-					<select name="dropdown" class="ui dropdown">
+					<select name="dental_phobia" class="ui dropdown">
 					<option value="无">无</option>
 					<option value="有">有</option>
 					</select>
@@ -157,8 +178,8 @@
 			<h3 class="ui blue header">预防管理难度</h3>
 			<div class="two fields">
 				<div class="field">
-					<label>龋病微创修复技术</label>
-					<select name="dropdown" class="ui dropdown">
+					<label>龋病风险难度分级</label>
+					<select name="difficulty_rating" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="低、中危人群">低、中危人群</option>
 					<option value="高危人群">高危人群</option>
