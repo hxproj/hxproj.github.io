@@ -77,6 +77,13 @@
 
 				<div class="ui active tab" data-tab="contextDetail1">
 					<form class="ui form">
+						<div class="ui info message">
+							<div class="header">药物治疗流程描述 </div>
+							<ul class="list">
+								<li>将药物氟化物（选择）和硝酸银（选择）涂布于龋损处30s</li>
+							</ul>
+						</div>
+						
 						<div class="two fields">
 							<div class="field">
 								<label>药物氟化物</label>
@@ -98,17 +105,110 @@
 							</div>
 						</div>
 
-			   			<button class="ui right floated blue button">确定</button>
+			   			<button class="ui right floated blue button">选择</button>
 		    		</form>
 				</div>
 				
 				<div class="ui tab" data-tab="contextDetail2">
-    				患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次
-			   		<button class="ui right floated blue button">确定</button>
+					<form class="ui form">
+						<div class="ui info message">
+							<div class="header">再矿物治疗流程描述 </div>
+							<ul class="list">
+								<li>患牙清洁，干燥</li>
+								<li>将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次</li>
+							</ul>
+						</div>
+	    				
+				   		<button class="ui right floated blue button">选择</button>
+			   		</form>
 				</div>
 
 				<div class="ui tab" data-tab="contextDetail3">
-			    	<h4 class="ui header">1. 清洁牙面</h4>
+					<form class="ui form">
+
+						<div class="ui info message">
+							<div class="header">窝沟封闭流程描述 </div>
+							<ul class="list">
+								<li>清洁牙面：在低速手机上装好额外装置（选择），蘸取适量试剂（选择）于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润</li>
+								<li>用棉纱球隔湿，压缩空气牙面吹干，（选择）蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间（选择）</li>
+								<li>流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物</li>
+								<li>洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上</li>
+								<li>1-2分钟固化/光固化灯离牙尖1mm照射20-40秒</li>
+								<li>探针进行检查，调合，定期（选择）复查</li>
+							</ul>
+						</div>
+
+						<div class="two fields">
+							<div class="field">
+								<label>低速手机额外装置</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择额外装置</option>
+								<option value="锥形小毛刷">锥形小毛刷</option>
+								<option value="橡皮杯">橡皮杯</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>蘸取试剂</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择试剂类型</option>
+								<option value="清洁剂">清洁剂</option>
+								<option value="含氟牙膏">含氟牙膏</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="two fields">
+							<div class="field">
+								<label>蘸取工具</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">蘸取工具</option>
+								<option value="小棉球">小棉球</option>
+								<option value="细毛刷">细毛刷</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>酸蚀时间</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择试剂类型</option>
+								<option value="20-30秒">20-30秒</option>
+								<option value="60秒">60秒</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="two fields">
+							<div class="field">
+								<label>蘸取工具</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">蘸取工具</option>
+								<option value="小棉球">小棉球</option>
+								<option value="细毛刷">细毛刷</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>定期复查时间</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择试剂类型</option>
+								<option value="3个月">3个月</option>
+								<option value="半年">半年</option>
+								<option value="一年">一年</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="two fields">
+							<div class="field">
+								<label>固化类型</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择固化灯类型</option>
+								<option value="自行固化">自行固化</option>
+								<option value="光固化">光固化</option>
+								</select>
+							</div>
+						</div>
+	    				
+				   		<button class="ui right floated blue button">选择</button>
+			   		</form>
 				</div>
 			</div>
 
@@ -116,7 +216,8 @@
 
 		<div class="ui tab clearing segment" data-tab="2">
 			<form class="ui form">
-				<div class="two fields">
+				<h3 class="ui blue header">1. 麻醉药物</h3>
+				<div class="three fields">
 					<div class="field">
 						<label>麻醉药物</label>
 						<select name="dropdown" class="ui dropdown">
@@ -134,8 +235,6 @@
 						<option value="浸润麻醉">浸润麻醉</option>
 						</select>
 					</div>
-				</div>
-				<div class="three fields">
 					<div class="field">
 						<label>是否使用橡皮障</label>
 						<select name="dropdown" class="ui dropdown">
@@ -143,21 +242,47 @@
 						<option value="是">是</option>
 						</select>
 					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
+				<div class="three fields">
 					<div class="field">
-						<label>是否使用开口器</label>
+						<label>去龋方法</label>
 						<select name="dropdown" class="ui dropdown">
-						<option value="否">否</option>
-						<option value="是">是</option>
+						<option value="">选择</option>
+						<option value="球钻(高速手机）">球钻(高速手机）</option>
+						<option value="裂钻(高速手机）">裂钻(高速手机）</option>
+						<option value="倒锥钻(高速手机）">倒锥钻(高速手机）</option>
+						<option value="低速手机">低速手机</option>
+						<option value="挖匙">挖匙</option>
 						</select>
 					</div>
 					<div class="field">
-						<label>是否使用排龈线</label>
+						<label>制备洞形</label>
 						<select name="dropdown" class="ui dropdown">
-						<option value="否">否</option>
-						<option value="是">是</option>
+						<option value="">选择</option>
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<option value="V">V</option>
+						<option value="VI">VI</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形深度</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="釉质">釉质</option>
+						<option value="本质浅层">本质浅层</option>
+						<option value="本质深层">本质深层</option>
+						<option value="近髓">近髓</option>
+						<option value="牙骨质">牙骨质</option>
 						</select>
 					</div>
 				</div>
+
+				<h3 class="ui blue header">3. 干燥，隔湿</h3>
 				<div class="three fields">
 					<div class="field">
 						<label>是否使用成形片</label>
@@ -175,20 +300,972 @@
 					</div>
 				</div>
 
+				<h3 class="ui blue header">4. 比色</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>比色板类型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Vita比色板">Vita比色板</option>
+						<option value="Chromascop比色板">Chromascop比色板</option>
+						<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>牙色</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="B1">B1</option>
+						<option value="A1">A1</option>
+						<option value="A2">A2</option>
+						<option value="D2">D2</option>
+						<option value="B2">B2</option>
+						<option value="C1">C1</option>
+						<option value="C2">C2</option>
+						<option value="D4">D4</option>
+						<option value="D3">D3</option>
+						<option value="A3">A3</option>
+						<option value="B3">B3</option>
+						<option value="A3.5">A3.5</option>
+						<option value="B4">B4</option>
+						<option value="C3">C3</option>
+						<option value="A4">A4</option>
+						<option value="C4">C4</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">5. 窝洞消毒</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>窝洞消毒</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="75%乙醇">75%乙醇</option>
+						<option value="氯己定">氯己定</option>
+						<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
+						<option value="樟脑酚">樟脑酚</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>垫底</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Dycal">Dycal</option>
+						<option value="光固化氢氧化钙">光固化氢氧化钙</option>
+						<option value="化学固化玻璃离子">化学固化玻璃离子</option>
+						<option value="光固化玻璃离子">光固化玻璃离子</option>
+						<option value="流体树脂">流体树脂</option>
+						<option value="氧化锌丁香油+磷酸锌">氧化锌丁香油+磷酸锌</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">6. 涂布粘接剂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>全酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Scotchbond Multi-purpose(3M ESPE)">Scotchbond Multi-purpose(3M ESPE)</option>
+						<option value="All-Bond2(Bisco)">All-Bond2(Bisco)</option>
+						<option value="Amalgambond(Parkell)">Amalgambond(Parkell)</option>
+						<option value="Gluma Comfort Bond(Hereaus Kulzer)">Gluma Comfort Bond(Hereaus Kulzer)</option>
+						<option value="Adper Single Bond Plus(3M ESPE)">Adper Single Bond Plus(3M ESPE)</option>
+						<option value="Prime&Bond NT(Dentsply)">Prime&Bond NT(Dentsply)</option>
+						<option value="其它">其它</option>
+					</select>
+					</div>
+					<div class="field">
+						<label>自酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Optibond Solo Plus SE(Kerr)">Optibond Solo Plus SE(Kerr)</option>
+						<option value="Adhese(Vivadent)">Adhese(Vivadent)</option>
+						<option value="Clearfil SE Bond(Kuraray)">Clearfil SE Bond(Kuraray)</option>
+						<option value="XENO Ⅲ(Dentsply)">XENO Ⅲ(Dentsply)</option>
+						<option value="Adper PromptL-Pop(3M ESPE)">Adper PromptL-Pop(3M ESPE)</option>
+						<option value="iBOND SelfEtch(Hereaus Kulzer)">iBOND SelfEtch(Hereaus Kulzer)</option>
+						<option value="G-Bond(GC)">G-Bond(GC)</option>
+						<option value="XENOIV(Dentsply)">XENOIV(Dentsply)</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>涂布时间</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s以下">5s以下</option>
+						<option value="5s-10s">5s-10s</option>
+						<option value="10s-15s">10s-15s</option>
+						<option value="15s-20s">15s-20s</option>
+						<option value="20s以上">20s以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>光照</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">7. 树脂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>树脂</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="3M">3M</option>
+						<option value="Kerr">Kerr</option>
+						<option value="可乐丽">可乐丽</option>
+						<option value="幻彩">幻彩</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">8. 修型</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>修型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="蜡刀">蜡刀</option>
+						<option value="瓷粉充填器">瓷粉充填器</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>光固化灯</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="普通卤光灯">普通卤光灯</option>
+						<option value="速效卤光灯">速效卤光灯</option>
+						<option value="LED灯">LED灯</option>
+						<option value="离子弧光灯">离子弧光灯</option>
+						<option value="氩激光灯">氩激光灯</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>光照【与上诉光照相同】</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">9. 打磨抛光</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>打磨抛光</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="金刚砂针">金刚砂针</option>
+						<option value="彩虹抛光系统">彩虹抛光系统</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
 			    <button class="ui right floated blue button">提交</button>
 			</form> 
 		</div>
 
 		<div class="ui tab clearing segment" data-tab="3">
-			牙安抚治疗&树脂充填修复
+			<form class="ui form">
+				<h3 class="ui blue header">1. 安抚药物【和牙树脂相比，此项是额外增加项】</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>安抚药物</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="丁香油酚">丁香油酚</option>
+						<option value="抗生素小棉球">抗生素小棉球</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>观察时间</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="1周">1周</option>
+						<option value="2周">2周</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 麻醉药物</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>麻醉药物</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阿替卡因">阿替卡因</option>
+						<option value="利多卡因">利多卡因</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>局部麻醉</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阻滞麻醉">阻滞麻醉</option>
+						<option value="浸润麻醉">浸润麻醉</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>是否使用橡皮障</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="否">否</option>
+						<option value="是">是</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">3. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>去龋方法</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="球钻(高速手机）">球钻(高速手机）</option>
+						<option value="裂钻(高速手机）">裂钻(高速手机）</option>
+						<option value="倒锥钻(高速手机）">倒锥钻(高速手机）</option>
+						<option value="低速手机">低速手机</option>
+						<option value="挖匙">挖匙</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<option value="V">V</option>
+						<option value="VI">VI</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形深度</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="釉质">釉质</option>
+						<option value="本质浅层">本质浅层</option>
+						<option value="本质深层">本质深层</option>
+						<option value="近髓">近髓</option>
+						<option value="牙骨质">牙骨质</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">4. 干燥，隔湿</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>是否使用成形片</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="否">否</option>
+						<option value="是">是</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>是否使用楔子</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="否">否</option>
+						<option value="是">是</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">5. 比色</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>比色板类型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Vita比色板">Vita比色板</option>
+						<option value="Chromascop比色板">Chromascop比色板</option>
+						<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>牙色</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="B1">B1</option>
+						<option value="A1">A1</option>
+						<option value="A2">A2</option>
+						<option value="D2">D2</option>
+						<option value="B2">B2</option>
+						<option value="C1">C1</option>
+						<option value="C2">C2</option>
+						<option value="D4">D4</option>
+						<option value="D3">D3</option>
+						<option value="A3">A3</option>
+						<option value="B3">B3</option>
+						<option value="A3.5">A3.5</option>
+						<option value="B4">B4</option>
+						<option value="C3">C3</option>
+						<option value="A4">A4</option>
+						<option value="C4">C4</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">6. 窝洞消毒</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>窝洞消毒</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="75%乙醇">75%乙醇</option>
+						<option value="氯己定">氯己定</option>
+						<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
+						<option value="樟脑酚">樟脑酚</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>垫底</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Dycal">Dycal</option>
+						<option value="光固化氢氧化钙">光固化氢氧化钙</option>
+						<option value="化学固化玻璃离子">化学固化玻璃离子</option>
+						<option value="光固化玻璃离子">光固化玻璃离子</option>
+						<option value="流体树脂">流体树脂</option>
+						<option value="氧化锌丁香油+磷酸锌">氧化锌丁香油+磷酸锌</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">7. 涂布粘接剂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>全酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Scotchbond Multi-purpose(3M ESPE)">Scotchbond Multi-purpose(3M ESPE)</option>
+						<option value="All-Bond2(Bisco)">All-Bond2(Bisco)</option>
+						<option value="Amalgambond(Parkell)">Amalgambond(Parkell)</option>
+						<option value="Gluma Comfort Bond(Hereaus Kulzer)">Gluma Comfort Bond(Hereaus Kulzer)</option>
+						<option value="Adper Single Bond Plus(3M ESPE)">Adper Single Bond Plus(3M ESPE)</option>
+						<option value="Prime&Bond NT(Dentsply)">Prime&Bond NT(Dentsply)</option>
+						<option value="其它">其它</option>
+					</select>
+					</div>
+					<div class="field">
+						<label>自酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Optibond Solo Plus SE(Kerr)">Optibond Solo Plus SE(Kerr)</option>
+						<option value="Adhese(Vivadent)">Adhese(Vivadent)</option>
+						<option value="Clearfil SE Bond(Kuraray)">Clearfil SE Bond(Kuraray)</option>
+						<option value="XENO Ⅲ(Dentsply)">XENO Ⅲ(Dentsply)</option>
+						<option value="Adper PromptL-Pop(3M ESPE)">Adper PromptL-Pop(3M ESPE)</option>
+						<option value="iBOND SelfEtch(Hereaus Kulzer)">iBOND SelfEtch(Hereaus Kulzer)</option>
+						<option value="G-Bond(GC)">G-Bond(GC)</option>
+						<option value="XENOIV(Dentsply)">XENOIV(Dentsply)</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>涂布时间</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s以下">5s以下</option>
+						<option value="5s-10s">5s-10s</option>
+						<option value="10s-15s">10s-15s</option>
+						<option value="15s-20s">15s-20s</option>
+						<option value="20s以上">20s以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>光照</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">8. 树脂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>树脂</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="3M">3M</option>
+						<option value="Kerr">Kerr</option>
+						<option value="可乐丽">可乐丽</option>
+						<option value="幻彩">幻彩</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">9. 修型</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>修型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="蜡刀">蜡刀</option>
+						<option value="瓷粉充填器">瓷粉充填器</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>光固化灯</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="普通卤光灯">普通卤光灯</option>
+						<option value="速效卤光灯">速效卤光灯</option>
+						<option value="LED灯">LED灯</option>
+						<option value="离子弧光灯">离子弧光灯</option>
+						<option value="氩激光灯">氩激光灯</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>光照【与上诉光照相同】</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">10. 打磨抛光</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>打磨抛光</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="金刚砂针">金刚砂针</option>
+						<option value="彩虹抛光系统">彩虹抛光系统</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+			    <button class="ui right floated blue button">提交</button>
+			</form>
 		</div>
 
+		<!-- 嵌体修复 -->
 		<div class="ui tab clearing segment" data-tab="4">
-			嵌体修复
+			<form class="ui form">
+				<h3 class="ui blue header">1. 麻醉药物</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>麻醉药物</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阿替卡因">阿替卡因</option>
+						<option value="利多卡因">利多卡因</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>局部麻醉</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阻滞麻醉">阻滞麻醉</option>
+						<option value="浸润麻醉">浸润麻醉</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>是否使用橡皮障</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="否">否</option>
+						<option value="是">是</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>去龋方法</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="球钻(高速手机）">球钻(高速手机）</option>
+						<option value="裂钻(高速手机）">裂钻(高速手机）</option>
+						<option value="倒锥钻(高速手机）">倒锥钻(高速手机）</option>
+						<option value="低速手机">低速手机</option>
+						<option value="挖匙">挖匙</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<option value="V">V</option>
+						<option value="VI">VI</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形深度</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="釉质">釉质</option>
+						<option value="本质浅层">本质浅层</option>
+						<option value="本质深层">本质深层</option>
+						<option value="近髓">近髓</option>
+						<option value="牙骨质">牙骨质</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">3. 干燥，隔湿</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>干燥</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="干燥">干燥</option>
+						<option value="棉卷">棉卷</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">4. 比色</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>比色板类型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Vita比色板">Vita比色板</option>
+						<option value="Chromascop比色板">Chromascop比色板</option>
+						<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>牙色</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="B1">B1</option>
+						<option value="A1">A1</option>
+						<option value="A2">A2</option>
+						<option value="D2">D2</option>
+						<option value="B2">B2</option>
+						<option value="C1">C1</option>
+						<option value="C2">C2</option>
+						<option value="D4">D4</option>
+						<option value="D3">D3</option>
+						<option value="A3">A3</option>
+						<option value="B3">B3</option>
+						<option value="A3.5">A3.5</option>
+						<option value="B4">B4</option>
+						<option value="C3">C3</option>
+						<option value="A4">A4</option>
+						<option value="C4">C4</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">5. 取模材料&嵌体材料</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>取模材料</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="藻酸盐">藻酸盐</option>
+						<option value="硅橡胶">硅橡胶</option>
+						<option value="琼脂">琼脂</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>嵌体材料</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="瓷嵌体">瓷嵌体</option>
+						<option value="树脂嵌体">树脂嵌体</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">6. 窝洞消毒</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>窝洞消毒</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="75%乙醇">75%乙醇</option>
+						<option value="氯己定">氯己定</option>
+						<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
+						<option value="樟脑酚">樟脑酚</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>垫底</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Dycal">Dycal</option>
+						<option value="光固化氢氧化钙">光固化氢氧化钙</option>
+						<option value="化学固化玻璃离子">化学固化玻璃离子</option>
+						<option value="光固化玻璃离子">光固化玻璃离子</option>
+						<option value="流体树脂">流体树脂</option>
+						<option value="氧化锌丁香油+磷酸锌">氧化锌丁香油+磷酸锌</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">7. 涂布粘接剂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>全酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Scotchbond Multi-purpose(3M ESPE)">Scotchbond Multi-purpose(3M ESPE)</option>
+						<option value="All-Bond2(Bisco)">All-Bond2(Bisco)</option>
+						<option value="Amalgambond(Parkell)">Amalgambond(Parkell)</option>
+						<option value="Gluma Comfort Bond(Hereaus Kulzer)">Gluma Comfort Bond(Hereaus Kulzer)</option>
+						<option value="Adper Single Bond Plus(3M ESPE)">Adper Single Bond Plus(3M ESPE)</option>
+						<option value="Prime&Bond NT(Dentsply)">Prime&Bond NT(Dentsply)</option>
+						<option value="其它">其它</option>
+					</select>
+					</div>
+					<div class="field">
+						<label>自酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Optibond Solo Plus SE(Kerr)">Optibond Solo Plus SE(Kerr)</option>
+						<option value="Adhese(Vivadent)">Adhese(Vivadent)</option>
+						<option value="Clearfil SE Bond(Kuraray)">Clearfil SE Bond(Kuraray)</option>
+						<option value="XENO Ⅲ(Dentsply)">XENO Ⅲ(Dentsply)</option>
+						<option value="Adper PromptL-Pop(3M ESPE)">Adper PromptL-Pop(3M ESPE)</option>
+						<option value="iBOND SelfEtch(Hereaus Kulzer)">iBOND SelfEtch(Hereaus Kulzer)</option>
+						<option value="G-Bond(GC)">G-Bond(GC)</option>
+						<option value="XENOIV(Dentsply)">XENOIV(Dentsply)</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>涂布时间</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s以下">5s以下</option>
+						<option value="5s-10s">5s-10s</option>
+						<option value="10s-15s">10s-15s</option>
+						<option value="15s-20s">15s-20s</option>
+						<option value="20s以上">20s以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>光照</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">9. 放置嵌体（无输入内容）</h3>
+
+				<h3 class="ui blue header">10. 打磨抛光</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>打磨抛光</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="金刚砂针">金刚砂针</option>
+						<option value="彩虹抛光系统">彩虹抛光系统</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+			    <button class="ui right floated blue button">提交</button>
+			</form>
 		</div>
 
+		<!--贴面修复-->
 		<div class="ui tab clearing segment" data-tab="5">
-			贴面修复
+			<form class="ui form">
+				<h3 class="ui blue header">1. 麻醉药物</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>麻醉药物</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阿替卡因">阿替卡因</option>
+						<option value="利多卡因">利多卡因</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>局部麻醉</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="阻滞麻醉">阻滞麻醉</option>
+						<option value="浸润麻醉">浸润麻醉</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>是否使用橡皮障</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="否">否</option>
+						<option value="是">是</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>去龋方法</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="球钻(高速手机）">球钻(高速手机）</option>
+						<option value="裂钻(高速手机）">裂钻(高速手机）</option>
+						<option value="倒锥钻(高速手机）">倒锥钻(高速手机）</option>
+						<option value="低速手机">低速手机</option>
+						<option value="挖匙">挖匙</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<option value="V">V</option>
+						<option value="VI">VI</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>制备洞形深度</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="釉质">釉质</option>
+						<option value="本质浅层">本质浅层</option>
+						<option value="本质深层">本质深层</option>
+						<option value="近髓">近髓</option>
+						<option value="牙骨质">牙骨质</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">3. 干燥，隔湿</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>干燥</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="干燥">干燥</option>
+						<option value="棉卷">棉卷</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">4. 比色</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>比色板类型</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Vita比色板">Vita比色板</option>
+						<option value="Chromascop比色板">Chromascop比色板</option>
+						<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>牙色</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="B1">B1</option>
+						<option value="A1">A1</option>
+						<option value="A2">A2</option>
+						<option value="D2">D2</option>
+						<option value="B2">B2</option>
+						<option value="C1">C1</option>
+						<option value="C2">C2</option>
+						<option value="D4">D4</option>
+						<option value="D3">D3</option>
+						<option value="A3">A3</option>
+						<option value="B3">B3</option>
+						<option value="A3.5">A3.5</option>
+						<option value="B4">B4</option>
+						<option value="C3">C3</option>
+						<option value="A4">A4</option>
+						<option value="C4">C4</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">5. 取模材料&嵌体材料</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>取模材料</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="藻酸盐">藻酸盐</option>
+						<option value="硅橡胶">硅橡胶</option>
+						<option value="琼脂">琼脂</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>嵌体材料</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="瓷嵌体">瓷嵌体</option>
+						<option value="树脂嵌体">树脂嵌体</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">6. 窝洞消毒</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>窝洞消毒</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="75%乙醇">75%乙醇</option>
+						<option value="氯己定">氯己定</option>
+						<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
+						<option value="樟脑酚">樟脑酚</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>垫底</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Dycal">Dycal</option>
+						<option value="光固化氢氧化钙">光固化氢氧化钙</option>
+						<option value="化学固化玻璃离子">化学固化玻璃离子</option>
+						<option value="光固化玻璃离子">光固化玻璃离子</option>
+						<option value="流体树脂">流体树脂</option>
+						<option value="氧化锌丁香油+磷酸锌">氧化锌丁香油+磷酸锌</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">7. 涂布粘接剂</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>全酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Scotchbond Multi-purpose(3M ESPE)">Scotchbond Multi-purpose(3M ESPE)</option>
+						<option value="All-Bond2(Bisco)">All-Bond2(Bisco)</option>
+						<option value="Amalgambond(Parkell)">Amalgambond(Parkell)</option>
+						<option value="Gluma Comfort Bond(Hereaus Kulzer)">Gluma Comfort Bond(Hereaus Kulzer)</option>
+						<option value="Adper Single Bond Plus(3M ESPE)">Adper Single Bond Plus(3M ESPE)</option>
+						<option value="Prime&Bond NT(Dentsply)">Prime&Bond NT(Dentsply)</option>
+						<option value="其它">其它</option>
+					</select>
+					</div>
+					<div class="field">
+						<label>自酸蚀粘接系统</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Optibond Solo Plus SE(Kerr)">Optibond Solo Plus SE(Kerr)</option>
+						<option value="Adhese(Vivadent)">Adhese(Vivadent)</option>
+						<option value="Clearfil SE Bond(Kuraray)">Clearfil SE Bond(Kuraray)</option>
+						<option value="XENO Ⅲ(Dentsply)">XENO Ⅲ(Dentsply)</option>
+						<option value="Adper PromptL-Pop(3M ESPE)">Adper PromptL-Pop(3M ESPE)</option>
+						<option value="iBOND SelfEtch(Hereaus Kulzer)">iBOND SelfEtch(Hereaus Kulzer)</option>
+						<option value="G-Bond(GC)">G-Bond(GC)</option>
+						<option value="XENOIV(Dentsply)">XENOIV(Dentsply)</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>涂布时间</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s以下">5s以下</option>
+						<option value="5s-10s">5s-10s</option>
+						<option value="10s-15s">10s-15s</option>
+						<option value="15s-20s">15s-20s</option>
+						<option value="20s以上">20s以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="three fields">
+					<div class="field">
+						<label>光照</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="5s">5s</option>
+						<option value="10s">10s</option>
+						<option value="15s">15s</option>
+						<option value="20s">20s</option>
+						<option value="25s">25s</option>
+						<option value="30s">30s</option>
+						<option value="40s">40s</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">9. 放置贴面（无输入内容）</h3>
+
+				<h3 class="ui blue header">10. 打磨抛光</h3>
+				<div class="three fields">
+					<div class="field">
+						<label>打磨抛光</label>
+						<select name="dropdown" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="金刚砂针">金刚砂针</option>
+						<option value="彩虹抛光系统">彩虹抛光系统</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+				</div>
+			    <button class="ui right floated blue button">提交</button>
+			</form>
 		</div>
 	</div>
 
