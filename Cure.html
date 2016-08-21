@@ -76,14 +76,9 @@
 				</div>
 
 				<div class="ui active tab" data-tab="contextDetail1">
+					<div class="ui hidden divider"></div>
 					<form class="ui form">
-						<div class="ui info message">
-							<div class="header">药物治疗流程描述 </div>
-							<ul class="list">
-								<li>将药物氟化物（选择）和硝酸银（选择）涂布于龋损处30s</li>
-							</ul>
-						</div>
-						
+						<h4 class="ui grey header">* 将药物氟化物75%氟化钠甘油糊剂/8%氟化亚锡溶液/酸性磷酸氟化钠溶液/1.5%APF凝胶（选择），10%硝酸银/氨硝酸银（选择）涂布于龋损处30s</h4>
 						<div class="two fields">
 							<div class="field">
 								<label>药物氟化物</label>
@@ -124,20 +119,9 @@
 				</div>
 
 				<div class="ui tab" data-tab="contextDetail3">
+					<div class="ui hidden divider"></div>
 					<form class="ui form">
-
-						<div class="ui info message">
-							<div class="header">窝沟封闭流程描述 </div>
-							<ul class="list">
-								<li>清洁牙面：在低速手机上装好额外装置（选择），蘸取适量试剂（选择）于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润</li>
-								<li>用棉纱球隔湿，压缩空气牙面吹干，（选择）蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间（选择）</li>
-								<li>流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物</li>
-								<li>洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上</li>
-								<li>1-2分钟固化/光固化灯离牙尖1mm照射20-40秒</li>
-								<li>探针进行检查，调合，定期（选择）复查</li>
-							</ul>
-						</div>
-
+						<h4 class="ui grey header">1. 清洁牙面：在低速手机上装好锥形小毛刷/橡皮杯（选择），蘸取适量清洁剂/含氟牙膏（选择）于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润</h4>
 						<div class="two fields">
 							<div class="field">
 								<label>低速手机额外装置</label>
@@ -157,6 +141,7 @@
 							</div>
 						</div>
 
+						<h4 class="ui grey header">2. 用棉纱球隔湿,压缩空气牙面吹干，小棉球/细毛刷（选择）蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间20-30秒/60秒</h4>
 						<div class="two fields">
 							<div class="field">
 								<label>蘸取工具</label>
@@ -166,43 +151,33 @@
 								<option value="细毛刷">细毛刷</option>
 								</select>
 							</div>
-							<div class="field">
-								<label>酸蚀时间</label>
-								<select name="dropdown" class="ui dropdown">
-								<option value="">选择试剂类型</option>
-								<option value="20-30秒">20-30秒</option>
-								<option value="60秒">60秒</option>
-								</select>
-							</div>
 						</div>
 
-						<div class="two fields">
-							<div class="field">
-								<label>蘸取工具</label>
-								<select name="dropdown" class="ui dropdown">
-								<option value="">蘸取工具</option>
-								<option value="小棉球">小棉球</option>
-								<option value="细毛刷">细毛刷</option>
-								</select>
-							</div>
-							<div class="field">
-								<label>定期复查时间</label>
-								<select name="dropdown" class="ui dropdown">
-								<option value="">选择试剂类型</option>
-								<option value="3个月">3个月</option>
-								<option value="半年">半年</option>
-								<option value="一年">一年</option>
-								</select>
-							</div>
-						</div>
+						<h4 class="ui grey header">3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物</h4>
 
+						<h4 class="ui grey header">4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上</h4>
+
+						<h4 class="ui grey header">5. 1-2分钟自行固化/光固化灯（选择）离牙尖1mm照射20-40秒</h4>
 						<div class="two fields">
 							<div class="field">
-								<label>固化类型</label>
+								<label>固化灯类型</label>
 								<select name="dropdown" class="ui dropdown">
 								<option value="">选择固化灯类型</option>
 								<option value="自行固化">自行固化</option>
 								<option value="光固化">光固化</option>
+								</select>
+							</div>
+						</div>
+
+						<h4 class="ui grey header">6. 探针进行检查，调合，定期复查（选择）</h4>
+						<div class="two fields">
+							<div class="field">
+								<label>定期复查时间</label>
+								<select name="dropdown" class="ui dropdown">
+								<option value="">选择复查时间</option>
+								<option value="3个月">3个月</option>
+								<option value="半年">半年</option>
+								<option value="一年">一年</option>
 								</select>
 							</div>
 						</div>
@@ -214,6 +189,7 @@
 
 		</div>
 
+		<!--牙树脂直接充填修复-->
 		<div class="ui tab clearing segment" data-tab="2">
 			<form class="ui form">
 				<h3 class="ui blue header">1. 麻醉药物</h3>
@@ -247,7 +223,7 @@
 				<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
 				<div class="three fields">
 					<div class="field">
-						<label>去龋方法</label>
+						<label>去龋工具</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="球钻(高速手机）">球钻(高速手机）</option>
@@ -261,24 +237,18 @@
 						<label>制备洞形</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="I">I</option>
-						<option value="II">II</option>
-						<option value="III">III</option>
-						<option value="IV">IV</option>
-						<option value="V">V</option>
-						<option value="VI">VI</option>
+						<option value="唇面">唇面</option>
+						<option value="颊面">颊面</option>
+						<option value="腭面">腭面</option>
+						<option value="近中面">近中面</option>
+						<option value="远中面">远中面</option>
+						<option value="合面">合面</option>
+						<option value="根面">根面</option>
 						</select>
 					</div>
 					<div class="field">
-						<label>制备洞形深度</label>
-						<select name="dropdown" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="釉质">釉质</option>
-						<option value="本质浅层">本质浅层</option>
-						<option value="本质深层">本质深层</option>
-						<option value="近髓">近髓</option>
-						<option value="牙骨质">牙骨质</option>
-						</select>
+						<label>洞形深度</label>
+						<input type="text" name="name" placeholder="mm">
 					</div>
 				</div>
 
@@ -408,7 +378,7 @@
 				</div>
 				<div class="three fields">
 					<div class="field">
-						<label>光照</label>
+						<label>光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -459,7 +429,7 @@
 						</select>
 					</div>
 					<div class="field">
-						<label>光照【与上诉光照相同】</label>
+						<label>光固化灯光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -556,24 +526,18 @@
 						<label>制备洞形</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="I">I</option>
-						<option value="II">II</option>
-						<option value="III">III</option>
-						<option value="IV">IV</option>
-						<option value="V">V</option>
-						<option value="VI">VI</option>
+						<option value="唇面">唇面</option>
+						<option value="颊面">颊面</option>
+						<option value="腭面">腭面</option>
+						<option value="近中面">近中面</option>
+						<option value="远中面">远中面</option>
+						<option value="合面">合面</option>
+						<option value="根面">根面</option>
 						</select>
 					</div>
 					<div class="field">
-						<label>制备洞形深度</label>
-						<select name="dropdown" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="釉质">釉质</option>
-						<option value="本质浅层">本质浅层</option>
-						<option value="本质深层">本质深层</option>
-						<option value="近髓">近髓</option>
-						<option value="牙骨质">牙骨质</option>
-						</select>
+						<label>洞形深度</label>
+						<input type="text" name="name" placeholder="mm">
 					</div>
 				</div>
 
@@ -703,7 +667,7 @@
 				</div>
 				<div class="three fields">
 					<div class="field">
-						<label>光照</label>
+						<label>光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -754,7 +718,7 @@
 						</select>
 					</div>
 					<div class="field">
-						<label>光照【与上诉光照相同】</label>
+						<label>光固化灯光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -832,24 +796,18 @@
 						<label>制备洞形</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="I">I</option>
-						<option value="II">II</option>
-						<option value="III">III</option>
-						<option value="IV">IV</option>
-						<option value="V">V</option>
-						<option value="VI">VI</option>
+						<option value="唇面">唇面</option>
+						<option value="颊面">颊面</option>
+						<option value="腭面">腭面</option>
+						<option value="近中面">近中面</option>
+						<option value="远中面">远中面</option>
+						<option value="合面">合面</option>
+						<option value="根面">根面</option>
 						</select>
 					</div>
 					<div class="field">
-						<label>制备洞形深度</label>
-						<select name="dropdown" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="釉质">釉质</option>
-						<option value="本质浅层">本质浅层</option>
-						<option value="本质深层">本质深层</option>
-						<option value="近髓">近髓</option>
-						<option value="牙骨质">牙骨质</option>
-						</select>
+						<label>洞形深度</label>
+						<input type="text" name="name" placeholder="mm">
 					</div>
 				</div>
 
@@ -994,7 +952,7 @@
 				</div>
 				<div class="three fields">
 					<div class="field">
-						<label>光照</label>
+						<label>光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -1074,24 +1032,18 @@
 						<label>制备洞形</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="I">I</option>
-						<option value="II">II</option>
-						<option value="III">III</option>
-						<option value="IV">IV</option>
-						<option value="V">V</option>
-						<option value="VI">VI</option>
+						<option value="唇面">唇面</option>
+						<option value="颊面">颊面</option>
+						<option value="腭面">腭面</option>
+						<option value="近中面">近中面</option>
+						<option value="远中面">远中面</option>
+						<option value="合面">合面</option>
+						<option value="根面">根面</option>
 						</select>
 					</div>
 					<div class="field">
-						<label>制备洞形深度</label>
-						<select name="dropdown" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="釉质">釉质</option>
-						<option value="本质浅层">本质浅层</option>
-						<option value="本质深层">本质深层</option>
-						<option value="近髓">近髓</option>
-						<option value="牙骨质">牙骨质</option>
-						</select>
+						<label>洞形深度</label>
+						<input type="text" name="name" placeholder="mm">
 					</div>
 				</div>
 
@@ -1236,7 +1188,7 @@
 				</div>
 				<div class="three fields">
 					<div class="field">
-						<label>光照</label>
+						<label>光照时间</label>
 						<select name="dropdown" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="5s">5s</option>
@@ -1268,13 +1220,6 @@
 			</form>
 		</div>
 	</div>
-
-
-
-
-
-
-		
   	</div>
 
 </body>
