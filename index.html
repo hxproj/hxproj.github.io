@@ -14,43 +14,90 @@
 		.main.container {
 			margin-top: 5em;
 	  	}
+	  	.invisible {
+	  		display: none;
+	  	}
   	</style>
 
 </head>
 
 <body>
-	<!-- Following Menu -->
-	<div class="ui large blue fixed inverted menu">
+	<div class="ui blue inverted large top fixed menu">
 		<div class="ui container">
 		    <a class="active item" href="index.html">病历</a>
 		    <a class="item" href="mouthexamination.html">搜索</a>
 
-	      	<div class="right item">
-		        <a href="#"><i class="plus icon"></i>添加病历</a>
-	        </div>
+  			<div class="right menu">
+		      	<div class="item">
+			        <a href="#"><i class="plus icon"></i>添加病历</a>
+		        </div>
+			</div> 
 		</div> 
 	</div> 
 
 	<div class="ui main container">
 
-		<div class="ui segment">
+		<div class="ui invisible segment">
+		    <div class="ui items">
+				<a class="ui orange ribbon label">个人史</a>
+				<div class="item">
+					<div class="content">
+						<div class="ui center aligned vertical basic segment">
+							<a class="ui large name header">name</a>      
+							<div class="meta">
+								<span class="gender">gender</span>
+								<span class="age">age</span>
+								<span class="occupation">occupation</span>
+								<span class="contact">contact</span>
+					      	</div>
+							<div class="ui divider"></div>
+							<div class="ui teal labeled icon add small button">添加牙位<i class="add icon"></i></div>
+				      	</div>
+
+						<div class="extra">
+							<div class="ui invisible header">
+								牙位
+								<div class="ui icon small buttons">
+									<a class="ui blue button" href="PresentIllness.html">现病史</a>
+									<a class="ui blue button" href="MouthExamination.html">口腔检查</a>
+									<a class="ui blue button" href="Diagnose.html">诊断</a>
+									<a class="ui blue button" href="DifficultyAssessment.html">难度评估（Ⅱ级）</a>
+									<a class="ui blue button" href="Cure.html">处置</a>
+									<a class="ui blue button" href="Manage.html">龋病预后管理（低风险）</a>
+									<a class="ui blue button" href="USPHS.html">USPHS评估</a>
+									<a class="ui teal button" href="">预览</a>
+									<a class="ui icon button" data-tooltip="删除当前牙位"><i class="remove icon"></i></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="ui hidden divider"></div>
+
+				      	<div class="extra">
+				      		<div class="ui right floated label">病历添加时间：2016-07-14 11:20</div>
+				      	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui medicalrecord segment">
 		    <div class="ui items">
 				<a class="ui orange ribbon label">个人史</a>
 				<div class="item">
 					<div class="content">
 
 						<div class="ui center aligned vertical basic segment">
-							<a class="ui large header">李狗蛋</a>      
+							<a class="ui large name header">李狗蛋</a>      
 							<div class="meta">
-								<span>男</span>
-								<span>23岁</span>
-								<span>系统架构师</span>
-								<span class="stay">15608041015</span>
+								<span class="gender">男</span>
+								<span class="age">23岁</span>
+								<span class="occupation">系统架构师</span>
+								<span class="contact">15608041015</span>
 					      	</div>
 							<div class="ui divider"></div>
 							<div class="ui teal labeled icon add small button">添加牙位<i class="add icon"></i></div>
 				      	</div>
-
 
 						<div class="extra">
 							<div class="ui header">
@@ -58,7 +105,7 @@
 								<div class="ui icon small buttons">
 									<a class="ui blue button" href="PresentIllness.html">现病史</a>
 									<a class="ui blue button" href="MouthExamination.html">口腔检查</a>
-									<a class="ui blue blue button" href="Diagnose.html">诊断</a>
+									<a class="ui blue button" href="Diagnose.html">诊断</a>
 									<a class="ui blue button" href="DifficultyAssessment.html">难度评估（Ⅱ级）</a>
 									<a class="ui blue button" href="Cure.html">处置</a>
 									<a class="ui blue button" href="Manage.html">龋病预后管理（低风险）</a>
@@ -79,7 +126,7 @@
 			</div>
 		</div>
 		
-		<div class="ui segment">
+		<div class="ui medicalrecord segment">
 			<a class="ui orange ribbon label">个人史</a>
 		    <div class="ui items">
 				<div class="item">
@@ -236,7 +283,7 @@
 		</div>
 	</div>
 
-	<div class="ui first coupled modal" id="MedicalRecords">
+	<div class="ui modal" id="MedicalRecords">
 		<div class="header">添加病历</div>
 		<div class="content">
 		    <div class="description">
@@ -454,7 +501,7 @@
 	  	</div>
 		<div class="actions">
 			<div class="ui orange deny button">取消</div>
-			<div class="ui teal right labeled icon button">重置<i class="refresh icon"></i></div>
+			<div class="ui primary right labeled icon reset button">重置<i class="refresh icon"></i></div>
 			<div class="ui primary approve right labeled icon button">
 				添加<i class="checkmark icon"></i>
 			</div>

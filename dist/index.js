@@ -9,48 +9,77 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: AJAX提交病历添加表单
-	$('.right.item a').click(function(){
+	$('.right.menu a').click(function(){
 		$('#MedicalRecords').modal({
 			closable: false,
   			onApprove : function() {
-  			var IsOK = true;
-  			var UserInfo;
-  			$.ajax({
-  				url: ADD_USER,
-  				type: "post",
-  				async: false, 
-  				data: $("#basicinfoform").serialize(),
-  				dataType: "json",
-  				error: function(){
-  					IsOK = false;
-  					alert("网络连接错误...");
-  				},
-  				success: function(data){
-  					UserInfo = data;
-  			}
-			});
-
-      		var UserID    = UserInfo.user_id;
-      		var UserIDStr = "user_id=" + UserID + "&";
-			if (IsOK){
-				$.ajax({
-					url: ADD_PERSONAL_HISTORY_URL,
-					type: "post",
-					async: false, 
-					data: UserIDStr + $("#personalhistoryform").serialize(),
-					dataType: "text",
-					error: function(){
-						IsOK = false;
-						alert("网络连接错误...");
-					},
-					success: function(data){
-						alert("OK");
-					}
+  				var IsOK = true;
+  				var UserInfo;
+  				$.ajax({
+	  				url: ADD_USER_URL,
+	  				type: "post",
+	  				async: false, 
+	  				data: $("#basicinfoform").serialize(),
+	  				dataType: "json",
+	  				error: function(){
+	  					IsOK = false;
+	  					alert("网络连接错误...");
+	  				},
+	  				success: function(data){
+	  					UserInfo = data;
+  					}
 				});
-			}
 
-			return IsOK;
-		}
+				if (IsOK){
+	      			var UserID    = UserInfo.user_id;
+	      			var UserIDStr = "user_id=" + UserID + "&";
+					$.ajax({
+						url: ADD_PERSONAL_HISTORY_URL,
+						type: "post",
+						async: false, 
+						data: UserIDStr + $("#personalhistoryform").serialize(),
+						dataType: "text",
+						error: function(){
+							IsOK = false;
+							alert("网络连接错误...");
+						},
+						success: function(data){
+							alert("OK");
+						}
+					});
+				}
+
+				// ***************************************************************
+				// FUNCTION: 在界面添加新的病历
+
+				// 用于界面设计，得到真正返回数据则修改
+				var User = {
+					name: "李超",
+					gender: 0,
+					age : 30,
+					occupation: "软件工程师",
+					contact: 10086
+				};
+
+				if (true) {
+					$MedicalRecord = $('.invisible.segment');
+
+					var Gender = "男";
+					if (User.gender == 1) { Gender = "女"}
+
+					$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
+					$ClonedMedicalRecord.find('.name').text(User.name);
+					$ClonedMedicalRecord.find('.gender').text(Gender);
+					$ClonedMedicalRecord.find('.age').text(User.age);
+					$ClonedMedicalRecord.find('.occupation').text(User.occupation);
+					$ClonedMedicalRecord.find('.contact').text(User.contact);
+
+					$MedicalRecord.after($ClonedMedicalRecord);
+				}
+
+				// there should return isOK
+				return true;
+			}
 		}).modal('show');
 	});
 
@@ -83,10 +112,9 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
-
 	$('#context .menu .item').tab({
 		context: $('#context')
-});
+	});
 
 	// ***************************************************************
 	// FUNCTION: 额外添加项弹出框
