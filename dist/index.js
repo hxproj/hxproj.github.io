@@ -51,34 +51,23 @@ $(document).ready(function(){
 
 				// ***************************************************************
 				// FUNCTION: 在界面添加新的病历
-
-				// 用于界面设计，得到真正返回数据则修改
-				var User = {
-					name: "李超",
-					gender: 0,
-					age : 30,
-					occupation: "软件工程师",
-					contact: 10086
-				};
-
-				if (true) {
+				if (IsOK) {
 					$MedicalRecord = $('.invisible.segment');
 
 					var Gender = "男";
-					if (User.gender == 1) { Gender = "女"}
+					if (UserInfo.gender == 1) { Gender = "女"}
 
 					$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
-					$ClonedMedicalRecord.find('.name').text(User.name);
+					$ClonedMedicalRecord.find('.name').text(UserInfo.name);
 					$ClonedMedicalRecord.find('.gender').text(Gender);
-					$ClonedMedicalRecord.find('.age').text(User.age);
-					$ClonedMedicalRecord.find('.occupation').text(User.occupation);
-					$ClonedMedicalRecord.find('.contact').text(User.contact);
+					$ClonedMedicalRecord.find('.age').text(UserInfo.age);
+					$ClonedMedicalRecord.find('.occupation').text(UserInfo.occupation);
+					$ClonedMedicalRecord.find('.contact').text(UserInfo.contact);
 
 					$MedicalRecord.after($ClonedMedicalRecord);
 				}
-
-				// there should return isOK
-				return true;
+				
+				return IsOK;
 			}
 		}).modal('show');
 	});
