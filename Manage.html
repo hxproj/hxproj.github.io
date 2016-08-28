@@ -22,6 +22,30 @@
   		$('#context .menu .item').tab({
     		context: $('#context')
 		});
+
+		var SERVER_URL    = "http://127.0.0.1:9000";
+		var ADD_MANAGE_URL = SERVER_URL + "/medical-case-of-illness/prognosis";
+
+		$('#context .segment button').click(function(){
+			var SelectItemValue = $(this).parent().attr('data-tab');
+			var UserID    = 5;
+		    var AdditionStr = "user_id=" + UserID + "&" + "patient_type=" + SelectItemValue;
+
+		    $.ajax({
+	      		url: ADD_MANAGE_URL,
+	      		type: "post",
+	      		data: AdditionStr,
+	      		dataType: "json",
+	      		error: function(){
+		        	IsOK = false;
+		        	alert("网络连接错误...");
+	      		},
+	      		success: function(data){
+	        		alert("OK");
+	      		}
+	    	});
+
+		});
   	});
   	</script>
 

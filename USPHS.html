@@ -18,6 +18,57 @@
   		$('.right.item a').click(function(){
   			$('.ui.modal').modal('show');
   		});
+
+		var SERVER_URL    = "http://127.0.0.1:9000";
+		var ADD_DIFFICULTY_URL = SERVER_URL + "/medical-case-of-illness/usphs";
+
+  		$('form').form({
+  			onSuccess: function(){
+				var UserID    = 5;
+				var ToothID   = 1;
+			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
+
+			    $.ajax({
+		      		url: ADD_DIFFICULTY_URL,
+		      		type: "post",
+		      		data: AdditionStr + $(this).serialize(),
+		      		dataType: "json",
+		      		error: function(){
+			        	IsOK = false;
+			        	alert("网络连接错误...");
+		      		},
+		      		success: function(data){
+		        		alert("OK");
+		      		}
+		    	});
+
+  				return false;
+  			}
+  		});
+
+  		$('#DifficultyForm').form({
+  			onSuccess: function(){
+				var UserID    = 5;
+				var ToothID   = 1;
+			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
+
+			    $.ajax({
+		      		url: ADD_DIFFICULTY_URL,
+		      		type: "post",
+		      		data: AdditionStr + $(this).serialize(),
+		      		dataType: "json",
+		      		error: function(){
+			        	IsOK = false;
+			        	alert("网络连接错误...");
+		      		},
+		      		success: function(data){
+		        		alert("OK");
+		      		}
+		    	});
+
+  				return false;
+  			}
+  		});
   	});
   	</script>
 
@@ -47,25 +98,25 @@
 			    <label>颜色匹配</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Color1" checked="checked" value="1">
+			        <input type="radio" name="color" checked="checked" value="无明显颜色变化，色度、饱和度、透明度与邻牙匹配好">
 			        <label>无明显颜色变化，色度、饱和度、透明度与邻牙匹配好</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Color2" value="2">
-			        <label>轻微色度、饱和度、透明度变化，比色区间<1，临床可接受</label>
+			        <input type="radio" name="color" value="轻微色度、饱和度、透明度变化，比色区间小于1，临床可接受">
+			        <label>轻微色度、饱和度、透明度变化，比色区间小于1，临床可接受</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Color" value="3">
-			        <label>严重色度、饱和度、透明度变化，比色区间>1， 临床不可接受</label>
+			        <input type="radio" name="color" value="严重色度、饱和度、透明度变化，比色区间大于1， 临床不可接受">
+			        <label>严重色度、饱和度、透明度变化，比色区间大于1， 临床不可接受</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox checked">
-			        <input type="radio" name="Color" value="4">
+			        <input type="radio" name="color" value="无法接受的色度、饱和度、透明度差异">
 			        <label>无法接受的色度、饱和度、透明度差异</label>
 			      </div>
 			    </div>
@@ -75,25 +126,25 @@
 			    <label>边缘适合性</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Bounding" checked="checked">
+			        <input type="radio" name="marginal_accuracy" checked="checked" value="探针和肉眼均不能检测出间隙，充填体与牙釉质良好接触，边缘无悬突、无着色">
 			        <label>探针和肉眼均不能检测出间隙，充填体与牙釉质良好接触，边缘无悬突、无着色</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Bounding">
+			        <input type="radio" name="marginal_accuracy" value="探针探有间隙， 肉眼可见超出或不足的边缘，边缘有轻微着色，但无牙体或基底材料暴露">
 			        <label>探针探有间隙， 肉眼可见超出或不足的边缘，边缘有轻微着色，但无牙体或基底材料暴露</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Bounding">
-			        <label>探针探有间隙， 肉眼可见超出或不足的边缘>1mm， 有牙体或基底材料暴露， 但无缺损或脱落</label>
+			        <input type="radio" name="marginal_accuracy" value="探针探有间隙， 肉眼可见超出或不足的边缘大于1mm， 有牙体或基底材料暴露， 但无缺损或脱落">
+			        <label>探针探有间隙， 肉眼可见超出或不足的边缘大于1mm， 有牙体或基底材料暴露， 但无缺损或脱落</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox checked">
-			        <input type="radio" name="Bounding">
+			        <input type="radio" name="marginal_accuracy" value="边缘继发龋">
 			        <label>边缘继发龋</label>
 			      </div>
 			    </div>
@@ -103,25 +154,25 @@
 			    <label>解剖形态</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Shape" checked="checked">
+			        <input type="radio" name="anatomic_form" checked="checked" value="修复体轮廓与牙体组织解剖形态和边缘连续">
 			        <label>修复体轮廓与牙体组织解剖形态和边缘连续</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Shape">
+			        <input type="radio" name="anatomic_form" value="修复体充填稍多或稍欠">
 			        <label>修复体充填稍多或稍欠</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Shape">
+			        <input type="radio" name="anatomic_form" value="边缘形成悬突或（应充填的）牙体组织暴露">
 			        <label>边缘形成悬突或（应充填的）牙体组织暴露</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox checked">
-			        <input type="radio" name="Shape">
+			        <input type="radio" name="anatomic_form" value="修复体确实，创伤牙合或修复体导致牙齿或周围组织疼痛">
 			        <label>修复体确实，创伤牙合或修复体导致牙齿或周围组织疼痛</label>
 			      </div>
 			    </div>
@@ -131,25 +182,25 @@
 			    <label>表面粗糙度</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Roughness" checked="checked">
+			        <input type="radio" name="surfaceness" checked="checked" value="修复体表面光滑">
 			        <label>修复体表面光滑</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Roughness">
+			        <input type="radio" name="surfaceness" value="修复表面轻微粗糙，可抛光">
 			        <label>修复表面轻微粗糙，可抛光</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="Roughness">
+			        <input type="radio" name="surfaceness" value="修复体表面粗糙，有不规则凹槽，不能抛光">
 			        <label>修复体表面粗糙，有不规则凹槽，不能抛光</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox checked">
-			        <input type="radio" name="Roughness">
+			        <input type="radio" name="surfaceness" value="修复体表面裂纹或剥脱">
 			        <label>修复体表面裂纹或剥脱</label>
 			      </div>
 			    </div>
@@ -159,20 +210,20 @@
 			    <label>边缘着色</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BoundingColor" checked="checked">
+			        <input type="radio" name="edge_color" checked="checked" value="无边缘着色">
 			        <label>无边缘着色</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BoundingColor">
-			        <label><50%的窝洞边缘着色</label>
+			        <input type="radio" name="edge_color" value="小于50%的窝洞边缘着色">
+			        <label>小于50%的窝洞边缘着色</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BoundingColor">
-			        <label>>50%的窝洞边缘着色</label>
+			        <input type="radio" name="edge_color" value="大于50%的窝洞边缘着色">
+			        <label>大于50%的窝洞边缘着色</label>
 			      </div>
 			    </div>
 			</div>
@@ -181,19 +232,19 @@
 			    <label>咬合接触</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BiteForce" checked="checked">
+			        <input type="radio" name="occlusal_contact" checked="checked" value="正常咬合">
 			        <label>正常咬合</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BiteForce">
+			        <input type="radio" name="occlusal_contact" value="咬合较紧或较松">
 			        <label>咬合较紧或较松</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="BiteForce">
+			        <input type="radio" name="occlusal_contact" value="无咬合">
 			        <label>无咬合</label>
 			      </div>
 			    </div>
@@ -203,19 +254,19 @@
 			    <label>牙齿敏感</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="ToothSensitivity" checked="checked">
+			        <input type="radio" name="sensitivity_of_tooth" checked="checked" value="无敏感症状">
 			        <label>无敏感症状</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="ToothSensitivity">
+			        <input type="radio" name="sensitivity_of_tooth" value="有轻微冷热刺激痛，无自发痛">
 			        <label>有轻微冷热刺激痛，无自发痛</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="ToothSensitivity">
+			        <input type="radio" name="sensitivity_of_tooth" value="有严重冷热刺激痛，并出现自发痛，无法忍受，需要做牙髓治疗">
 			        <label>有严重冷热刺激痛，并出现自发痛，无法忍受，需要做牙髓治疗</label>
 			      </div>
 			    </div>
@@ -225,13 +276,13 @@
 			    <label>继发龋</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="SecondaryCaries" checked="checked">
+			        <input type="radio" name="secondary_caries" checked="checked" value="无任何继发龋">
 			        <label>无任何继发龋</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="SecondaryCaries">
+			        <input type="radio" name="secondary_caries" value="可检测到修复体边缘周围继发龋">
 			        <label>可检测到修复体边缘周围继发龋</label>
 			      </div>
 			    </div>
@@ -241,19 +292,19 @@
 			    <label>修复体完整性</label>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="RepairBody" checked="checked">
+			        <input type="radio" name="integrity" checked="checked" value="修复体完整">
 			        <label>修复体完整</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="RepairBody">
+			        <input type="radio" name="integrity" value="部分缺损">
 			        <label>部分缺损</label>
 			      </div>
 			    </div>
 			    <div class="field">
 			      <div class="ui slider checkbox">
-			        <input type="radio" name="RepairBody">
+			        <input type="radio" name="integrity" value="修复体缺失">
 			        <label>修复体缺失</label>
 			      </div>
 			    </div>
