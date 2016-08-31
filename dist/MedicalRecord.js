@@ -1,57 +1,75 @@
 $(document).ready(function(){
 
-  var SERVER_URL    = "http://127.0.0.1:9000";
-  var ADD_USER_URL  = SERVER_URL + "/medical-case-of-illness/user";
-  var ADD_TOOTH_URL = SERVER_URL + "/medical-case-of-illness/tooth-location-record";
-  var ADD_PERSONAL_HISTORY_URL = SERVER_URL + "/medical-case-of-illness/personal-history";
+	var URL_ADD_USER  = URL_SERVER + "/medical-case-of-illness/user";
+	var URL_ADD_TOOTH = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
 
-	$('.ui.dropdown').dropdown();
+	var IsSubmitOK = false;
+	$("#basicinfoform").form({
+		fields: {
+			name: {
+				identifier: 'name',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病人的姓名'
+					}
+				]
+			},
+			gender: {
+				identifier: 'gender',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病人的性别'
+					}
+				]
+			},
+			age: {
+				identifier: 'age',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病人的年龄'
+					}
+				]
+			},
+			occupation: {
+				identifier: 'occupation',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病人的职业'
+					}
+				]
+			},
+			contact: {
+				identifier: 'contact',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病人的联系方式'
+					}
+				]
+			}
+		},
+		inline: true,
+		onSuccess: function(){
+			$.ajax({
+  				url: URL_ADD_USER,
+				type: "post",
+				async: false, 
+				data: $(this).serialize(),
+				dataType: "json",
+				error: function(){
+					IsSubmitOK = false;
+  					alert("网络连接错误，请检查网络是否正常");
+  				},
+  				success: function(UserInfo){
+  					IsSubmitOK = true;
 
-	// ***************************************************************
-	// FUNCTION: AJAX提交病历添加表单
-	$('.right.menu a').click(function(){
-		$('#MedicalRecords').modal({
-			closable: false,
-  			onApprove : function() {
-  				var IsOK = true;
-  				var UserInfo;
-  				$.ajax({
-	  				url: ADD_USER_URL,
-	  				type: "post",
-	  				async: false, 
-	  				data: $("#basicinfoform").serialize(),
-	  				dataType: "json",
-	  				error: function(){
-	  					IsOK = false;
-	  					alert("网络连接错误...");
-	  				},
-	  				success: function(data){
-	  					UserInfo = data;
-  					}
-				});
-
-				if (IsOK){
-	      			var UserID    = UserInfo.user_id;
-	      			var UserIDStr = "user_id=" + UserID + "&";
-					$.ajax({
-						url: ADD_PERSONAL_HISTORY_URL,
-						type: "post",
-						async: false, 
-						data: UserIDStr + $("#personalhistoryform").serialize(),
-						dataType: "text",
-						error: function(){
-							IsOK = false;
-							alert("网络连接错误...");
-						},
-						success: function(data){
-							alert("OK");
-						}
-					});
-				}
-
-				// ***************************************************************
-				// FUNCTION: 在界面添加新的病历
-				if (IsOK) {
+  					alert("添加成功");
+					// ***************************************************************
+					// FUNCTION: 在界面添加新的病历
 					$MedicalRecord = $('.invisible.segment');
 
 					var Gender = "男";
@@ -66,8 +84,20 @@ $(document).ready(function(){
 
 					$MedicalRecord.after($ClonedMedicalRecord);
 				}
-				
-				return IsOK;
+			});
+
+			// 防止表单提交导致页面跳转
+			return false;
+		}
+	});
+
+	$('.right.menu a').click(function(){
+		$('#MedicalRecords').modal({
+			closable: false,
+  			onApprove : function() {
+  				$("#basicinfoform").submit();
+
+				return IsSubmitOK;
 			}
 		}).modal('show');
 	});
