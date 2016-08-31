@@ -182,15 +182,72 @@
 						              	</select>
 							    	</div>
 							    	<div class="field">
-							    		<label>病发时间(此处UI有待进一步设计)</label>
-							    		<select name="time_of_occurrence" class="ui dropdown">
-						                <option value="">选择</option>
-						                <option value="2016">1-10天前</option>
-						                <option value="2015">1-10月前</option>
-						                <option value="2015">几年前</option>
-						              	</select>
+							    		<label>病发时间</label>
+							    		<div class="ui disabled input">
+							    			<input type="text" name="time_of_occurrence"></input>
+							    		</div>
 							    	</div>
 							    </div>	
+
+						    	<div class="ui custom top right hidden fluid popup">
+						    		<div class="ui center aligned basic segment">
+						    			<label>选择病发时间</label>
+							    		<div class="ui divider"></div>
+							    		<div class="ui large teal labels" id="time_day">
+								    		<a class="ui label">1</a>
+								    		<a class="ui label">2</a>
+								    		<a class="ui label">3</a>
+								    		<a class="ui label">4</a>
+								    		<a class="ui label">5</a>
+								    		<a class="ui label">6</a>
+								    		<a class="ui label">7</a>
+								    		<a class="ui label">8</a>
+								    		<a class="ui label">9</a>
+								    		<a class="ui label">10</a>
+								    		天
+										</div>
+							    		<div class="ui large teal labels" id="time_week">
+								    		<a class="ui label">1</a>
+								    		<a class="ui label">2</a>
+								    		<a class="ui label">3</a>
+								    		<a class="ui label">4</a>
+								    		<a class="ui label">5</a>
+								    		<a class="ui label">6</a>
+								    		<a class="ui label">7</a>
+								    		<a class="ui label">8</a>
+								    		<a class="ui label">9</a>
+								    		<a class="ui label">10</a>
+								    		周
+										</div>
+							    		<div class="ui large teal labels" id="time_month">
+								    		<a class="ui label">1</a>
+								    		<a class="ui label">2</a>
+								    		<a class="ui label">3</a>
+								    		<a class="ui label">4</a>
+								    		<a class="ui label">5</a>
+								    		<a class="ui label">6</a>
+								    		<a class="ui label">7</a>
+								    		<a class="ui label">8</a>
+								    		<a class="ui label">9</a>
+								    		<a class="ui label">10</a>
+								    		月
+										</div>
+							    		<div class="ui large teal labels" id="time_year">
+								    		<a class="ui label">1</a>
+								    		<a class="ui label">2</a>
+								    		<a class="ui label">3</a>
+								    		<a class="ui label">4</a>
+								    		<a class="ui label">5</a>
+								    		<a class="ui label">6</a>
+								    		<a class="ui label">7</a>
+								    		<a class="ui label">8</a>
+								    		<a class="ui label">9</a>
+								    		<a class="ui label">10</a>
+								    		年
+										</div>
+						    		</div>
+								</div>
+									
 							    <input name="is_fill_tooth" type="hidden" value="0">
 							</form>
 						</div>
@@ -263,8 +320,8 @@
 					    		<input type="text" name="occupation" placeholder="输入职业">
 					    	</div>
 					    	<div class="field">
-					    		<label>电话</label>
-					    		<input type="text" name="contact" placeholder="输入电话">
+					    		<label>联系方式</label>
+					    		<input type="text" name="contact" placeholder="输入联系方式">
 					    	</div>
 					    </div>
 					</form>
