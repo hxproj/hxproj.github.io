@@ -128,6 +128,15 @@ $(document).ready(function(){
 					}
 				]
 			},
+			time_of_occurrence: {
+				identifier: 'time_of_occurrence',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写病发时间'
+					}
+				]
+			}
 		},
 		inline: true,
 		onSuccess: function(){
