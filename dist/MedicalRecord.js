@@ -174,6 +174,7 @@ $(document).ready(function(){
 		}
 	});
 
+	var ToothData = null;
 	function submitTooth($Form, AdditionForm){
 		$.ajax({
 			url     : URL_ADD_TOOTH,
@@ -186,6 +187,8 @@ $(document).ready(function(){
 			},
 			success : function(data){
 				IsSubmitOK = true;
+				ToothData  = data;
+
 				alert("OK");
 			}
 		});
@@ -194,14 +197,23 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: AJAX提交牙位添加表单
 	$('.add.button').click(function(){
+		$InvisibleExtra = $(this).parents(".content").find(".extra:first");
 		$('#add_tooth').modal({
 			onApprove: function(){
 
-	        	var data_tab = $('#add_tooth .item.active').attr('data-tab');
+	        	var data_tab    = $('#add_tooth .item.active').attr('data-tab');
 	        	var submit_form = $("#add_tooth .tab[data-tab="+ data_tab +"] form");
 
 	        	submit_form.submit();
 
+        		// ***************************************************************
+				// FUNCTION: 在界面添加新的牙位
+	        	if (IsSubmitOK) {
+					$ClonedExtra = $InvisibleExtra.clone(true);
+					$InvisibleExtra.after($ClonedExtra);
+					$ClonedExtra.find('.invisible.header').removeClass('invisible');
+	        	}
+	        	
 	        	return IsSubmitOK;
 			}
 		}).modal('show');

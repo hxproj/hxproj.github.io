@@ -2,6 +2,12 @@ $(document).ready(function(){
 
 	var URL_ADD_PERSONAL_HISTORY = URL_SERVER + "/medical-case-of-illness/personal-history";
 
+	// ***************************************************************
+	// FUNCTION: 添加额外事件
+	$.fn.form.settings.rules.matchOption = function() {
+		return ($("form").form('get value', 'times_of_teeth_brush') == $("select[name=time_of_teeth_brush]").dropdown('get selectionCount').toString().split(",")[0]);
+	};
+
 	// 设置病历个人史表单相关属性
 	$("form").form({
 		fields: {
@@ -11,6 +17,15 @@ $(document).ready(function(){
 					{
 						type   : 'empty',
             			prompt : '请输入刷牙时长'
+					}
+				]
+			},
+			time_of_teeth_brush: {
+				identifier: 'time_of_teeth_brush',
+				rules: [
+					{
+						type   : 'matchOption',
+            			prompt : '刷点时间点次数必须与刷牙次数相等'
 					}
 				]
 			},
