@@ -29,6 +29,11 @@
 		<h2 class="ui orange header">口腔检查（李狗蛋、上前牙）</h2>
 		<form class="ui clearing segment form">
 			<h3 class="ui blue header">牙体情况</h3>
+			<div class="field">
+		    	<input name="tooth_location" type="hidden" value="">
+				<label>牙位</label>
+		    	<div class="ui mini icon button" id="addLocation"><i class="plus icon"></i></div>
+			</div>
 			<div class="three fields">
 				<div class="field">
 					<label>有无继发龋</label>
@@ -139,12 +144,6 @@
 					<label>牙齿活力值</label>
 					<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
 				</div>
-			</div>
-
-			<div class="field">
-				<label>牙位</label>
-		    	<div class="ui mini icon button" id="addLocation"><i class="plus icon"></i></div>
-		    	<input name="is_fill_tooth" type="hidden" value="">
 			</div>
 
 			<h3 class="ui blue header">牙周情况</h3>
@@ -387,15 +386,15 @@
 		<div class="content">
 		    <div class="description">
 				<div id="context">
-					<div class="ui blue pointing fluid two item secondary menu">
+					<div class="ui blue pointing fluid two item menu">
 						<a class="active item" data-tab="1">成年人牙位</a>
 						<a class="item" data-tab="2">婴幼儿牙位</a>
 					</div>
 
 					<div class="ui tab clearing basic segment active" data-tab="1">
-						<div class="ui equal width internally celled grid">
+						<div class="ui equal width celled center aligned grid">
 							<div class="row">
-								<div class="right aligned column">
+								<div class="column">
 						    		<div class="ui large labels">
 							    		<a class="ui label">18</a>
 							    		<a class="ui label">17</a>
@@ -421,7 +420,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="right aligned column">
+								<div class="column">
 						    		<div class="ui large labels">
 							    		<a class="ui label">48</a>
 							    		<a class="ui label">47</a>
@@ -450,9 +449,9 @@
 					</div>
 
 					<div class="ui tab clearing basic segment" data-tab="2">
-						<div class="ui equal width internally celled grid">
+						<div class="ui equal width celled center aligned grid">
 							<div class="row">
-								<div class="right aligned column">
+								<div class="column">
 						    		<div class="ui large labels">
 							    		<a class="ui label">15</a>
 							    		<a class="ui label">14</a>
@@ -472,7 +471,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="right aligned column">
+								<div class="column">
 						    		<div class="ui large labels">
 							    		<a class="ui label">45</a>
 							    		<a class="ui label">44</a>
@@ -499,7 +498,7 @@
 		<div class="actions">
 			<div class="ui orange deny button">取消</div>
 			<div class="ui primary approve right labeled icon button">
-				添加<i class="checkmark icon"></i>
+				确定<i class="checkmark icon"></i>
 			</div>
 		</div>
 	</div>

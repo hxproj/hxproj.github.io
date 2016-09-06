@@ -41,14 +41,23 @@ $(document).ready(function(){
 	$('#addLocation').click(function(){
 		$('.ui.modal').modal({
 			onApprove: function(){
-				var $ToothType = $('.modal .item.active');
-				var Value = $ToothType.attr('data-tab');
-				var Name  = $ToothType.text();
+				var $AddLocation = $('#addLocation');
+				var $ToothType   = $('.modal .item.active');
+				var ToothTypeValue = $ToothType.attr('data-tab');
+				var ToothTypeName  = $ToothType.text();
 
-				var 
+				$AddLocation.nextAll().remove();
+				$AddLocation.after("<a class='ui orange label'>" + ToothTypeName + "</a>");
+
+				var FormData = ToothTypeValue;
 				$('.modal .segment.active .teal.label').each(function(){
-					$(this).text();
+					var ToothLocation = $(this).text();
+					FormData += "," + ToothLocation;
+
+					$AddLocation.next().last().after("<a class='ui teal label'>" + ToothLocation + "</a>");
 				});
+
+				$('input[name=tooth_location]').val(FormData);
 			}
 		}).modal('show');
 	});
