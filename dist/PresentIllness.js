@@ -1,11 +1,7 @@
 $(document).ready(function(){
 
-	var SERVER_URL   = "http://127.0.0.1:9000";
-	var ADD_ILLNESS_HISTORY_URL = SERVER_URL + "/medical-case-of-illness/illness-history";
+	var ADD_ILLNESS_HISTORY_URL = URL_SERVER + "/medical-case-of-illness/illness-history";
 
-	$('.ui.dropdown').dropdown();
-	$('.ui.accordion').accordion();
-	
 	$('#context .menu .item').tab({
 		context: $('#context')
 	});

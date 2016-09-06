@@ -10,6 +10,7 @@
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
+  	<script src="dist/config.js"></script>  
   	<script src="dist/PresentIllness.js"></script>  
 
   	<style type="text/css">
@@ -57,21 +58,14 @@
 				          	</select>
 						</div>
 				    	<div class="field">
-				    		<label>是否服用药物【名称】</label>
-				    		<select name="is_medicine" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
-				          	</select>
-						</div>
-					</div>
-			    	<div class="three fields">
-				    	<div class="field">
 				    		<label>是否做过治疗</label>
 				    		<select name="is_treatment" class="ui dropdown">
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
 						</div>
+					</div>
+			    	<div class="three fields">
 				    	<div class="field">
 				    		<label>症状是否缓解</label>
 				    		<select name="is_relief" class="ui dropdown">
@@ -80,11 +74,15 @@
 				            <option value="是">是</option>
 				          	</select>
 						</div>
+				    	<div class="field">
+				    		<label>服用药物名称(如未服用则不填此项)</label>
+							<input type="text" name="medicine_name" placeholder="药物名称">
+						</div>
 					</div>
 
 					<input name="is_primary" type="hidden" value="0">
-					<input name="medicine_name" type="hidden" value="">
 					<input name="fill_type" type="hidden" value="">
+					<input name="is_medicine" type="hidden" value="">
 		    		<div class="ui right floated submit blue button">提交</div>
 				</form>
 	  		</div>
@@ -108,13 +106,6 @@
 			              	</select>
 				    	</div>
 				    	<div class="field">
-				    		<label>是否服用药物【名称】</label>
-				    		<select name="is_medicine" class="ui dropdown">
-				            <option value="否">否</option>
-				            <option value="是">是</option>
-				          	</select>
-						</div>
-				    	<div class="field">
 				    		<label>症状是否缓解</label>
 				    		<select name="is_relief" class="ui dropdown">
 				            <option value="">选择</option>
@@ -122,13 +113,16 @@
 				            <option value="是">是</option>
 				          	</select>
 						</div>
+				    	<div class="field">
+				    		<label>服用药物名称(如未服用则不填此项)</label>
+							<input type="text" name="medicine_name" placeholder="药物名称">
+						</div>
 					</div>
 
 					<input name="is_primary" type="hidden" value="1">
 					<input name="is_treatment" type="hidden" value="">
 					<input name="is_night_pain_self_pain" type="hidden" value="">
 					<input name="is_very_bad" type="hidden" value="">
-					<input name="medicine_name" type="hidden" value="">
 		    		<div class="ui right floated blue submit button">提交</div>
 				</form>
 	  		</div>

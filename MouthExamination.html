@@ -7,64 +7,12 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-		var SERVER_URL    = "http://127.0.0.1:9000";
-		var ADD_MOUTHEXAM_URL = SERVER_URL + "/medical-case-of-illness/oral-examination";
-
-  		$('.ui.dropdown').dropdown();
-
-  		$('.right.item a').click(function(){
-  			$('.ui.modal').modal('show');
-  		});
-
-  		$('form').form({
-  			fields: {
-  				vitality_value_of_teeth: {
-  					rules: [
-  						{
-  							type: 'empty',
-  							prompt : '牙齿活力值不能为空'
-  						}
-  					]
-  				}
-  			},
-  			inline: true,
-  			onSuccess: function() {
-				var UserID    = 5;
-				var ToothID   = 1;
-			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
-
-			    $.ajax({
-		      		url: ADD_MOUTHEXAM_URL,
-		      		type: "post",
-		      		data: AdditionStr + $(this).serialize(),
-		      		dataType: "json",
-		      		error: function(){
-			        	IsOK = false;
-			        	alert("网络连接错误...");
-		      		},
-		      		success: function(data){
-		        		alert("OK");
-		      		}
-		    	});
-		    	
-  				return false;
-  			}
-  		});
-  	});
-  	</script>
-
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
+  	<script src="dist/config.js"></script>  
+  	<script src="dist/MouthExamination.js"></script>  
 
 </head>
 
@@ -83,16 +31,10 @@
 			<h3 class="ui blue header">牙体情况</h3>
 			<div class="three fields">
 				<div class="field">
-					<label>牙位【UI有待进一步设计】</label>
-					<select name="tooth_location" class="ui fluid search multiple dropdown">
-					<option value="">选择</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
+					<label>有无继发龋</label>
+					<select name="secondary" class="ui dropdown">
+					<option value="NO">无</option>
+					<option value="YES">有</option>
 					</select>
 				</div>
 				<div class="field">
@@ -183,13 +125,6 @@
 			</div>
 			<div class="three fields">
 				<div class="field">
-					<label>有无继发龋</label>
-					<select name="secondary" class="ui dropdown">
-					<option value="NO">无</option>
-					<option value="YES">有</option>
-					</select>
-				</div>
-				<div class="field">
 					<label>原填充体</label>
 					<select name="fill" class="ui dropdown">
 					<option value="无">无</option>
@@ -204,6 +139,12 @@
 					<label>牙齿活力值</label>
 					<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
 				</div>
+			</div>
+
+			<div class="field">
+				<label>牙位</label>
+		    	<div class="ui mini icon button" id="addLocation"><i class="plus icon"></i></div>
+		    	<input name="is_fill_tooth" type="hidden" value="">
 			</div>
 
 			<h3 class="ui blue header">牙周情况</h3>
@@ -441,5 +382,126 @@
 		</form> 
   	</div>
 
+	<div class="ui large modal">
+		<div class="header">添加牙位</div>
+		<div class="content">
+		    <div class="description">
+				<div id="context">
+					<div class="ui blue pointing fluid two item secondary menu">
+						<a class="active item" data-tab="1">成年人牙位</a>
+						<a class="item" data-tab="2">婴幼儿牙位</a>
+					</div>
+
+					<div class="ui tab clearing basic segment active" data-tab="1">
+						<div class="ui equal width internally celled grid">
+							<div class="row">
+								<div class="right aligned column">
+						    		<div class="ui large labels">
+							    		<a class="ui label">18</a>
+							    		<a class="ui label">17</a>
+							    		<a class="ui label">16</a>
+							    		<a class="ui label">15</a>
+							    		<a class="ui label">14</a>
+							    		<a class="ui label">13</a>
+							    		<a class="ui label">12</a>
+							    		<a class="ui label">11</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label">21</a>
+							    		<a class="ui label">22</a>
+							    		<a class="ui label">23</a>
+							    		<a class="ui label">24</a>
+							    		<a class="ui label">25</a>
+							    		<a class="ui label">26</a>
+							    		<a class="ui label">27</a>
+							    		<a class="ui label">28</a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="right aligned column">
+						    		<div class="ui large labels">
+							    		<a class="ui label">48</a>
+							    		<a class="ui label">47</a>
+							    		<a class="ui label">46</a>
+							    		<a class="ui label">45</a>
+							    		<a class="ui label">44</a>
+							    		<a class="ui label">43</a>
+							    		<a class="ui label">42</a>
+							    		<a class="ui label">41</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label">31</a>
+							    		<a class="ui label">32</a>
+							    		<a class="ui label">33</a>
+							    		<a class="ui label">34</a>
+							    		<a class="ui label">35</a>
+							    		<a class="ui label">36</a>
+							    		<a class="ui label">37</a>
+							    		<a class="ui label">38</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ui tab clearing basic segment" data-tab="2">
+						<div class="ui equal width internally celled grid">
+							<div class="row">
+								<div class="right aligned column">
+						    		<div class="ui large labels">
+							    		<a class="ui label">15</a>
+							    		<a class="ui label">14</a>
+							    		<a class="ui label">13</a>
+							    		<a class="ui label">12</a>
+							    		<a class="ui label">11</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label">21</a>
+							    		<a class="ui label">22</a>
+							    		<a class="ui label">23</a>
+							    		<a class="ui label">24</a>
+							    		<a class="ui label">25</a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="right aligned column">
+						    		<div class="ui large labels">
+							    		<a class="ui label">45</a>
+							    		<a class="ui label">44</a>
+							    		<a class="ui label">43</a>
+							    		<a class="ui label">42</a>
+							    		<a class="ui label">41</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label">31</a>
+							    		<a class="ui label">32</a>
+							    		<a class="ui label">33</a>
+							    		<a class="ui label">34</a>
+							    		<a class="ui label">35</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui primary approve right labeled icon button">
+				添加<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

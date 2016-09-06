@@ -25,7 +25,7 @@ $(document).ready(function(){
 				rules: [
 					{
 						type   : 'matchOption',
-            			prompt : '刷点时间点次数必须与刷牙次数相等'
+            			prompt : '刷点时间点次数必须与每天刷牙次数相等'
 					}
 				]
 			},
