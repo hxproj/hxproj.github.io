@@ -2,6 +2,20 @@ $(document).ready(function(){
 
 	var URL_ADD_USER  = URL_SERVER + "/medical-case-of-illness/user";
 	var URL_ADD_TOOTH = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
+	var URL_PAGE      = URL_SERVER + "/medical-case-of-illness/index-info";
+	
+	$.ajax({
+		url     : URL_PAGE,
+		type    : "get",
+		data    : "page=1",
+		dataType: "json",
+		error   : function(){
+			alert("网络连接错误...");
+		},
+		success : function(data){
+			alert("OK");
+		}
+	});
 
 	var IsSubmitOK = false;
 	$("#basicinfoform").form({
