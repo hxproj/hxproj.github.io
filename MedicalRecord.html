@@ -14,6 +14,7 @@
   	<style type="text/css">
 		.main.container {
 			margin-top: 5em;
+			margin-bottom: 10em;
 	  	}
 	  	.invisible {
 	  		display: none;
@@ -30,7 +31,7 @@
 
   			<div class="right menu">
 		      	<div class="item">
-			        <a href="#"><i class="plus icon"></i>添加病历</a>
+			        <a href="#" class="add href"><i class="plus icon"></i>添加病历</a>
 		        </div>
 			</div> 
 		</div> 
@@ -87,69 +88,18 @@
 			</div>
 		</div>
 
-		<div class="ui medicalrecord segment">
-		    <div class="ui items">
-				<a class="ui right corner label">
-					<i class="setting icon"></i>
-				</a>
-				<div class="item">
-					<div class="content">
-
-						<div class="ui center aligned vertical basic segment">
-							<a class="ui large name header">李狗蛋</a>      
-							<div class="meta">
-								<span class="gender">男</span>
-								<span class="age">23岁</span>
-								<span class="occupation">系统架构师</span>
-								<span class="contact">15608041015</span>
-					      	</div>
-							<div class="ui divider"></div>
-							<a class="ui teal small button" href="PersonalHistory.html">个人史</a>
-							<div class="ui teal labeled icon add small button">添加牙位<i class="add icon"></i></div>
-				      	</div>
-
-						<div class="extra">
-							<div class="ui invisible header">
-								牙位 
-								<div class="ui icon small buttons">
-									<a class="ui disabled button" href="PresentIllness.html">现病史</a>
-									<a class="ui disabled button" href="MouthExamination.html">口腔检查</a>
-									<a class="ui disabled button" href="Diagnose.html">诊断</a>
-									<a class="ui disabled button" href="DifficultyAssessment.html">难度评估（Ⅱ级）</a>
-									<a class="ui disabled button" href="Cure.html">处置</a>
-									<a class="ui disabled button" href="USPHS.html">USPHS评估</a>
-									<a class="ui teal button" href="">预览</a>
-									<a class="ui icon button" data-tooltip="删除当前牙位"><i class="remove icon"></i></a>
-								</div>
-							</div>
-						</div>
-
-						<div class="extra">
-							<div class="ui header">
-								口内多颗牙【折裂、20天前】
-								<div class="ui icon small buttons">
-									<a class="ui blue button" href="PresentIllness.html">现病史</a>
-									<a class="ui blue button" href="MouthExamination.html">口腔检查</a>
-									<a class="ui blue button" href="Diagnose.html">诊断</a>
-									<a class="ui blue button" href="DifficultyAssessment.html">难度评估（Ⅱ级）</a>
-									<a class="ui blue button" href="Cure.html">处置</a>
-									<a class="ui blue button" href="USPHS.html">USPHS评估</a>
-									<a class="ui teal button" href="">预览</a>
-									<a class="ui icon button" data-tooltip="删除当前牙位"><i class="remove icon"></i></a>
-								</div>
-							</div>
-						</div>
-
-						<div class="ui right aligned vertical basic segment">
-							<a class="ui teal small button" href="Manage.html">龋病预后管理（低风险患者）</a>
-						</div>
-
-				      	<div class="extra">
-				      		<div class="ui right floated label">病历添加时间：2016-07-14 11:20</div>
-				      	</div>
-					</div>
-				</div>
-			</div>
+		<div class="ui hidden divider"></div>
+		
+		<div class="ui right floated borderless large menu">
+			<a class="item"><i class="angle double left icon"></i></a>
+			<div class="disabled item">...</div>
+			<a class="active blue item">1</a>
+			<a class="item" href="#">2</a>
+			<a class="item" href="#">3</a>
+			<a class="item" href="#">4</a>
+			<a class="item" href="#">5</a>
+			<div class="disabled item">...</div>
+			<a class="item"><i class="angle double right icon"></i></a>
 		</div>
 
 		<div class="ui modal" id="add_tooth">

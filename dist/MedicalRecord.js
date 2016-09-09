@@ -4,18 +4,43 @@ $(document).ready(function(){
 	var URL_ADD_TOOTH = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
 	var URL_PAGE      = URL_SERVER + "/medical-case-of-illness/index-info";
 	
+
+	// ***************************************************************
+	// FUNCTION: 获取第几页的数据
+	var CurrentPageNum = 1;
 	$.ajax({
 		url     : URL_PAGE,
 		type    : "get",
-		data    : "page=1",
+		data    : "page=" + CurrentPageNum,
 		dataType: "json",
 		error   : function(){
 			alert("网络连接错误...");
 		},
 		success : function(data){
-			alert("OK");
+			$.each(data, function(){
+				showNewMedicalRecord(this);
+			});
 		}
 	});
+
+	// ***************************************************************
+	// FUNCTION: 在界面现实新的病历项
+	function showNewMedicalRecord(UserData){
+		$MedicalRecord = $('.invisible.segment');
+
+		var Gender = "男";
+		if (UserData.gender == 1) { Gender = "女"}
+
+		$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
+		$ClonedMedicalRecord.find('.name').text(UserData.name);
+		$ClonedMedicalRecord.find('.gender').text(Gender);
+		$ClonedMedicalRecord.find('.age').text(UserData.age);
+		$ClonedMedicalRecord.find('.occupation').text(UserData.occupation);
+		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
+		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
+
+		$MedicalRecord.after($ClonedMedicalRecord);
+	}
 
 	var IsSubmitOK = false;
 	$("#basicinfoform").form({
@@ -99,6 +124,7 @@ $(document).ready(function(){
 					$ClonedMedicalRecord.find('.age').text(UserInfo.age);
 					$ClonedMedicalRecord.find('.occupation').text(UserInfo.occupation);
 					$ClonedMedicalRecord.find('.contact').text(UserInfo.contact);
+					$ClonedMedicalRecord.find('.time').text(UserInfo.in_date);
 
 					$MedicalRecord.after($ClonedMedicalRecord);
 				}
@@ -109,7 +135,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.right.menu a').click(function(){
+	$('.right.menu .add.href').click(function(){
 		$('#MedicalRecords').modal({
 			closable: false,
   			onApprove : function() {
