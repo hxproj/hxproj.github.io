@@ -31,8 +31,9 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">个人史（李狗蛋、上前牙）</h2>
-		<form class="ui clearing segment form">
+		<h2 class="ui orange header">个人史</h2>
+		<div class="ui divider"></div>
+		<form class="ui clearing basic segment form">
 			<h3 class="ui blue header">饮食习惯</h3>
 	    	<div class="three fields">
 		    	<div class="field">
@@ -156,13 +157,6 @@
 	    	
 	    	<h3 class="ui blue header">宿主易感性</h3>
 			<div class="three fields">
-		    	<div class="detail field">
-		    		<label>是否有唾液腺疾病【病名】</label>
-		    		<select name="is_salivary_gland_disease" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
 		    	<div class="field">
 		    		<label>是否有干燥综合征</label>
 		    		<select name="sjogren_syndrome" class="ui dropdown">
@@ -171,39 +165,12 @@
 		          	</select>
 				</div>
 		    	<div class="detail field">
-		    		<label>是否自觉唾液流量减少【时间】</label>
-		    		<select name="is_consciously_reduce_salivary_flow" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
+		    		<label>唾液腺疾病</label>
+		    		<input type="text" name="salivary_gland_disease" placeholder="输入病名">
 				</div>
-	    	</div>
-
-			<div class="two fields">
-				<div class="field">
-					<div class="ui custom top left hidden fluid popup" id="is_salivary_gland_disease">
-						<div class="field">
-				    		<label>唾液腺疾病名</label>
-				    		<div class="ui action input">
-					    		<input type="text" name="salivary_gland_disease" placeholder="输入病名">
-  								<div class="ui blue button">确定</div>
-  								<div class="ui orange button">取消</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="field">
-					<div class="ui custom top right hidden fluid popup" id="is_consciously_reduce_salivary_flow">
-						<div class="field">
-				    		<label>自觉唾液流量减少时间</label>
-				    		<div class="ui action input">
-					    		<input type="text" name="consciously_reduce_salivary_flow" placeholder="输入时间">
-  								<div class="ui blue button">确定</div>
-  								<div class="ui orange button">取消</div>
-							</div>
-						</div>
-					</div>
+		    	<div class="detail field">
+		    		<label>自觉唾液流量减少时间</label>
+		    		<input type="text" name="consciously_reduce_salivary_flow" placeholder="输入时间">
 				</div>
 	    	</div>
 	    	

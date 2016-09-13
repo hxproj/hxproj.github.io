@@ -49,7 +49,27 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
+		$.each(UserData.tootn_location_list, function(){
+			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
+		});
+
 		$MedicalRecord.after($ClonedMedicalRecord);
+	}
+
+	// ***************************************************************
+	// FUNCTION: 在界面显示牙位
+	function showToothLocation($Selector, ToothData){
+		$ClonedExtra = $Selector.clone(true);
+
+		var LocationStr = ToothData.tooth_location
+					+ "（" + ToothData.time_of_occurrence + ", "
+					+ ToothData.symptom + "）";
+
+		$ClonedExtra.attr("value", ToothData.tooth_id);
+		$ClonedExtra.find('.location').text(LocationStr);
+
+		$Selector.after($ClonedExtra);
+		$ClonedExtra.find('.invisible.header').removeClass('invisible');
 	}
 
 	// ***************************************************************
@@ -71,6 +91,8 @@ $(document).ready(function(){
 			if (StartPage < 1) {
 				StartPage = 1
 			}
+
+			if (Pages < 1) { Pages = 1; }
 
 			var EndPage = Page + 2;
 			if (EndPage < MaxDisplayPages) {
@@ -204,7 +226,28 @@ $(document).ready(function(){
 		}).modal('show');
 	});
 
-	// 设置添加牙位相关属性
+	var USER_ID         = null;
+	var $InvisibleExtra = null;
+	// ***************************************************************
+	// FUNCTION: AJAX提交牙位添加表单
+	$('.add.button').click(function(){
+		$InvisibleExtra = $(this).parents(".content").find(".extra:first");
+		USER_ID = $(this).parents('.record.segment').attr('value');
+		$('#add_tooth').modal({
+			onApprove: function(){
+
+	        	var data_tab    = $('#add_tooth .item.active').attr('data-tab');
+	        	var submit_form = $("#add_tooth .tab[data-tab="+ data_tab +"] form");
+
+	        	submit_form.submit();
+
+	        	return false;
+			}
+		}).modal('show');
+	});
+
+	// ***************************************************************
+	// FUNCTION: 设置添加牙位相关属性
 	// 主诉
 	$("#add_tooth .tab[data-tab=1] form").form({
 		fields: {
@@ -238,11 +281,7 @@ $(document).ready(function(){
 		},
 		inline: true,
 		onSuccess: function(){
-
-        	var UserID       = 5;
-        	var AdditionForm = "user_id=" + UserID + "&";
-
-        	submitTooth($(this), AdditionForm);
+        	submitTooth($(this));
 
         	return false;
 		}
@@ -262,64 +301,32 @@ $(document).ready(function(){
 		},
 		inline: true,
 		onSuccess: function(){
-
-        	var UserID       = 5;
-        	var AdditionForm = "user_id=" + UserID + "&";
-
-        	submitTooth($(this), AdditionForm);
+        	submitTooth($(this));
 
         	return false;
 		}
 	});
 
-	var ToothData = null;
-	function submitTooth($Form, AdditionForm){
+	function submitTooth($Form){
+		
+		var AddtionParameter = "user_id=" + USER_ID + "&";
 		$.ajax({
 			url     : URL_ADD_TOOTH,
 			type    : "post",
-			data    : AdditionForm + $Form.serialize(),
+			data    : AddtionParameter + $Form.serialize(),
 			dataType: "json",
 			error   : function(){
-				IsSubmitOK = false;
+				IsToothAddOK = false;
 				alert("网络连接错误...");
 			},
 			success : function(data){
-				IsSubmitOK = true;
-				ToothData  = data;
-
-				alert("OK");
+				$('#add_tooth').modal('hide');
+				showToothLocation($InvisibleExtra, data);
 			}
 		});
 	}
 
-	// ***************************************************************
-	// FUNCTION: AJAX提交牙位添加表单
-	$('.add.button').click(function(){
-		$InvisibleExtra = $(this).parents(".content").find(".extra:first");
-		$('#add_tooth').modal({
-			onApprove: function(){
-
-	        	var data_tab    = $('#add_tooth .item.active').attr('data-tab');
-	        	var submit_form = $("#add_tooth .tab[data-tab="+ data_tab +"] form");
-
-	        	submit_form.submit();
-
-        		// ***************************************************************
-				// FUNCTION: 在界面添加新的牙位
-	        	if (IsSubmitOK) {
-					$ClonedExtra = $InvisibleExtra.clone(true);
-					$InvisibleExtra.after($ClonedExtra);
-					$ClonedExtra.find('.invisible.header').removeClass('invisible');
-	        	}
-	        	
-	        	return IsSubmitOK;
-			}
-		}).modal('show');
-	});
-
-	$('#context .menu .item').tab({
-		context: $('#context')
-	});
+	$('#context .menu .item').tab({ context: $('#context') });
 
 	// 添加时间控件
 	$('#add_tooth .disabled.input').click(function(){
@@ -348,5 +355,23 @@ $(document).ready(function(){
 		$('#add_tooth .disabled.input input').val(Result);
 
 		$('#add_tooth .disabled.input').popup('hide');
+	});
+
+	// ***************************************************************
+	// FUNCTION:设置链接数据
+	// 个人史
+	$('a[href^=PersonalHistory]').click(function(){
+		$(this).prop('href', $(this).prop('href') + "?uid=" + $(this).parents('.record.segment').attr('value'));
+	});
+
+	// 其它
+	$('.record.segment .extra:first a').click(function(){
+		var U_ID = $(this).parents('.record.segment').attr('value');
+		var T_ID = $(this).parents('.extra').attr('value');
+
+		var Href = $(this).prop('href');
+		Href += "?uid=" + U_ID + "&tid=" + T_ID; 
+
+		$(this).prop('href', Href);
 	});
 });

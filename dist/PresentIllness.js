@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
 	var ADD_ILLNESS_HISTORY_URL = URL_SERVER + "/medical-case-of-illness/illness-history";
+	var U_ID = Number(requestParameter("uid"));
+	var T_ID = Number(requestParameter("tid"));
 
 	$('#context .menu .item').tab({
 		context: $('#context')
@@ -10,14 +12,12 @@ $(document).ready(function(){
 	// FUNCTION: AJAX提交现病史
 	$('.ui.tab .submit.button').click(function(){
 
-		var UserID    = 5;
-		var ToothID   = 2;
-	    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
+	    var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 
       	$.ajax({
       		url: ADD_ILLNESS_HISTORY_URL,
       		type: "post",
-      		data: AdditionStr + $(this).parent().serialize(),
+      		data: AddtionParameter + $(this).parent().serialize(),
       		dataType: "json",
       		error: function(){
 	        	IsOK = false;
