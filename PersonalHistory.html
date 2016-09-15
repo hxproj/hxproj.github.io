@@ -7,18 +7,12 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
   	<script src="dist/PersonalHistory.js"></script>  
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
-
 </head>
 
 <body>
@@ -32,150 +26,179 @@
 
 	<div class="ui main container">
 		<h2 class="ui orange header">个人史</h2>
-		<div class="ui divider"></div>
-		<form class="ui clearing basic segment form">
-			<h3 class="ui blue header">饮食习惯</h3>
-	    	<div class="three fields">
-		    	<div class="field">
-		    		<label>是否多甜食、多蛋白质类食物</label>
-		    		<select name="more_sweet" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>食用量</label>
-		    		<select name="consumption_of_sweet" class="ui dropdown">
-		            <option value="124"><125g</option>
-		            <option value="125">125-249g</option>
-		            <option value="250">250-500g</option>
-		            <option value="500">>500g</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>食用频率</label>
-		    		<select name="frequency_of_sweet" class="ui dropdown">
-		            <option value="1">小于1次/天</option>
-		            <option value="2">2次/天</option>
-		            <option value="3">3次/天</option>
-		            <option value="4">4次/天</option>
-		            <option value="5">5次/天</option>
-		            <option value="6">大于5次/天</option>
-		          	</select>
-				</div>
-			</div>
-	    	<div class="three fields">
-		    	<div class="field">
-		    		<label>正餐间进食频率</label>
-		    		<select name="frequency_of_meal" class="ui dropdown">
-		            <option value="1">≤1</option>
-		            <option value="2">1＜频率≤2</option>
-		            <option value="3">≥3</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>正餐间进食是否含碳酸</label>
-		    		<select name="is_carbonic_acid" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-			</div>
 
-	    	<h3 class="ui blue header">口腔卫生维护</h3>
-			<div class="three fields">
-		    	<div class="field">
-		    		<label>是否使用牙线</label>
-		    		<select name="is_floss" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>每天刷牙次数</label>
-		    		<select name="times_of_teeth_brush" class="ui dropdown">
-		            <option value="1">1</option>
-		            <option value="2">2</option>
-		            <option value="3">3</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>刷牙时间点</label>
-		    		<select name="time_of_teeth_brush" class="ui fluid dropdown" multiple="" value="早间刷牙">
-		    		<option value="">选择刷牙时间点</option>
-		            <option value="早间刷牙">早间刷牙</option>
-		            <option value="中午刷牙">中午刷牙</option>
-		            <option value="睡前刷牙">睡前刷牙</option>
-		          	</select>
-				</div>
-	    	</div>
+		<table class="ui celled striped invisible table" id="display">
+			<thead>
+				<tr>
+					<th colspan="2">上前牙一年前发现折裂</th>
+				</tr>
+			</thead>
+  			<tbody>
+				<tr>
+					<td class="collapsing">饮食习惯</td>
+					<td id="PH_Habit"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">口腔卫生维护</td>
+					<td id="PH_Health"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">宿主易感性</td>
+					<td id="PH_Host"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="ui right floated blue edit button">修改</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-			<div class="three fields">
-		    	<div class="field">
-		    		<label>刷牙时长</label>
-		    		<input type="text" name="long_of_teeth_brush" placeholder="刷牙时长">
+		<div class="ui clearing invisible segment" id="submit">
+			<form class="ui form">
+				<h3 class="ui blue header">饮食习惯</h3>
+		    	<div class="three fields">
+			    	<div class="field">
+			    		<label>是否多甜食、多蛋白质类食物</label>
+			    		<select name="more_sweet" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>食用量</label>
+			    		<select name="consumption_of_sweet" class="ui dropdown">
+			            <option value="124"><125g</option>
+			            <option value="125">125-249g</option>
+			            <option value="250">250-500g</option>
+			            <option value="500">>500g</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>食用频率</label>
+			    		<select name="frequency_of_sweet" class="ui dropdown">
+			            <option value="1">小于1次/天</option>
+			            <option value="2">2次/天</option>
+			            <option value="3">3次/天</option>
+			            <option value="4">4次/天</option>
+			            <option value="5">5次/天</option>
+			            <option value="6">大于5次/天</option>
+			          	</select>
+					</div>
+				</div>
+		    	<div class="three fields">
+			    	<div class="field">
+			    		<label>正餐间进食频率</label>
+			    		<select name="frequency_of_meal" class="ui dropdown">
+			            <option value="1">≤1</option>
+			            <option value="2">1＜频率≤2</option>
+			            <option value="3">≥3</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>正餐间进食是否含碳酸</label>
+			    		<select name="is_carbonic_acid" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+				</div>
+
+		    	<h3 class="ui blue header">口腔卫生维护</h3>
+				<div class="three fields">
+			    	<div class="field">
+			    		<label>是否使用牙线</label>
+			    		<select name="is_floss" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>每天刷牙次数</label>
+			    		<select name="times_of_teeth_brush" class="ui dropdown">
+			            <option value="1">1</option>
+			            <option value="2">2</option>
+			            <option value="3">3</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>刷牙时间点</label>
+			    		<select name="time_of_teeth_brush" class="ui fluid dropdown" multiple="" value="早间刷牙">
+			    		<option value="">选择刷牙时间点</option>
+			            <option value="早间刷牙">早间刷牙</option>
+			            <option value="中午刷牙">中午刷牙</option>
+			            <option value="睡前刷牙">睡前刷牙</option>
+			          	</select>
+					</div>
 		    	</div>
-		    	<div class="field">
-		    		<label>是否使用电动牙刷</label>
-		    		<select name="electric_tooth_brush" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>刷牙方法是否正确</label>
-		    		<select name="method_of_tooth_brush" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-	    	</div>
 
-			<div class="three fields">
-		    	<div class="field">
-		    		<label>牙膏是否含氟</label>
-		    		<select name="is_fluorine" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>口腔定期是否检查</label>
-		    		<select name="is_cavity_examination" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="field">
-		    		<label>是否定期牙周洁治</label>
-		    		<select name="is_periodontal_treatment" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-	    	</div>
-	    	
-	    	<h3 class="ui blue header">宿主易感性</h3>
-			<div class="three fields">
-		    	<div class="field">
-		    		<label>是否有干燥综合征</label>
-		    		<select name="sjogren_syndrome" class="ui dropdown">
-		            <option value="0">否</option>
-		            <option value="1">是</option>
-		          	</select>
-				</div>
-		    	<div class="detail field">
-		    		<label>唾液腺疾病</label>
-		    		<input type="text" name="salivary_gland_disease" placeholder="输入病名">
-				</div>
-		    	<div class="detail field">
-		    		<label>自觉唾液流量减少时间</label>
-		    		<input type="text" name="consciously_reduce_salivary_flow" placeholder="输入时间">
-				</div>
-	    	</div>
-	    	
-		    <button class="ui right floated blue button">提交</button>
-		</form> 
+				<div class="three fields">
+			    	<div class="field">
+			    		<label>刷牙时长</label>
+			    		<input type="text" name="long_of_teeth_brush" placeholder="刷牙时长">
+			    	</div>
+			    	<div class="field">
+			    		<label>是否使用电动牙刷</label>
+			    		<select name="electric_tooth_brush" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>刷牙方法是否正确</label>
+			    		<select name="method_of_tooth_brush" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+		    	</div>
+
+				<div class="three fields">
+			    	<div class="field">
+			    		<label>牙膏是否含氟</label>
+			    		<select name="is_fluorine" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>口腔定期是否检查</label>
+			    		<select name="is_cavity_examination" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="field">
+			    		<label>是否定期牙周洁治</label>
+			    		<select name="is_periodontal_treatment" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+		    	</div>
+		    	
+		    	<h3 class="ui blue header">宿主易感性</h3>
+				<div class="three fields">
+			    	<div class="field">
+			    		<label>是否有干燥综合征</label>
+			    		<select name="sjogren_syndrome" class="ui dropdown">
+			            <option value="否">否</option>
+			            <option value="是">是</option>
+			          	</select>
+					</div>
+			    	<div class="detail field">
+			    		<label>唾液腺疾病</label>
+			    		<input type="text" name="salivary_gland_disease" placeholder="输入病名">
+					</div>
+			    	<div class="detail field">
+			    		<label>自觉唾液流量减少时间</label>
+			    		<input type="text" name="consciously_reduce_salivary_flow" placeholder="输入时间">
+					</div>
+		    	</div>
+		    	
+			    <button class="ui right floated blue button">提交</button>
+			</form> 
+		</div>
   	</div>
 
 </body>

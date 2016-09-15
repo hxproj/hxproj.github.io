@@ -7,18 +7,12 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
   	<script src="dist/PresentIllness.js"></script>  
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
-
 </head>
 
 <body>
@@ -31,9 +25,32 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">现病史（张三全蛋）</h2>
-
-		<div id="context">
+		<h2 class="ui orange header">现病史</h2>
+		<table class="ui invisible celled striped table" id="display">
+			<thead>
+				<tr>
+					<th colspan="2"></th>
+				</tr>
+			</thead>
+  			<tbody>
+				<tr>
+					<td class="collapsing">病种</td>
+					<td id="illnessType"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">现病史描述</td>
+					<td id="describe"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="ui right floated blue edit button">修改</div>
+						<div class="ui right floated blue next button">下一项（口腔检查）</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="invisible" id="context">
 	  		<div class="ui blue pointing fluid two item menu">
 				<a class="active item" data-tab="1">原发性龋病</a>
 				<a class="item" data-tab="2">有治疗史龋病</a>
@@ -67,6 +84,10 @@
 					</div>
 			    	<div class="three fields">
 				    	<div class="field">
+				    		<label>服用药物名称(如未服用则不填此项)</label>
+							<input type="text" name="medicine_name" placeholder="药物名称">
+						</div>
+				    	<div class="field">
 				    		<label>症状是否缓解</label>
 				    		<select name="is_relief" class="ui dropdown">
 				            <option value="">选择</option>
@@ -74,15 +95,10 @@
 				            <option value="是">是</option>
 				          	</select>
 						</div>
-				    	<div class="field">
-				    		<label>服用药物名称(如未服用则不填此项)</label>
-							<input type="text" name="medicine_name" placeholder="药物名称">
-						</div>
 					</div>
 
 					<input name="is_primary" type="hidden" value="0">
 					<input name="fill_type" type="hidden" value="">
-					<input name="is_medicine" type="hidden" value="">
 		    		<div class="ui right floated submit blue button">提交</div>
 				</form>
 	  		</div>
@@ -106,16 +122,16 @@
 			              	</select>
 				    	</div>
 				    	<div class="field">
+				    		<label>服用药物名称(如未服用则不填此项)</label>
+							<input type="text" name="medicine_name" placeholder="药物名称">
+						</div>
+				    	<div class="field">
 				    		<label>症状是否缓解</label>
 				    		<select name="is_relief" class="ui dropdown">
 				            <option value="">选择</option>
 				            <option value="否">否</option>
 				            <option value="是">是</option>
 				          	</select>
-						</div>
-				    	<div class="field">
-				    		<label>服用药物名称(如未服用则不填此项)</label>
-							<input type="text" name="medicine_name" placeholder="药物名称">
 						</div>
 					</div>
 

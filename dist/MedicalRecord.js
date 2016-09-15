@@ -61,12 +61,19 @@ $(document).ready(function(){
 	function showToothLocation($Selector, ToothData){
 		$ClonedExtra = $Selector.clone(true);
 
-		var LocationStr = ToothData.tooth_location
-					+ "（" + ToothData.time_of_occurrence + ", "
-					+ ToothData.symptom + "）";
+		var LocationStr = ToothData.tooth_location;
+		ToothData.is_fill_tooth ? LocationStr += "（要求直接补牙）" :
+			LocationStr += "（" + ToothData.time_of_occurrence + ", " + ToothData.symptom + "）";
 
 		$ClonedExtra.attr("value", ToothData.tooth_id);
 		$ClonedExtra.find('.location').text(LocationStr);
+
+		// 设置当前牙位操作状态
+		$.each($ClonedExtra.find('.disabled.button'), function(index){
+			if (index + 1 <= ToothData.step) {
+				$(this).addClass('blue').removeClass('disabled');
+			}
+		});
 
 		$Selector.after($ClonedExtra);
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
@@ -361,16 +368,24 @@ $(document).ready(function(){
 	// FUNCTION:设置链接数据
 	// 个人史
 	$('a[href^=PersonalHistory]').click(function(){
-		$(this).prop('href', $(this).prop('href') + "?uid=" + $(this).parents('.record.segment').attr('value'));
+
+		// 设置Href
+		var $Record = $(this).parents('.record.segment');
+		$(this).prop('href', $(this).prop('href') + "?" 
+			+ addParameter("uid", $Record.attr('value'))
+			+ "&" + addParameter("name", $Record.find('.name').text()));
 	});
 
 	// 其它
 	$('.record.segment .extra:first a').click(function(){
 		var U_ID = $(this).parents('.record.segment').attr('value');
 		var T_ID = $(this).parents('.extra').attr('value');
+		var Name = $(this).parents('.record.segment').find('.name').text();
 
 		var Href = $(this).prop('href');
-		Href += "?uid=" + U_ID + "&tid=" + T_ID; 
+		Href += "?" + addParameter("uid", U_ID)
+			 + "&" + addParameter("tid", T_ID)
+			 + "&" + addParameter("name", Name); 
 
 		$(this).prop('href', Href);
 	});
