@@ -7,60 +7,12 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-  		$('.ui.dropdown').dropdown();
-
-  		$('.right.item a').click(function(){
-  			$('.ui.modal').modal('show');
-  		});
-
-  		$('#context .menu .item').tab({
-    		context: $('#context')
-		});
-
-		var SERVER_URL    = "http://127.0.0.1:9000";
-		var ADD_Cure_URL = SERVER_URL + "/medical-case-of-illness/handle";
-
-		$.each($('form'), function(){
-			$(this).form({
-	  			onSuccess: function(){
-					var UserID    = 5;
-					var ToothID   = 1;
-				    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
-
-				    $.ajax({
-			      		url: ADD_Cure_URL,
-			      		type: "post",
-			      		data: AdditionStr + $(this).serialize(),
-			      		dataType: "json",
-			      		error: function(){
-				        	IsOK = false;
-				        	alert("网络连接错误...");
-			      		},
-			      		success: function(data){
-			        		alert("OK");
-			      		}
-			    	});
-
-	  				return false;
-	  			}
-			});
-		});
-  	});
-  	</script>
-
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
-
+  	<script src="dist/config.js"></script>  
+  	<script src="dist/Cure.js"></script> 
 </head>
 
 <body>
@@ -73,7 +25,28 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">处置（李狗蛋）</h2>
+		<h2 class="ui orange header">处置</h2>
+
+		<table class="ui celled invisible structured table" id="display">
+  			<tbody>
+				<tr>
+					<td class="negative collapsing">处置方法</td>
+					<td id="Method"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">处置流程</td>
+					<td id="Describe"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="ui right floated blue edit button">修改</div>
+						<div class="ui right floated blue next button">下一项（难度评估）</div>
+						<div class="ui right floated blue next button">上一项（USPHS）</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
 		<div id="context">
   		<div class="ui blue pointing fluid five item menu">
 			<a class="active item" data-tab="1">牙非手术治疗</a>
@@ -94,8 +67,7 @@
 
 				<div class="ui active tab" data-tab="contextDetail1">
 					<div class="ui hidden divider"></div>
-					<form class="ui form">
-						<h4 class="ui grey header">* 将药物氟化物75%氟化钠甘油糊剂/8%氟化亚锡溶液/酸性磷酸氟化钠溶液/1.5%APF凝胶（选择），10%硝酸银/氨硝酸银（选择）涂布于龋损处30s</h4>
+					<form class="ui form" id="CureForm1">
 						<div class="two fields">
 							<div class="field">
 								<label>药物氟化物</label>
@@ -128,12 +100,12 @@
 						<input type="hidden" name="lamp" value="">
 						<input type="hidden" name="check_time" value="">
 
-			   			<button class="ui right floated blue button">选择</button>
+			   			<button class="ui right floated blue button">提交</button>
 		    		</form>
 				</div>
 				
 				<div class="ui tab" data-tab="contextDetail2">
-					<form class="ui form">
+					<form class="ui form" id="CureForm2">
 						<div class="ui info message">
 							<div class="header">再矿物治疗流程描述 </div>
 							<ul class="list">
@@ -155,14 +127,13 @@
 						<input type="hidden" name="lamp" value="">
 						<input type="hidden" name="check_time" value="">
 	    				
-				   		<button class="ui right floated blue button">选择</button>
+				   		<button class="ui right floated blue button">提交</button>
 			   		</form>
 				</div>
 
 				<div class="ui tab" data-tab="contextDetail3">
 					<div class="ui hidden divider"></div>
-					<form class="ui form">
-						<h4 class="ui grey header">1. 清洁牙面：在低速手机上装好锥形小毛刷/橡皮杯（选择），蘸取适量清洁剂/含氟牙膏（选择）于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润</h4>
+					<form class="ui form" id="CureForm3">
 						<div class="two fields">
 							<div class="field">
 								<label>低速手机额外装置</label>
@@ -182,7 +153,6 @@
 							</div>
 						</div>
 
-						<h4 class="ui grey header">2. 用棉纱球隔湿,压缩空气牙面吹干，小棉球/细毛刷（选择）蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间20-30秒/60秒</h4>
 						<div class="two fields">
 							<div class="field">
 								<label>蘸取工具</label>
@@ -192,14 +162,6 @@
 								<option value="细毛刷">细毛刷</option>
 								</select>
 							</div>
-						</div>
-
-						<h4 class="ui grey header">3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物</h4>
-
-						<h4 class="ui grey header">4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上</h4>
-
-						<h4 class="ui grey header">5. 1-2分钟自行固化/光固化灯（选择）离牙尖1mm照射20-40秒</h4>
-						<div class="two fields">
 							<div class="field">
 								<label>固化灯类型</label>
 								<select name="lamp" class="ui dropdown">
@@ -209,8 +171,6 @@
 								</select>
 							</div>
 						</div>
-
-						<h4 class="ui grey header">6. 探针进行检查，调合，定期复查（选择）</h4>
 						<div class="two fields">
 							<div class="field">
 								<label>定期复查时间</label>
@@ -227,7 +187,7 @@
 						<input type="hidden" name="handle_type" value="0">
 						<input type="hidden" name="specific_method" value="窝沟封闭">
 
-				   		<button class="ui right floated blue button">选择</button>
+				   		<button class="ui right floated blue button">提交</button>
 			   		</form>
 				</div>
 			</div>
@@ -236,7 +196,7 @@
 
 		<!--牙树脂直接充填修复-->
 		<div class="ui tab clearing segment" data-tab="2">
-			<form class="ui form">
+			<form class="ui form" id="CureForm4">
 				<h3 class="ui blue header">1. 麻醉药物</h3>
 				<div class="three fields">
 					<div class="field">
@@ -265,7 +225,7 @@
 					</div>
 				</div>
 
-				<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
+				<h3 class="ui blue header">2. 显微镜下</h3>
 				<div class="three fields">
 					<div class="field">
 						<label>去龋工具</label>
@@ -516,8 +476,8 @@
 		</div>
 
 		<div class="ui tab clearing segment" data-tab="3">
-			<form class="ui form">
-				<h3 class="ui blue header">1. 安抚药物【和牙树脂相比，此项是额外增加项】</h3>
+			<form class="ui form" id="CureForm5">
+				<h3 class="ui blue header">1. 安抚药物</h3>
 				<div class="three fields">
 					<div class="field">
 						<label>安抚药物</label>
@@ -815,7 +775,7 @@
 
 		<!-- 嵌体修复 -->
 		<div class="ui tab clearing segment" data-tab="4">
-			<form class="ui form">
+			<form class="ui form" id="CureForm6">
 				<h3 class="ui blue header">1. 麻醉药物</h3>
 				<div class="three fields">
 					<div class="field">
@@ -1065,7 +1025,7 @@
 
 		<!--贴面修复-->
 		<div class="ui tab clearing segment" data-tab="5">
-			<form class="ui form">
+			<form class="ui form" id="CureForm7">
 				<h3 class="ui blue header">1. 麻醉药物</h3>
 				<div class="three fields">
 					<div class="field">

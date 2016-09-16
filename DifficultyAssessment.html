@@ -7,51 +7,12 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-
-  		$('.ui.dropdown').dropdown();
-
-		var SERVER_URL    = "http://127.0.0.1:9000";
-		var ADD_DIFFICULTY_URL = SERVER_URL + "/medical-case-of-illness/difficulty-assessment";
-
-  		$('#DifficultyForm').form({
-  			onSuccess: function(){
-				var UserID    = 5;
-				var ToothID   = 1;
-			    var AdditionStr = "user_id=" + UserID + "&" + "tooth_id=" + ToothID + "&";
-
-			    $.ajax({
-		      		url: ADD_DIFFICULTY_URL,
-		      		type: "post",
-		      		data: AdditionStr + $(this).serialize(),
-		      		dataType: "json",
-		      		error: function(){
-			        	IsOK = false;
-			        	alert("网络连接错误...");
-		      		},
-		      		success: function(data){
-		        		alert("OK");
-		      		}
-		    	});
-
-  				return false;
-  			}
-  		});
-  	});
-  	</script>
-
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
-
+  	<script src="dist/config.js"></script>  
+  	<script src="dist/DifficultyAssessment.js"></script> 
 </head>
 
 <body>
@@ -64,9 +25,69 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">难度评估（李狗蛋）</h2>
+		<table class="ui celled invisible structured table" id="display">
+			<thead>
+				<tr>
+					<th class="center aligned" colspan="3">难度评估</th>
+				</tr>
+			</thead>
+  			<tbody>
+				<tr>
+					<td class="negative collapsing" rowspan="2">龋损因素</td>
+					<td class="collapsing">累及牙面及部位</td>
+					<td id="tooth_surface_and_location"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">龋损深度</td>
+					<td id="caries_depth"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">技术因素</td>
+					<td class="collapsing">技术类型</td>
+					<td id="technology_type"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">充填修复史</td>
+					<td class="collapsing">充填修复史及充填失败史</td>
+					<td id="history_of_fill"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing" rowspan="4">附加因素</td>
+					<td class="collapsing">张口度</td>
+					<td id="mouth_opening"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">咽反射</td>
+					<td id="gag_reflex"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">唾液分泌量</td>
+					<td id="saliva"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">牙科恐惧症</td>
+					<td id="dental_phobia"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">预防管理难度</td>
+					<td class="collapsing">龋病风险难度分级</td>
+					<td id="difficulty_rating"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">评估等级</td>
+					<td class="negative center aligned" colspan="2" id="difficulty_level"></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div class="ui right floated blue edit button">修改</div>
+						<div class="ui right floated blue next button">下一项（处置）</div>
+						<div class="ui right floated blue next button">上一项（诊断）</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-		<form class="ui clearing segment form" id="DifficultyForm">
+		<form class="ui clearing invisible segment form" id="DifficultyForm">
 			<h3 class="ui blue header">龋损因素</h3>
 			<div class="two fields">
 				<div class="field">
@@ -103,7 +124,7 @@
 			<h3 class="ui blue header">技术因素</h3>
 			<div class="two fields">
 				<div class="field">
-					<label>技术类型【后牙修复没有“微创”?】</label>
+					<label>技术类型</label>
 					<select name="technology_type" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="后牙复合树脂修复">后牙复合树脂修复（后牙直接修复）</option>

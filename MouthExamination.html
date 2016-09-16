@@ -13,7 +13,6 @@
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
   	<script src="dist/MouthExamination.js"></script>  
-
 </head>
 
 <body>
@@ -27,7 +26,48 @@
 
 	<div class="ui main container">
 		<h2 class="ui orange header">口腔检查（李狗蛋、上前牙）</h2>
-		<form class="ui clearing segment form">
+
+		<table class="ui celled striped invisible table" id="display">
+  			<tbody>
+				<tr>
+					<td class="collapsing">牙体情况</td>
+					<td id="ME_Body"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">牙周情况</td>
+					<td id="ME_Around"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">龋失补指数</td>
+					<td id="ME_Loss"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">牙齿发育情况</td>
+					<td id="ME_Condition"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">患牙与邻牙接触关系</td>
+					<td id="ME_Neighbor"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">患牙修复治疗情况</td>
+					<td id="ME_Cure"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">X线片表现</td>
+					<td id="ME_X"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="ui right floated blue edit button">修改</div>
+						<div class="ui right floated blue next button">下一项（诊断）</div>
+						<div class="ui right floated blue next button">上一项（现病史）</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<form class="ui clearing segment invisible form" id="submit">
 			<h3 class="ui blue header">牙体情况</h3>
 			<div class="field">
 		    	<input name="tooth_location" type="hidden" value="">
@@ -38,13 +78,13 @@
 				<div class="field">
 					<label>有无继发龋</label>
 					<select name="secondary" class="ui dropdown">
-					<option value="NO">无</option>
-					<option value="YES">有</option>
+					<option value="否">无</option>
+					<option value="是">有</option>
 					</select>
 				</div>
 				<div class="field">
 					<label>龋坏累及牙面</label>
-					<select name="caries_tired" class="ui fluid search multiple dropdown">
+					<select name="caries_tired" class="ui fluid search multiple dropdown" multiple=''>
 					<option value="">选择</option>
 					<option value="唇面">唇面</option>
 					<option value="舌面">舌面</option>
