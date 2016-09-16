@@ -23,7 +23,7 @@ $(document).ready(function(){
   			
   			// 牙非手术治疗
   			if (DATA.handle_type == 0) {
-  				$('#Method').text("牙非手术治疗-" + DATA.specific_method);
+  				$('#Method').text("牙非手术治疗 - " + DATA.specific_method);
 
   				var Describe_Text = "";
   				switch (DATA.specific_method) {
@@ -37,20 +37,193 @@ $(document).ready(function(){
   					}
   					case "窝沟封闭": {
   						Describe_Text += "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
-  							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润<br/>"
-  							+ "2. 用棉纱球隔湿,压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间20-30秒/60秒<br/>" 
-  							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物<br/>" 
-  							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上<br/>" 
-  							+ "5. 1-2分钟自行" + DATA.lamp + "灯离牙尖1mm照射20-40秒<br/>" 
-  							+ "6. 探针进行检查，调合，定期" + DATA.check_time + "复查" 
+  							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润<br/><br/>"
+  							+ "2. 用棉纱球隔湿,压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀" + DATA.time_of_etching + "<br/><br/>" 
+  							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物<br/><br/>" 
+  							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上<br/><br/>" 
+  							+ "5. 1-2分钟自行" + DATA.lamp + "灯离牙尖1mm照射20-40秒<br/><br/>" 
+  							+ "6. 探针进行检查，调合，定期" + DATA.check_time + "复查";
   						break;
   					}
   				}
   				$('#Describe').html(Describe_Text);
   			}
+
   			// 手术治疗
   			else if (DATA.handle_type == 1) {
+  				$('#Method').text(DATA.specific_method);
 
+  				var Describe_Text = "";
+  				switch (DATA.specific_method) {
+  					case "牙树脂直接填充修复": {
+  						// 1. 
+  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
+  						if (DATA.rubber == "否") {
+  							Describe_Text += "不使用橡皮障<br/><br/>";
+  						} else if (DATA.rubber == "是") {
+  							Describe_Text += "使用橡皮障<br/><br/>";
+  						}
+
+  						// 2.
+						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
+							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+
+						// 3. 
+						Describe_Text += "3. 干燥，隔湿，";
+  						if (DATA.is_piece == "否") {
+  							Describe_Text += "不使用成形片，";
+  						} else if (DATA.is_piece == "是") {
+  							Describe_Text += "使用成形片，";
+  						}
+  						if (DATA.is_chock == "否") {
+  							Describe_Text += "不使用楔子";
+  						} else if (DATA.is_chock == "是") {
+  							Describe_Text += "使用楔子";
+  						}
+						Describe_Text += "<br/><br/>";
+
+  						// 4.
+						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+
+  						// 5.
+						Describe_Text += "5. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+
+  						// 6.
+						Describe_Text += "6. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
+							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+
+  						// 7.
+						Describe_Text += "7. 树脂：" + DATA.resin + "<br/><br/>" ;
+
+  						// 8.
+						Describe_Text += "8. " + DATA.modification + "修型，" + DATA.lamp 
+							+ "光照" + DATA.time_of_lamp + "，" + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+
+  						break;
+  					}
+  					case "牙安抚治疗&树脂充填修复": {
+  						// 1. 
+						Describe_Text += "1. 使用安抚药物：" + DATA.appease_medicine + "，观察时间：" + DATA.observed_time + "<br/><br/>" ;
+  						
+  						// 2.
+  						Describe_Text += "2. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
+  						if (DATA.rubber == "否") {
+  							Describe_Text += "不使用橡皮障<br/><br/>";
+  						} else if (DATA.rubber == "是") {
+  							Describe_Text += "使用橡皮障<br/><br/>";
+  						}
+
+  						// 3.
+						Describe_Text += "3. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
+							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+
+						// 4. 
+						Describe_Text += "4. 干燥，隔湿，";
+  						if (DATA.is_piece == "否") {
+  							Describe_Text += "不使用成形片，";
+  						} else if (DATA.is_piece == "是") {
+  							Describe_Text += "使用成形片，";
+  						}
+  						if (DATA.is_chock == "否") {
+  							Describe_Text += "不使用楔子";
+  						} else if (DATA.is_chock == "是") {
+  							Describe_Text += "使用楔子";
+  						}
+						Describe_Text += "<br/><br/>";
+
+  						// 5.
+						Describe_Text += "5. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+						
+  						// 6.
+						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+
+  						// 7.
+						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
+							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+
+  						// 8.
+						Describe_Text += "8. 树脂：" + DATA.resin + "<br/><br/>" ;
+
+  						// 9.
+						Describe_Text += "9. " + DATA.modification + "修型，" + DATA.lamp 
+							+ "光照" + DATA.time_of_lamp + "，" + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+
+  						break;
+  					}
+  					case "嵌体修复": {
+  						// 1. 
+  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
+  						if (DATA.rubber == "否") {
+  							Describe_Text += "不使用橡皮障<br/><br/>";
+  						} else if (DATA.rubber == "是") {
+  							Describe_Text += "使用橡皮障<br/><br/>";
+  						}
+
+  						// 2.
+						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
+							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+
+						// 3. 
+						Describe_Text += "3. " + DATA.is_piece + "干燥，隔湿<br/><br/>";
+
+  						// 4.
+						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+
+						// 5.
+						Describe_Text += "5. 取模材料：" + DATA.modulo + "，嵌体材料：" + DATA.inlay + "<br/><br/>" ;
+
+  						// 6.
+						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+
+  						// 7.
+						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
+							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+
+  						// 8.
+						Describe_Text += "8. 放置嵌体<br/><br/>" ;
+
+  						// 9.
+						Describe_Text += "9. " + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+  						break;
+  					}
+  					case "贴面修复": {
+  						// 1. 
+  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
+  						if (DATA.rubber == "否") {
+  							Describe_Text += "不使用橡皮障<br/><br/>";
+  						} else if (DATA.rubber == "是") {
+  							Describe_Text += "使用橡皮障<br/><br/>";
+  						}
+
+  						// 2.
+						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
+							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+
+						// 3. 
+						Describe_Text += "3. " + DATA.is_piece + "干燥，隔湿<br/><br/>";
+
+  						// 4.
+						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+
+						// 5.
+						Describe_Text += "5. 取模材料：" + DATA.modulo + "，嵌体材料：" + DATA.inlay + "<br/><br/>" ;
+
+  						// 6.
+						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+
+  						// 7.
+						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
+							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+
+  						// 8.
+						Describe_Text += "8. 放置贴面<br/><br/>" ;
+
+  						// 9.
+						Describe_Text += "9. " + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+  						break;
+  					}
+  				}
+  				$('#Describe').html(Describe_Text);
   			}
 
 
@@ -94,6 +267,16 @@ $(document).ready(function(){
 				}
 			]
 		},
+		time_of_etching: {
+			identifier: 'time_of_etching',
+			rules: [
+				{
+					type   : 'empty',
+					prompt : '请选择酸蚀时间'
+				}
+			]
+		},
+
 		reagent: {
 			identifier: 'reagent',
 			rules: [
