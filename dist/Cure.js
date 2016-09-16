@@ -48,7 +48,6 @@ $(document).ready(function(){
   				}
   				$('#Describe').html(Describe_Text);
   			}
-
   			// 手术治疗
   			else if (DATA.handle_type == 1) {
   				$('#Method').text(DATA.specific_method);
@@ -858,12 +857,175 @@ $(document).ready(function(){
 		});
 	});
   	
-
 	// ***************************************************************
 	// FUNCTION: 修改
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
+		$MainContextLink = $('#MainContext a').removeClass('active');
+		$TabSegment      = $('.tab.segment').removeClass('active');
+		// 牙非手术治疗
+  		if (DATA.handle_type == 0) {
+  			ChangeTabActive($MainContextLink, $TabSegment, 0);
+
+  			$DetailContextLink = $('#contextDetail .menu a').removeClass('active');
+  			$DetailTab         = $('#contextDetail .ui.tab').removeClass('active');
+			switch (DATA.specific_method) {
+				case "药物治疗": {
+  					ChangeTabActive($DetailContextLink, $DetailTab, 0);
+
+  					$('select[name=fluorination]').dropdown("set selected", DATA.fluorination);
+        			$('select[name=silver_nitrate]').dropdown("set selected", DATA.silver_nitrate);
+
+					break;
+				}
+				case "再矿物治疗": {
+  					ChangeTabActive($DetailContextLink, $DetailTab, 1);
+					break;
+				}
+				case "窝沟封闭": {
+  					ChangeTabActive($DetailContextLink, $DetailTab, 2);
+
+  					$('select[name=additional_device]').dropdown("set selected", DATA.additional_device);
+        			$('select[name=reagent]').dropdown("set selected", DATA.reagent);
+        			$('select[name=tools]').dropdown("set selected", DATA.tools);
+        			$('select[name=time_of_etching]').dropdown("set selected", DATA.time_of_etching);
+        			$('select[name=lamp]').dropdown("set selected", DATA.lamp);
+        			$('select[name=check_time]').dropdown("set selected", DATA.check_time);
+
+					break;
+				}
+			}
+  		}
+		// 手术治疗
+		else if (DATA.handle_type == 1) {
+
+  			switch (DATA.specific_method) {
+  				case "牙树脂直接填充修复": {
+  					ChangeTabActive($MainContextLink, $TabSegment, 1);
+
+  					$('select[name=anesthesia_medicine]').dropdown("set selected", DATA.anesthesia_medicine);
+        			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
+        			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
+        			$('select[name=tools]').dropdown("set selected", DATA.tools);
+        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
+
+        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+
+        			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
+        			$('select[name=is_chock]').dropdown("set selected", DATA.is_chock);
+        			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);
+        			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
+        			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
+        			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
+        			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+        			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
+        			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
+        			$('select[name=resin]').dropdown("set selected", DATA.resin);
+        			$('select[name=modification]').dropdown("set selected", DATA.modification);
+        			$('select[name=lamp]').dropdown("set selected", DATA.lamp);
+        			$('select[name=time_of_lamp]').dropdown("set selected", DATA.time_of_lamp);
+        			$('select[name=polishing]').dropdown("set selected", DATA.polishing);
+
+					break;
+				}
+  				case "牙安抚治疗&树脂充填修复": {
+  					ChangeTabActive($MainContextLink, $TabSegment, 2);
+  					$('select[name=appease_medicine]').dropdown("set selected", DATA.appease_medicine);
+  					$('select[name=observed_time]').dropdown("set selected", DATA.observed_time);
+
+  					$('select[name=anesthesia_medicine]').dropdown("set selected", DATA.anesthesia_medicine);
+        			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
+        			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
+        			$('select[name=tools]').dropdown("set selected", DATA.tools);
+        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
+
+        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+
+        			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
+        			$('select[name=is_chock]').dropdown("set selected", DATA.is_chock);
+        			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);
+        			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
+        			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
+        			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
+        			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+        			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
+        			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
+        			$('select[name=resin]').dropdown("set selected", DATA.resin);
+        			$('select[name=modification]').dropdown("set selected", DATA.modification);
+        			$('select[name=lamp]').dropdown("set selected", DATA.lamp);
+        			$('select[name=time_of_lamp]').dropdown("set selected", DATA.time_of_lamp);
+        			$('select[name=polishing]').dropdown("set selected", DATA.polishing);
+					break;
+				}
+  				case "嵌体修复": {
+  					ChangeTabActive($MainContextLink, $TabSegment, 3);
+
+  					$('select[name=anesthesia_medicine]').dropdown("set selected", DATA.anesthesia_medicine);
+        			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
+        			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
+        			$('select[name=tools]').dropdown("set selected", DATA.tools);
+        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
+
+        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+
+        			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
+        			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);
+        			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
+        			
+        			$('select[name=modulo]').dropdown("set selected", DATA.modulo);
+        			$('select[name=inlay]').dropdown("set selected", DATA.inlay);
+        			
+
+        			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
+        			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
+        			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+        			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
+        			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
+        			
+        			$('select[name=polishing]').dropdown("set selected", DATA.polishing);
+					break;
+				}
+  				case "贴面修复": {
+  					ChangeTabActive($MainContextLink, $TabSegment, 4);
+
+  					$('select[name=anesthesia_medicine]').dropdown("set selected", DATA.anesthesia_medicine);
+        			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
+        			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
+        			$('select[name=tools]').dropdown("set selected", DATA.tools);
+        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
+
+        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+
+        			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
+        			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);
+        			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
+        			
+        			$('select[name=modulo]').dropdown("set selected", DATA.modulo);
+        			$('select[name=inlay]').dropdown("set selected", DATA.inlay);
+        			
+
+        			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
+        			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
+        			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+        			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
+        			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
+        			
+        			$('select[name=polishing]').dropdown("set selected", DATA.polishing);
+					break;
+				}
+  			}
+		}
+
 		$('#context').show();
 	});
+
+	function ChangeTabActive($Context, $TabSegment, Index){
+		$Context.eq(Index).addClass('active');
+		$TabSegment.eq(Index).addClass('active');
+	}
 });
