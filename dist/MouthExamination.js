@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+	// ******************************************************
+	// Other
+	$('.modal .ui.label').click(function(){ $(this).toggleClass('teal'); });
+	$('#context .menu .item').tab({ context: $('#context') });
+	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
 
@@ -109,32 +116,53 @@ $(document).ready(function(){
 
 			// 患牙与邻牙接触关系
 			var ME_Neighbor_Text = "";
-  			if (DATA.fistula != "正常") {
+  			if (DATA.relations_between_teeth != "正常") {
   				ME_Neighbor_Text += "患牙与邻牙接触关系正常，";
-  			} else if (DATA.gingival_hyperemia != "否") {
+  			} else if (DATA.relations_between_teeth != "否") {
   				ME_Neighbor_Text += "患牙与邻牙接触关系不正常，";
   			}
-  			if (DATA.fistula != "否") {
+  			if (DATA.is_teeth_crowd != "否") {
   				ME_Neighbor_Text += "牙列不拥挤，";
-  			} else if (DATA.gingival_hyperemia != "是") {
+  			} else if (DATA.is_teeth_crowd != "是") {
   				ME_Neighbor_Text += "牙列拥挤，";
   			}
-  			if (DATA.fistula != "有") {
-  				ME_Neighbor_Text += "患牙有对合牙";
-  			} else if (DATA.gingival_hyperemia != "无") {
-  				ME_Neighbor_Text += "患牙无对合牙";
+  			if (DATA.involution_teeth != "有") {
+  				ME_Neighbor_Text += "患牙有对合牙，";
+  			} else if (DATA.involution_teeth != "无") {
+  				ME_Neighbor_Text += "患牙无对合牙，";
   			}
+  			ME_Neighbor_Text += "牙体形态：" + DATA.tooth_shape;
 
 			$('#ME_Neighbor').text(ME_Neighbor_Text);
 
 			// 患牙修复治疗情况
 			var ME_Cure_Text = "";
+  			ME_Cure_Text += "患牙修复治疗情况：" + DATA.treatment + "，";
+  			if (DATA.orthodontic != "否") {
+  				ME_Cure_Text += "没有正畸治疗史";
+  			} else if (DATA.orthodontic != "是") {
+  				ME_Cure_Text += "有正畸治疗史";
+  			}
 			$('#ME_Cure').text(ME_Cure_Text);
 
 			// X线片表现
 			var ME_X_Text = "";
-			$('#ME_X').text(ME_X_Text);
 
+  			if (DATA.X_Ray_depth != "") {
+  				ME_X_Text += "程度：" + DATA.X_Ray_depth + "，";
+  			}
+  			if (DATA.X_Ray_fill_quality != "") {
+  				ME_X_Text += "充填体影像：" + DATA.X_Ray_fill_quality + "，";
+  			}
+  			if (DATA.CT_shows != "") {
+  				ME_X_Text += "CT表现：" + DATA.CT_shows + "，";
+  			}
+  			if (DATA.piece != "") {
+  				ME_X_Text += "咬翼片表现：" + DATA.piece + "，";
+  			}
+  			ME_X_Text += "部位：" + DATA.X_Ray_location;
+
+			$('#ME_X').text(ME_X_Text);
   		}
 	});
 
@@ -143,17 +171,6 @@ $(document).ready(function(){
 	// ******************************************************
 	// 提交表单数据
 	$('form').form({
-		fields: {
-			vitality_value_of_teeth: {
-				rules: [
-					{
-						type: 'empty',
-						prompt : '牙齿活力值不能为空'
-					}
-				]
-			}
-		},
-		inline   : true,
 		onSuccess: function() {
 	    	var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 		    $.ajax({
@@ -178,8 +195,44 @@ $(document).ready(function(){
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
-  		// FIXME: todo
-  		
+		// FIXME: 添加空元素判断
+        $('select[name=secondary]').dropdown("set selected", DATA.secondary);
+        $('select[name=caries_tired]').dropdown("set selected", DATA.caries_tired);
+        $('select[name=depth]').dropdown("set selected", DATA.depth);
+        $('select[name=cold]').dropdown("set selected", DATA.cold);
+        $('select[name=hot]').dropdown("set selected", DATA.hot);
+        $('select[name=touch]').dropdown("set selected", DATA.touch);
+        $('select[name=bite]').dropdown("set selected", DATA.bite);
+        $('select[name=color_of_caries]').dropdown("set selected", DATA.color_of_caries);
+        $('select[name=flex_of_caries]').dropdown("set selected", DATA.flex_of_caries);
+        $('select[name=fill]').dropdown("set selected", DATA.fill);
+    	$('input[name=vitality_value_of_teeth]').val(DATA.vitality_value_of_teeth);
+
+        $('select[name=gingival_hyperemia]').dropdown("set selected", DATA.gingival_hyperemia);
+        $('select[name=tartar_up]').dropdown("set selected", DATA.tartar_up);
+        $('select[name=tartar_down]').dropdown("set selected", DATA.tartar_down);
+        $('select[name=bop]').dropdown("set selected", DATA.bop);
+        $('select[name=periodontal_pocket_depth]').dropdown("set selected", DATA.periodontal_pocket_depth);
+        $('select[name=furcation]').dropdown("set selected", DATA.furcation);
+        $('select[name=location]').dropdown("set selected", DATA.location);
+        $('select[name=mobility]').dropdown("set selected", DATA.mobility);
+        $('select[name=fistula]').dropdown("set selected", DATA.fistula);
+        $('select[name=overflow_pus]').dropdown("set selected", DATA.overflow_pus);
+    	$('input[name=loss_caries_index_up]').val(DATA.loss_caries_index_up);
+
+        $('select[name=development_of_the_situation]').dropdown("set selected", DATA.development_of_the_situation);
+        $('select[name=relations_between_teeth]').dropdown("set selected", DATA.relations_between_teeth);
+        $('select[name=is_teeth_crowd]').dropdown("set selected", DATA.is_teeth_crowd);
+        $('select[name=involution_teeth]').dropdown("set selected", DATA.involution_teeth);
+        $('select[name=tooth_shape]').dropdown("set selected", DATA.tooth_shape);
+        $('select[name=treatment]').dropdown("set selected", DATA.treatment);
+        $('select[name=orthodontic]').dropdown("set selected", DATA.orthodontic);
+        $('select[name=X_Ray_location]').dropdown("set selected", DATA.X_Ray_location);
+        $('select[name=X_Ray_depth]').dropdown("set selected", DATA.X_Ray_depth);
+        $('select[name=X_Ray_fill_quality]').dropdown("set selected", DATA.X_Ray_fill_quality);
+    	$('input[name=CT_shows]').val(DATA.CT_shows);
+    	$('input[name=piece]').val(DATA.piece);
+        
 		$('#submit').show();
 	});
 
@@ -208,9 +261,4 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
-
-	// ******************************************************
-	// Other
-	$('.modal .ui.label').click(function(){ $(this).toggleClass('teal'); });
-	$('#context .menu .item').tab({ context: $('#context') });
 });

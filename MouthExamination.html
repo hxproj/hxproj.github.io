@@ -25,36 +25,41 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">口腔检查（李狗蛋、上前牙）</h2>
+		<h2 class="ui orange header">口腔检查</h2>
 
 		<table class="ui celled striped invisible table" id="display">
+			<thead>
+				<tr>
+					<th class="center aligned" colspan="2">口腔检查</th>
+				</tr>
+			</thead>
   			<tbody>
 				<tr>
-					<td class="collapsing">牙体情况</td>
+					<td class="negative collapsing">牙体情况</td>
 					<td id="ME_Body"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">牙周情况</td>
+					<td class="negative collapsing">牙周情况</td>
 					<td id="ME_Around"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">龋失补指数</td>
+					<td class="negative collapsing">龋失补指数</td>
 					<td id="ME_Loss"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">牙齿发育情况</td>
+					<td class="negative collapsing">牙齿发育情况</td>
 					<td id="ME_Condition"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">患牙与邻牙接触关系</td>
+					<td class="negative collapsing">患牙与邻牙接触关系</td>
 					<td id="ME_Neighbor"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">患牙修复治疗情况</td>
+					<td class="negative collapsing">患牙修复治疗情况</td>
 					<td id="ME_Cure"></td>
 				</tr>
 				<tr>
-					<td class="collapsing">X线片表现</td>
+					<td class="negative collapsing">X线片表现</td>
 					<td id="ME_X"></td>
 				</tr>
 				<tr>
@@ -84,7 +89,7 @@
 				</div>
 				<div class="field">
 					<label>龋坏累及牙面</label>
-					<select name="caries_tired" class="ui fluid search multiple dropdown" multiple=''>
+					<select name="caries_tired" class="ui dropdown">
 					<option value="">选择</option>
 					<option value="唇面">唇面</option>
 					<option value="舌面">舌面</option>

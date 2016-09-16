@@ -212,7 +212,7 @@ $(document).ready(function(){
 		$('select[name=is_floss]').dropdown("set selected", DATA.is_floss);
 		$('select[name=times_of_teeth_brush]').dropdown("set selected", DATA.times_of_teeth_brush);
 		// FIXME: 刷牙时间点time_of_teeth_brush
-        $('input[name=long_of_teeth_brush]').val(DATA.long_of_teeth_brush);
+    $('input[name=long_of_teeth_brush]').val(DATA.long_of_teeth_brush);
 		$('select[name=electric_tooth_brush]').dropdown("set selected", DATA.electric_tooth_brush);
 		$('select[name=method_of_tooth_brush]').dropdown("set selected", DATA.method_of_tooth_brush);
 		$('select[name=is_fluorine]').dropdown("set selected", DATA.is_fluorine);
@@ -220,8 +220,8 @@ $(document).ready(function(){
 		$('select[name=is_periodontal_treatment]').dropdown("set selected", DATA.is_periodontal_treatment);
 
 		$('select[name=sjogren_syndrome]').dropdown("set selected", DATA.sjogren_syndrome);
-        $('input[name=salivary_gland_disease]').val(DATA.salivary_gland_disease);
-        $('input[name=consciously_reduce_salivary_flow]').val(DATA.consciously_reduce_salivary_flow ? DATA.consciously_reduce_salivary_flow  : "");
+    $('input[name=salivary_gland_disease]').val(DATA.salivary_gland_disease);
+    $('input[name=consciously_reduce_salivary_flow]').val(DATA.consciously_reduce_salivary_flow ? DATA.consciously_reduce_salivary_flow  : "");
 
 		$('#submit').show();
 	});
