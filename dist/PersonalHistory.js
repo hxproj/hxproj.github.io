@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+  // 设置表头用户数据
+  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+
 	var U_ID = Number(requestParameter("uid"));
 
 	var DATA = null;
@@ -119,7 +122,7 @@ $(document).ready(function(){
   			}
 
   			// 宿主易感性
-			if (DATA.is_cavity_examination == "是") {
+			if (DATA.sjogren_syndrome == "是") {
   				PH_Host_Text += "有干燥综合征";
   			} else {
   				PH_Host_Text += "没有干燥综合征";
@@ -144,9 +147,6 @@ $(document).ready(function(){
        		$('#PH_Host').text(PH_Host_Text);
   		}
 	});
-
-	// 设置表头用户数据
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
 
 	// ***************************************************************
 	// FUNCTION: 添加额外事件

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+  
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
 	
