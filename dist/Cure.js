@@ -20,6 +20,38 @@ $(document).ready(function(){
   			$('#context').hide();
 
   			DATA = data;
+  			
+  			// 牙非手术治疗
+  			if (DATA.handle_type == 0) {
+  				$('#Method').text("牙非手术治疗-" + DATA.specific_method);
+
+  				var Describe_Text = "";
+  				switch (DATA.specific_method) {
+  					case "药物治疗": {
+  						Describe_Text += "将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
+  						break;
+  					}
+  					case "再矿物治疗": {
+  						Describe_Text += "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
+  						break;
+  					}
+  					case "窝沟封闭": {
+  						Describe_Text += "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
+  							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润<br/>"
+  							+ "2. 用棉纱球隔湿,压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀时间20-30秒/60秒<br/>" 
+  							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物<br/>" 
+  							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上<br/>" 
+  							+ "5. 1-2分钟自行" + DATA.lamp + "灯离牙尖1mm照射20-40秒<br/>" 
+  							+ "6. 探针进行检查，调合，定期" + DATA.check_time + "复查" 
+  						break;
+  					}
+  				}
+  				$('#Describe').html(Describe_Text);
+  			}
+  			// 手术治疗
+  			else if (DATA.handle_type == 1) {
+
+  			}
 
 
   			$('#display').show();

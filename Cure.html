@@ -163,6 +163,16 @@
 								</select>
 							</div>
 							<div class="field">
+								<label>酸蚀时间</label>
+								<select name="time_of_etching" class="ui dropdown">
+								<option value="">选择酸蚀时间</option>
+								<option value="20-30秒">20-30秒</option>
+								<option value="60秒">60秒</option>
+								</select>
+							</div>
+						</div>
+						<div class="two fields">
+							<div class="field">
 								<label>固化灯类型</label>
 								<select name="lamp" class="ui dropdown">
 								<option value="">选择固化灯类型</option>
@@ -170,8 +180,6 @@
 								<option value="光固化">光固化</option>
 								</select>
 							</div>
-						</div>
-						<div class="two fields">
 							<div class="field">
 								<label>定期复查时间</label>
 								<select name="check_time" class="ui dropdown">
@@ -186,6 +194,9 @@
 						<!--hidden input-->
 						<input type="hidden" name="handle_type" value="0">
 						<input type="hidden" name="specific_method" value="窝沟封闭">
+						<!--useless input-->
+						<input type="hidden" name="fluorination" value="">
+						<input type="hidden" name="silver_nitrate" value="">
 
 				   		<button class="ui right floated blue button">提交</button>
 			   		</form>

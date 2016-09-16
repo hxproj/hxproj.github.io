@@ -19,6 +19,4 @@ $(document).ready(function(){
 	window.addParameter = function(Name, Value) {
 		return Name + "=" + Value;
 	};
-
-
 });
