@@ -200,7 +200,7 @@ $(document).ready(function(){
 		inline: true,
 		onSuccess: function(){
 			$.ajax({
-  				url     : URL_ADD_USER,
+  				url     : URL_USER,
 				type    : "post",
 				async   : false, 
 				data    : $(this).serialize(),
@@ -321,7 +321,7 @@ $(document).ready(function(){
 		
 		var AddtionParameter = "user_id=" + USER_ID + "&";
 		$.ajax({
-			url     : URL_ADD_TOOTH,
+			url     : URL_TOOTH,
 			type    : "post",
 			data    : AddtionParameter + $Form.serialize(),
 			dataType: "json",
@@ -389,5 +389,28 @@ $(document).ready(function(){
 			 + "&" + addParameter("name", Name); 
 
 		$(this).prop('href', Href);
+	});
+
+
+	// ***************************************************************
+	// FUNCTION: 删除牙位
+	$('.deletetooth.button').click(function(){
+		var $Tooth = $(this).parents('.extra');
+		var AddtionParameter = addParameter("tooth_id", $Tooth.attr('value'));
+
+		$.ajax({
+			url     : URL_TOOTH + "?" + AddtionParameter,
+			type    : "DELETE",
+			dataType: "text",
+			error   : function(){
+				alert("网络连接错误...");
+			},
+			success : function(data){
+				// 删除页面当前牙位
+				$Tooth.remove();
+			}
+		});
+
+		return false;
 	});
 });
