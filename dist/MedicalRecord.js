@@ -53,6 +53,9 @@ $(document).ready(function(){
 			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
 		});
 
+		// FIXME: 设置风险评估和预后管理的状态disabled，是否是所有填写完成显示状态
+		
+
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
 
@@ -366,10 +369,8 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION:设置链接数据
-	// 个人史
-	$('a[href^=PersonalHistory]').click(function(){
-
-		// 设置Href
+	// 个人史，风险评估和预后管理
+	$('a[href^=RiskEvaluation], a[href^=Manage], a[href^=PersonalHistory]').click(function(){
 		var $Record = $(this).parents('.record.segment');
 		$(this).prop('href', $(this).prop('href') + "?" 
 			+ addParameter("uid", $Record.attr('value'))

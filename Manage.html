@@ -7,54 +7,11 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
-
+ 	<link rel="stylesheet" type="text/css" href="dist/config.css">
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
-
-  	<script type="text/javascript">
-  	$(document).ready(function(){
-  		$('.ui.dropdown').dropdown();
-
-  		$('.right.item a').click(function(){
-  			$('.ui.modal').modal('show');
-  		});
-
-  		$('#context .menu .item').tab({
-    		context: $('#context')
-		});
-
-		var SERVER_URL    = "http://127.0.0.1:9000";
-		var ADD_MANAGE_URL = SERVER_URL + "/medical-case-of-illness/prognosis";
-
-		$('#context .segment button').click(function(){
-			var SelectItemValue = $(this).parent().attr('data-tab');
-			var UserID    = 5;
-		    var AdditionStr = "user_id=" + UserID + "&" + "patient_type=" + SelectItemValue;
-
-		    $.ajax({
-	      		url: ADD_MANAGE_URL,
-	      		type: "post",
-	      		data: AdditionStr,
-	      		dataType: "json",
-	      		error: function(){
-		        	IsOK = false;
-		        	alert("网络连接错误...");
-	      		},
-	      		success: function(data){
-	        		alert("OK");
-	      		}
-	    	});
-
-		});
-  	});
-  	</script>
-
-
-  	<style type="text/css">
-		.main.container {
-			margin-top: 5em;
-	  	}
-  	</style>
+  	<script src="dist/config.js"></script>  
+  	<script src="dist/Manage.js"></script> 
 
 </head>
 
@@ -68,9 +25,27 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">龋病预后管理（李狗蛋）</h2>
+		<h2 class="ui orange header">龋病预后管理</h2>
 
-		<div id="context">
+		<table class="ui celled invisible structured table" id="display">
+  			<tbody>
+				<tr>
+					<td class="negative collapsing">风险等级</td>
+					<td id="Level"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">处置流程</td>
+					<td id="Describe"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="ui right floated blue edit button">修改</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="invisible" id="context">
 	  		<div class="ui blue pointing fluid four item menu">
 				<a class="active item" data-tab="1">低风险患者</a>
 				<a class="item" data-tab="2">中风险患者</a>
