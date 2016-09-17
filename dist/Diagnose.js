@@ -50,8 +50,8 @@ $(document).ready(function(){
 		}
 	});
 
-  // ***************************************************************
-  // FUNCTION: 修改
+	// ***************************************************************
+	// FUNCTION: 修改
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
@@ -59,5 +59,24 @@ $(document).ready(function(){
         $('select[name=caries_type]').dropdown("set selected", DATA.caries_type);
 
 		$('#DiagnoseForm').show();
+	});
+
+	// ***************************************************************
+	// FUNCTION: 下一项
+	$('.right.labeled.button').click(function(){
+		var href = "DifficultyAssessment.html";
+		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+			+ addParameter("name", requestParameter("name"));
+
+		window.location.href = href;
+	});
+	// ***************************************************************
+	// FUNCTION: 上一项
+	$('.left.labeled.button').click(function(){
+		var href = "MouthExamination.html";
+		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+			+ addParameter("name", requestParameter("name"));
+
+		window.location.href = href;
 	});
 });

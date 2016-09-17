@@ -74,4 +74,14 @@ $(document).ready(function(){
 
 		$('form').show();
 	});
+
+	// ***************************************************************
+	// FUNCTION: 上一项
+	$('.right.labeled.button').click(function(){
+		var href = "Cure.html";
+		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+			+ addParameter("name", requestParameter("name"));
+
+		window.location.href = href;
+	});
 });

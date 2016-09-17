@@ -4,6 +4,7 @@ $(document).ready(function(){
 
 	window.URL_SERVER           = "http://127.0.0.1:9000";
 	window.URL_PERSONAL_HISTORY = URL_SERVER + "/medical-case-of-illness/personal-history";
+	window.URL_PRESENTILLNESS   = URL_SERVER + "/medical-case-of-illness/illness-history";
 	window.URL_MOUTHEXAM        = URL_SERVER + "/medical-case-of-illness/oral-examination";
 	window.URL_DIAGNOSE			= URL_SERVER + "/medical-case-of-illness/diagnose";
 	window.URL_DIFFICULTYASSE   = URL_SERVER + "/medical-case-of-illness/difficulty-assessment";

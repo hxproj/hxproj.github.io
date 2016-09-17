@@ -261,4 +261,23 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
+
+  // ***************************************************************
+  // FUNCTION: 下一项
+  $('.right.labeled.button').click(function(){
+    var href = "Diagnose.html";
+    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+        + addParameter("name", requestParameter("name"));
+
+    window.location.href = href;
+  });
+  // ***************************************************************
+  // FUNCTION: 上一项
+  $('.left.labeled.button').click(function(){
+    var href = "PresentIllness.html";
+    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+        + addParameter("name", requestParameter("name"));
+
+    window.location.href = href;
+  });
 });

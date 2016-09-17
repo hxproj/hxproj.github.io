@@ -1,25 +1,24 @@
 $(document).ready(function(){
+  // ***************************************************************
+  // FUNCTION: 其它
+  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+  $('#context .menu .item').tab({ context: $('#context') });
 
-	var ADD_ILLNESS_HISTORY_URL = URL_SERVER + "/medical-case-of-illness/illness-history";
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
-
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
-	
-	$('#context .menu .item').tab({ context: $('#context') });
 
 	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
   $.ajax({
-  		url     : ADD_ILLNESS_HISTORY_URL,
-  		type    : "get",
-  		data    : addParameter("tooth_id", T_ID),
-  		dataType: "json",
-  		error   : function(){
+  		url      : URL_PRESENTILLNESS,
+  		type     : "GET",
+  		data     : addParameter("tooth_id", T_ID),
+  		dataType : "json",
+  		error    : function(){
   			// 如果服务器未添加该牙的现病史数据则调到该项，不做任何处理
   		},
-  		success : function(data){
+  		success  : function(data){
   			// 如果已添加现病史则显示添加数据，关闭提交菜单
   			$('#context').hide();
   			$('#display').show();
@@ -78,17 +77,17 @@ $(document).ready(function(){
 	// FUNCTION: AJAX提交现病史
 	$('.ui.tab .submit.button').click(function(){
 
-	    var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
+	    var AddtionParameter = addParameter("user_id", U_ID) + "&" + addParameter("tooth_id", T_ID) + "&";
 
     	$.ajax({
-    		url: ADD_ILLNESS_HISTORY_URL,
-    		type: DATA == null ? "post" : "PUT", 
-    		data: AddtionParameter + $(this).parent().serialize(),
-    		dataType: "json",
-    		error: function(){
+    		url      : URL_PRESENTILLNESS,
+    		type     : DATA == null ? "POST" : "PUT", 
+    		data     : AddtionParameter + $(this).parent().serialize(),
+    		dataType : "json",
+    		error    : function(){
         	alert("网络连接错误...");
     		},
-    		success: function(data){
+    		success  : function(data){
           location.reload();
     		}
   	  });
@@ -120,5 +119,15 @@ $(document).ready(function(){
       }
 
       $('#context').show();
+  });
+
+  // ***************************************************************
+  // FUNCTION: 下一项
+  $('.right.labeled.button').click(function(){
+    var href = "MouthExamination.html";
+    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+        + addParameter("name", requestParameter("name"));
+
+    window.location.href = href;
   });
 });

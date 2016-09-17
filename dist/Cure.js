@@ -1028,4 +1028,23 @@ $(document).ready(function(){
 		$Context.eq(Index).addClass('active');
 		$TabSegment.eq(Index).addClass('active');
 	}
+	
+	// ***************************************************************
+	// FUNCTION: 下一项
+	$('.right.labeled.button').click(function(){
+		var href = "USPHS.html";
+		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+			+ addParameter("name", requestParameter("name"));
+
+		window.location.href = href;
+	});
+	// ***************************************************************
+	// FUNCTION: 上一项
+	$('.left.labeled.button').click(function(){
+		var href = "DifficultyAssessment.html";
+		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
+			+ addParameter("name", requestParameter("name"));
+
+		window.location.href = href;
+	});
 });
