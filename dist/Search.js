@@ -1,15 +1,26 @@
 $(document).ready(function(){
-	
-	// 刷新页面获取首页数据
+
+	var Table  = requestParameter("type");
+	var Field  = requestParameter("name");
+	var Value  = requestParameter("value");
+	var Search = requestParameter("search");
+
+	// ***************************************************************
+	// FUNCTION: 搜索
 	requestPageData(1);
 
 	// ***************************************************************
 	// FUNCTION: 获取页面数据
 	function requestPageData(PageNum){
+
+		var AddtionParameter = addParameter("table", Table) 
+				+ "&" + addParameter(Field, Value)
+				+ "&" + addParameter("page", PageNum);
+
 		$.ajax({
-			url       : URL_PAGE,
+			url       : URL_SEARCH,
 			type      : "get",
-			data      : "page=" + PageNum,
+			data      : AddtionParameter,
 			dataType  : "json",
 			beforeSend: function(){
 				
@@ -45,7 +56,7 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
-		$.each(UserData.tootn_location_list, function(){
+		$.each(UserData.tooth_location_list, function(){
 			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
 		});
 
@@ -139,98 +150,6 @@ $(document).ready(function(){
 			if (!$Menu.hasClass('invisible')) {$Menu.addClass('invisible');}
 		}
 	}
-
-	var IsSubmitOK = false;
-	$("#basicinfoform").form({
-		fields: {
-			name: {
-				identifier: 'name',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的姓名'
-					}
-				]
-			},
-			gender: {
-				identifier: 'gender',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的性别'
-					}
-				]
-			},
-			age: {
-				identifier: 'age',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的年龄'
-					},
-					{
-						type   : 'integer[1..100]',
-            			prompt : '请正确填写病人的年龄'
-					}
-				]
-			},
-			occupation: {
-				identifier: 'occupation',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的职业'
-					}
-				]
-			},
-			contact: {
-				identifier: 'contact',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的联系方式'
-					}
-				]
-			}
-		},
-		inline: true,
-		onSuccess: function(){
-			$.ajax({
-  				url     : URL_USER,
-				type    : "post",
-				async   : false, 
-				data    : $(this).serialize(),
-				dataType: "json",
-				error   : function(){
-
-					IsSubmitOK = false;
-  					alert("网络连接错误...");
-  				},
-  				success : function(UserInfo){
-
-  					IsSubmitOK = true;
-  					showNewMedicalRecord(UserInfo);
-				}
-			});
-
-			return false;
-		}
-	});
-
-	$('.right.menu .add.href').click(function(){
-		$('#MedicalRecords').modal({
-			closable: false,
-  			onApprove : function() {
-
-  				$Form = $("#basicinfoform");
-  				$Form.submit();
-
-  				if (IsSubmitOK) {$Form.form('clear')};
-
-				return IsSubmitOK;
-			}
-		}).modal('show');
-	});
 
 	var USER_ID         = null;
 	var $InvisibleExtra = null;
@@ -387,6 +306,7 @@ $(document).ready(function(){
 		$(this).prop('href', Href);
 	});
 
+
 	// ***************************************************************
 	// FUNCTION: 删除牙位
 	$('.deletetooth.button').click(function(){
@@ -404,30 +324,6 @@ $(document).ready(function(){
 				$Tooth.remove();
 			}
 		});
-
-		return false;
-	});
-
-	// ***************************************************************
-	// FUNCTION: 删除牙位
-	$('.download.button').click(function(){
-		var THIS_TOOTH_ID = $(this).parents('.extra').attr('value');
-		var AddtionParameter = addParameter("tooth_id", THIS_TOOTH_ID) + "&" + addParameter("risk", 0);
-		
-		$.ajax({
-			url     : URL_DOC + "?" + AddtionParameter,
-			type    : "GET",
-			dataType: "text",
-			error   : function(){
-				alert("网络连接错误...");
-			},
-			success : function(text){
-		
-				location.href = text;
-				alert('ok');
-			}
-		});
-
 
 		return false;
 	});

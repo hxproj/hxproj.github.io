@@ -15,6 +15,8 @@ $(document).ready(function(){
 	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
 	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 	window.URL_RISKEVALUATION   = URL_SERVER + "/medical-case-of-illness/risk-assessment";
+	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
+	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
 
 	window.requestParameter = function(Name) {
 		var REG = new RegExp("(^|&)" + Name + "=([^&]*)(&|$)","i");

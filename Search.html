@@ -11,20 +11,14 @@
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>
-  	<script src="dist/MedicalRecord.js"></script>
+  	<script src="dist/Search.js"></script>
 </head>
 
 <body>
 	<div class="ui blue inverted large top fixed menu">
 		<div class="ui container">
 		    <a class="item" href="index.html">主页</a>
-		    <a class="active item" href="MedicalRecord.html">病历</a>
-
-  			<div class="right menu">
-		      	<div class="item">
-			        <a href="#" class="add href"><i class="plus icon"></i>添加病历</a>
-		        </div>
-			</div> 
+		    <a class="item" href="MedicalRecord.html">病历</a> 
 		</div> 
 	</div> 
 
@@ -63,14 +57,12 @@
 									<a class="ui disabled button" href="DifficultyAssessment.html">难度评估</a>
 									<a class="ui disabled button" href="Cure.html">处置</a>
 									<a class="ui disabled button" href="USPHS.html">USPHS评估</a>
-									<a class="ui disabled download button">下载</a>
 									<a class="ui icon deletetooth button" data-tooltip="删除当前牙位"><i class="remove icon"></i></a>
 								</div>
 							</div>
 						</div>
 
 						<div class="ui right aligned vertical basic segment">
-							<a class="ui teal small button">下载</a>
 							<a class="ui teal small button" href="RiskEvaluation.html">风险评估</a>
 							<a class="ui teal small button" href="Manage.html">龋病预后管理（低风险患者）</a>
 						</div>
@@ -244,52 +236,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="ui modal" id="MedicalRecords">
-			<div class="header">添加病历</div>
-			<div class="content">
-			    <div class="description">
-					<form class="ui clearing form" id="basicinfoform">
-				    	<h3 class="ui blue header">基本信息</h3>
-					    <div class="three fields">
-					    	<div class="field">
-					    		<label>姓名</label>
-					    		<input type="text" name="name" placeholder="输入姓名">
-					    	</div>
-					    	<div class="field">
-					    		<label>性别</label>
-					    		<select name="gender" class="ui dropdown">
-				                <option value="">选择</option>
-				                <option value="0">男</option>
-				                <option value="1">女</option>
-				              	</select>
-					    	</div>
-					    	<div class="field">
-					    		<label>年龄</label>
-					    		<input type="text" name="age" placeholder="输入年龄">
-					    	</div>
-					    </div>	
-					    <div class="three fields">
-					    	<div class="field">
-					    		<label>职业</label>
-					    		<input type="text" name="occupation" placeholder="输入职业">
-					    	</div>
-					    	<div class="field">
-					    		<label>联系方式</label>
-					    		<input type="text" name="contact" placeholder="输入联系方式">
-					    	</div>
-					    </div>
-					</form>
-			    </div>
-		  	</div>
-			<div class="actions">
-				<div class="ui orange deny button">取消</div>
-				<div class="ui primary approve right labeled icon button">
-					添加<i class="checkmark icon"></i>
-				</div>
-			</div>
-		</div>
 	</div>
-
 </body>
 </html>
