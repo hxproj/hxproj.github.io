@@ -35,9 +35,17 @@ $(document).ready(function(){
 
 				$('.record.segment:visible').each(function(){ this.remove(); });
 
-				$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-				
-				showPagination(data.pages, Number(PageNum), data.info_list.length);
+				if (data.searched == "ok") {
+					$('.orange.header').text("搜索结果：" + decodeURI(Search));
+					// 如果数据库内容不为空
+					if (data.info_list != undefined) {
+						$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
+						showPagination(data.pages, Number(PageNum), data.info_list.length);
+					}
+					// FIXME: 为空？更改MedicalRecord
+				} else if (data.searched == "failed") {
+					$('.orange.header').text("没有搜索到'" + decodeURI(Search) + "'相关病历");
+				}
 			}
 		});
 	}

@@ -9,7 +9,11 @@ $(document).ready(function(){
 		var Search = $(this).text();
 		var Value  = $(this).attr("value"); 
 		// 如果是其它项，则其Label的value值即为字段名
-		if (Field == "other") {Field = $(this).attr('id')};
+		if (Field == "other") {
+			Field = $(this).attr('id');
+		} else {
+			Search = $(this).prevAll('div.label').text() + Search;
+		}
 
 		location.href = "Search.html?" + addParameter("type", Table) + "&"
 						+ addParameter("name", Field) + "&"

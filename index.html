@@ -30,14 +30,17 @@
 
 		<div class="ui fluid action left icon large input">
 			<i class="search icon"></i>
-			<input type="text" placeholder="Search...">
+			<input type="text" placeholder="输入姓名">
 			<div class="ui teal button">Search</div>
 		</div>
 
 		<br/>
 
-		<div class="ui info message">
-			<p>点击下面蓝色<a class="ui blue label"></a>标签搜索相关病历</p>
+		<div class="ui icon warning message">
+			<i class="info icon"></i>
+			<div class="content">
+				<p>点击下面蓝色 <a class="ui blue label"></a> 标签搜索相关病历</p>
+			</div>
 		</div>
 
 		<div class="ui divided items" id="LabelSearch">
@@ -124,15 +127,6 @@
 				</div>
 			</div>
 
-			<!--口腔检查-->
-			<div class="ui item">
-				<div class="content">
-					<div class="blue header">口腔检查</div>
-					<div class="description" id="oral_examination">
-					</div>
-				</div>
-			</div>
-
 			<!--现病史-->
 			<div class="ui item">
 				<div class="content">
@@ -152,10 +146,15 @@
 							<a class="ui blue label">静止龋</a>
 							<a class="ui blue label">酸蚀症</a>
 						</div>
+					</div>
+				</div>
+			</div>
 
-						<div class="ui divider"></div>
-
-						<h3 class="ui blue header">难度评估</h3>
+			<!--现病史-->
+			<div class="ui item">
+				<div class="content">
+					<div class="blue header">难度评估</div>
+					<div class="description" id="">
 						<div class="ui labels">
 							<div class="ui tag teal label">难度等级</div>
 							<a class="ui blue label">Ⅰ级</a>
