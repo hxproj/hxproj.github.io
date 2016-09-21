@@ -82,7 +82,7 @@ $(document).ready(function(){
   			}
   			PH_Health_Text += "，";
 
-  			// FIXME: 刷牙时间点
+        PH_Health_Text += "刷牙时间点：" + DATA.time_of_teeth_brush + "，";
 
   			PH_Health_Text += "刷牙时长：" + DATA.long_of_teeth_brush;
   			PH_Health_Text += "，";
@@ -148,13 +148,14 @@ $(document).ready(function(){
   		}
 	});
 
-	// ***************************************************************
-	// FUNCTION: 添加额外事件
-	$.fn.form.settings.rules.matchOption = function() {
-		return ($("form").form('get value', 'times_of_teeth_brush') == $("select[name=time_of_teeth_brush]").dropdown('get selectionCount').toString().split(",")[0]);
-	};
+  if (DATA == null) {$('#submit').show();};
 
-	// 设置病历个人史表单相关属性
+  // ***************************************************************
+  // FUNCTION: 设置病历个人史表单相关属性
+	// 添加额外事件
+  $.fn.form.settings.rules.matchOption = function() {
+    return ($("form").form('get value', 'times_of_teeth_brush') == $("select[name=time_of_teeth_brush_display]").dropdown('get selectionCount').toString().split(",")[0]);
+  };
 	$("form").form({
 		fields: {
 			long_of_teeth_brush: {
@@ -166,8 +167,8 @@ $(document).ready(function(){
 					}
 				]
 			},
-			time_of_teeth_brush: {
-				identifier: 'time_of_teeth_brush',
+			time_of_teeth_brush_display: {
+				identifier: 'time_of_teeth_brush_display',
 				rules: [
 					{
 						type   : 'matchOption',
@@ -178,21 +179,22 @@ $(document).ready(function(){
 		},
 		inline: true,
 		onSuccess: function(){
-      		var AddtionParameter = "user_id=" + U_ID + "&";
-      		
-			$.ajax({
-  				url      : URL_PERSONAL_HISTORY,
-				type     : DATA == null ? "post" : "PUT", 
-				async    : false, 
-				data     : AddtionParameter + $(this).serialize(),
-				dataType : "json",
-				error    : function(){
-  					alert("网络连接错误...");
-  				},
-  				success  : function(data){
-  					location.reload();
-				}
-			});
+      var AddtionParameter = addParameter("user_id", U_ID) + "&"
+               + addParameter("time_of_teeth_brush", $(this).form('get value', 'time_of_teeth_brush_display')).toString() + "&";
+
+      $.ajax({
+        url      : URL_PERSONAL_HISTORY,
+        type     : DATA == null ? "post" : "PUT", 
+        async    : false, 
+        data     : AddtionParameter + $(this).serialize(),
+        dataType : "json",
+        error    : function(){
+            alert("网络连接错误...");
+          },
+          success  : function(data){
+            location.reload();
+        }
+      });
 
 			return false;
 		}
@@ -211,7 +213,14 @@ $(document).ready(function(){
 
 		$('select[name=is_floss]').dropdown("set selected", DATA.is_floss);
 		$('select[name=times_of_teeth_brush]').dropdown("set selected", DATA.times_of_teeth_brush);
-		// FIXME: 刷牙时间点time_of_teeth_brush
+
+    if (DATA.time_of_teeth_brush != "") {
+      var SplitTime = DATA.time_of_teeth_brush.split(',');
+      for (var i=0; i<SplitTime.length; ++i){
+        $('select[name=time_of_teeth_brush_display]').dropdown("set selected", SplitTime[i]);
+      }
+    };
+   
     $('input[name=long_of_teeth_brush]').val(DATA.long_of_teeth_brush);
 		$('select[name=electric_tooth_brush]').dropdown("set selected", DATA.electric_tooth_brush);
 		$('select[name=method_of_tooth_brush]').dropdown("set selected", DATA.method_of_tooth_brush);
