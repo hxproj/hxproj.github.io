@@ -8,10 +8,13 @@
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/config.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/file.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
+  	<script src="dist/ajaxfileupload.js"></script>  
   	<script src="dist/config.js"></script>  
+  	<script src="dist/file.js"></script>  
   	<script src="dist/MouthExamination.js"></script>  
 </head>
 
@@ -423,7 +426,12 @@
 				</div>
 			</div>
 
-			<h3 class="ui red header">添加检查图片【多张】</h3>
+			<div class="ui fluid file button">
+				<span id="FileLabel">选择口腔检查图片</span> 
+				<input type="file" name="file[]" multiple="multiple" id="imageupload">
+			</div>
+
+			<div class="ui hidden divider"></div>
 		    <button class="ui right floated blue button">提交</button>
 		</form> 
   	</div>

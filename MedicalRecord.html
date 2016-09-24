@@ -11,6 +11,7 @@
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>
+  	<script src="dist/Pagination.js"></script>
   	<script src="dist/MedicalRecord.js"></script>
 </head>
 
@@ -33,7 +34,7 @@
 		<!--Invisible Segment-->
 		<div class="ui invisible record segment">
 		    <div class="ui items">
-		    	<!--
+		    	<!-- 修改/删除
 				<a class="ui right corner label">
 					<i class="setting icon"></i>
 				</a>
@@ -82,14 +83,7 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="ui hidden divider"></div>
 		
-		<div class="ui right floated blue inverted borderless large menu">
-			<a class='left item' href="#"><i class='angle double left icon'></i></a>
-			<a class='right item' href="#"><i class='angle double right icon'></i></a>
-		</div>
-
 		<div class="ui modal" id="add_tooth">
 			<div class="header">添加牙位</div>
 			<div class="content">
@@ -286,6 +280,28 @@
 				<div class="ui orange deny button">取消</div>
 				<div class="ui primary approve right labeled icon button">
 					添加<i class="checkmark icon"></i>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui small basic modal" id="networkerror">
+			<div class="ui icon header">
+				<i class="orange warning sign icon"></i>
+				网络无法访问或服务器异常
+			</div>
+
+			<!--
+			<div class="content">
+				<p> 请尝试以下方法解决问题：</p>
+				<ol>
+					<li>重启服务器</li>
+				</ol>	
+			</div>
+			-->
+
+			<div class="center aligned actions">
+				<div class="ui ok basic inverted button">
+					<i class="checkmark icon"></i>确认
 				</div>
 			</div>
 		</div>

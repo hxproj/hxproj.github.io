@@ -182,7 +182,24 @@ $(document).ready(function(){
 		        	alert("网络连接错误...");
 	      		},
 	      		success: function(data){
-	        		location.reload();
+
+              // 上传图片
+              $.ajaxFileUpload({
+                url:URL_IMAGEUPLOAD,
+                fileElementId: 'imageupload',
+                dataType: 'json',
+                data: {tooth_id : data.tooth_id},
+                success: function() {
+                  alert('file upload ok');
+
+                  // 上传成功刷新页面
+                  location.reload()
+                },
+                error: function() {
+                  alert('file upload fail');
+                }
+              });
+
 	      		}
 	    	});
     	
@@ -271,6 +288,7 @@ $(document).ready(function(){
 
     window.location.href = href;
   });
+
   // ***************************************************************
   // FUNCTION: 上一项
   $('.left.labeled.button').click(function(){

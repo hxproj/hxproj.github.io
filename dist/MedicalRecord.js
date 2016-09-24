@@ -1,36 +1,32 @@
 $(document).ready(function(){
-	
-	// 刷新页面获取首页数据
-	requestPageData(1);
 
 	// ***************************************************************
-	// FUNCTION: 获取页面数据
-	function requestPageData(PageNum){
-		$.ajax({
-			url       : URL_PAGE,
-			type      : "get",
-			data      : "page=" + PageNum,
-			dataType  : "json",
-			beforeSend: function(){
-				
-			},
-			complete  : function(){
-
-			},
-			error     : function(){
-				alert("网络连接错误...");
-			},
-			success   : function(data){
+	// 请求首页数据
+	$.ajax({
+			url      : URL_PAGE,
+			type     : "get",
+			data     : {page : 1},
+			dataType : "json",
+			error    : function(){ networkError(); },
+			success  : function(data){
+				// 添加分页
+				//function($AfterSelector, TotalPageNums, PageNum, URL, ErrorFunc, SuccessFunc)
+				$.Page($('.record.segment'),
+				 		data.pages,
+				 		1,
+				 		URL_PAGE,
+				 		function() { networkError(); },
+				 		function(data) {
+							$('.record.segment:visible').each(function(){ this.remove(); });
+							$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
+				 		}
+				 		);
 
 				$('.record.segment:visible').each(function(){ this.remove(); });
-
 				$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-				
-				showPagination(data.pages, Number(PageNum), data.info_list.length);
 			}
-		});
-	}
-
+	});
+	
 	// ***************************************************************
 	// FUNCTION: 在界面现实新的病历项
 	function showNewMedicalRecord(UserData){
@@ -81,63 +77,6 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 显示分页
 	function showPagination(Pages, Page, IsContainContent){
-		var $Menu = $('.borderless.menu');
-		if (IsContainContent) {
-
-			if ($Menu.hasClass('invisible')) {$Menu.removeClass('invisible');}
-			$('.borderless.menu').find('.blue.item').remove();
-			$('.borderless.menu').find('.disabled.item').remove();
-
-			var DisabledItem    = "<div class='disabled item'>...</div>";
-			var PageItem        = "<a class='blue item' href='#'></a>";
-
-			var MaxDisplayPages = 5;
-
-			var StartPage = Page - 2;
-			if (StartPage < 1) {
-				StartPage = 1
-			}
-
-			if (Pages < 1) { Pages = 1; }
-
-			var EndPage = Page + 2;
-			if (EndPage < MaxDisplayPages) {
-				EndPage = MaxDisplayPages;
-			}
-			if (EndPage > Pages) {
-				EndPage = Pages;
-			} 
-
-			var $LeftItem  = $Menu.find('.left.item');
-			var $RightItem = $Menu.find('.right.item');
-
-			// 设置首尾页点击事件
-			$LeftItem.bind('click', function() { requestPageData(1); });
-			$RightItem.bind('click', function() { requestPageData(Pages); });
-
-			// 添加disable item
-			var $Item = $LeftItem;
-			if (StartPage > 1) {
-				$Item.after(DisabledItem);
-				$Item = $Item.next();
-			}
-
-			if (Pages - EndPage > 0) {
-				$RightItem.before(DisabledItem);
-			}
-
-			for (var i=StartPage; i<=EndPage; ++i) {
-				$Item.after(PageItem);
-				$Item = $Item.next().text(i);
-
-				i == Page ? $Item.addClass('active') : 
-					$Item.bind('click', function() {
-						requestPageData(this.text)
-					});
-			}
-		} else {
-			if (!$Menu.hasClass('invisible')) {$Menu.addClass('invisible');}
-		}
 	}
 
 	var IsSubmitOK = false;

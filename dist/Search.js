@@ -148,11 +148,8 @@ $(document).ready(function(){
 			for (var i=StartPage; i<=EndPage; ++i) {
 				$Item.after(PageItem);
 				$Item = $Item.next().text(i);
-
-				i == Page ? $Item.addClass('active') : 
-					$Item.bind('click', function() {
-						requestPageData(this.text)
-					});
+ 
+				$Item.bind('click', function() {requestPageData(this.text)});
 			}
 		} else {
 			if (!$Menu.hasClass('invisible')) {$Menu.addClass('invisible');}

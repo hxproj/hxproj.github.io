@@ -62,15 +62,15 @@ $(document).ready(function(){
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
-    $('input[value=' + DATA.color + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.marginal_accuracy + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.anatomic_form + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.surfaceness + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.edge_color + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.occlusal_contact + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.sensitivity_of_tooth + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.secondary_caries + ']').parent().checkbox('check'); 
-    $('input[value=' + DATA.integrity + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.color + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.marginal_accuracy + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.anatomic_form + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.surfaceness + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.edge_color + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.occlusal_contact + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.sensitivity_of_tooth + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.secondary_caries + ']').parent().checkbox('check'); 
+    	$('input[value=' + DATA.integrity + ']').parent().checkbox('check'); 
 
 		$('form').show();
 	});
