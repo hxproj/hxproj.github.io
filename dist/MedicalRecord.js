@@ -40,12 +40,25 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
-		$.each(UserData.tootn_location_list, function(){
-			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
-		});
+		if (UserData.tootn_location_list != undefined && UserData.tootn_location_list > 0) {
+			$.each(UserData.tootn_location_list, function(){
+				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
+			});
+		}
 
 		// FIXME: 设置风险评估和预后管理的状态disabled，是否是所有填写完成显示状态
-		
+
+		// 如果未添加个人史，则牙位添加按钮不可点击
+		$.ajax({
+  			url      : URL_PERSONAL_HISTORY,
+  			type     : "get",
+  			data     : {user_id : UserData.user_id},
+  			dataType : "json",
+  			error    : function() {
+  				$ClonedMedicalRecord.find('.add.button').unbind().bind('click', function(){return false;}).popup({
+  					content:"请先填写个人史，再添加牙位"});
+  			}
+  		});
 
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
