@@ -10,7 +10,6 @@ $(document).ready(function(){
 			error    : function(){ networkError(); },
 			success  : function(data){
 				// 添加分页
-				//function($AfterSelector, TotalPageNums, PageNum, URL, ErrorFunc, SuccessFunc)
 				$.Page($('.record.segment'),
 				 		data.pages,
 				 		1,

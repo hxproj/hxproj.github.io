@@ -35,19 +35,11 @@ jQuery.extend({
 		} 
 
 		// 计算分页起始页
-		var StartPage = PageNum - 2;
-		if (StartPage < 1) { StartPage = 1; }
-
-		if (TotalPageNums < 1) { TotalPageNums = 1; }
-
-		var EndPage = PageNum + 2;
-		if (EndPage < this.MaxDisplayPages) {
-			EndPage = this.MaxDisplayPages;
-		}
-		if (EndPage > TotalPageNums) {
-			EndPage = TotalPageNums;
-		} 
-
+		var StartPage = PageNum - 2,
+			EndPage   = PageNum + 2;
+		if (StartPage < 1) {StartPage = 1;}
+		if (EndPage < this.MaxDisplayPages) {EndPage = this.MaxDisplayPages;}
+		if (EndPage > TotalPageNums) {EndPage = TotalPageNums;} 
 		if (EndPage - StartPage < this.MaxDisplayPages && EndPage - this.MaxDisplayPages > 0) {
 			StartPage = EndPage - this.MaxDisplayPages + 1;
 		}
