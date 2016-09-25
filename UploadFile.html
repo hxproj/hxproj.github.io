@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+  	<meta charset="utf-8" />
 
 <div class="ui basic modal">
 	<div class="header">
@@ -10,9 +11,10 @@
 			<i class="archive icon"></i>	
 		</div>
 		<div class="description">
-			<form name="uploadfile">
+			<form name="uploadfile" action="http://127.0.0.1:9000/medical-case-of-illness/img" method="POST" enctype="multipart/form-data">
 				<input type="file" name="file[]" multiple/>
-				<input type="hidden" name="tooth_id"/>
+				<input type="hidden" name="tooth_id" value='72'/>
+				<input type="submit"></input>
 			</form>
 		</div>
 		<div class="actions">
