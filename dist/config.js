@@ -34,3 +34,4 @@ $(document).ready(function(){
 	// FUNCTION: Page Common Settings
 	$('.ui.dropdown').dropdown();
 });
+

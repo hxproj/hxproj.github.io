@@ -3,27 +3,27 @@ $(document).ready(function(){
 	// ***************************************************************
 	// 请求首页数据
 	$.ajax({
-			url      : URL_PAGE,
-			type     : "get",
-			data     : {page : 1},
-			dataType : "json",
-			error    : function(){ networkError(); },
-			success  : function(data){
-				// 添加分页
-				$.Page($('.record.segment'),
-				 		data.pages,
-				 		1,
-				 		URL_PAGE,
-				 		function() { networkError(); },
-				 		function(data) {
-							$('.record.segment:visible').each(function(){ this.remove(); });
-							$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-				 		}
-				 		);
+		url      : URL_PAGE,
+		type     : "get",
+		data     : {page : 1},
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(data){
+			// 添加分页
+			$.Page($('.record.segment'),
+			 	data.pages,
+			 	1,
+			 	URL_PAGE,
+			 	function() { networkError(); },
+			 	function(data) {
+					$('.record.segment:visible').each(function(){ this.remove(); });
+					$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
+			 	}
+			 );
 
-				$('.record.segment:visible').each(function(){ this.remove(); });
-				$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-			}
+			$('.record.segment:visible').each(function(){ this.remove(); });
+			$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
+		}
 	});
 	
 	// ***************************************************************
@@ -45,25 +45,28 @@ $(document).ready(function(){
 			$.each(UserData.tootn_location_list, function(){
 				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
 
-				if (this.step < 6) {IsToothInfoCompleted = false};
+				if (this.step < 6) {IsToothInfoCompleted = false;}
 			});
+		} else {
+			IsToothInfoCompleted = false;
 		}
-		
-		// 如果未添加个人史，则牙位添加按钮不可点击
+
+		// ***************************************************************
+		// FUNCTION: 设置相关按钮不可点击
+		// 1. 如果未添加个人史，则牙位添加按钮不可点击
 		$.ajax({
   			url      : URL_PERSONAL_HISTORY,
   			type     : "get",
   			data     : {user_id : UserData.user_id},
   			dataType : "json",
   			error    : function() {
-  				$ClonedMedicalRecord.find('.add.button').unbind().bind('click', function(){return false;}).popup({
-  					content:"请先填写个人史，再添加牙位"});
+  				$ClonedMedicalRecord.find('.add.button').removeClass('teal').unbind().attr('data-tooltip', "请先完善病人个人史信息");
   			}
   		});
 
-		// 如果所有牙位的信息未填写完全，禁止填写风险评估和预后管理相关信息
+		// 2. 如果所有牙位的信息未填写完全，禁止填写风险评估和预后管理相关信息
 		if (!IsToothInfoCompleted) {
-			$ClonedMedicalRecord.find('.right.segment a.button').addClass('disabled');
+			$ClonedMedicalRecord.find('.right.segment a.button').removeClass('teal').bind('click', function(){return false}).attr('data-tooltip', "请先完善病人所有牙位信息");
 		}
 
 		$MedicalRecord.after($ClonedMedicalRecord);
