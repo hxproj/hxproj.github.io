@@ -35,3 +35,19 @@ $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
 });
 
+jQuery.extend({
+	ajaxFile: function(Parameters) {
+
+		// 设置form数据:添加文件
+		var formData       = new FormData(),
+			$FilesSelector = $("#" + Parameters.fileElementId),
+			FilesName      = $FilesSelector.attr('name'),
+			Files          = $FilesSelector[0].files;
+
+		$.each(Files, function() {formData.append(FilesName, this);});
+		$.each(Parameters.data, function(name, value) {formData.append(name, value);});
+		Parameters.data = formData;
+
+  		$.ajax(Parameters);
+	}
+})

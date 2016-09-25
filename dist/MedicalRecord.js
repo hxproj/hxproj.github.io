@@ -20,7 +20,7 @@ $(document).ready(function(){
 					$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
 			 	}
 			 );
-
+ 
 			$('.record.segment:visible').each(function(){ this.remove(); });
 			$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
 		}

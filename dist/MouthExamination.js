@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$.ajax({
   		url     : URL_MOUTHEXAM,
   		type    : "get",
-  		data    : addParameter("tooth_id", T_ID),
+  		data    : {tooth_id : T_ID},
   		dataType: "json",
   		error   : function(){
   		},
@@ -182,24 +182,26 @@ $(document).ready(function(){
 		        	alert("网络连接错误...");
 	      		},
 	      		success: function(data){
-
               // 上传图片
-              $.ajaxFileUpload({
-                url:URL_IMAGEUPLOAD,
-                fileElementId: 'imageupload',
-                dataType: 'json',
-                data: {tooth_id : data.tooth_id},
-                success: function() {
-                  alert('file upload ok');
 
-                  // 上传成功刷新页面
-                  location.reload()
+              $.ajaxFile({
+                url           : URL_IMAGEUPLOAD, 
+                type          : 'POST',  
+                fileElementId : 'imageupload',
+                dataType      : 'text',
+                data         :  {tooth_id : data.tooth_id},
+            async: false,  
+            cache: false,  
+            contentType: false,  
+            processData: false,
+                success       : function() {
+                  alert("ok");
+                  //location.reload()
                 },
                 error: function() {
-                  alert('file upload fail');
+                  alert("fail");
                 }
               });
-
 	      		}
 	    	});
     	
