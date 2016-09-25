@@ -183,23 +183,21 @@ $(document).ready(function(){
 	      		},
 	      		success: function(data){
               // 上传图片
-
               $.ajaxFile({
                 url           : URL_IMAGEUPLOAD, 
                 type          : 'POST',  
                 fileElementId : 'imageupload',
                 dataType      : 'text',
-                data         :  {tooth_id : data.tooth_id},
-            async: false,  
-            cache: false,  
-            contentType: false,  
-            processData: false,
+                data          :  {tooth_id : data.tooth_id},
+                async         : false,  
+                cache         : false,  
+                contentType   : false,  
+                processData   : false,
                 success       : function() {
-                  alert("ok");
-                  //location.reload()
+                  location.reload()
                 },
-                error: function() {
-                  alert("fail");
+                error         : function() {
+                  alert("文件上传失败");
                 }
               });
 	      		}
