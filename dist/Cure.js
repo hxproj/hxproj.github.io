@@ -3,20 +3,19 @@ $(document).ready(function(){
 	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
   	$('#context .menu .item').tab({ context: $('#context') });
 	
-    var U_ID = Number(requestParameter("uid"));
-	var T_ID = Number(requestParameter("tid"));
+    var U_ID = Number(requestParameter("uid")),
+		T_ID = Number(requestParameter("tid")),
+		DATA = null;
 
-	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
-  		url     : URL_CURE,
-  		type    : "get",
-  		data    : addParameter("tooth_id", T_ID),
-  		dataType: "json",
-  		error   : function(){
-  		},
-  		success : function(data){
+  		url      : URL_CURE,
+  		type     : "get",
+  		data     : {tooth_id : T_ID},
+  		dataType : "json",
+      	async    : false,
+  		success  : function(data){
   			$('#context').hide();
 
   			DATA = data;
@@ -844,12 +843,8 @@ $(document).ready(function(){
 					type     : DATA == null ? "POST" : "PUT", 
 					data     : AddtionParameter + $(this).serialize(),
 					dataType : "json",
-					error    : function(){	
-						alert("网络连接错误...");
-					},
-					success: function(data){
-						location.reload();
-					}
+					error    : function() {networkError();},
+					success  : function() {location.reload();}
 				});
 
   				return false;
@@ -1030,7 +1025,7 @@ $(document).ready(function(){
 	}
 	
 	// ***************************************************************
-	// FUNCTION: 下一项
+	// FUNCTION: 下一项，USPHS
 	$('.right.labeled.button').click(function(){
 		var href = "USPHS.html";
 		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
@@ -1039,7 +1034,7 @@ $(document).ready(function(){
 		window.location.href = href;
 	});
 	// ***************************************************************
-	// FUNCTION: 上一项
+	// FUNCTION: 上一项，难度评估
 	$('.left.labeled.button').click(function(){
 		var href = "DifficultyAssessment.html";
 		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"

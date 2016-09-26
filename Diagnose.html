@@ -8,10 +8,12 @@
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/config.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/file.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
+  	<script src="dist/file.js"></script>  
   	<script src="dist/Diagnose.js"></script>  
 </head>
 
@@ -30,7 +32,7 @@
 		<table class="ui celled striped invisible table" id="display">
 			<thead>
 				<tr>
-					<th class="center aligned" colspan="2">上前牙一年前发现折裂</th>
+					<th class="center aligned" colspan="2">FIXME: 上前牙一年前发现折裂</th>
 				</tr>
 			</thead>
   			<tbody>
@@ -44,7 +46,10 @@
 				</tr>
 				<tr>
 					<td class="negative collapsing">诊断图片</td>
-					<td id="Image"></td>
+					<td>
+						<div class="ui medium rounded images" id="Image">
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -58,37 +63,43 @@
 			</tbody>
 		</table>
 
-		<form class="ui clearing basic invisible segment form" id="DiagnoseForm">
-			<h3 class="ui blue header">上前牙、累及唇面</h3>
-			<div class="two fields">
-				<div class="field">
-					<label>龋损程度</label>
-					<select name="caries_degree" class="ui dropdown">
-					<option value="">选择</option>
-					<option value="浅龋">浅龋</option>
-					<option value="中龋">中龋</option>
-					<option value="深龋">深龋</option>
-					</select>
+		<div class="ui invisible clearing segment" id="DiagnoseForm">
+			<form class="ui form">
+				<h3 class="ui blue header">上前牙、累及唇面</h3>
+				<div class="two fields">
+					<div class="field">
+						<label>龋损程度</label>
+						<select name="caries_degree" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="浅龋">浅龋</option>
+						<option value="中龋">中龋</option>
+						<option value="深龋">深龋</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>龋齿病种</label>
+						<select name="caries_type" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="猛性龋">猛性龋</option>
+						<option value="隐匿性龋">隐匿性龋</option>
+						<option value="根面龋">根面龋</option>
+						<option value="继发龋">继发龋</option>
+						<option value="静止龋">静止龋</option>
+						<option value="酸蚀症">酸蚀症</option>
+						</select>
+					</div>
 				</div>
 
-				<div class="field">
-					<label>龋齿病种</label>
-					<select name="caries_type" class="ui dropdown">
-					<option value="">选择</option>
-					<option value="猛性龋">猛性龋</option>
-					<option value="隐匿性龋">隐匿性龋</option>
-					<option value="根面龋">根面龋</option>
-					<option value="继发龋">继发龋</option>
-					<option value="静止龋">静止龋</option>
-					<option value="酸蚀症">酸蚀症</option>
-					</select>
+				<div class="ui fluid file button">
+					<span id="FileLabel">选择诊断图片</span> 
+					<input type="file" name="file[]" multiple="multiple" id="imageupload">
 				</div>
-			</div>
 
-			<h3 class="ui red header">添加诊断图片（与检查图片对焦不同）</h3>
-		    <button class="ui right floated blue button">提交</button>
-		</form> 
-
+				<div class="ui hidden divider"></div>
+			    <button class="ui right floated blue button">提交</button>
+			</form> 
+		</div>
   	</div>
 
 </body>

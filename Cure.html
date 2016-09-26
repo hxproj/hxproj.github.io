@@ -28,11 +28,12 @@
 		<h2 class="ui orange header">处置</h2>
 
 		<table class="ui celled invisible structured table" id="display">
-  			<tbody>
+			<thead>
 				<tr>
-					<td class="negative collapsing">牙位</td>
-					<td id="Tooth_Location"></td>
+					<th colspan="2">FIXME: 牙位</th>
 				</tr>
+			</thead>
+  			<tbody>
 				<tr>
 					<td class="negative collapsing">处置方法</td>
 					<td id="Method"></td>
@@ -53,7 +54,7 @@
 			</tbody>
 		</table>
 		
-		<div id="context">
+		<div class="invisible" id="context">
   		<div class="ui blue pointing fluid five item menu" id="MainContext">
 			<a class="active item" data-tab="1">牙非手术治疗</a>
 			<a class="item" data-tab="2">牙树脂直接填充修复</a>
@@ -105,6 +106,7 @@
 						<input type="hidden" name="tools" value="">
 						<input type="hidden" name="lamp" value="">
 						<input type="hidden" name="check_time" value="">
+						<input type="hidden" name="time_of_etching" value="">
 
 			   			<button class="ui right floated blue button">提交</button>
 		    		</form>
@@ -132,6 +134,7 @@
 						<input type="hidden" name="tools" value="">
 						<input type="hidden" name="lamp" value="">
 						<input type="hidden" name="check_time" value="">
+						<input type="hidden" name="time_of_etching" value="">
 	    				
 				   		<button class="ui right floated blue button">提交</button>
 			   		</form>

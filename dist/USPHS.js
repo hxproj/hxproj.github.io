@@ -8,20 +8,19 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
-  		url     : URL_USPHS,
-  		type    : "get",
-  		data    : addParameter("tooth_id", T_ID),
-  		dataType: "json",
-  		error   : function(){
-  		},
-  		success : function(data){
+  		url      : URL_USPHS,
+  		type     : "get",
+  		data     : {tooth_id : T_ID},
+  		dataType : "json",
+      	async    : false,
+  		success  : function(data){
   			$('form').hide();
 
   			DATA = data;
   			$('#color').text(DATA.color);
   			$('#marginal_accuracy').text(DATA.marginal_accuracy);
   			$('#anatomic_form').text(DATA.anatomic_form);
-        $('#surfaceness').text(DATA.surfaceness);
+        	$('#surfaceness').text(DATA.surfaceness);
   			$('#edge_color').text(DATA.edge_color);
   			$('#occlusal_contact').text(DATA.occlusal_contact);
   			$('#sensitivity_of_tooth').text(DATA.sensitivity_of_tooth);
@@ -45,12 +44,8 @@ $(document).ready(function(){
 				type     : DATA == null ? "post" : "PUT", 
 				data     : AddtionParameter + $(this).serialize(),
 				dataType : "json",
-				error    : function(){	
-					alert("网络连接错误...");
-				},
-				success: function(data){
-					location.reload();
-				}
+				error    : function() {networkError();},
+				success  : function() {location.reload();}
 			});
 
 			return false;
@@ -76,7 +71,7 @@ $(document).ready(function(){
 	});
 
 	// ***************************************************************
-	// FUNCTION: 上一项
+	// FUNCTION: 上一项，处置
 	$('.right.labeled.button').click(function(){
 		var href = "Cure.html";
 		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"

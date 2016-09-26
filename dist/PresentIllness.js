@@ -1,8 +1,9 @@
 $(document).ready(function(){
+
   // ***************************************************************
-    // FUNCTION: 其它
-    $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
-    $('#context .menu .item').tab({ context: $('#context') });
+  // FUNCTION: 其它
+  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+  $('#context .menu .item').tab({ context: $('#context') });
 
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
@@ -13,8 +14,9 @@ $(document).ready(function(){
   $.ajax({
   		url      : URL_PRESENTILLNESS,
   		type     : "GET",
-  		data     : addParameter("tooth_id", T_ID),
-  		dataType : "json",
+  		data     : {tooth_id : T_ID},
+      async    : false,
+      dataType : "json",
   		success  : function(data){
         $('#context').hide();
         $('#display').show();
@@ -73,7 +75,7 @@ $(document).ready(function(){
 	// FUNCTION: AJAX提交现病史
 	$('.ui.tab .submit.button').click(function(){
 
-	    var AddtionParameter = addParameter("user_id", U_ID) + "&" + addParameter("tooth_id", T_ID) + "&";
+      var AddtionParameter = addParameter("user_id", U_ID) + "&" + addParameter("tooth_id", T_ID) + "&";
 
     	$.ajax({
     		url      : URL_PRESENTILLNESS,
@@ -118,7 +120,7 @@ $(document).ready(function(){
   });
 
 	// ***************************************************************
-	// FUNCTION: 下一项
+	// FUNCTION: 下一项-口腔检查
   $('.right.labeled.button').click(function(){
     var href = "MouthExamination.html";
     href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
