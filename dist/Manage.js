@@ -91,12 +91,8 @@ $(document).ready(function(){
       		type     : DATA == null ? "POST" : "PUT", 
       		data     : AddtionParameter,
       		dataType : "json",
-      		error    : function(){
-	        	alert("网络连接错误...");
-      		},
-      		success  : function(data){
-				location.reload();
-      		}
+			error    : function() {networkError();},
+			success  : function() {location.reload();}
     	});
 
 	});

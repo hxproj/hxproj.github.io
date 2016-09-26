@@ -34,6 +34,12 @@ $(document).ready(function(){
 				}
 			});
 
+	        // 设置牙位信息
+	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
+	        	$('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
+	        		data.symptom + "（" + data.time_of_occurrence) + "）");
+	        }, "json");
+
   			$('#display').show();
   		}
 	});
@@ -43,6 +49,27 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 提交
 	$('#DiagnoseForm form').form({
+		fields: {
+			caries_degree: {
+				identifier: 'caries_degree',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请选择龋损程度'
+					}
+				]
+			},
+			caries_type: {
+				identifier: 'caries_type',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请选择龋齿病种'
+					}
+				]
+			},
+		},
+		inline: true,
 		onSuccess: function(){
 			var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 			$.ajax({
@@ -91,19 +118,11 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 下一项，难度评估
 	$('.right.labeled.button').click(function(){
-		var href = "DifficultyAssessment.html";
-		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-			+ addParameter("name", requestParameter("name"));
-
-		window.location.href = href;
+   		redirection("DifficultyAssessment.html", U_ID, T_ID, requestParameter("name"));
 	});
 	// ***************************************************************
 	// FUNCTION: 上一项，口腔检查
 	$('.left.labeled.button').click(function(){
-		var href = "MouthExamination.html";
-		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-			+ addParameter("name", requestParameter("name"));
-
-		window.location.href = href;
+   		redirection("MouthExamination.html", U_ID, T_ID, requestParameter("name"));
 	});
 });

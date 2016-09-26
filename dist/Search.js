@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 		var AddtionParameter = addParameter("table", Table) 
 				+ "&" + addParameter(Field, Value)
-				+ "&" + addParameter("page", PageNum);
+				+ "&" + addParameter("page", 0);
 
 		$.ajax({
 			url       : URL_SEARCH,
@@ -67,10 +67,7 @@ $(document).ready(function(){
 		$.each(UserData.tooth_location_list, function(){
 			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
 		});
-
-		// FIXME: 设置风险评估和预后管理的状态disabled，是否是所有填写完成显示状态
 		
-
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
 

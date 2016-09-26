@@ -16,7 +16,6 @@ $(document).ready(function(){
   		success : function(data){
   			
   			$('#submit').hide();
-  			$('#display').show();
 
   			DATA = data;
 
@@ -145,6 +144,8 @@ $(document).ready(function(){
        		$('#PH_Habit').text(PH_Habit_Text);
        		$('#PH_Health').text(PH_Health_Text);
        		$('#PH_Host').text(PH_Host_Text);
+
+        $('#display').show();
   		}
 	});
 
@@ -188,12 +189,8 @@ $(document).ready(function(){
         async    : false, 
         data     : AddtionParameter + $(this).serialize(),
         dataType : "json",
-        error    : function(){
-            alert("网络连接错误...");
-          },
-          success  : function(data){
-            location.reload();
-        }
+        error    : function() {networkError();},
+        success  : function() {location.reload();}
       });
 
 			return false;

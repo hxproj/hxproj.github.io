@@ -29,6 +29,10 @@ $(document).ready(function(){
 
 	window.addParameter = function(Name, Value) { return Name + "=" + Value; };
 	window.networkError = function() { $('#networkerror').modal('show'); }
+	window.redirection  = function(URL, UID, TID, Name) {
+		window.location.href = URL + "?" + addParameter("uid", UID) + "&" + addParameter("tid", TID) + "&"
+      			+ addParameter("name", Name);
+	}
 
 	// ***************************************************************
 	// FUNCTION: Page Common Settings

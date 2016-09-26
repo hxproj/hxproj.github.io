@@ -19,7 +19,6 @@ $(document).ready(function(){
       dataType : "json",
   		success  : function(data){
         $('#context').hide();
-        $('#display').show();
 
   			DATA = data;
 
@@ -66,6 +65,14 @@ $(document).ready(function(){
         }
 
         $('#describe').text(DescribeText);
+
+        // 设置牙位信息
+        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
+          $('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
+              data.symptom + "（" + data.time_of_occurrence) + "）");
+        }, "json");
+
+        $('#display').show();
   		}
 	});
 
@@ -82,12 +89,8 @@ $(document).ready(function(){
     		type     : DATA == null ? "POST" : "PUT", 
     		data     : AddtionParameter + $(this).parent().serialize(),
     		dataType : "json",
-    		error    : function(){
-        	alert("网络连接错误...");
-    		},
-    		success  : function(data){
-          location.reload();
-    		}
+        error    : function() {networkError();},
+        success  : function() {location.reload();}
   	  });
 	});
 
@@ -122,10 +125,6 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 下一项-口腔检查
   $('.right.labeled.button').click(function(){
-    var href = "MouthExamination.html";
-    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-        + addParameter("name", requestParameter("name"));
-
-    window.location.href = href;
+    redirection("MouthExamination.html", U_ID, T_ID, requestParameter("name"));
   });
 });

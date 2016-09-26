@@ -19,7 +19,13 @@ $(document).ready(function(){
   			$('#context').hide();
 
   			DATA = data;
-  			
+
+	        // 设置牙位信息
+	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
+	        	$('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
+	        		data.symptom + "（" + data.time_of_occurrence) + "）");
+	        }, "json");
+	        
   			// 牙非手术治疗
   			if (DATA.handle_type == 0) {
   				$('#Method').text("牙非手术治疗 - " + DATA.specific_method);
@@ -1027,19 +1033,11 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 下一项，USPHS
 	$('.right.labeled.button').click(function(){
-		var href = "USPHS.html";
-		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-			+ addParameter("name", requestParameter("name"));
-
-		window.location.href = href;
+   		redirection("USPHS.html", U_ID, T_ID, requestParameter("name"));
 	});
 	// ***************************************************************
 	// FUNCTION: 上一项，难度评估
 	$('.left.labeled.button').click(function(){
-		var href = "DifficultyAssessment.html";
-		href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-			+ addParameter("name", requestParameter("name"));
-
-		window.location.href = href;
+   		redirection("DifficultyAssessment.html", U_ID, T_ID, requestParameter("name"));
 	});
 });

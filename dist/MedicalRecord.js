@@ -351,21 +351,17 @@ $(document).ready(function(){
 	// FUNCTION: 删除牙位
 	$('.deletetooth.button').click(function(){
 		var $Tooth = $(this).parents('.extra');
-		var AddtionParameter = addParameter("tooth_id", $Tooth.attr('value'));
-
-		$.ajax({
-			url     : URL_TOOTH + "?" + AddtionParameter,
-			type    : "DELETE",
-			dataType: "text",
-			error   : function(){
-				alert("网络连接错误...");
-			},
-			success : function(data){
-				$Tooth.remove();
+		$('#deletemodal').modal({
+			onApprove: function() {
+				$.ajax({
+					url      : URL_TOOTH + "?" + addParameter("tooth_id", $Tooth.attr('value')),
+					type     : "DELETE",
+					dataType : "text",
+					error    : function() {alert("删除牙位失败");},
+					success  : function() {$Tooth.remove();}
+				});
 			}
-		});
-
-		return false;
+		}).modal('show');
 	});
 
 	// ***************************************************************
@@ -388,16 +384,14 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 删除病历
 	$('.corner.label').click(function(){
-
 		var $Record = $(this).parents('.record.segment');
 		$('#deletemodal').modal({
 			onApprove: function() {
 				$.ajax({
-					url      : URL_USER,
+					url      : URL_USER + "?" + addParameter("user_id", $Record.attr("value")),
 					type     : "DELETE",
-					data     : {user_id : $Record.attr("value")},
 					dataType : "text",
-					error    : function() {networkError();},
+					error    : function() {alert("删除病历失败");},
 					success  : function() {$Record.remove();}
 				});
 			}

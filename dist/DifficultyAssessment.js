@@ -46,6 +46,54 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 提交
 	$('#DifficultyForm form').form({
+    fields: {
+      tooth_surface_and_location: {
+        identifier: 'tooth_surface_and_location',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择累及牙面及部位'
+          }
+        ]
+      },
+      caries_depth: {
+        identifier: 'caries_depth',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择龋损深度'
+          }
+        ]
+      },
+      technology_type: {
+        identifier: 'technology_type',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择技术类型'
+          }
+        ]
+      },
+      history_of_fill: {
+        identifier: 'history_of_fill',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择充填修复史及充填失败史'
+          }
+        ]
+      },
+      difficulty_rating: {
+        identifier: 'difficulty_rating',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择龋病风险难度分级'
+          }
+        ]
+      },
+    },
+    inline: true,
 		onSuccess: function(){
 			var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 
@@ -81,19 +129,11 @@ $(document).ready(function(){
   // ***************************************************************
   // FUNCTION: 下一项，治疗
   $('.right.labeled.button').click(function(){
-    var href = "Cure.html";
-    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-      + addParameter("name", requestParameter("name"));
-
-    window.location.href = href;
+    redirection("Cure.html", U_ID, T_ID, requestParameter("name"));
   });
   // ***************************************************************
   // FUNCTION: 上一项，诊断
   $('.left.labeled.button').click(function(){
-    var href = "Diagnose.html";
-    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-      + addParameter("name", requestParameter("name"));
-
-    window.location.href = href;
+    redirection("Diagnose.html", U_ID, T_ID, requestParameter("name"));
   });
 });

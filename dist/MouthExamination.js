@@ -293,20 +293,12 @@ $(document).ready(function(){
   // ***************************************************************
   // FUNCTION: 下一项，诊断
   $('#display .right.labeled.button').click(function(){
-    var href = "Diagnose.html";
-    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-        + addParameter("name", requestParameter("name"));
-
-    window.location.href = href;
+    redirection("Diagnose.html", U_ID, T_ID, requestParameter("name"));
   });
 
   // ***************************************************************
   // FUNCTION: 上一项，现病史
   $('#display .left.labeled.button').click(function(){
-    var href = "PresentIllness.html";
-    href += "?" + addParameter("uid", U_ID) + "&" + addParameter("tid", T_ID) + "&"
-        + addParameter("name", requestParameter("name"));
-
-    window.location.href = href;
+    redirection("PresentIllness.html", U_ID, T_ID, requestParameter("name"));
   });
 });
