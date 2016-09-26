@@ -369,26 +369,38 @@ $(document).ready(function(){
 	});
 
 	// ***************************************************************
-	// FUNCTION: 删除牙位
+	// FUNCTION: 下载文件
 	$('.download.button').click(function(){
 		var THIS_TOOTH_ID = $(this).parents('.extra').attr('value');
 		var AddtionParameter = addParameter("tooth_id", THIS_TOOTH_ID) + "&" + addParameter("risk", 0);
 		
 		$.ajax({
-			url     : URL_DOC + "?" + AddtionParameter,
-			type    : "GET",
-			dataType: "text",
-			error   : function(){
-				alert("网络连接错误...");
-			},
-			success : function(text){
-		
-				location.href = text;
-				alert('ok');
-			}
+			url      : URL_DOC + "?" + AddtionParameter,
+			type     : "GET",
+			dataType : "text",
+			error    : function() {networkError();},
+			success  : function(text) {location.href = text;}
 		});
 
-
 		return false;
+	});
+
+	// ***************************************************************
+	// FUNCTION: 删除病历
+	$('.corner.label').click(function(){
+
+		var $Record = $(this).parents('.record.segment');
+		$('#deletemodal').modal({
+			onApprove: function() {
+				$.ajax({
+					url      : URL_USER,
+					type     : "DELETE",
+					data     : {user_id : $Record.attr("value")},
+					dataType : "text",
+					error    : function() {networkError();},
+					success  : function() {$Record.remove();}
+				});
+			}
+		}).modal('show');
 	});
 });
