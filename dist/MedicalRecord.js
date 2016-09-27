@@ -368,7 +368,7 @@ $(document).ready(function(){
 	// FUNCTION: 下载文件
 	$('.download.button').click(function(){
 		var THIS_TOOTH_ID = $(this).parents('.extra').attr('value');
-		var AddtionParameter = addParameter("tooth_id", THIS_TOOTH_ID) + "&" + addParameter("risk", 0);
+		var AddtionParameter = addParameter("tooth_id", THIS_TOOTH_ID) + "&risk=";
 		
 		$.ajax({
 			url      : URL_DOC + "?" + AddtionParameter,

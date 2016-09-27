@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 		var AddtionParameter = addParameter("table", Table) 
 				+ "&" + addParameter(Field, Value)
-				+ "&" + addParameter("page", 0);
+				+ "&" + addParameter("page", 1);
 
 		$.ajax({
 			url       : URL_SEARCH,
