@@ -267,12 +267,12 @@ $(document).ready(function(){
 	// ******************************************************
 	// 添加牙位
 	$('#addLocation').click(function(){
-		$('.ui.modal').modal({
+		$('#addLocationModal').modal({
 			onApprove: function(){
-				var $AddLocation = $('#addLocation');
-				var $ToothType   = $('.modal .item.active');
-				var ToothTypeValue = $ToothType.attr('data-tab');
-				var ToothTypeName  = $ToothType.text();
+				var $AddLocation   = $('#addLocation'),
+            $ToothType     = $('.modal .item.active'),
+				    ToothTypeValue = $ToothType.attr('data-tab'),
+				    ToothTypeName  = $ToothType.text();
 
 				$AddLocation.nextAll().remove();
 				$AddLocation.after("<a class='ui orange label'>" + ToothTypeName + "</a>");
