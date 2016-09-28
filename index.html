@@ -23,7 +23,6 @@
 	</div> 
 
 	<div class="ui main container">
-
 		<br/>
 		<br/>
 		<br/>
@@ -31,139 +30,155 @@
 		<div class="ui fluid action left icon large input">
 			<i class="search icon"></i>
 			<input type="text" placeholder="输入姓名">
-			<div class="ui teal button">Search</div>
+			<div class="ui blue button">Search</div>
 		</div>
 
-		<br/>
+		<div class="ui hidden divider"></div>
 
-		<div class="ui icon warning message">
-			<i class="info icon"></i>
-			<div class="content">
-				<p>点击下面蓝色 <a class="ui blue label"></a> 标签搜索相关病历</p>
-			</div>
+		<div class="ui raised segment" id="personal_history">
+			<h3 class="ui header">个人史</h3>
+			<table class="ui very basic table">
+	  			<tbody>
+					<tr>
+						<td class="collapsing">蛋白质，甜食食用量</td>
+						<td>
+							<div class="ui blue labels" value="consumption_of_sweet">
+								<a class="ui blue label" value="124">小于125g</a>
+								<a class="ui blue label" value="125">125~249g</a>
+								<a class="ui blue label" value="250">250~500g</a>
+								<a class="ui blue label" value="500">大于500g</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">蛋白质，甜食食用频率</td>
+						<td id="">
+							<div class="ui blue labels" value="frequency_of_sweet">
+								<a class="ui blue label" value="1">小于1次/天</a>
+								<a class="ui blue label" value="2">2次/天</a>
+								<a class="ui blue label" value="3">3次/天</a>
+								<a class="ui blue label" value="4">4次/天</a>
+								<a class="ui blue label" value="5">5次/天</a>
+								<a class="ui blue label" value="6">大于5次/天</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">正餐间进食频率</td>
+						<td id="">
+							<div class="ui blue labels" value="frequency_of_meal">
+								<a class="ui label" value="1">小于1</a>
+								<a class="ui label" value="2">1~2</a>
+								<a class="ui label" value="3">大于3</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">每天刷牙次数</td>
+						<td id="">
+							<div class="ui blue labels" value="times_of_teeth_brush">
+								<a class="ui label" value="1">1次</a>
+								<a class="ui label" value="2">2次</a>
+								<a class="ui label" value="3">3次</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">其它</td>
+						<td>
+							<div class="ui blue labels" value="other">
+								<a class="ui label" id="more_sweet" value="是">多甜食、多蛋白质类食物</a>
+								<a class="ui label" id="is_carbonic_acid" value="是">正餐间进食含碳酸</a>
+								<a class="ui label" id="is_floss" value="是">使用牙线</a>
+								<a class="ui label" id="electric_tooth_brush" value="是">使用电动牙刷</a>
+								<a class="ui label" id="is_fluorine" value="是">牙膏含氟</a>
+								<a class="ui label" id="is_cavity_examination" value="是">定期口腔检查</a>
+								<a class="ui label" id="is_periodontal_treatment" value="是">定期牙周洁治</a>
+								<a class="ui label" id="sjogren_syndrome" value="是">患有干燥综合征</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 
-		<div class="ui divided items" id="LabelSearch">
-			<!--个人史-->
-			<div class="ui item">
-				<div class="content">
-					<div class="blue header">个人史</div>
-					<div class="description" id="personal_history">
-						<div class="ui labels" value="consumption_of_sweet">
-							<div class="ui tag teal label">蛋白质/甜食食用量</div>
-							<a class="ui blue label" value="124"><125g</a>
-							<a class="ui blue label" value="125">125-249g</a>
-							<a class="ui blue label" value="250">250-500g</a>
-							<a class="ui blue label" value="500">>500g</a>
-						</div>
-						 
-						<div class="ui labels" value="frequency_of_sweet">
-							<div class="ui tag teal label">蛋白质/甜食食用频率</div>
-							<a class="ui blue label" value="1"><1次/天</a>
-							<a class="ui blue label" value="2">2次/天</a>
-							<a class="ui blue label" value="3">3次/天</a>
-							<a class="ui blue label" value="4">4次/天</a>
-							<a class="ui blue label" value="5">5次/天</a>
-							<a class="ui blue label" value="6">>5次/天</a>
-						</div>
+		<div class="ui raised segment" id="illness_history">
+			<h3 class="ui header">现病史</h3>
+			<table class="ui very basic table">
+	  			<tbody>
+					<tr>
+						<td class="collapsing">原发性龋病</td>
+						<td>
+							<div class="ui blue labels" value="consumption_of_sweet">
+								<a class="ui label">症状加重</a>
+								<a class="ui label">症状未加重</a>
+								<a class="ui label">有自发痛或夜间痛</a>
+								<a class="ui label">做过治疗</a>
+								<a class="ui label">症状未缓解</a>
+								<a class="ui label">服用过药物</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">蛋白质，甜食食用频率</td>
+						<td id="">
+							<div class="ui blue labels" value="frequency_of_sweet">
+								<a class="ui label">做过充填体治疗</a>
+								<a class="ui label">症状未缓解</a>
+								<a class="ui label">服用过药物</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-						<div class="ui labels" value="frequency_of_meal">
-							<div class="ui tag teal label">正餐间进食频率</div>
-							<a class="ui blue label" value="1">≤1</a>
-							<a class="ui blue label" value="2">1＜频率≤2</a>
-							<a class="ui blue label" value="3">≥3</a>
-						</div>
+		<div class="ui raised segment" id="diagnose">
+			<h3 class="ui header">诊断</h3>
+			<table class="ui very basic table">
+	  			<tbody>
+					<tr>
+						<td class="collapsing">龋损程度</td>
+						<td>
+							<div class="ui blue labels" value="consumption_of_sweet">
+								<a class="ui label">浅龋</a>
+								<a class="ui label">中龋</a>
+								<a class="ui label">深龋</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="collapsing">龋齿病种</td>
+						<td id="">
+							<div class="ui blue labels" value="frequency_of_sweet">
+								<a class="ui label">隐匿性龋</a>
+								<a class="ui label">根面龋</a>
+								<a class="ui label">继发龋</a>
+								<a class="ui label">静止龋</a>
+								<a class="ui label">酸蚀症</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-						<div class="ui labels" value="times_of_teeth_brush">
-							<div class="ui tag teal label">每天刷牙次数</div>
-							<a class="ui blue label" value="1">1次</a>
-							<a class="ui blue label" value="2">2次</a>
-							<a class="ui blue label" value="3">3次</a>
-						</div>
-
-						<div class="ui labels" value="time_of_teeth_brush">
-							<div class="ui tag teal label">刷牙时间点</div>
-							<a class="ui blue label" value="早间刷牙">早间刷牙</a>
-							<a class="ui blue label" value="中午刷牙">中午刷牙</a>
-							<a class="ui blue label" value="睡前刷牙">睡前刷牙</a>
-						</div>
-
-						<div class="ui labels" value="other">
-							<div class="ui tag teal label">其它</div>
-							<a class="ui blue label" id="more_sweet" value="是">多甜食、多蛋白质类食物</a>
-							<a class="ui blue label" id="is_carbonic_acid" value="是">正餐间进食含碳酸</a>
-							<a class="ui blue label" id="is_floss" value="是">使用牙线</a>
-							<a class="ui blue label" id="electric_tooth_brush" value="是">使用电动牙刷</a>
-							<a class="ui blue label" id="is_fluorine" value="是">牙膏含氟</a>
-							<a class="ui blue label" id="is_cavity_examination" value="是">定期口腔检查</a>
-							<a class="ui blue label" id="is_periodontal_treatment" value="是">定期牙周洁治</a>
-							<a class="ui blue label" id="sjogren_syndrome" value="是">患有干燥综合征</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!--现病史-->
-			<div class="ui item">
-				<div class="content">
-					<div class="blue header">现病史</div>
-					<div class="description" id="illness_history">
-						<div class="ui labels">
-							<div class="ui tag teal label">原发性龋病</div>
-							<a class="ui blue label">症状加重</a>
-							<a class="ui blue label">症状未加重</a>
-							<a class="ui blue label">有自发痛或夜间痛</a>
-							<a class="ui blue label">做过治疗</a>
-							<a class="ui blue label">症状未缓解</a>
-							<a class="ui blue label">服用过药物</a>
-						</div>
-						<div class="ui labels">
-							<div class="ui tag teal label">有治疗史龋病</div>
-							<a class="ui blue label">做过充填体治疗</a>
-							<a class="ui blue label">症状未缓解</a>
-							<a class="ui blue label">服用过药物</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!--现病史-->
-			<div class="ui item">
-				<div class="content">
-					<div class="blue header">诊断</div>
-					<div class="description" id="diagnose">
-						<div class="ui labels">
-							<div class="ui tag teal label">龋损程度</div>
-							<a class="ui blue label">浅龋</a>
-							<a class="ui blue label">中龋</a>
-							<a class="ui blue label">深龋</a>
-						</div>
-						<div class="ui labels">
-							<div class="ui tag teal label">龋齿病种</div>
-							<a class="ui blue label">隐匿性龋</a>
-							<a class="ui blue label">根面龋</a>
-							<a class="ui blue label">继发龋</a>
-							<a class="ui blue label">静止龋</a>
-							<a class="ui blue label">酸蚀症</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!--现病史-->
-			<div class="ui item">
-				<div class="content">
-					<div class="blue header">难度评估</div>
-					<div class="description" id="">
-						<div class="ui labels">
-							<div class="ui tag teal label">难度等级</div>
-							<a class="ui blue label">Ⅰ级</a>
-							<a class="ui blue label">Ⅱ级</a>
-							<a class="ui blue label">Ⅲ级</a>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="ui raised segment" id="diagnose">
+			<h3 class="ui header">难度评估</h3>
+			<table class="ui very basic table">
+	  			<tbody>
+					<tr>
+						<td class="collapsing">难度等级</td>
+						<td>
+							<div class="ui blue labels" value="consumption_of_sweet">
+								<a class="ui label">Ⅰ级</a>
+								<a class="ui label">Ⅱ级</a>
+								<a class="ui label">Ⅲ级</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

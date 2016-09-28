@@ -19,7 +19,7 @@ $(document).ready(function(){
   			$('#early_carie').text(DATA.early_carie);
   			$('#can_see').text(DATA.can_see);
   			$('#lost_tooth').text(DATA.lost_tooth);
-        	$('#system_illness').text(DATA.system_illness);
+        $('#system_illness').text(DATA.system_illness);
   			$('#illness_name').text(DATA.illness_name);
   			$('#times_of_carbohydrate').text(DATA.times_of_carbohydrate);
   			$('#consumption_of_carbohydrate').text(DATA.consumption_of_carbohydrate);
