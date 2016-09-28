@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
 	// ***************************************************************
+	// FUNCTION: 设置tab可选性
+	$('#context .menu .item').tab({ context: $('#context') });
+	
+	// ***************************************************************
 	// FUNCTION: 点击标签
 	$('.segment a.label').click(function(){
 		var DataBaseTableName = $(this).parents('.ui.segment').attr('id'),
