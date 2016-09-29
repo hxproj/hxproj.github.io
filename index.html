@@ -37,14 +37,114 @@
 
 		<!--context-->
 		<div id="context">
-	  		<div class="ui fluid four item labeled icon menu">
-				<a class="active blue item" data-tab="1"><i class="history icon"></i>个人史</a>
-				<a class="red item" data-tab="2"><i class="file text icon"></i>现病史</a>
-				<a class="pink item" data-tab="3"><i class="first aid icon"></i>诊断</a>
-				<a class="teal item" data-tab="4"><i class="bar chart icon"></i>难度评估</a>
+	  		<div class="ui fluid eight item labeled icon menu">
+				<a class="active blue item" data-tab="1"><i class="file text icon"></i>主诉</a>
+				<a class="orange item" data-tab="2"><i class="history icon"></i>个人史</a>
+				<a class="pink item" data-tab="3"><i class="add square icon"></i>口腔检查</a>
+				<a class="red item" data-tab="4"><i class="heartbeat icon"></i>诊断</a>
+				<a class="olive item" data-tab="5"><i class="bar chart icon"></i>难度评估</a>
+				<a class="teal item" data-tab="6"><i class="first aid icon"></i>处置</a>
+				<a class="violet item" data-tab="7"><i class="area chart icon"></i>USPHS评估</a>
+				<a class="purple item" data-tab="8"><i class="block layout icon"></i>龋病预后管理</a>
 	  		</div>
 
-			<div class="ui raised active tab segment" id="personal_history" data-tab="1">
+			<div class="ui raised active tab segment" id="illness_history" data-tab="1">
+				<h3 class="ui orange header">主诉</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">牙位</td>
+							<td>
+								<div class="ui blue labels" value="consumption_of_sweet">
+									<a class="ui label">上前牙</a>
+									<a class="ui label">下前牙</a>
+									<a class="ui label">左上前牙</a>
+									<a class="ui label">左下前牙</a>
+									<a class="ui label">右上前牙</a>
+									<a class="ui label">右下前牙</a>
+									<a class="ui label">上后牙</a>
+									<a class="ui label">下后牙</a>
+									<a class="ui label">左上后牙</a>
+									<a class="ui label">左下后牙</a>
+									<a class="ui label">右上后牙</a>
+									<a class="ui label">右下后牙</a>
+									<a class="ui label">口内多颗牙</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙齿病变情况</td>
+							<td id="">
+								<div class="ui blue labels" value="frequency_of_sweet">
+									<a class="ui label">颜色变化</a>
+									<a class="ui label">有洞</a>
+									<a class="ui label">冷热敏感</a>
+									<a class="ui label">充填体松动</a>
+									<a class="ui label">充填体脱落</a>
+									<a class="ui label">食物嵌塞</a>
+									<a class="ui label">折裂</a>
+									<a class="ui label">咬合痛</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">病发时间</td>
+							<td id="">
+								<div class="ui blue labels" value="frequency_of_sweet">
+									<a class="ui label">1天前</a>
+									<a class="ui label">2天前</a>
+									<a class="ui label">3天前</a>
+									<a class="ui label">4天前</a>
+									<a class="ui label">5天前</a>
+									<a class="ui label">6天前</a>
+									<a class="ui label">7天前</a>
+									<a class="ui label">8天前</a>
+									<a class="ui label">9天前</a>
+									<a class="ui label">10天前</a>
+								</div>
+								<div class="ui blue labels" value="frequency_of_sweet">
+									<a class="ui label">1周前</a>
+									<a class="ui label">2周前</a>
+									<a class="ui label">3周前</a>
+									<a class="ui label">4周前</a>
+									<a class="ui label">5周前</a>
+									<a class="ui label">6周前</a>
+									<a class="ui label">7周前</a>
+									<a class="ui label">8周前</a>
+									<a class="ui label">9周前</a>
+									<a class="ui label">10周前</a>
+								</div>
+								<div class="ui blue labels" value="frequency_of_sweet">
+									<a class="ui label">1月前</a>
+									<a class="ui label">2月前</a>
+									<a class="ui label">3月前</a>
+									<a class="ui label">4月前</a>
+									<a class="ui label">5月前</a>
+									<a class="ui label">6月前</a>
+									<a class="ui label">7月前</a>
+									<a class="ui label">8月前</a>
+									<a class="ui label">9月前</a>
+									<a class="ui label">10月前</a>
+								</div>
+								<div class="ui blue labels" value="frequency_of_sweet">
+									<a class="ui label">1年前</a>
+									<a class="ui label">2年前</a>
+									<a class="ui label">3年前</a>
+									<a class="ui label">4年前</a>
+									<a class="ui label">5年前</a>
+									<a class="ui label">6年前</a>
+									<a class="ui label">7年前</a>
+									<a class="ui label">8年前</a>
+									<a class="ui label">9年前</a>
+									<a class="ui label">10月前</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="ui raised tab segment" id="personal_history" data-tab="2">
 				<h3 class="ui orange header">个人史</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -61,7 +161,7 @@
 						</tr>
 						<tr>
 							<td class="collapsing">蛋白质，甜食食用频率</td>
-							<td id="">
+							<td>
 								<div class="ui blue labels" value="frequency_of_sweet">
 									<a class="ui blue label" value="1">小于1次/天</a>
 									<a class="ui blue label" value="2">2次/天</a>
@@ -74,7 +174,7 @@
 						</tr>
 						<tr>
 							<td class="collapsing">正餐间进食频率</td>
-							<td id="">
+							<td>
 								<div class="ui blue labels" value="frequency_of_meal">
 									<a class="ui label" value="1">小于1</a>
 									<a class="ui label" value="2">1~2</a>
@@ -84,7 +184,7 @@
 						</tr>
 						<tr>
 							<td class="collapsing">每天刷牙次数</td>
-							<td id="">
+							<td>
 								<div class="ui blue labels" value="times_of_teeth_brush">
 									<a class="ui label" value="1">1次</a>
 									<a class="ui label" value="2">2次</a>
@@ -103,6 +203,7 @@
 									<a class="ui label" id="is_fluorine" value="是">牙膏含氟</a>
 									<a class="ui label" id="is_cavity_examination" value="是">定期口腔检查</a>
 									<a class="ui label" id="is_periodontal_treatment" value="是">定期牙周洁治</a>
+									<a class="ui label" id="" value="是">患有有唾液腺疾病</a>
 									<a class="ui label" id="sjogren_syndrome" value="是">患有干燥综合征</a>
 								</div>
 							</td>
@@ -111,30 +212,214 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="illness_history" data-tab="2">
-				<h3 class="ui orange header">现病史</h3>
+			<div class="ui raised tab segment" id="" data-tab="3">
+				<h3 class="ui orange header">口腔检查 </h3>
 				<table class="ui very basic table">
 		  			<tbody>
 						<tr>
-							<td class="collapsing">原发性龋病</td>
+							<td class="collapsing">龋坏累及牙面</td>
 							<td>
-								<div class="ui blue labels" value="consumption_of_sweet">
-									<a class="ui label">症状加重</a>
-									<a class="ui label">症状未加重</a>
-									<a class="ui label">有自发痛或夜间痛</a>
-									<a class="ui label">做过治疗</a>
-									<a class="ui label">症状未缓解</a>
-									<a class="ui label">服用过药物</a>
+								<div class="ui blue labels" value="caries_tired">
+									<a class="ui label">唇面</a>
+									<a class="ui label">舌面</a>
+									<a class="ui label">腭面</a>
+									<a class="ui label">颊面</a>
+									<a class="ui label">合面</a>
+									<a class="ui label">近中面</a>
+									<a class="ui label">远中面</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td class="collapsing">蛋白质，甜食食用频率</td>
-							<td id="">
-								<div class="ui blue labels" value="frequency_of_sweet">
-									<a class="ui label">做过充填体治疗</a>
-									<a class="ui label">症状未缓解</a>
-									<a class="ui label">服用过药物</a>
+							<td class="collapsing">原填充体</td>
+							<td>
+								<div class="ui blue labels" value="fill">
+									<a class="ui label">复合树脂</a>
+									<a class="ui label">银汞合金</a>
+									<a class="ui label">玻璃离子</a>
+									<a class="ui label">磷酸锌</a>
+									<a class="ui label">其他</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">冷</td>
+							<td>
+								<div class="ui blue labels" value="cold">
+									<a class="ui label">-</a>
+									<a class="ui label">+-</a>
+									<a class="ui label">+</a>
+									<a class="ui label">++</a>
+									<a class="ui label">+++</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">热</td>
+							<td>
+								<div class="ui blue labels" value="hot">
+									<a class="ui label">-</a>
+									<a class="ui label">+-</a>
+									<a class="ui label">+</a>
+									<a class="ui label">++</a>
+									<a class="ui label">+++</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">探</td>
+							<td>
+								<div class="ui blue labels" value="touch">
+									<a class="ui label">-</a>
+									<a class="ui label">+-</a>
+									<a class="ui label">+</a>
+									<a class="ui label">++</a>
+									<a class="ui label">+++</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">叩</td>
+							<td>
+								<div class="ui blue labels" value="bite">
+									<a class="ui label">-</a>
+									<a class="ui label">+-</a>
+									<a class="ui label">+</a>
+									<a class="ui label">++</a>
+									<a class="ui label">+++</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">龈上牙石</td>
+							<td>
+								<div class="ui blue labels" value="tartar_up">
+									<a class="ui label">无</a>
+									<a class="ui label">1级</a>
+									<a class="ui label">2级</a>
+									<a class="ui label">3级</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">龈下牙石</td>
+							<td>
+								<div class="ui blue labels" value="tartar_down">
+									<a class="ui label">无</a>
+									<a class="ui label">1级</a>
+									<a class="ui label">2级</a>
+									<a class="ui label">3级</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">BOP</td>
+							<td>
+								<div class="ui blue labels" value="bop">
+									<a class="ui label">无</a>
+									<a class="ui label">+</a>
+									<a class="ui label">-</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙周袋深度</td>
+							<td>
+								<div class="ui blue labels" value="periodontal_pocket_depth">
+									<a class="ui label">正常</a>
+									<a class="ui label">3.5mm</a>
+									<a class="ui label">3.5-5.5mm</a>
+									<a class="ui label">5.5-8.5mm</a>
+									<a class="ui label">8.5-11.5mm</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">根分叉病变</td>
+							<td>
+								<div class="ui blue labels" value="furcation">
+									<a class="ui label">无</a>
+									<a class="ui label">1级</a>
+									<a class="ui label">2级</a>
+									<a class="ui label">3级</a>
+									<a class="ui label">4级</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">位置</td>
+							<td>
+								<div class="ui blue labels" value="location">
+									<a class="ui label">唇侧</a>
+									<a class="ui label">颊侧</a>
+									<a class="ui label">舌侧</a>
+									<a class="ui label">腭侧</a>
+									<a class="ui label">近中侧</a>
+									<a class="ui label">远中侧</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙齿松动度</td>
+							<td>
+								<div class="ui blue labels" value="mobility">
+									<a class="ui label">正常</a>
+									<a class="ui label">Ⅰ</a>
+									<a class="ui label">Ⅱ</a>
+									<a class="ui label">Ⅲ</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙齿发育情况</td>
+							<td>
+								<div class="ui blue labels" value="development_of_the_situation">
+									<a class="ui label">无异常情况</a>
+									<a class="ui label">釉质发育不全</a>
+									<a class="ui label">牙本质发育不全</a>
+									<a class="ui label">氟牙症</a>
+									<a class="ui label">四环素牙</a>
+									<a class="ui label">磨耗牙</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙体形态</td>
+							<td>
+								<div class="ui blue labels" value="tooth_shape">
+									<a class="ui label">正常</a>
+									<a class="ui label">畸形舌侧沟</a>
+									<a class="ui label">畸形中央尖</a>
+									<a class="ui label">过大牙</a>
+									<a class="ui label">过小牙</a>
+									<a class="ui label">融合牙</a>
+									<a class="ui label">双生牙</a>
+									<a class="ui label">结合牙</a>
+									<a class="ui label">牙内陷</a>
+									<a class="ui label">釉珠</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">其它</td>
+							<td>
+								<div class="ui blue labels" value="other">
+									<a class="ui label" filed="secondary" value="无">无继发龋</a>
+									<a class="ui label" filed="secondary" value="有">有继发龋</a>
+									<a class="ui label" filed="color_of_caries" value="棕褐">色棕褐</a>
+									<a class="ui label" filed="color_of_caries" value="黑">色黑</a>
+									<a class="ui label" filed="flex_of_caries" value="硬">质硬</a>
+									<a class="ui label" filed="flex_of_caries" value="软">质软</a>
+									<a class="ui label" filed="gingival_hyperemia" value="是">牙龈充血</a>
+									<a class="ui label" filed="fistula" value="无">牙龈无瘘道</a>
+									<a class="ui label" filed="fistula" value="有">牙龈有瘘道</a>
+									<a class="ui label" filed="overflow_pus" value="无">牙龈无溢脓</a>
+									<a class="ui label" filed="overflow_pus" value="有">牙龈有溢脓</a>
+									<a class="ui label" filed="relations_between_teeth" value="否">患牙与邻牙接触关系不正常</a>
+									<a class="ui label" filed="is_teeth_crowd" value="是">牙列拥挤</a>
+									<a class="ui label" filed="involution_teeth" value="有">患牙有对合牙</a>
 								</div>
 							</td>
 						</tr>
@@ -142,7 +427,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="diagnose" data-tab="3">
+			<div class="ui raised tab segment" id="diagnose" data-tab="4">
 				<h3 class="ui orange header">诊断</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -172,7 +457,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="difficulty_assessment" data-tab="4">
+			<div class="ui raised tab segment" id="difficulty_assessment" data-tab="5">
 				<h3 class="ui orange header">难度评估</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -189,7 +474,7 @@
 						<tr>
 							<td class="collapsing">累及牙面及部位</td>
 							<td>
-								<div class="ui blue labels" value="">
+								<div class="ui blue labels" value="tooth_surface_and_location">
 									<a class="ui label">Ⅰ类洞</a>
 									<a class="ui label">Ⅱ类洞</a>
 									<a class="ui label">Ⅲ类洞</a>
@@ -209,72 +494,466 @@
 						<tr>
 							<td class="collapsing">龋损深度</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="caries_depth">
+									<a class="ui label">浅龋</a>
+									<a class="ui label">中龋</a>
+									<a class="ui label">深龋</a>
+									<a class="ui label">年轻恒牙深龋</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">技术类型</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="technology_type">
+									<a class="ui label">后牙复合树脂修复</a>
+									<a class="ui label">后牙银汞合金修复</a>
+									<a class="ui label">ART修复</a>
+									<a class="ui label">预防性填充</a>
+									<a class="ui label">玻璃离子过渡性修复</a>
+									<a class="ui label">釉质成型术</a>
+									<a class="ui label">微创磨术</a>
+									<a class="ui label">前牙复合树脂修复</a>
+									<a class="ui label">前牙无创美容修复</a>
+									<a class="ui label">前牙微创复合树脂分层修复</a>
+									<a class="ui label">前牙微创CAD/CAM瓷贴面修复</a>
+									<a class="ui label">后牙复合树脂嵌体</a>
+									<a class="ui label">后牙CAD/CAM瓷嵌体修复</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">充填修复史及充填失败史</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="history_of_fill">
+									<a class="ui label">患牙有充填修复史，但龋坏未累及旧修复体</a>
+									<a class="ui label">龋坏累及旧修复体或旧修复体首次折裂</a>
+									<a class="ui label">患牙的旧修复体脱落2次或2次以上</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">张口度</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="mouth_opening">
+									<a class="ui label">正常</a>
+									<a class="ui label">3指宽</a>
+									<a class="ui label">2指宽</a>
+									<a class="ui label">2指宽以下</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">咽反射</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="gag_reflex">
+									<a class="ui label">无</a>
+									<a class="ui label">有</a>
+									<a class="ui label">强烈</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">唾液分泌量</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="collapsing">唾液分泌量</td>
-							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="saliva">
+									<a class="ui label">正常</a>
+									<a class="ui label">较多</a>
+									<a class="ui label">非常多</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">牙科恐惧症</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="dental_phobia">
+									<a class="ui label">无</a>
+									<a class="ui label">有</a>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="collapsing">龋病风险难度分级</td>
 							<td>
-								<div class="ui blue labels" value="">
-									
+								<div class="ui blue labels" value="difficulty_rating">
+									<a class="ui label">低、中危人群</a>
+									<a class="ui label">高危人群</a>
+									<a class="ui label">极高危人群</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="ui raised tab segment" id="surgical" data-tab="6">
+				<h3 class="ui orange header">处置</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">处置方法</td>
+							<td>
+								<div class="ui blue labels" value="specific_method">
+									<a class="ui label">牙树脂直接填充修复</a>
+									<a class="ui label">牙安抚治疗&树脂充填修复</a>
+									<a class="ui label">嵌体修复</a>
+ 									<a class="ui label">贴面修复</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">麻醉药物</td>
+							<td>
+								<div class="ui blue labels" value="anesthesia_medicine">
+									<a class="ui label">阿替卡因</a>
+									<a class="ui label">利多卡因</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">局部麻醉</td>
+							<td>
+								<div class="ui blue labels" value="part_anesthesia">
+									<a class="ui label">阻滞麻醉</a>
+									<a class="ui label">浸润麻醉</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">去龋工具</td>
+							<td>
+								<div class="ui blue labels" value="tools">
+									<a class="ui label">球钻(高速手机）</a>
+									<a class="ui label">裂钻(高速手机）</a>
+									<a class="ui label">倒锥钻(高速手机）</a>
+									<a class="ui label">低速手机</a>
+									<a class="ui label">挖匙</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">制备洞形</td>
+							<td>
+								<div class="ui blue labels" value="shape_of_hole">
+									<a class="ui label">唇面</a>
+									<a class="ui label">颊面</a>
+									<a class="ui label">腭面</a>
+									<a class="ui label">近中面</a>
+									<a class="ui label">远中面</a>
+									<a class="ui label">合面</a>
+									<a class="ui label">根面</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">比色板类型</td>
+							<td>
+								<div class="ui blue labels" value="shade_guide">
+									<a class="ui label">Vita比色板</a>
+									<a class="ui label">Chromascop比色板</a>
+									<a class="ui label">Vitapan 3D-Master比色板</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙色</td>
+							<td>
+								<div class="ui blue labels" value="color_of_tooth">
+									<a class="ui label">B1</a>
+									<a class="ui label">A1</a>
+									<a class="ui label">A2</a>
+									<a class="ui label">D2</a>
+									<a class="ui label">B2</a>
+									<a class="ui label">C1</a>
+									<a class="ui label">C2</a>
+									<a class="ui label">D4</a>
+									<a class="ui label">D3</a>
+									<a class="ui label">A3</a>
+									<a class="ui label">B3</a>
+									<a class="ui label">A3.5</a>
+									<a class="ui label">B4</a>
+									<a class="ui label">C3</a>
+									<a class="ui label">A4</a>
+									<a class="ui label">C4</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">窝洞消毒</td>
+							<td>
+								<div class="ui blue labels" value="disinfect">
+									<a class="ui label">75%乙醇</a>
+									<a class="ui label">氯己定</a>
+									<a class="ui label">25%麝香草酚乙醇溶液</a>
+									<a class="ui label">樟脑酚</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">垫底</td>
+							<td>
+								<div class="ui blue labels" value="bottom">
+									<a class="ui label">Dycal</a>
+									<a class="ui label">光固化氢氧化钙</a>
+									<a class="ui label">化学固化玻璃离子</a>
+									<a class="ui label">光固化玻璃离子</a>
+									<a class="ui label">流体树脂</a>
+									<a class="ui label">氧化锌丁香油+磷酸锌</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">全酸蚀粘接系统</td>
+							<td>
+								<div class="ui blue labels" value="full_etching">
+									<a class="ui label">Scotchbond Multi-purpose(3M ESPE)</a>
+									<a class="ui label">All-Bond2(Bisco)</a>
+									<a class="ui label">Amalgambond(Parkell)</a>
+									<a class="ui label">Gluma Comfort Bond(Hereaus Kulzer)</a>
+									<a class="ui label">Adper Single Bond Plus(3M ESPE)</a>
+									<a class="ui label">Prime&Bond NT(Dentsply)</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">自酸蚀粘接系统</td>
+							<td>
+								<div class="ui blue labels" value="self_etching">
+									<a class="ui label">Optibond Solo Plus SE(Kerr)</a>
+									<a class="ui label">Adhese(Vivadent)</a>
+									<a class="ui label">Clearfil SE Bond(Kuraray)</a>
+									<a class="ui label">XENO Ⅲ(Dentsply)</a>
+									<a class="ui label">Adper PromptL-Pop(3M ESPE)</a>
+									<a class="ui label">iBOND SelfEtch(Hereaus Kulzer)</a>
+									<a class="ui label">G-Bond(GC)</a>
+									<a class="ui label">XENOIV(Dentsply)</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">涂布时间</td>
+							<td>
+								<div class="ui blue labels" value="coating_time">
+									<a class="ui label">5s以下</a>
+									<a class="ui label">5s-10s</a>
+									<a class="ui label">10s-15s</a>
+									<a class="ui label">15s-20s</a>
+									<a class="ui label">20s以上</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">光照时间</td>
+							<td>
+								<div class="ui blue labels" value="illumination_time">
+									<a class="ui label">5s</a>
+									<a class="ui label">10s</a>
+									<a class="ui label">15s</a>
+									<a class="ui label">20s</a>
+									<a class="ui label">25s</a>
+									<a class="ui label">30s</a>
+									<a class="ui label">40s</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">树脂</td>
+							<td>
+								<div class="ui blue labels" value="resin">
+									<a class="ui label">3M</a>
+									<a class="ui label">Kerr</a>
+									<a class="ui label">可乐丽</a>
+									<a class="ui label">幻彩</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">修型</td>
+							<td>
+								<div class="ui blue labels" value="modification">
+									<a class="ui label">蜡刀</a>
+									<a class="ui label">瓷粉充填器</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">光固化灯</td>
+							<td>
+								<div class="ui blue labels" value="lamp">
+									<a class="ui label">普通卤光灯</a>
+									<a class="ui label">速效卤光灯</a>
+									<a class="ui label">LED灯</a>
+									<a class="ui label">离子弧光灯</a>
+									<a class="ui label">氩激光灯</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">光固化灯光照时间</td>
+							<td>
+								<div class="ui blue labels" value="time_of_lamp">
+									<a class="ui label">5s</a>
+									<a class="ui label">10s</a>
+									<a class="ui label">15s</a>
+									<a class="ui label">20s</a>
+									<a class="ui label">25s</a>
+									<a class="ui label">30s</a>
+									<a class="ui label">40s</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">打磨抛光</td>
+							<td>
+								<div class="ui blue labels" value="polishing">
+									<a class="ui label">金刚砂针</a>
+									<a class="ui label">彩虹抛光系统</a>
+									<a class="ui label">其它</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">安抚药物</td>
+							<td>
+								<div class="ui blue labels" value="appease_medicine">
+									<a class="ui label">丁香油酚</a>
+									<a class="ui label">抗生素小棉球</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙安抚治疗观察时间</td>
+							<td>
+								<div class="ui blue labels" value="observed_time">
+									<a class="ui label">1周</a>
+									<a class="ui label">2周</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="ui raised tab segment" id="" data-tab="7">
+				<h3 class="ui orange header">USPHS评估</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">颜色匹配</td>
+							<td>
+								<div class="ui blue labels" value="color">
+									<a class="ui label">无明显颜色变化，色度、饱和度、透明度与邻牙匹配好</a>
+									<a class="ui label">轻微色度、饱和度、透明度变化，比色区间小于1，临床可接受</a>
+									<a class="ui label">严重色度、饱和度、透明度变化，比色区间大于1，临床不可接受</a>
+									<a class="ui label">无法接受的色度、饱和度、透明度差异</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">边缘适合性</td>
+							<td>
+								<div class="ui blue labels" value="marginal_accuracy">
+									<a class="ui label">探针和肉眼均不能检测出间隙，充填体与牙釉质良好接触，边缘无悬突、无着色</a>
+									<a class="ui label">探针探有间隙，肉眼可见超出或不足的边缘，边缘有轻微着色，但无牙体或基底材料暴露</a>
+									<a class="ui label">探针探有间隙，肉眼可见超出或不足的边缘大于1mm，有牙体或基底材料暴露，但无缺损或脱落</a>
+									<a class="ui label">边缘继发龋</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">解剖形态</td>
+							<td>
+								<div class="ui blue labels" value="anatomic_form">
+									<a class="ui label">修复体轮廓与牙体组织解剖形态和边缘连续</a>
+									<a class="ui label">修复体充填稍多或稍欠</a>
+									<a class="ui label">边缘形成悬突或（应充填的）牙体组织暴露</a>
+									<a class="ui label">修复体确实，创伤牙合或修复体导致牙齿或周围组织疼痛</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">表面粗糙度</td>
+							<td>
+								<div class="ui blue labels" value="surfaceness">
+									<a class="ui label">修复体表面光滑</a>
+									<a class="ui label">修复表面轻微粗糙，可抛光</a>
+									<a class="ui label">修复体表面粗糙，有不规则凹槽，不能抛光</a>
+									<a class="ui label">修复体表面裂纹或剥脱</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">边缘着色</td>
+							<td>
+								<div class="ui blue labels" value="edge_color">
+									<a class="ui label">无边缘着色</a>
+									<a class="ui label">小于50%的窝洞边缘着色</a>
+									<a class="ui label">大于50%的窝洞边缘着色</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">咬合接触</td>
+							<td>
+								<div class="ui blue labels" value="occlusal_contact">
+									<a class="ui label">正常咬合</a>
+									<a class="ui label">咬合较紧或较松</a>
+									<a class="ui label">无咬合</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙齿敏感</td>
+							<td>
+								<div class="ui blue labels" value="sensitivity_of_tooth">
+									<a class="ui label">无敏感症状</a>
+									<a class="ui label">有轻微冷热刺激痛，无自发痛</a>
+									<a class="ui label">有严重冷热刺激痛，并出现自发痛，无法忍受，需要做牙髓治疗</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">继发龋</td>
+							<td>
+								<div class="ui blue labels" value="secondary_caries">
+									<a class="ui label">无任何继发龋</a>
+									<a class="ui label">可检测到修复体边缘周围继发龋</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">修复体完整性</td>
+							<td>
+								<div class="ui blue labels" value="integrity">
+									<a class="ui label">修复体完整</a>
+									<a class="ui label">部分缺损</a>
+									<a class="ui label">修复体缺失</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="ui raised tab segment" id="" data-tab="8">
+				<h3 class="ui orange header">龋病预后管理</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">风险等级</td>
+							<td>
+								<div class="ui blue labels" value="patient_type">
+									<a class="ui label">低风险患者</a>
+									<a class="ui label">中风险患者</a>
+									<a class="ui label">高风险患者</a>
+									<a class="ui label">极高风险患者</a>
 								</div>
 							</td>
 						</tr>

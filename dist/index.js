@@ -12,7 +12,7 @@ $(document).ready(function(){
 			SearchItemName    = $(this).text(),
 			SearchItemValue   = $(this).attr('value');
 
-		DataBaseFieldName == "other" ? DataBaseFieldName = $(this).attr('id') : 
+		DataBaseFieldName == "other" ? DataBaseFieldName = $(this).attr('filed') : 
 			SearchItemName = $(this).parents('td').prev().text() + "：" + SearchItemName;
 
 		window.location.href = "Search.html?" + addParameter("type", DataBaseTableName) + "&"
