@@ -32,7 +32,7 @@
 	<div class="ui main container">
 
 		<!--Invisible Segment-->
-		<div class="ui invisible record segment">
+		<div class="ui invisible record raised piled segment">
 		    <div class="ui items">
 				<a class="ui right corner label">
 					<i class="delete icon"></i>
@@ -54,27 +54,27 @@
 
 						<div class="extra">
 							<div class="ui invisible header">
-								<div class="ui icon small buttons">
-									<div class="ui tag teal location button"></div>
-									<a class="ui blue button" href="PresentIllness.html">现病史</a>
-									<a class="ui disabled button" href="MouthExamination.html">口腔检查</a>
-									<a class="ui disabled button" href="Diagnose.html">诊断</a>
-									<a class="ui disabled button" href="DifficultyAssessment.html">难度评估</a>
-									<a class="ui disabled button" href="Cure.html">处置</a>
-									<a class="ui disabled button" href="USPHS.html">USPHS评估</a>
-									<a class="ui disabled download button">下载</a>
-									<div class="ui icon deletetooth button" data-tooltip="删除当前牙位"><i class="remove icon"></i></div>
+								<div class="ui small buttons">
+									<div class="ui basic large location button"></div>
+									<a class="ui button" href="PresentIllness.html">现病史</a>
+									<a class="ui button" href="MouthExamination.html">口腔检查</a>
+									<a class="ui button" href="Diagnose.html">诊断</a>
+									<a class="ui button" href="DifficultyAssessment.html">难度评估</a>
+									<a class="ui button" href="Cure.html">处置</a>
+									<a class="ui button" href="USPHS.html">USPHS评估</a>
+									<button class="ui download button"><i class="download icon"></i>下载</button>
+									<button class="ui deletetooth button"><i class="trash icon"></i>删除</button>
 								</div>
 							</div>
 						</div>
 
 						<div class="ui right aligned vertical basic segment">
 							<a class="ui teal small button" href="RiskEvaluation.html">风险评估</a>
-							<a class="ui teal small button" href="Manage.html">龋病预后管理（低风险患者）</a>
+							<a class="ui teal small button" href="Manage.html">龋病预后管理</a>
 						</div>
 
 				      	<div class="extra">
-				      		<div class="ui right floated time label">时间</div>
+				      		<div class="ui time label">时间</div>
 				      	</div>
 					</div>
 				</div>
@@ -309,10 +309,17 @@
 			</div>
 
 			<div class="center aligned actions">
-				<div class="ui basic red cancel button"><i class="remove icon"></i> 取消 </div>
+				<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
 				<div class="ui basic blue ok button">
 					<i class="checkmark icon"></i>确认
 				</div>
+			</div>
+		</div>
+
+		<div class="ui hidden info message" id="id_infomessage">
+			<div class="ui header">
+				<i class="info icon"></i>
+				<div class="content">还未添加任何病历，请点击右上角“添加病历”添加</div>
 			</div>
 		</div>
 	</div>

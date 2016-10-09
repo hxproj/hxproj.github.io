@@ -26,18 +26,25 @@
 		<div class="ui hidden divider"></div>
 		<div class="ui hidden divider"></div>
 
-		<div class="ui fluid action left icon large input">
-			<i class="search icon"></i>
-			<input type="text" placeholder="输入姓名">
-			<div class="ui blue button">Search</div>
+		<div class="ui text container">
+			<div class="ui action fluid left icon input" id="id_search">
+				<i class="search icon"></i>
+				<input type="text" placeholder="输入姓名">
+				<div class="ui teal button">Search</div>
+			</div>
+
+			<div class="ui hidden info message">
+				请输入病人姓名
+			</div>
 		</div>
 
+		<div class="ui hidden divider"></div>
 		<div class="ui hidden divider"></div>
 		<div class="ui hidden divider"></div>
 
 		<!--context-->
 		<div id="context">
-	  		<div class="ui fluid eight item labeled icon menu">
+	  		<div class="ui fluid eight item pointing labeled icon menu">
 				<a class="active blue item" data-tab="1"><i class="file text icon"></i>主诉</a>
 				<a class="orange item" data-tab="2"><i class="history icon"></i>个人史</a>
 				<a class="pink item" data-tab="3"><i class="add square icon"></i>口腔检查</a>
@@ -841,7 +848,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="" data-tab="7">
+			<div class="ui raised tab segment" id="usphs" data-tab="7">
 				<h3 class="ui orange header">USPHS评估</h3>
 				<table class="ui very basic table">
 		  			<tbody>

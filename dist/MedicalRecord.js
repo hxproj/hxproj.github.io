@@ -9,26 +9,35 @@ $(document).ready(function(){
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(data){
-			// 添加分页
-			$.Page($('.record.segment'),
-			 	data.pages,
-			 	1,
-			 	URL_PAGE,
-			 	function() { networkError(); },
-			 	function(data) {
-					$('.record.segment:visible').each(function(){ this.remove(); });
-					$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-			 	}
-			 );
- 
-			$('.record.segment:visible').each(function(){ this.remove(); });
-			$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
+			if (data.info_list.length) {
+				// 设置分页属性
+				$.Page(
+					$('.record.segment'),
+				 	data.pages,
+				 	1,
+				 	URL_PAGE,
+				 	function() { networkError(); },
+				 	function(data) { showAllMedicalRecord(data); }
+				 );
+	 			
+	 			// 显示当前页所有病历
+	 			showAllMedicalRecord(data);
+			} else {
+				$('#id_infomessage').show();
+			}
 		}
 	});
 	
 	// ***************************************************************
+	// FUNCTION: 显示所有病历
+	function showAllMedicalRecord(data) {
+		$('.record.segment:visible').remove();
+		$.each(data.info_list.reverse(), function(){ showMedicalRecord(this); });
+	}
+	
+	// ***************************************************************
 	// FUNCTION: 在界面现实新的病历项
-	function showNewMedicalRecord(UserData){
+	function showMedicalRecord(UserData){
 		$MedicalRecord = $('.invisible.segment');
 
 		$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
@@ -40,33 +49,10 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
-		var IsToothInfoCompleted = true;
 		if (UserData.tootn_location_list != undefined && UserData.tootn_location_list.length > 0) {
 			$.each(UserData.tootn_location_list, function(){
 				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
-
-				if (this.step < 6) {IsToothInfoCompleted = false;}
 			});
-		} else {
-			IsToothInfoCompleted = false;
-		}
-
-		// ***************************************************************
-		// FUNCTION: 设置相关按钮不可点击
-		// 1. 如果未添加个人史，则牙位添加按钮不可点击
-		$.ajax({
-  			url      : URL_PERSONAL_HISTORY,
-  			type     : "get",
-  			data     : {user_id : UserData.user_id},
-  			dataType : "json",
-  			error    : function() {
-  				$ClonedMedicalRecord.find('.add.button').removeClass('teal').unbind().attr('data-tooltip', "请先完善病人个人史信息");
-  			}
-  		});
-
-		// 2. 如果所有牙位的信息未填写完全，禁止填写风险评估和预后管理相关信息
-		if (!IsToothInfoCompleted) {
-			$ClonedMedicalRecord.find('.right.segment a.button').removeClass('teal').bind('click', function(){return false}).attr('data-tooltip', "请先完善病人所有牙位信息");
 		}
 
 		$MedicalRecord.after($ClonedMedicalRecord);
@@ -85,9 +71,9 @@ $(document).ready(function(){
 		$ClonedExtra.find('.location').text(LocationStr);
 
 		// 设置当前牙位操作状态
-		$.each($ClonedExtra.find('.disabled.button'), function(index){
-			if (index + 1 <= ToothData.step) {
-				$(this).addClass('blue').removeClass('disabled');
+		$.each(ToothData.step, function(){
+			if (this != 0) {
+				$ClonedExtra.find('a.button').eq(this - 1).addClass('blue');
 			}
 		});
 
@@ -95,12 +81,6 @@ $(document).ready(function(){
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
 	}
 
-	// ***************************************************************
-	// FUNCTION: 显示分页
-	function showPagination(Pages, Page, IsContainContent){
-	}
-
-	var IsSubmitOK = false;
 	$("#basicinfoform").form({
 		fields: {
 			name: {
@@ -156,21 +136,13 @@ $(document).ready(function(){
 		inline: true,
 		onSuccess: function(){
 			$.ajax({
-  				url     : URL_USER,
-				type    : "post",
-				async   : false, 
-				data    : $(this).serialize(),
-				dataType: "json",
-				error   : function(){
-
-					IsSubmitOK = false;
-  					alert("网络连接错误...");
-  				},
-  				success : function(UserInfo){
-
-  					IsSubmitOK = true;
-  					showNewMedicalRecord(UserInfo);
-				}
+  				url      : URL_USER,
+				type     : "post",
+				async    : false, 
+				data     : $(this).serialize(),
+				dataType : "json",
+				error    : function() {networkError();},
+				success  : function() {location.reload();}
 			});
 
 			return false;
@@ -179,15 +151,10 @@ $(document).ready(function(){
 
 	$('.right.menu .add.href').click(function(){
 		$('#MedicalRecords').modal({
-			closable: false,
+			closable  : false,
   			onApprove : function() {
-
-  				$Form = $("#basicinfoform");
-  				$Form.submit();
-
-  				if (IsSubmitOK) {$Form.form('clear')};
-
-				return IsSubmitOK;
+  				$("#basicinfoform").submit();
+				return false;
 			}
 		}).modal('show');
 	});
@@ -391,7 +358,7 @@ $(document).ready(function(){
 					url      : URL_USER + "?" + addParameter("user_id", $Record.attr("value")),
 					type     : "DELETE",
 					dataType : "text",
-					error    : function() {alert("删除病历失败");},
+					error    : function() {networkError();},
 					success  : function() {$Record.remove();}
 				});
 			}
