@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
-  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+  // 其它
+  $('.orange.header').text("难度评估 - " + decodeURI(requestParameter("name")));
   
+  var DATA = null;
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
 	
-	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
@@ -16,9 +17,11 @@ $(document).ready(function(){
       async    : false,
   		success  : function(data){
   			$('#DifficultyForm').hide();
-
   			DATA = data;
 
+        // 表头
+        $('#display th').text("难度评估 - " + decodeURI(requestParameter("name")));
+        
   			$('#tooth_surface_and_location').text(DATA.tooth_surface_and_location);
   			$('#caries_depth').text(DATA.caries_depth);
   			$('#technology_type').text(DATA.technology_type);
@@ -123,6 +126,8 @@ $(document).ready(function(){
     $('select[name=saliva]').dropdown("set selected", DATA.saliva);
     $('select[name=dental_phobia]').dropdown("set selected", DATA.dental_phobia);
     $('select[name=difficulty_rating]').dropdown("set selected", DATA.difficulty_rating);
+
+    $('#DifficultyForm .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('#DifficultyForm').show();
 	});
 

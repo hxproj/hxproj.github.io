@@ -25,31 +25,91 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">个人史</h2>
+		<h2 class="ui orange header"></h2>
 
-		<table class="ui celled striped invisible table" id="display">
+		<table class="ui invisible celled structured table" id="display">
+			<thead>
+				<tr>
+					<th class="center aligned" colspan="3"></th>
+				</tr>
+			</thead>
   			<tbody>
 				<tr>
-					<td class="negative collapsing">饮食习惯</td>
-					<td id="PH_Habit"></td>
+					<td class="negative collapsing" rowspan="5">饮食习惯</td>
+					<td class="collapsing">是否多甜食、多蛋白质类食物</td>
+					<td id="more_sweet"></td>
 				</tr>
 				<tr>
-					<td class="negative collapsing">口腔卫生维护</td>
-					<td id="PH_Health"></td>
+					<td class="collapsing">食用量</td>
+					<td id="consumption_of_sweet"></td>
 				</tr>
 				<tr>
-					<td class="negative collapsing">宿主易感性</td>
-					<td id="PH_Host"></td>
+					<td class="collapsing">食用频率</td>
+					<td id="frequency_of_sweet"></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<div class="ui right floated blue edit button">修改</div>
-					</td>
+					<td class="collapsing">正餐间进食频率</td>
+					<td id="frequency_of_meal"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">正餐间进食是否含碳酸</td>
+					<td id="is_carbonic_acid"></td>
+				</tr>
+
+				<tr>
+					<td class="negative collapsing" rowspan="8">口腔卫生维护</td>
+					<td class="collapsing">是否使用牙线</td>
+					<td id="is_floss"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">每天刷牙次数</td>
+					<td id="times_of_teeth_brush"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">刷牙时间点</td>
+					<td id="time_of_teeth_brush"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">刷牙时长</td>
+					<td id="long_of_teeth_brush"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">是否使用电动牙刷</td>
+					<td id="electric_tooth_brush"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">牙膏是否含氟</td>
+					<td id="is_fluorine"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">口腔定期是否检查</td>
+					<td id="is_cavity_examination"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">是否定期牙周洁治</td>
+					<td id="is_periodontal_treatment"></td>
+				</tr>
+
+				<tr>
+					<td class="negative collapsing" rowspan="3">宿主易感性</td>
+					<td class="collapsing">是否有干燥综合征</td>
+					<td id="sjogren_syndrome"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">唾液腺疾病</td>
+					<td id="salivary_gland_disease"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">自觉唾液流量减少时间</td>
+					<td id="consciously_reduce_salivary_flow"></td>
+				</tr>
+				<tr>
+					<td colspan="3"><div class="ui right floated blue edit button">修改</div></td>
 				</tr>
 			</tbody>
 		</table>
 
-		<div class="ui clearing invisible segment" id="submit">
+		<div class="ui invisible clearing segment" id="submit">
 			<form class="ui form">
 				<h3 class="ui blue header">饮食习惯</h3>
 		    	<div class="three fields">
@@ -140,22 +200,16 @@
 			          	</select>
 					</div>
 			    	<div class="field">
-			    		<label>刷牙方法是否正确</label>
-			    		<select name="method_of_tooth_brush" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-		    	</div>
-
-				<div class="three fields">
-			    	<div class="field">
 			    		<label>牙膏是否含氟</label>
 			    		<select name="is_fluorine" class="ui dropdown">
 			            <option value="否">否</option>
 			            <option value="是">是</option>
 			          	</select>
 					</div>
+					<input type="hidden" name="method_of_tooth_brush"/>
+		    	</div>
+
+				<div class="three fields">
 			    	<div class="field">
 			    		<label>口腔定期是否检查</label>
 			    		<select name="is_cavity_examination" class="ui dropdown">
@@ -191,7 +245,7 @@
 					</div>
 		    	</div>
 		    	
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form> 
 		</div>
   	</div>

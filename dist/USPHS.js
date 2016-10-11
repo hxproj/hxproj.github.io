@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
 
+	$('.orange.header').text("USPHS评估 - " + decodeURI(requestParameter("name")));
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
 	
@@ -15,12 +15,14 @@ $(document).ready(function(){
       	async    : false,
   		success  : function(data){
   			$('form').hide();
-
   			DATA = data;
+
+        	// 表头
+        $('#display th').text("USPHS评估 - " + decodeURI(requestParameter("name")));
   			$('#color').text(DATA.color);
   			$('#marginal_accuracy').text(DATA.marginal_accuracy);
   			$('#anatomic_form').text(DATA.anatomic_form);
-        	$('#surfaceness').text(DATA.surfaceness);
+        $('#surfaceness').text(DATA.surfaceness);
   			$('#edge_color').text(DATA.edge_color);
   			$('#occlusal_contact').text(DATA.occlusal_contact);
   			$('#sensitivity_of_tooth').text(DATA.sensitivity_of_tooth);
@@ -66,7 +68,8 @@ $(document).ready(function(){
     	$('input[value=' + DATA.sensitivity_of_tooth + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.secondary_caries + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.integrity + ']').parent().checkbox('check'); 
-
+    	
+   		$('form .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('form').show();
 	});
 

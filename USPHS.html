@@ -25,9 +25,14 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">USPHS评估</h2>
+		<h2 class="ui orange header"></h2>
 
 		<table class="ui celled invisible table" id="display">
+			<thead>
+				<tr>
+					<th class="center aligned" colspan="3">难度评估</th>
+				</tr>
+			</thead>
   			<tbody>
 				<tr>
 					<td class="negative collapsing">颜色匹配</td>
@@ -63,7 +68,11 @@
 				</tr>
 				<tr>
 					<td class="negative collapsing">修复体完整性</td>
-					<td id="integrity"></td>
+					<td id="integrity" ></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">评估等级</td>
+					<td  class="center aligned negative" id="usphs_level" colsapn="2">A</td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -291,7 +300,7 @@
 			    </div>
 			</div>
 
-		    <button class="ui right floated blue button">提交</button>
+		    <button class="ui right floated blue submit button">提交</button>
 		</form> 
   	</div>
 

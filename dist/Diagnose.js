@@ -1,10 +1,12 @@
 $(document).ready(function(){
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
-	
-	var U_ID = Number(requestParameter("uid"));
-	var T_ID = Number(requestParameter("tid"));
+
+	// 其它
+	$('.orange.header').text("诊断 - " + decodeURI(requestParameter("name")));
 	
 	var DATA = null;
+	var U_ID = Number(requestParameter("uid"));
+	var T_ID = Number(requestParameter("tid"));
+
 	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
@@ -15,10 +17,18 @@ $(document).ready(function(){
       	async    : false,
   		success  : function(data){
   			$('#DiagnoseForm').hide();
-
   			DATA = data;
-  			$('#Degree').text(DATA.caries_degree);
-  			$('#Type').text(DATA.caries_type);
+
+  			$('#display th').text("诊断 - " + decodeURI(requestParameter("name")));
+
+  			// 设置诊断描述
+	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(toothdata){
+
+	        	$('#id_tooth_location').text(toothdata.tooth_location);
+	        	$('#caries_degree').text(DATA.caries_degree);
+	        	$('#caries_type').text(DATA.caries_type);
+
+	        }, "json");
 
 		    // 显示口腔检查图片
 			$.ajax({
@@ -33,12 +43,6 @@ $(document).ready(function(){
 					});
 				}
 			});
-
-	        // 设置牙位信息
-	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
-	        	$('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
-	        		data.symptom + "（" + data.time_of_occurrence) + "）");
-	        }, "json");
 
   			$('#display').show();
   		}
@@ -85,7 +89,7 @@ $(document).ready(function(){
 	                type          : 'POST',  
 	                fileElementId : 'imageupload',
 	                dataType      : 'text',
-	                data          : {tooth_id : data.tooth_id},
+	                data          : {tooth_id : data.tooth_id, picture_type : 1},
 	                async         : false,  
 	                cache         : false,  
 	                contentType   : false,  
@@ -111,7 +115,8 @@ $(document).ready(function(){
 
         $('select[name=caries_degree]').dropdown("set selected", DATA.caries_degree);
         $('select[name=caries_type]').dropdown("set selected", DATA.caries_type);
-
+        
+		$('#DiagnoseForm .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('#DiagnoseForm').show();
 	});
 

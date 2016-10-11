@@ -1,155 +1,84 @@
 $(document).ready(function(){
 
-  // 设置表头用户数据
-  $('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
-
+  // 其它
+  $('.orange.header').text("个人史 - " + decodeURI(requestParameter("name")));
+  
+  var DATA = null;
 	var U_ID = Number(requestParameter("uid"));
 
-	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
   	$.ajax({
-  		url     : URL_PERSONAL_HISTORY,
-  		type    : "get",
-  		data    : addParameter("user_id", U_ID),
-  		dataType: "json",
-  		success : function(data){
-  			
+  		url      : URL_PERSONAL_HISTORY,
+  		type     : "get",
+  		data     : {user_id : U_ID},
+  		dataType : "json",
+      async    : false,
+  		success  : function(data){
   			$('#submit').hide();
-
   			DATA = data;
 
-  			var PH_Habit_Text  = "";
-  			var PH_Health_Text = "";
-  			var PH_Host_Text   = "";
+        // 表头
+        $('#display th').text("个人史 - " + decodeURI(requestParameter("name")));
 
-  			// 饮食习惯
-			if (DATA.more_sweet == "是") {
-  				PH_Habit_Text += "食用多甜食、多蛋白质类食物";
-  			} else {
-  				PH_Habit_Text += "未食用多甜食、多蛋白质类食物";
-  			}
-  			PH_Habit_Text += "，";
+        // 饮食习惯
+        $('#more_sweet').text(DATA.more_sweet);
 
-  			PH_Habit_Text += "食用量：";
-  			switch (Number(DATA.consumption_of_sweet)) {
-  				case 124: PH_Habit_Text += "<125g"; break;
-  				case 125: PH_Habit_Text += "125-249g"; break;
-  				case 250: PH_Habit_Text += "250-500g"; break;
-  				case 500: PH_Habit_Text += ">500g"; break;
-  			}
-  			PH_Habit_Text += "，";
-  			
-  			PH_Habit_Text += "食用频率：";
+        var TempText = "";
+        switch (Number(DATA.consumption_of_sweet)) {
+          case 124: TempText = "<125g"; break;
+          case 125: TempText = "125-249g"; break;
+          case 250: TempText = "250-500g"; break;
+          case 500: TempText = ">500g"; break;
+        }
+        $('#consumption_of_sweet').text(TempText);
+
   			switch (Number(DATA.frequency_of_sweet)) {
-  				case 1: PH_Habit_Text += "小于1次/天"; break;
-  				case 2: PH_Habit_Text += "2次/天"; break;
-  				case 3: PH_Habit_Text += "3次/天"; break;
-  				case 4: PH_Habit_Text += "4次/天"; break;
-  				case 5: PH_Habit_Text += "5次/天"; break;
-  				case 6: PH_Habit_Text += "大于5次/天"; break;
+  				case 1: TempText = "小于1次/天"; break;
+  				case 2: TempText = "2次/天"; break;
+  				case 3: TempText = "3次/天"; break;
+  				case 4: TempText = "4次/天"; break;
+  				case 5: TempText = "5次/天"; break;
+  				case 6: TempText = "大于5次/天"; break;
   			}
-  			PH_Habit_Text += "，";
+        $('#frequency_of_sweet').text(TempText);
 
-  			PH_Habit_Text += "正餐间进食频率：";
   			switch (Number(DATA.frequency_of_meal)) {
-  				case 1: PH_Habit_Text += "≤1"; break;
-  				case 2: PH_Habit_Text += "1＜频率≤2"; break;
-  				case 3: PH_Habit_Text += "≥3"; break;
+  				case 1: TempText = "≤1"; break;
+  				case 2: TempText = "1＜频率≤2"; break;
+  				case 3: TempText = "≥3"; break;
   			}
-  			PH_Habit_Text += "，";
+        $('#frequency_of_meal').text(TempText);
 
-			if (DATA.is_carbonic_acid == "是") {
-  				PH_Habit_Text += "正餐间进食含碳酸";
-  			} else {
-  				PH_Habit_Text += "正餐间进食不含碳酸";
+        $('#is_carbonic_acid').text(DATA.is_carbonic_acid);
+        $('#is_floss').text(DATA.is_floss);
+
+       	// 口腔卫生维护
+  			switch (Number(DATA.times_of_teeth_brush)) {
+  				case 1: TempText = "1次"; break;
+  				case 2: TempText = "2次"; break;
+  				case 3: TempText = "3次"; break;
   			}
+        $('#times_of_teeth_brush').text(TempText);
+        $('#time_of_teeth_brush').text(DATA.time_of_teeth_brush);
+        $('#long_of_teeth_brush').text(DATA.long_of_teeth_brush);
+  		
+        $('#electric_tooth_brush').text(DATA.electric_tooth_brush);
+        $('#method_of_tooth_brush').text(DATA.method_of_tooth_brush);
+        $('#is_fluorine').text(DATA.is_fluorine);
+        $('#is_cavity_examination').text(DATA.is_cavity_examination);
+        $('#is_periodontal_treatment').text(DATA.is_periodontal_treatment);
+        $('#sjogren_syndrome').text(DATA.sjogren_syndrome);
 
-       		// 口腔卫生维护
-			if (DATA.is_floss == "是") {
-  				PH_Health_Text += "使用牙线";
-  			} else {
-  				PH_Health_Text += "不使用牙线";
-  			}
-  			PH_Health_Text += "，";
-
-  			PH_Health_Text += "每天刷牙次数：";
-  			switch (Number(DATA.frequency_of_meal)) {
-  				case 1: PH_Health_Text += "1次"; break;
-  				case 2: PH_Health_Text += "2次"; break;
-  				case 3: PH_Health_Text += "3次"; break;
-  			}
-  			PH_Health_Text += "，";
-
-        PH_Health_Text += "刷牙时间点：" + DATA.time_of_teeth_brush + "，";
-
-  			PH_Health_Text += "刷牙时长：" + DATA.long_of_teeth_brush;
-  			PH_Health_Text += "，";
-
-			if (DATA.electric_tooth_brush == "是") {
-  				PH_Health_Text += "使用电动牙刷";
-  			} else {
-  				PH_Health_Text += "不使用电动牙刷";
-  			}
-  			PH_Health_Text += "，";
-
-			if (DATA.method_of_tooth_brush == "是") {
-  				PH_Health_Text += "刷牙方法正确";
-  			} else {
-  				PH_Health_Text += "刷牙方法不正确";
-  			}
-  			PH_Health_Text += "，";
-
-			if (DATA.method_of_tooth_brush == "是") {
-  				PH_Health_Text += "牙膏不含氟";
-  			} else {
-  				PH_Health_Text += "牙膏含氟";
-  			}
-  			PH_Health_Text += "，";
-
-			if (DATA.is_cavity_examination == "是") {
-  				PH_Health_Text += "口腔定期检查";
-  			} else {
-  				PH_Health_Text += "口腔不定期检查";
-  			}
-  			PH_Health_Text += "，";
-
-			if (DATA.is_cavity_examination == "是") {
-  				PH_Health_Text += "定期牙周洁治";
-  			} else {
-  				PH_Health_Text += "不定期牙周洁治";
-  			}
-
-  			// 宿主易感性
-			if (DATA.sjogren_syndrome == "是") {
-  				PH_Host_Text += "有干燥综合征";
-  			} else {
-  				PH_Host_Text += "没有干燥综合征";
-  			}
-  			PH_Host_Text += "，";
-
-			if (DATA.salivary_gland_disease == "") {
-  				PH_Host_Text += "没有唾液腺疾病";
-  			} else {
-  				PH_Host_Text += "唾液腺疾病：" + DATA.salivary_gland_disease;
-  			}
-  			PH_Host_Text += "，";
-
-			if (DATA.consciously_reduce_salivary_flow == "") {
-  				PH_Host_Text += "未自觉唾液流量减少";
-  			} else {
-  				PH_Host_Text += "自觉唾液流量减少，减少时间：" + DATA.consciously_reduce_salivary_flow;
-  			}
-
-       		$('#PH_Habit').text(PH_Habit_Text);
-       		$('#PH_Health').text(PH_Health_Text);
-       		$('#PH_Host').text(PH_Host_Text);
+        // 宿主易感性
+        $('#salivary_gland_disease').text(DATA.salivary_gland_disease);
+        $('#consciously_reduce_salivary_flow').text(DATA.consciously_reduce_salivary_flow);
 
         $('#display').show();
   		}
 	});
 
-  if (DATA == null) {$('#submit').show();};
+  if (DATA == null) {$('#submit').show();}
 
   // ***************************************************************
   // FUNCTION: 设置病历个人史表单相关属性
@@ -229,6 +158,7 @@ $(document).ready(function(){
     $('input[name=salivary_gland_disease]').val(DATA.salivary_gland_disease);
     $('input[name=consciously_reduce_salivary_flow]').val(DATA.consciously_reduce_salivary_flow ? DATA.consciously_reduce_salivary_flow  : "");
 
+    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('#submit').show();
 	});
 });

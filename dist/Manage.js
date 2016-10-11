@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+	
+	// 其它
+	$('.orange.header').text("龋病预后管理 - " + decodeURI(requestParameter("name")));
   	$('#context .menu .item').tab({ context: $('#context') });
-	
-	var U_ID = Number(requestParameter("uid"));
-	
+
 	var Level1 = "1. 复诊检查周期：每6-12个月<br/><br/>"
 			   + "2. 影像学检查频率：每24-36个月<br/><br/>"
 			   + "3. 氯己定：不需要或仅唾液检测细菌培养计数高者使用<br/><br/>"
@@ -37,17 +37,17 @@ $(document).ready(function(){
 			   + "7. 窝沟封闭<br/><br/>";
 			   + "6. 当感觉口干时，饭后及吃零食后使用小苏打水漱口<br/><br/>";
 
-	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
+	var DATA = null;
+	var U_ID = Number(requestParameter("uid"));
 	$.ajax({
-  		url     : URL_MANAGE,
-  		type    : "get",
-  		data    : addParameter("user_id", U_ID),
-  		dataType: "json",
-  		error   : function(){
-  		},
-  		success : function(data){
+  		url      : URL_MANAGE,
+  		type     : "get",
+  		data     : {user_id : U_ID},
+  		dataType : "json",
+		async    : false,
+  		success  : function(data){
   			$('#context').hide();
 
   			DATA = data;
@@ -78,18 +78,15 @@ $(document).ready(function(){
   		}
 	});
 
-	if (DATA == null) {$('#context').show();};
+	if (DATA == null) {$('#context').show();}
 
 	// ***************************************************************
 	// FUNCTION: 提交
 	$('#context .segment button').click(function(){
-		var SelectItemValue = $(this).parent().attr('data-tab');
-		var AddtionParameter = addParameter("user_id", U_ID)+ "&" + addParameter("patient_type", SelectItemValue);
-
 	    $.ajax({
       		url      : URL_MANAGE,
       		type     : DATA == null ? "POST" : "PUT", 
-      		data     : AddtionParameter,
+      		data     : {user_id : U_ID, patient_type : $(this).parent().attr('data-tab')},
       		dataType : "json",
 			error    : function() {networkError();},
 			success  : function() {location.reload();}
@@ -106,6 +103,7 @@ $(document).ready(function(){
 		$TabSegment  = $('#context .tab.segment').removeClass('active');
 		ChangeTabActive($ContextLink, $TabSegment, DATA.patient_type - 1);
 
+		$('#context .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('#context').show();
 	});
 

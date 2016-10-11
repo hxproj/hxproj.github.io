@@ -4,7 +4,7 @@ $(document).ready(function(){
 	// Other
 	$('.modal .ui.label').click(function(){ $(this).toggleClass('teal'); });
 	$('#context .menu .item').tab({ context: $('#context') });
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+	$('.orange.header').text("口腔检查 - " + decodeURI(requestParameter("name")));
 
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
@@ -199,7 +199,7 @@ $(document).ready(function(){
                 type          : 'POST',  
                 fileElementId : 'imageupload',
                 dataType      : 'text',
-                data          : {tooth_id : data.tooth_id},
+                data          : {tooth_id : data.tooth_id, picture_type : 0},
                 async         : false,  
                 cache         : false,  
                 contentType   : false,  
@@ -260,7 +260,8 @@ $(document).ready(function(){
     $('select[name=X_Ray_fill_quality]').dropdown("set selected", DATA.X_Ray_fill_quality);
   	$('input[name=CT_shows]').val(DATA.CT_shows);
   	$('input[name=piece]').val(DATA.piece);
-      
+    
+    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 	  $('#submit').show();
 	});
 

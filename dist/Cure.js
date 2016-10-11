@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// 设置表头用户数据
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
+	$('.orange.header').text("处置 - " + decodeURI(requestParameter("name")));
   	$('#context .menu .item').tab({ context: $('#context') });
 	
     var U_ID = Number(requestParameter("uid")),
@@ -20,15 +20,19 @@ $(document).ready(function(){
 
   			DATA = data;
 
+        	// 表头
+        	$('#display th').text("处置 - " + decodeURI(requestParameter("name")));
+
 	        // 设置牙位信息
 	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
-	        	$('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
-	        		data.symptom + "（" + data.time_of_occurrence) + "）");
+	        	$('#ToothLocation').text(data.tooth_location);
+	        	data.is_fill_tooth ? $('#Symptom').text(data.tooth_location) : $('#Symptom').text(data.symptom);
+	        	$('#Time_of_occurrence').text(data.time_of_occurrence);
 	        }, "json");
 	        
   			// 牙非手术治疗
   			if (DATA.handle_type == 0) {
-  				$('#Method').text("牙非手术治疗 - " + DATA.specific_method);
+  				$('#Method').text("牙非手术治疗：" + DATA.specific_method);
 
   				var Describe_Text = "";
   				switch (DATA.specific_method) {
@@ -1022,6 +1026,7 @@ $(document).ready(function(){
   			}
 		}
 
+    	$('#context .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
 		$('#context').show();
 	});
 

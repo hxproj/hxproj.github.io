@@ -25,15 +25,27 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">处置</h2>
+		<h2 class="ui orange header"></h2>
 
 		<table class="ui celled invisible structured table" id="display">
 			<thead>
 				<tr>
-					<th class="center aligned" id="ToothLocation" colspan="2"></th>
+					<th class="center aligned" colspan="2"></th>
 				</tr>
 			</thead>
   			<tbody>
+				<tr>
+					<td class="negative collapsing">牙位</td>
+					<td id="ToothLocation"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">症状</td>
+					<td id="Symptom"></td>
+				</tr>
+				<tr>
+					<td class="negative collapsing">病发时间</td>
+					<td id="Time_of_occurrence"></td>
+				</tr>
 				<tr>
 					<td class="negative collapsing">处置方法</td>
 					<td id="Method"></td>
@@ -108,7 +120,7 @@
 						<input type="hidden" name="check_time" value="">
 						<input type="hidden" name="time_of_etching" value="">
 
-			   			<button class="ui right floated blue button">提交</button>
+			   			<button class="ui right floated blue submit button">提交</button>
 		    		</form>
 				</div>
 				
@@ -136,7 +148,7 @@
 						<input type="hidden" name="check_time" value="">
 						<input type="hidden" name="time_of_etching" value="">
 	    				
-				   		<button class="ui right floated blue button">提交</button>
+				   		<button class="ui right floated blue submit button">提交</button>
 			   		</form>
 				</div>
 
@@ -207,7 +219,7 @@
 						<input type="hidden" name="fluorination" value="">
 						<input type="hidden" name="silver_nitrate" value="">
 
-				   		<button class="ui right floated blue button">提交</button>
+				   		<button class="ui right floated blue submit button">提交</button>
 			   		</form>
 				</div>
 			</div>
@@ -491,7 +503,7 @@
 				<input type="hidden" name="modulo" value="">
 				<input type="hidden" name="inlay" value="">
 
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form> 
 		</div>
 
@@ -788,7 +800,7 @@
 				<input type="hidden" name="modulo" value="">
 				<input type="hidden" name="inlay" value="">
 
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form>
 		</div>
 
@@ -1038,7 +1050,7 @@
 				<input type="hidden" name="lamp" value="">
 				<input type="hidden" name="time_of_lamp" value="">
 
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form>
 		</div>
 
@@ -1288,7 +1300,7 @@
 				<input type="hidden" name="lamp" value="">
 				<input type="hidden" name="time_of_lamp" value="">
 
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form>
 		</div>
 	</div>

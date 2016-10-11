@@ -27,32 +27,37 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header">诊断</h2>
+		<h2 class="ui orange header"></h2>
 
-		<table class="ui celled striped invisible table" id="display">
+		<table class="ui invisible celled structured table" id="display">
 			<thead>
 				<tr>
-					<th class="center aligned" id="ToothLocation" colspan="2"></th>
+					<th class="center aligned" colspan="3"></th>
 				</tr>
 			</thead>
   			<tbody>
 				<tr>
-					<td class="negative collapsing">龋损程度</td>
-					<td id="Degree"></td>
+					<td class="negative collapsing" rowspan="3">诊断结果</td>
+					<td class="collapsing">牙位</td>
+					<td id="id_tooth_location"></td>
 				</tr>
 				<tr>
-					<td class="negative collapsing">龋齿病种</td>
-					<td id="Type"></td>
+					<td class="collapsing">龋损程度</td>
+					<td id="caries_degree"></td>
+				</tr>
+				<tr>
+					<td class="collapsing">龋齿病种</td>
+					<td id="caries_type"></td>
 				</tr>
 				<tr>
 					<td class="negative collapsing">诊断图片</td>
-					<td>
+					<td colspan="2">
 						<div class="ui medium rounded images" id="Image">
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="3">
 						<div class="ui right floated small blue edit button">修改</div>
 						<div class="ui right floated small teal buttons">
 							<div class="ui left labeled icon button"><i class="chevron left icon"></i>上一项（口腔检查）</div>
@@ -97,7 +102,7 @@
 				</div>
 
 				<div class="ui hidden divider"></div>
-			    <button class="ui right floated blue button">提交</button>
+			    <button class="ui right floated blue submit button">提交</button>
 			</form> 
 		</div>
   	</div>

@@ -276,13 +276,13 @@ $(document).ready(function(){
 
 		if (TimeType === "time_day")
 		{
-			Result += "天前";
+			Result += "天";
 		} else if (TimeType === "time_week") {
-			Result += "周前";
+			Result += "周";
 		} else if (TimeType === "time_month") {
-			Result += "月前";
+			Result += "月";
 		} else if (TimeType === "time_year") {
-			Result += "年前";
+			Result += "年";
 		}
 
 		$('#add_tooth .disabled.input input').val(Result);

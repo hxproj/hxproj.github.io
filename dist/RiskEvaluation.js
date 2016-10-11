@@ -1,21 +1,25 @@
 $(document).ready(function(){
-	$('.orange.header').text($('.orange.header').text() + " - " + decodeURI(requestParameter("name")));
 
+  // 其它
+  $('.orange.header').text("龋病风险评估 - " + decodeURI(requestParameter("name")));
+  
+  var DATA = null;
 	var U_ID = Number(requestParameter("uid"));
-	var DATA = null;
+
 	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
-  		url     : URL_RISKEVALUATION,
-  		type    : "get",
-  		data    : addParameter("user_id", U_ID),
-  		dataType: "json",
-  		error   : function(){
-  		},
-  		success : function(data){
+  		url      : URL_RISKEVALUATION,
+  		type     : "get",
+  		data     : {user_id : U_ID},
+  		dataType : "json",
+      async    : false,
+  		success  : function(data){
   			$('#RiskForm').hide();
-
   			DATA = data;
+
+        $('#display th').text("龋病风险评估" + " - " + decodeURI(requestParameter("name")));
+
   			$('#early_carie').text(DATA.early_carie);
   			$('#can_see').text(DATA.can_see);
   			$('#lost_tooth').text(DATA.lost_tooth);
@@ -65,27 +69,28 @@ $(document).ready(function(){
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
-        $('select[name=early_carie]').dropdown("set selected", DATA.early_carie);
-        $('select[name=can_see]').dropdown("set selected", DATA.can_see);
-        $('select[name=lost_tooth]').dropdown("set selected", DATA.lost_tooth);
-        $('select[name=system_illness]').dropdown("set selected", DATA.system_illness);
+    $('select[name=early_carie]').dropdown("set selected", DATA.early_carie);
+    $('select[name=can_see]').dropdown("set selected", DATA.can_see);
+    $('select[name=lost_tooth]').dropdown("set selected", DATA.lost_tooth);
+    $('select[name=system_illness]').dropdown("set selected", DATA.system_illness);
 
-        $('input[name=illness_name]').val(DATA.illness_name);
-        
-        $('select[name=times_of_carbohydrate]').dropdown("set selected", DATA.times_of_carbohydrate);
-        $('select[name=consumption_of_carbohydrate]').dropdown("set selected", DATA.consumption_of_carbohydrate);
-        $('select[name=times_of_meal]').dropdown("set selected", DATA.times_of_meal);
-        $('select[name=speed_of_saliva]').dropdown("set selected", DATA.speed_of_saliva);
-        $('select[name=ablity_saliva]').dropdown("set selected", DATA.ablity_saliva);
-        $('select[name=bacteria]').dropdown("set selected", DATA.bacteria);
-        $('select[name=consumption]').dropdown("set selected", DATA.consumption);
-        $('select[name=fluorine_with_water]').dropdown("set selected", DATA.fluorine_with_water);
-        $('select[name=fluorine]').dropdown("set selected", DATA.fluorine);
-        $('select[name=seal]').dropdown("set selected", DATA.seal);
-        $('select[name=times_of_tooth_brush]').dropdown("set selected", DATA.times_of_tooth_brush);
-        $('select[name=long_of_tooth_brush]').dropdown("set selected", DATA.long_of_tooth_brush);
-        $('select[name=health_care]').dropdown("set selected", DATA.health_care);
+    $('input[name=illness_name]').val(DATA.illness_name);
 
-		$('#RiskForm').show();
+    $('select[name=times_of_carbohydrate]').dropdown("set selected", DATA.times_of_carbohydrate);
+    $('select[name=consumption_of_carbohydrate]').dropdown("set selected", DATA.consumption_of_carbohydrate);
+    $('select[name=times_of_meal]').dropdown("set selected", DATA.times_of_meal);
+    $('select[name=speed_of_saliva]').dropdown("set selected", DATA.speed_of_saliva);
+    $('select[name=ablity_saliva]').dropdown("set selected", DATA.ablity_saliva);
+    $('select[name=bacteria]').dropdown("set selected", DATA.bacteria);
+    $('select[name=consumption]').dropdown("set selected", DATA.consumption);
+    $('select[name=fluorine_with_water]').dropdown("set selected", DATA.fluorine_with_water);
+    $('select[name=fluorine]').dropdown("set selected", DATA.fluorine);
+    $('select[name=seal]').dropdown("set selected", DATA.seal);
+    $('select[name=times_of_tooth_brush]').dropdown("set selected", DATA.times_of_tooth_brush);
+    $('select[name=long_of_tooth_brush]').dropdown("set selected", DATA.long_of_tooth_brush);
+    $('select[name=health_care]').dropdown("set selected", DATA.health_care);
+
+    $('#RiskForm .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+    $('#RiskForm').show();
 	});
 });
