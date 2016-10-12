@@ -40,7 +40,7 @@ $(document).ready(function(){
 	function showMedicalRecord(UserData){
 		$MedicalRecord = $('.invisible.segment');
 
-		$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
+		var $ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
 		$ClonedMedicalRecord.attr("value", UserData.user_id);
 		$ClonedMedicalRecord.find('.name').text(UserData.name);
 		$ClonedMedicalRecord.find('.gender').text(UserData.gender == 0 ? "男" : "女");

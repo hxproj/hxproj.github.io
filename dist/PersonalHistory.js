@@ -158,7 +158,13 @@ $(document).ready(function(){
     $('input[name=salivary_gland_disease]').val(DATA.salivary_gland_disease);
     $('input[name=consciously_reduce_salivary_flow]').val(DATA.consciously_reduce_salivary_flow ? DATA.consciously_reduce_salivary_flow  : "");
 
-    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$('#submit').show();
 	});
+
+  // ***************************************************************
+  // FUNCTION: 返回病人病历概述
+  $('.return.button').click(function(){
+
+  });
 });

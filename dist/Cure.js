@@ -40,7 +40,7 @@ $(document).ready(function(){
   						Describe_Text += "将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
   						break;
   					}
-  					case "再矿物治疗": {
+  					case "再矿化治疗": {
   						Describe_Text += "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
   						break;
   					}

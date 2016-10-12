@@ -1,17 +1,14 @@
 $(document).ready(function(){
 
-	// ******************************************************
-	// Other
 	$('.modal .ui.label').click(function(){ $(this).toggleClass('teal'); });
 	$('#context .menu .item').tab({ context: $('#context') });
-	$('.orange.header').text("口腔检查 - " + decodeURI(requestParameter("name")));
 
+  var DATA = null;
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
 
 	// ******************************************************
 	// 检查数据是否已经提交
-	var DATA = null;
 	$.ajax({
   		url      : URL_MOUTHEXAM,
   		type     : "get",
@@ -171,8 +168,10 @@ $(document).ready(function(){
           },
           success  : function(FileData) {
             $.each(FileData, function(Index, Value){
-              $('#ME_IMAGE').append("<img class='ui image'>");
-              $('#ME_IMAGE .ui.image').eq(Index).attr('src', this);
+              var $ClonedImage = $('#ME_IMAGE .hidden.image').clone(true).removeClass('hidden');
+              $ClonedImage.find('img').attr('src', Value);
+
+              $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
             });
           }
         });
@@ -301,5 +300,11 @@ $(document).ready(function(){
   // FUNCTION: 上一项，现病史
   $('#display .left.labeled.button').click(function(){
     redirection("PresentIllness.html", U_ID, T_ID, requestParameter("name"));
+  });
+
+  // ***************************************************************
+  // FUNCTION: 删除图片
+  $('#ME_IMAGE .corner.label').click(function(){
+    
   });
 });

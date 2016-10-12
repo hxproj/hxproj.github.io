@@ -27,420 +27,437 @@
 	</div> 
 
 	<div class="ui main container">
-		<h2 class="ui orange header"></h2>
 
-		<table class="ui celled striped invisible table" id="display">
-			<thead>
-				<tr>
-					<th class="center aligned" colspan="2">口腔检查</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="negative collapsing">牙体情况</td>
-					<td id="ME_Body"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">牙周情况</td>
-					<td id="ME_Around"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">龋失补指数</td>
-					<td id="ME_Loss"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">牙齿发育情况</td>
-					<td id="ME_Condition"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">患牙与邻牙接触关系</td>
-					<td id="ME_Neighbor"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">患牙修复治疗情况</td>
-					<td id="ME_Cure"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">X线片表现</td>
-					<td id="ME_X"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">口腔检查图片</td>
-					<td>
-						<div class="ui medium rounded images" id="ME_IMAGE">
+		<div class="ui grid">
+			<div class="two wide center aligned column">
+				<div class="ui mini labeled icon vertical menu">
+					<a class="item"><i class="return chevron left icon"></i>返回病历</a>
+					<a class="item" href="PresentIllness.html"><i class="history icon"></i>现病史</a>
+					<a class="blue active item"><i class="add square icon"></i>口腔检查</a>
+					<a class="item" href="Diagnose.html"><i class="heartbeat icon"></i>诊断</a>
+					<a class="item" href="DifficultyAssessment.html"><i class="bar chart icon"></i>难度评估</a>
+					<a class="item" href="Cure.html"><i class="first aid icon"></i>处置</a>
+					<a class="item" href="USPHS.html"><i class="area chart icon"></i>USPHS评估</a>
+				</div>
+			</div>
+
+			<div class="fourteen wide column">
+				<table class="ui celled striped invisible table" id="display">
+					<thead>
+						<tr>
+							<th class="center aligned" colspan="2">口腔检查</th>
+						</tr>
+					</thead>
+		  			<tbody>
+						<tr>
+							<td class="negative collapsing">牙体情况</td>
+							<td id="ME_Body"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">牙周情况</td>
+							<td id="ME_Around"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">龋失补指数</td>
+							<td id="ME_Loss"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">牙齿发育情况</td>
+							<td id="ME_Condition"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">患牙与邻牙接触关系</td>
+							<td id="ME_Neighbor"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">患牙修复治疗情况</td>
+							<td id="ME_Cure"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">X线片表现</td>
+							<td id="ME_X"></td>
+						</tr>
+						<tr>
+							<td class="negative collapsing">口腔检查图片</td>
+							<td id="ME_IMAGE">
+								<div class="ui hidden image">
+									<a class="ui right corner label"><i class="remove icon"></i></a>
+									<img style="max-width:100%; height:auto;">
+						    	</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="ui right floated small blue edit button">修改</div>
+								<div class="ui right floated small teal buttons">
+									<div class="ui left labeled icon button"><i class="chevron left icon"></i>上一项（现病史）</div>
+									<div class="ui right labeled icon button"><i class="chevron right icon"></i>下一项（诊断）</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="ui invisible clearing segment" style="margin-top:0px" id="submit">
+					<form class="ui form">
+						<h3 class="ui blue header">牙体情况</h3>
+						<div class="field">
+					    	<input name="tooth_location" type="hidden" value="">
+							<label>牙位</label>
+					    	<div class="ui mini icon button" id="addLocation"><i class="plus icon"></i></div>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<div class="ui right floated small blue edit button">修改</div>
-						<div class="ui right floated small teal buttons">
-							<div class="ui left labeled icon button"><i class="chevron left icon"></i>上一项（现病史）</div>
-							<div class="ui right labeled icon button"><i class="chevron right icon"></i>下一项（诊断）</div>
+						<div class="three fields">
+							<div class="field">
+								<label>有无继发龋</label>
+								<select name="secondary" class="ui dropdown">
+								<option value="否">无</option>
+								<option value="是">有</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>龋坏累及牙面</label>
+								<select name="caries_tired" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="唇面">唇面</option>
+								<option value="舌面">舌面</option>
+								<option value="腭面">腭面</option>
+								<option value="颊面">颊面</option>
+								<option value="合面">合面</option>
+								<option value="近中面">近中面</option>
+								<option value="远中面">远中面</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>深度</label>
+								<select name="depth" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="浅龋">浅龋</option>
+								<option value="中龋">中龋</option>
+								<option value="深龋">深龋</option>
+								</select>
+							</div>
 						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						<div class="three fields">
+							<div class="field">
+								<label>冷</label>
+								<select name="cold" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="1">-</option>
+								<option value="2">+-</option>
+								<option value="3">+</option>
+								<option value="4">++</option>
+								<option value="5">+++</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>热</label>
+								<select name="hot" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="1">-</option>
+								<option value="2">+-</option>
+								<option value="3">+</option>
+								<option value="4">++</option>
+								<option value="5">+++</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>探</label>
+								<select name="touch" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="1">-</option>
+								<option value="2">+-</option>
+								<option value="3">+</option>
+								<option value="4">++</option>
+								<option value="5">+++</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>叩</label>
+								<select name="bite" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="1">-</option>
+								<option value="2">+-</option>
+								<option value="3">+</option>
+								<option value="4">++</option>
+								<option value="5">+++</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>色</label>
+								<select name="color_of_caries" class="ui dropdown">
+								<option value="正常">正常</option>
+								<option value="棕褐">棕褐</option>
+								<option value="黑">黑</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>质</label>
+								<select name="flex_of_caries" class="ui dropdown">
+								<option value="硬">硬</option>
+								<option value="软">软</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>原填充体</label>
+								<select name="fill" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="复合树脂">复合树脂</option>
+								<option value="银汞合金">银汞合金</option>
+								<option value="玻璃离子">玻璃离子</option>
+								<option value="磷酸锌">磷酸锌</option>
+								<option value="其他">其他</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>牙齿活力值</label>
+								<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
+							</div>
+						</div>
 
-		<div class="ui invisible clearing segment" id="submit">
-			<form class="ui form">
-				<h3 class="ui blue header">牙体情况</h3>
-				<div class="field">
-			    	<input name="tooth_location" type="hidden" value="">
-					<label>牙位</label>
-			    	<div class="ui mini icon button" id="addLocation"><i class="plus icon"></i></div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>有无继发龋</label>
-						<select name="secondary" class="ui dropdown">
-						<option value="否">无</option>
-						<option value="是">有</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>龋坏累及牙面</label>
-						<select name="caries_tired" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="唇面">唇面</option>
-						<option value="舌面">舌面</option>
-						<option value="腭面">腭面</option>
-						<option value="颊面">颊面</option>
-						<option value="合面">合面</option>
-						<option value="近中面">近中面</option>
-						<option value="远中面">远中面</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>深度</label>
-						<select name="depth" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="浅龋">浅龋</option>
-						<option value="中龋">中龋</option>
-						<option value="深龋">深龋</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>冷</label>
-						<select name="cold" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="1">-</option>
-						<option value="2">+-</option>
-						<option value="3">+</option>
-						<option value="4">++</option>
-						<option value="5">+++</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>热</label>
-						<select name="hot" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="1">-</option>
-						<option value="2">+-</option>
-						<option value="3">+</option>
-						<option value="4">++</option>
-						<option value="5">+++</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>探</label>
-						<select name="touch" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="1">-</option>
-						<option value="2">+-</option>
-						<option value="3">+</option>
-						<option value="4">++</option>
-						<option value="5">+++</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>叩</label>
-						<select name="bite" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="1">-</option>
-						<option value="2">+-</option>
-						<option value="3">+</option>
-						<option value="4">++</option>
-						<option value="5">+++</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>色</label>
-						<select name="color_of_caries" class="ui dropdown">
-						<option value="正常">正常</option>
-						<option value="棕褐">棕褐</option>
-						<option value="黑">黑</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>质</label>
-						<select name="flex_of_caries" class="ui dropdown">
-						<option value="硬">硬</option>
-						<option value="软">软</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>原填充体</label>
-						<select name="fill" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="复合树脂">复合树脂</option>
-						<option value="银汞合金">银汞合金</option>
-						<option value="玻璃离子">玻璃离子</option>
-						<option value="磷酸锌">磷酸锌</option>
-						<option value="其他">其他</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>牙齿活力值</label>
-						<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
-					</div>
-				</div>
+						<h3 class="ui blue header">牙周情况</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>牙龈是否充血</label>
+								<select name="gingival_hyperemia" class="ui dropdown">
+								<option value="否">否</option>
+								<option value="是">是</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>龈上牙石</label>
+								<select name="tartar_up" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="1级">1级</option>
+								<option value="2级">2级</option>
+								<option value="3级">3级</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>龈下牙石</label>
+								<select name="tartar_down" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="1级">1级</option>
+								<option value="2级">2级</option>
+								<option value="3级">3级</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>BOP</label>
+								<select name="bop" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="+">+</option>
+								<option value="-">-</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>牙周袋深度</label>
+								<select name="periodontal_pocket_depth" class="ui dropdown">
+								<option value="正常">正常</option>
+								<option value="3.5mm">3.5mm</option>
+								<option value="3.5-5.5mm">3.5-5.5mm</option>
+								<option value="5.5-8.5mm">5.5-8.5mm</option>
+								<option value="8.5-11.5mm">8.5-11.5mm</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>根分叉病变</label>
+								<select name="furcation" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="1级">1级</option>
+								<option value="2级">2级</option>
+								<option value="3级">3级</option>
+								<option value="4级">4级</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>位置</label>
+								<select name="location" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="唇侧">唇侧</option>
+								<option value="颊侧">颊侧</option>
+								<option value="舌侧">舌侧</option>
+								<option value="腭侧">腭侧</option>
+								<option value="近中侧">近中侧</option>
+								<option value="远中侧">远中侧</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>牙齿松动度</label>
+								<select name="mobility" class="ui dropdown">
+								<option value="正常">正常</option>
+								<option value="Ⅰ">Ⅰ</option>
+								<option value="Ⅱ">Ⅱ</option>
+								<option value="Ⅲ">Ⅲ</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>牙龈有无瘘道</label>
+								<select name="fistula" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="有">有</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>牙龈有无溢脓</label>
+								<select name="overflow_pus" class="ui dropdown">
+								<option value="无">无</option>
+								<option value="有">有</option>
+								</select>
+							</div>
+						</div>
 
-				<h3 class="ui blue header">牙周情况</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>牙龈是否充血</label>
-						<select name="gingival_hyperemia" class="ui dropdown">
-						<option value="否">否</option>
-						<option value="是">是</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>龈上牙石</label>
-						<select name="tartar_up" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="1级">1级</option>
-						<option value="2级">2级</option>
-						<option value="3级">3级</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>龈下牙石</label>
-						<select name="tartar_down" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="1级">1级</option>
-						<option value="2级">2级</option>
-						<option value="3级">3级</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>BOP</label>
-						<select name="bop" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="+">+</option>
-						<option value="-">-</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>牙周袋深度</label>
-						<select name="periodontal_pocket_depth" class="ui dropdown">
-						<option value="正常">正常</option>
-						<option value="3.5mm">3.5mm</option>
-						<option value="3.5-5.5mm">3.5-5.5mm</option>
-						<option value="5.5-8.5mm">5.5-8.5mm</option>
-						<option value="8.5-11.5mm">8.5-11.5mm</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>根分叉病变</label>
-						<select name="furcation" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="1级">1级</option>
-						<option value="2级">2级</option>
-						<option value="3级">3级</option>
-						<option value="4级">4级</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>位置</label>
-						<select name="location" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="唇侧">唇侧</option>
-						<option value="颊侧">颊侧</option>
-						<option value="舌侧">舌侧</option>
-						<option value="腭侧">腭侧</option>
-						<option value="近中侧">近中侧</option>
-						<option value="远中侧">远中侧</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>牙齿松动度</label>
-						<select name="mobility" class="ui dropdown">
-						<option value="正常">正常</option>
-						<option value="Ⅰ">Ⅰ</option>
-						<option value="Ⅱ">Ⅱ</option>
-						<option value="Ⅲ">Ⅲ</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>牙龈有无瘘道</label>
-						<select name="fistula" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="有">有</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>牙龈有无溢脓</label>
-						<select name="overflow_pus" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="有">有</option>
-						</select>
-					</div>
-				</div>
+						<h3 class="ui blue header">龋失补指数</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>龋失补指数</label>
+								<input type="text" name="loss_caries_index_up" placeholder="0-32">
+							</div>
+						</div>
 
-				<h3 class="ui blue header">龋失补指数</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>龋失补指数</label>
-						<input type="text" name="loss_caries_index_up" placeholder="0-32">
-					</div>
-				</div>
+						<h3 class="ui blue header">牙齿发育情况</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>牙齿发育情况</label>
+								<select name="development_of_the_situation" class="ui dropdown">
+								<option value="无异常情况">无异常情况</option>
+								<option value="釉质发育不全">釉质发育不全</option>
+								<option value="牙本质发育不全">牙本质发育不全</option>
+								<option value="氟牙症">氟牙症</option>
+								<option value="四环素牙">四环素牙</option>
+								<option value="釉质发育不全">磨耗牙</option>
+								<option value="釉质发育不全">其它</option>
+								</select>
+							</div>
+						</div>
 
-				<h3 class="ui blue header">牙齿发育情况</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>牙齿发育情况</label>
-						<select name="development_of_the_situation" class="ui dropdown">
-						<option value="无异常情况">无异常情况</option>
-						<option value="釉质发育不全">釉质发育不全</option>
-						<option value="牙本质发育不全">牙本质发育不全</option>
-						<option value="氟牙症">氟牙症</option>
-						<option value="四环素牙">四环素牙</option>
-						<option value="釉质发育不全">磨耗牙</option>
-						<option value="釉质发育不全">其它</option>
-						</select>
-					</div>
-				</div>
+						<h3 class="ui blue header">患牙与邻牙接触关系</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>患牙与邻牙接触关系是否正常</label>
+								<select name="relations_between_teeth" class="ui dropdown">
+								<option value="正常">正常</option>
+								<option value="否">否</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>牙列是否拥挤</label>
+								<select name="is_teeth_crowd" class="ui dropdown">
+								<option value="否">否</option>
+								<option value="是">是</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>患牙有无对合牙</label>
+								<select name="involution_teeth" class="ui dropdown">
+								<option value="有">有</option>
+								<option value="无">无</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>牙体形态</label>
+								<select name="tooth_shape" class="ui dropdown">
+								<option value="正常">正常</option>
+								<option value="畸形舌侧沟">畸形舌侧沟</option>
+								<option value="畸形中央尖">畸形中央尖</option>
+								<option value="过大牙">过大牙</option>
+								<option value="过小牙">过小牙</option>
+								<option value="融合牙">融合牙</option>
+								<option value="双生牙">双生牙</option>
+								<option value="结合牙">结合牙</option>
+								<option value="牙内陷">牙内陷</option>
+								<option value="釉珠">釉珠</option>
+								<option value="其它">其它</option>
+								</select>
+							</div>
+						</div>
 
-				<h3 class="ui blue header">患牙与邻牙接触关系</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>患牙与邻牙接触关系是否正常</label>
-						<select name="relations_between_teeth" class="ui dropdown">
-						<option value="正常">正常</option>
-						<option value="否">否</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>牙列是否拥挤</label>
-						<select name="is_teeth_crowd" class="ui dropdown">
-						<option value="否">否</option>
-						<option value="是">是</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>患牙有无对合牙</label>
-						<select name="involution_teeth" class="ui dropdown">
-						<option value="有">有</option>
-						<option value="无">无</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>牙体形态</label>
-						<select name="tooth_shape" class="ui dropdown">
-						<option value="正常">正常</option>
-						<option value="畸形舌侧沟">畸形舌侧沟</option>
-						<option value="畸形中央尖">畸形中央尖</option>
-						<option value="过大牙">过大牙</option>
-						<option value="过小牙">过小牙</option>
-						<option value="融合牙">融合牙</option>
-						<option value="双生牙">双生牙</option>
-						<option value="结合牙">结合牙</option>
-						<option value="牙内陷">牙内陷</option>
-						<option value="釉珠">釉珠</option>
-						<option value="其它">其它</option>
-						</select>
-					</div>
-				</div>
+						<h3 class="ui blue header">患牙修复治疗情况</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>患牙修复治疗情况</label>
+								<select name="treatment" class="ui dropdown">
+								<option value="没有做过修复治疗">没有做过修复治疗</option>
+								<option value="树脂充填体">树脂充填体</option>
+								<option value="玻璃离子充填体">玻璃离子充填体</option>
+								<option value="银汞合金充填体">银汞合金充填体</option>
+								<option value="烤瓷冠">烤瓷冠</option>
+								<option value="金属冠">金属冠</option>
+								<option value="瓷嵌体">瓷嵌体</option>
+								<option value="树脂嵌体">树脂嵌体</option>
+								<option value="釉质发育不全">其它</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>是否有正畸治疗史</label>
+								<select name="orthodontic" class="ui dropdown">
+								<option value="否">否</option>
+								<option value="是">是</option>
+								</select>
+							</div>
+						</div>
 
-				<h3 class="ui blue header">患牙修复治疗情况</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>患牙修复治疗情况</label>
-						<select name="treatment" class="ui dropdown">
-						<option value="没有做过修复治疗">没有做过修复治疗</option>
-						<option value="树脂充填体">树脂充填体</option>
-						<option value="玻璃离子充填体">玻璃离子充填体</option>
-						<option value="银汞合金充填体">银汞合金充填体</option>
-						<option value="烤瓷冠">烤瓷冠</option>
-						<option value="金属冠">金属冠</option>
-						<option value="瓷嵌体">瓷嵌体</option>
-						<option value="树脂嵌体">树脂嵌体</option>
-						<option value="釉质发育不全">其它</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>是否有正畸治疗史</label>
-						<select name="orthodontic" class="ui dropdown">
-						<option value="否">否</option>
-						<option value="是">是</option>
-						</select>
-					</div>
-				</div>
+						<h3 class="ui blue header">X线片表现</h3>
+						<div class="three fields">
+							<div class="field">
+								<label>部位</label>
+								<select name="X_Ray_location" class="ui dropdown">
+								<option value="近中邻面">近中邻面</option>
+								<option value="远中邻面">远中邻面</option>
+								<option value="合面">合面</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>程度</label>
+								<select name="X_Ray_depth" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="釉质">釉质</option>
+								<option value="本质浅层">本质浅层</option>
+								<option value="本质深层">本质深层</option>
+								<option value="近髓">近髓</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>充填体影像</label>
+								<select name="X_Ray_fill_quality" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="低密度影">低密度充填体影像</option>
+								<option value="高密度充填体影像">高密度充填体影像</option>
+								</select>
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>CT表现</label>
+								<input type="text" name="CT_shows" placeholder="CT表现">
+							</div>
+							<div class="field">
+								<label>咬翼片表现</label>
+								<input type="text" name="piece" placeholder="咬翼片表现">
+							</div>
+						</div>
 
-				<h3 class="ui blue header">X线片表现</h3>
-				<div class="three fields">
-					<div class="field">
-						<label>部位</label>
-						<select name="X_Ray_location" class="ui dropdown">
-						<option value="近中邻面">近中邻面</option>
-						<option value="远中邻面">远中邻面</option>
-						<option value="合面">合面</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>程度</label>
-						<select name="X_Ray_depth" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="釉质">釉质</option>
-						<option value="本质浅层">本质浅层</option>
-						<option value="本质深层">本质深层</option>
-						<option value="近髓">近髓</option>
-						</select>
-					</div>
-					<div class="field">
-						<label>充填体影像</label>
-						<select name="X_Ray_fill_quality" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="低密度影">低密度充填体影像</option>
-						<option value="高密度充填体影像">高密度充填体影像</option>
-						</select>
-					</div>
-				</div>
-				<div class="three fields">
-					<div class="field">
-						<label>CT表现</label>
-						<input type="text" name="CT_shows" placeholder="CT表现">
-					</div>
-					<div class="field">
-						<label>咬翼片表现</label>
-						<input type="text" name="piece" placeholder="咬翼片表现">
-					</div>
-				</div>
+						<div class="ui fluid file button">
+							<span id="FileLabel">选择口腔检查图片</span> 
+							<input type="file" name="file[]" multiple="multiple" id="imageupload">
+						</div>
 
-				<div class="ui fluid file button">
-					<span id="FileLabel">选择口腔检查图片</span> 
-					<input type="file" name="file[]" multiple="multiple" id="imageupload">
+						<div class="ui hidden divider"></div>
+					    <button class="ui right floated blue submit button">提交</button>
+					</form> 
 				</div>
-
-				<div class="ui hidden divider"></div>
-			    <button class="ui right floated blue submit button">提交</button>
-			</form> 
+			</div>
 		</div>
   	</div>
 
@@ -535,15 +552,6 @@
 							</div>
 							<div class="row">
 								<div class="column">
-						    		<div class="ui large labels">
-							    		<a class="ui label">75</a>
-							    		<a class="ui label">74</a>
-							    		<a class="ui label">73</a>
-							    		<a class="ui label">72</a>
-							    		<a class="ui label">71</a>
-							    	</div>
-						    	</div>
-								<div class="column">
 							    	<div class="ui large labels">
 							    		<a class="ui label">81</a>
 							    		<a class="ui label">82</a>
@@ -551,6 +559,15 @@
 							    		<a class="ui label">84</a>
 							    		<a class="ui label">85</a>
 									</div>
+						    	</div>
+								<div class="column">
+						    		<div class="ui large labels">
+							    		<a class="ui label">75</a>
+							    		<a class="ui label">74</a>
+							    		<a class="ui label">73</a>
+							    		<a class="ui label">72</a>
+							    		<a class="ui label">71</a>
+							    	</div>
 								</div>
 							</div>
 						</div>
@@ -581,7 +598,7 @@
 			</ol>	
 		</div>
 
-		<div class="center aligned actions">
+		<div class="actions">
 			<div class="ui ok basic inverted button">
 				<i class="checkmark icon"></i>确认
 			</div>

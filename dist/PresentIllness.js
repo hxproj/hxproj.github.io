@@ -1,14 +1,10 @@
 $(document).ready(function(){
 
-  // ***************************************************************
-  // FUNCTION: 其它
-  $('.orange.header').text("现病史 - " + decodeURI(requestParameter("name")));
   $('#context .menu .item').tab({ context: $('#context') });
 
-	var U_ID = Number(requestParameter("uid"));
+  var DATA = null; 
+  var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
-
-	var DATA = null;
 	// ***************************************************************
 	// FUNCTION: 请求数据
   $.ajax({
@@ -26,10 +22,6 @@ $(document).ready(function(){
 
         // 设置描述（需提前获取牙位信息）
         $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(toothdata){
-
-
-          //$('#ToothLocation').text(data.tooth_location + "：" + (data.is_fill_tooth ? "要求直接补牙" :
-          //    data.symptom + "（" + data.time_of_occurrence) + "）");
 
           var DescribeText = "";
           if (!DATA.is_primary) {
@@ -77,6 +69,12 @@ $(document).ready(function(){
               DescribeText += "，充填体（" + DATA.fill_type + "）";
             }
 
+            if (DATA.medicine_name == "") {
+              DescribeText += "，未服用药物";
+            } else {
+              DescribeText += "，服用" + DATA.medicine_name;
+            }
+            
             if (DATA.is_treatment == "否") {
               DescribeText += "，未做过治疗";
             } else if (DATA.is_treatment == "是") {
@@ -148,5 +146,15 @@ $(document).ready(function(){
 	// FUNCTION: 下一项-口腔检查
   $('.right.labeled.button').click(function(){
     redirection("MouthExamination.html", U_ID, T_ID, requestParameter("name"));
+  });
+
+  // ***************************************************************
+  // FUNCTION: 导航栏
+  $('#nav a').not('.active, .return').click(function(){
+    $(this).prop('href', $(this).prop('href') + "?" + toquerystring({
+      uid  : U_ID,
+      tid  : T_ID,
+      name : requestParameter("name")
+    }));
   });
 });

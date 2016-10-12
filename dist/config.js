@@ -33,6 +33,14 @@ $(document).ready(function(){
 		window.location.href = URL + "?" + addParameter("uid", UID) + "&" + addParameter("tid", TID) + "&"
       			+ addParameter("name", Name);
 	}
+	window.toquerystring = function(parameters) {
+		var querystring = "";
+		$.each(parameters, function(key, value){
+			querystring += key + "=" + value + "&";
+		});
+
+		return querystring.length > 0 ? querystring.substring(0, querystring.length - 2) : querystring;
+	}
 
 	// ***************************************************************
 	// FUNCTION: Page Common Settings
