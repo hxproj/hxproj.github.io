@@ -307,4 +307,14 @@ $(document).ready(function(){
   $('#ME_IMAGE .corner.label').click(function(){
     
   });
+
+  // ***************************************************************
+  // FUNCTION: 导航栏
+  $('#nav a').not('.active, .return').click(function(){
+    $(this).prop('href', $(this).prop('href') + toquerystring({
+      uid  : U_ID,
+      tid  : T_ID,
+      name : requestParameter("name")
+    }));
+  });
 });

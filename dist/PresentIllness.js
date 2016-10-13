@@ -100,13 +100,10 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: AJAX提交现病史
 	$('.ui.tab .submit.button').click(function(){
-
-      var AddtionParameter = addParameter("user_id", U_ID) + "&" + addParameter("tooth_id", T_ID) + "&";
-
     	$.ajax({
     		url      : URL_PRESENTILLNESS,
     		type     : DATA == null ? "POST" : "PUT", 
-    		data     : AddtionParameter + $(this).parent().serialize(),
+    		data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).parent().serialize(),
     		dataType : "json",
         error    : function() {networkError();},
         success  : function() {location.reload();}
@@ -151,7 +148,7 @@ $(document).ready(function(){
   // ***************************************************************
   // FUNCTION: 导航栏
   $('#nav a').not('.active, .return').click(function(){
-    $(this).prop('href', $(this).prop('href') + "?" + toquerystring({
+    $(this).prop('href', $(this).prop('href') + toquerystring({
       uid  : U_ID,
       tid  : T_ID,
       name : requestParameter("name")

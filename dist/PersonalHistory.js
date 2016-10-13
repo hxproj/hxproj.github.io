@@ -107,16 +107,17 @@ $(document).ready(function(){
 				]
 			},
 		},
-		inline: true,
-		onSuccess: function(){
-      var AddtionParameter = addParameter("user_id", U_ID) + "&"
-               + addParameter("time_of_teeth_brush", $(this).form('get value', 'time_of_teeth_brush_display')).toString() + "&";
+		inline    : true,
+		onSuccess : function(){
+      var AddtionFormField = toform({
+        user_id             : U_ID,
+        time_of_teeth_brush : $(this).form('get value', 'time_of_teeth_brush_display').toString()
+      });
 
       $.ajax({
         url      : URL_PERSONAL_HISTORY,
         type     : DATA == null ? "post" : "PUT", 
-        async    : false, 
-        data     : AddtionParameter + $(this).serialize(),
+        data     : AddtionFormField + $(this).serialize(),
         dataType : "json",
         error    : function() {networkError();},
         success  : function() {location.reload();}

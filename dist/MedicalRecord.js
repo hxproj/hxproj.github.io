@@ -242,11 +242,10 @@ $(document).ready(function(){
 
 	function submitTooth($Form){
 		
-		var AddtionParameter = "user_id=" + USER_ID + "&";
 		$.ajax({
 			url     : URL_TOOTH,
 			type    : "post",
-			data    : AddtionParameter + $Form.serialize(),
+			data    : toform({user_id : USER_ID}) + $Form.serialize(),
 			dataType: "json",
 			error   : function(){
 				IsToothAddOK = false;
@@ -295,9 +294,10 @@ $(document).ready(function(){
 	// 个人史，风险评估和预后管理
 	$('a[href^=RiskEvaluation], a[href^=Manage], a[href^=PersonalHistory]').click(function(){
 		var $Record = $(this).parents('.record.segment');
-		$(this).prop('href', $(this).prop('href') + "?" 
-			+ addParameter("uid", $Record.attr('value'))
-			+ "&" + addParameter("name", $Record.find('.name').text()));
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : $Record.attr('value'),
+			name : $Record.find('.name').text()
+		}));
 	});
 
 	// 其它
@@ -306,12 +306,11 @@ $(document).ready(function(){
 		var T_ID = $(this).parents('.extra').attr('value');
 		var Name = $(this).parents('.record.segment').find('.name').text();
 
-		var Href = $(this).prop('href');
-		Href += "?" + addParameter("uid", U_ID)
-			 + "&" + addParameter("tid", T_ID)
-			 + "&" + addParameter("name", Name); 
-
-		$(this).prop('href', Href);
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : U_ID,
+			tid  : T_ID,
+			name : Name
+		}));
 	});
 
 	// ***************************************************************
@@ -321,7 +320,7 @@ $(document).ready(function(){
 		$('#deletemodal').modal({
 			onApprove: function() {
 				$.ajax({
-					url      : URL_TOOTH + "?" + addParameter("tooth_id", $Tooth.attr('value')),
+					url      : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
 					type     : "DELETE",
 					dataType : "text",
 					error    : function() {alert("删除牙位失败");},
@@ -334,11 +333,8 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 下载文件
 	$('.download.button').click(function(){
-		var THIS_TOOTH_ID = $(this).parents('.extra').attr('value');
-		var AddtionParameter = addParameter("tooth_id", THIS_TOOTH_ID) + "&risk=";
-		
 		$.ajax({
-			url      : URL_DOC + "?" + AddtionParameter,
+			url      : URL_DOC + toquerystring({tooth_id : $(this).parents('.extra').attr('value'), risk : ""}),
 			type     : "GET",
 			dataType : "text",
 			error    : function() {networkError();},
@@ -355,7 +351,7 @@ $(document).ready(function(){
 		$('#deletemodal').modal({
 			onApprove: function() {
 				$.ajax({
-					url      : URL_USER + "?" + addParameter("user_id", $Record.attr("value")),
+					url      : URL_USER + toquerystring({user_id : $Record.attr("value")}),
 					type     : "DELETE",
 					dataType : "text",
 					error    : function() {networkError();},

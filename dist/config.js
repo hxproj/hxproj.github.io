@@ -27,20 +27,26 @@ $(document).ready(function(){
 		if (r!=null) return (r[2]); return null;
 	};
 
-	window.addParameter = function(Name, Value) { return Name + "=" + Value; };
 	window.networkError = function() { $('#networkerror').modal('show'); }
 	window.redirection  = function(URL, UID, TID, Name) {
-		window.location.href = URL + "?" + addParameter("uid", UID) + "&" + addParameter("tid", TID) + "&"
-      			+ addParameter("name", Name);
-	}
-	window.toquerystring = function(parameters) {
-		var querystring = "";
-		$.each(parameters, function(key, value){
-			querystring += key + "=" + value + "&";
+		window.location.href = URL + window.toquerystring({
+			uid  : UID,
+			tid  : TID,
+			name : Name
 		});
-
-		return querystring.length > 0 ? querystring.substring(0, querystring.length - 2) : querystring;
 	}
+
+	window.toform = function(parameters) {
+		var form = "";
+		$.each(parameters, function(key, value) {form += key + "=" + value + "&";});
+		return form;
+	};
+
+	window.toquerystring = function(parameters) {
+		var querystring = "?" + window.toform(parameters);
+		// Delete the last charactor '&' if exist
+		return querystring.length > 0 ? querystring.substring(0, querystring.length - 1) : querystring;
+	};
 
 	// ***************************************************************
 	// FUNCTION: Page Common Settings

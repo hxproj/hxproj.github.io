@@ -78,4 +78,14 @@ $(document).ready(function(){
 	$('.right.labeled.button').click(function(){
     	redirection("Cure.html", U_ID, T_ID, requestParameter("name"));
 	});
+
+  // ***************************************************************
+  // FUNCTION: 导航栏
+  $('#nav a').not('.active, .return').click(function(){
+    $(this).prop('href', $(this).prop('href') + toquerystring({
+      uid  : U_ID,
+      tid  : T_ID,
+      name : requestParameter("name")
+    }));
+  });
 });
