@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-	// 其它
-	$('.orange.header').text("诊断 - " + decodeURI(requestParameter("name")));
-	
 	var DATA = null;
 	var U_ID = Number(requestParameter("uid"));
 	var T_ID = Number(requestParameter("tid"));
@@ -75,11 +72,10 @@ $(document).ready(function(){
 		},
 		inline: true,
 		onSuccess: function(){
-			var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 			$.ajax({
 				url      : URL_DIAGNOSE,
 				type     : DATA == null ? "post" : "PUT", 
-				data     : AddtionParameter + $(this).serialize(),
+				data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function(data){

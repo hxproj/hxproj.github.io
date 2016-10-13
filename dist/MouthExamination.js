@@ -21,6 +21,9 @@ $(document).ready(function(){
 
   			DATA = data;
 
+        // 表头
+        $('#display th').text("现病史 - " + decodeURI(requestParameter("name")));
+
   			// 牙体情况
   			var ME_Body_Text = "";
   			if (DATA.tooth_location != "") {
@@ -184,11 +187,10 @@ $(document).ready(function(){
 	// 提交表单数据
 	$('form').form({
 		onSuccess: function() {
-	    	var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
 		    $.ajax({
 	      		url      : URL_MOUTHEXAM,
 	      		type     : DATA == null ? "post" : "PUT", 
-	      		data     : AddtionParameter + $(this).serialize(),
+	      		data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
 	      		dataType : "json",
 	      		error    : function() {networkError();},
 	      		success  : function(data){

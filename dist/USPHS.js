@@ -39,12 +39,10 @@ $(document).ready(function(){
 	// FUNCTION: 提交
 	$('form').form({
 		onSuccess: function(){
-			var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
-
 			$.ajax({
 				url      : URL_USPHS,
 				type     : DATA == null ? "post" : "PUT", 
-				data     : AddtionParameter + $(this).serialize(),
+				data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function() {location.reload();}

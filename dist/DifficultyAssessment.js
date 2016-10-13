@@ -98,12 +98,10 @@ $(document).ready(function(){
     },
     inline: true,
 		onSuccess: function(){
-			var AddtionParameter = "user_id=" + U_ID + "&" + "tooth_id=" + T_ID + "&";
-
 			$.ajax({
 				url      : URL_DIFFICULTYASSE,
 				type     : DATA == null ? "post" : "PUT", 
-				data     : AddtionParameter + $(this).serialize(),
+				data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function() {location.reload();}

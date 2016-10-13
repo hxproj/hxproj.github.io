@@ -27,7 +27,7 @@
 	<div class="ui main container">
 		
 		<div class="ui grid">
-			<div class="two wide center aligned column">
+			<div class="three wide right aligned column">
 				<div class="ui mini labeled icon vertical menu" id="nav">
 					<a class="item"><i class="return chevron left icon"></i>返回病历</a>
 					<a class="item" href="PresentIllness.html"><i class="history icon"></i>现病史</a>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 
-			<div class="fourteen wide column">
+			<div class="thirteen wide column">
 				<table class="ui celled invisible structured table" id="display">
 					<thead>
 						<tr>
@@ -226,15 +226,15 @@
 							</div>
 						</div>
 
-					    <button class="ui right floated blue submit button">提交</button>
+					    <div class="ui right floated blue submit button">提交</div>
 					</form> 
 				</div>
 			</div>
 		</div>
   	</div>
 
-  	<!-- 弹出层 -->
-	<div class="ui small basic modal" id="networkerror">
+  	<!-- 网络错误 -->
+	<div class="ui small modal" id="networkerror">
 		<div class="ui icon header">
 			<i class="orange warning sign icon"></i>
 			网络无法访问或服务器异常
@@ -245,11 +245,12 @@
 			<ol>
 				<li>重启服务器（电脑）</li>
 				<li>联系系统管理员</li>
+				<li>检查网络配置是否正确</li>
 			</ol>	
 		</div>
 
 		<div class="center aligned actions">
-			<div class="ui ok basic inverted button">
+			<div class="ui blue ok button">
 				<i class="checkmark icon"></i>确认
 			</div>
 		</div>
