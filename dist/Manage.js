@@ -37,10 +37,10 @@ $(document).ready(function(){
 			   + "7. 窝沟封闭<br/><br/>";
 			   + "6. 当感觉口干时，饭后及吃零食后使用小苏打水漱口<br/><br/>";
 
+	var DATA = null,
+		U_ID = Number(requestParameter("uid"));
 	// ***************************************************************
 	// FUNCTION: 请求数据
-	var DATA = null;
-	var U_ID = Number(requestParameter("uid"));
 	$.ajax({
   		url      : URL_MANAGE,
   		type     : "get",

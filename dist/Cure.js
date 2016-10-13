@@ -1,11 +1,10 @@
 $(document).ready(function(){
-	// 设置表头用户数据
-	$('.orange.header').text("处置 - " + decodeURI(requestParameter("name")));
   	$('#context .menu .item').tab({ context: $('#context') });
 	
-    var U_ID = Number(requestParameter("uid")),
-		T_ID = Number(requestParameter("tid")),
-		DATA = null;
+    var DATA       = null,
+    	U_ID       = Number(requestParameter("uid")),
+		T_ID       = Number(requestParameter("tid")),
+		Image_type = 2;
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
@@ -17,7 +16,6 @@ $(document).ready(function(){
       	async    : false,
   		success  : function(data){
   			$('#context').hide();
-
   			DATA = data;
 
         	// 表头
@@ -234,6 +232,47 @@ $(document).ready(function(){
   				$('#Describe').html(Describe_Text);
   			}
 
+		    // 显示图片
+			$.ajax({
+				url      : URL_IMAGEUPLOAD,
+				type     : "GET",
+				data     : {tooth_id : T_ID, type : Image_type},
+				dataType : "json",
+				success  : function(FileData) {
+					$.each(FileData, function(Index, Value){
+						$('#Image').append("<img class='ui image'>");
+						$('#Image .ui.image').eq(Index).attr('src', this);
+					});
+
+					$.each(FileData, function(){
+						var $ClonedImage = $('#IMAGE .hidden.image').clone(true).removeClass('hidden');
+						$ClonedImage.attr("value", this.img_id);
+						$ClonedImage.find('img').attr('src', this.path);
+						$ClonedImage.find('.corner').bind('click', function(){
+							var $Image = $(this).parent();
+	                
+							$('#deletemodal').modal({
+								onApprove: function() {
+									$.ajax({
+										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+										type     : "DELETE",
+										data     : {},
+										dataType : "text",
+										error    : function(data) {
+											alert("删除文件失败，请检查网络设置。");
+										},
+										success  : function() {
+											$Image.remove();
+										}
+									});
+								}
+							}).modal('show');
+              			});
+
+						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+					});
+				}
+			});
 
   			$('#display').show();
   		}
@@ -830,7 +869,6 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 提交表单数据
 	$.each($('#context form'), function(){
-
 		// 设置当前表单规则
 		var Rules = {};
 		switch ($(this).attr('id')) {
@@ -842,6 +880,7 @@ $(document).ready(function(){
 			case "CureForm7": Rules = vForm67Rules; break;
 		}
 
+		var FileID = $(this).find('input[type=file]').attr("id");
 		$(this).form({
 			fields   : Rules,
 			inline   : true,
@@ -852,7 +891,26 @@ $(document).ready(function(){
 					data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
 					dataType : "json",
 					error    : function() {networkError();},
-					success  : function() {location.reload();}
+					success  : function(data) {
+						// 上传图片
+						$.ajaxFile({
+							url           : URL_IMAGEUPLOAD, 
+							type          : 'POST',  
+							fileElementId : FileID,
+							dataType      : 'text',
+							data          : {tooth_id : data.tooth_id, picture_type : Image_type},
+							async         : false,  
+							cache         : false,  
+							contentType   : false,  
+							processData   : false,
+							success       : function() {
+								location.reload()
+							},
+							error         : function() {
+								alert("文件上传失败");
+							}
+						});
+					}
 				});
 
   				return false;
@@ -882,7 +940,7 @@ $(document).ready(function(){
 
 					break;
 				}
-				case "再矿物治疗": {
+				case "再矿化治疗": {
   					ChangeTabActive($DetailContextLink, $DetailTab, 1);
 					break;
 				}

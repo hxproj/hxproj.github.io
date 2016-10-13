@@ -3,9 +3,10 @@ $(document).ready(function(){
 	$('.modal .ui.label').click(function(){ $(this).toggleClass('teal'); });
 	$('#context .menu .item').tab({ context: $('#context') });
 
-  var DATA = null;
-	var U_ID = Number(requestParameter("uid"));
-	var T_ID = Number(requestParameter("tid"));
+  var DATA       = null,
+      U_ID       = Number(requestParameter("uid")),
+      T_ID       = Number(requestParameter("tid"));
+      Image_type = 0;
 
 	// ******************************************************
 	// 检查数据是否已经提交
@@ -164,15 +165,33 @@ $(document).ready(function(){
         $.ajax({
           url      : URL_IMAGEUPLOAD,
           type     : "GET",
-          data     : {tooth_id : T_ID},
+          data     : {tooth_id : T_ID, type : Image_type},
           dataType : "json",
-          error    : function() {
-
-          },
           success  : function(FileData) {
-            $.each(FileData, function(Index, Value){
+            $.each(FileData, function(){
               var $ClonedImage = $('#ME_IMAGE .hidden.image').clone(true).removeClass('hidden');
-              $ClonedImage.find('img').attr('src', Value);
+              $ClonedImage.attr("value", this.img_id);
+              $ClonedImage.find('.corner').bind('click', function(){
+                var $Image = $(this).parent();
+                
+                $('#deletemodal').modal({
+                  onApprove: function() {
+                    $.ajax({
+                      url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+                      type     : "DELETE",
+                      data     : {},
+                      dataType : "text",
+                      error    : function(data) {
+                        alert("删除文件失败，请检查网络设置。");
+                      },
+                      success  : function() {
+                        $Image.remove();
+                      }
+                    });
+                  }
+                }).modal('show');
+              });
+              $ClonedImage.find('img').attr('src', this.path);
 
               $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
             });
@@ -200,7 +219,7 @@ $(document).ready(function(){
                 type          : 'POST',  
                 fileElementId : 'imageupload',
                 dataType      : 'text',
-                data          : {tooth_id : data.tooth_id, picture_type : 0},
+                data          : {tooth_id : data.tooth_id, picture_type : Image_type},
                 async         : false,  
                 cache         : false,  
                 contentType   : false,  

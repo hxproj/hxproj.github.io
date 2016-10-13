@@ -17,6 +17,6 @@ $(document).ready(function(){
     // ***************************************************************
     // FUNCTION: 图片添加
     $('.file.button :file').on('fileselect', function(event, numFiles, label) {
-        $("#FileLabel").text(label);
+        $(".FileLabel").text(label);
     });
 });

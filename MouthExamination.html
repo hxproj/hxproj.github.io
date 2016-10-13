@@ -449,7 +449,7 @@
 						</div>
 
 						<div class="ui fluid file button">
-							<span id="FileLabel">选择口腔检查图片</span> 
+							<span class="FileLabel">选择口腔检查图片</span> 
 							<input type="file" name="file[]" multiple="multiple" id="imageupload">
 						</div>
 
@@ -601,6 +601,21 @@
 
 		<div class="center aligned actions">
 			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除图片 -->
+	<div class="ui small modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除图片
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
 				<i class="checkmark icon"></i>确认
 			</div>
 		</div>

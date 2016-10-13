@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-	var DATA = null;
-	var U_ID = Number(requestParameter("uid"));
-	var T_ID = Number(requestParameter("tid"));
+	var DATA       = null,
+		U_ID       = Number(requestParameter("uid")),
+		T_ID       = Number(requestParameter("tid"))
+		Image_type = 1;
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
@@ -27,16 +28,44 @@ $(document).ready(function(){
 
 	        }, "json");
 
-		    // 显示口腔检查图片
+		    // 显示诊断图片
 			$.ajax({
 				url      : URL_IMAGEUPLOAD,
 				type     : "GET",
-				data     : {tooth_id : T_ID},
+				data     : {tooth_id : T_ID, type : Image_type},
 				dataType : "json",
 				success  : function(FileData) {
 					$.each(FileData, function(Index, Value){
 						$('#Image').append("<img class='ui image'>");
 						$('#Image .ui.image').eq(Index).attr('src', this);
+					});
+
+					$.each(FileData, function(){
+						var $ClonedImage = $('#IMAGE .hidden.image').clone(true).removeClass('hidden');
+						$ClonedImage.attr("value", this.img_id);
+						$ClonedImage.find('img').attr('src', this.path);
+						$ClonedImage.find('.corner').bind('click', function(){
+							var $Image = $(this).parent();
+	                
+							$('#deletemodal').modal({
+								onApprove: function() {
+									$.ajax({
+										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+										type     : "DELETE",
+										data     : {},
+										dataType : "text",
+										error    : function(data) {
+											alert("删除文件失败，请检查网络设置。");
+										},
+										success  : function() {
+											$Image.remove();
+										}
+									});
+								}
+							}).modal('show');
+              			});
+
+						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
 					});
 				}
 			});
@@ -79,24 +108,24 @@ $(document).ready(function(){
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function(data){
-	              // 上传图片
-	              $.ajaxFile({
-	                url           : URL_IMAGEUPLOAD, 
-	                type          : 'POST',  
-	                fileElementId : 'imageupload',
-	                dataType      : 'text',
-	                data          : {tooth_id : data.tooth_id, picture_type : 1},
-	                async         : false,  
-	                cache         : false,  
-	                contentType   : false,  
-	                processData   : false,
-	                success       : function() {
-	                  location.reload()
-	                },
-	                error         : function() {
-	                  alert("文件上传失败");
-	                }
-	              });
+					// 上传图片
+					$.ajaxFile({
+						url           : URL_IMAGEUPLOAD, 
+						type          : 'POST',  
+						fileElementId : 'imageupload',
+						dataType      : 'text',
+						data          : {tooth_id : data.tooth_id, picture_type : Image_type},
+						async         : false,  
+						cache         : false,  
+						contentType   : false,  
+						processData   : false,
+						success       : function() {
+							location.reload()
+						},
+						error         : function() {
+							alert("文件上传失败");
+						}
+					});
 				}
 			});
 

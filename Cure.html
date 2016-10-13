@@ -8,10 +8,12 @@
 
  	<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/config.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/file.css">
 
   	<script src="dist/jquery.min.js"></script>
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
+  	<script src="dist/file.js"></script>  
   	<script src="dist/Cure.js"></script> 
 </head>
 
@@ -68,6 +70,15 @@
 							<td id="Describe"></td>
 						</tr>
 						<tr>
+							<td class="negative collapsing">诊断图片</td>
+							<td id="IMAGE" colspan="2">
+								<div class="ui hidden image">
+									<a class="ui right corner label"><i class="remove icon"></i></a>
+									<img style="max-width:100%; height:auto;">
+						    	</div>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="2">
 								<div class="ui right floated small blue edit button">修改</div>
 								<div class="ui right floated small teal buttons">
@@ -93,7 +104,7 @@
 						<div id="contextDetail">
 			    			<div class="ui secondary pointing menu">
 								<a class="item active" data-tab="contextDetail1">药物治疗</a>
-								<a class="item" data-tab="contextDetail2">再矿物治疗</a>
+								<a class="item" data-tab="contextDetail2">再矿化治疗</a>
 								<a class="item" data-tab="contextDetail3">窝沟封闭</a>
 							</div>
 
@@ -121,6 +132,12 @@
 										</div>
 									</div>
 
+									<div class="ui fluid file button">
+										<span class="FileLabel">选择处置图片</span> 
+										<input type="file" name="file[]" multiple="multiple" id="imageupload1">
+									</div>
+									<div class="ui hidden divider"></div>
+
 									<!--hidden input-->
 									<input type="hidden" name="handle_type" value="0">
 									<input type="hidden" name="specific_method" value="药物治疗">
@@ -146,9 +163,15 @@
 										</ul>
 									</div>
 
+									<div class="ui fluid file button">
+										<span class="FileLabel">选择处置图片</span> 
+										<input type="file" name="file[]" multiple="multiple" id="imageupload2">
+									</div>
+									<div class="ui hidden divider"></div>
+
 									<!--hidden input-->
 									<input type="hidden" name="handle_type" value="0">
-									<input type="hidden" name="specific_method" value="再矿物治疗">
+									<input type="hidden" name="specific_method" value="再矿化治疗">
 
 									<!--useless input-->
 									<input type="hidden" name="fluorination" value="">
@@ -223,7 +246,13 @@
 											</select>
 										</div>
 									</div>
-				    				
+
+									<div class="ui fluid file button">
+										<span class="FileLabel">选择处置图片</span> 
+										<input type="file" name="file[]" multiple="multiple" id="imageupload3">
+									</div>
+									<div class="ui hidden divider"></div>
+									
 									<!--hidden input-->
 									<input type="hidden" name="handle_type" value="0">
 									<input type="hidden" name="specific_method" value="窝沟封闭">
@@ -505,6 +534,12 @@
 								</div>
 							</div>
 
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload4">
+							</div>
+							<div class="ui hidden divider"></div>
+							
 							<!--hidden input-->
 							<input type="hidden" name="handle_type" value="1">
 							<input type="hidden" name="specific_method" value="牙树脂直接填充修复">
@@ -804,6 +839,12 @@
 								</div>
 							</div>
 
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload5">
+							</div>
+							<div class="ui hidden divider"></div>
+							
 							<!--hidden input-->
 							<input type="hidden" name="handle_type" value="1">
 							<input type="hidden" name="specific_method" value="牙安抚治疗&树脂充填修复">
@@ -1049,6 +1090,12 @@
 								</div>
 							</div>
 
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload6">
+							</div>
+							<div class="ui hidden divider"></div>
+							
 							<!--hidden input-->
 							<input type="hidden" name="handle_type" value="1">
 							<input type="hidden" name="specific_method" value="嵌体修复">
@@ -1299,6 +1346,12 @@
 								</div>
 							</div>
 
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload7">
+							</div>
+							<div class="ui hidden divider"></div>
+							
 							<!--hidden input-->
 							<input type="hidden" name="handle_type" value="1">
 							<input type="hidden" name="specific_method" value="贴面修复">
@@ -1338,6 +1391,21 @@
 
 		<div class="center aligned actions">
 			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除图片 -->
+	<div class="ui small modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除图片
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
 				<i class="checkmark icon"></i>确认
 			</div>
 		</div>

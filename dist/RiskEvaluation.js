@@ -3,8 +3,8 @@ $(document).ready(function(){
   // 其它
   $('.orange.header').text("龋病风险评估 - " + decodeURI(requestParameter("name")));
   
-  var DATA = null;
-	var U_ID = Number(requestParameter("uid"));
+  var DATA = null,
+      U_ID = Number(requestParameter("uid"));
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
@@ -49,12 +49,10 @@ $(document).ready(function(){
 	// FUNCTION: 提交
 	$('#RiskForm').form({
 		onSuccess: function(){
-			var AddtionParameter = addParameter("user_id", U_ID) + "&";
-
 			$.ajax({
 				url      : URL_RISKEVALUATION,
 				type     : DATA == null ? "post" : "PUT", 
-				data     : AddtionParameter + $(this).serialize(),
+				data     : toform({user_id : U_ID}) + $(this).serialize(),
 				dataType : "json",
         error    : function() {networkError();},
         success  : function() {location.reload();}
