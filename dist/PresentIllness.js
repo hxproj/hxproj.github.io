@@ -154,4 +154,10 @@ $(document).ready(function(){
       name : requestParameter("name")
     }));
   });
+
+  // ***************************************************************
+  // FUNCTION: 导航栏，返回病历
+  $('#nav a.return').click(function(){
+    $(this).prop('href', "MedicalRecordDetail.html" + toquerystring({uid  : U_ID}));
+  });
 });

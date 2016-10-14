@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 提交
-	$('#context .segment button').click(function(){
+	$('#context .segment div.button').click(function(){
 	    $.ajax({
       		url      : URL_MANAGE,
       		type     : DATA == null ? "POST" : "PUT", 
@@ -103,7 +103,7 @@ $(document).ready(function(){
 		$TabSegment  = $('#context .tab.segment').removeClass('active');
 		ChangeTabActive($ContextLink, $TabSegment, DATA.patient_type - 1);
 
-		$('#context .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+		$('#context .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$('#context').show();
 	});
 
@@ -111,4 +111,10 @@ $(document).ready(function(){
 		$Context.eq(Index).addClass('active');
 		$TabSegment.eq(Index).addClass('active');
 	}
+
+	// ***************************************************************
+	// FUNCTION: 返回病人病历概述
+	$('.returnMedical.button').click(function(){
+		window.location = "MedicalRecordDetail.html" + toquerystring({uid  : U_ID});
+	});
 });

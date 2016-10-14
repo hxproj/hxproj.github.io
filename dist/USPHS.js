@@ -27,7 +27,8 @@ $(document).ready(function(){
   			$('#occlusal_contact').text(DATA.occlusal_contact);
   			$('#sensitivity_of_tooth').text(DATA.sensitivity_of_tooth);
   			$('#secondary_caries').text(DATA.secondary_caries);
-  			$('#integrity').text(DATA.integrity);
+        $('#integrity').text(DATA.integrity);
+  			$('#usphs_level').text(DATA.level);
 
   			$('#display').show();
   		}
@@ -85,5 +86,11 @@ $(document).ready(function(){
       tid  : T_ID,
       name : requestParameter("name")
     }));
+  });
+  
+  // ***************************************************************
+  // FUNCTION: 导航栏，返回病历
+  $('#nav a.return').click(function(){
+    $(this).prop('href', "MedicalRecordDetail.html" + toquerystring({uid  : U_ID}));
   });
 });

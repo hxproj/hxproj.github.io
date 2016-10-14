@@ -48,9 +48,11 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 页面跳转
 	function search(Parameters) {
-		window.location.href = "Search.html?" + addParameter("type", Parameters.DataBaseTableName) + "&"
-				+ addParameter("name", Parameters.DataBaseFieldName) + "&"
-				+ addParameter("value", Parameters.SearchItemValue) + "&"
-				+ addParameter("search", Parameters.SearchItemName);
+		window.location.href = "Search.html" + toquerystring({
+			type   : Parameters.DataBaseTableName,
+			name   : Parameters.DataBaseFieldName,
+			value  : Parameters.SearchItemValue,
+			search : Parameters.SearchItemName
+		});
 	}
 });

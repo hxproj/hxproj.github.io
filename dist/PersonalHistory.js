@@ -165,7 +165,7 @@ $(document).ready(function(){
 
   // ***************************************************************
   // FUNCTION: 返回病人病历概述
-  $('.return.button').click(function(){
-
+  $('.returnMedical.button').click(function(){
+    window.location = "MedicalRecordDetail.html" + toquerystring({uid  : U_ID});
   });
 });

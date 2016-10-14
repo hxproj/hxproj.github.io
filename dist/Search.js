@@ -12,22 +12,11 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 获取页面数据
 	function requestPageData(PageNum){
-
-		var AddtionParameter = addParameter("table", Table) 
-				+ "&" + addParameter(Field, Value)
-				+ "&" + addParameter("page", 1);
-
 		$.ajax({
 			url       : URL_SEARCH,
 			type      : "get",
-			data      : AddtionParameter,
+			data      : toform({table : Table, page : 1}) + Field + "=" + Value,
 			dataType  : "json",
-			beforeSend: function(){
-				
-			},
-			complete  : function(){
-
-			},
 			error     : function(){
 				alert("网络连接错误...");
 			},
@@ -289,9 +278,7 @@ $(document).ready(function(){
 	// 个人史，风险评估和预后管理
 	$('a[href^=RiskEvaluation], a[href^=Manage], a[href^=PersonalHistory]').click(function(){
 		var $Record = $(this).parents('.record.segment');
-		$(this).prop('href', $(this).prop('href') + "?" 
-			+ addParameter("uid", $Record.attr('value'))
-			+ "&" + addParameter("name", $Record.find('.name').text()));
+		$(this).prop('href', $(this).prop('href') + toquerystring({uid : $Record.attr('value'), name : $Record.find('.name').text()}));
 	});
 
 	// 其它
@@ -300,10 +287,7 @@ $(document).ready(function(){
 		var T_ID = $(this).parents('.extra').attr('value');
 		var Name = $(this).parents('.record.segment').find('.name').text();
 
-		var Href = $(this).prop('href');
-		Href += "?" + addParameter("uid", U_ID)
-			 + "&" + addParameter("tid", T_ID)
-			 + "&" + addParameter("name", Name); 
+		var Href = $(this).prop('href') + toquerystring({uid : U_ID, tid : T_ID, name : Name});
 
 		$(this).prop('href', Href);
 	});
@@ -313,10 +297,9 @@ $(document).ready(function(){
 	// FUNCTION: 删除牙位
 	$('.deletetooth.button').click(function(){
 		var $Tooth = $(this).parents('.extra');
-		var AddtionParameter = addParameter("tooth_id", $Tooth.attr('value'));
 
 		$.ajax({
-			url     : URL_TOOTH + "?" + AddtionParameter,
+			url     : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
 			type    : "DELETE",
 			dataType: "text",
 			error   : function(){

@@ -88,7 +88,13 @@ $(document).ready(function(){
     $('select[name=long_of_tooth_brush]').dropdown("set selected", DATA.long_of_tooth_brush);
     $('select[name=health_care]').dropdown("set selected", DATA.health_care);
 
-    $('#RiskForm .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+    $('#RiskForm .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
     $('#RiskForm').show();
 	});
+
+  // ***************************************************************
+  // FUNCTION: 返回病人病历概述
+  $('.returnMedical.button').click(function(){
+    window.location = "MedicalRecordDetail.html" + toquerystring({uid  : U_ID});
+  });
 });

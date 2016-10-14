@@ -1,61 +1,37 @@
 $(document).ready(function(){
+	var USER_DATA = null,
+		U_ID      = Number(requestParameter("uid"));	// FIXME: check uid is empty
 
 	// ***************************************************************
-	// 请求首页数据
+	// FUNCTION: 请求用户基本数据
 	$.ajax({
-		url      : URL_PAGE,
-		type     : "get",
-		data     : {page : 1},
-		dataType : "json",
-		error    : function(){ networkError(); },
+  		url      : URL_SEARCH,
+  		type     : "GET",
+  		data     : {table : "user", user_id : U_ID, page : 1},
+  		dataType : "json",
+		async    : false,
+		error    : function() {networkError();},
 		success  : function(data){
-			if (data.info_list.length) {
-				// 设置分页属性
-				$.Page(
-					$('.record.segment'),
-				 	data.pages,
-				 	1,
-				 	URL_PAGE,
-				 	function() { networkError(); },
-				 	function(data) { showAllMedicalRecord(data); }
-				 );
-	 			
-	 			// 显示当前页所有病历
-	 			showAllMedicalRecord(data);
-			} else {
-				$('#id_infomessage').show();
-			}
+			showMedicalRecord(data.info_list[0]);
 		}
 	});
-	
-	// ***************************************************************
-	// FUNCTION: 显示所有病历
-	function showAllMedicalRecord(data) {
-		$('.record.segment:visible').remove();
-		$.each(data.info_list.reverse(), function(){ showMedicalRecord(this); });
-	}
-	
+
 	// ***************************************************************
 	// FUNCTION: 在界面显示新的病历项
 	function showMedicalRecord(UserData){
-		$MedicalRecord = $('.invisible.segment');
 
-		var $ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
-		$ClonedMedicalRecord.attr("value", UserData.user_id);
-		$ClonedMedicalRecord.find('.name').text(UserData.name);
-		$ClonedMedicalRecord.find('.gender').text(UserData.gender == 0 ? "男" : "女");
-		$ClonedMedicalRecord.find('.age').text(UserData.age);
-		$ClonedMedicalRecord.find('.occupation').text(UserData.occupation);
-		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
-		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
+		var $MedicalRecord = $('.record.segment');
+		$MedicalRecord.attr("value", UserData.user_id);
+		$MedicalRecord.find('.name').text(UserData.name);
+		$MedicalRecord.find('.gender').text(UserData.gender == 0 ? "男" : "女");
+		$MedicalRecord.find('.age').text(UserData.age);
+		$MedicalRecord.find('.occupation').text(UserData.occupation);
+		$MedicalRecord.find('.contact').text(UserData.contact);
+		$MedicalRecord.find('.time').text(UserData.in_date);
 
-		if (UserData.tootn_location_list != undefined && UserData.tootn_location_list.length > 0) {
-			$.each(UserData.tootn_location_list, function(){
-				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
-			});
-		}
-
-		$MedicalRecord.after($ClonedMedicalRecord);
+		$.each(UserData.tooth_location_list, function(){
+			showToothLocation($MedicalRecord.find('.extra:first'), this);
+		});
 	}
 
 	// ***************************************************************
@@ -81,84 +57,6 @@ $(document).ready(function(){
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
 	}
 
-	$("#basicinfoform").form({
-		fields: {
-			name: {
-				identifier: 'name',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的姓名'
-					}
-				]
-			},
-			gender: {
-				identifier: 'gender',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的性别'
-					}
-				]
-			},
-			age: {
-				identifier: 'age',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的年龄'
-					},
-					{
-						type   : 'integer[1..100]',
-            			prompt : '请正确填写病人的年龄'
-					}
-				]
-			},
-			occupation: {
-				identifier: 'occupation',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的职业'
-					}
-				]
-			},
-			contact: {
-				identifier: 'contact',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的联系方式'
-					}
-				]
-			}
-		},
-		inline: true,
-		onSuccess: function(){
-			$.ajax({
-  				url      : URL_USER,
-				type     : "post",
-				async    : false, 
-				data     : $(this).serialize(),
-				dataType : "json",
-				error    : function() {networkError();},
-				success  : function() {location.reload();}
-			});
-
-			return false;
-		}
-	});
-
-	$('.right.menu .add.href').click(function(){
-		$('#MedicalRecords').modal({
-			closable  : false,
-  			onApprove : function() {
-  				$("#basicinfoform").submit();
-				return false;
-			}
-		}).modal('show');
-	});
-
 	var USER_ID         = null;
 	var $InvisibleExtra = null;
 	// ***************************************************************
@@ -178,6 +76,8 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
+	
+	$('#context .menu .item').tab({ context: $('#context') });
 
 	// ***************************************************************
 	// FUNCTION: 设置添加牙位相关属性
@@ -257,8 +157,6 @@ $(document).ready(function(){
 			}
 		});
 	}
-
-	$('#context .menu .item').tab({ context: $('#context') });
 
 	// 添加时间控件
 	$('#add_tooth .disabled.input').click(function(){
