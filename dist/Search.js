@@ -1,50 +1,54 @@
 $(document).ready(function(){
 
-	var Table  = requestParameter("type");
-	var Field  = requestParameter("name");
-	var Value  = requestParameter("value");
-	var Search = requestParameter("search");
+	var Table       = requestParameter("type"),
+		Field       = requestParameter("name"),
+		Value       = requestParameter("value"),
+		Search      = requestParameter("search"),
+		QueryString = URL_SEARCH + toquerystring({table : Table}) + "&" + Field + "=" + Value;
 
 	// ***************************************************************
-	// FUNCTION: 搜索
-	requestPageData(1);
+	// 请求首页数据
+	$.ajax({
+		url      : QueryString,
+		type     : "get",
+		data     : {page : 0},
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(data){
 
-	// ***************************************************************
-	// FUNCTION: 获取页面数据
-	function requestPageData(PageNum){
-		$.ajax({
-			url       : URL_SEARCH,
-			type      : "get",
-			data      : toform({table : Table, page : 1}) + Field + "=" + Value,
-			dataType  : "json",
-			error     : function(){
-				alert("网络连接错误...");
-			},
-			success   : function(data){
-
-				$('.record.segment:visible').each(function(){ this.remove(); });
-
-				if (data.searched == "ok") {
-					$('.orange.header').text("搜索结果：" + decodeURI(Search));
-					// 如果数据库内容不为空
-					if (data.info_list != undefined) {
-						$.each(data.info_list.reverse(), function(){ showNewMedicalRecord(this); });
-						showPagination(data.pages, Number(PageNum), data.info_list.length);
-					}
-					// FIXME: 为空？更改MedicalRecord
-				} else if (data.searched == "failed") {
-					$('.orange.header').text("没有搜索到'" + decodeURI(Search) + "'相关病历");
-				}
+			if (data.searched == "ok") {
+				$('.orange.header').text("搜索结果：" + decodeURI(Search));
+				// 设置分页属性
+				$.Page(
+					$('.record.segment'),
+				 	data.pages,
+				 	1,
+				 	QueryString,
+				 	function() { networkError(); },
+				 	function(data) { showAllMedicalRecord(data); }
+				 );
+	 			
+	 			// 显示当前页所有病历
+	 			showAllMedicalRecord(data);
+			} else {
+				$('.orange.header').text("没有搜索到'" + decodeURI(Search) + "'相关病历");
 			}
-		});
-	}
-
+		}
+	});
+	
 	// ***************************************************************
-	// FUNCTION: 在界面现实新的病历项
-	function showNewMedicalRecord(UserData){
+	// FUNCTION: 显示所有病历
+	function showAllMedicalRecord(data) {
+		$('.record.segment:visible').remove();
+		$.each(data.info_list.reverse(), function(){ showMedicalRecord(this); });
+	}
+	
+	// ***************************************************************
+	// FUNCTION: 在界面显示新的病历项
+	function showMedicalRecord(UserData){
 		$MedicalRecord = $('.invisible.segment');
 
-		$ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
+		var $ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
 		$ClonedMedicalRecord.attr("value", UserData.user_id);
 		$ClonedMedicalRecord.find('.name').text(UserData.name);
 		$ClonedMedicalRecord.find('.gender').text(UserData.gender == 0 ? "男" : "女");
@@ -56,7 +60,7 @@ $(document).ready(function(){
 		$.each(UserData.tooth_location_list, function(){
 			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
 		});
-		
+
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
 
@@ -73,73 +77,14 @@ $(document).ready(function(){
 		$ClonedExtra.find('.location').text(LocationStr);
 
 		// 设置当前牙位操作状态
-		$.each($ClonedExtra.find('.disabled.button'), function(index){
-			if (index + 1 <= ToothData.step) {
-				$(this).addClass('blue').removeClass('disabled');
+		$.each(ToothData.step, function(){
+			if (this != 0) {
+				$ClonedExtra.find('a.button').eq(this - 1).addClass('blue');
 			}
 		});
 
 		$Selector.after($ClonedExtra);
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
-	}
-
-	// ***************************************************************
-	// FUNCTION: 显示分页
-	function showPagination(Pages, Page, IsContainContent){
-		var $Menu = $('.borderless.menu');
-		if (IsContainContent) {
-
-			if ($Menu.hasClass('invisible')) {$Menu.removeClass('invisible');}
-			$('.borderless.menu').find('.blue.item').remove();
-			$('.borderless.menu').find('.disabled.item').remove();
-
-			var DisabledItem    = "<div class='disabled item'>...</div>";
-			var PageItem        = "<a class='blue item' href='#'></a>";
-
-			var MaxDisplayPages = 5;
-
-			var StartPage = Page - 2;
-			if (StartPage < 1) {
-				StartPage = 1
-			}
-
-			if (Pages < 1) { Pages = 1; }
-
-			var EndPage = Page + 2;
-			if (EndPage < MaxDisplayPages) {
-				EndPage = MaxDisplayPages;
-			}
-			if (EndPage > Pages) {
-				EndPage = Pages;
-			} 
-
-			var $LeftItem  = $Menu.find('.left.item');
-			var $RightItem = $Menu.find('.right.item');
-
-			// 设置首尾页点击事件
-			$LeftItem.bind('click', function() { requestPageData(1); });
-			$RightItem.bind('click', function() { requestPageData(Pages); });
-
-			// 添加disable item
-			var $Item = $LeftItem;
-			if (StartPage > 1) {
-				$Item.after(DisabledItem);
-				$Item = $Item.next();
-			}
-
-			if (Pages - EndPage > 0) {
-				$RightItem.before(DisabledItem);
-			}
-
-			for (var i=StartPage; i<=EndPage; ++i) {
-				$Item.after(PageItem);
-				$Item = $Item.next().text(i);
- 
-				$Item.bind('click', function() {requestPageData(this.text)});
-			}
-		} else {
-			if (!$Menu.hasClass('invisible')) {$Menu.addClass('invisible');}
-		}
 	}
 
 	var USER_ID         = null;
@@ -225,11 +170,10 @@ $(document).ready(function(){
 
 	function submitTooth($Form){
 		
-		var AddtionParameter = "user_id=" + USER_ID + "&";
 		$.ajax({
 			url     : URL_TOOTH,
 			type    : "post",
-			data    : AddtionParameter + $Form.serialize(),
+			data    : toform({user_id : USER_ID}) + $Form.serialize(),
 			dataType: "json",
 			error   : function(){
 				IsToothAddOK = false;
@@ -259,13 +203,13 @@ $(document).ready(function(){
 
 		if (TimeType === "time_day")
 		{
-			Result += "天前";
+			Result += "天";
 		} else if (TimeType === "time_week") {
-			Result += "周前";
+			Result += "周";
 		} else if (TimeType === "time_month") {
-			Result += "月前";
+			Result += "月";
 		} else if (TimeType === "time_year") {
-			Result += "年前";
+			Result += "年";
 		}
 
 		$('#add_tooth .disabled.input input').val(Result);
@@ -278,7 +222,10 @@ $(document).ready(function(){
 	// 个人史，风险评估和预后管理
 	$('a[href^=RiskEvaluation], a[href^=Manage], a[href^=PersonalHistory]').click(function(){
 		var $Record = $(this).parents('.record.segment');
-		$(this).prop('href', $(this).prop('href') + toquerystring({uid : $Record.attr('value'), name : $Record.find('.name').text()}));
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : $Record.attr('value'),
+			name : $Record.find('.name').text()
+		}));
 	});
 
 	// 其它
@@ -287,29 +234,58 @@ $(document).ready(function(){
 		var T_ID = $(this).parents('.extra').attr('value');
 		var Name = $(this).parents('.record.segment').find('.name').text();
 
-		var Href = $(this).prop('href') + toquerystring({uid : U_ID, tid : T_ID, name : Name});
-
-		$(this).prop('href', Href);
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : U_ID,
+			tid  : T_ID,
+			name : Name
+		}));
 	});
-
 
 	// ***************************************************************
 	// FUNCTION: 删除牙位
 	$('.deletetooth.button').click(function(){
 		var $Tooth = $(this).parents('.extra');
-
-		$.ajax({
-			url     : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
-			type    : "DELETE",
-			dataType: "text",
-			error   : function(){
-				alert("网络连接错误...");
-			},
-			success : function(data){
-				$Tooth.remove();
+		$('#deletemodal').modal({
+			onApprove: function() {
+				$.ajax({
+					url      : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
+					type     : "DELETE",
+					dataType : "text",
+					error    : function() {alert("删除牙位失败");},
+					success  : function() {$Tooth.remove();}
+				});
 			}
+		}).modal('show');
+	});
+
+	// ***************************************************************
+	// FUNCTION: 下载文件
+	$('.download.button').click(function(){
+		$.ajax({
+			url      : URL_DOC + toquerystring({tooth_id : $(this).parents('.extra').attr('value'), risk : ""}),
+			type     : "GET",
+			dataType : "text",
+			error    : function() {networkError();},
+			success  : function(text) {location.href = text;}
 		});
 
 		return false;
+	});
+
+	// ***************************************************************
+	// FUNCTION: 删除病历
+	$('.corner.label').click(function(){
+		var $Record = $(this).parents('.record.segment');
+		$('#deletemodal').modal({
+			onApprove: function() {
+				$.ajax({
+					url      : URL_USER + toquerystring({user_id : $Record.attr("value")}),
+					type     : "DELETE",
+					dataType : "text",
+					error    : function() {networkError();},
+					success  : function() {$Record.remove();}
+				});
+			}
+		}).modal('show');
 	});
 });

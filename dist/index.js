@@ -13,7 +13,7 @@ $(document).ready(function(){
 			SearchItemValue   = $(this).attr('value');
 
 		DataBaseFieldName == "other" ? DataBaseFieldName = $(this).attr('filed') : 
-			SearchItemName = $(this).parents('td').prev().text() + "：" + SearchItemName;
+			SearchItemName = SearchItemName + "(" + $(this).parents('td').prev().text() + ")";
 
 		search({
 			DataBaseTableName : DataBaseTableName,
