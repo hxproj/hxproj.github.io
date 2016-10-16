@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$.ajax({
 		url      : QueryString,
 		type     : "get",
-		data     : {page : 0},
+		data     : {page : 1},
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(data){

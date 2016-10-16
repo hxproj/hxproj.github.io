@@ -53,6 +53,8 @@ $(document).ready(function(){
 			}
 		});
 
+		$ClonedExtra.find('a.button').bind('click', clickToothStepLink);
+
 		$Selector.after($ClonedExtra);
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
 	}
@@ -199,7 +201,7 @@ $(document).ready(function(){
 	});
 
 	// 其它
-	$('.record.segment .extra:first a').click(function(){
+	function clickToothStepLink(){
 		var U_ID = $(this).parents('.record.segment').attr('value');
 		var T_ID = $(this).parents('.extra').attr('value');
 		var Name = $(this).parents('.record.segment').find('.name').text();
@@ -209,7 +211,7 @@ $(document).ready(function(){
 			tid  : T_ID,
 			name : Name
 		}));
-	});
+	}
 
 	// ***************************************************************
 	// FUNCTION: 删除牙位

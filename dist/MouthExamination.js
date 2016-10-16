@@ -171,6 +171,11 @@ $(document).ready(function(){
             $.each(FileData, function(){
               var $ClonedImage = $('#ME_IMAGE .hidden.image').clone(true).removeClass('hidden');
               $ClonedImage.attr("value", this.img_id);
+
+              var ImagePath = this.path;
+              ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+              $ClonedImage.find('img').attr('src', ImagePath);
+              
               $ClonedImage.find('.corner').bind('click', function(){
                 var $Image = $(this).parent();
                 
@@ -191,7 +196,6 @@ $(document).ready(function(){
                   }
                 }).modal('show');
               });
-              $ClonedImage.find('img').attr('src', this.path);
 
               $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
             });

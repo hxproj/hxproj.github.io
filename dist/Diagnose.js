@@ -6,6 +6,19 @@ $(document).ready(function(){
 		Image_type = 1;
 
 	// ***************************************************************
+	// FUNCTION: 请求牙位信息
+	$.get(URL_TOOTH, {tooth_id : T_ID}, function(toothdata){
+		var ToothDescription = "";
+		if (!toothdata.is_fill_tooth) {
+      		ToothDescription += toothdata.tooth_location + toothdata.time_of_occurrence + "前" + toothdata.symptom;
+		} else {
+			ToothDescription += toothdata.tooth_location + "要求补牙";
+		}
+
+		$('.locationdescription').text(ToothDescription);
+	}, "json");
+
+	// ***************************************************************
 	// FUNCTION: 请求数据
 	$.ajax({
   		url      : URL_DIAGNOSE,
@@ -35,15 +48,15 @@ $(document).ready(function(){
 				data     : {tooth_id : T_ID, type : Image_type},
 				dataType : "json",
 				success  : function(FileData) {
-					$.each(FileData, function(Index, Value){
-						$('#Image').append("<img class='ui image'>");
-						$('#Image .ui.image').eq(Index).attr('src', this);
-					});
 
 					$.each(FileData, function(){
 						var $ClonedImage = $('#IMAGE .hidden.image').clone(true).removeClass('hidden');
 						$ClonedImage.attr("value", this.img_id);
-						$ClonedImage.find('img').attr('src', this.path);
+
+						var ImagePath = this.path;
+						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+						$ClonedImage.find('img').attr('src', ImagePath);
+						
 						$ClonedImage.find('.corner').bind('click', function(){
 							var $Image = $(this).parent();
 	                

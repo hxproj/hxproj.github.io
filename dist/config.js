@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
-	window.URL_SERVER           = "http://127.0.0.1:9000";
+	window.URL_SERVER           = "http://192.168.191.1:9000";
 	window.URL_PERSONAL_HISTORY = URL_SERVER + "/medical-case-of-illness/personal-history";
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";

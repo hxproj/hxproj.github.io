@@ -1,12 +1,26 @@
 $(document).ready(function(){
 
-  $('#context .menu .item').tab({ context: $('#context') });
+	$('#context .menu .item').tab({ context: $('#context') });
 
-  var DATA = null; 
-  var U_ID = Number(requestParameter("uid"));
-	var T_ID = Number(requestParameter("tid"));
+  var DATA = null,
+      U_ID = Number(requestParameter("uid")),
+      T_ID = Number(requestParameter("tid"));
+
+  // ***************************************************************
+  // FUNCTION: 请求牙位信息
+  $.get(URL_TOOTH, {tooth_id : T_ID}, function(toothdata){
+    var ToothDescription = "";
+    if (!toothdata.is_fill_tooth) {
+      ToothDescription += toothdata.tooth_location + toothdata.time_of_occurrence + "前" + toothdata.symptom;
+    } else {
+      ToothDescription += toothdata.tooth_location + "要求补牙";
+    }
+
+    $('.locationdescription').text(ToothDescription);
+  }, "json");
+
 	// ***************************************************************
-	// FUNCTION: 请求数据
+	// FUNCTION: 请求现病史数据
   $.ajax({
   		url      : URL_PRESENTILLNESS,
   		type     : "GET",
@@ -46,7 +60,7 @@ $(document).ready(function(){
             if (DATA.medicine_name == "") {
               DescribeText += "，未服用药物";
             } else {
-              DescribeText += "，服用" + DATA.medicine_name;
+              DescribeText += "，服用过" + DATA.medicine_name;
             }
 
             if (DATA.is_treatment == "否") {

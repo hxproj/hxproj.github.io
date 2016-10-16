@@ -239,15 +239,14 @@ $(document).ready(function(){
 				data     : {tooth_id : T_ID, type : Image_type},
 				dataType : "json",
 				success  : function(FileData) {
-					$.each(FileData, function(Index, Value){
-						$('#Image').append("<img class='ui image'>");
-						$('#Image .ui.image').eq(Index).attr('src', this);
-					});
-
 					$.each(FileData, function(){
 						var $ClonedImage = $('#IMAGE .hidden.image').clone(true).removeClass('hidden');
 						$ClonedImage.attr("value", this.img_id);
-						$ClonedImage.find('img').attr('src', this.path);
+
+						var ImagePath = this.path;
+						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+						$ClonedImage.find('img').attr('src', ImagePath);
+						
 						$ClonedImage.find('.corner').bind('click', function(){
 							var $Image = $(this).parent();
 	                
