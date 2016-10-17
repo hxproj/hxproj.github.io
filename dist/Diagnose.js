@@ -55,7 +55,9 @@ $(document).ready(function(){
 
 						var ImagePath = this.path;
 						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-						$ClonedImage.find('img').attr('src', ImagePath);
+						window.loadImage(ImagePath, function(){
+							$ClonedImage.find('img').attr('src', ImagePath);
+						});
 						
 						$ClonedImage.find('.corner').bind('click', function(){
 							var $Image = $(this).parent();
