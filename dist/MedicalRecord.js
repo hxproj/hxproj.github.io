@@ -338,7 +338,10 @@ $(document).ready(function(){
 			type     : "GET",
 			dataType : "text",
 			error    : function() {networkError();},
-			success  : function(text) {location.href = text;}
+			success  : function(text) {
+				text = text.substring(text.lastIndexOf("Medical_Case\\"), text.length);
+				location.href = text;
+			}
 		});
 
 		return false;

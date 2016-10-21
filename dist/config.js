@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
-	window.URL_SERVER           = "http://127.0.0.1:9000"; //192.168.191.1
+	window.URL_SERVER           = "http://192.168.191.1:9000"; //192.168.191.1
 	window.URL_PERSONAL_HISTORY = URL_SERVER + "/medical-case-of-illness/personal-history";
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
@@ -49,8 +49,8 @@ $(document).ready(function(){
 	};
 
 	window.loadImage = function(url, callback){
-		var Img = new Image(url);
-
+		var Img = new Image();
+		Img.src = url;
 		// If the image is aready in the brower cache, then load it
 		if (Img.complete) {
 			callback(Img);

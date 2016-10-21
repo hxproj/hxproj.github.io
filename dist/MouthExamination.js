@@ -169,13 +169,14 @@ $(document).ready(function(){
           dataType : "json",
           success  : function(FileData) {
             $.each(FileData, function(){
-              var $ClonedImage = $('#ME_IMAGE .hidden.image').clone(true).removeClass('hidden');
+              var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
               $ClonedImage.attr("value", this.img_id);
 
               var ImagePath = this.path;
               ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
               window.loadImage(ImagePath, function(){
                 $ClonedImage.find('img').attr('src', ImagePath);
+                $ClonedImage.find('.corner').removeClass('hidden');
               });
               
               $ClonedImage.find('.corner').bind('click', function(){
