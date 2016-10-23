@@ -23,7 +23,7 @@ $(document).ready(function(){
   			DATA = data;
 
         // 表头
-        $('#display th').text("现病史 - " + decodeURI(requestParameter("name")));
+        $('#display th').text("口腔检查 - " + decodeURI(requestParameter("name")));
 
   			// 牙体情况
   			var ME_Body_Text = "";
@@ -66,9 +66,9 @@ $(document).ready(function(){
 
 			  ME_Body_Text += "牙齿活力值：" + DATA.vitality_value_of_teeth + "，";
 
-  			if (DATA.secondary != "否") {
+  			if (DATA.secondary == "否") {
   				ME_Body_Text += " 无继发龋";
-  			} else if (DATA.secondary != "是") {
+  			} else if (DATA.secondary == "是") {
   				ME_Body_Text += " 有继发龋";
   			}
 

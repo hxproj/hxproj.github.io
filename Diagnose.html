@@ -26,103 +26,101 @@
 		</div> 
 	</div> 
 
-	<div class="ui main container">
-
-		<div class="ui grid">
-			<div class="three wide right aligned column">
-				<div class="ui mini labeled icon vertical menu" id="nav">
-					<a class="return item"><i class="chevron left icon"></i>返回病历</a>
-					<a class="item" href="PresentIllness.html"><i class="history icon"></i>现病史</a>
-					<a class="item" href="MouthExamination.html"><i class="add square icon"></i>口腔检查</a>
-					<a class="blue active item"><i class="heartbeat icon"></i>诊断</a>
-					<a class="item" href="DifficultyAssessment.html"><i class="bar chart icon"></i>难度评估</a>
-					<a class="item" href="Cure.html"><i class="first aid icon"></i>处置</a>
-					<a class="item" href="USPHS.html"><i class="area chart icon"></i>USPHS评估</a>
-				</div>
-			</div>
-
-			<div class="thirteen wide column">
-				<table class="ui invisible celled structured table" id="display">
-					<thead>
-						<tr>
-							<th class="center aligned" colspan="3"></th>
-						</tr>
-					</thead>
-		  			<tbody>
-						<tr>
-							<td class="negative collapsing" rowspan="3">诊断结果</td>
-							<td class="collapsing">牙位</td>
-							<td id="id_tooth_location"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">龋损程度</td>
-							<td id="caries_degree"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">龋齿病种</td>
-							<td id="caries_type"></td>
-						</tr>
-						<tr>
-							<td class="negative collapsing">诊断图片</td>
-							<td id="IMAGE" colspan="2">
-								<div class="ui hidden rounded image">
-									<a class="ui hidden right corner label"><i class="remove icon"></i></a>
-									<img style="max-width:100%; height:auto;">
-						    	</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3">
-								<div class="ui right floated small blue edit button">修改</div>
-								<div class="ui right floated small teal buttons">
-									<div class="ui left labeled icon button"><i class="chevron left icon"></i>上一项（口腔检查）</div>
-									<div class="ui right labeled icon button"><i class="chevron right icon"></i>下一项（难度评估）</div>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div class="ui invisible clearing segment" style="margin-top:0px" id="DiagnoseForm">
-					<form class="ui form">
-						<h3 class="ui locationdescription blue header"></h3>
-						<div class="two fields">
-							<div class="field">
-								<label>龋损程度</label>
-								<select name="caries_degree" class="ui dropdown">
-								<option value="">选择</option>
-								<option value="浅龋">浅龋</option>
-								<option value="中龋">中龋</option>
-								<option value="深龋">深龋</option>
-								</select>
-							</div>
-
-							<div class="field">
-								<label>龋齿病种</label>
-								<select name="caries_type" class="ui dropdown">
-								<option value="">选择</option>
-								<option value="猛性龋">猛性龋</option>
-								<option value="隐匿性龋">隐匿性龋</option>
-								<option value="根面龋">根面龋</option>
-								<option value="继发龋">继发龋</option>
-								<option value="静止龋">静止龋</option>
-								<option value="酸蚀症">酸蚀症</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="ui fluid file button">
-							<span class="FileLabel">选择诊断图片</span> 
-							<input type="file" name="file[]" multiple="multiple" id="imageupload">
-						</div>
-
-						<div class="ui hidden divider"></div>
-					    <div class="ui right floated blue submit button">提交</div>
-					</form> 
-				</div>
+	<div class="ui center aligned relaxed stackable main grid container">
+		<div class="three wide column">
+			<div class="ui vertical container stackable menu" id="nav">
+				<a class="return item"><i class="chevron left icon"></i>返回病历</a>
+				<a class="item" href="PresentIllness.html"><i class="history icon"></i>现病史</a>
+				<a class="item" href="MouthExamination.html"><i class="add square icon"></i>口腔检查</a>
+				<a class="blue active item"><i class="heartbeat icon"></i>诊断</a>
+				<a class="item" href="DifficultyAssessment.html"><i class="bar chart icon"></i>难度评估</a>
+				<a class="item" href="Cure.html"><i class="first aid icon"></i>处置</a>
+				<a class="item" href="USPHS.html"><i class="area chart icon"></i>USPHS评估</a>
 			</div>
 		</div>
-  	</div>
+
+		<div class="thirteen wide column">
+			<table class="ui invisible celled structured table" id="display">
+				<thead>
+					<tr>
+						<th class="center aligned" colspan="3"></th>
+					</tr>
+				</thead>
+	  			<tbody>
+					<tr>
+						<td class="negative collapsing" rowspan="3">诊断结果</td>
+						<td class="collapsing">牙位</td>
+						<td id="id_tooth_location"></td>
+					</tr>
+					<tr>
+						<td class="collapsing">龋损程度</td>
+						<td id="caries_degree"></td>
+					</tr>
+					<tr>
+						<td class="collapsing">龋齿病种</td>
+						<td id="caries_type"></td>
+					</tr>
+					<tr>
+						<td class="negative collapsing">诊断图片</td>
+						<td id="IMAGE" colspan="2">
+							<div class="ui hidden rounded image">
+								<a class="ui hidden right corner label"><i class="remove icon"></i></a>
+								<img style="max-width:100%; height:auto;">
+					    	</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="right aligned">
+							<div class="ui small teal buttons">
+								<div class="ui left labeled icon button"><i class="chevron left icon"></i>口腔检查</div>
+								<div class="ui right labeled icon button"><i class="chevron right icon"></i>难度评估</div>
+							</div>
+
+							<div class="ui blue edit small button">修改</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="ui invisible clearing segment" style="margin-top:0px" id="DiagnoseForm">
+				<form class="ui form">
+					<h3 class="ui locationdescription blue header"></h3>
+					<div class="two fields">
+						<div class="field">
+							<label>龋损程度</label>
+							<select name="caries_degree" class="ui dropdown">
+							<option value="">选择</option>
+							<option value="浅龋">浅龋</option>
+							<option value="中龋">中龋</option>
+							<option value="深龋">深龋</option>
+							</select>
+						</div>
+
+						<div class="field">
+							<label>龋齿病种</label>
+							<select name="caries_type" class="ui dropdown">
+							<option value="">选择</option>
+							<option value="猛性龋">猛性龋</option>
+							<option value="隐匿性龋">隐匿性龋</option>
+							<option value="根面龋">根面龋</option>
+							<option value="继发龋">继发龋</option>
+							<option value="静止龋">静止龋</option>
+							<option value="酸蚀症">酸蚀症</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="ui fluid file button">
+						<span class="FileLabel">选择诊断图片</span> 
+						<input type="file" name="file[]" multiple="multiple" id="imageupload">
+					</div>
+
+					<div class="ui hidden divider"></div>
+				    <div class="ui right floated blue submit button">提交</div>
+				</form> 
+			</div>
+		</div>
+	</div>
 
   	<!-- 网络错误 -->
 	<div class="ui small modal" id="networkerror">

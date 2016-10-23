@@ -24,141 +24,143 @@
 		</div> 
 	</div> 
 
-	<div class="ui main container">
-		<div class="ui grid">
-			<div class="three wide right aligned column">
-				<div class="ui mini labeled icon vertical menu" id="nav">
-					<a class="return item"><i class="chevron left icon"></i>返回病历</a>
-					<a class="blue active item"><i class="history icon"></i>现病史</a>
-					<a class="item" href="MouthExamination.html"><i class="add square icon"></i>口腔检查</a>
-					<a class="item" href="Diagnose.html"><i class="heartbeat icon"></i>诊断</a>
-					<a class="item" href="DifficultyAssessment.html"><i class="bar chart icon"></i>难度评估</a>
-					<a class="item" href="Cure.html"><i class="first aid icon"></i>处置</a>
-					<a class="item" href="USPHS.html"><i class="area chart icon"></i>USPHS评估</a>
-				</div>
-			</div>
-
-			<div class="thirteen wide column">
-				<table class="ui invisible celled striped table" id="display">
-					<thead>
-						<tr>
-							<th class="center aligned" colspan="2"></th>
-						</tr>
-					</thead>
-		  			<tbody>
-						<tr>
-							<td class="negative collapsing">病种</td>
-							<td id="illnessType"></td>
-						</tr>
-						<tr>
-							<td class="negative collapsing">现病史描述</td>
-							<td id="describe"></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="ui right floated blue edit small button">修改</div>
-								<div class="ui right floated teal right labeled icon small button"><i class="chevron right icon"></i>下一项（口腔检查）</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div class="invisible" id="context">
-			  		<div class="ui blue pointing fluid two item menu">
-						<a class="active item" data-tab="1">原发性龋病</a>
-						<a class="item" data-tab="2">有治疗史龋病</a>
-			  		</div>
-
-			  		<div class="ui tab clearing segment active" data-tab="1">
-			  			<form class="ui form">
-					    	<h3 class="ui locationdescription blue header"></h3>
-							<div class="three fields">
-						    	<div class="field">
-						    		<label>症状是否加重</label>
-						    		<select name="is_very_bad" class="ui dropdown">
-						            <option value="否">否</option>
-						            <option value="是">是</option>
-						          	</select>
-								</div>
-						    	<div class="field">
-						    		<label>有无自发痛或夜间痛</label>
-						    		<select name="is_night_pain_self_pain" class="ui dropdown">
-						            <option value="否">否</option>
-						            <option value="是">是</option>
-						          	</select>
-								</div>
-						    	<div class="field">
-						    		<label>是否做过治疗</label>
-						    		<select name="is_treatment" class="ui dropdown">
-						            <option value="否">否</option>
-						            <option value="是">是</option>
-						          	</select>
-								</div>
-							</div>
-					    	<div class="three fields">
-						    	<div class="field">
-						    		<label>服用药物名称</label>
-									<input type="text" name="medicine_name" placeholder="药物名称">
-								</div>
-						    	<div class="field">
-						    		<label>症状是否缓解</label>
-						    		<select name="is_relief" class="ui dropdown">
-						            <option value="">选择</option>
-						            <option value="否">否</option>
-						            <option value="是">是</option>
-						          	</select>
-								</div>
-							</div>
-
-							<input name="is_primary" type="hidden" value="0">
-							<input name="fill_type" type="hidden" value="">
-				    		<div class="ui right floated blue submit button">提交</div>
-						</form>
-			  		</div>
-
-			  		<div class="ui tab clearing segment" data-tab="2">
-			  			<form class="ui form">
-					    	<h3 class="ui locationdescription blue header"></h3>
-				  			<div class="three fields">
-						    	<div class="field">
-						    		<label>修复治疗充填体类型</label>
-						    		<select name="fill_type" class="ui dropdown">
-					                <option value="">选择</option>
-					                <option value="树脂充填体">树脂充填体</option>
-					                <option value="玻璃离子充填体">玻璃离子充填体</option>
-					                <option value="银汞合金充填体">银汞合金充填体</option>
-					                <option value="烤瓷冠">烤瓷冠</option>
-					                <option value="金属冠">金属冠</option>
-					                <option value="瓷嵌体">瓷嵌体</option>
-					                <option value="树脂嵌体">树脂嵌体</option>
-					                <option value="其它">其它</option>
-					              	</select>
-						    	</div>
-						    	<div class="field">
-						    		<label>服用药物名称</label>
-									<input type="text" name="medicine_name" placeholder="药物名称">
-								</div>
-						    	<div class="field">
-						    		<label>症状是否缓解</label>
-						    		<select name="is_relief" class="ui dropdown">
-						            <option value="">选择</option>
-						            <option value="否">否</option>
-						            <option value="是">是</option>
-						          	</select>
-								</div>
-							</div>
-
-							<input name="is_primary" type="hidden" value="1">
-							<input name="is_treatment" type="hidden" value="">
-							<input name="is_night_pain_self_pain" type="hidden" value="">
-							<input name="is_very_bad" type="hidden" value="">
-				    		<div class="ui right floated blue submit button">提交</div>
-						</form>
-			  		</div>
-		  		</div>
+	<div class="ui center aligned relaxed stackable main grid container">
+		<div class="three wide column">
+			<div class="ui vertical container stackable menu" id="nav">
+				<a class="return item"><i class="chevron left icon"></i>返回病历</a>
+				<a class="blue active item"><i class="history icon"></i>现病史</a>
+				<a class="item" href="MouthExamination.html"><i class="add square icon"></i>口腔检查</a>
+				<a class="item" href="Diagnose.html"><i class="heartbeat icon"></i>诊断</a>
+				<a class="item" href="DifficultyAssessment.html"><i class="bar chart icon"></i>难度评估</a>
+				<a class="item" href="Cure.html"><i class="first aid icon"></i>处置</a>
+				<a class="item" href="USPHS.html"><i class="area chart icon"></i>USPHS评估</a>
 			</div>
 		</div>
-  	</div>
+
+		<div class="thirteen wide column">
+			<table class="ui invisible celled striped table" id="display">
+				<thead>
+					<tr>
+						<th class="center aligned" colspan="2"></th>
+					</tr>
+				</thead>
+	  			<tbody>
+					<tr>
+						<td class="negative collapsing">病种</td>
+						<td id="illnessType"></td>
+					</tr>
+					<tr>
+						<td class="negative collapsing">现病史描述</td>
+						<td id="describe"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="right aligned">
+
+							<div class="ui small teal buttons">
+								<div class="ui right labeled icon button"><i class="chevron right icon"></i>口腔检查</div>
+							</div>
+							
+							<div class="ui blue edit small button">修改</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="invisible" id="context">
+		  		<div class="ui blue pointing fluid two item menu">
+					<a class="active item" data-tab="1">原发性龋病</a>
+					<a class="item" data-tab="2">有治疗史龋病</a>
+		  		</div>
+
+		  		<div class="ui tab clearing segment active" data-tab="1">
+		  			<form class="ui form">
+				    	<h3 class="ui locationdescription blue header"></h3>
+						<div class="three fields">
+					    	<div class="field">
+					    		<label>症状是否加重</label>
+					    		<select name="is_very_bad" class="ui dropdown">
+					            <option value="否">否</option>
+					            <option value="是">是</option>
+					          	</select>
+							</div>
+					    	<div class="field">
+					    		<label>有无自发痛或夜间痛</label>
+					    		<select name="is_night_pain_self_pain" class="ui dropdown">
+					            <option value="否">否</option>
+					            <option value="是">是</option>
+					          	</select>
+							</div>
+					    	<div class="field">
+					    		<label>是否做过治疗</label>
+					    		<select name="is_treatment" class="ui dropdown">
+					            <option value="否">否</option>
+					            <option value="是">是</option>
+					          	</select>
+							</div>
+						</div>
+				    	<div class="three fields">
+					    	<div class="field">
+					    		<label>服用药物名称</label>
+								<input type="text" name="medicine_name" placeholder="药物名称">
+							</div>
+					    	<div class="field">
+					    		<label>症状是否缓解</label>
+					    		<select name="is_relief" class="ui dropdown">
+					            <option value="">选择</option>
+					            <option value="否">否</option>
+					            <option value="是">是</option>
+					          	</select>
+							</div>
+						</div>
+
+						<input name="is_primary" type="hidden" value="0">
+						<input name="fill_type" type="hidden" value="">
+			    		<div class="ui right floated blue submit button">提交</div>
+					</form>
+		  		</div>
+
+		  		<div class="ui tab clearing segment" data-tab="2">
+		  			<form class="ui form">
+				    	<h3 class="ui locationdescription blue header"></h3>
+			  			<div class="three fields">
+					    	<div class="field">
+					    		<label>修复治疗充填体类型</label>
+					    		<select name="fill_type" class="ui dropdown">
+				                <option value="">选择</option>
+				                <option value="树脂充填体">树脂充填体</option>
+				                <option value="玻璃离子充填体">玻璃离子充填体</option>
+				                <option value="银汞合金充填体">银汞合金充填体</option>
+				                <option value="烤瓷冠">烤瓷冠</option>
+				                <option value="金属冠">金属冠</option>
+				                <option value="瓷嵌体">瓷嵌体</option>
+				                <option value="树脂嵌体">树脂嵌体</option>
+				                <option value="其它">其它</option>
+				              	</select>
+					    	</div>
+					    	<div class="field">
+					    		<label>服用药物名称</label>
+								<input type="text" name="medicine_name" placeholder="药物名称">
+							</div>
+					    	<div class="field">
+					    		<label>症状是否缓解</label>
+					    		<select name="is_relief" class="ui dropdown">
+					            <option value="">选择</option>
+					            <option value="否">否</option>
+					            <option value="是">是</option>
+					          	</select>
+							</div>
+						</div>
+
+						<input name="is_primary" type="hidden" value="1">
+						<input name="is_treatment" type="hidden" value="">
+						<input name="is_night_pain_self_pain" type="hidden" value="">
+						<input name="is_very_bad" type="hidden" value="">
+			    		<div class="ui right floated blue submit button">提交</div>
+					</form>
+		  		</div>
+	  		</div>
+		</div>
+	</div>
 
   	<!-- 网络错误 -->
 	<div class="ui small modal" id="networkerror">

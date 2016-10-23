@@ -74,7 +74,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 上一项，处置
-	$('.right.labeled.button').click(function(){
+	$('.left.labeled.button').click(function(){
     	redirection("Cure.html", U_ID, T_ID, requestParameter("name"));
 	});
 

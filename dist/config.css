@@ -3,6 +3,11 @@
 	margin-bottom: 10em;
 }
 
+.grid.container {
+	margin-top: 1.5em;
+	margin-bottom: 10em;
+}
+
 .invisible {
 	display: none;
 }
