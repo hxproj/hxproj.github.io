@@ -73,7 +73,7 @@ $(document).ready(function(){
 		// 设置当前牙位操作状态
 		$.each(ToothData.step, function(){
 			if (this != 0) {
-				$ClonedExtra.find('a.button').eq(this - 1).addClass('blue');
+				$ClonedExtra.find('a.label').eq(this - 1).addClass('blue');
 			}
 		});
 
