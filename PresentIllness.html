@@ -76,45 +76,70 @@
 		  			<form class="ui form">
 				    	<h3 class="ui locationdescription blue header"></h3>
 						<div class="three fields">
-					    	<div class="field">
+					    	<div class="required field">
 					    		<label>症状是否加重</label>
 					    		<select name="is_very_bad" class="ui dropdown">
-					            <option value="否">否</option>
-					            <option value="是">是</option>
+					            <option value="近来症状未加重">否</option>
+					            <option value="近来症状加重">是</option>
 					          	</select>
 							</div>
-					    	<div class="field">
-					    		<label>有无自发痛或夜间痛</label>
+					    	<div class="required field">
+					    		<label>有无自发痛</label>
 					    		<select name="is_night_pain_self_pain" class="ui dropdown">
-					            <option value="否">否</option>
-					            <option value="是">是</option>
+					            <option value="患牙无自发痛">无</option>
+					            <option value="患牙有自发痛">有</option>
 					          	</select>
 							</div>
-					    	<div class="field">
-					    		<label>是否做过治疗</label>
-					    		<select name="is_treatment" class="ui dropdown">
-					            <option value="否">否</option>
-					            <option value="是">是</option>
+					    	<div class="required field">
+					    		<label>有无夜间痛</label>
+					    		<select name="is_hypnalgia" class="ui dropdown">
+					            <option value="无夜间痛">无</option>
+					            <option value="有夜间痛">有</option>
+					          	</select>
+							</div>
+						</div>
+						<div class="three fields">
+					    	<div class="required field">
+					    		<label>有无冷热敏感</label>
+					    		<select name="is_sensitive_cold_heat" class="ui dropdown">
+					            <option value="无冷热敏感">无</option>
+					            <option value="有冷热敏感">有</option>
+					          	</select>
+							</div>
+					    	<div class="required field">
+					    		<label>有无冷热刺激痛</label>
+					    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
+					            <option value="无冷热刺激痛">无</option>
+					            <option value="有冷热刺激痛">有</option>
+					          	</select>
+							</div>
+					    	<div class="required field">
+					    		<label>有无延缓痛</label>
+					    		<select name="is_delayed_pain" class="ui dropdown">
+					            <option value="无延缓痛">无</option>
+					            <option value="有延缓痛">有</option>
 					          	</select>
 							</div>
 						</div>
 				    	<div class="three fields">
 					    	<div class="field">
 					    		<label>服用药物名称</label>
-								<input type="text" name="medicine_name" placeholder="药物名称">
+								<input type="text" name="medicine_name_display" placeholder="药物名称">
 							</div>
-					    	<div class="field">
+					    	<div class="required field">
 					    		<label>症状是否缓解</label>
 					    		<select name="is_relief" class="ui dropdown">
-					            <option value="">选择</option>
-					            <option value="否">否</option>
-					            <option value="是">是</option>
+				                <option value="">选择</option>
+					            <option value="症状缓解">是</option>
+					            <option value="症状未缓解">否</option>
 					          	</select>
 							</div>
 						</div>
 
 						<input name="is_primary" type="hidden" value="0">
 						<input name="fill_type" type="hidden" value="">
+						<input name="fill_state" type="hidden" value="">
+						<input name="cure_time" type="hidden" value="">
 			    		<div class="ui right floated blue submit button">提交</div>
 					</form>
 		  		</div>
@@ -123,8 +148,14 @@
 		  			<form class="ui form">
 				    	<h3 class="ui locationdescription blue header"></h3>
 			  			<div class="three fields">
-					    	<div class="field">
-					    		<label>修复治疗充填体类型</label>
+					    	<div class="required field">
+					    		<label>治疗时间</label>
+					    		<div class="ui disabled input" id="ID_CureTime">
+									<input type="text" name="cure_time" placeholder="单击选择治疗时间~~">
+								</div>
+							</div>
+					    	<div class="required field">
+					    		<label>充填体类型</label>
 					    		<select name="fill_type" class="ui dropdown">
 				                <option value="">选择</option>
 				                <option value="树脂充填体">树脂充填体</option>
@@ -137,29 +168,142 @@
 				                <option value="其它">其它</option>
 				              	</select>
 					    	</div>
-					    	<div class="field">
-					    		<label>服用药物名称</label>
-								<input type="text" name="medicine_name" placeholder="药物名称">
+					    	<div class="required field">
+					    		<label>充填体状况</label>
+					    		<select name="fill_state" class="ui dropdown">
+				                <option value="">选择</option>
+				                <option value="完好">完好</option>
+				                <option value="折裂">折裂</option>
+				                <option value="脱落">脱落</option>
+				                <option value="缺损">缺损</option>
+				                <option value="变色">变色</option>
+				              	</select>
+					    	</div>
+						</div>
+						<div class="three fields">
+					    	<div class="required field">
+					    		<label>有无自发痛</label>
+					    		<select name="is_night_pain_self_pain" class="ui dropdown">
+					            <option value="患牙无自发痛">无</option>
+					            <option value="患牙有自发痛">有</option>
+					          	</select>
 							</div>
-					    	<div class="field">
-					    		<label>症状是否缓解</label>
-					    		<select name="is_relief" class="ui dropdown">
-					            <option value="">选择</option>
-					            <option value="否">否</option>
-					            <option value="是">是</option>
+					    	<div class="required field">
+					    		<label>有无夜间痛</label>
+					    		<select name="is_hypnalgia" class="ui dropdown">
+					            <option value="无夜间痛">无</option>
+					            <option value="有夜间痛">有</option>
+					          	</select>
+							</div>
+					    	<div class="required field">
+					    		<label>有无冷热敏感</label>
+					    		<select name="is_sensitive_cold_heat" class="ui dropdown">
+					            <option value="无冷热敏感">无</option>
+					            <option value="有冷热敏感">有</option>
 					          	</select>
 							</div>
 						</div>
-
+						<div class="three fields">
+					    	<div class="required field">
+					    		<label>有无冷热刺激痛</label>
+					    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
+					            <option value="无冷热刺激痛">无</option>
+					            <option value="有冷热刺激痛">有</option>
+					          	</select>
+							</div>
+					    	<div class="required field">
+					    		<label>有无延缓痛</label>
+					    		<select name="is_delayed_pain" class="ui dropdown">
+					            <option value="无延缓痛">无</option>
+					            <option value="有延缓痛">有</option>
+					          	</select>
+							</div>
+					    	<div class="field">
+					    		<label>服用药物名称</label>
+								<input type="text" name="medicine_name_display" placeholder="药物名称">
+							</div>
+						</div>
+			  			<div class="three fields">
+					    	<div class="required field">
+					    		<label>症状是否缓解</label>
+					    		<select name="is_relief" class="ui dropdown">
+				                <option value="">选择</option>
+					            <option value="症状缓解">是</option>
+					            <option value="症状未缓解">否</option>
+					          	</select>
+							</div>
+						</div>
+					    	
 						<input name="is_primary" type="hidden" value="1">
-						<input name="is_treatment" type="hidden" value="">
-						<input name="is_night_pain_self_pain" type="hidden" value="">
 						<input name="is_very_bad" type="hidden" value="">
 			    		<div class="ui right floated blue submit button">提交</div>
 					</form>
 		  		</div>
 	  		</div>
 		</div>
+	</div>
+
+	<!--选择治疗时间-->
+	<div class="ui small modal" id="ID_SetCureTime">
+		<div class="content">
+		    <div class="description">
+				<div class="ui center aligned basic segment">
+		    		<div class="ui large labels" id="time_day">
+			    		<div class="ui basic label">天</div>
+			    		<a class="ui teal label">1</a>
+			    		<a class="ui teal label">2</a>
+			    		<a class="ui teal label">3</a>
+			    		<a class="ui teal label">4</a>
+			    		<a class="ui teal label">5</a>
+			    		<a class="ui teal label">6</a>
+			    		<a class="ui teal label">7</a>
+			    		<a class="ui teal label">8</a>
+			    		<a class="ui teal label">9</a>
+			    		<a class="ui teal label">10</a>
+					</div>
+		    		<div class="ui large labels" id="time_week">
+			    		<div class="ui basic label">周</div>
+			    		<a class="ui teal label">1</a>
+			    		<a class="ui teal label">2</a>
+			    		<a class="ui teal label">3</a>
+			    		<a class="ui teal label">4</a>
+			    		<a class="ui teal label">5</a>
+			    		<a class="ui teal label">6</a>
+			    		<a class="ui teal label">7</a>
+			    		<a class="ui teal label">8</a>
+			    		<a class="ui teal label">9</a>
+			    		<a class="ui teal label">10</a>
+					</div>
+		    		<div class="ui large labels" id="time_month">
+			    		<div class="ui basic label">月</div>
+			    		<a class="ui teal label">1</a>
+			    		<a class="ui teal label">2</a>
+			    		<a class="ui teal label">3</a>
+			    		<a class="ui teal label">4</a>
+			    		<a class="ui teal label">5</a>
+			    		<a class="ui teal label">6</a>
+			    		<a class="ui teal label">7</a>
+			    		<a class="ui teal label">8</a>
+			    		<a class="ui teal label">9</a>
+			    		<a class="ui teal label">10</a>
+					</div>
+		    		<div class="ui large labels" id="time_year">
+			    		<div class="ui basic label">年</div>
+			    		<a class="ui teal label">1</a>
+			    		<a class="ui teal label">2</a>
+			    		<a class="ui teal label">3</a>
+			    		<a class="ui teal label">4</a>
+			    		<a class="ui teal label">5</a>
+			    		<a class="ui teal label">6</a>
+			    		<a class="ui teal label">7</a>
+			    		<a class="ui teal label">8</a>
+			    		<a class="ui teal label">9</a>
+			    		<a class="ui teal label">10</a>
+					</div>
+				</div>
+		    </div>
+	  	</div>
+		<div class="actions"><div class="ui orange deny button">取消</div></div>
 	</div>
 
   	<!-- 网络错误 -->

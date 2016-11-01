@@ -63,9 +63,8 @@ $(document).ready(function(){
 	function showToothLocation($Selector, ToothData){
 		$ClonedExtra = $Selector.clone(true);
 
-		var LocationStr = ToothData.tooth_location;
-		ToothData.is_fill_tooth ? LocationStr += "（要求直接补牙）" :
-			LocationStr += "（" + ToothData.time_of_occurrence + ", " + ToothData.symptom + "）";
+		var LocationStr = "主诉：" + ToothData.tooth_location;
+		LocationStr += ToothData.is_fill_tooth ? "要求补牙" : ToothData.symptom + ToothData.time_of_occurrence;
 
 		$ClonedExtra.attr("value", ToothData.tooth_id);
 		$ClonedExtra.find('.location').text(LocationStr);
