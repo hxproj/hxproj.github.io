@@ -3,8 +3,8 @@ $(document).ready(function(){
   // 其它
   $('.orange.header').text("个人史 - " + decodeURI(requestParameter("name")));
   
-  var DATA = null;
-	var U_ID = Number(requestParameter("uid"));
+  var DATA = null,
+      U_ID = Number(requestParameter("uid"));
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
@@ -15,85 +15,63 @@ $(document).ready(function(){
   		dataType : "json",
       async    : false,
   		success  : function(data){
+        DATA = data;
   			$('#submit').hide();
-  			DATA = data;
 
         // 表头
         $('#display th').text("个人史 - " + decodeURI(requestParameter("name")));
 
         // 饮食习惯
-        $('#more_sweet').text(DATA.more_sweet);
-
-        var TempText = "";
-        switch (Number(DATA.consumption_of_sweet)) {
-          case 124: TempText = "<125g"; break;
-          case 125: TempText = "125-249g"; break;
-          case 250: TempText = "250-500g"; break;
-          case 500: TempText = ">500g"; break;
-        }
-        $('#consumption_of_sweet').text(TempText);
-
-  			switch (Number(DATA.frequency_of_sweet)) {
-  				case 1: TempText = "小于1次/天"; break;
-  				case 2: TempText = "2次/天"; break;
-  				case 3: TempText = "3次/天"; break;
-  				case 4: TempText = "4次/天"; break;
-  				case 5: TempText = "5次/天"; break;
-  				case 6: TempText = "大于5次/天"; break;
-  			}
-        $('#frequency_of_sweet').text(TempText);
-
-  			switch (Number(DATA.frequency_of_meal)) {
-  				case 1: TempText = "≤1"; break;
-  				case 2: TempText = "1＜频率≤2"; break;
-  				case 3: TempText = "≥3"; break;
-  			}
-        $('#frequency_of_meal').text(TempText);
-
-        $('#is_carbonic_acid').text(DATA.is_carbonic_acid);
-        $('#is_floss').text(DATA.is_floss);
+        var ID_Eating_Habits = "";
+        ID_Eating_Habits += DATA.consumption_of_sweet + "，";
+        ID_Eating_Habits += DATA.frequency_of_sweet + "，";
+        ID_Eating_Habits += DATA.frequency_of_meal + "，";
+        ID_Eating_Habits += DATA.is_carbonic_acid;
+        $('#ID_Eating_Habits').text(ID_Eating_Habits);
 
        	// 口腔卫生维护
-  			switch (Number(DATA.times_of_teeth_brush)) {
-  				case 1: TempText = "1次"; break;
-  				case 2: TempText = "2次"; break;
-  				case 3: TempText = "3次"; break;
-  			}
-        $('#times_of_teeth_brush').text(TempText);
-        $('#time_of_teeth_brush').text(DATA.time_of_teeth_brush);
-        $('#long_of_teeth_brush').text(DATA.long_of_teeth_brush);
-  		
-        $('#electric_tooth_brush').text(DATA.electric_tooth_brush);
-        $('#method_of_tooth_brush').text(DATA.method_of_tooth_brush);
-        $('#is_fluorine').text(DATA.is_fluorine);
-        $('#is_cavity_examination').text(DATA.is_cavity_examination);
-        $('#is_periodontal_treatment').text(DATA.is_periodontal_treatment);
-        $('#sjogren_syndrome').text(DATA.sjogren_syndrome);
+        var ID_Oral_Maintenance = "";
+        ID_Oral_Maintenance += DATA.is_floss + "，";
+        ID_Oral_Maintenance += DATA.times_of_teeth_brush + "，";
+        ID_Oral_Maintenance += DATA.time_of_teeth_brush + "，";
+        ID_Oral_Maintenance += DATA.long_of_teeth_brush + "，";
+        ID_Oral_Maintenance += DATA.electric_tooth_brush + "，";
+        ID_Oral_Maintenance += DATA.is_fluorine + "，";
+        ID_Oral_Maintenance += DATA.is_cavity_examination + "，";
+        ID_Oral_Maintenance += DATA.is_periodontal_treatment;
+        $('#ID_Oral_Maintenance').text(ID_Oral_Maintenance);
 
         // 宿主易感性
-        $('#salivary_gland_disease').text(DATA.salivary_gland_disease);
-        $('#consciously_reduce_salivary_flow').text(DATA.consciously_reduce_salivary_flow);
-
+        var ID_Sensitive = "";
+        ID_Sensitive += DATA.salivary_gland_disease + "，";
+        ID_Sensitive += DATA.sjogren_syndrome + "，";
+        ID_Sensitive += DATA.consciously_reduce_salivary_flow;
+        $('#ID_Sensitive').text(ID_Sensitive);
+        
         $('#display').show();
   		}
 	});
 
   if (DATA == null) {$('#submit').show();}
 
+  // 一些通用描述
+  var Des_brushtime    = "刷牙时间点为",
+      Des_brush        = "每次刷牙",
+      Des_disease      = "患有唾液腺疾病：",
+      Des_nodisease    = "无唾液腺疾病",
+      Des_reduceflow   = "自觉唾液流量减少",
+      Des_noreduceflow = "唾液流量未明显减少";
+
   // ***************************************************************
   // FUNCTION: 设置病历个人史表单相关属性
-	// 添加额外事件
-  $.fn.form.settings.rules.matchOption = function() {
-    return ($("form").form('get value', 'times_of_teeth_brush') == $("select[name=time_of_teeth_brush_display]").dropdown('get selectionCount').toString().split(",")[0]);
-  };
 	$("form").form({
 		fields: {
 			long_of_teeth_brush: {
-				identifier: 'long_of_teeth_brush',
+				identifier: 'long_of_teeth_brush_display',
 				rules: [
 					{
 						type   : 'empty',
-            			prompt : '请输入刷牙时长'
+            prompt : '请输入刷牙时长'
 					}
 				]
 			},
@@ -101,23 +79,29 @@ $(document).ready(function(){
 				identifier: 'time_of_teeth_brush_display',
 				rules: [
 					{
-						type   : 'matchOption',
-            			prompt : '刷点时间点次数必须与每天刷牙次数相等'
+						type   : 'empty',
+            prompt : '请选择刷牙时间点'
 					}
 				]
 			},
 		},
 		inline    : true,
 		onSuccess : function(){
-      var AddtionFormField = toform({
-        user_id             : U_ID,
-        time_of_teeth_brush : $(this).form('get value', 'time_of_teeth_brush_display').toString()
-      });
+      // 设置相关描述
+      var disease       = $(this).form('get value', 'salivary_gland_disease_display'),
+          reduceflow    = $(this).form('get value', 'consciously_reduce_salivary_flow_display'),
+          additionField = toform({
+            user_id : U_ID,
+            salivary_gland_disease : disease == "" ? Des_nodisease : Des_disease + disease,
+            consciously_reduce_salivary_flow : reduceflow == "" ? Des_noreduceflow : Des_reduceflow + reduceflow,
+            time_of_teeth_brush : Des_brushtime + $(this).form('get value', 'time_of_teeth_brush_display'),
+            long_of_teeth_brush : Des_brush + $(this).form('get value', 'long_of_teeth_brush_display'),
+          });
 
       $.ajax({
         url      : URL_PERSONAL_HISTORY,
         type     : DATA == null ? "post" : "PUT", 
-        data     : AddtionFormField + $(this).serialize(),
+        data     : additionField + $(this).serialize(),
         dataType : "json",
         error    : function() {networkError();},
         success  : function() {location.reload();}
@@ -140,15 +124,7 @@ $(document).ready(function(){
 
 		$('select[name=is_floss]').dropdown("set selected", DATA.is_floss);
 		$('select[name=times_of_teeth_brush]').dropdown("set selected", DATA.times_of_teeth_brush);
-
-    if (DATA.time_of_teeth_brush != "") {
-      var SplitTime = DATA.time_of_teeth_brush.split(',');
-      for (var i=0; i<SplitTime.length; ++i){
-        $('select[name=time_of_teeth_brush_display]').dropdown("set selected", SplitTime[i]);
-      }
-    };
    
-    $('input[name=long_of_teeth_brush]').val(DATA.long_of_teeth_brush);
 		$('select[name=electric_tooth_brush]').dropdown("set selected", DATA.electric_tooth_brush);
 		$('select[name=method_of_tooth_brush]').dropdown("set selected", DATA.method_of_tooth_brush);
 		$('select[name=is_fluorine]').dropdown("set selected", DATA.is_fluorine);
@@ -156,8 +132,25 @@ $(document).ready(function(){
 		$('select[name=is_periodontal_treatment]').dropdown("set selected", DATA.is_periodontal_treatment);
 
 		$('select[name=sjogren_syndrome]').dropdown("set selected", DATA.sjogren_syndrome);
-    $('input[name=salivary_gland_disease]').val(DATA.salivary_gland_disease);
-    $('input[name=consciously_reduce_salivary_flow]').val(DATA.consciously_reduce_salivary_flow ? DATA.consciously_reduce_salivary_flow  : "");
+
+    // 去除描述语句
+    var long_of_teeth_brush    = DATA.long_of_teeth_brush,
+        time_of_teeth_brush    = DATA.time_of_teeth_brush;
+        salivary_gland_disease = DATA.salivary_gland_disease,
+        consciously_reduce_salivary_flow = DATA.consciously_reduce_salivary_flow,
+
+    long_of_teeth_brush = long_of_teeth_brush.substring(Des_brush.length);
+    time_of_teeth_brush = time_of_teeth_brush.substring(Des_brushtime.length);
+    salivary_gland_disease = salivary_gland_disease == Des_nodisease ? "" : salivary_gland_disease.substring(Des_disease.length);
+    consciously_reduce_salivary_flow = consciously_reduce_salivary_flow == Des_noreduceflow ? "" : consciously_reduce_salivary_flow.substring(Des_reduceflow.length);
+
+    var SplitTime = time_of_teeth_brush.split(',');
+    for (var i=0; i<SplitTime.length; ++i){
+      $('select[name=time_of_teeth_brush_display]').dropdown("set selected", SplitTime[i]);
+    }
+    $('input[name=long_of_teeth_brush_display]').val(long_of_teeth_brush);
+    $('input[name=salivary_gland_disease_display]').val(salivary_gland_disease);
+    $('input[name=consciously_reduce_salivary_flow_display]').val(consciously_reduce_salivary_flow);
 
     $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$('#submit').show();
