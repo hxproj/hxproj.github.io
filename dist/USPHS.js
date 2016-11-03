@@ -62,13 +62,16 @@ $(document).ready(function(){
     	$('input[value=' + DATA.marginal_accuracy + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.anatomic_form + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.surfaceness + ']').parent().checkbox('check'); 
-    	$('input[value=' + DATA.edge_color + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.occlusal_contact + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.sensitivity_of_tooth + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.secondary_caries + ']').parent().checkbox('check'); 
     	$('input[value=' + DATA.integrity + ']').parent().checkbox('check'); 
+
+      // jquery选择器中包括"%"会报错
+      var InputIndex = "小于50%的窝洞边缘着色" == DATA.edge_color ? 1 : "大于50%的窝洞边缘着色" == DATA.edge_color ? 2 : 0;
+      $('input[name=edge_color]').eq(InputIndex).parent().checkbox('check'); 
     	
-   		$('form .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+   		$('form .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$('form').show();
 	});
 

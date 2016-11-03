@@ -26,139 +26,82 @@ $(document).ready(function(){
         $('#display th').text("口腔检查 - " + decodeURI(requestParameter("name")));
 
   			// 牙体情况
-  			var ME_Body_Text = "";
-  			if (DATA.tooth_location != "") {
-  				ME_Body_Text += "牙位：" + DATA.tooth_location + "，";
-  			}
+  			var ME_Body_Text = DATA.tooth_location + "牙";
+        ME_Body_Text += "龋坏累及" + DATA.caries_tired + "面，";
+        ME_Body_Text += "为" + DATA.depth + "，";
 
-  			if (DATA.caries_tired != "") {
-  				ME_Body_Text += "龋坏累及牙面：" + DATA.caries_tired + "，";
-  			}
+        // 当原充填体选择“无”时，不进行任何语言描述，且不描述有无继发龋
+        if (DATA.fill != "无") {
+          ME_Body_Text += "原充填体为" + DATA.fill + "，";
+          ME_Body_Text += DATA.secondary + "，";
+        };
 
-  			if (DATA.depth != "") {
-  				ME_Body_Text += "深度：" + DATA.depth + "，";
-  			}
-
-  			if (DATA.cold != "") {
-  				ME_Body_Text += "冷：" + DATA.cold + "，";
-  			}
-
-  			if (DATA.hot != "") {
-  				ME_Body_Text += "热：" + DATA.hot + "，";
-  			}
-
-  			if (DATA.touch != "") {
-  				ME_Body_Text += "探：" + DATA.touch + "，";
-  			}
-
-  			if (DATA.bite != "") {
-  				ME_Body_Text += "叩：" + DATA.bite + "，";
-  			}
-
-			  ME_Body_Text += "色" + DATA.color_of_caries + "，";
-			  ME_Body_Text += "质" + DATA.flex_of_caries + "，";
-
-  			if (DATA.fill != "") {
-  				ME_Body_Text += "无原填充体，";
-  			} else {
-  				ME_Body_Text += "原填充体：" + DATA.fill + "，";
-  			}
-
-			  ME_Body_Text += "牙齿活力值：" + DATA.vitality_value_of_teeth + "，";
-
-  			if (DATA.secondary == "否") {
-  				ME_Body_Text += " 无继发龋";
-  			} else if (DATA.secondary == "是") {
-  				ME_Body_Text += " 有继发龋";
-  			}
-
+        ME_Body_Text += DATA.color_of_caries + "，";
+        ME_Body_Text += DATA.flex_of_caries + "，";
+        ME_Body_Text += DATA.cold + "，";
+        ME_Body_Text += DATA.hot + "，";
+        ME_Body_Text += DATA.touch + "，";
+        ME_Body_Text += DATA.bite + "，";
+			  ME_Body_Text += "牙齿活力值：" + DATA.vitality_value_of_teeth;
 			  $('#ME_Body').text(ME_Body_Text);
 
+
   			// 牙周情况
-  			var ME_Around_Text = "";
-  			if (DATA.gingival_hyperemia != "否") {
-  				ME_Around_Text += " 牙龈未充血，";
-  			} else if (DATA.gingival_hyperemia != "是") {
-  				ME_Around_Text += " 有继发龋，";
-  			}
+        var ME_Around_Text = DATA.gingival_hyperemia + "，";
+        ME_Around_Text += DATA.gingival_color + "，";
+        ME_Around_Text += DATA.tartar_up + "，";
+        ME_Around_Text += DATA.tartar_down + "，";
+        ME_Around_Text += DATA.bop + "，";
+        ME_Around_Text += DATA.periodontal_pocket_depth + "，";
 
-  			ME_Around_Text += "龈上牙石：" + DATA.tartar_up + "，";
-  			ME_Around_Text += "龈下牙石：" + DATA.tartar_down + "，";
-  			ME_Around_Text += "BOP：" + DATA.bop + "，";
-  			ME_Around_Text += "牙周袋深度：" + DATA.periodontal_pocket_depth + "，";
-  			ME_Around_Text += "根分叉病变：" + DATA.furcation + "，";
-  			ME_Around_Text += "位置：" + DATA.location + "，";
-  			ME_Around_Text += "牙齿松动度：" + DATA.mobility + "，";
+        // 当选根分叉病变无时则不显示位置
+        if (DATA.furcation != "根分叉病变无") {
+          ME_Around_Text += DATA.furcation + "，";
+          ME_Around_Text += DATA.location + "，";
+        }
 
-  			if (DATA.fistula != "无") {
-  				ME_Around_Text += " 牙龈无瘘道" + "，";
-  			} else if (DATA.gingival_hyperemia != "有") {
-  				ME_Around_Text += " 牙龈有瘘道" + "，";
-  			}
-  			
-  			if (DATA.fistula != "无") {
-  				ME_Around_Text += " 牙龈无溢脓";
-  			} else if (DATA.gingival_hyperemia != "有") {
-  				ME_Around_Text += " 牙龈有溢脓";
-  			}
-  			
+        ME_Around_Text += DATA.fistula + "，";
+        ME_Around_Text += DATA.gingival_hyperemia + "，";
+        ME_Around_Text += DATA.mobility;
   			$('#ME_Around').text(ME_Around_Text);
 
-  			// 龋失补指数
-  			$('#ME_Loss').text(DATA.loss_caries_index_up);
 
-  			// 牙齿发育情况
-  			var ME_Condition_Text = "";
-  			$('#ME_Condition').text(DATA.development_of_the_situation);
+        // 龋失补指数
+        $('#ME_Loss').text(DATA.loss_caries_index_up);
+        // 牙齿发育情况
+        $('#ME_Condition').text(DATA.development_of_the_situation);
+
 
   			// 患牙与邻牙接触关系
   			var ME_Neighbor_Text = "";
-  			if (DATA.relations_between_teeth != "正常") {
-  				ME_Neighbor_Text += "患牙与邻牙接触关系正常，";
-  			} else if (DATA.relations_between_teeth != "否") {
-  				ME_Neighbor_Text += "患牙与邻牙接触关系不正常，";
-  			}
-  			if (DATA.is_teeth_crowd != "否") {
-  				ME_Neighbor_Text += "牙列不拥挤，";
-  			} else if (DATA.is_teeth_crowd != "是") {
-  				ME_Neighbor_Text += "牙列拥挤，";
-  			}
-  			if (DATA.involution_teeth != "有") {
-  				ME_Neighbor_Text += "患牙有对合牙，";
-  			} else if (DATA.involution_teeth != "无") {
-  				ME_Neighbor_Text += "患牙无对合牙，";
-  			}
-  			ME_Neighbor_Text += "牙体形态：" + DATA.tooth_shape;
-
+        ME_Neighbor_Text += DATA.relations_between_teeth + "，";
+        ME_Neighbor_Text += DATA.is_teeth_crowd + "，";
+        ME_Neighbor_Text += DATA.involution_teeth + "，";
+        ME_Neighbor_Text += DATA.tooth_shape;
   			$('#ME_Neighbor').text(ME_Neighbor_Text);
+
 
   			// 患牙修复治疗情况
   			var ME_Cure_Text = "";
-    			ME_Cure_Text += "患牙修复治疗情况：" + DATA.treatment + "，";
-    			if (DATA.orthodontic != "否") {
-    				ME_Cure_Text += "没有正畸治疗史";
-    			} else if (DATA.orthodontic != "是") {
-    				ME_Cure_Text += "有正畸治疗史";
-    			}
+        ME_Cure_Text += DATA.treatment + "，";
+        ME_Cure_Text += DATA.orthodontic;
   			$('#ME_Cure').text(ME_Cure_Text);
 
-  			// X线片表现
-  			var ME_X_Text = "";
 
-  			if (DATA.X_Ray_depth != "") {
-  				ME_X_Text += "程度：" + DATA.X_Ray_depth + "，";
-  			}
-  			if (DATA.X_Ray_fill_quality != "") {
-  				ME_X_Text += "充填体影像：" + DATA.X_Ray_fill_quality + "，";
-  			}
+  			// X线片表现
+        var ME_X_Text = "";
+        ME_X_Text += DATA.tooth_location + "牙";
+        ME_X_Text += DATA.X_Ray_location;
+        ME_X_Text += DATA.X_Ray_depth;
+        ME_X_Text += DATA.X_Ray_fill_quality + "，根尖周组织无明显异常。";
+
+        // 如果CT表现和咬翼片表现为空时，则不显示
   			if (DATA.CT_shows != "") {
   				ME_X_Text += "CT表现：" + DATA.CT_shows + "，";
   			}
   			if (DATA.piece != "") {
   				ME_X_Text += "咬翼片表现：" + DATA.piece + "，";
   			}
-  			ME_X_Text += "部位：" + DATA.X_Ray_location;
-
   			$('#ME_X').text(ME_X_Text);
 
         // 显示口腔检查图片
@@ -212,6 +155,99 @@ $(document).ready(function(){
 	// ******************************************************
 	// 提交表单数据
 	$('form').form({
+    fields : {
+      tooth_location: {
+        identifier: 'tooth_location',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择病人牙位'
+          }
+        ]
+      },
+      caries_tired: {
+        identifier: 'caries_tired',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择龋坏累及牙面'
+          }
+        ]
+      },
+      depth: {
+        identifier: 'depth',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择深度'
+          }
+        ]
+      },
+      cold: {
+        identifier: 'cold',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      hot: {
+        identifier: 'hot',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      touch: {
+        identifier: 'touch',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      bite: {
+        identifier: 'bite',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      X_Ray_depth: {
+        identifier: 'X_Ray_depth',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      X_Ray_fill_quality: {
+        identifier: 'X_Ray_fill_quality',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
+      bop: {
+        identifier: 'bop',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择BOP'
+          }
+        ]
+      },
+    },
+    inline   : true,
 		onSuccess: function() {
 		    $.ajax({
 	      		url      : URL_MOUTHEXAM,
@@ -302,18 +338,15 @@ $(document).ready(function(){
 				    ToothTypeValue = $ToothType.attr('data-tab'),
 				    ToothTypeName  = $ToothType.text();
 
-				$AddLocation.nextAll().remove();
-				$AddLocation.after("<a class='ui orange label'>" + ToothTypeName + "</a>");
-
-				var FormData = ToothTypeValue;
+				var FormData = "";
 				$('.modal .segment.active .teal.label').each(function(){
-					var ToothLocation = $(this).text();
-					FormData += "," + ToothLocation;
-
-					$AddLocation.next().last().after("<a class='ui teal label'>" + ToothLocation + "</a>");
+					FormData += $(this).text() + ",";
 				});
 
+        if (FormData.length > 0) {FormData = FormData.substring(0, FormData.length - 1);} 
+
 				$('input[name=tooth_location]').val(FormData);
+        $('input[name=tooth_type]').val(ToothTypeValue);
 			}
 		}).modal('show');
 	});
