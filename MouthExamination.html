@@ -112,7 +112,7 @@
 					<div class="three fields">
 						<div class="field">
 							<label>龋坏累及牙面</label>
-							<select name="caries_tired" class="ui dropdown" multiple="">
+							<select name="caries_tired_display" class="ui dropdown" multiple="">
 							<option value="">选择</option>
 							<option value="唇">唇面</option>
 							<option value="舌">舌面</option>
@@ -241,7 +241,7 @@
 						<div class="field">
 							<label>龈上牙石</label>
 							<select name="tartar_up" class="ui dropdown">
-							<option value="无龈上牙石">无</option>
+							<option value="龈上牙石无">无</option>
 							<option value="龈上牙石1级">1级</option>
 							<option value="龈上牙石2级">2级</option>
 							<option value="龈上牙石3级">3级</option>
@@ -252,7 +252,7 @@
 						<div class="field">
 							<label>龈下牙石</label>
 							<select name="tartar_down" class="ui dropdown">
-							<option value="无龈下牙石">无</option>
+							<option value="龈下牙石无">无</option>
 							<option value="龈下牙石1级">1级</option>
 							<option value="龈下牙石2级">2级</option>
 							<option value="龈下牙石3级">3级</option>
@@ -344,8 +344,8 @@
 							<option value="牙本质发育不全">牙本质发育不全</option>
 							<option value="氟牙症">氟牙症</option>
 							<option value="四环素牙">四环素牙</option>
-							<option value="釉质发育不全">磨耗牙</option>
-							<option value="釉质发育不全">其它</option>
+							<option value="磨耗牙">磨耗牙</option>
+							<option value="其它">其它</option>
 							</select>
 						</div>
 					</div>
@@ -464,14 +464,13 @@
 					</div>
 
 					<div class="ui hidden divider"></div>
-				    <div class="ui right floated blue submit button">提交</div>
+				    <div class="ui right floated blue submit small button">提交</div>
 				</form> 
 			</div>
 		</div>
 	</div>
 
 	<div class="ui large modal" id="addLocationModal">
-		<div class="header">添加牙位</div>
 		<div class="content">
 		    <div class="description">
 				<div id="context">

@@ -27,7 +27,14 @@ $(document).ready(function(){
 
   			// 牙体情况
   			var ME_Body_Text = DATA.tooth_location + "牙";
-        ME_Body_Text += "龋坏累及" + DATA.caries_tired + "面，";
+
+        // 累及面以逗号隔开，显示时需去除逗号
+        ME_Body_Text += "龋坏累及";
+        $.each(DATA.caries_tired.split(","), function(){
+          ME_Body_Text += this;
+        });
+        ME_Body_Text += "面，";
+
         ME_Body_Text += "为" + DATA.depth + "，";
 
         // 当原充填体选择“无”时，不进行任何语言描述，且不描述有无继发龋
@@ -61,7 +68,7 @@ $(document).ready(function(){
         }
 
         ME_Around_Text += DATA.fistula + "，";
-        ME_Around_Text += DATA.gingival_hyperemia + "，";
+        ME_Around_Text += DATA.overflow_pus + "，";
         ME_Around_Text += DATA.mobility;
   			$('#ME_Around').text(ME_Around_Text);
 
@@ -97,10 +104,13 @@ $(document).ready(function(){
 
         // 如果CT表现和咬翼片表现为空时，则不显示
   			if (DATA.CT_shows != "") {
-  				ME_X_Text += "CT表现：" + DATA.CT_shows + "，";
+  				ME_X_Text += "CT表现：" + DATA.CT_shows;
+          if (DATA.piece != "") {
+            ME_X_Text += "，";
+          };
   			}
   			if (DATA.piece != "") {
-  				ME_X_Text += "咬翼片表现：" + DATA.piece + "，";
+  				ME_X_Text += "咬翼片表现：" + DATA.piece;
   			}
   			$('#ME_X').text(ME_X_Text);
 
@@ -165,8 +175,8 @@ $(document).ready(function(){
           }
         ]
       },
-      caries_tired: {
-        identifier: 'caries_tired',
+      caries_tired_display: {
+        identifier: 'caries_tired_display',
         rules: [
           {
             type   : 'empty',
@@ -249,33 +259,41 @@ $(document).ready(function(){
     },
     inline   : true,
 		onSuccess: function() {
-		    $.ajax({
-	      		url      : URL_MOUTHEXAM,
-	      		type     : DATA == null ? "post" : "PUT", 
-	      		data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
-	      		dataType : "json",
-	      		error    : function() {networkError();},
-	      		success  : function(data){
-              // 上传图片
-              $.ajaxFile({
-                url           : URL_IMAGEUPLOAD, 
-                type          : 'POST',  
-                fileElementId : 'imageupload',
-                dataType      : 'text',
-                data          : {tooth_id : data.tooth_id, picture_type : Image_type},
-                async         : false,  
-                cache         : false,  
-                contentType   : false,  
-                processData   : false,
-                success       : function() {
-                  location.reload()
-                },
-                error         : function() {
-                  alert("文件上传失败");
-                }
-              });
-	      		}
-	    	});
+
+      var caries_tired = $(this).form('get value', 'caries_tired_display'),
+          AdditionFormData = toform({
+            user_id      : U_ID,
+            tooth_id     : T_ID,
+            caries_tired : caries_tired,
+          });
+
+	    $.ajax({
+      		url      : URL_MOUTHEXAM,
+      		type     : DATA == null ? "post" : "PUT", 
+      		data     : AdditionFormData + $(this).serialize(),
+      		dataType : "json",
+      		error    : function() {networkError();},
+      		success  : function(data){
+            // 上传图片
+            $.ajaxFile({
+              url           : URL_IMAGEUPLOAD, 
+              type          : 'POST',  
+              fileElementId : 'imageupload',
+              dataType      : 'text',
+              data          : {tooth_id : data.tooth_id, picture_type : Image_type},
+              async         : false,  
+              cache         : false,  
+              contentType   : false,  
+              processData   : false,
+              success       : function() {
+                location.reload()
+              },
+              error         : function() {
+                alert("文件上传失败");
+              }
+            });
+      		}
+    	});
     	
 			return false;
 		}
@@ -286,9 +304,15 @@ $(document).ready(function(){
 	$('.edit.button').click(function(){
 		$('#display').hide();
 
-		// FIXME: 添加空元素判断
+    $('input[name=tooth_location]').val(DATA.tooth_location);
+    $('input[name=tooth_type]').val(DATA.tooth_type);
+
+    // 龋坏累及牙面去掉逗号
+    $.each(DATA.caries_tired.split(","), function(){
+      $('select[name=caries_tired_display]').dropdown("set selected", this);
+    });
+
     $('select[name=secondary]').dropdown("set selected", DATA.secondary);
-    $('select[name=caries_tired]').dropdown("set selected", DATA.caries_tired);
     $('select[name=depth]').dropdown("set selected", DATA.depth);
     $('select[name=cold]').dropdown("set selected", DATA.cold);
     $('select[name=hot]').dropdown("set selected", DATA.hot);
@@ -300,6 +324,7 @@ $(document).ready(function(){
 	  $('input[name=vitality_value_of_teeth]').val(DATA.vitality_value_of_teeth);
 
     $('select[name=gingival_hyperemia]').dropdown("set selected", DATA.gingival_hyperemia);
+    $('select[name=gingival_color]').dropdown("set selected", DATA.gingival_color);
     $('select[name=tartar_up]').dropdown("set selected", DATA.tartar_up);
     $('select[name=tartar_down]').dropdown("set selected", DATA.tartar_down);
     $('select[name=bop]').dropdown("set selected", DATA.bop);
@@ -324,7 +349,7 @@ $(document).ready(function(){
   	$('input[name=CT_shows]').val(DATA.CT_shows);
   	$('input[name=piece]').val(DATA.piece);
     
-    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+    $('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 	  $('#submit').show();
 	});
 
