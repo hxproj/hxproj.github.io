@@ -48,8 +48,12 @@ $(document).ready(function(){
         ME_Body_Text += DATA.cold + "，";
         ME_Body_Text += DATA.hot + "，";
         ME_Body_Text += DATA.touch + "，";
-        ME_Body_Text += DATA.bite + "，";
-			  ME_Body_Text += "牙齿活力值：" + DATA.vitality_value_of_teeth;
+        ME_Body_Text += DATA.bite;
+
+        // 如果牙齿活力值为空，则不显示
+        if (DATA.vitality_value_of_teeth != "") {
+          ME_Body_Text += "，牙齿活力值：" + DATA.vitality_value_of_teeth;
+        };
 			  $('#ME_Body').text(ME_Body_Text);
 
 
@@ -356,6 +360,22 @@ $(document).ready(function(){
 	// ******************************************************
 	// 添加牙位
 	$('#addLocation').click(function(){
+
+    // 设置当前默认选项值
+    var ThisInput = $(this).find('input').val();
+    if (ThisInput) {
+      $.each(ThisInput.split(","), function(){
+        $('#addLocationModal').find(".ui.label[val=" + this + "]").addClass('teal');
+      });
+    };
+
+    if (DATA != null && DATA.tooth_type != undefined) {
+      $('#context .menu .active').removeClass("active");
+      $('#context .segment.active').removeClass("active");
+      $('#context .menu a[data-tab=' + DATA.tooth_type + ']').addClass("active");
+      $('#context .segment[data-tab=' + DATA.tooth_type + ']').addClass("active");
+    }
+
 		$('#addLocationModal').modal({
 			onApprove: function(){
 				var $AddLocation   = $('#addLocation'),
