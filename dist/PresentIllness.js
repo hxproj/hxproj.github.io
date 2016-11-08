@@ -52,7 +52,7 @@ $(document).ready(function(){
 
             DescribeText += "在" + DATA.cure_time + "前曾进行充填修复治疗，";
             DescribeText += "为" + DATA.fill_type + "，";
-            DescribeText += "今充填体" + DATA.fill_state + "，";
+            DescribeText += DATA.fill_state + "，";
             DescribeText += DATA.is_night_pain_self_pain + "，";
             DescribeText += DATA.is_hypnalgia + "，";
             DescribeText += DATA.is_sensitive_cold_heat + "，";

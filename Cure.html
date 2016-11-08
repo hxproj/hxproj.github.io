@@ -48,23 +48,11 @@
 				</thead>
 	  			<tbody>
 					<tr>
-						<td class="negative collapsing">牙位</td>
+						<td class="negative collapsing">牙位(是否应该显示诊断牙位)</td>
 						<td id="ToothLocation"></td>
 					</tr>
 					<tr>
-						<td class="negative collapsing">症状</td>
-						<td id="Symptom"></td>
-					</tr>
-					<tr>
-						<td class="negative collapsing">病发时间</td>
-						<td id="Time_of_occurrence"></td>
-					</tr>
-					<tr>
-						<td class="negative collapsing">处置方法</td>
-						<td id="Method"></td>
-					</tr>
-					<tr>
-						<td class="negative collapsing">处置流程</td>
+						<td class="negative collapsing">处置</td>
 						<td id="Describe"></td>
 					</tr>
 					<tr>
@@ -111,7 +99,7 @@
 							<div class="ui hidden divider"></div>
 							<form class="ui form" id="CureForm1">
 								<div class="two fields">
-									<div class="field">
+									<div class="required field">
 										<label>药物氟化物</label>
 										<select name="fluorination" class="ui dropdown">
 										<option value="">选择药物氟化物</option>
@@ -121,7 +109,7 @@
 										<option value="1.5%APF凝胶">1.5%APF凝胶</option>
 										</select>
 									</div>
-									<div class="field">
+									<div class="required field">
 										<label>硝酸银</label>
 										<select name="silver_nitrate" class="ui dropdown">
 										<option value="">选择硝酸银</option>
@@ -190,15 +178,15 @@
 							<div class="ui hidden divider"></div>
 							<form class="ui form" id="CureForm3">
 								<div class="two fields">
-									<div class="field">
-										<label>低速手机额外装置（配套工具）</label>
+									<div class="required field">
+										<label>低速手机配套工具</label>
 										<select name="additional_device" class="ui dropdown">
-										<option value="">选择额外装置</option>
+										<option value="">选择配套工具</option>
 										<option value="锥形小毛刷">锥形小毛刷</option>
 										<option value="橡皮杯">橡皮杯</option>
 										</select>
 									</div>
-									<div class="field">
+									<div class="required field">
 										<label>蘸取试剂</label>
 										<select name="reagent" class="ui dropdown">
 										<option value="">选择试剂类型</option>
@@ -209,7 +197,7 @@
 								</div>
 
 								<div class="two fields">
-									<div class="field">
+									<div class="required field">
 										<label>蘸取工具</label>
 										<select name="tools" class="ui dropdown">
 										<option value="">蘸取工具</option>
@@ -217,7 +205,7 @@
 										<option value="细毛刷">细毛刷</option>
 										</select>
 									</div>
-									<div class="field">
+									<div class="required field">
 										<label>酸蚀时间</label>
 										<select name="time_of_etching" class="ui dropdown">
 										<option value="">选择酸蚀时间</option>
@@ -227,15 +215,15 @@
 									</div>
 								</div>
 								<div class="two fields">
-									<div class="field">
-										<label>固化灯类型</label>
+									<div class="required field">
+										<label>固化方式</label>
 										<select name="lamp" class="ui dropdown">
-										<option value="">选择固化灯类型</option>
+										<option value="">选择固化方式</option>
 										<option value="自行固化">自行固化</option>
-										<option value="光固化灯">光固化灯</option>
+										<option value="光固化灯">光固化</option>
 										</select>
 									</div>
-									<div class="field">
+									<div class="required field">
 										<label>定期复查时间</label>
 										<select name="check_time" class="ui dropdown">
 										<option value="">选择复查时间</option>
@@ -271,7 +259,7 @@
 					<form class="ui form" id="CureForm4">
 						<h3 class="ui blue header">1. 麻醉药物</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>麻醉药物</label>
 								<select name="anesthesia_medicine" class="ui dropdown">
 								<option value="">选择</option>
@@ -281,7 +269,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>局部麻醉</label>
 								<select name="part_anesthesia" class="ui dropdown">
 								<option value="">选择</option>
@@ -289,7 +277,7 @@
 								<option value="浸润麻醉">浸润麻醉</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用橡皮障</label>
 								<select name="rubber" class="ui dropdown">
 								<option value="否">否</option>
@@ -300,7 +288,7 @@
 
 						<h3 class="ui blue header">2. 显微镜下</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>去龋工具</label>
 								<select name="tools" class="ui dropdown">
 								<option value="">选择</option>
@@ -311,7 +299,7 @@
 								<option value="挖匙">挖匙</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>制备洞形</label>
 								<select name="shape_of_hole" class="ui dropdown">
 								<option value="">选择</option>
@@ -324,7 +312,7 @@
 								<option value="根面">根面</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>洞形深度</label>
 								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
@@ -332,14 +320,14 @@
 
 						<h3 class="ui blue header">3. 干燥，隔湿</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>是否使用成形片</label>
 								<select name="is_piece" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用楔子</label>
 								<select name="is_chock" class="ui dropdown">
 								<option value="否">否</option>
@@ -350,7 +338,7 @@
 
 						<h3 class="ui blue header">4. 比色</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>比色板类型</label>
 								<select name="shade_guide" class="ui dropdown">
 								<option value="">选择</option>
@@ -359,7 +347,7 @@
 								<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>牙色</label>
 								<select name="color_of_tooth" class="ui dropdown">
 								<option value="">选择</option>
@@ -386,7 +374,7 @@
 
 						<h3 class="ui blue header">5. 窝洞消毒</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>窝洞消毒</label>
 								<select name="disinfect" class="ui dropdown">
 								<option value="">选择</option>
@@ -397,7 +385,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>垫底</label>
 								<select name="bottom" class="ui dropdown">
 								<option value="">选择</option>
@@ -414,7 +402,7 @@
 
 						<h3 class="ui blue header">6. 涂布粘接剂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>全酸蚀粘接系统</label>
 								<select name="full_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -427,7 +415,7 @@
 								<option value="其它">其它</option>
 							</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>自酸蚀粘接系统</label>
 								<select name="self_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -442,7 +430,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>涂布时间</label>
 								<select name="coating_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -455,7 +443,7 @@
 							</div>
 						</div>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>光照时间</label>
 								<select name="illumination_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -472,7 +460,7 @@
 
 						<h3 class="ui blue header">7. 树脂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>树脂</label>
 								<select name="resin" class="ui dropdown">
 								<option value="">选择</option>
@@ -487,7 +475,7 @@
 
 						<h3 class="ui blue header">8. 修型</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>修型</label>
 								<select name="modification" class="ui dropdown">
 								<option value="">选择</option>
@@ -495,7 +483,7 @@
 								<option value="瓷粉充填器">瓷粉充填器</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>光固化灯</label>
 								<select name="lamp" class="ui dropdown">
 								<option value="">选择</option>
@@ -506,7 +494,7 @@
 								<option value="氩激光灯">氩激光灯</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>光固化灯光照时间</label>
 								<select name="time_of_lamp" class="ui dropdown">
 								<option value="">选择</option>
@@ -523,7 +511,7 @@
 
 						<h3 class="ui blue header">9. 打磨抛光</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>打磨抛光</label>
 								<select name="polishing" class="ui dropdown">
 								<option value="">选择</option>
@@ -558,7 +546,7 @@
 					<form class="ui form" id="CureForm5">
 						<h3 class="ui blue header">1. 安抚药物</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>安抚药物</label>
 								<select name="appease_medicine" class="ui dropdown">
 								<option value="">选择</option>
@@ -566,7 +554,7 @@
 								<option value="抗生素小棉球">抗生素小棉球</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>观察时间</label>
 								<select name="observed_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -578,7 +566,7 @@
 
 						<h3 class="ui blue header">2. 麻醉药物</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>麻醉药物</label>
 								<select name="anesthesia_medicine" class="ui dropdown">
 								<option value="">选择</option>
@@ -587,7 +575,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>局部麻醉</label>
 								<select name="part_anesthesia" class="ui dropdown">
 								<option value="">选择</option>
@@ -595,7 +583,7 @@
 								<option value="浸润麻醉">浸润麻醉</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用橡皮障</label>
 								<select name="rubber" class="ui dropdown">
 								<option value="否">否</option>
@@ -606,7 +594,7 @@
 
 						<h3 class="ui blue header">3. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>去龋方法</label>
 								<select name="tools" class="ui dropdown">
 								<option value="">选择</option>
@@ -617,7 +605,7 @@
 								<option value="挖匙">挖匙</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>制备洞形</label>
 								<select name="shape_of_hole" class="ui dropdown">
 								<option value="">选择</option>
@@ -630,7 +618,7 @@
 								<option value="根面">根面</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>洞形深度</label>
 								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
@@ -638,14 +626,14 @@
 
 						<h3 class="ui blue header">4. 干燥，隔湿</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>是否使用成形片</label>
 								<select name="is_piece" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用楔子</label>
 								<select name="is_chock" class="ui dropdown">
 								<option value="否">否</option>
@@ -656,7 +644,7 @@
 
 						<h3 class="ui blue header">5. 比色</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>比色板类型</label>
 								<select name="shade_guide" class="ui dropdown">
 								<option value="">选择</option>
@@ -665,7 +653,7 @@
 								<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>牙色</label>
 								<select name="color_of_tooth" class="ui dropdown">
 								<option value="">选择</option>
@@ -692,7 +680,7 @@
 
 						<h3 class="ui blue header">6. 窝洞消毒</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>窝洞消毒</label>
 								<select name="disinfect" class="ui dropdown">
 								<option value="">选择</option>
@@ -703,7 +691,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>垫底</label>
 								<select name="bottom" class="ui dropdown">
 								<option value="">选择</option>
@@ -720,7 +708,7 @@
 
 						<h3 class="ui blue header">7. 涂布粘接剂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>全酸蚀粘接系统</label>
 								<select name="full_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -733,7 +721,7 @@
 								<option value="其它">其它</option>
 							</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>自酸蚀粘接系统</label>
 								<select name="self_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -748,7 +736,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>涂布时间</label>
 								<select name="coating_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -761,7 +749,7 @@
 							</div>
 						</div>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>光照时间</label>
 								<select name="illumination_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -778,7 +766,7 @@
 
 						<h3 class="ui blue header">8. 树脂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>树脂</label>
 								<select name="resin" class="ui dropdown">
 								<option value="">选择</option>
@@ -793,7 +781,7 @@
 
 						<h3 class="ui blue header">9. 修型</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>修型</label>
 								<select name="modification" class="ui dropdown">
 								<option value="">选择</option>
@@ -801,7 +789,7 @@
 								<option value="瓷粉充填器">瓷粉充填器</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>光固化灯</label>
 								<select name="lamp" class="ui dropdown">
 								<option value="">选择</option>
@@ -812,7 +800,7 @@
 								<option value="氩激光灯">氩激光灯</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>光固化灯光照时间</label>
 								<select name="time_of_lamp" class="ui dropdown">
 								<option value="">选择</option>
@@ -828,7 +816,7 @@
 						</div>
 						
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>打磨抛光</label>
 								<select name="polishing" class="ui dropdown">
 								<option value="">选择</option>
@@ -862,7 +850,7 @@
 					<form class="ui form" id="CureForm6">
 						<h3 class="ui blue header">1. 麻醉药物</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>麻醉药物</label>
 								<select name="anesthesia_medicine" class="ui dropdown">
 								<option value="">选择</option>
@@ -871,7 +859,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>局部麻醉</label>
 								<select name="part_anesthesia" class="ui dropdown">
 								<option value="">选择</option>
@@ -879,7 +867,7 @@
 								<option value="浸润麻醉">浸润麻醉</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用橡皮障</label>
 								<select name="rubber" class="ui dropdown">
 								<option value="否">否</option>
@@ -890,7 +878,7 @@
 
 						<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>去龋方法</label>
 								<select name="tools" class="ui dropdown">
 								<option value="">选择</option>
@@ -901,7 +889,7 @@
 								<option value="挖匙">挖匙</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>制备洞形</label>
 								<select name="shape_of_hole" class="ui dropdown">
 								<option value="">选择</option>
@@ -914,7 +902,7 @@
 								<option value="根面">根面</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>洞形深度</label>
 								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
@@ -922,7 +910,7 @@
 
 						<h3 class="ui blue header">3. 干燥，隔湿</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>干燥</label>
 								<select name="is_piece" class="ui dropdown">
 								<option value="">选择</option>
@@ -934,7 +922,7 @@
 
 						<h3 class="ui blue header">4. 比色</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>比色板类型</label>
 								<select name="shade_guide" class="ui dropdown">
 								<option value="">选择</option>
@@ -943,7 +931,7 @@
 								<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>牙色</label>
 								<select name="color_of_tooth" class="ui dropdown">
 								<option value="">选择</option>
@@ -970,7 +958,7 @@
 
 						<h3 class="ui blue header">5. 取模材料&嵌体材料</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>取模材料</label>
 								<select name="modulo" class="ui dropdown">
 								<option value="">选择</option>
@@ -979,7 +967,7 @@
 								<option value="琼脂">琼脂</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>嵌体材料</label>
 								<select name="inlay" class="ui dropdown">
 								<option value="">选择</option>
@@ -991,7 +979,7 @@
 
 						<h3 class="ui blue header">6. 窝洞消毒</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>窝洞消毒</label>
 								<select name="disinfect" class="ui dropdown">
 								<option value="">选择</option>
@@ -1002,7 +990,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>垫底</label>
 								<select name="bottom" class="ui dropdown">
 								<option value="">选择</option>
@@ -1019,7 +1007,7 @@
 
 						<h3 class="ui blue header">7. 涂布粘接剂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>全酸蚀粘接系统</label>
 								<select name="full_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -1032,7 +1020,7 @@
 								<option value="其它">其它</option>
 							</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>自酸蚀粘接系统</label>
 								<select name="self_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -1047,7 +1035,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>涂布时间</label>
 								<select name="coating_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -1060,7 +1048,7 @@
 							</div>
 						</div>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>光照时间</label>
 								<select name="illumination_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -1079,7 +1067,7 @@
 
 						<h3 class="ui blue header">10. 打磨抛光</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>打磨抛光</label>
 								<select name="polishing" class="ui dropdown">
 								<option value="">选择</option>
@@ -1118,7 +1106,7 @@
 					<form class="ui form" id="CureForm7">
 						<h3 class="ui blue header">1. 麻醉药物</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>麻醉药物</label>
 								<select name="anesthesia_medicine" class="ui dropdown">
 								<option value="">选择</option>
@@ -1127,7 +1115,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>局部麻醉</label>
 								<select name="part_anesthesia" class="ui dropdown">
 								<option value="">选择</option>
@@ -1135,7 +1123,7 @@
 								<option value="浸润麻醉">浸润麻醉</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>是否使用橡皮障</label>
 								<select name="rubber" class="ui dropdown">
 								<option value="否">否</option>
@@ -1146,7 +1134,7 @@
 
 						<h3 class="ui blue header">2. 显微镜下（以龋蚀显示剂指示，继续去净龋坏）</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>去龋方法</label>
 								<select name="tools" class="ui dropdown">
 								<option value="">选择</option>
@@ -1157,7 +1145,7 @@
 								<option value="挖匙">挖匙</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>制备洞形</label>
 								<select name="shape_of_hole" class="ui dropdown">
 								<option value="">选择</option>
@@ -1170,7 +1158,7 @@
 								<option value="根面">根面</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>洞形深度</label>
 								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
@@ -1178,7 +1166,7 @@
 
 						<h3 class="ui blue header">3. 干燥，隔湿</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>干燥</label>
 								<select name="is_piece" class="ui dropdown">
 								<option value="">选择</option>
@@ -1190,7 +1178,7 @@
 
 						<h3 class="ui blue header">4. 比色</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>比色板类型</label>
 								<select name="shade_guide" class="ui dropdown">
 								<option value="">选择</option>
@@ -1199,7 +1187,7 @@
 								<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>牙色</label>
 								<select name="color_of_tooth" class="ui dropdown">
 								<option value="">选择</option>
@@ -1226,7 +1214,7 @@
 
 						<h3 class="ui blue header">5. 取模材料&嵌体材料</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>取模材料</label>
 								<select name="modulo" class="ui dropdown">
 								<option value="">选择</option>
@@ -1235,7 +1223,7 @@
 								<option value="琼脂">琼脂</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>嵌体材料</label>
 								<select name="inlay" class="ui dropdown">
 								<option value="">选择</option>
@@ -1247,7 +1235,7 @@
 
 						<h3 class="ui blue header">6. 窝洞消毒</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>窝洞消毒</label>
 								<select name="disinfect" class="ui dropdown">
 								<option value="">选择</option>
@@ -1258,7 +1246,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>垫底</label>
 								<select name="bottom" class="ui dropdown">
 								<option value="">选择</option>
@@ -1275,7 +1263,7 @@
 
 						<h3 class="ui blue header">7. 涂布粘接剂</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>全酸蚀粘接系统</label>
 								<select name="full_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -1288,7 +1276,7 @@
 								<option value="其它">其它</option>
 							</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>自酸蚀粘接系统</label>
 								<select name="self_etching" class="ui dropdown">
 								<option value="">选择</option>
@@ -1303,7 +1291,7 @@
 								<option value="其它">其它</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>涂布时间</label>
 								<select name="coating_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -1316,7 +1304,7 @@
 							</div>
 						</div>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>光照时间</label>
 								<select name="illumination_time" class="ui dropdown">
 								<option value="">选择</option>
@@ -1335,7 +1323,7 @@
 
 						<h3 class="ui blue header">10. 打磨抛光</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>打磨抛光</label>
 								<select name="polishing" class="ui dropdown">
 								<option value="">选择</option>

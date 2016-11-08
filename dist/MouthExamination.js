@@ -197,6 +197,15 @@ $(document).ready(function(){
           }
         ]
       },
+      flex_of_caries: {
+        identifier: 'flex_of_caries',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : '请选择该项选项'
+          }
+        ]
+      },
       cold: {
         identifier: 'cold',
         rules: [

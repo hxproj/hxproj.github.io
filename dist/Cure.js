@@ -24,8 +24,6 @@ $(document).ready(function(){
 	        // 设置牙位信息
 	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
 	        	$('#ToothLocation').text(data.tooth_location);
-	        	data.is_fill_tooth ? $('#Symptom').text(data.tooth_location) : $('#Symptom').text(data.symptom);
-	        	$('#Time_of_occurrence').text(data.time_of_occurrence);
 	        }, "json");
 	        
   			// 牙非手术治疗
@@ -35,21 +33,22 @@ $(document).ready(function(){
   				var Describe_Text = "";
   				switch (DATA.specific_method) {
   					case "药物治疗": {
-  						Describe_Text += "将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
+  						Describe_Text += "药物治疗：将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
   						break;
   					}
   					case "再矿化治疗": {
-  						Describe_Text += "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
+  						Describe_Text += "再矿化治疗：患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
   						break;
   					}
   					case "窝沟封闭": {
-  						Describe_Text += "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
+  						Describe_Text += "窝沟封闭：<br/><br/>"
+  							+ "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
   							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润<br/><br/>"
-  							+ "2. 用棉纱球隔湿,压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀" + DATA.time_of_etching + "<br/><br/>" 
+  							+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀" + DATA.time_of_etching + "<br/><br/>" 
   							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物<br/><br/>" 
   							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上<br/><br/>" 
   							+ "5. 1-2分钟自行" + DATA.lamp + "离牙尖1mm照射20-40秒<br/><br/>" 
-  							+ "6. 探针进行检查，调合，定期" + DATA.check_time + "复查";
+  							+ "6. 探针进行检查，调合，" + DATA.check_time + "复查";
   						break;
   					}
   				}
