@@ -8,48 +8,48 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
-  	$.ajax({
-  		url      : URL_PERSONAL_HISTORY,
-  		type     : "get",
-  		data     : {user_id : U_ID},
-  		dataType : "json",
-      async    : false,
-  		success  : function(data){
-        DATA = data;
-  			$('#submit').hide();
+  $.ajax({
+		url      : URL_PERSONAL_HISTORY,
+		type     : "get",
+		data     : {user_id : U_ID},
+		dataType : "json",
+    async    : false,
+		success  : function(data){
+      DATA = data;
+			$('#submit').hide();
 
-        // 表头
-        $('#display th').text("个人史 - " + decodeURI(requestParameter("name")));
+      // 表头
+      $('#display th').text("个人史 - " + decodeURI(requestParameter("name")));
 
-        // 饮食习惯
-        var ID_Eating_Habits = "";
-        ID_Eating_Habits += DATA.consumption_of_sweet + "，";
-        ID_Eating_Habits += DATA.frequency_of_sweet + "，";
-        ID_Eating_Habits += DATA.frequency_of_meal + "，";
-        ID_Eating_Habits += DATA.is_carbonic_acid;
-        $('#ID_Eating_Habits').text(ID_Eating_Habits);
+      // 饮食习惯
+      var ID_Eating_Habits = "";
+      ID_Eating_Habits += DATA.consumption_of_sweet + "，";
+      ID_Eating_Habits += DATA.frequency_of_sweet + "，";
+      ID_Eating_Habits += DATA.frequency_of_meal + "，";
+      ID_Eating_Habits += DATA.is_carbonic_acid;
+      $('#ID_Eating_Habits').text(ID_Eating_Habits);
 
-       	// 口腔卫生维护
-        var ID_Oral_Maintenance = "";
-        ID_Oral_Maintenance += DATA.is_floss + "，";
-        ID_Oral_Maintenance += DATA.times_of_teeth_brush + "，";
-        ID_Oral_Maintenance += DATA.time_of_teeth_brush + "，";
-        ID_Oral_Maintenance += DATA.long_of_teeth_brush + "，";
-        ID_Oral_Maintenance += DATA.electric_tooth_brush + "，";
-        ID_Oral_Maintenance += DATA.is_fluorine + "，";
-        ID_Oral_Maintenance += DATA.is_cavity_examination + "，";
-        ID_Oral_Maintenance += DATA.is_periodontal_treatment;
-        $('#ID_Oral_Maintenance').text(ID_Oral_Maintenance);
+     	// 口腔卫生维护
+      var ID_Oral_Maintenance = "";
+      ID_Oral_Maintenance += DATA.is_floss + "，";
+      ID_Oral_Maintenance += DATA.times_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.time_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.long_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.electric_tooth_brush + "，";
+      ID_Oral_Maintenance += DATA.is_fluorine + "，";
+      ID_Oral_Maintenance += DATA.is_cavity_examination + "，";
+      ID_Oral_Maintenance += DATA.is_periodontal_treatment;
+      $('#ID_Oral_Maintenance').text(ID_Oral_Maintenance);
 
-        // 宿主易感性
-        var ID_Sensitive = "";
-        ID_Sensitive += DATA.salivary_gland_disease + "，";
-        ID_Sensitive += DATA.sjogren_syndrome + "，";
-        ID_Sensitive += DATA.consciously_reduce_salivary_flow;
-        $('#ID_Sensitive').text(ID_Sensitive);
-        
-        $('#display').show();
-  		}
+      // 宿主易感性
+      var ID_Sensitive = "";
+      ID_Sensitive += DATA.salivary_gland_disease + "，";
+      ID_Sensitive += DATA.sjogren_syndrome + "，";
+      ID_Sensitive += DATA.consciously_reduce_salivary_flow;
+      $('#ID_Sensitive').text(ID_Sensitive);
+      
+      $('#display').show();
+		}
 	});
 
   if (DATA == null) {$('#submit').show();}

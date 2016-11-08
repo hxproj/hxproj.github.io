@@ -43,22 +43,13 @@
 			<table class="ui invisible celled structured table" id="display">
 				<thead>
 					<tr>
-						<th class="center aligned" colspan="3"></th>
+						<th class="center aligned" colspan="2"></th>
 					</tr>
 				</thead>
 	  			<tbody>
 					<tr>
-						<td class="negative collapsing" rowspan="3">诊断结果</td>
-						<td class="collapsing">牙位</td>
-						<td id="id_tooth_location"></td>
-					</tr>
-					<tr>
-						<td class="collapsing">龋损程度</td>
-						<td id="caries_degree"></td>
-					</tr>
-					<tr>
-						<td class="collapsing">龋齿病种</td>
-						<td id="caries_type"></td>
+						<td class="collapsing">诊断描述</td>
+						<td id="ID_Description"></td>
 					</tr>
 					<tr>
 						<td class="negative collapsing">诊断图片</td>
@@ -86,7 +77,7 @@
 				<form class="ui form">
 					<h3 class="ui locationdescription blue header"></h3>
 					<div class="two fields">
-						<div class="field">
+						<div class="required field">
 							<label>龋损程度</label>
 							<select name="caries_degree" class="ui dropdown">
 							<option value="">选择</option>

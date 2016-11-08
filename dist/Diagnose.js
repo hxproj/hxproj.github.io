@@ -33,11 +33,21 @@ $(document).ready(function(){
   			$('#display th').text("诊断 - " + decodeURI(requestParameter("name")));
 
   			// 设置诊断描述
-	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(toothdata){
+	        $.get(URL_MOUTHEXAM, {tooth_id : DATA.tooth_id}, function(mouthData){
 
-	        	$('#id_tooth_location').text(toothdata.tooth_location);
-	        	$('#caries_degree').text(DATA.caries_degree);
-	        	$('#caries_type').text(DATA.caries_type);
+	        	var ToothLocation = mouthData.tooth_location + "牙",
+	        		Description = ToothLocation;
+
+		        $.each(mouthData.caries_tired.split(","), function(){
+		          Description += this;
+		        });
+		        Description += "面" + DATA.caries_degree;
+
+		        if (DATA.caries_type != "") {
+		        	Description += "<br/><br/>" + ToothLocation + DATA.caries_type;
+		        }
+
+	        	$('#ID_Description').html(Description);
 
 	        }, "json");
 
@@ -102,15 +112,6 @@ $(document).ready(function(){
 					{
 						type   : 'empty',
             			prompt : '请选择龋损程度'
-					}
-				]
-			},
-			caries_type: {
-				identifier: 'caries_type',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择龋齿病种'
 					}
 				]
 			},
