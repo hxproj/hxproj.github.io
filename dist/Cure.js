@@ -33,18 +33,18 @@ $(document).ready(function(){
   			if (DATA.handle_type == 0) {
   				$('#Method').text("牙非手术治疗：" + DATA.specific_method);
 
-  				var Describe_Text = "";
+  				var Describe_Text = "<bold>" + DATA.specific_method + "：</bold>";
   				switch (DATA.specific_method) {
   					case "药物治疗": {
-  						Describe_Text += "药物治疗：将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
+  						Describe_Text += "将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
   						break;
   					}
   					case "再矿化治疗": {
-  						Describe_Text += "再矿化治疗：患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
+  						Describe_Text += "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
   						break;
   					}
   					case "窝沟封闭": {
-  						Describe_Text += "窝沟封闭：" + NewLine
+  						Describe_Text += "" + NewLine
   							+ "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
   							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
   							+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上。" + DATA.time_of_etching + NewLine
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += "深度：" + DATA.depth_of_hole;
 						Describe_Text += NewLine;
 
 						// 3. 
@@ -148,7 +148,7 @@ $(document).ready(function(){
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += "深度：" + DATA.depth_of_hole;
 						Describe_Text += NewLine;
 
 						// 3. 
@@ -207,7 +207,7 @@ $(document).ready(function(){
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += "深度：" + DATA.depth_of_hole;
 						Describe_Text += NewLine;
 
   						// 3.
@@ -263,7 +263,7 @@ $(document).ready(function(){
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += "深度：" + DATA.depth_of_hole;
 						Describe_Text += NewLine;
 
   						// 3.
@@ -471,8 +471,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		shape_of_hole: {
-			identifier: 'shape_of_hole',
+		shape_of_hole_display: {
+			identifier: 'shape_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -480,8 +480,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		depth_of_hole: {
-			identifier: 'depth_of_hole',
+		depth_of_hole_display: {
+			identifier: 'depth_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -636,8 +636,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		shape_of_hole: {
-			identifier: 'shape_of_hole',
+		shape_of_hole_display: {
+			identifier: 'shape_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -645,8 +645,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		depth_of_hole: {
-			identifier: 'depth_of_hole',
+		depth_of_hole_display: {
+			identifier: 'depth_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -783,8 +783,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		shape_of_hole: {
-			identifier: 'shape_of_hole',
+		shape_of_hole_display: {
+			identifier: 'shape_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -792,8 +792,8 @@ $(document).ready(function(){
 				}
 			]
 		},
-		depth_of_hole: {
-			identifier: 'depth_of_hole',
+		depth_of_hole_display: {
+			identifier: 'depth_of_hole_display',
 			rules: [
 				{
 					type   : 'empty',
@@ -903,10 +903,17 @@ $(document).ready(function(){
 			fields   : Rules,
 			inline   : true,
 			onSuccess: function(){
+				var AddtionFormField = toform({
+					user_id  : U_ID, 
+					tooth_id : T_ID,
+					shape_of_hole : $(this).form('get value', 'shape_of_hole_display'),
+					depth_of_hole : $(this).form('get value', 'depth_of_hole_display') + "mm",
+				});
+
 				$.ajax({
 					url      : URL_CURE,
 					type     : DATA == null ? "POST" : "PUT", 
-					data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
+					data     : AddtionFormField + $(this).serialize(),
 					dataType : "json",
 					error    : function() {networkError();},
 					success  : function(data) {
@@ -988,10 +995,11 @@ $(document).ready(function(){
         			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
         			$('select[name=tools]').dropdown("set selected", DATA.tools);
 
-        			
-        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
-
-        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+        			// 制备洞型
+        			$.each(DATA.shape_of_hole.split(','), function(){
+        				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
+        			});
+        			$('input[name=depth_of_hole_display]').val(DATA.depth_of_hole);
 
         			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
         			$('select[name=is_chock]').dropdown("set selected", DATA.is_chock);
@@ -1025,9 +1033,12 @@ $(document).ready(function(){
         			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
         			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
         			$('select[name=tools]').dropdown("set selected", DATA.tools);
-        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
 
-        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+        			// 制备洞型
+        			$.each(DATA.shape_of_hole.split(','), function(){
+        				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
+        			});
+        			$('input[name=depth_of_hole_display]').val(DATA.depth_of_hole);
 
         			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
         			$('select[name=is_chock]').dropdown("set selected", DATA.is_chock);
@@ -1058,9 +1069,12 @@ $(document).ready(function(){
         			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
         			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
         			$('select[name=tools]').dropdown("set selected", DATA.tools);
-        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
 
-        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+        			// 制备洞型
+        			$.each(DATA.shape_of_hole.split(','), function(){
+        				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
+        			});
+        			$('input[name=depth_of_hole_display]').val(DATA.depth_of_hole);
 
         			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
         			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);
@@ -1092,9 +1106,12 @@ $(document).ready(function(){
         			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
         			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
         			$('select[name=tools]').dropdown("set selected", DATA.tools);
-        			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
-
-        			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
+        			
+        			// 制备洞型
+        			$.each(DATA.shape_of_hole.split(','), function(){
+        				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
+        			});
+        			$('input[name=depth_of_hole_display]').val(DATA.depth_of_hole);
 
         			$('select[name=is_piece]').dropdown("set selected", DATA.is_piece);
         			$('select[name=shade_guide]').dropdown("set selected", DATA.shade_guide);

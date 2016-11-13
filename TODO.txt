@@ -10,6 +10,10 @@ TODO:
 
 *. Ç¶ÌåºÍÈ¡Ä¤¶þÑ¡Ò»°É£¿
 
+*. ·çÏÕÆÀ¹ÀÓ¦¸ÃÓÐ¸öÆÀ¹ÀµÈ¼¶É¶µÄ
+
+*. ÍÙÒºÏÙ¼²²¡ËÑË÷
+
 ** BUG
 
 1. USPHSµÈ¼¶ÆÀ¹À´íÎó
@@ -35,3 +39,8 @@ if (FileData.length > 0 ) {$('#IMAGE').find('.ui.header .content').text("Í¼Æ¬ÕýÔ
 3. Î´Íê³ÉµÄ²¡ÀúÏî
 
 4. ÆäËüÑ¡Ïî£¬¿ÉÒÔÌí¼Ó¶îÍâµÄÑ¡ÏîÖµ£¬²¢ÇÒ£¬ÕâÐ©Ñ¡Ïî¿ÉÒÔ´Ó·þÎñÆ÷ÊµÊ±»ñÈ¡
+
+
+UI:
+~. ±íÍ·ÏÔÊ¾ÓÃ»§µÄ»ù±¾ÐÅÏ¢£¬±ÈÈç£ºÐÕÃû£¬ÐÐÒµ£¬ÁªÏµµç»°
+~. 

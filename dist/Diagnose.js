@@ -30,9 +30,10 @@ $(document).ready(function(){
   			$('#DiagnoseForm').hide();
   			DATA = data;
 
-  			$('#display th').text("诊断 - " + decodeURI(requestParameter("name")));
+  			$('#display th').text(decodeURI(requestParameter("name")));
 
   			// 设置诊断描述
+  			// FIXME: 如果未设置牙位，提示用户添加牙位
 	        $.get(URL_MOUTHEXAM, {tooth_id : DATA.tooth_id}, function(mouthData){
 
 	        	var ToothLocation = mouthData.tooth_location + "牙",

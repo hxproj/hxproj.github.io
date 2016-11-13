@@ -48,7 +48,7 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 页面跳转
 	function search(Parameters) {
-		window.location.href = "Search.html" + toquerystring({
+		window.location.href = "SearchResult.html" + toquerystring({
 			type   : Parameters.DataBaseTableName,
 			name   : Parameters.DataBaseFieldName,
 			value  : Parameters.SearchItemValue,

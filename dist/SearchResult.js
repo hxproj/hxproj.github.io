@@ -57,9 +57,11 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
-		$.each(UserData.tooth_location_list, function(){
-			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
-		});
+		if (UserData.tooth_location_list != undefined && UserData.tooth_location_list.length > 0) {
+			$.each(UserData.tooth_location_list, function(){
+				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
+			});
+		}
 
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
@@ -69,9 +71,8 @@ $(document).ready(function(){
 	function showToothLocation($Selector, ToothData){
 		$ClonedExtra = $Selector.clone(true);
 
-		var LocationStr = ToothData.tooth_location;
-		ToothData.is_fill_tooth ? LocationStr += "（要求直接补牙）" :
-			LocationStr += "（" + ToothData.time_of_occurrence + ", " + ToothData.symptom + "）";
+		var LocationStr = "主诉：" + ToothData.tooth_location;
+		LocationStr += ToothData.is_fill_tooth ? "要求补牙" : ToothData.symptom + ToothData.time_of_occurrence;
 
 		$ClonedExtra.attr("value", ToothData.tooth_id);
 		$ClonedExtra.find('.location').text(LocationStr);
@@ -79,12 +80,61 @@ $(document).ready(function(){
 		// 设置当前牙位操作状态
 		$.each(ToothData.step, function(){
 			if (this != 0) {
-				$ClonedExtra.find('a.button').eq(this - 1).addClass('blue');
+				$ClonedExtra.find('a.label').eq(this - 1).addClass('blue');
 			}
 		});
 
+		$ClonedExtra.find('a.label').bind('click', clickToothStep);
+
+		$ClonedExtra.find('a.download').unbind().bind('click', downloadFile);
+		$ClonedExtra.find('a.deletetooth').unbind().bind('click', deleteToothLocation);
+
 		$Selector.after($ClonedExtra);
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
+	}
+
+	// *************************************************************
+	// 单击牙位处理流程
+	function clickToothStep(){
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : $(this).parents('.record.segment').attr('value'),
+			tid  : $(this).parents('.extra').attr('value'),
+			name : $(this).parents('.record.segment').find('.name').text()
+		}));
+	}
+
+	// ***************************************************************
+	// FUNCTION: 删除牙位
+	function deleteToothLocation(){
+		var $Tooth = $(this).parents('.extra');
+		$('#deletemodal').modal({
+			onApprove: function() {
+				$.ajax({
+					url      : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
+					type     : "DELETE",
+					dataType : "text",
+					error    : function() {alert("删除牙位失败");},
+					success  : function() {$Tooth.remove();}
+				});
+			}
+		}).modal('show');
+	}
+
+	// ***************************************************************
+	// FUNCTION: 下载文件
+	function downloadFile(){
+		$.ajax({
+			url      : URL_DOC + toquerystring({tooth_id : $(this).parents('.extra').attr('value'), risk : ""}),
+			type     : "GET",
+			dataType : "text",
+			error    : function() {networkError();},
+			success  : function(text) {
+				text = text.substring(text.lastIndexOf("Medical_Case\\"), text.length);
+				location.href = text;
+			}
+		});
+
+		return false;
 	}
 
 	var USER_ID         = null;
@@ -169,7 +219,6 @@ $(document).ready(function(){
 	});
 
 	function submitTooth($Form){
-		
 		$.ajax({
 			url     : URL_TOOTH,
 			type    : "post",
@@ -187,35 +236,14 @@ $(document).ready(function(){
 	}
 
 	$('#context .menu .item').tab({ context: $('#context') });
-
+	$('.coupled.modal').modal({allowMultiple: true});
 	// 添加时间控件
-	$('#add_tooth .disabled.input').click(function(){
-		$(this).popup({
-			on       : 'manual',
-			inline   : true,
-			popup    : $('#add_tooth .popup')
-		}).popup('show');
+	$('#ID_Time').modal('attach events', '#add_tooth .disabled.input');
+	$('#ID_Time a.label').click(function(){
+		$('#add_tooth .disabled.input input').val($(this).text() + $(this).prevAll('div.label').text());
+		$('#ID_Time').modal('hide');
 	});
 
-	$('#add_tooth .popup a.label').click(function(){
-		var Result   = $(this).text();
-		var TimeType = $(this).parent().prop('id');
-
-		if (TimeType === "time_day")
-		{
-			Result += "天";
-		} else if (TimeType === "time_week") {
-			Result += "周";
-		} else if (TimeType === "time_month") {
-			Result += "月";
-		} else if (TimeType === "time_year") {
-			Result += "年";
-		}
-
-		$('#add_tooth .disabled.input input').val(Result);
-
-		$('#add_tooth .disabled.input').popup('hide');
-	});
 
 	// ***************************************************************
 	// FUNCTION:设置链接数据
@@ -227,54 +255,7 @@ $(document).ready(function(){
 			name : $Record.find('.name').text()
 		}));
 	});
-
-	// 其它
-	$('.record.segment .extra:first a').click(function(){
-		var U_ID = $(this).parents('.record.segment').attr('value');
-		var T_ID = $(this).parents('.extra').attr('value');
-		var Name = $(this).parents('.record.segment').find('.name').text();
-
-		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid  : U_ID,
-			tid  : T_ID,
-			name : Name
-		}));
-	});
-
-	// ***************************************************************
-	// FUNCTION: 删除牙位
-	$('.deletetooth.button').click(function(){
-		var $Tooth = $(this).parents('.extra');
-		$('#deletemodal').modal({
-			onApprove: function() {
-				$.ajax({
-					url      : URL_TOOTH + toquerystring({tooth_id : $Tooth.attr('value')}),
-					type     : "DELETE",
-					dataType : "text",
-					error    : function() {alert("删除牙位失败");},
-					success  : function() {$Tooth.remove();}
-				});
-			}
-		}).modal('show');
-	});
-
-	// ***************************************************************
-	// FUNCTION: 下载文件
-	$('.download.button').click(function(){
-		$.ajax({
-			url      : URL_DOC + toquerystring({tooth_id : $(this).parents('.extra').attr('value'), risk : ""}),
-			type     : "GET",
-			dataType : "text",
-			error    : function() {networkError();},
-			success  : function(text) {
-				text = text.substring(text.lastIndexOf("Medical_Case\\"), text.length);
-				location.href = text;
-			}
-		});
-
-		return false;
-	});
-
+	
 	// ***************************************************************
 	// FUNCTION: 删除病历
 	$('.corner.label').click(function(){

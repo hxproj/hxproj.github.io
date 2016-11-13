@@ -34,9 +34,21 @@ $(document).ready(function(){
 
   			var Level = "";
   			switch (DATA.difficulty_level) {
-  				case 1:  Level = "Ⅰ级"; break;
-  				case 2:  Level = "Ⅱ级"; break;
-  				case 3:  Level = "Ⅲ级"; break;
+  				case 1:  {
+            Level = "Ⅰ级"; 
+            $('#id_advice').text("建议转诊到Ⅲ级医师进行处理");
+            break;
+          }
+  				case 2:  {
+            Level = "Ⅱ级"; 
+            $('#id_advice').text("建议转诊到Ⅱ级医师进行处理");
+            break;
+          }
+  				case 3:  {
+            Level = "Ⅲ级"; 
+            $('#id_advice').text("建议转诊到Ⅰ级医师进行处理");
+            break;
+          }
   			}
   			$('#difficulty_level').text(Level);
 
@@ -125,7 +137,7 @@ $(document).ready(function(){
     $('select[name=dental_phobia]').dropdown("set selected", DATA.dental_phobia);
     $('select[name=difficulty_rating]').dropdown("set selected", DATA.difficulty_rating);
 
-    $('#DifficultyForm .submit.button').text("确认修改").after('<div class="ui right floated teal button" onclick="location.reload()">取消</div>');
+    $('#DifficultyForm .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$('#DifficultyForm').show();
 	});
 

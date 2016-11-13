@@ -26,18 +26,16 @@ $(document).ready(function(){
   			DATA = data;
 
         // 表头
-        $('#display th').text("现病史 - " + decodeURI(requestParameter("name")));
+        $('#display th').text(decodeURI(requestParameter("name")));
 
         // 设置描述（需提前获取牙位信息）
         $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(ToothData){
 
-          var DescribeText = ToothData.tooth_location;
-              DescribeText += ToothData.is_fill_tooth ? "要求补牙" : ToothData.time_of_occurrence + "前发现" + ToothData.symptom + "，";
+          var DescribeText = !DATA.is_primary ? "<bold>原发性龋病：</bold>" : "<bold>有治疗史龋病：</bold>";
+          DescribeText += ToothData.tooth_location;
+          DescribeText += ToothData.is_fill_tooth ? "要求补牙" : ToothData.time_of_occurrence + "前发现" + ToothData.symptom + "，";
          
           if (!DATA.is_primary) {
-            // 设置病种
-            $('#illnessType').text("原发性龋病");
-
             DescribeText += DATA.is_very_bad + "，";
             DescribeText += DATA.is_night_pain_self_pain + "，";
             DescribeText += DATA.is_hypnalgia + "，";
@@ -48,8 +46,6 @@ $(document).ready(function(){
             DescribeText += DATA.is_relief;
 
           } else {
-            $('#illnessType').text("有治疗史龋病");
-
             DescribeText += "在" + DATA.cure_time + "前曾进行充填修复治疗，";
             DescribeText += "为" + DATA.fill_type + "，";
             DescribeText += DATA.fill_state + "，";
@@ -63,7 +59,7 @@ $(document).ready(function(){
 
           }
 
-          $('#describe').text(DescribeText);
+          $('#describe').html(DescribeText);
         }, "json");
 
         $('#display').show();
