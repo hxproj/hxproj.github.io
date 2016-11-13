@@ -4,7 +4,8 @@ $(document).ready(function(){
     var DATA       = null,
     	U_ID       = Number(requestParameter("uid")),
 		T_ID       = Number(requestParameter("tid")),
-		Image_type = 2;
+		Image_type = 2,
+		NewLine    = "<br/><br/>";
 
 	// ***************************************************************
 	// FUNCTION: 请求数据
@@ -19,12 +20,14 @@ $(document).ready(function(){
   			DATA = data;
 
         	// 表头
-        	$('#display th').text("处置 - " + decodeURI(requestParameter("name")));
+        	$('#display th').text(decodeURI(requestParameter("name")));
 
 	        // 设置牙位信息
+	        /*
 	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
 	        	$('#ToothLocation').text(data.tooth_location);
 	        }, "json");
+			*/
 	        
   			// 牙非手术治疗
   			if (DATA.handle_type == 0) {
@@ -41,14 +44,14 @@ $(document).ready(function(){
   						break;
   					}
   					case "窝沟封闭": {
-  						Describe_Text += "窝沟封闭：<br/><br/>"
+  						Describe_Text += "窝沟封闭：" + NewLine
   							+ "1. 清洁牙面： 在低速手机上装好" + DATA.additional_device 
-  							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润<br/><br/>"
-  							+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2／3上。酸蚀" + DATA.time_of_etching + "<br/><br/>" 
-  							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物<br/><br/>" 
-  							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上<br/><br/>" 
-  							+ "5. 1-2分钟自行" + DATA.lamp + "离牙尖1mm照射20-40秒<br/><br/>" 
-  							+ "6. 探针进行检查，调合，" + DATA.check_time + "复查";
+  							+ "，蘸取适量" + DATA.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
+  							+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + DATA.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上。" + DATA.time_of_etching + NewLine
+  							+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物" + NewLine
+  							+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上" + NewLine
+  							+ "5. " + DATA.lamp + NewLine
+  							+ "6. 探针进行检查，调合，" + DATA.check_time;
   						break;
   					}
   				}
@@ -58,173 +61,250 @@ $(document).ready(function(){
   			else if (DATA.handle_type == 1) {
   				$('#Method').text(DATA.specific_method);
 
-  				var Describe_Text = "";
+  				var Describe_Text = "<h4 class='ui blue header'>" + DATA.specific_method + "：</h4>";
+
   				switch (DATA.specific_method) {
-  					case "牙树脂直接填充修复": {
+  					case "牙树脂直接充填修复": {
   						// 1. 
-  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
-  						if (DATA.rubber == "否") {
-  							Describe_Text += "不使用橡皮障<br/><br/>";
-  						} else if (DATA.rubber == "是") {
-  							Describe_Text += "使用橡皮障<br/><br/>";
-  						}
+  						Describe_Text += "1. ";
+						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
+						Describe_Text += "局部" + DATA.part_anesthesia + "，";
+  						Describe_Text += DATA.rubber;
+						Describe_Text += NewLine;
 
   						// 2.
-						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
-							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+						Describe_Text += "2. ";
+
+						if (DATA.microscope == "显微镜下") {
+							Describe_Text += DATA.microscope + "，";
+						}
+
+						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+						Describe_Text += DATA.shape_of_hole + "制备洞形，";
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += NewLine;
 
 						// 3. 
 						Describe_Text += "3. 干燥，隔湿，";
-  						if (DATA.is_piece == "否") {
-  							Describe_Text += "不使用成形片，";
-  						} else if (DATA.is_piece == "是") {
-  							Describe_Text += "使用成形片，";
-  						}
-  						if (DATA.is_chock == "否") {
-  							Describe_Text += "不使用楔子";
-  						} else if (DATA.is_chock == "是") {
-  							Describe_Text += "使用楔子";
-  						}
-						Describe_Text += "<br/><br/>";
+						Describe_Text += DATA.is_piece + "，";
+						Describe_Text += DATA.is_chock;
+						Describe_Text += NewLine;
 
   						// 4.
-						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+						Describe_Text += "4. ";
+						Describe_Text += DATA.shade_guide + "，";
+						Describe_Text += "选择牙色" + DATA.color_of_tooth;
+						Describe_Text += NewLine;
 
   						// 5.
-						Describe_Text += "5. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+						Describe_Text += "5. ";
+						Describe_Text += DATA.disinfect + "窝洞消毒";
+						// 如果垫底为空，则不显示
+						if (DATA.bottom != "")
+						{
+							Describe_Text += "，" + DATA.bottom;
+						}
+						Describe_Text += NewLine;
 
-  						// 6.
-						Describe_Text += "6. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
-							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+  						// 6. TODO
+						Describe_Text += "6. 涂布粘接剂：";
+						Describe_Text += DATA.etching_type + "：";
+						Describe_Text += "全酸蚀粘接系统" == DATA.etching_type ? DATA.full_etching : DATA.full_etching;
+						Describe_Text += "，涂布" + DATA.coating_time;
+						Describe_Text += "，吹干5s，光照" + DATA.illumination_time;
+						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 树脂：" + DATA.resin + "<br/><br/>" ;
+						Describe_Text += "7. 树脂：";
+						Describe_Text += DATA.resin;
+						Describe_Text += NewLine;
 
   						// 8.
-						Describe_Text += "8. " + DATA.modification + "修型，" + DATA.lamp 
-							+ "光照" + DATA.time_of_lamp + "，" + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+						Describe_Text += "8. 修型：";
+						Describe_Text += DATA.modification + "，";
+						Describe_Text += DATA.lamp + "光照" + DATA.time_of_lamp + "，"
+						Describe_Text += DATA.polishing + "调合打磨抛光";
+						Describe_Text += NewLine;
 
   						break;
   					}
   					case "牙安抚治疗&树脂充填修复": {
-  						// 1. 
-						Describe_Text += "1. 使用安抚药物：" + DATA.appease_medicine + "，观察时间：" + DATA.observed_time + "<br/><br/>" ;
-  						
+  						// 初诊
+  						Describe_Text += "<bold>初诊：</bold>";
+						Describe_Text += "使用"+ DATA.appease_medicine + "，";
+						Describe_Text += "观察" + DATA.observed_time;
+						Describe_Text += NewLine;
+
+  						// 复诊：1. 
+  						Describe_Text += "<bold>复诊：</bold>";
+						Describe_Text += NewLine;
+  						Describe_Text += "1. ";
+						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
+						Describe_Text += "局部" + DATA.part_anesthesia + "，";
+  						Describe_Text += DATA.rubber;
+						Describe_Text += NewLine;
+
   						// 2.
-  						Describe_Text += "2. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
-  						if (DATA.rubber == "否") {
-  							Describe_Text += "不使用橡皮障<br/><br/>";
-  						} else if (DATA.rubber == "是") {
-  							Describe_Text += "使用橡皮障<br/><br/>";
-  						}
+						Describe_Text += "2. 显微镜下，";
+						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+						Describe_Text += DATA.shape_of_hole + "制备洞形，";
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += NewLine;
 
-  						// 3.
-						Describe_Text += "3. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
-							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+						// 3. 
+						Describe_Text += "3. 干燥，隔湿，";
+						Describe_Text += DATA.is_piece + "，";
+						Describe_Text += DATA.is_chock;
+						Describe_Text += NewLine;
 
-						// 4. 
-						Describe_Text += "4. 干燥，隔湿，";
-  						if (DATA.is_piece == "否") {
-  							Describe_Text += "不使用成形片，";
-  						} else if (DATA.is_piece == "是") {
-  							Describe_Text += "使用成形片，";
-  						}
-  						if (DATA.is_chock == "否") {
-  							Describe_Text += "不使用楔子";
-  						} else if (DATA.is_chock == "是") {
-  							Describe_Text += "使用楔子";
-  						}
-						Describe_Text += "<br/><br/>";
+  						// 4.
+						Describe_Text += "4. ";
+						Describe_Text += DATA.shade_guide + "，";
+						Describe_Text += "选择牙色" + DATA.color_of_tooth;
+						Describe_Text += NewLine;
 
   						// 5.
-						Describe_Text += "5. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
-						
-  						// 6.
-						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+						Describe_Text += "5. ";
+						Describe_Text += DATA.disinfect + "窝洞消毒";
+						// 如果垫底为空，则不显示
+						if (DATA.bottom != "")
+						{
+							Describe_Text += "，" + DATA.bottom;
+						}
+						Describe_Text += NewLine;
+
+  						// 6. TODO
+						Describe_Text += "6. 涂布粘接剂：";
+						Describe_Text += DATA.etching_type + "：";
+						Describe_Text += "全酸蚀粘接系统" == DATA.etching_type ? DATA.full_etching : DATA.full_etching;
+						Describe_Text += "，涂布" + DATA.coating_time;
+						Describe_Text += "，吹干5s，光照" + DATA.illumination_time;
+						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
-							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+						Describe_Text += "7. 树脂：";
+						Describe_Text += DATA.resin;
+						Describe_Text += NewLine;
 
   						// 8.
-						Describe_Text += "8. 树脂：" + DATA.resin + "<br/><br/>" ;
-
-  						// 9.
-						Describe_Text += "9. " + DATA.modification + "修型，" + DATA.lamp 
-							+ "光照" + DATA.time_of_lamp + "，" + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
+						Describe_Text += "8. 修型：";
+						Describe_Text += DATA.modification + "，";
+						Describe_Text += DATA.lamp + "光照" + DATA.time_of_lamp + "，"
+						Describe_Text += DATA.polishing + "调合打磨抛光";
+						Describe_Text += NewLine;
 
   						break;
   					}
   					case "嵌体修复": {
   						// 1. 
-  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
-  						if (DATA.rubber == "否") {
-  							Describe_Text += "不使用橡皮障<br/><br/>";
-  						} else if (DATA.rubber == "是") {
-  							Describe_Text += "使用橡皮障<br/><br/>";
-  						}
+  						Describe_Text += "1. ";
+						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
+						Describe_Text += "局部" + DATA.part_anesthesia + "，";
+  						Describe_Text += DATA.rubber;
+						Describe_Text += NewLine;
 
   						// 2.
-						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
-							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+						Describe_Text += "2. 显微镜下，";
+						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+						Describe_Text += DATA.shape_of_hole + "制备洞形，";
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += NewLine;
 
-						// 3. 
-						Describe_Text += "3. " + DATA.is_piece + "干燥，隔湿<br/><br/>";
+  						// 3.
+						Describe_Text += "3. ";
+						Describe_Text += DATA.shade_guide + "，";
+						Describe_Text += "选择牙色" + DATA.color_of_tooth;
+						Describe_Text += NewLine;
 
-  						// 4.
-						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+						// 4.
+						Describe_Text += "4. ";
+						Describe_Text += "取模材料：" + DATA.modulo + "，";
+						Describe_Text += "嵌体材料：" + DATA.inlay;
+						Describe_Text += NewLine;
 
-						// 5.
-						Describe_Text += "5. 取模材料：" + DATA.modulo + "，嵌体材料：" + DATA.inlay + "<br/><br/>" ;
+  						// 5.
+						Describe_Text += "5. ";
+						Describe_Text += DATA.disinfect + "窝洞消毒";
+						// 如果垫底为空，则不显示
+						if (DATA.bottom != "")
+						{
+							Describe_Text += "，" + DATA.bottom;
+						}
+						Describe_Text += NewLine;
 
-  						// 6.
-						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+  						// 6. TODO
+						Describe_Text += "6. 涂布粘接剂：";
+						Describe_Text += DATA.etching_type + "：";
+						Describe_Text += "全酸蚀粘接系统" == DATA.etching_type ? DATA.full_etching : DATA.full_etching;
+						Describe_Text += "，涂布" + DATA.coating_time;
+						Describe_Text += "，吹干5s，光照" + DATA.illumination_time;
+						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
-							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+						Describe_Text += "7. 放置嵌体";
+						Describe_Text += NewLine;
 
   						// 8.
-						Describe_Text += "8. 放置嵌体<br/><br/>" ;
+						Describe_Text += "8. ";
+						Describe_Text += DATA.polishing + "调合打磨抛光";
+						Describe_Text += NewLine;
 
-  						// 9.
-						Describe_Text += "9. " + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
   						break;
   					}
   					case "贴面修复": {
   						// 1. 
-  						Describe_Text += "1. 使用" + DATA.anesthesia_medicine + "局部" + DATA.part_anesthesia + "，";
-  						if (DATA.rubber == "否") {
-  							Describe_Text += "不使用橡皮障<br/><br/>";
-  						} else if (DATA.rubber == "是") {
-  							Describe_Text += "使用橡皮障<br/><br/>";
-  						}
+  						Describe_Text += "1. ";
+						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
+						Describe_Text += "局部" + DATA.part_anesthesia + "，";
+  						Describe_Text += DATA.rubber;
+						Describe_Text += NewLine;
 
   						// 2.
-						Describe_Text += "2. 显微镜下，" + DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，制备洞形：" + DATA.shape_of_hole 
-							+ "，深度：" + DATA.depth_of_hole + "mm<br/><br/>" ;
+						Describe_Text += "2. 显微镜下，";
+						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+						Describe_Text += DATA.shape_of_hole + "制备洞形，";
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
+						Describe_Text += NewLine;
 
-						// 3. 
-						Describe_Text += "3. " + DATA.is_piece + "干燥，隔湿<br/><br/>";
+  						// 3.
+						Describe_Text += "3. ";
+						Describe_Text += DATA.shade_guide + "，";
+						Describe_Text += "选择牙色" + DATA.color_of_tooth;
+						Describe_Text += NewLine;
 
-  						// 4.
-						Describe_Text += "4. " + DATA.shade_guide + "选择牙色：" + DATA.color_of_tooth + "<br/><br/>" ;
+						// 4.
+						Describe_Text += "4. ";
+						Describe_Text += "取模材料：" + DATA.modulo + "，";
+						Describe_Text += "嵌体材料：" + DATA.inlay;
+						Describe_Text += NewLine;
 
-						// 5.
-						Describe_Text += "5. 取模材料：" + DATA.modulo + "，嵌体材料：" + DATA.inlay + "<br/><br/>" ;
+  						// 5.
+						Describe_Text += "5. ";
+						Describe_Text += DATA.disinfect + "窝洞消毒";
+						// 如果垫底为空，则不显示
+						if (DATA.bottom != "")
+						{
+							Describe_Text += "，" + DATA.bottom;
+						}
+						Describe_Text += NewLine;
 
-  						// 6.
-						Describe_Text += "6. 窝洞消毒：" + DATA.disinfect + "，垫底：" + DATA.bottom + "<br/><br/>" ;
+  						// 6. TODO
+						Describe_Text += "6. 涂布粘接剂：";
+						Describe_Text += DATA.etching_type + "：";
+						Describe_Text += "全酸蚀粘接系统" == DATA.etching_type ? DATA.full_etching : DATA.full_etching;
+						Describe_Text += "，涂布" + DATA.coating_time;
+						Describe_Text += "，吹干5s，光照" + DATA.illumination_time;
+						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 涂布粘接剂：全酸蚀粘接系统：" + DATA.full_etching + "，自酸蚀粘接系统：" + DATA.self_etching  
-							+ "，涂布时间：" + DATA.coating_time + "，吹干5s，光照" + DATA.illumination_time + "<br/><br/>" ;
+						Describe_Text += "7. 放置贴面";
+						Describe_Text += NewLine;
 
   						// 8.
-						Describe_Text += "8. 放置贴面<br/><br/>" ;
+						Describe_Text += "8. ";
+						Describe_Text += DATA.polishing + "调合打磨抛光";
+						Describe_Text += NewLine;
 
-  						// 9.
-						Describe_Text += "9. " + DATA.polishing + "打磨抛光" + "<br/><br/>" ;
   						break;
   					}
   				}
@@ -436,30 +516,12 @@ $(document).ready(function(){
 				}
 			]
 		},
-		bottom: {
-			identifier: 'bottom',
+		etching_type: {
+			identifier: 'etching_type',
 			rules: [
 				{
 					type   : 'empty',
-					prompt : '请选择垫底'
-				}
-			]
-		},
-		full_etching: {
-			identifier: 'full_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择全酸蚀粘接系统'
-				}
-			]
-		},
-		self_etching: {
-			identifier: 'self_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择自酸蚀粘接系统'
+					prompt : '请选择酸蚀粘接系统类型'
 				}
 			]
 		},
@@ -619,30 +681,12 @@ $(document).ready(function(){
 				}
 			]
 		},
-		bottom: {
-			identifier: 'bottom',
+		etching_type: {
+			identifier: 'etching_type',
 			rules: [
 				{
 					type   : 'empty',
-					prompt : '请选择垫底'
-				}
-			]
-		},
-		full_etching: {
-			identifier: 'full_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择全酸蚀粘接系统'
-				}
-			]
-		},
-		self_etching: {
-			identifier: 'self_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择自酸蚀粘接系统'
+					prompt : '请选择酸蚀粘接系统类型'
 				}
 			]
 		},
@@ -757,15 +801,6 @@ $(document).ready(function(){
 				}
 			]
 		},
-		is_piece: {
-			identifier: 'is_piece',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择干燥方法'
-				}
-			]
-		},
 		shade_guide: {
 			identifier: 'shade_guide',
 			rules: [
@@ -811,30 +846,12 @@ $(document).ready(function(){
 				}
 			]
 		},
-		bottom: {
-			identifier: 'bottom',
+		etching_type: {
+			identifier: 'etching_type',
 			rules: [
 				{
 					type   : 'empty',
-					prompt : '请选择垫底'
-				}
-			]
-		},
-		full_etching: {
-			identifier: 'full_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择全酸蚀粘接系统'
-				}
-			]
-		},
-		self_etching: {
-			identifier: 'self_etching',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择自酸蚀粘接系统'
+					prompt : '请选择酸蚀粘接系统类型'
 				}
 			]
 		},
@@ -963,13 +980,15 @@ $(document).ready(function(){
 		else if (DATA.handle_type == 1) {
 
   			switch (DATA.specific_method) {
-  				case "牙树脂直接填充修复": {
+  				case "牙树脂直接充填修复": {
   					ChangeTabActive($MainContextLink, $TabSegment, 1);
 
   					$('select[name=anesthesia_medicine]').dropdown("set selected", DATA.anesthesia_medicine);
         			$('select[name=part_anesthesia]').dropdown("set selected", DATA.part_anesthesia);
         			$('select[name=rubber]').dropdown("set selected", DATA.rubber);
         			$('select[name=tools]').dropdown("set selected", DATA.tools);
+
+        			
         			$('select[name=shape_of_hole]').dropdown("set selected", DATA.shape_of_hole);
 
         			$('input[name=depth_of_hole]').val(DATA.depth_of_hole);
@@ -980,8 +999,13 @@ $(document).ready(function(){
         			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
         			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
         			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+
+        			// 设置酸蚀粘接系统类型
+        			$('select[name=etching_type]').dropdown("set selected", DATA.etching_type);
+        			changeEtching(DATA.etching_type);
         			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
         			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			$('select[name=resin]').dropdown("set selected", DATA.resin);
@@ -1011,8 +1035,13 @@ $(document).ready(function(){
         			$('select[name=color_of_tooth]').dropdown("set selected", DATA.color_of_tooth);
         			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
         			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			
+        			// 设置酸蚀粘接系统类型
+        			$('select[name=etching_type]').dropdown("set selected", DATA.etching_type);
+        			changeEtching(DATA.etching_type);
         			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
         			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			$('select[name=resin]').dropdown("set selected", DATA.resin);
@@ -1043,8 +1072,13 @@ $(document).ready(function(){
 
         			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
         			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+        			
+        			// 设置酸蚀粘接系统类型
+        			$('select[name=etching_type]').dropdown("set selected", DATA.etching_type);
+        			changeEtching(DATA.etching_type);
         			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
         			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			
@@ -1072,8 +1106,13 @@ $(document).ready(function(){
 
         			$('select[name=disinfect]').dropdown("set selected", DATA.disinfect);
         			$('select[name=bottom]').dropdown("set selected", DATA.bottom);
+
+        			// 设置酸蚀粘接系统类型
+        			$('select[name=etching_type]').dropdown("set selected", DATA.etching_type);
+        			changeEtching(DATA.etching_type);
         			$('select[name=full_etching]').dropdown("set selected", DATA.full_etching);
         			$('select[name=self_etching]').dropdown("set selected", DATA.self_etching);
+
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			
@@ -1118,4 +1157,23 @@ $(document).ready(function(){
 	$('#nav a.return').click(function(){
 		$(this).prop('href', "MedicalRecordDetail.html" + toquerystring({uid  : U_ID}));
 	});
+
+	// ***************************************************************
+	// FUNCTION: 酸蚀粘接系统类型选择
+	$('select[name=etching_type]').parent().dropdown({
+		onChange: function(value, text, $selected) { changeEtching(value); }
+	});
+
+	function changeEtching(EtchingType) {
+		var $FullEtching = $('.tag_full_etching'),
+			$SelfEtching = $('.tag_self_etching');
+
+		if (EtchingType == "全酸蚀粘接系统") {
+			$SelfEtching.addClass('invisible');
+			$FullEtching.removeClass('invisible');
+		} else if (EtchingType == "自酸蚀粘接系统") {
+			$FullEtching.addClass('invisible');
+			$SelfEtching.removeClass('invisible');
+		}
+	}
 });

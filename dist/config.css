@@ -16,3 +16,7 @@ body {
 	background : url(bg.gif);
 	font-family: '微软雅黑', 'Tahoma';
 }
+
+bold {
+	font-weight: bold;
+}

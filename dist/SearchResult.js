@@ -1,21 +1,29 @@
 $(document).ready(function(){
 
+	var Table       = requestParameter("type"),
+		Field       = requestParameter("name"),
+		Value       = requestParameter("value"),
+		Search      = requestParameter("search"),
+		QueryString = URL_SEARCH + toquerystring({table : Table}) + "&" + Field + "=" + Value;
+
 	// ***************************************************************
 	// 请求首页数据
 	$.ajax({
-		url      : URL_PAGE,
+		url      : QueryString,
 		type     : "get",
 		data     : {page : 1},
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(data){
-			if (data.info_list.length) {
+
+			if (data.searched == "ok") {
+				$('.orange.header').text("搜索结果：" + decodeURI(Search));
 				// 设置分页属性
 				$.Page(
 					$('.record.segment'),
 				 	data.pages,
 				 	1,
-				 	URL_PAGE,
+				 	QueryString,
 				 	function() { networkError(); },
 				 	function(data) { showAllMedicalRecord(data); }
 				 );
@@ -23,7 +31,7 @@ $(document).ready(function(){
 	 			// 显示当前页所有病历
 	 			showAllMedicalRecord(data);
 			} else {
-				$('#id_infomessage').show();
+				$('.orange.header').text("没有搜索到'" + decodeURI(Search) + "'相关病历");
 			}
 		}
 	});
@@ -49,11 +57,9 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('.contact').text(UserData.contact);
 		$ClonedMedicalRecord.find('.time').text(UserData.in_date);
 
-		if (UserData.tootn_location_list != undefined && UserData.tootn_location_list.length > 0) {
-			$.each(UserData.tootn_location_list, function(){
-				showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
-			});
-		}
+		$.each(UserData.tooth_location_list, function(){
+			showToothLocation($ClonedMedicalRecord.find('.extra:first'), this);
+		});
 
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
@@ -63,8 +69,9 @@ $(document).ready(function(){
 	function showToothLocation($Selector, ToothData){
 		$ClonedExtra = $Selector.clone(true);
 
-		var LocationStr = "主诉：" + ToothData.tooth_location;
-		LocationStr += ToothData.is_fill_tooth ? "要求补牙" : ToothData.symptom + ToothData.time_of_occurrence;
+		var LocationStr = ToothData.tooth_location;
+		ToothData.is_fill_tooth ? LocationStr += "（要求直接补牙）" :
+			LocationStr += "（" + ToothData.time_of_occurrence + ", " + ToothData.symptom + "）";
 
 		$ClonedExtra.attr("value", ToothData.tooth_id);
 		$ClonedExtra.find('.location').text(LocationStr);
@@ -72,96 +79,13 @@ $(document).ready(function(){
 		// 设置当前牙位操作状态
 		$.each(ToothData.step, function(){
 			if (this != 0) {
-				$ClonedExtra.find('a.label').eq(this - 1).addClass('blue');
+				$ClonedExtra.find('a.button').eq(this - 1).addClass('blue');
 			}
 		});
-
-		$ClonedExtra.find('a.label').bind('click', clickToothStep);
-
-		$ClonedExtra.find('a.download').unbind().bind('click', downloadFile);
-		$ClonedExtra.find('a.deletetooth').unbind().bind('click', deleteToothLocation);
 
 		$Selector.after($ClonedExtra);
 		$ClonedExtra.find('.invisible.header').removeClass('invisible');
 	}
-
-	$("#basicinfoform").form({
-		fields: {
-			name: {
-				identifier: 'name',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的姓名'
-					}
-				]
-			},
-			gender: {
-				identifier: 'gender',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的性别'
-					}
-				]
-			},
-			age: {
-				identifier: 'age',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的年龄'
-					},
-					{
-						type   : 'integer[1..100]',
-            			prompt : '请正确填写病人的年龄'
-					}
-				]
-			},
-			occupation: {
-				identifier: 'occupation',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的职业'
-					}
-				]
-			},
-			contact: {
-				identifier: 'contact',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的联系方式'
-					}
-				]
-			}
-		},
-		inline: true,
-		onSuccess: function(){
-			$.ajax({
-  				url      : URL_USER,
-				type     : "post",
-				async    : false, 
-				data     : $(this).serialize(),
-				dataType : "json",
-				error    : function() {networkError();},
-				success  : function() {location.reload();}
-			});
-
-			return false;
-		}
-	});
-
-	$('.right.menu .add.href').click(function(){
-		$('#MedicalRecords').modal({
-			closable  : false,
-  			onApprove : function() {
-  				$("#basicinfoform").submit();
-				return false;
-			}
-		}).modal('show');
-	});
 
 	var USER_ID         = null;
 	var $InvisibleExtra = null;
@@ -297,15 +221,29 @@ $(document).ready(function(){
 	// FUNCTION:设置链接数据
 	// 个人史，风险评估和预后管理
 	$('a[href^=RiskEvaluation], a[href^=Manage], a[href^=PersonalHistory]').click(function(){
+		var $Record = $(this).parents('.record.segment');
 		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid  : $(this).parents('.record.segment').attr('value'),
-			name : $(this).parents('.record.segment').find('.name').text()
+			uid  : $Record.attr('value'),
+			name : $Record.find('.name').text()
+		}));
+	});
+
+	// 其它
+	$('.record.segment .extra:first a').click(function(){
+		var U_ID = $(this).parents('.record.segment').attr('value');
+		var T_ID = $(this).parents('.extra').attr('value');
+		var Name = $(this).parents('.record.segment').find('.name').text();
+
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : U_ID,
+			tid  : T_ID,
+			name : Name
 		}));
 	});
 
 	// ***************************************************************
 	// FUNCTION: 删除牙位
-	function deleteToothLocation(){
+	$('.deletetooth.button').click(function(){
 		var $Tooth = $(this).parents('.extra');
 		$('#deletemodal').modal({
 			onApprove: function() {
@@ -318,11 +256,11 @@ $(document).ready(function(){
 				});
 			}
 		}).modal('show');
-	}
+	});
 
 	// ***************************************************************
 	// FUNCTION: 下载文件
-	function downloadFile(){
+	$('.download.button').click(function(){
 		$.ajax({
 			url      : URL_DOC + toquerystring({tooth_id : $(this).parents('.extra').attr('value'), risk : ""}),
 			type     : "GET",
@@ -335,11 +273,11 @@ $(document).ready(function(){
 		});
 
 		return false;
-	}
+	});
 
 	// ***************************************************************
 	// FUNCTION: 删除病历
-	function deleteMedicalRecord(){
+	$('.corner.label').click(function(){
 		var $Record = $(this).parents('.record.segment');
 		$('#deletemodal').modal({
 			onApprove: function() {
@@ -352,15 +290,5 @@ $(document).ready(function(){
 				});
 			}
 		}).modal('show');
-	}
-
-	// *************************************************************
-	// 单击牙位处理流程
-	function clickToothStep(){
-		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid  : $(this).parents('.record.segment').attr('value'),
-			tid  : $(this).parents('.extra').attr('value'),
-			name : $(this).parents('.record.segment').find('.name').text()
-		}));
-	}
+	});
 });
