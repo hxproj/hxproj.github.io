@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		
-		<div class="ui modal" id="add_tooth">
+		<div class="ui coupled modal" id="add_tooth">
 			<div class="header">添加牙位</div>
 			<div class="content">
 			    <div class="description">
@@ -134,67 +134,6 @@
 							    		</div>
 							    	</div>
 							    </div>	
-
-						    	<div class="ui custom top left hidden fluid popup">
-									<a class="ui right corner label">
-										<i class="remove icon"></i>
-									</a>
-						    		<div class="ui center aligned basic segment">
-							    		<div class="ui large teal labels" id="time_day">
-								    		<a class="ui label">1</a>
-								    		<a class="ui label">2</a>
-								    		<a class="ui label">3</a>
-								    		<a class="ui label">4</a>
-								    		<a class="ui label">5</a>
-								    		<a class="ui label">6</a>
-								    		<a class="ui label">7</a>
-								    		<a class="ui label">8</a>
-								    		<a class="ui label">9</a>
-								    		<a class="ui label">10</a>
-								    		天
-										</div>
-							    		<div class="ui large teal labels" id="time_week">
-								    		<a class="ui label">1</a>
-								    		<a class="ui label">2</a>
-								    		<a class="ui label">3</a>
-								    		<a class="ui label">4</a>
-								    		<a class="ui label">5</a>
-								    		<a class="ui label">6</a>
-								    		<a class="ui label">7</a>
-								    		<a class="ui label">8</a>
-								    		<a class="ui label">9</a>
-								    		<a class="ui label">10</a>
-								    		周
-										</div>
-							    		<div class="ui large teal labels" id="time_month">
-								    		<a class="ui label">1</a>
-								    		<a class="ui label">2</a>
-								    		<a class="ui label">3</a>
-								    		<a class="ui label">4</a>
-								    		<a class="ui label">5</a>
-								    		<a class="ui label">6</a>
-								    		<a class="ui label">7</a>
-								    		<a class="ui label">8</a>
-								    		<a class="ui label">9</a>
-								    		<a class="ui label">10</a>
-								    		月
-										</div>
-							    		<div class="ui large teal labels" id="time_year">
-								    		<a class="ui label">1</a>
-								    		<a class="ui label">2</a>
-								    		<a class="ui label">3</a>
-								    		<a class="ui label">4</a>
-								    		<a class="ui label">5</a>
-								    		<a class="ui label">6</a>
-								    		<a class="ui label">7</a>
-								    		<a class="ui label">8</a>
-								    		<a class="ui label">9</a>
-								    		<a class="ui label">10</a>
-								    		年
-										</div>
-						    		</div>
-								</div>
-									
 							    <input name="is_fill_tooth" type="hidden" value="0">
 							</form>
 						</div>
@@ -235,6 +174,69 @@
 					添加<i class="checkmark icon"></i>
 				</div>
 			</div>
+		</div>
+
+		<!--选择病发时间-->
+		<div class="ui coupled small modal" id="ID_Time">
+			<div class="content">
+			    <div class="description">
+					<div class="ui center aligned basic segment">
+			    		<div class="ui large labels" id="time_day">
+				    		<div class="ui basic label">天</div>
+				    		<a class="ui teal label">1</a>
+				    		<a class="ui teal label">2</a>
+				    		<a class="ui teal label">3</a>
+				    		<a class="ui teal label">4</a>
+				    		<a class="ui teal label">5</a>
+				    		<a class="ui teal label">6</a>
+				    		<a class="ui teal label">7</a>
+				    		<a class="ui teal label">8</a>
+				    		<a class="ui teal label">9</a>
+				    		<a class="ui teal label">10</a>
+						</div>
+			    		<div class="ui large labels" id="time_week">
+				    		<div class="ui basic label">周</div>
+				    		<a class="ui teal label">1</a>
+				    		<a class="ui teal label">2</a>
+				    		<a class="ui teal label">3</a>
+				    		<a class="ui teal label">4</a>
+				    		<a class="ui teal label">5</a>
+				    		<a class="ui teal label">6</a>
+				    		<a class="ui teal label">7</a>
+				    		<a class="ui teal label">8</a>
+				    		<a class="ui teal label">9</a>
+				    		<a class="ui teal label">10</a>
+						</div>
+			    		<div class="ui large labels" id="time_month">
+				    		<div class="ui basic label">月</div>
+				    		<a class="ui teal label">1</a>
+				    		<a class="ui teal label">2</a>
+				    		<a class="ui teal label">3</a>
+				    		<a class="ui teal label">4</a>
+				    		<a class="ui teal label">5</a>
+				    		<a class="ui teal label">6</a>
+				    		<a class="ui teal label">7</a>
+				    		<a class="ui teal label">8</a>
+				    		<a class="ui teal label">9</a>
+				    		<a class="ui teal label">10</a>
+						</div>
+			    		<div class="ui large labels" id="time_year">
+				    		<div class="ui basic label">年</div>
+				    		<a class="ui teal label">1</a>
+				    		<a class="ui teal label">2</a>
+				    		<a class="ui teal label">3</a>
+				    		<a class="ui teal label">4</a>
+				    		<a class="ui teal label">5</a>
+				    		<a class="ui teal label">6</a>
+				    		<a class="ui teal label">7</a>
+				    		<a class="ui teal label">8</a>
+				    		<a class="ui teal label">9</a>
+				    		<a class="ui teal label">10</a>
+						</div>
+					</div>
+			    </div>
+		  	</div>
+			<div class="actions"><div class="ui orange deny button">取消</div></div>
 		</div>
 
 		<div class="ui modal" id="MedicalRecords">

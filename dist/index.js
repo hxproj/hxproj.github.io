@@ -263,34 +263,12 @@ $(document).ready(function(){
 	}
 
 	$('#context .menu .item').tab({ context: $('#context') });
-
+	$('.coupled.modal').modal({allowMultiple: true});
 	// 添加时间控件
-	$('#add_tooth .disabled.input').click(function(){
-		$(this).popup({
-			on       : 'manual',
-			inline   : true,
-			popup    : $('#add_tooth .popup')
-		}).popup('show');
-	});
-
-	$('#add_tooth .popup a.label').click(function(){
-		var Result   = $(this).text();
-		var TimeType = $(this).parent().prop('id');
-
-		if (TimeType === "time_day")
-		{
-			Result += "天";
-		} else if (TimeType === "time_week") {
-			Result += "周";
-		} else if (TimeType === "time_month") {
-			Result += "月";
-		} else if (TimeType === "time_year") {
-			Result += "年";
-		}
-
-		$('#add_tooth .disabled.input input').val(Result);
-
-		$('#add_tooth .disabled.input').popup('hide');
+	$('#ID_Time').modal('attach events', '#add_tooth .disabled.input');
+	$('#ID_Time a.label').click(function(){
+		$('#add_tooth .disabled.input input').val($(this).text() + $(this).prevAll('div.label').text());
+		$('#ID_Time').modal('hide');
 	});
 
 	// ***************************************************************
