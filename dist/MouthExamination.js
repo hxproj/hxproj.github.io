@@ -125,40 +125,45 @@ $(document).ready(function(){
           data     : {tooth_id : T_ID, type : Image_type},
           dataType : "json",
           success  : function(FileData) {
-            $.each(FileData, function(){
-              var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
-              $ClonedImage.attr("value", this.img_id);
 
-              var ImagePath = this.path;
-              ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-              window.loadImage(ImagePath, function(){
-                $ClonedImage.find('img').attr('src', ImagePath);
-                $ClonedImage.find('.corner').removeClass('hidden');
-              });
-              
-              $ClonedImage.find('.corner').bind('click', function(){
-                var $Image = $(this).parent();
+            if (FileData.length == 0) {
+              $('#ME_IMAGE').text("未添加任何图片，请点击右下角修改按钮添加");
+            } else {
+              $.each(FileData, function(){
+                var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
+                $ClonedImage.attr("value", this.img_id);
+
+                var ImagePath = this.path;
+                ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+                window.loadImage(ImagePath, function(){
+                  $ClonedImage.find('img').attr('src', ImagePath);
+                  $ClonedImage.find('.corner').removeClass('hidden');
+                });
                 
-                $('#deletemodal').modal({
-                  onApprove: function() {
-                    $.ajax({
-                      url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-                      type     : "DELETE",
-                      data     : {},
-                      dataType : "text",
-                      error    : function(data) {
-                        alert("删除文件失败，请检查网络设置。");
-                      },
-                      success  : function() {
-                        $Image.remove();
-                      }
-                    });
-                  }
-                }).modal('show');
-              });
+                $ClonedImage.find('.corner').bind('click', function(){
+                  var $Image = $(this).parent();
+                  
+                  $('#deletemodal').modal({
+                    onApprove: function() {
+                      $.ajax({
+                        url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+                        type     : "DELETE",
+                        data     : {},
+                        dataType : "text",
+                        error    : function(data) {
+                          alert("删除文件失败，请检查网络设置。");
+                        },
+                        success  : function() {
+                          $Image.remove();
+                        }
+                      });
+                    }
+                  }).modal('show');
+                });
 
-              $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-            });
+                $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+              });
+            }
           }
         });
   		}

@@ -30,27 +30,44 @@ $(document).ready(function(){
   			$('#DiagnoseForm').hide();
   			DATA = data;
 
-  			$('#display th').text(decodeURI(requestParameter("name")));
+  			$('#display th').text("诊断 - " + decodeURI(requestParameter("name")));
 
   			// 设置诊断描述
-  			// FIXME: 如果未设置牙位，提示用户添加牙位
-	        $.get(URL_MOUTHEXAM, {tooth_id : DATA.tooth_id}, function(mouthData){
+  			// 获取牙位信息
+  			var MouthData = null;
+  			$.ajax({
+		  		url      : URL_MOUTHEXAM,
+		  		type     : "get",
+		  		data     : {tooth_id : DATA.tooth_id},
+		  		dataType : "json",
+      			async    : false,
+		  		success  : function(data) { MouthData = data; }
+  			})
 
-	        	var ToothLocation = mouthData.tooth_location + "牙",
-	        		Description = ToothLocation;
+  			var ToothLocation = "<bold>注：还未设置病人“牙位”和“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
+  				Description   = "";
+        	
+  			if (MouthData != null) {
+	        	ToothLocation = MouthData.tooth_location + "牙";
+  				Description   = ToothLocation;
 
-		        $.each(mouthData.caries_tired.split(","), function(){
+		        $.each(MouthData.caries_tired.split(","), function(){
 		          Description += this;
 		        });
 		        Description += "面" + DATA.caries_degree;
 
-		        if (DATA.caries_type != "") {
+  				if (DATA.caries_type != "") {
 		        	Description += "<br/><br/>" + ToothLocation + DATA.caries_type;
-		        }
+		   		}	
+  			} else {
+  				Description += DATA.caries_degree;
 
-	        	$('#ID_Description').html(Description);
-
-	        }, "json");
+  				if (DATA.caries_type != "") {
+		        	Description += "<br/><br/>" + DATA.caries_type;
+		   		}	
+  				Description += "<br/><br/>" + ToothLocation;
+  			}
+        	$('#ID_Description').html(Description);
 
 		    // 显示诊断图片
 			$.ajax({
@@ -60,40 +77,44 @@ $(document).ready(function(){
 				dataType : "json",
 				success  : function(FileData) {
 
-					$.each(FileData, function(){
-						var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
-						$ClonedImage.attr("value", this.img_id);
+					if (FileData.length == 0) {
+						$('#IMAGE').text("未添加任何图片，请点击右下角修改按钮添加");
+					} else {
+						$.each(FileData, function(){
+							var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
+							$ClonedImage.attr("value", this.img_id);
 
-						var ImagePath = this.path;
-						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-						window.loadImage(ImagePath, function(){
-							$ClonedImage.find('img').attr('src', ImagePath);
-							$ClonedImage.find('.corner').removeClass('hidden');
+							var ImagePath = this.path;
+							ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+							window.loadImage(ImagePath, function(){
+								$ClonedImage.find('img').attr('src', ImagePath);
+								$ClonedImage.find('.corner').removeClass('hidden');
+							});
+							
+							$ClonedImage.find('.corner').bind('click', function(){
+								var $Image = $(this).parent();
+		                
+								$('#deletemodal').modal({
+									onApprove: function() {
+										$.ajax({
+											url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+											type     : "DELETE",
+											data     : {},
+											dataType : "text",
+											error    : function(data) {
+												alert("删除文件失败，请检查网络设置。");
+											},
+											success  : function() {
+												$Image.remove();
+											}
+										});
+									}
+								}).modal('show');
+	              			});
+
+							$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
 						});
-						
-						$ClonedImage.find('.corner').bind('click', function(){
-							var $Image = $(this).parent();
-	                
-							$('#deletemodal').modal({
-								onApprove: function() {
-									$.ajax({
-										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-										type     : "DELETE",
-										data     : {},
-										dataType : "text",
-										error    : function(data) {
-											alert("删除文件失败，请检查网络设置。");
-										},
-										success  : function() {
-											$Image.remove();
-										}
-									});
-								}
-							}).modal('show');
-              			});
-
-						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-					});
+					}
 				}
 			});
 

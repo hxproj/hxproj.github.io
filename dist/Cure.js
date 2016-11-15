@@ -20,7 +20,7 @@ $(document).ready(function(){
   			DATA = data;
 
         	// 表头
-        	$('#display th').text(decodeURI(requestParameter("name")));
+        	$('#display th').text("处置 - " + decodeURI(requestParameter("name")));
 
 	        // 设置牙位信息
 	        /*
@@ -63,25 +63,48 @@ $(document).ready(function(){
 
   				var Describe_Text = "<h4 class='ui blue header'>" + DATA.specific_method + "：</h4>";
 
+	  			// 获取牙位信息
+	  			var MouthData = null;
+	  			$.ajax({
+			  		url      : URL_MOUTHEXAM,
+			  		type     : "get",
+			  		data     : {tooth_id : DATA.tooth_id},
+			  		dataType : "json",
+	      			async    : false,
+			  		success  : function(data) {
+			  			MouthData = data.tooth_location;
+			  		}
+	  			})
+	  			// 1. 麻醉
+	  			var Anesthesia = "";
+	  			if (MouthData != null) {
+	  				Anesthesia += MouthData + "牙";
+					Anesthesia += "使用" + DATA.anesthesia_medicine + "，";
+					Anesthesia += "局部" + DATA.part_anesthesia + "，";
+					Anesthesia += DATA.rubber;
+	  			} else {
+					Anesthesia += "使用" + DATA.anesthesia_medicine + "，";
+					Anesthesia += "局部" + DATA.part_anesthesia + "，";
+					Anesthesia += DATA.rubber;
+					Anesthesia += "<bold>（注：还未设置病人“牙位”，请到“口腔检查”功能项中完善相关信息）</bold>";
+	  			}
+
   				switch (DATA.specific_method) {
   					case "牙树脂直接充填修复": {
   						// 1. 
   						Describe_Text += "1. ";
-						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
-						Describe_Text += "局部" + DATA.part_anesthesia + "，";
-  						Describe_Text += DATA.rubber;
+  						Describe_Text += Anesthesia;
 						Describe_Text += NewLine;
 
   						// 2.
 						Describe_Text += "2. ";
-
 						if (DATA.microscope == "显微镜下") {
 							Describe_Text += DATA.microscope + "，";
 						}
 
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole;
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
 						Describe_Text += NewLine;
 
 						// 3. 
@@ -139,16 +162,14 @@ $(document).ready(function(){
   						Describe_Text += "<bold>复诊：</bold>";
 						Describe_Text += NewLine;
   						Describe_Text += "1. ";
-						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
-						Describe_Text += "局部" + DATA.part_anesthesia + "，";
-  						Describe_Text += DATA.rubber;
+  						Describe_Text += Anesthesia;
 						Describe_Text += NewLine;
 
   						// 2.
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole;
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
 						Describe_Text += NewLine;
 
 						// 3. 
@@ -198,16 +219,14 @@ $(document).ready(function(){
   					case "嵌体修复": {
   						// 1. 
   						Describe_Text += "1. ";
-						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
-						Describe_Text += "局部" + DATA.part_anesthesia + "，";
-  						Describe_Text += DATA.rubber;
+  						Describe_Text += Anesthesia;
 						Describe_Text += NewLine;
 
   						// 2.
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole;
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
 						Describe_Text += NewLine;
 
   						// 3.
@@ -254,16 +273,14 @@ $(document).ready(function(){
   					case "贴面修复": {
   						// 1. 
   						Describe_Text += "1. ";
-						Describe_Text += "使用" + DATA.anesthesia_medicine + "，";
-						Describe_Text += "局部" + DATA.part_anesthesia + "，";
-  						Describe_Text += DATA.rubber;
+  						Describe_Text += Anesthesia;
 						Describe_Text += NewLine;
 
   						// 2.
 						Describe_Text += "2. 显微镜下，";
 						Describe_Text += DATA.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 						Describe_Text += DATA.shape_of_hole + "制备洞形，";
-						Describe_Text += "深度：" + DATA.depth_of_hole;
+						Describe_Text += "深度：" + DATA.depth_of_hole + "mm";
 						Describe_Text += NewLine;
 
   						// 3.
@@ -318,40 +335,45 @@ $(document).ready(function(){
 				data     : {tooth_id : T_ID, type : Image_type},
 				dataType : "json",
 				success  : function(FileData) {
-					$.each(FileData, function(){
-						var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
-						$ClonedImage.attr("value", this.img_id);
 
-						var ImagePath = this.path;
-						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-						window.loadImage(ImagePath, function(){
-							$ClonedImage.find('img').attr('src', ImagePath);
-							$ClonedImage.find('.corner').removeClass('hidden');
+					if (FileData.length == 0) {
+						$('#IMAGE').text("未添加任何图片，请点击右下角修改按钮添加");
+					} else {
+						$.each(FileData, function(){
+							var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
+							$ClonedImage.attr("value", this.img_id);
+
+							var ImagePath = this.path;
+							ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+							window.loadImage(ImagePath, function(){
+								$ClonedImage.find('img').attr('src', ImagePath);
+								$ClonedImage.find('.corner').removeClass('hidden');
+							});
+							
+							$ClonedImage.find('.corner').bind('click', function(){
+								var $Image = $(this).parent();
+		                
+								$('#deletemodal').modal({
+									onApprove: function() {
+										$.ajax({
+											url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
+											type     : "DELETE",
+											data     : {},
+											dataType : "text",
+											error    : function(data) {
+												alert("删除文件失败，请检查网络设置。");
+											},
+											success  : function() {
+												$Image.remove();
+											}
+										});
+									}
+								}).modal('show');
+	              			});
+
+							$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
 						});
-						
-						$ClonedImage.find('.corner').bind('click', function(){
-							var $Image = $(this).parent();
-	                
-							$('#deletemodal').modal({
-								onApprove: function() {
-									$.ajax({
-										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-										type     : "DELETE",
-										data     : {},
-										dataType : "text",
-										error    : function(data) {
-											alert("删除文件失败，请检查网络设置。");
-										},
-										success  : function() {
-											$Image.remove();
-										}
-									});
-								}
-							}).modal('show');
-              			});
-
-						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-					});
+					}
 				}
 			});
 
@@ -907,7 +929,8 @@ $(document).ready(function(){
 					user_id  : U_ID, 
 					tooth_id : T_ID,
 					shape_of_hole : $(this).form('get value', 'shape_of_hole_display'),
-					depth_of_hole : $(this).form('get value', 'depth_of_hole_display') + "mm",
+					depth_of_hole : $(this).form('get value', 'depth_of_hole_display'),
+					//depth_of_hole : $(this).form('get value', 'depth_of_hole_display') + "mm",
 				});
 
 				$.ajax({

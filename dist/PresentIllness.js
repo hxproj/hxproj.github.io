@@ -26,7 +26,7 @@ $(document).ready(function(){
   			DATA = data;
 
         // 表头
-        $('#display th').text(decodeURI(requestParameter("name")));
+        $('#display th').text("现病史 - " + decodeURI(requestParameter("name")));
 
         // 设置描述（需提前获取牙位信息）
         $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(ToothData){
