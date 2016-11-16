@@ -45,113 +45,17 @@
 		<!--context-->
 		<div id="context">
 	  		<div class="ui fluid eight item pointing labeled icon menu">
-				<a class="active blue item" data-tab="1"><i class="file text icon"></i>主诉</a>
-				<a class="orange item" data-tab="2"><i class="history icon"></i>个人史</a>
-				<a class="pink item" data-tab="3"><i class="add square icon"></i>口腔检查</a>
-				<a class="red item" data-tab="4"><i class="heartbeat icon"></i>诊断</a>
-				<a class="olive item" data-tab="5"><i class="bar chart icon"></i>难度评估</a>
+				<a class="active orange item" data-tab="1"><i class="history icon"></i>个人史</a>
+				<a class="pink item" data-tab="2"><i class="add square icon"></i>口腔检查</a>
+				<a class="red item" data-tab="3"><i class="heartbeat icon"></i>诊断</a>
+				<a class="olive item" data-tab="4"><i class="bar chart icon"></i>难度评估</a>
+				<a class="blue item" data-tab="5"><i class="pie chart icon"></i>风险评估</a>
 				<a class="teal item" data-tab="6"><i class="first aid icon"></i>处置</a>
 				<a class="violet item" data-tab="7"><i class="area chart icon"></i>USPHS评估</a>
 				<a class="purple item" data-tab="8"><i class="block layout icon"></i>龋病预后管理</a>
 	  		</div>
 
-			<div class="ui raised active tab segment" id="tooth_location" data-tab="1">
-				<h3 class="ui orange header">主诉</h3>
-				<table class="ui very basic table">
-		  			<tbody>
-						<tr>
-							<td class="collapsing">牙位</td>
-							<td>
-								<div class="ui blue labels" value="tooth_location">
-									<a class="ui label" value="上前牙">上前牙</a>
-									<a class="ui label" value="下前牙">下前牙</a>
-									<a class="ui label" value="左上前牙">左上前牙</a>
-									<a class="ui label" value="左下前牙">左下前牙</a>
-									<a class="ui label" value="右上前牙">右上前牙</a>
-									<a class="ui label" value="右下前牙">右下前牙</a>
-									<a class="ui label" value="上后牙">上后牙</a>
-									<a class="ui label" value="下后牙">下后牙</a>
-									<a class="ui label" value="左上后牙">左上后牙</a>
-									<a class="ui label" value="左下后牙">左下后牙</a>
-									<a class="ui label" value="右上后牙">右上后牙</a>
-									<a class="ui label" value="右下后牙">右下后牙</a>
-									<a class="ui label" value="口内多颗牙">口内多颗牙</a>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="collapsing">牙齿病变情况</td>
-							<td id="">
-								<div class="ui blue labels" value="symptom">
-									<a class="ui label" value="颜色变化">颜色变化</a>
-									<a class="ui label" value="有洞">有洞</a>
-									<a class="ui label" value="冷热敏感">冷热敏感</a>
-									<a class="ui label" value="充填体松动">充填体松动</a>
-									<a class="ui label" value="充填体脱落">充填体脱落</a>
-									<a class="ui label" value="食物嵌塞">食物嵌塞</a>
-									<a class="ui label" value="折裂">折裂</a>
-									<a class="ui label" value="咬合痛">咬合痛</a>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="collapsing">病发时间</td>
-							<td id="">
-								<div class="ui blue labels" value="time_of_occurrence">
-									<a class="ui label" value="1天">1天</a>
-									<a class="ui label" value="2天">2天</a>
-									<a class="ui label" value="3天">3天</a>
-									<a class="ui label" value="4天">4天</a>
-									<a class="ui label" value="5天">5天</a>
-									<a class="ui label" value="6天">6天</a>
-									<a class="ui label" value="7天">7天</a>
-									<a class="ui label" value="8天">8天</a>
-									<a class="ui label" value="9天">9天</a>
-									<a class="ui label" value="10天">10天</a>
-								</div>
-								<div class="ui blue labels" value="time_of_occurrence">
-									<a class="ui label" value="1周">1周</a>
-									<a class="ui label" value="2周">2周</a>
-									<a class="ui label" value="3周">3周</a>
-									<a class="ui label" value="4周">4周</a>
-									<a class="ui label" value="5周">5周</a>
-									<a class="ui label" value="6周">6周</a>
-									<a class="ui label" value="7周">7周</a>
-									<a class="ui label" value="8周">8周</a>
-									<a class="ui label" value="9周">9周</a>
-									<a class="ui label" value="10周">10周</a>
-								</div>
-								<div class="ui blue labels" value="time_of_occurrence">
-									<a class="ui label" value="1月">1月</a>
-									<a class="ui label" value="2月">2月</a>
-									<a class="ui label" value="3月">3月</a>
-									<a class="ui label" value="4月">4月</a>
-									<a class="ui label" value="5月">5月</a>
-									<a class="ui label" value="6月">6月</a>
-									<a class="ui label" value="7月">7月</a>
-									<a class="ui label" value="8月">8月</a>
-									<a class="ui label" value="9月">9月</a>
-									<a class="ui label" value="10月">10月</a>
-								</div>
-								<div class="ui blue labels" value="time_of_occurrence">
-									<a class="ui label" value="1年">1年</a>
-									<a class="ui label" value="2年">2年</a>
-									<a class="ui label" value="3年">3年</a>
-									<a class="ui label" value="4年">4年</a>
-									<a class="ui label" value="5年">5年</a>
-									<a class="ui label" value="6年">6年</a>
-									<a class="ui label" value="7年">7年</a>
-									<a class="ui label" value="8年">8年</a>
-									<a class="ui label" value="9年">9年</a>
-									<a class="ui label" value="10年">10年</a>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="ui raised tab segment" id="personal_history" data-tab="2">
+			<div class="ui active raised tab segment" id="personal_history" data-tab="1">
 				<h3 class="ui orange header">个人史</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -223,7 +127,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="oral_examination" data-tab="3">
+			<div class="ui raised tab segment" id="oral_examination" data-tab="2">
 				<h3 class="ui orange header">口腔检查</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -438,7 +342,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="diagnose" data-tab="4">
+			<div class="ui raised tab segment" id="diagnose" data-tab="3">
 				<h3 class="ui orange header">诊断</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -468,7 +372,7 @@
 				</table>
 			</div>
 
-			<div class="ui raised tab segment" id="difficulty_assessment" data-tab="5">
+			<div class="ui raised tab segment" id="difficulty_assessment" data-tab="4">
 				<h3 class="ui orange header">难度评估</h3>
 				<table class="ui very basic table">
 		  			<tbody>
@@ -590,6 +494,34 @@
 									<a class="ui label" value="低、中危人群">低、中危人群</a>
 									<a class="ui label" value="高危人群">高危人群</a>
 									<a class="ui label" value="极高危人群">极高危人群</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="ui raised tab segment" id="risk" data-tab="5">
+				<h3 class="ui orange header">风险评估</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">牙位</td>
+							<td>
+								<div class="ui blue labels" value="tooth_location">
+									<a class="ui label" value="上前牙">上前牙</a>
+									<a class="ui label" value="下前牙">下前牙</a>
+									<a class="ui label" value="左上前牙">左上前牙</a>
+									<a class="ui label" value="左下前牙">左下前牙</a>
+									<a class="ui label" value="右上前牙">右上前牙</a>
+									<a class="ui label" value="右下前牙">右下前牙</a>
+									<a class="ui label" value="上后牙">上后牙</a>
+									<a class="ui label" value="下后牙">下后牙</a>
+									<a class="ui label" value="左上后牙">左上后牙</a>
+									<a class="ui label" value="左下后牙">左下后牙</a>
+									<a class="ui label" value="右上后牙">右上后牙</a>
+									<a class="ui label" value="右下后牙">右下后牙</a>
+									<a class="ui label" value="口内多颗牙">口内多颗牙</a>
 								</div>
 							</td>
 						</tr>

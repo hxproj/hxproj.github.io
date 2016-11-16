@@ -56,7 +56,7 @@
 						<td id="ME_Around"></td>
 					</tr>
 					<tr>
-						<td class="positive collapsing">龋失补指数</td>
+						<td class="positive collapsing">DMFT/DMFS</td>
 						<td id="ME_Loss"></td>
 					</tr>
 					<tr>
@@ -283,10 +283,10 @@
 							<label>根分叉病变</label>
 							<select name="furcation" class="ui dropdown">
 							<option value="根分叉病变无">无</option>
-							<option value="根分叉病变1级">1级</option>
-							<option value="根分叉病变2级">2级</option>
-							<option value="根分叉病变3级">3级</option>
-							<option value="根分叉病变4级">4级</option>
+							<option value="根分叉病变Ⅰ度">Ⅰ度</option>
+							<option value="根分叉病变Ⅱ度">Ⅱ度</option>
+							<option value="根分叉病变Ⅲ度">Ⅲ度</option>
+							<option value="根分叉病变Ⅳ度">Ⅳ度</option>
 							</select>
 						</div>
 						<div class="required field">
@@ -327,11 +327,15 @@
 						</div>
 					</div>
 
-					<h3 class="ui blue header">龋失补指数</h3>
+					<h3 class="ui blue header">DMFT/DMFS</h3>
 					<div class="three fields">
 						<div class="field">
-							<label>龋失补指数</label>
+							<label>龋失补指数(DMFT)</label>
 							<input type="text" name="loss_caries_index_up" placeholder="0-32">
+						</div>
+						<div class="field">
+							<label>龋失补牙面数(DMFS)</label>
+							<input type="text" name="loss_caries_surface_index_up" placeholder="0-128">
 						</div>
 					</div>
 

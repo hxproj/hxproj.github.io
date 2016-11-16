@@ -76,12 +76,21 @@ $(document).ready(function(){
         ME_Around_Text += DATA.mobility;
   			$('#ME_Around').text(ME_Around_Text);
 
-
         // 龋失补指数
-        $('#ME_Loss').text(DATA.loss_caries_index_up);
+        var ME_Loss_Text = "";
+        if (DATA.loss_caries_index_up != "") {
+          ME_Loss_Text += "DMFT：" + DATA.loss_caries_index_up;
+        }
+        if (DATA.loss_caries_surface_index_up != "") {
+          if (DATA.loss_caries_index_up != "") {
+            ME_Loss_Text += "，";
+          }
+          ME_Loss_Text += "DMFS：" + DATA.loss_caries_surface_index_up;
+        }
+        $('#ME_Loss').text(ME_Loss_Text);
+
         // 牙齿发育情况
         $('#ME_Condition').text(DATA.development_of_the_situation);
-
 
   			// 患牙与邻牙接触关系
   			var ME_Neighbor_Text = "";
@@ -353,7 +362,8 @@ $(document).ready(function(){
     $('select[name=fistula]').dropdown("set selected", DATA.fistula);
     $('select[name=overflow_pus]').dropdown("set selected", DATA.overflow_pus);
   	$('input[name=loss_caries_index_up]').val(DATA.loss_caries_index_up);
-
+    $('input[name=loss_caries_surface_index_up]').val(DATA.loss_caries_surface_index_up);
+    
     $('select[name=development_of_the_situation]').dropdown("set selected", DATA.development_of_the_situation);
     $('select[name=relations_between_teeth]').dropdown("set selected", DATA.relations_between_teeth);
     $('select[name=is_teeth_crowd]').dropdown("set selected", DATA.is_teeth_crowd);

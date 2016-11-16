@@ -33,7 +33,7 @@ $(document).ready(function(){
 
           var DescribeText = !DATA.is_primary ? "<bold>原发性龋病：</bold>" : "<bold>有治疗史龋病：</bold>";
           DescribeText += ToothData.tooth_location;
-          DescribeText += ToothData.is_fill_tooth ? "要求补牙" : ToothData.time_of_occurrence + "前发现" + ToothData.symptom + "，";
+          DescribeText += ToothData.is_fill_tooth ? "要求补牙，" : ToothData.time_of_occurrence + "前发现" + ToothData.symptom + "，";
          
           if (!DATA.is_primary) {
             DescribeText += DATA.is_very_bad + "，";
@@ -46,7 +46,7 @@ $(document).ready(function(){
             DescribeText += DATA.is_relief;
 
           } else {
-            DescribeText += "在" + DATA.cure_time + "前曾进行充填修复治疗，";
+            DescribeText += "在" + DATA.cure_time + "曾进行充填修复治疗，";
             DescribeText += "为" + DATA.fill_type + "，";
             DescribeText += DATA.fill_state + "，";
             DescribeText += DATA.is_night_pain_self_pain + "，";
@@ -206,7 +206,7 @@ $(document).ready(function(){
   });
 
   $('#ID_SetCureTime a.label').click(function(){
-    $('#ID_CureTime input').val($(this).text() + $(this).prevAll('div.label').text());
+    $('#ID_CureTime input').val($(this).text() + $(this).prevAll('div.label').text() + "前");
     $('#ID_SetCureTime').modal('hide');
   });
 
