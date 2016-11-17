@@ -56,13 +56,13 @@ $(document).ready(function(){
 		        });
 		        Description += "面" + DATA.caries_degree;
 
-  				if (DATA.caries_type != "") {
+  				if (DATA.caries_type != "无") {
 		        	Description += "<br/><br/>" + ToothLocation + DATA.caries_type;
 		   		}	
   			} else {
   				Description += DATA.caries_degree;
 
-  				if (DATA.caries_type != "") {
+  				if (DATA.caries_type != "无") {
 		        	Description += "<br/><br/>" + DATA.caries_type;
 		   		}	
   				Description += "<br/><br/>" + ToothLocation;

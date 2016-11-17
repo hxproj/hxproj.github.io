@@ -138,8 +138,9 @@ $(document).ready(function(){
 						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 树脂：";
-						Describe_Text += DATA.resin;
+						Describe_Text += "7. ";
+						Describe_Text += "树脂：" + DATA.resin + "，";
+						Describe_Text += "颜色：" + DATA.color_of_resin;
 						Describe_Text += NewLine;
 
   						// 8.
@@ -203,8 +204,9 @@ $(document).ready(function(){
 						Describe_Text += NewLine;
 
   						// 7.
-						Describe_Text += "7. 树脂：";
-						Describe_Text += DATA.resin;
+						Describe_Text += "7. ";
+						Describe_Text += "树脂：" + DATA.resin + "，";
+						Describe_Text += "颜色：" + DATA.color_of_resin;
 						Describe_Text += NewLine;
 
   						// 8.
@@ -574,6 +576,15 @@ $(document).ready(function(){
 				}
 			]
 		},
+		color_of_resin: {
+			identifier: 'color_of_resin',
+			rules: [
+				{
+					type   : 'empty',
+					prompt : '请选树脂颜色'
+				}
+			]
+		},
 		modification: {
 			identifier: 'modification',
 			rules: [
@@ -736,6 +747,15 @@ $(document).ready(function(){
 				{
 					type   : 'empty',
 					prompt : '请选树脂'
+				}
+			]
+		},
+		color_of_resin: {
+			identifier: 'color_of_resin',
+			rules: [
+				{
+					type   : 'empty',
+					prompt : '请选树脂颜色'
 				}
 			]
 		},
@@ -1040,6 +1060,7 @@ $(document).ready(function(){
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			$('select[name=resin]').dropdown("set selected", DATA.resin);
+        			$('select[name=color_of_resin]').dropdown("set selected", DATA.color_of_resin);
         			$('select[name=modification]').dropdown("set selected", DATA.modification);
         			$('select[name=lamp]').dropdown("set selected", DATA.lamp);
         			$('select[name=time_of_lamp]').dropdown("set selected", DATA.time_of_lamp);
@@ -1079,6 +1100,7 @@ $(document).ready(function(){
         			$('select[name=coating_time]').dropdown("set selected", DATA.coating_time);
         			$('select[name=illumination_time]').dropdown("set selected", DATA.illumination_time);
         			$('select[name=resin]').dropdown("set selected", DATA.resin);
+        			$('select[name=color_of_resin]').dropdown("set selected", DATA.color_of_resin);
         			$('select[name=modification]').dropdown("set selected", DATA.modification);
         			$('select[name=lamp]').dropdown("set selected", DATA.lamp);
         			$('select[name=time_of_lamp]').dropdown("set selected", DATA.time_of_lamp);
