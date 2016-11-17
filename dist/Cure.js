@@ -22,13 +22,6 @@ $(document).ready(function(){
         	// 表头
         	$('#display th').text("处置 - " + decodeURI(requestParameter("name")));
 
-	        // 设置牙位信息
-	        /*
-	        $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(data){
-	        	$('#ToothLocation').text(data.tooth_location);
-	        }, "json");
-			*/
-	        
   			// 牙非手术治疗
   			if (DATA.handle_type == 0) {
   				$('#Method').text("牙非手术治疗：" + DATA.specific_method);
