@@ -750,7 +750,10 @@ $(document).ready(function(){
       $('#RE_can_see').text("无肉眼可见/影像学可见的充填体或龋损：" + DATA.can_see);
       $('#RE_lost_tooth').text("因龋缺失牙：" + DATA.lost_tooth);
       $('#RE_system_illness').text("系统性疾病：" + DATA.system_illness);
-      $('#RE_illness_name').text("具体疾病：" + DATA.illness_name == "" ? "无" : DATA.illness_name);
+
+      var illness_name = DATA.illness_name == "" ? "无" : DATA.illness_name;
+      $('#RE_illness_name').text("具体疾病：" + illness_name);
+      
       $('#RE_times_of_carbohydrate').text("进食碳水化合物次数（可降解碳水化合物）：" + DATA.times_of_carbohydrate);
       $('#RE_consumption_of_carbohydrate').text("每天摄入的碳水化合物的量：" + DATA.consumption_of_carbohydrate);
       $('#RE_times_of_meal').text("进食零食频率：" + DATA.times_of_meal);
