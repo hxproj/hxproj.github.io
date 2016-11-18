@@ -18,7 +18,7 @@ $(document).ready(function(){
       BasicInfo += "联系方式：" + DATA.contact + "。"; 
       $('#User_Description').text(BasicInfo);
 
-      $('#User').show();
+      $('#User').removeClass('invisible');
     }
   });
 
@@ -35,7 +35,7 @@ $(document).ready(function(){
       ChiefComplaint += "。";
       $('#ChiefComplaint').text(ChiefComplaint);
       
-      $('#ToothLocation').show();
+      $('#ToothLocation').removeClass('invisible');
     }
   });
 
@@ -80,7 +80,7 @@ $(document).ready(function(){
         $('#PI_Description').html(DescribeText);
       }, "json");
       
-      $('#PresentIllness').show();
+      $('#PresentIllness').removeClass('invisible');
     }
   });
 
@@ -122,7 +122,7 @@ $(document).ready(function(){
       ID_Sensitive += "。";
       $('#PH_Sensitive').html(ID_Sensitive);
       
-      $('#PersonalHistory').show();
+      $('#PersonalHistory').removeClass('invisible');
 		}
 	});
 
@@ -134,7 +134,6 @@ $(document).ready(function(){
     data     : {tooth_id : T_ID},
     dataType : "json",
     success  : function(DATA){
-
 
       // 牙体情况
       var ME_Body_Text = "<span>牙体情况：</span>";
@@ -262,7 +261,7 @@ $(document).ready(function(){
         }
       });
       
-      $('#MouthExamination').show();
+      $('#MouthExamination').removeClass('invisible');
     }
   });
 
@@ -332,7 +331,7 @@ $(document).ready(function(){
         }
       });
       
-      $('#Diagnose').show();
+      $('#Diagnose').removeClass('invisible');
     }
   });
 
@@ -377,7 +376,7 @@ $(document).ready(function(){
       $('#DA_difficulty_level').html("<span>评估等级：</span>" + Level);
       $('#DA_id_advice').html("<span>转诊意见：</span>" + Advice);
       
-      $('#DifficultyAssessment').show();
+      $('#DifficultyAssessment').removeClass('invisible');
     }
   });
 
@@ -711,7 +710,7 @@ $(document).ready(function(){
         }
       });
       
-      $('#Cure').show();
+      $('#Cure').removeClass('invisible');
     }
   });
 
@@ -734,7 +733,7 @@ $(document).ready(function(){
       $('#USPHS_integrity').html("<span>修复体完整性：</span>" + DATA.integrity);
       $('#USPHS_usphs_level').html("<span>评估等级：</span>" + DATA.level);
       
-      $('#USPHS').show();
+      $('#USPHS').removeClass('invisible');
     }
   });
 
@@ -768,7 +767,7 @@ $(document).ready(function(){
       $('#RE_long_of_tooth_brush').text("刷牙时间：" + DATA.long_of_tooth_brush);
       $('#RE_health_care').text("吃完甜食后口腔保健：" + DATA.health_care);
       
-      $('#RiskEvaluation').show();
+      $('#RiskEvaluation').removeClass('invisible');
     }
   });
 
@@ -843,7 +842,7 @@ $(document).ready(function(){
       }
       $('#Manage_Describe').html(Level);
 
-      $('#Manage').show();
+      $('#Manage').removeClass('invisible');
     }
   });
 

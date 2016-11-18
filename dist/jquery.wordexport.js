@@ -23,7 +23,8 @@ if (typeof jQuery !== "undefined" && typeof saveAs !== "undefined") {
                 if (self.is(':hidden'))
                     self.remove();
             });
-            markup.find('img.hidden').remove();
+            markup.find('.hidden').remove();
+            markup.find('.invisible').remove();
 
             // Embed all images using Data URLs
             var images = Array();
