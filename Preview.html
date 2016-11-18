@@ -13,6 +13,20 @@
   	<script src="dist/semantic.min.js"></script>  
   	<script src="dist/config.js"></script>  
   	<script src="dist/Preview.js"></script>
+  	<script src="dist/FileSaver.min.js"></script>
+  	<script src="dist/jquery.wordexport.js"></script>
+
+  	<script type="text/javascript">
+  		$(document).ready(function(){
+
+  			var styles = "span{font-weight: bold;}";
+  			styles += ".ui.segment{word-break:break-all;word-wrap:break-word;}";
+
+  			$('#download').click(function(){
+  				$("#maincontent").wordExport('test', styles);
+  			});
+  		});
+  	</script>
 </head>
 
 <body>
@@ -27,402 +41,181 @@
 	<div class="ui main container">
 		<h2 class="ui orange header">预览病人信息</h2>
 
-		<!-- 基本信息 -->
-		<table class="ui celled structured invisible table" id="User">
-			<thead>
-				<tr>
-					<th colspan="8">基本信息</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">姓名</td>
-					<td id="User_Name"></td>
-					<td class="positive collapsing">性别</td>
-					<td id="User_Gender"></td>
-					<td class="positive collapsing">年龄</td>
-					<td id="User_Age"></td>
-					<td class="positive collapsing">职业</td>
-					<td id="User_Occupation"></td>
-				</tr>
+		<div class="ui segment" id="maincontent">
+			<div class="ui invisible basic segment" id="User">
+				<h3 class="ui blue header">【基本信息】</h3>
+				<p id="User_Description"></p>
+			</div>
+			<div class="ui divider"></div>
 
-				<tr>
-					<td class="positive collapsing">联系方式</td>
-					<td id="User_Contact" colspan="7"></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="ToothLocation">
+				<h3 class="ui blue header">【主诉】</h3>
+				<p id="ChiefComplaint"></p>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 主诉 -->
-		<table class="ui celled structured invisible table" id="ToothLocation">
-			<thead>
-				<tr>
-					<th colspan="2">主诉</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">主诉</td>
-					<td id="ChiefComplaint"></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="PresentIllness">
+				<h3 class="ui blue header">【现病史】</h3>
+				<p id="PI_Description"></p>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 个人史 -->
-		<table class="ui celled structured invisible table" id="PersonalHistory">
-			<thead>
-				<tr>
-					<th colspan="2">个人史</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">饮食习惯</td>
-					<td id="PH_Eating_Habits"></td>
-				</tr>
+			<div class="ui invisible basic segment" id="PersonalHistory">
+				<h3 class="ui blue header">【个人史】</h3>
+				<p id="PH_Eating_Habits"></p>
+				<p id="PH_Oral_Maintenance"></p>
+				<p id="PH_Sensitive"></p>
+			</div>
+			<div class="ui divider"></div>
 
-				<tr>
-					<td class="positive collapsing">口腔卫生维护</td>
-					<td id="PH_Oral_Maintenance"></td>
-				</tr>
+			<div class="ui invisible basic segment" id="MouthExamination">
+				<h3 class="ui blue header">【口腔检查】</h3>
+				<p id="ME_Body"></p>
+				<p id="ME_Around"></p>
+				<p id="ME_Loss"></p>
+				<p id="ME_Condition"></p>
+				<p id="ME_Neighbor"></p>
+				<p id="ME_Cure"></p>
+				<p id="ME_X"></p>
+				<div id="ME_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+			<div class="ui divider"></div>
 
-				<tr>
-					<td class="positive collapsing">宿主易感性</td>
-					<td id="PH_Sensitive"></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="Diagnose">
+				<h3 class="ui blue header">【诊断】</h3>
+				<p id="Diagnose_Description"></p>
+				<div id="Diagnose_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 现病史 -->
-		<table class="ui celled structured invisible table" id="PresentIllness">
-			<thead>
-				<tr>
-					<th colspan="2">现病史</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">现病史</td>
-					<td id="PI_Description"></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="DifficultyAssessment">
+				<h3 class="ui blue header">【难度评估】</h3>
+				<p>
+					<span>龋损因素：</span>
+					<ul>
+						<li id="DA_tooth_surface_and_location"></li>
+						<li id="DA_caries_depth"></li>
+					</ul>
+				</p>
+				<p>
+					<span>技术因素：</span>
+					<ul>
+						<li id="DA_technology_type"></li>
+					</ul>
+				</p>
+				<p>
+					<span>充填修复史：</span>
+					<ul>
+						<li id="DA_history_of_fill"></li>
+					</ul>
+				</p>
+				<p>
+					<span>附加因素：</span>
+					<ul>
+						<li id="DA_mouth_opening"></li>
+						<li id="DA_gag_reflex"></li>
+						<li id="DA_saliva"></li>
+						<li id="DA_dental_phobia"></li>
+					</ul>
+				</p>
+				<p>
+					<span>预防管理难度：</span>
+					<ul>
+						<li id="DA_difficulty_rating"></li>
+					</ul>
+				</p>
+				<p id="DA_difficulty_level"></p>
+				<p id="DA_id_advice"></p>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 口腔检查 -->
-		<table class="ui celled striped invisible table" id="MouthExamination">
-			<thead>
-				<tr>
-					<th colspan="2">口腔检查</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">牙体情况</td>
-					<td id="ME_Body"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">牙周情况</td>
-					<td id="ME_Around"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">DMFT/DMFS</td>
-					<td id="ME_Loss"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">牙齿发育情况</td>
-					<td id="ME_Condition"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">患牙与邻牙接触关系</td>
-					<td id="ME_Neighbor"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">患牙修复治疗情况</td>
-					<td id="ME_Cure"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">X线片表现</td>
-					<td id="ME_X"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">口腔检查图片</td>
-					<td class="negative" id="ME_IMAGE">
-						<div class="ui hidden rounded image">
-							<a class="ui hidden right corner label"><i class="remove icon"></i></a>
-							<img style="max-width:100%; height:auto;">
-				    	</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="Cure">
+				<h3 class="ui blue header">【处置】</h3>
+				<p id="Cure_Describe"></p>
+				<div id="Cure_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 诊断 -->
-		<table class="ui celled structured invisible table" id="Diagnose">
-			<thead>
-				<tr>
-					<th colspan="2">诊断</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">诊断</td>
-					<td id="Diagnose_Description"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">诊断图片</td>
-					<td class="negative" id="Diagnose_IMAGE" colspan="2">
-						<div class="ui hidden rounded image">
-							<a class="ui hidden right corner label"><i class="remove icon"></i></a>
-							<img style="max-width:100%; height:auto;">
-				    	</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="USPHS">
+				<h3 class="ui blue header">【USPHS评估】</h3>
+				<p id="USPHS_marginal_accuracy"></p>
+				<p id="USPHS_anatomic_form"></p>
+				<p id="USPHS_surfaceness"></p>
+				<p id="USPHS_edge_color"></p>
+				<p id="USPHS_occlusal_contact"></p>
+				<p id="USPHS_sensitivity_of_tooth"></p>
+				<p id="USPHS_secondary_caries"></p>
+				<p id="USPHS_integrity"></p>
+				<p id="USPHS_usphs_level"></p>
+			</div>
+			<div class="ui divider"></div>
 
-		<!-- 难度评估 -->
-		<table class="ui celled structured invisible table" id="DifficultyAssessment">
-			<thead>
-				<tr>
-					<th colspan="3">难度评估</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing" rowspan="2">龋损因素</td>
-					<td class="collapsing">累及牙面及部位</td>
-					<td id="DA_tooth_surface_and_location"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">龋损深度</td>
-					<td id="DA_caries_depth"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">技术因素</td>
-					<td class="collapsing">技术类型</td>
-					<td id="DA_technology_type"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">充填修复史</td>
-					<td class="collapsing">充填修复史及充填失败史</td>
-					<td id="DA_history_of_fill"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing" rowspan="4">附加因素</td>
-					<td class="collapsing">张口度</td>
-					<td id="DA_mouth_opening"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">咽反射</td>
-					<td id="DA_gag_reflex"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">唾液分泌量</td>
-					<td id="DA_saliva"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">牙科恐惧症</td>
-					<td id="DA_dental_phobia"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">预防管理难度</td>
-					<td class="collapsing">龋病风险难度分级</td>
-					<td id="DA_difficulty_rating"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">评估等级</td>
-					<td class="negative center aligned" colspan="2" id="DA_difficulty_level"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">转诊意见</td>
-					<td class="negative center aligned" colspan="2" id="DA_id_advice"></td>
-				</tr>
-			</tbody>
-		</table>
+			<div class="ui invisible basic segment" id="RiskEvaluation">
+				<h3 class="ui blue header">【龋病风险评估】</h3>
+				<p>
+					<span>患龋经历：</span>
+					<ul>
+						<li id="RE_early_carie"></li>
+						<li id="RE_can_see"></li>
+						<li id="RE_lost_tooth"></li>
+					</ul>
+				</p>
+				<p>
+					<span>全身状况：</span>
+					<ul>
+						<li id="RE_system_illness"></li>
+						<li id="RE_illness_name"></li>
+					</ul>
+				</p>
+				<p>
+					<span>饮食习惯：</span>
+					<ul>
+						<li id="RE_times_of_carbohydrate"></li>
+						<li id="RE_consumption_of_carbohydrate"></li>
+						<li id="RE_times_of_meal"></li>
+					</ul>
+				</p>
+				<p>
+					<span>临床试验：</span>
+					<ul>
+						<li id="RE_speed_of_saliva"></li>
+						<li id="RE_ablity_saliva"></li>
+						<li id="RE_bacteria"></li>
+						<li id="RE_consumption"></li>
+					</ul>
+				</p>
+				<p>
+					<span>保护因素：</span>
+					<ul>
+						<li id="RE_fluorine_with_water"></li>
+						<li id="RE_fluorine"></li>
+						<li id="RE_seal"></li>
+					</ul>
+				</p>
+				<p>
+					<span>生活习惯：</span>
+					<ul>
+						<li id="RE_times_of_tooth_brush"></li>
+						<li id="RE_long_of_tooth_brush"></li>
+						<li id="RE_health_care"></li>
+					</ul>
+				</p>
+			</div>
+			<div class="ui divider"></div>
 
-	  	<!-- 处置 -->
-		<table class="ui celled structured invisible table" id="Cure">
-			<thead>
-				<tr>
-					<th colspan="2">处置</th>
-				</tr>
-			</thead>
-				<tbody>
-				<tr>
-					<td class="positive collapsing">处置</td>
-					<td id="Cure_Describe"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">处置图片</td>
-					<td class="negative" id="Cure_IMAGE" colspan="2">
-						<div class="ui hidden rounded image">
-							<a class="ui hidden right corner label"><i class="remove icon"></i></a>
-							<img style="max-width:100%; height:auto;">
-				    	</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-	  	<!-- USPHS评估 -->
-		<table class="ui celled invisible table" id="USPHS">
-			<thead>
-				<tr>
-					<th colspan="3">USPHS评估</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="positive collapsing">颜色匹配</td>
-					<td id="USPHS_color"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">边缘适合性</td>
-					<td id="USPHS_marginal_accuracy"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">解剖形态</td>
-					<td id="USPHS_anatomic_form"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">表面粗糙度</td>
-					<td id="USPHS_surfaceness"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">边缘着色</td>
-					<td id="USPHS_edge_color"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">咬合接触</td>
-					<td id="USPHS_occlusal_contact"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">牙齿敏感</td>
-					<td id="USPHS_sensitivity_of_tooth"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">继发龋</td>
-					<td id="USPHS_secondary_caries"></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">修复体完整性</td>
-					<td id="USPHS_integrity" ></td>
-				</tr>
-				<tr>
-					<td class="positive collapsing">评估等级</td>
-					<td class="center aligned negative" id="USPHS_usphs_level" colsapn="2"></td>
-				</tr>
-			</tbody>
-		</table>
-
-	  	<!-- 龋病风险评估 -->
-		<table class="ui celled structured invisible table" id="RiskEvaluation">
-			<thead>
-				<tr>
-					<th colspan="3">龋病风险评估</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="negative collapsing" rowspan="3">患龋经历</td>
-					<td class="collapsing">早期龋（尚未形成龋洞）</td>
-					<td id="RE_early_carie"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">无肉眼可见/影像学可见的充填体或龋损</td>
-					<td id="RE_can_see"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">因龋缺失牙</td>
-					<td id="RE_lost_tooth"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing" rowspan="2">全身状况</td>
-					<td class="collapsing">系统性疾病</td>
-					<td id="RE_system_illness"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">具体疾病</td>
-					<td id="RE_illness_name"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing" rowspan="3">饮食习惯</td>
-					<td class="collapsing">进食碳水化合物次数（可降解碳水化合物）</td>
-					<td id="RE_times_of_carbohydrate"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">每天摄入的碳水化合物的量</td>
-					<td id="RE_consumption_of_carbohydrate"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">进食零食频率</td>
-					<td id="RE_times_of_meal"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing" rowspan="4">临床试验</td>
-					<td class="collapsing">唾液流速（刺激性唾液）</td>
-					<td id="RE_speed_of_saliva"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">唾液缓冲能力（Dentobuff试纸检测）</td>
-					<td id="RE_ablity_saliva"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">菌斑</td>
-					<td id="RE_bacteria"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">变链检出量</td>
-					<td id="RE_consumption"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing" rowspan="3">保护因素</td>
-					<td class="collapsing">饮用水加氟</td>
-					<td id="RE_fluorine_with_water"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">定期涂氟</td>
-					<td id="RE_fluorine"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">窝沟封闭</td>
-					<td id="RE_seal"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing" rowspan="3">生活习惯</td>
-					<td class="collapsing">刷牙次数</td>
-					<td id="RE_times_of_tooth_brush"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">刷牙时间</td>
-					<td id="RE_long_of_tooth_brush"></td>
-				</tr>
-				<tr>
-					<td class="collapsing">吃完甜食后口腔保健</td>
-					<td id="RE_health_care"></td>
-				</tr>
-			</tbody>
-		</table>
-
-	  	<!-- 龋病预后管理 -->
-		<table class="ui celled structured invisible table" id="Manage">
-			<thead>
-				<tr>
-					<th colspan="3">龋病预后管理</th>
-				</tr>
-			</thead>
-  			<tbody>
-				<tr>
-					<td class="negative collapsing">风险等级</td>
-					<td id="Manage_Level"></td>
-				</tr>
-				<tr>
-					<td class="negative collapsing">处置流程</td>
-					<td id="Manage_Describe"></td>
-				</tr>
-			</tbody>
-		</table>
-
+			<div class="ui invisible basic segment" id="Manage">
+				<h3 class="ui blue header">【龋病预后管理】</h3>
+				<p id="Manage_Describe"></p>
+			</div>
+		</div>
+  	
+		<div class="ui right floated left labeled icon teal button" id="download"><i class="download icon"></i>下载病历</div>
 		<div class="ui right floated left labeled icon returnMedical teal button"><i class="chevron left icon"></i>返回病历</div>
   	</div>
 

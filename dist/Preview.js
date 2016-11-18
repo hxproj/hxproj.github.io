@@ -11,12 +11,13 @@ $(document).ready(function(){
     data     : {user_id : U_ID},
     dataType : "json",
     success  : function(DATA){
-      $('#User_Name').text(DATA.name);
-      !DATA.gender ? $('#User_Gender').text("男") : $('#User_Gender').text("女");
-      $('#User_Age').text(DATA.age);
-      $('#User_Occupation').text(DATA.occupation);
-      $('#User_Contact').text(DATA.contact);
-      
+      var BasicInfo = "患者" + DATA.name + "，";
+      BasicInfo += (!DATA.gender ? "男" : "女") + "，"; 
+      BasicInfo += DATA.age + "岁，"; 
+      BasicInfo += DATA.occupation + "，"; 
+      BasicInfo += "联系方式：" + DATA.contact + "。"; 
+      $('#User_Description').text(BasicInfo);
+
       $('#User').show();
     }
   });
@@ -31,50 +32,12 @@ $(document).ready(function(){
     success  : function(DATA){
       var ChiefComplaint = DATA.tooth_location;
       ChiefComplaint += DATA.is_fill_tooth ? "要求补牙" : DATA.symptom + DATA.time_of_occurrence;
+      ChiefComplaint += "。";
       $('#ChiefComplaint').text(ChiefComplaint);
       
       $('#ToothLocation').show();
     }
   });
-
-	// ***************************************************************
-	// FUNCTION: 个人史
-  $.ajax({
-		url      : URL_PERSONAL_HISTORY,
-		type     : "get",
-		data     : {user_id : U_ID},
-		dataType : "json",
-		success  : function(DATA){
-      // 饮食习惯
-      var ID_Eating_Habits = "";
-      ID_Eating_Habits += DATA.consumption_of_sweet + "，";
-      ID_Eating_Habits += DATA.frequency_of_sweet + "，";
-      ID_Eating_Habits += DATA.frequency_of_meal + "，";
-      ID_Eating_Habits += DATA.is_carbonic_acid;
-      $('#PH_Eating_Habits').text(ID_Eating_Habits);
-
-     	// 口腔卫生维护
-      var ID_Oral_Maintenance = "";
-      ID_Oral_Maintenance += DATA.is_floss + "，";
-      ID_Oral_Maintenance += DATA.times_of_teeth_brush + "，";
-      ID_Oral_Maintenance += DATA.time_of_teeth_brush + "，";
-      ID_Oral_Maintenance += DATA.long_of_teeth_brush + "，";
-      ID_Oral_Maintenance += DATA.electric_tooth_brush + "，";
-      ID_Oral_Maintenance += DATA.is_fluorine + "，";
-      ID_Oral_Maintenance += DATA.is_cavity_examination + "，";
-      ID_Oral_Maintenance += DATA.is_periodontal_treatment;
-      $('#PH_Oral_Maintenance').text(ID_Oral_Maintenance);
-
-      // 宿主易感性
-      var ID_Sensitive = "";
-      ID_Sensitive += DATA.salivary_gland_disease + "，";
-      ID_Sensitive += DATA.sjogren_syndrome + "，";
-      ID_Sensitive += DATA.consciously_reduce_salivary_flow;
-      $('#PH_Sensitive').text(ID_Sensitive);
-      
-      $('#PersonalHistory').show();
-		}
-	});
 
   // ***************************************************************
   // FUNCTION: 现病史
@@ -87,7 +50,7 @@ $(document).ready(function(){
       // 设置描述（需提前获取牙位信息）
       $.get(URL_TOOTH, {tooth_id : DATA.tooth_id}, function(ToothData){
 
-        var DescribeText = !DATA.is_primary ? "<bold>原发性龋病：</bold>" : "<bold>有治疗史龋病：</bold>";
+        var DescribeText = !DATA.is_primary ? "<span>原发性龋病：</span>" : "<span>有治疗史龋病：</span>";
         DescribeText += ToothData.tooth_location;
         DescribeText += ToothData.is_fill_tooth ? "要求补牙，" : ToothData.time_of_occurrence + "前发现" + ToothData.symptom + "，";
        
@@ -100,7 +63,6 @@ $(document).ready(function(){
           DescribeText += DATA.is_delayed_pain + "，";
           DescribeText += DATA.medicine_name + "，";
           DescribeText += DATA.is_relief;
-
         } else {
           DescribeText += "在" + DATA.cure_time + "曾进行充填修复治疗，";
           DescribeText += "为" + DATA.fill_type + "，";
@@ -112,8 +74,8 @@ $(document).ready(function(){
           DescribeText += DATA.is_delayed_pain + "，";
           DescribeText += DATA.medicine_name + "，";
           DescribeText += DATA.is_relief;
-
         }
+        DescribeText += "。";
 
         $('#PI_Description').html(DescribeText);
       }, "json");
@@ -121,6 +83,48 @@ $(document).ready(function(){
       $('#PresentIllness').show();
     }
   });
+
+	// ***************************************************************
+	// FUNCTION: 个人史
+  $.ajax({
+		url      : URL_PERSONAL_HISTORY,
+		type     : "get",
+		data     : {user_id : U_ID},
+		dataType : "json",
+		success  : function(DATA){
+      // 饮食习惯
+      var ID_Eating_Habits = "<span>饮食习惯：</span>";
+      ID_Eating_Habits += DATA.consumption_of_sweet + "，";
+      ID_Eating_Habits += DATA.frequency_of_sweet + "，";
+      ID_Eating_Habits += DATA.frequency_of_meal + "，";
+      ID_Eating_Habits += DATA.is_carbonic_acid;
+      ID_Eating_Habits += "。";
+      $('#PH_Eating_Habits').html(ID_Eating_Habits);
+
+     	// 口腔卫生维护
+      var ID_Oral_Maintenance = "<span>口腔卫生维护：</span>";
+      ID_Oral_Maintenance += DATA.is_floss + "，";
+      ID_Oral_Maintenance += DATA.times_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.time_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.long_of_teeth_brush + "，";
+      ID_Oral_Maintenance += DATA.electric_tooth_brush + "，";
+      ID_Oral_Maintenance += DATA.is_fluorine + "，";
+      ID_Oral_Maintenance += DATA.is_cavity_examination + "，";
+      ID_Oral_Maintenance += DATA.is_periodontal_treatment;
+      ID_Oral_Maintenance += "。";
+      $('#PH_Oral_Maintenance').html(ID_Oral_Maintenance);
+
+      // 宿主易感性
+      var ID_Sensitive = "<span>宿主易感性：</span>";
+      ID_Sensitive += DATA.salivary_gland_disease + "，";
+      ID_Sensitive += DATA.sjogren_syndrome + "，";
+      ID_Sensitive += DATA.consciously_reduce_salivary_flow;
+      ID_Sensitive += "。";
+      $('#PH_Sensitive').html(ID_Sensitive);
+      
+      $('#PersonalHistory').show();
+		}
+	});
 
   // ***************************************************************
   // FUNCTION: 口腔检查
@@ -131,11 +135,10 @@ $(document).ready(function(){
     dataType : "json",
     success  : function(DATA){
 
-      // 表头
-      $('#display th').text("口腔检查 - " + decodeURI(requestParameter("name")));
 
       // 牙体情况
-      var ME_Body_Text = DATA.tooth_location + "牙";
+      var ME_Body_Text = "<span>牙体情况：</span>";
+      ME_Body_Text += DATA.tooth_location + "牙";
 
       // 累及面以逗号隔开，显示时需去除逗号
       ME_Body_Text += "龋坏累及";
@@ -163,10 +166,12 @@ $(document).ready(function(){
       if (DATA.vitality_value_of_teeth != "") {
         ME_Body_Text += "，牙齿活力值：" + DATA.vitality_value_of_teeth;
       };
-      $('#ME_Body').text(ME_Body_Text);
+      ME_Body_Text += "。";
+      $('#ME_Body').html(ME_Body_Text);
 
       // 牙周情况
-      var ME_Around_Text = DATA.gingival_hyperemia + "，";
+      var ME_Around_Text = "<span>牙周情况：</span>";
+      ME_Around_Text += DATA.gingival_hyperemia + "，";
       ME_Around_Text += DATA.gingival_color + "，";
       ME_Around_Text += DATA.tartar_up + "，";
       ME_Around_Text += DATA.tartar_down + "，";
@@ -182,10 +187,11 @@ $(document).ready(function(){
       ME_Around_Text += DATA.fistula + "，";
       ME_Around_Text += DATA.overflow_pus + "，";
       ME_Around_Text += DATA.mobility;
-      $('#ME_Around').text(ME_Around_Text);
+      ME_Around_Text += "。";
+      $('#ME_Around').html(ME_Around_Text);
 
       // 龋失补指数
-      var ME_Loss_Text = "";
+      var ME_Loss_Text = "<span>DMFT/DMFS：</span>";
       if (DATA.loss_caries_index_up != "") {
         ME_Loss_Text += "DMFT：" + DATA.loss_caries_index_up;
       }
@@ -195,29 +201,30 @@ $(document).ready(function(){
         }
         ME_Loss_Text += "DMFS：" + DATA.loss_caries_surface_index_up;
       }
-      $('#ME_Loss').text(ME_Loss_Text);
+      ME_Loss_Text += "。";
+      $('#ME_Loss').html(ME_Loss_Text);
 
       // 牙齿发育情况
-      $('#ME_Condition').text(DATA.development_of_the_situation);
+      $('#ME_Condition').html("<span>牙齿发育情况：</span>" + DATA.development_of_the_situation + "。");
 
       // 患牙与邻牙接触关系
-      var ME_Neighbor_Text = "";
+      var ME_Neighbor_Text = "<span>患牙与邻牙接触关系：</span>";
       ME_Neighbor_Text += DATA.relations_between_teeth + "，";
       ME_Neighbor_Text += DATA.is_teeth_crowd + "，";
       ME_Neighbor_Text += DATA.involution_teeth + "，";
       ME_Neighbor_Text += DATA.tooth_shape;
-      $('#ME_Neighbor').text(ME_Neighbor_Text);
-
+      ME_Neighbor_Text += "。";
+      $('#ME_Neighbor').html(ME_Neighbor_Text);
 
       // 患牙修复治疗情况
-      var ME_Cure_Text = "";
+      var ME_Cure_Text = "<span>患牙修复治疗情况：</span>";
       ME_Cure_Text += DATA.treatment + "，";
       ME_Cure_Text += DATA.orthodontic;
-      $('#ME_Cure').text(ME_Cure_Text);
-
+      ME_Cure_Text += "。";
+      $('#ME_Cure').html(ME_Cure_Text);
 
       // X线片表现
-      var ME_X_Text = "";
+      var ME_X_Text = "<span>X线片表现：</span>";
       ME_X_Text += DATA.tooth_location + "牙";
       ME_X_Text += DATA.X_Ray_location;
       ME_X_Text += DATA.X_Ray_depth;
@@ -226,14 +233,12 @@ $(document).ready(function(){
       // 如果CT表现和咬翼片表现为空时，则不显示
       if (DATA.CT_shows != "") {
         ME_X_Text += "CT表现：" + DATA.CT_shows;
-        if (DATA.piece != "") {
-          ME_X_Text += "，";
-        };
+        ME_X_Text += DATA.piece != "" ? "，" : "。";
       }
       if (DATA.piece != "") {
-        ME_X_Text += "咬翼片表现：" + DATA.piece;
+        ME_X_Text += "咬翼片表现：" + DATA.piece + "。";
       }
-      $('#ME_X').text(ME_X_Text);
+      $('#ME_X').html(ME_X_Text);
 
       // 显示口腔检查图片
       $.ajax({
@@ -242,45 +247,18 @@ $(document).ready(function(){
         data     : {tooth_id : T_ID, type : 0},
         dataType : "json",
         success  : function(FileData) {
+          $.each(FileData, function(){
+            var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
+            $ClonedImage.attr("value", this.img_id);
 
-          if (FileData.length == 0) {
-            $('#ME_IMAGE').text("未添加任何图片");
-          } else {
-            $.each(FileData, function(){
-              var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
-              $ClonedImage.attr("value", this.img_id);
-
-              var ImagePath = this.path;
-              ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-              window.loadImage(ImagePath, function(){
-                $ClonedImage.find('img').attr('src', ImagePath);
-                $ClonedImage.find('.corner').removeClass('hidden');
-              });
-              
-              $ClonedImage.find('.corner').bind('click', function(){
-                var $Image = $(this).parent();
-                
-                $('#deletemodal').modal({
-                  onApprove: function() {
-                    $.ajax({
-                      url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-                      type     : "DELETE",
-                      data     : {},
-                      dataType : "text",
-                      error    : function(data) {
-                        alert("删除文件失败，请检查网络设置。");
-                      },
-                      success  : function() {
-                        $Image.remove();
-                      }
-                    });
-                  }
-                }).modal('show');
-              });
-
-              $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+            var ImagePath = this.path;
+            ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+            window.loadImage(ImagePath, function(){
+              $ClonedImage.attr('src', ImagePath);
             });
-          }
+
+            $('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+          });
         }
       });
       
@@ -307,77 +285,50 @@ $(document).ready(function(){
         success  : function(data) { MouthData = data; }
       })
 
-      var ToothLocation = "<bold>注：还未设置病人“牙位”和“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
+      var ToothLocation = "<span>注：还未设置病人“牙位”和“累及牙面”，请到“口腔检查”功能项中完善相关信息</span>",
           Description   = "";
         
       if (MouthData != null) {
-          ToothLocation = MouthData.tooth_location + "牙";
+        ToothLocation = MouthData.tooth_location + "牙";
         Description   = ToothLocation;
 
-          $.each(MouthData.caries_tired.split(","), function(){
-            Description += this;
-          });
-          Description += "面" + DATA.caries_degree;
+        $.each(MouthData.caries_tired.split(","), function(){
+          Description += this;
+        });
+        Description += "面" + DATA.caries_degree + "。";
 
         if (DATA.caries_type != "无") {
-            Description += "<br/><br/>" + ToothLocation + DATA.caries_type;
+            Description += "<br/><br/>" + ToothLocation + DATA.caries_type + "。";
         } 
       } else {
-        Description += DATA.caries_degree;
+        Description += DATA.caries_degree + "。";
 
         if (DATA.caries_type != "无") {
-            Description += "<br/><br/>" + DATA.caries_type;
+            Description += "<br/><br/>" + DATA.caries_type + "。";
         } 
         Description += "<br/><br/>" + ToothLocation;
       }
-        $('#Diagnose_Description').html(Description);
+      $('#Diagnose_Description').html(Description);
 
-      // 显示诊断图片
+      // 显示图片
       $.ajax({
         url      : URL_IMAGEUPLOAD,
         type     : "GET",
         data     : {tooth_id : T_ID, type : 1},
         dataType : "json",
         success  : function(FileData) {
+          $.each(FileData, function(){
+            var $ClonedImage = $('#Diagnose_IMAGE .hidden.image').clone().removeClass('hidden');
+            $ClonedImage.attr("value", this.img_id);
 
-          if (FileData.length == 0) {
-            $('#Diagnose_IMAGE').text("未添加任何图片");
-          } else {
-            $.each(FileData, function(){
-              var $ClonedImage = $('#Diagnose_IMAGE .hidden.image').clone().removeClass('hidden');
-              $ClonedImage.attr("value", this.img_id);
-
-              var ImagePath = this.path;
-              ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-              window.loadImage(ImagePath, function(){
-                $ClonedImage.find('img').attr('src', ImagePath);
-                $ClonedImage.find('.corner').removeClass('hidden');
-              });
-              
-              $ClonedImage.find('.corner').bind('click', function(){
-                var $Image = $(this).parent();
-                    
-                $('#deletemodal').modal({
-                  onApprove: function() {
-                    $.ajax({
-                      url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-                      type     : "DELETE",
-                      data     : {},
-                      dataType : "text",
-                      error    : function(data) {
-                        alert("删除文件失败，请检查网络设置。");
-                      },
-                      success  : function() {
-                        $Image.remove();
-                      }
-                    });
-                  }
-                }).modal('show');
-              });
-
-              $('#Diagnose_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+            var ImagePath = this.path;
+            ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+            window.loadImage(ImagePath, function(){
+              $ClonedImage.attr('src', ImagePath);
             });
-          }
+            
+            $('#Diagnose_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+          });
         }
       });
       
@@ -393,35 +344,38 @@ $(document).ready(function(){
     data     : {tooth_id : T_ID},
     dataType : "json",
     success  : function(DATA){
-      $('#DA_tooth_surface_and_location').text(DATA.tooth_surface_and_location);
-      $('#DA_caries_depth').text(DATA.caries_depth);
-      $('#DA_technology_type').text(DATA.technology_type);
-      $('#DA_history_of_fill').text(DATA.history_of_fill);
-      $('#DA_mouth_opening').text(DATA.mouth_opening);
-      $('#DA_gag_reflex').text(DATA.gag_reflex);
-      $('#DA_saliva').text(DATA.saliva);
-      $('#DA_dental_phobia').text(DATA.dental_phobia);
-      $('#DA_difficulty_rating').text(DATA.difficulty_rating);
+      $('#DA_tooth_surface_and_location').text("累及牙面及部位：" + DATA.tooth_surface_and_location);
+      $('#DA_caries_depth').text("龋损深度：" + DATA.caries_depth);
+      $('#DA_technology_type').text("技术类型：" + DATA.technology_type);
+      $('#DA_history_of_fill').text("充填修复史及充填失败史：" + DATA.history_of_fill);
+      $('#DA_mouth_opening').text("张口度：" + DATA.mouth_opening);
+      $('#DA_gag_reflex').text("咽反射：" + DATA.gag_reflex);
+      $('#DA_saliva').text("唾液分泌量：" + DATA.saliva);
+      $('#DA_dental_phobia').text("牙科恐惧症：" + DATA.dental_phobia);
+      $('#DA_difficulty_rating').text("龋病风险难度分级：" + DATA.difficulty_rating);
 
-      var Level = "";
+      var Level  = "",
+          Advice = "";
       switch (DATA.difficulty_level) {
         case 1:  {
-          Level = "Ⅰ级"; 
-          $('#DA_id_advice').text("建议转诊到Ⅲ级医师进行处理");
+          Level  = "Ⅰ级"; 
+          Advice = "建议转诊到Ⅲ级医师进行处理";
           break;
         }
         case 2:  {
-          Level = "Ⅱ级"; 
-          $('#DA_id_advice').text("建议转诊到Ⅱ级医师进行处理");
+          Level  = "Ⅱ级"; 
+          Advice = "建议转诊到Ⅱ级医师进行处理";
           break;
         }
         case 3:  {
-          Level = "Ⅲ级"; 
-          $('#DA_id_advice').text("建议转诊到Ⅰ级医师进行处理");
+          Level  = "Ⅲ级"; 
+          Advice = "建议转诊到Ⅰ级医师进行处理";
           break;
         }
       }
-      $('#DA_difficulty_level').text(Level);
+
+      $('#DA_difficulty_level').html("<span>评估等级：</span>" + Level);
+      $('#DA_id_advice').html("<span>转诊意见：</span>" + Advice);
       
       $('#DifficultyAssessment').show();
     }
@@ -440,7 +394,7 @@ $(document).ready(function(){
 
       // 牙非手术治疗
       if (DATA.handle_type == 0) {
-        var Describe_Text = "<bold>" + DATA.specific_method + "：</bold>";
+        var Describe_Text = "<span>" + DATA.specific_method + "：</span>";
         switch (DATA.specific_method) {
           case "药物治疗": {
             Describe_Text += "将" + DATA.fluorination + "，" + DATA.silver_nitrate + "涂布于龋损处30s";
@@ -466,7 +420,8 @@ $(document).ready(function(){
       }
       // 手术治疗
       else if (DATA.handle_type == 1) {
-        var Describe_Text = "<h4 class='ui blue header'>" + DATA.specific_method + "：</h4>";
+        var Describe_Text = "<span>" + DATA.specific_method + "：</span>";
+            Describe_Text += NewLine;
         // 获取牙位信息
         var MouthData = null;
         $.ajax({
@@ -490,7 +445,7 @@ $(document).ready(function(){
         Anesthesia += "使用" + DATA.anesthesia_medicine + "，";
         Anesthesia += "局部" + DATA.part_anesthesia + "，";
         Anesthesia += DATA.rubber;
-        Anesthesia += "<bold>（注：还未设置病人“牙位”，请到“口腔检查”功能项中完善相关信息）</bold>";
+        Anesthesia += "<span>（注：还未设置病人“牙位”，请到“口腔检查”功能项中完善相关信息）</span>";
         }
 
         switch (DATA.specific_method) {
@@ -558,13 +513,13 @@ $(document).ready(function(){
           }
           case "牙安抚治疗&树脂充填修复": {
             // 初诊
-            Describe_Text += "<bold>初诊：</bold>";
+            Describe_Text += "<span>初诊：</span>";
           Describe_Text += "使用"+ DATA.appease_medicine + "，";
           Describe_Text += "观察" + DATA.observed_time;
           Describe_Text += NewLine;
 
             // 复诊：1. 
-            Describe_Text += "<bold>复诊：</bold>";
+            Describe_Text += "<span>复诊：</span>";
           Describe_Text += NewLine;
             Describe_Text += "1. ";
             Describe_Text += Anesthesia;
@@ -741,45 +696,18 @@ $(document).ready(function(){
         data     : {tooth_id : T_ID, type : 2},
         dataType : "json",
         success  : function(FileData) {
+          $.each(FileData, function(){
+            var $ClonedImage = $('#Cure_IMAGE .hidden.image').clone().removeClass('hidden');
+            $ClonedImage.attr("value", this.img_id);
 
-          if (FileData.length == 0) {
-            $('#Cure_IMAGE').text("未添加任何图片");
-          } else {
-            $.each(FileData, function(){
-              var $ClonedImage = $('#Cure_IMAGE .hidden.image').clone().removeClass('hidden');
-              $ClonedImage.attr("value", this.img_id);
-
-              var ImagePath = this.path;
-              ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-              window.loadImage(ImagePath, function(){
-                $ClonedImage.find('img').attr('src', ImagePath);
-                $ClonedImage.find('.corner').removeClass('hidden');
-              });
-              
-              $ClonedImage.find('.corner').bind('click', function(){
-                var $Image = $(this).parent();
-                    
-                $('#deletemodal').modal({
-                  onApprove: function() {
-                    $.ajax({
-                      url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-                      type     : "DELETE",
-                      data     : {},
-                      dataType : "text",
-                      error    : function(data) {
-                        alert("删除文件失败，请检查网络设置。");
-                      },
-                      success  : function() {
-                        $Image.remove();
-                      }
-                    });
-                  }
-                }).modal('show');
-                      });
-
-              $('#Cure_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+            var ImagePath = this.path;
+            ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+            window.loadImage(ImagePath, function(){
+              $ClonedImage.attr('src', ImagePath);
             });
-          }
+            
+            $('#Cure_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+          });
         }
       });
       
@@ -795,16 +723,16 @@ $(document).ready(function(){
     data     : {tooth_id : T_ID},
     dataType : "json",
     success  : function(DATA){
-      $('#USPHS_color').text(DATA.color);
-      $('#USPHS_marginal_accuracy').text(DATA.marginal_accuracy);
-      $('#USPHS_anatomic_form').text(DATA.anatomic_form);
-      $('#USPHS_surfaceness').text(DATA.surfaceness);
-      $('#USPHS_edge_color').text(DATA.edge_color);
-      $('#USPHS_occlusal_contact').text(DATA.occlusal_contact);
-      $('#USPHS_sensitivity_of_tooth').text(DATA.sensitivity_of_tooth);
-      $('#USPHS_secondary_caries').text(DATA.secondary_caries);
-      $('#USPHS_integrity').text(DATA.integrity);
-      $('#USPHS_usphs_level').text(DATA.level);
+      $('#USPHS_color').html("<span>颜色匹配：</span>" + DATA.color);
+      $('#USPHS_marginal_accuracy').html("<span>边缘适合性：</span>" + DATA.marginal_accuracy);
+      $('#USPHS_anatomic_form').html("<span>解剖形态：</span>" + DATA.anatomic_form);
+      $('#USPHS_surfaceness').html("<span>表面粗糙度：</span>" + DATA.surfaceness);
+      $('#USPHS_edge_color').html("<span>边缘着色：</span>" + DATA.edge_color);
+      $('#USPHS_occlusal_contact').html("<span>咬合接触：</span>" + DATA.occlusal_contact);
+      $('#USPHS_sensitivity_of_tooth').html("<span>牙齿敏感：</span>" + DATA.sensitivity_of_tooth);
+      $('#USPHS_secondary_caries').html("<span>继发龋：</span>" + DATA.secondary_caries);
+      $('#USPHS_integrity').html("<span>修复体完整性：</span>" + DATA.integrity);
+      $('#USPHS_usphs_level').html("<span>评估等级：</span>" + DATA.level);
       
       $('#USPHS').show();
     }
@@ -818,24 +746,24 @@ $(document).ready(function(){
     data     : {user_id : U_ID},
     dataType : "json",
     success  : function(DATA){
-      $('#RE_early_carie').text(DATA.early_carie);
-      $('#RE_can_see').text(DATA.can_see);
-      $('#RE_lost_tooth').text(DATA.lost_tooth);
-      $('#RE_system_illness').text(DATA.system_illness);
-      $('#RE_illness_name').text(DATA.illness_name);
-      $('#RE_times_of_carbohydrate').text(DATA.times_of_carbohydrate);
-      $('#RE_consumption_of_carbohydrate').text(DATA.consumption_of_carbohydrate);
-      $('#RE_times_of_meal').text(DATA.times_of_meal);
-      $('#RE_speed_of_saliva').text(DATA.speed_of_saliva);
-      $('#RE_ablity_saliva').text(DATA.ablity_saliva);
-      $('#RE_bacteria').text(DATA.bacteria);
-      $('#RE_consumption').text(DATA.consumption);
-      $('#RE_fluorine_with_water').text(DATA.fluorine_with_water);
-      $('#RE_fluorine').text(DATA.fluorine);
-      $('#RE_seal').text(DATA.seal);
-      $('#RE_times_of_tooth_brush').text(DATA.times_of_tooth_brush);
-      $('#RE_long_of_tooth_brush').text(DATA.long_of_tooth_brush);
-      $('#RE_health_care').text(DATA.health_care);
+      $('#RE_early_carie').text("早期龋（尚未形成龋洞）：" + DATA.early_carie);
+      $('#RE_can_see').text("无肉眼可见/影像学可见的充填体或龋损：" + DATA.can_see);
+      $('#RE_lost_tooth').text("因龋缺失牙：" + DATA.lost_tooth);
+      $('#RE_system_illness').text("系统性疾病：" + DATA.system_illness);
+      $('#RE_illness_name').text("具体疾病：" + DATA.illness_name == "" ? "无" : DATA.illness_name);
+      $('#RE_times_of_carbohydrate').text("进食碳水化合物次数（可降解碳水化合物）：" + DATA.times_of_carbohydrate);
+      $('#RE_consumption_of_carbohydrate').text("每天摄入的碳水化合物的量：" + DATA.consumption_of_carbohydrate);
+      $('#RE_times_of_meal').text("进食零食频率：" + DATA.times_of_meal);
+      $('#RE_speed_of_saliva').text("唾液流速（刺激性唾液）：" + DATA.speed_of_saliva);
+      $('#RE_ablity_saliva').text("唾液缓冲能力（Dentobuff试纸检测）：" + DATA.ablity_saliva);
+      $('#RE_bacteria').text("菌斑：" + DATA.bacteria);
+      $('#RE_consumption').text("变链检出量：" + DATA.consumption);
+      $('#RE_fluorine_with_water').text("饮用水加氟：" + DATA.fluorine_with_water);
+      $('#RE_fluorine').text("定期涂氟：" + DATA.fluorine);
+      $('#RE_seal').text("窝沟封闭：" + DATA.seal);
+      $('#RE_times_of_tooth_brush').text("刷牙次数：" + DATA.times_of_tooth_brush);
+      $('#RE_long_of_tooth_brush').text("刷牙时间：" + DATA.long_of_tooth_brush);
+      $('#RE_health_care').text("吃完甜食后口腔保健：" + DATA.health_care);
       
       $('#RiskEvaluation').show();
     }
@@ -882,29 +810,36 @@ $(document).ready(function(){
     data     : {user_id : U_ID},
     dataType : "json",
     success  : function(DATA){
+      var Level   = "",
+          NewLine = "</br></br>";
       switch (DATA.patient_type) {
         case 1: {
-          $('#Manage_Level').text("低风险患者");
-          $('#Manage_Describe').html(Level1);
+          Level = "<span>低风险患者：</span>";
+          Level += NewLine;
+          Level += Level1;
           break;
         }
         case 2: {
-          $('#Manage_Level').text("中风险患者");
-          $('#Manage_Describe').html(Level2);
+          Level = "<span>中风险患者：</span>";
+          Level += NewLine;
+          Level += Level2;
           break;
         }
         case 3: {
-          $('#Manage_Level').text("高风险患者");
-          $('#Manage_Describe').html(Level3);
+          Level = "<span>中高风险患者：</span>";
+          Level += NewLine;
+          Level += Level3;
           break;
         }
         case 4: {
-          $('#Manage_Level').text("极高风险患者");
-          $('#Manage_Describe').html(Level4);
+          Level = "<span>极高风险患者：</span>";
+          Level += NewLine;
+          Level += Level4;
           break;
         }
       }
-      
+      $('#Manage_Describe').html(Level);
+
       $('#Manage').show();
     }
   });
