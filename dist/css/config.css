@@ -1,0 +1,24 @@
+body {
+	background : url(../media/bg.gif);
+	font-family: '微软雅黑', 'Tahoma';
+}
+
+.invisible {
+	display: none;
+}
+
+/*
+.main.container {
+	margin-bottom: 10em;
+}
+.grid.container {
+	margin-top: 1.5em;
+	margin-bottom: 10em;
+}
+bold {
+	font-weight: bold;
+}
+span {
+	font-weight: bold;
+}
+/*
