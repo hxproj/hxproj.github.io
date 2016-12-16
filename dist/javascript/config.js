@@ -28,14 +28,10 @@ $(document).ready(function(){
 	};
 
 	window.networkError = function() { $('#networkerror').modal('show'); }
-	window.redirection  = function(URL, UID, TID, Name) {
-		window.location.href = URL + window.toquerystring({
-			uid  : UID,
-			tid  : TID,
-			name : Name
-		});
+	window.redirection  = function(URL, Parameters) {
+		window.location.href = URL + window.toquerystring(Parameters);
 	}
-
+	
 	window.toform = function(parameters) {
 		var form = "";
 		$.each(parameters, function(key, value) {form += key + "=" + value + "&";});
