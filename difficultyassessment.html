@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+  	<meta charset="utf-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<link rel="SHORTCUT ICON" href="dist/media/logo.png">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+ 	
+  	<script src="dist/javascript/semantic/jquery.min.js"></script>
+  	<script src="dist/javascript/semantic/semantic.min.js"></script>  
+  	<script src="dist/javascript/config.js"></script>
+
+</head>
+
+<body>
+	<div class="ui blue inverted large top stackable menu">
+		<a href="index.html" class="center header item">
+			<img class="logo" src="dist/media/logo.png">
+			&nbsp;龋病防治难度评估及管理
+		</a>
+	    <a class="item" href="search.html">搜索</a>
+	    <a class="item" href="help.html">帮助</a>
+	</div> 
+
+	<div class="ui relaxed stackable grid container">
+		<div class="center aligned three wide column">
+			<div class="ui vertical container stackable menu" id="nav">
+				<a class="item" href="medicalrecord.html"><i class="chevron left icon"></i>返回病历</a>
+				<a class="item" href="illnesshistory.html"><i class="history icon"></i>主诉&病史</a>
+				<a class="item" href="mouthexamination.html"><i class="add square icon"></i>口腔检查</a>
+				<a class="item" href="riskevaluation.html"><i class="pie chart icon"></i>风险评估</a>
+				<a class="item" href="diagnose.html"><i class="heartbeat icon"></i>诊断及治疗计划</a>
+				<a class="blue active item"><i class="bar chart icon"></i>难度评估</a>
+				<a class="item" href="cure.html"><i class="first aid icon"></i>处置</a>
+				<a class="item" href="manage.html"><i class="block layout icon"></i>预后管理</a>
+			</div>
+		</div>
+
+		<div class="thirteen wide column">
+			<form class="ui clearing raised form segment">
+				<a class="ui blue ribbon label">初诊</a>
+				<span>2016-11-11</span>
+				<div class="ui center aligned basic segment">
+					<div class="ui large header">【难度评估】</div>
+					<div class="ui teal labels">
+						<div class="ui label">张三</div>
+						<div class="ui label">男</div>
+						<div class="ui label">32岁</div>
+						<div class="ui label">50023119840312638X</div>
+						<div class="ui label">医生</div>
+						<div class="ui label">151846574201</div>
+						<div class="ui label">11牙中龋</div>
+					</div>
+				</div>
+
+				<div class="ui divider"></div>
+				<h3 class="ui blue header">1. 龋损因素</h3>
+				<div class="two fields">
+					<div class="required field">
+						<label>累及牙面及部位</label>
+						<select name="tooth_surface_and_location" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="Ⅰ类洞">Ⅰ类洞</option>
+						<option value="Ⅱ类洞">Ⅱ类洞</option>
+						<option value="Ⅲ类洞">Ⅲ类洞</option>
+						<option value="Ⅳ类洞">Ⅳ类洞</option>
+						<option value="Ⅴ类洞">Ⅴ类洞</option>
+						<option value="Ⅵ类洞">Ⅵ类洞</option>
+						<option value="根面龋(累及唇颊面)">根面龋(累及唇颊面)</option>
+						<option value="后牙远中邻面龈方1/3洞">后牙远中邻面龈方1/3洞</option>
+						<option value="磨耗牙">磨耗牙</option>
+						<option value="牙尖缺损">牙尖缺损</option>
+						<option value="严重缺损的残冠">严重缺损的残冠</option>
+						<option value="根面龋(累及2个面以上)">根面龋(累及2个面以上)</option>
+						<option value="猛性龋">猛性龋</option>
+						</select>
+					</div>
+					<div class="required field">
+						<label>龋损深度</label>
+						<select name="caries_depth" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="浅龋">浅龋</option>
+						<option value="中龋">中龋</option>
+						<option value="深龋">深龋</option>
+						<option value="年轻恒牙深龋">年轻恒牙深龋</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 技术因素</h3>
+				<div class="two fields">
+					<div class="required field">
+						<label>技术类型</label>
+						<select name="technology_type" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="后牙复合树脂修复">后牙复合树脂修复（后牙直接修复）</option>
+						<option value="后牙银汞合金修复">后牙银汞合金修复（后牙直接修复）</option>
+						<option value="ART修复">ART修复（龋病微创修复技术）</option>
+						<option value="预防性填充">预防性填充（龋病微创修复技术）</option>
+						<option value="玻璃离子过渡性修复">玻璃离子过渡性修复（龋病微创修复技术）</option>
+						<option value="釉质成型术">釉质成型术（龋病微创修复技术）</option>
+						<option value="微创磨术">微创磨术（龋病微创修复技术）</option>
+						<option value="前牙复合树脂修复">前牙复合树脂修复</option>
+						<option value="前牙无创美容修复">前牙无创美容修复（前牙美容修复）</option>
+						<option value="前牙微创复合树脂分层修复">前牙微创复合树脂分层修复（前牙美容修复）</option>
+						<option value="前牙微创CAD/CAM瓷贴面修复">前牙微创CAD/CAM瓷贴面修复（前牙美容修复）</option>
+						<option value="后牙复合树脂嵌体">后牙复合树脂嵌体（后牙嵌体修复）</option>
+						<option value="后牙CAD/CAM瓷嵌体修复">后牙CAD/CAM瓷嵌体修复（后牙嵌体修复）</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">3. 充填修复史</h3>
+				<div class="two fields">
+					<div class="required field">
+						<label>充填修复史及充填失败史</label>
+						<select name="history_of_fill" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="患牙有充填修复史，但龋坏未累及旧修复体">患牙有充填修复史，但龋坏未累及旧修复体</option>
+						<option value="龋坏累及旧修复体或旧修复体首次折裂">龋坏累及旧修复体或旧修复体首次折裂</option>
+						<option value="患牙的旧修复体脱落2次或2次以上">患牙的旧修复体脱落2次或2次以上</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">4. 附加因素</h3>
+				<div class="two fields">
+					<div class="required field">
+						<label>张口度</label>
+						<select name="mouth_opening" class="ui dropdown">
+						<option value="正常">正常</option>
+						<option value="3指宽">3指宽</option>
+						<option value="2指宽">2指宽</option>
+						<option value="2指宽以下">2指宽以下</option>
+						</select>
+					</div>
+					<div class="required field">
+						<label>咽反射</label>
+						<select name="gag_reflex" class="ui dropdown">
+						<option value="无">无</option>
+						<option value="有">有</option>
+						<option value="强烈">强烈</option>
+						</select>
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="required field">
+						<label>唾液分泌量</label>
+						<select name="saliva" class="ui dropdown">
+						<option value="正常">正常</option>
+						<option value="较多">较多</option>
+						<option value="非常多">非常多</option>
+						</select>
+					</div>
+					<div class="required field">
+						<label>牙科恐惧症</label>
+						<select name="dental_phobia" class="ui dropdown">
+						<option value="无">无</option>
+						<option value="有">有</option>
+						</select>
+					</div>
+				</div>
+				
+				<h3 class="ui blue header">5. 预防管理难度</h3>
+				<div class="two fields">
+					<div class="required field">
+						<label>龋病风险难度分级</label>
+						<select name="difficulty_rating" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="低、中危人群">低、中危人群</option>
+						<option value="高危人群">高危人群</option>
+						<option value="极高危人群">极高危人群</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="ui hidden divider"></div>
+				<div class="ui right floated blue submit button">提交</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+  	<meta charset="utf-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<link rel="SHORTCUT ICON" href="dist/media/logo.png">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+ 	
+  	<script src="dist/javascript/semantic/jquery.min.js"></script>
+  	<script src="dist/javascript/semantic/semantic.min.js"></script>  
+  	<script src="dist/javascript/config.js"></script>
+
+</head>
+
+<body>
+	<div class="ui blue inverted large top stackable menu">
+		<a href="index.html" class="center header item">
+			<img class="logo" src="dist/media/logo.png">
+			&nbsp;龋病防治难度评估及管理
+		</a>
+	    <a class="item" href="search.html">搜索</a>
+	    <a class="item" href="help.html">帮助</a>
+	</div> 
+
+	<div class="ui relaxed stackable grid container">
+		<div class="center aligned three wide column">
+			<div class="ui vertical container stackable menu" id="nav">
+				<a class="item" href="medicalrecord.html"><i class="chevron left icon"></i>返回病历</a>
+				<a class="item" href="illnesshistory.html"><i class="history icon"></i>主诉&病史</a>
+				<a class="item" href="mouthexamination.html"><i class="add square icon"></i>口腔检查</a>
+				<a class="item" href="riskevaluation.html"><i class="pie chart icon"></i>风险评估</a>
+				<a class="blue active item"><i class="heartbeat icon"></i>诊断及治疗计划</a>
+				<a class="item" href="difficultyassessment.html"><i class="bar chart icon"></i>难度评估</a>
+				<a class="item" href="cure.html"><i class="first aid icon"></i>处置</a>
+				<a class="item" href="manage.html"><i class="block layout icon"></i>预后管理</a>
+			</div>
+		</div>
+
+		<div class="thirteen wide column">
+			<form class="ui clearing raised form segment">
+				<a class="ui blue ribbon label">初诊</a>
+				<span>2016-11-11</span>
+				<div class="ui center aligned basic segment">
+					<div class="ui large header">【诊断及治疗计划】</div>
+					<div class="ui teal labels">
+						<div class="ui label">张三</div>
+						<div class="ui label">男</div>
+						<div class="ui label">32岁</div>
+						<div class="ui label">50023119840312638X</div>
+						<div class="ui label">医生</div>
+						<div class="ui label">151846574201</div>
+						<div class="ui label">11牙中龋</div>
+					</div>
+				</div>
+				<div class="ui divider"></div>
+
+				<h3 class="ui blue header">1. 诊断</h3>
+		    	<div class="two fields">
+					<div class="required field">
+						<label>龋损程度</label>
+						<select name="caries_degree" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="浅龋">浅龋</option>
+						<option value="中龋">中龋</option>
+						<option value="深龋">深龋</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>龋齿病种</label>
+						<select name="caries_type" class="ui dropdown">
+						<option value="无">无</option>
+						<option value="猛性龋">猛性龋</option>
+						<option value="隐匿性龋">隐匿性龋</option>
+						<option value="根面龋">根面龋</option>
+						<option value="继发龋">继发龋</option>
+						<option value="静止龋">静止龋</option>
+						<option value="酸蚀症">酸蚀症</option>
+						</select>
+					</div>
+				</div>
+
+				<h3 class="ui blue header">2. 治疗方案</h3>
+		    	<div class="two fields">
+					<div class="required field">
+						<label>治疗计划</label>
+						<select name="caries_degree" class="ui dropdown">
+						<option value="">选择</option>
+						<option value="后牙直接修复">后牙直接修复</option>
+						<option value="龋病微创修复技术">龋病微创修复技术</option>
+						<option value="前牙美容修复">前牙美容修复</option>
+						<option value="后牙嵌体修复">后牙嵌体修复</option>
+						</select>
+					</div>
+
+					<div class="required field">
+						<label>具体治疗方案，编写逻辑功能的时候实现</label>
+					</div>
+
+
+			    	<div class="invisible required field">
+			    		<label>后牙直接修复</label>
+			    		<select name="" class="ui dropdown">
+		                <option value="">选择</option>
+						<option value="后牙复合树脂修复">后牙复合树脂修复</option>
+						<option value="后牙银汞合金修复">后牙银汞合金修复</option>
+		              	</select>
+			    	</div>
+			    	<div class="invisible required field">
+			    		<label>龋病微创修复技术</label>
+			    		<select name="" class="ui dropdown">
+		                <option value="">选择</option>
+						<option value="ART修复">ART修复</option>
+						<option value="预防性充填">预防性充填</option>
+						<option value="玻璃离子过渡性修复">玻璃离子过渡性修复</option>
+						<option value="釉质成型术">釉质成型术</option>
+						<option value="微打磨术">微打磨术</option>
+		              	</select>
+			    	</div>
+
+			    	<div class="invisible required field">
+			    		<label>前牙美容修复</label>
+			    		<select name="" class="ui dropdown">
+		                <option value="">选择</option>
+						<option value="前牙无创美容修复">前牙无创美容修复</option>
+						<option value="前牙微创复合树脂分层修复">前牙微创复合树脂分层修复</option>
+						<option value="前牙微创CAD/CAM瓷贴面修复">前牙微创CAD/CAM瓷贴面修复</option>
+		              	</select>
+			    	</div>
+			    	<div class="invisible required field">
+			    		<label>后牙嵌体修复</label>
+			    		<select name="" class="ui dropdown">
+		                <option value="">选择</option>
+						<option value="复合树脂嵌体">复合树脂嵌体</option>
+						<option value="CAD/CAM瓷嵌体修复">CAD/CAM瓷嵌体修复</option>
+		              	</select>
+			    	</div>
+				</div>
+
+				<div class="ui hidden divider"></div>
+				<div class="ui right floated blue submit button">提交</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -7,6 +7,10 @@ body {
 	display: none;
 }
 
+.ui.container {
+	margin-bottom: 10em;
+}
+
 /*
 .main.container {
 	margin-bottom: 10em;
