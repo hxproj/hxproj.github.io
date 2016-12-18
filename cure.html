@@ -1029,6 +1029,9 @@
 											</select>
 										</div>
 									</div>
+									<h3 class="ui blue header">3. 处理剂清洁窝洞，彻底冲洗，吹干</h3>
+									<h3 class="ui blue header">4. 干燥隔湿，使用玻璃离子充填龋洞并涂上凡士林</h3>
+									<h3 class="ui blue header">5. 修形，调合，涂布凡士林</h3>
 									
 									<div class="ui fluid file button">
 										<span class="FileLabel">选择处置图片</span> 
@@ -1336,6 +1339,131 @@
 							<!--玻璃离子过渡性修复-->
 							<div class="ui tab" data-tab="minimalContext3">
 								<form class="ui form" id="">
+									<h3 class="ui blue header">1. 麻醉</h3>
+									<div class="three fields">
+										<div class="required field">
+											<label>麻醉药物</label>
+											<select name="anesthesia_medicine" class="ui dropdown">
+											<option value="">选择</option>
+											<option value="阿替卡因">阿替卡因</option>
+											<option value="利多卡因">利多卡因</option>
+											<option value="其它">其它</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>局部麻醉</label>
+											<select name="part_anesthesia" class="ui dropdown">
+											<option value="">选择</option>
+											<option value="阻滞麻醉">阻滞麻醉</option>
+											<option value="浸润麻醉">浸润麻醉</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>是否使用橡皮障</label>
+											<select name="rubber" class="ui dropdown">
+											<option value="未使用橡皮障">否</option>
+											<option value="使用橡皮障">是</option>
+											</select>
+										</div>
+									</div>
+
+									<h3 class="ui blue header">2. 备洞</h3>
+									<div class="three fields">
+										<div class="field">
+											<label>是否使用显微镜</label>
+											<select name="microscope" class="ui dropdown">
+											<option value="否">否</option>
+											<option value="显微镜下">是</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>去龋工具</label>
+											<select name="tools" class="ui dropdown">
+											<option value="">选择</option>
+											<option value="高速手机">高速手机</option>
+											<option value="低速手机">低速手机</option>
+											<option value="挖匙">挖匙</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>制备洞形位置</label>
+											<select name="shape_of_hole_display" class="ui dropdown" multiple="">
+											<option value="">选择</option>
+											<option value="唇面">唇面</option>
+											<option value="颊面">颊面</option>
+											<option value="腭面">腭面</option>
+											<option value="近中面">近中面</option>
+											<option value="远中面">远中面</option>
+											<option value="合面">合面</option>
+											<option value="根面">根面</option>
+											</select>
+										</div>
+									</div>
+									<div class="three fields">
+										<div class="required field">
+											<label>制备洞形深度(mm)</label>
+											<input type="text" name="depth_of_hole_display" placeholder="mm">
+										</div>
+									</div>
+
+									<h3 class="ui blue header">3. 成型</h3>
+									<div class="three fields">
+										<div class="required field">
+											<label>成形片</label>
+											<select name="is_piece" class="ui dropdown">
+											<option value="未使用成形片">不使用成形片</option>
+											<option value="Palodent豆瓣">Palodent豆瓣</option>
+											<option value="V3">V3</option>
+											<option value="其他">其他</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>楔子</label>
+											<select name="is_chock" class="ui dropdown">
+											<option value="未使用楔子">不使用楔子</option>
+											<option value="木楔">木楔</option>
+											<option value="Palodent V3">Palodent V3</option>
+											<option value="其他">其他</option>
+											</select>
+										</div>
+									</div>
+
+									<h3 class="ui blue header">4. 窝洞处理</h3>
+									<div class="three fields">
+										<div class="required field">
+											<label>窝洞消毒</label>
+											<select name="disinfect" class="ui dropdown">
+											<option value="无窝洞消毒">无窝洞消毒</option>
+											<option value="75%乙醇">75%乙醇</option>
+											<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
+											<option value="樟脑酚">樟脑酚</option>
+											<option value="洗必泰">洗必泰</option>
+											</select>
+										</div>
+										<div class="field">
+											<label>间接盖髓</label>
+											<select name="bottom" class="ui dropdown">
+											<option value="无">无</option>
+											<option value="自凝氢氧化钙制剂">自凝氢氧化钙制剂</option>
+											<option value="光敏氢氧化钙制剂">光敏氢氧化钙制剂</option>
+											</select>
+										</div>
+									</div>
+
+									<h3 class="ui blue header">5. 玻璃离子</h3>
+									<div class="three fields">
+										<div class="required field">
+											<label>玻璃离子充填</label>
+											<select name="disinfect" class="ui dropdown">
+											<option value="">选择</option>
+											<option value="Fuji Cem GC">Fuji Cem GC</option>
+											<option value="Fuji Plus GC">Fuji Plus GC</option>
+											<option value="Fuji I GC">Fuji I GC</option>
+											</select>
+										</div>
+									</div>
+
+									<h3 class="ui blue header">6. 修型，调合，涂凡士林</h3>
 									
 									<div class="ui fluid file button">
 										<span class="FileLabel">选择处置图片</span> 
@@ -1349,6 +1477,38 @@
 							<!--釉质成型术-->
 							<div class="ui tab" data-tab="minimalContext4">
 								<form class="ui form" id="">
+									<h4 class="ui blue header">1. 去龋</h4>
+									<div class="three fields">
+										<div class="field">
+											<label>是否使用显微镜</label>
+											<select name="microscope" class="ui dropdown">
+											<option value="否">否</option>
+											<option value="显微镜下">是</option>
+											</select>
+										</div>
+										<div class="required field">
+											<label>去龋方式</label>
+											<select name="tools" class="ui dropdown">
+											<option value="">选择</option>
+											<option value="高速牙钻法">高速牙钻法</option>
+											<option value="空气喷砂法">空气喷砂法</option>
+											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
+											<option value="超声去龋">超声去龋</option>
+											<option value="激光去龋">激光去龋</option>
+											<option value="手用器械伢典">手用器械伢典</option>
+											</select>
+										</div>
+									</div>
+									<h4 class="ui blue header">2. 无龋牙面及窝沟清洗</h4>
+									<div class="three fields">
+										<div class="field">
+											<label>低速手机</label>
+											<select name="microscope" class="ui dropdown">
+											<option value="锥形小毛刷">锥形小毛刷</option>
+											<option value="橡皮杯">橡皮杯</option>
+											</select>
+										</div>
+									</div>
 									
 									<div class="ui fluid file button">
 										<span class="FileLabel">选择处置图片</span> 
@@ -1362,6 +1522,26 @@
 							<!--微打磨术-->
 							<div class="ui tab" data-tab="minimalContext5">
 								<form class="ui form" id="">
+									<h4 class="ui blue header">1. 无龋牙面及窝沟清洗</h4>
+									<div class="three fields">
+										<div class="field">
+											<label>低速手机（清洗）</label>
+											<select name="microscope" class="ui dropdown">
+											<option value="锥形小毛刷">锥形小毛刷</option>
+											<option value="橡皮杯">橡皮杯</option>
+											</select>
+										</div>
+									</div>
+									<h4 class="ui blue header">2. 打磨</h4>
+									<div class="three fields">
+										<div class="field">
+											<label>低速手机（打磨）</label>
+											<select name="microscope" class="ui dropdown">
+											<option value="锥形小毛刷">锥形小毛刷</option>
+											<option value="橡皮杯">橡皮杯</option>
+											</select>
+										</div>
+									</div>
 									
 									<div class="ui fluid file button">
 										<span class="FileLabel">选择处置图片</span> 
