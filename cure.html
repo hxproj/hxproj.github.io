@@ -2258,13 +2258,14 @@
 <!--***********************************嵌体修复***************************************-->
 					<div class="ui tab clearing segment" data-tab="5">
 						<form class="ui form" id="">
-							<h4 class="ui blue header">1. 后牙嵌体修复类型</h4>
+							<h4 class="ui blue header">1. 嵌体修复材料类型</h4>
 							<div class="three fields">
 								<div class="field">
-									<label>后牙嵌体修复类型</label>
+									<label>嵌体材料类型</label>
 									<select name="" class="ui dropdown">
+									<option value="瓷嵌体">瓷嵌体</option>
 									<option value="复合树脂嵌体">复合树脂嵌体</option>
-									<option value="CAD/CAM瓷嵌体修复">CAD/CAM瓷嵌体修复</option>
+									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -2275,9 +2276,10 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="">选择</option>
+									<option value="无">无</option>
 									<option value="阿替卡因">阿替卡因</option>
 									<option value="利多卡因">利多卡因</option>
-									<option value="其它">其它</option>
+									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -2297,7 +2299,7 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">3. 备洞</h4>
+							<h4 class="ui blue header">3. 牙体预备</h4>
 							<div class="three fields">
 								<div class="field">
 									<label>是否使用显微镜</label>
@@ -2315,7 +2317,8 @@
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="手用器械伢典">手用器械伢典</option>
+									<option value="伢典">伢典</option>
+									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -2336,6 +2339,27 @@
 								<div class="required field">
 									<label>制备洞形深度(mm)</label>
 									<input type="text" name="depth_of_hole_display" placeholder="mm">
+								</div>
+								<div class="required field">
+									<label>钻针序列编号</label>
+									<select name="" class="ui dropdown">
+									<option value="">选择</option>
+									<option value="TF">TF</option>
+									<option value="TR">TR</option>
+									<option value="TC">TC</option>
+									<option value="RS">RS</option>
+									<option value="EX">EX</option>
+									<option value="CR">CR</option>
+									<option value="CD">CD</option>
+									<option value="SF">SF</option>
+									<option value="SO">SO</option>
+									<option value="SR">SR</option>
+									<option value="WR">WR</option>
+									<option value="BR">BR</option>
+									<option value="BC">BC</option>
+									<option value="DI">DI</option>
+									<option value="其他编号">其他编号</option>
+									</select>
 								</div>
 							</div>
 							<div class="three fields">
@@ -2555,36 +2579,13 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">4. 牙体预备</h4>
-							<div class="three fields">
-								<div class="field">
-									<label>钻针序列编号</label>
-									<select name="" class="ui dropdown">
-									<option value="TF">TF</option>
-									<option value="TR">TR</option>
-									<option value="TC">TC</option>
-									<option value="RS">RS</option>
-									<option value="EX">EX</option>
-									<option value="CR">CR</option>
-									<option value="CD">CD</option>
-									<option value="SF">SF</option>
-									<option value="SO">SO</option>
-									<option value="SR">SR</option>
-									<option value="WR">WR</option>
-									<option value="BR">BR</option>
-									<option value="BC">BC</option>
-									<option value="DI">DI</option>
-									<option value="其他编号">其他编号</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">5. 取工作模</h4>
+							<h4 class="ui blue header">5. 取模材料/方式</h4>
 							<div class="three fields">
 								<div class="field">
 									<label>排龈</label>
 									<select name="" class="ui dropdown">
 									<option value="无">无</option>
+									<option value="排龈膏">排龈膏</option>
 									<option value="排龈线型号0">排龈线型号0</option>
 									<option value="排龈线型号00">排龈线型号00</option>
 									<option value="排龈线型号000">排龈线型号000</option>
@@ -2603,7 +2604,7 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">6. 粘接</h4>
+							<h4 class="ui blue header">6. 临时修复体粘接</h4>
 							<div class="three fields">
 								<div class="field">
 									<label>粘接剂</label>
@@ -2616,7 +2617,7 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">7. 复诊</h4>
+							<h4 class="ui blue header">7. 复诊戴牙</h4>
 							<div class="three fields">
 								<div class="field">
 									<label>氢氟酸</label>
