@@ -70,7 +70,7 @@
 				<div class="ui header">1. 主诉</div>
 			    <div class="three fields">
 			    	<div class="field">
-			    		<label>牙齿部位</label>
+			    		<label>患牙位置</label>
 			    		<select name="tooth_location" class="ui dropdown">
 		                <option value="">选择</option>
 						<option value="上前牙">上前牙</option>
@@ -102,10 +102,12 @@
 		                <option value="咬合痛">咬合痛</option>
 		                <option value="牙体缺损">牙体缺损</option>
 		                <option value="要求补牙">要求补牙</option>
+		                <option value="外伤">外伤</option>
+		                <option value="充填体缺损">充填体缺损</option>
 		              	</select>
 			    	</div>
 			    	<div class="field">
-			    		<label>病发时间</label>
+			    		<label>病程时间</label>
 			    		<div class="ui disabled input">
 			    			<input type="text" name="time_of_occurrence"></input>
 			    		</div>
@@ -121,7 +123,7 @@
 				<div id="PresentIllnessContext">
 			  		<div class="ui blue pointing fluid two item menu">
 						<a class="active item" data-tab="1">原发性龋病</a>
-						<a class="item" data-tab="2">有治疗史龋病</a>
+						<a class="item" data-tab="2">继发性龋病</a>
 			  		</div>
 
 			  		<div class="ui tab clearing basic segment active" data-tab="1">
@@ -152,7 +154,7 @@
 							</div>
 							<div class="three fields">
 						    	<div class="required field">
-						    		<label>有无冷热敏感</label>
+						    		<label>有无牙齿敏感</label>
 						    		<select name="is_sensitive_cold_heat" class="ui dropdown">
 						            <option value="无冷热敏感">无</option>
 						            <option value="有冷热敏感">有</option>
@@ -206,7 +208,7 @@
 									</div>
 								</div>
 						    	<div class="required field">
-						    		<label>充填体类型</label>
+						    		<label>修复体类型</label>
 						    		<select name="fill_type" class="ui dropdown">
 					                <option value="">选择</option>
 					                <option value="树脂充填体">树脂充填体</option>
@@ -220,14 +222,16 @@
 					              	</select>
 						    	</div>
 						    	<div class="required field">
-						    		<label>充填体状况</label>
+						    		<label>修复体状况</label>
 						    		<select name="fill_state" class="ui dropdown">
 					                <option value="">选择</option>
-					                <option value="今充填体完好">完好</option>
-					                <option value="今充填体折裂">折裂</option>
-					                <option value="今充填体脱落">脱落</option>
-					                <option value="今充填体缺损">缺损</option>
-					                <option value="今充填体变色">变色</option>
+					                <option value="今修复体完好">完好</option>
+					                <option value="今修复体折裂">折裂</option>
+					                <option value="今修复体脱落">脱落</option>
+					                <option value="今修复体缺损">缺损</option>
+					                <option value="今修复体变色">变色</option>
+					                <option value="今修复体松动">松动</option>
+					                <option value="今修复体不合适">不合适</option>
 					              	</select>
 						    	</div>
 							</div>
@@ -247,7 +251,7 @@
 						          	</select>
 								</div>
 						    	<div class="required field">
-						    		<label>有无冷热敏感</label>
+						    		<label>有无牙齿敏感</label>
 						    		<select name="is_sensitive_cold_heat" class="ui dropdown">
 						            <option value="无冷热敏感">无</option>
 						            <option value="有冷热敏感">有</option>
@@ -291,6 +295,11 @@
 			  		</div>
 		  		</div>
 
+				<div class="field">
+					<label>补充现病史</label>
+					<input type="text" name="time_of_occurrence"></input>
+				</div>
+
 				<div class="ui header">3. 个人史</div>
 				<h3 class="ui blue header">饮食习惯</h3>
 		    	<div class="three fields">
@@ -304,7 +313,7 @@
 			          	</select>
 					</div>
 			    	<div class="required field">
-			    		<label>食用频率</label>
+			    		<label>甜食，蛋白质类食物食用频率</label>
 			    		<select name="frequency_of_sweet" class="ui dropdown">
 			            <option value="食用频率<1次/天"><1次/天</option>
 			            <option value="食用频率2次/天">2次/天</option>
@@ -315,20 +324,20 @@
 			          	</select>
 					</div>
 			    	<div class="required field">
-			    		<label>正餐间进食频率</label>
+			    		<label>日进食频率</label>
 			    		<select name="frequency_of_meal" class="ui dropdown">
-			            <option value="正餐间进食频率≤1次">≤1次</option>
-			            <option value="正餐间进食频率1~2次">1＜频率≤2次</option>
-			            <option value="正餐间进食频率≥3次">≥3次</option>
+			            <option value="日进食频率≤1次">≤1次</option>
+			            <option value="日进食频率1~2次">1＜频率≤2次</option>
+			            <option value="日进食频率≥3次">≥3次</option>
 			          	</select>
 					</div>
 				</div>
 		    	<div class="three fields">
 			    	<div class="required field">
-			    		<label>正餐间进食是否含碳酸</label>
+			    		<label>进食是否含碳酸</label>
 			    		<select name="is_carbonic_acid" class="ui dropdown">
-			            <option value="不含碳酸">否</option>
-			            <option value="含碳酸">是</option>
+			            <option value="进食不含碳酸">否</option>
+			            <option value="进食含碳酸">是</option>
 			          	</select>
 					</div>
 				</div>
@@ -345,6 +354,7 @@
 			    	<div class="required field">
 			    		<label>每天刷牙次数</label>
 			    		<select name="times_of_teeth_brush" class="ui dropdown">
+			            <option value="每天刷牙小于1次">小于1次</option>
 			            <option value="每天刷牙1次">1次</option>
 			            <option value="每天刷牙2次">2次</option>
 			            <option value="每天刷牙3次">3次</option>
@@ -395,17 +405,21 @@
 
 				<div class="three fields">
 			    	<div class="required field">
-			    		<label>口腔定期是否检查</label>
+			    		<label>是否定期口腔检查</label>
 			    		<select name="is_cavity_examination" class="ui dropdown">
-			            <option value="口腔未定期检查">否</option>
-			            <option value="口腔定期检查">是</option>
+			            <option value="未定期口腔检查">否</option>
+			            <option value="定期口腔检查小于1次/年">小于1次/年</option>
+			            <option value="定期口腔检查2次/年">2次/年</option>
+			            <option value="定期口腔检查大于2次/年">大于2次/年</option>
 			          	</select>
 					</div>
 			    	<div class="required field">
 			    		<label>是否定期牙周洁治</label>
 			    		<select name="is_periodontal_treatment" class="ui dropdown">
-			            <option value="未定期进行牙周洁治">否</option>
-			            <option value="定期进行牙周洁治">是</option>
+			            <option value="未定期牙周洁治">否</option>
+			            <option value="定期牙周洁治小于1次/年">小于1次/年</option>
+			            <option value="定期牙周洁治2次/年">2次/年</option>
+			            <option value="定期牙周洁治大于2次/年">大于2次/年</option>
 			          	</select>
 					</div>
 		    	</div>
@@ -420,7 +434,7 @@
 			          	</select>
 					</div>
 			    	<div class="field">
-			    		<label>唾液腺疾病</label>
+			    		<label>唾液腺疾病或其他系统性疾病</label>
 			    		<input type="text" name="salivary_gland_disease_display" placeholder="输入病名">
 					</div>
 			    	<div class="field">
@@ -428,6 +442,29 @@
 			    		<input type="text" name="consciously_reduce_salivary_flow_display" placeholder="输入时间，请记得输入时间单位喔~~">
 					</div>
 		    	</div>
+				<div class="three fields">
+					<div class="required field">
+						<label>牙齿发育情况</label>
+						<select name="development_of_the_situation" class="ui dropdown">
+						<option value="无异常情况">无异常情况</option>
+						<option value="釉质发育不全">釉质发育不全</option>
+						<option value="牙本质发育不全">牙本质发育不全</option>
+						<option value="氟牙症">氟牙症</option>
+						<option value="四环素牙">四环素牙</option>
+						<option value="磨耗牙">磨耗牙</option>
+						<option value="磨损牙">磨损牙</option>
+						<option value="牙异位萌出/阻生">牙异位萌出/阻生</option>
+						<option value="其它">其它</option>
+						</select>
+					</div>
+			    	<div class="required field">
+			    		<label>是否有放射治疗史</label>
+			    		<select name="sjogren_syndrome" class="ui dropdown">
+			            <option value="无放射治疗史">否</option>
+			            <option value="有放射治疗史">是</option>
+			          	</select>
+					</div>
+				</div>
 
 				<h3 class="ui blue header">DMFT/DMFS</h3>
 				<div class="three fields">
@@ -441,38 +478,8 @@
 					</div>
 				</div>
 
-				<h3 class="ui blue header">牙齿发育情况</h3>
+				<h3 class="ui blue header">患牙其他治疗情况</h3>
 				<div class="three fields">
-					<div class="required field">
-						<label>牙齿发育情况</label>
-						<select name="development_of_the_situation" class="ui dropdown">
-						<option value="无异常情况">无异常情况</option>
-						<option value="釉质发育不全">釉质发育不全</option>
-						<option value="牙本质发育不全">牙本质发育不全</option>
-						<option value="氟牙症">氟牙症</option>
-						<option value="四环素牙">四环素牙</option>
-						<option value="磨耗牙">磨耗牙</option>
-						<option value="其它">其它</option>
-						</select>
-					</div>
-				</div>
-
-				<h3 class="ui blue header">患牙修复治疗情况</h3>
-				<div class="three fields">
-					<div class="required field">
-						<label>患牙修复治疗情况</label>
-						<select name="treatment" class="ui dropdown">
-						<option value="患牙没有做过修复治疗">没有做过修复治疗</option>
-						<option value="患牙曾行树脂充填体修复">树脂充填体</option>
-						<option value="患牙曾行玻璃离子充填体修复">玻璃离子充填体</option>
-						<option value="患牙曾行银汞合金充填体修复">银汞合金充填体</option>
-						<option value="患牙曾行烤瓷冠修复">烤瓷冠</option>
-						<option value="患牙曾行金属冠修复">金属冠</option>
-						<option value="患牙曾行瓷嵌体修复">瓷嵌体</option>
-						<option value="患牙曾行树脂嵌体修复">树脂嵌体</option>
-						<option value="其它">其它</option>
-						</select>
-					</div>
 					<div class="required field">
 						<label>有无正畸治疗史</label>
 						<select name="orthodontic" class="ui dropdown">
@@ -480,6 +487,10 @@
 						<option value="有正畸治疗史">有</option>
 						</select>
 					</div>
+				</div>
+				<div class="field">
+					<label>患牙补充说明</label>
+					<input type="text" name="time_of_occurrence"></input>
 				</div>
 
 				<div class="ui hidden divider"></div>

@@ -75,7 +75,7 @@
 				</div>
 				<div class="three fields">
 					<div class="required field">
-						<label>龋坏累及牙面</label>
+						<label>龋坏累及牙面（不连接，比如“唇合面”，应“唇面合面”）</label>
 						<select name="caries_tired_display" class="ui dropdown" multiple="">
 						<option value="">选择</option>
 						<option value="唇">唇面</option>
@@ -84,6 +84,7 @@
 						<option value="颊">颊面</option>
 						<option value="近中">近中面</option>
 						<option value="远中">远中面</option>
+						<option value="根">根面</option>
 						<option value="合">合面</option>
 						</select>
 					</div>
@@ -91,9 +92,10 @@
 						<label>深度</label>
 						<select name="depth" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="浅龋">浅龋</option>
-						<option value="中龋">中龋</option>
-						<option value="深龋">深龋</option>
+						<option value="釉质层">釉质层</option>
+						<option value="本质浅层">本质浅层</option>
+						<option value="本质深层">本质深层</option>
+						<option value="近髓">近髓</option>
 						</select>
 					</div>
 					<div class="required field">
@@ -122,6 +124,7 @@
 						<option value="色正常">正常</option>
 						<option value="色棕褐">棕褐</option>
 						<option value="色黑">黑</option>
+						<option value="白垩色">白垩色</option>
 						</select>
 					</div>
 					<div class="required field">
@@ -181,8 +184,8 @@
 						</select>
 					</div>
 					<div class="field">
-						<label>牙齿活力值</label>
-						<input type="text" name="vitality_value_of_teeth" placeholder="填写牙齿活力值">
+						<label>牙髓电活力值</label>
+						<input type="text" name="vitality_value_of_teeth" placeholder="填写牙髓电活力值">
 					</div>
 				</div>
 
@@ -284,9 +287,9 @@
 						<label>牙齿松动度</label>
 						<select name="mobility" class="ui dropdown">
 						<option value="牙齿松动度正常">正常</option>
-						<option value="牙齿松动度Ⅰ级">Ⅰ级</option>
-						<option value="牙齿松动度Ⅱ级">Ⅱ级</option>
-						<option value="牙齿松动度Ⅲ级">Ⅲ级</option>
+						<option value="牙齿松动度Ⅰ度">Ⅰ度</option>
+						<option value="牙齿松动度Ⅱ度">Ⅱ度</option>
+						<option value="牙齿松动度Ⅲ度">Ⅲ度</option>
 						</select>
 					</div>
 				</div>
@@ -348,7 +351,7 @@
 						<label>程度</label>
 						<select name="X_Ray_depth" class="ui dropdown">
 						<option value="">选择</option>
-						<option value="釉质">釉质</option>
+						<option value="釉质层">釉质层</option>
 						<option value="本质浅层">本质浅层</option>
 						<option value="本质深层">本质深层</option>
 						<option value="近髓">近髓</option>
@@ -371,6 +374,10 @@
 					<div class="field">
 						<label>咬翼片表现</label>
 						<input type="text" name="piece" placeholder="咬翼片表现">
+					</div>
+					<div class="field">
+						<label>其他表现</label>
+						<input type="text" name="piece" placeholder="其他表现">
 					</div>
 				</div>
 
