@@ -284,7 +284,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -365,7 +366,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -901,7 +903,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -1263,7 +1266,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -1743,7 +1747,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -2068,7 +2073,8 @@
 											<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 											<option value="超声去龋">超声去龋</option>
 											<option value="激光去龋">激光去龋</option>
-											<option value="手用器械伢典">手用器械伢典</option>
+											<option value="伢典">伢典</option>
+											<option value="其他">其他</option>
 											</select>
 										</div>
 										<div class="required field">
@@ -2271,7 +2277,6 @@
 								<div class="required field">
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
-									<option value="">选择</option>
 									<option value="无">无</option>
 									<option value="阿替卡因">阿替卡因</option>
 									<option value="利多卡因">利多卡因</option>
@@ -2581,17 +2586,16 @@
 							<div class="three fields">
 								<div class="field">
 									<label>排龈</label>
-									<select name="" class="ui dropdown">
-									<option value="无">无</option>
+									<select name="" class="ui dropdown" multiple="">
 									<option value="排龈膏">排龈膏</option>
 									<option value="排龈线型号0">排龈线型号0</option>
 									<option value="排龈线型号00">排龈线型号00</option>
 									<option value="排龈线型号000">排龈线型号000</option>
-									<option value="其它">EX</option>
+									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="field">
-									<label>取模</label>
+									<label>取模材料/方式</label>
 									<select name="" class="ui dropdown">
 									<option value="藻酸盐">藻酸盐</option>
 									<option value="琼脂">琼脂</option>
@@ -2618,7 +2622,7 @@
 							<h4 class="ui blue header">7. 复诊戴牙</h4>
 							<div class="three fields">
 								<div class="field">
-									<label>氢氟酸</label>
+									<label>粘接剂品牌</label>
 									<select name="" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="登士柏">登士柏</option>
@@ -2628,9 +2632,9 @@
 									</select>
 								</div>
 								<div class="field">
-									<label>酸蚀修复体时间</label>
+									<label>氢氟酸酸蚀修复体时间</label>
 									<select name="" class="ui dropdown">
-									<option value="">选择</option>
+									<option value="无">无</option>
 									<option value="25s">25s</option>
 									<option value="30s">30s</option>
 									<option value="40s">40s</option>
@@ -2654,16 +2658,6 @@
 							</div>
 							<div class="three fields">
 								<div class="field">
-									<label>粘接剂品牌</label>
-									<select name="" class="ui dropdown">
-									<option value="">选择</option>
-									<option value="登士柏">登士柏</option>
-									<option value="3M">3M</option>
-									<option value="松风">松风</option>
-									<option value="其他">其他品牌</option>
-									</select>
-								</div>
-								<div class="field">
 									<label>粘接剂成分</label>
 									<select name="" class="ui dropdown">
 									<option value="">选择</option>
@@ -2682,11 +2676,42 @@
 									<label>光照时间</label>
 									<select name="" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="2s">2s</option>
-									<option value="3s">3s</option>
-									<option value="4s">4s</option>
-									<option value="5s">5s</option>
-									<option value="6s">6s</option>
+									<option value="25s">25s</option>
+									<option value="30s">30s</option>
+									<option value="40s">40s</option>
+									<option value="50s">50s</option>
+									<option value="60s">60s</option>
+									<option value="其他">其他</option>
+									</select>
+								</div>
+								<div class="field">
+									<label>调合</label>
+									<select name="" class="ui dropdown">
+									<option value="">选择</option>
+									<option value="TF">TF</option>
+									<option value="TR">TR</option>
+									<option value="TC">TC</option>
+									<option value="RS">RS</option>
+									<option value="EX">EX</option>
+									<option value="CR">CR</option>
+									<option value="CD">CD</option>
+									<option value="SF">SF</option>
+									<option value="SO">SO</option>
+									<option value="SR">SR</option>
+									<option value="WR">WR</option>
+									<option value="BR">BR</option>
+									<option value="BC">BC</option>
+									<option value="DI">DI</option>
+									<option value="其他">其他</option>
+									</select>
+								</div>
+							</div>
+							<div class="three fields">
+								<div class="field">
+									<label>抛光</label>
+									<select name="" class="ui dropdown">
+									<option value="">选择</option>
+									<option value="彩虹抛光系统">彩虹抛光系统</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
