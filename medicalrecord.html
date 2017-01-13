@@ -12,6 +12,7 @@
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/medicalrecord.js"></script>
 
   	<style type="text/css">
   		.ui.labels a.label {
@@ -48,11 +49,64 @@
   			<div class="ui divider"></div>
 			<div class="ui teal labeled icon disabled small button">返回<i class="left angle icon"></i></div>
 			<div class="ui teal labeled icon disabled small button" data-tooltip="查看所有牙位详细信息">预览<i class="search icon"></i></div>
-			<div class="ui teal labeled icon small button" data-tooltip="添加牙位">牙位<i class="add icon"></i></div>
+			<div class="ui teal labeled icon small button" data-tooltip="添加牙位" id="ID_AddToothLocation">牙位<i class="add icon"></i></div>
+		</div>
+
+		<div class="ui toothlocationrecord raised clearing segment">
+			<a class="ui right corner delete_tooth_record label">
+				<i class="delete icon"></i>
+			</a>
+			<div class="ui large center aligned header" type="tooth_location">牙位</div>
+
+			<div class="ui divider"></div>
+			<div class="ui hidden divider"></div>
+
+			<!--初诊-->
+			<div class="ui labels">
+				<div class="ui right pointing basic label">初诊(2016-11-01)<a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
+				<a class="ui basic label" href="illnesshistory.html">主诉&病史</a>
+				<a class="ui basic label" href="mouthexamination.html">口腔检查</a>
+				<a class="ui basic label" href="riskevaluation.html">风险评估</a>
+				<a class="ui basic label" href="diagnose.html">诊断及治疗计划</a>
+				<a class="ui basic label" href="difficultyassessment.html">难度评估</a>
+				<a class="ui basic label" href="cure.html">处置</a>
+				<a class="ui basic label" href="manage.html">预后管理</a>
+			</div>
+
+			<!--不处置复诊-->
+			<div class="ui labels">
+				<div class="ui right pointing basic label"><span>不处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
+				<a class="ui basic label" href="usphs.html">USPHS评估</a>
+				<a class="ui basic label">风险评估</a>
+				<a class="ui basic label">预后管理</a>
+				<a class="ui basic label"><i class="trash icon"></i>删除</a>
+			</div>
+
+			<!--处置复诊-->
+			<div class="ui labels">
+				<div class="ui right pointing basic label"><span>处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
+				<a class="ui basic label">USPHS评估</a>
+				<a class="ui basic label">口腔检查</a>
+				<a class="ui basic label">风险评估</a>
+				<a class="ui basic label">诊断及治疗计划</a>
+				<a class="ui basic label">难度评估</a>
+				<a class="ui basic label">处置</a>
+				<a class="ui basic label">预后管理</a>
+				<a class="ui basic label"><i class="trash icon"></i>删除</a>
+			</div>
+
+			<div class="ui hidden after divider"></div>
+
+
+
+			<div class="ui right floated mini buttons">
+				<div class="ui button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
+				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
+			</div>
 		</div>
 
 		<div class="ui raised clearing segment">
-			<a class="ui right corner label">
+			<a class="ui right corner delete_tooth_record label">
 				<i class="delete icon"></i>
 			</a>
 			<div class="ui large center aligned header">35牙</div>
@@ -76,7 +130,7 @@
 		</div>
 
 		<div class="ui clearing raised segment">
-			<a class="ui right corner label">
+			<a class="ui right corner delete_tooth_record label">
 				<i class="delete icon"></i>
 			</a>
 			<div class="ui large center aligned header">13牙深龋</div>
@@ -118,7 +172,173 @@
 				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
 			</div>
 		</div>
-
 	</div>
+
+
+	<!--************************* modal *************************-->
+	<!--添加牙位及初诊-->
+	<div class="ui coupled modal" id="ID_AddToothLocationModal">
+		<div class="header">添加牙位</div>
+		<div class="content">
+			<div class="description">
+				<form class="ui clearing form">
+					<div class="two fields">
+				    	<div class="field">
+				    		<label>牙位</label>
+				    		<div class="ui disabled input" id="ID_SelectToothLocation">
+				    			<input type="text" name="tooth_location"></input>
+				    		</div>
+				    	</div>
+				    	<div class="field">
+				    		<label>初诊医生</label>
+				    		<input type="text" name="doctor" placeholder="输入初诊医生姓名">
+				    	</div>
+					</div>
+		    	</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui primary approve right labeled icon button">
+				添加<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui coupled modal" id="ID_SelectToothLocationModal">
+		<div class="content">
+		    <div class="description">
+				<div id="context">
+					<div class="ui blue pointing fluid two item menu">
+						<a class="active item" data-tab="1">恒牙列</a>
+						<a class="item" data-tab="2">乳牙列</a>
+					</div>
+
+					<div class="ui tab clearing basic segment active" data-tab="1">
+						<div class="ui equal width celled center aligned grid">
+							<div class="row">
+								<div class="column">
+						    		<div class="ui large labels">
+							    		<a class="ui label" val="18">18</a>
+							    		<a class="ui label" val="17">17</a>
+							    		<a class="ui label" val="16">16</a>
+							    		<a class="ui label" val="15">15</a>
+							    		<a class="ui label" val="14">14</a>
+							    		<a class="ui label" val="13">13</a>
+							    		<a class="ui label" val="12">12</a>
+							    		<a class="ui label" val="11">11</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label" val="21">21</a>
+							    		<a class="ui label" val="22">22</a>
+							    		<a class="ui label" val="23">23</a>
+							    		<a class="ui label" val="24">24</a>
+							    		<a class="ui label" val="25">25</a>
+							    		<a class="ui label" val="26">26</a>
+							    		<a class="ui label" val="27">27</a>
+							    		<a class="ui label" val="28">28</a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="column">
+						    		<div class="ui large labels">
+							    		<a class="ui label" val="48">48</a>
+							    		<a class="ui label" val="47">47</a>
+							    		<a class="ui label" val="46">46</a>
+							    		<a class="ui label" val="45">45</a>
+							    		<a class="ui label" val="44">44</a>
+							    		<a class="ui label" val="43">43</a>
+							    		<a class="ui label" val="42">42</a>
+							    		<a class="ui label" val="41">41</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label" val="31">31</a>
+							    		<a class="ui label" val="32">32</a>
+							    		<a class="ui label" val="33">33</a>
+							    		<a class="ui label" val="34">34</a>
+							    		<a class="ui label" val="35">35</a>
+							    		<a class="ui label" val="36">36</a>
+							    		<a class="ui label" val="37">37</a>
+							    		<a class="ui label" val="38">38</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ui tab clearing basic segment" data-tab="2">
+						<div class="ui equal width celled center aligned grid">
+							<div class="row">
+								<div class="column">
+						    		<div class="ui large labels">
+							    		<a class="ui label" val="55">55</a>
+							    		<a class="ui label" val="54">54</a>
+							    		<a class="ui label" val="53">53</a>
+							    		<a class="ui label" val="52">52</a>
+							    		<a class="ui label" val="51">51</a>
+							    	</div>
+						    	</div>
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label" val="61">61</a>
+							    		<a class="ui label" val="62">62</a>
+							    		<a class="ui label" val="63">63</a>
+							    		<a class="ui label" val="64">64</a>
+							    		<a class="ui label" val="65">65</a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="column">
+							    	<div class="ui large labels">
+							    		<a class="ui label" val="81">81</a>
+							    		<a class="ui label" val="82">82</a>
+							    		<a class="ui label" val="83">83</a>
+							    		<a class="ui label" val="84">84</a>
+							    		<a class="ui label" val="85">85</a>
+									</div>
+						    	</div>
+								<div class="column">
+						    		<div class="ui large labels">
+							    		<a class="ui label" val="75">75</a>
+							    		<a class="ui label" val="74">74</a>
+							    		<a class="ui label" val="73">73</a>
+							    		<a class="ui label" val="72">72</a>
+							    		<a class="ui label" val="71">71</a>
+							    	</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui primary approve right labeled icon button">
+				确定<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui small modal" id="ID_DeleteModal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
