@@ -35,20 +35,6 @@ $(document).ready(function(){
 			$('#ID_SelectToothLocation input[name=tooth_type]').val(ToothTypeValue);
 		}
 	});
-
-
-	// **************************************************
-	// 删除牙位
-	$('.corner.delete_tooth_record').click(function(){
-		$DeleteToothRecord = $(this).parent();
-		$('#ID_DeleteModal').modal({
-			onApprove : function(){
-				$DeleteToothRecord.remove();
-			}
-		}).modal('show');
-	});
-
-
 	// **************************************************
 	// 向服务器提交牙位数据
 	$('#ID_AddToothLocationModal form').form({
@@ -87,7 +73,68 @@ $(document).ready(function(){
         	return false;
 		}
 	});
+	// **************************************************
+	// 删除牙位
+	$('.corner.delete_tooth_record').click(function(){
+		$DeleteToothRecord = $(this).parent();
+		$('#ID_DeleteModal').modal({
+			onApprove : function(){
+				$DeleteToothRecord.remove();
+			}
+		}).modal('show');
+	});
 
+
+	// **************************************************
+	// 添加复诊（处置or非处置）
+	$('.add_re_examination.button').click(function(){
+
+		$ToothLocationRecord = $(this).parents('.toothlocationrecord');
+
+		$('#ID_ReExaminationModal').modal({
+			closable  : false,
+			onApprove : function(){
+
+				$('#ID_ReExaminationModal form').form({
+					onSuccess : function(){
+
+						// FIXME: submit the tooth
+						$('#ID_ReExaminationModal').modal('hide');
+
+						showReExamination({
+							id             : 6,  // FIXME: should form server
+							handle         : $(this).form('get value', 'is_handle') == "是" ? true : false,
+							doctor         : $(this).form('get value', 'doctor'),
+							afterSelector  : $ToothLocationRecord.find('.after.divider')
+						});
+
+			        	return false;
+					}
+				}).submit();
+
+				return false;
+			}
+		}).modal('show');
+	});
+
+	// **************************************************
+	// 向服务器提交复诊数据
+	/*
+	$('#ID_ReExaminationModal form').form({
+		onSuccess : function(){
+
+			// FIXME: submit the tooth
+			$('#ID_ReExaminationModal').modal('hide');
+
+			showReExamination({
+				id    : 6,  // FIXME: should form server
+				doctor: $(this).form('get value', 'doctor'),
+			});
+
+        	return false;
+		}
+	});
+	*/
 
 	// **************************************************
 	// Function
@@ -103,4 +150,15 @@ $(document).ready(function(){
 		$ToothLocationRecord.after($ClonedToothLocationRecord);
 	}
 
+	function showReExamination(Data) {
+		var $ReExaminationSelector;
+		Data.handle ? $ReExaminationSelector = $('.invisible.handle.labels') : $ReExaminationSelector = $('.invisible.nohandle.labels');
+
+		var $ClonedReExamination = $ReExaminationSelector.clone(true).removeClass('invisible');
+		$ClonedReExamination.attr("re_examination_id", Data.id);
+		$ClonedReExamination.find('span[type=doctor]').text(Data.doctor);
+		$ClonedReExamination.after("<div class='ui hidden divider'></div>");
+
+		Data.afterSelector.after($ClonedReExamination);
+	}
 });

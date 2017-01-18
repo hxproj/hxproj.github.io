@@ -52,7 +52,30 @@
 			<div class="ui teal labeled icon small button" data-tooltip="添加牙位" id="ID_AddToothLocation">牙位<i class="add icon"></i></div>
 		</div>
 
-		<div class="ui toothlocationrecord raised clearing segment">
+
+		<!--不处置复诊-->
+		<div class="ui invisible nohandle labels">
+			<div class="ui right pointing basic label"><span>不处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
+			<a class="ui basic label" href="usphs.html">USPHS评估</a>
+			<a class="ui basic label">风险评估</a>
+			<a class="ui basic label">预后管理</a>
+			<a class="ui basic label"><i class="trash icon"></i>删除</a>
+		</div>
+
+		<!--处置复诊-->
+		<div class="ui invisible handle labels">
+			<div class="ui right pointing basic label"><span>处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
+			<a class="ui basic label">USPHS评估</a>
+			<a class="ui basic label">口腔检查</a>
+			<a class="ui basic label">风险评估</a>
+			<a class="ui basic label">诊断及治疗计划</a>
+			<a class="ui basic label">难度评估</a>
+			<a class="ui basic label">处置</a>
+			<a class="ui basic label">预后管理</a>
+			<a class="ui basic label"><i class="trash icon"></i>删除</a>
+		</div>
+
+		<div class="ui invisible toothlocationrecord raised clearing segment">
 			<a class="ui right corner delete_tooth_record label">
 				<i class="delete icon"></i>
 			</a>
@@ -73,39 +96,15 @@
 				<a class="ui basic label" href="manage.html">预后管理</a>
 			</div>
 
-			<!--不处置复诊-->
-			<div class="ui labels">
-				<div class="ui right pointing basic label"><span>不处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
-				<a class="ui basic label" href="usphs.html">USPHS评估</a>
-				<a class="ui basic label">风险评估</a>
-				<a class="ui basic label">预后管理</a>
-				<a class="ui basic label"><i class="trash icon"></i>删除</a>
-			</div>
-
-			<!--处置复诊-->
-			<div class="ui labels">
-				<div class="ui right pointing basic label"><span>处置复诊</span><a class="detail"><i class="doctor icon"></i><span type="doctor">医生</span></a></div>
-				<a class="ui basic label">USPHS评估</a>
-				<a class="ui basic label">口腔检查</a>
-				<a class="ui basic label">风险评估</a>
-				<a class="ui basic label">诊断及治疗计划</a>
-				<a class="ui basic label">难度评估</a>
-				<a class="ui basic label">处置</a>
-				<a class="ui basic label">预后管理</a>
-				<a class="ui basic label"><i class="trash icon"></i>删除</a>
-			</div>
-
 			<div class="ui hidden after divider"></div>
 
-
-
 			<div class="ui right floated mini buttons">
-				<div class="ui button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
+				<div class="ui add_re_examination button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
 				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
 			</div>
 		</div>
 
-		<div class="ui raised clearing segment">
+		<div class="ui toothlocationrecord raised clearing segment">
 			<a class="ui right corner delete_tooth_record label">
 				<i class="delete icon"></i>
 			</a>
@@ -122,9 +121,11 @@
 				<a class="ui basic blue label" href="cure.html">处置</a>
 				<a class="ui basic blue label" href="manage.html">预后管理</a>
 			</div>
+			
+			<div class="ui hidden after divider"></div>
 
 			<div class="ui right floated mini buttons">
-				<div class="ui button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
+				<div class="ui add_re_examination button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
 				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
 			</div>
 		</div>
@@ -146,7 +147,8 @@
 				<a class="ui basic blue label" href="cure.html">处置</a>
 				<a class="ui basic blue label" href="manage.html">预后管理</a>
 			</div>
-			<div class="ui hidden divider"></div>
+			<div class="ui hidden after divider"></div>
+
 			<div class="ui labels">
 				<div class="ui right pointing basic label">复诊(2016-11-11)<a class="detail"><i class="doctor icon"></i>程磊</a></div>
 				<a class="ui basic blue label" href="usphs.html">USPHS评估</a>
@@ -154,7 +156,8 @@
 				<a class="ui basic blue label">预后管理</a>
 				<a class="ui basic label"><i class="trash icon"></i>删除</a>
 			</div>
-				<div class="ui hidden divider"></div>
+			<div class="ui hidden divider"></div>
+			
 			<div class="ui labels">
 				<div class="ui right pointing basic label">复诊(2016-11-13)<a class="detail"><i class="doctor icon"></i>周雯</a></div>
 				<a class="ui basic label">USPHS评估</a>
@@ -168,7 +171,7 @@
 			</div>
 
 			<div class="ui right floated mini buttons">
-				<div class="ui button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
+				<div class="ui add_re_examination button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
 				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
 			</div>
 		</div>
@@ -322,6 +325,37 @@
 			<div class="ui orange deny button">取消</div>
 			<div class="ui primary approve right labeled icon button">
 				确定<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
+
+	<!--添加复诊-->
+	<div class="ui modal" id="ID_ReExaminationModal">
+		<div class="header">添加复诊</div>
+		<div class="content">
+			<div class="description">
+				<form class="ui clearing form">
+					<div class="two fields">
+						<div class="required field">
+							<label>是否处置</label>
+							<select name="is_handle" class="ui dropdown">
+							<option value="否">否</option>
+							<option value="是">是</option>
+							</select>
+						</div>
+				    	<div class="field">
+				    		<label>复诊医生</label>
+				    		<input type="text" name="doctor" placeholder="输入复诊医生姓名">
+				    	</div>
+					</div>
+		    	</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui primary approve right labeled icon button">
+				添加<i class="checkmark icon"></i>
 			</div>
 		</div>
 	</div>
