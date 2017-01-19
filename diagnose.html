@@ -9,10 +9,13 @@
 	<link rel="SHORTCUT ICON" href="dist/media/logo.png">
  	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/file.css">
  	
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/file.js"></script>
+  	<script src="dist/javascript/diagnose.js"></script>
 
 </head>
 
@@ -88,33 +91,27 @@
 		    	<div class="two fields">
 					<div class="required field">
 						<label>治疗计划</label>
-						<select name="caries_degree" class="ui dropdown" multiple="">
+						<select name="cure_plan" class="ui dropdown">
 						<option value="">选择</option>
 						<option value="牙非手术治疗">牙非手术治疗</option>
-						<option value="后牙直接修复">后牙直接修复</option>
-						<option value="龋病微创修复技术">龋病微创修复技术</option>
+						<option value="龋病微创修复">龋病微创修复</option>
+						<option value="复合树脂修复">复合树脂修复</option>
 						<option value="美容修复">美容修复</option>
-						<option value="后牙嵌体修复">后牙嵌体修复</option>
+						<option value="间接修复">间接修复</option>
 						</select>
 					</div>
 
-					<div class="required field">
-						<label>具体治疗方案，编写逻辑功能的时候实现</label>
-					</div>
-
-
-			    	<div class="required field">
-			    		<label>后牙直接修复</label>
-			    		<select name="" class="ui dropdown">
-		                <option value="">选择</option>
-						<option value="后牙复合树脂修复">后牙复合树脂修复</option>
-						<option value="后牙银汞合金修复">后牙银汞合金修复</option>
+			    	<div class="invisible required select field" field="牙非手术治疗">
+			    		<label>牙非手术治疗</label>
+			    		<select name="specification1" class="ui dropdown">
+						<option value="药物治疗">药物治疗</option>
+						<option value="再矿化治疗">再矿化治疗</option>
+						<option value="窝沟封闭">窝沟封闭</option>
 		              	</select>
 			    	</div>
-			    	<div class="invisible required field">
-			    		<label>龋病微创修复技术</label>
-			    		<select name="" class="ui dropdown">
-		                <option value="">选择</option>
+			    	<div class="invisible required select field" field="龋病微创修复">
+			    		<label>龋病微创修复</label>
+			    		<select name="specification2" class="ui dropdown">
 						<option value="ART修复">ART修复</option>
 						<option value="预防性充填">预防性充填</option>
 						<option value="玻璃离子过渡性修复">玻璃离子过渡性修复</option>
@@ -122,24 +119,25 @@
 						<option value="微打磨术">微打磨术</option>
 		              	</select>
 			    	</div>
-
-			    	<div class="invisible required field">
+			    	<div class="invisible required select field" field="复合树脂修复">
+			    		<label>复合树脂修复</label>
+			    		<select name="specification3" class="ui dropdown">
+						<option value="牙数值直接充填修复">牙数值直接充填修复</option>
+						<option value="牙安抚治疗和树脂充填修复">牙安抚治疗和树脂充填修复</option>
+		              	</select>
+			    	</div>
+			    	<div class="invisible required select field" field="美容修复">
 			    		<label>美容修复</label>
-			    		<select name="" class="ui dropdown">
-		                <option value="">选择</option>
-						<option value="前牙无创美容修复">前牙无创美容修复</option>
-						<option value="前牙微创复合树脂分层修复">前牙微创复合树脂分层修复</option>
-						<option value="前牙微创CAD/CAM瓷贴面修复">前牙微创CAD/CAM瓷贴面修复</option>
+			    		<select name="specification4" class="ui dropdown">
+						<option value="渗透树脂修复">渗透树脂修复</option>
+						<option value="微创复合树脂分层修复">前牙微创复合树脂分层修复</option>
 		              	</select>
 			    	</div>
-			    	<div class="invisible required field">
-			    		<label>后牙嵌体修复</label>
-			    		<select name="" class="ui dropdown">
-		                <option value="">选择</option>
-						<option value="复合树脂嵌体">复合树脂嵌体</option>
-						<option value="CAD/CAM瓷嵌体修复">CAD/CAM瓷嵌体修复</option>
-		              	</select>
-			    	</div>
+				</div>
+
+				<div class="ui fluid file button">
+					<span class="FileLabel">选择诊断图片</span> 
+					<input type="file" name="file[]" multiple="multiple" id="imageupload">
 				</div>
 
 				<div class="ui hidden divider"></div>
