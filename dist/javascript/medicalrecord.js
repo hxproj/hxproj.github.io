@@ -7,7 +7,43 @@ $(document).ready(function(){
 			closable  : false,
 			onApprove : function(){
 
-				$('#ID_AddToothLocationModal form').submit();
+				// 向服务器提交牙位数据 
+				$('#ID_AddToothLocationModal form').form({
+					fields: {
+						tooth_location: {
+							identifier: 'tooth_location',
+							rules: [
+								{
+									type   : 'empty',
+			            			prompt : '请选择病人牙齿部位'
+								}
+							]
+						},
+						doctor: {
+							identifier: 'doctor',
+							rules: [
+								{
+									type   : 'empty',
+			            			prompt : '请填写初诊医生'
+								}
+							]
+						}
+					},
+					inline    : true,
+					onSuccess : function(){
+
+						// FIXME: submit the tooth
+						$('#ID_AddToothLocationModal').modal('hide');
+
+						showToothLocationRecord({
+							id : 6,  // FIXME: should form server
+							tooth_location: $(this).form('get value', 'tooth_location'),
+							doctor: $(this).form('get value', 'doctor'),
+						});
+
+			        	return false;
+					}
+				}).submit();
 
 				return false;
 			}
@@ -33,44 +69,6 @@ $(document).ready(function(){
 
 			$('#ID_SelectToothLocation input').val(FormData);
 			$('#ID_SelectToothLocation input[name=tooth_type]').val(ToothTypeValue);
-		}
-	});
-	// **************************************************
-	// 向服务器提交牙位数据
-	$('#ID_AddToothLocationModal form').form({
-		fields: {
-			tooth_location: {
-				identifier: 'tooth_location',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择病人牙齿部位'
-					}
-				]
-			},
-			doctor: {
-				identifier: 'doctor',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写初诊医生'
-					}
-				]
-			}
-		},
-		inline    : true,
-		onSuccess : function(){
-
-			// FIXME: submit the tooth
-			$('#ID_AddToothLocationModal').modal('hide');
-
-			showToothLocationRecord({
-				id : 6,  // FIXME: should form server
-				tooth_location: $(this).form('get value', 'tooth_location'),
-				doctor: $(this).form('get value', 'doctor'),
-			});
-
-        	return false;
 		}
 	});
 	// **************************************************
@@ -116,25 +114,6 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
-
-	// **************************************************
-	// 向服务器提交复诊数据
-	/*
-	$('#ID_ReExaminationModal form').form({
-		onSuccess : function(){
-
-			// FIXME: submit the tooth
-			$('#ID_ReExaminationModal').modal('hide');
-
-			showReExamination({
-				id    : 6,  // FIXME: should form server
-				doctor: $(this).form('get value', 'doctor'),
-			});
-
-        	return false;
-		}
-	});
-	*/
 
 	// **************************************************
 	// Function
