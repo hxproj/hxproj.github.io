@@ -1,44 +1,103 @@
 $(document).ready(function(){
 
 	// **************************************************
-	// 添加牙位
+	// INIT
+ 	var U_ID = Number(requestParameter("uid"));
+
+	$('#ID_AddToothLocationModal form').form({
+		fields: {
+			tooth_location: {
+				identifier: 'tooth_location',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请选择病人牙齿部位'
+					}
+				]
+			},
+			doctor: {
+				identifier: 'doctor',
+				rules: [
+					{
+						type   : 'empty',
+            			prompt : '请填写初诊医生'
+					}
+				]
+			}
+		}
+	});
+
+
+	// **************************************************
+	// GET
+	// GET: 用户基本信息
+	$.ajax({
+		url      : URL_USER + toquerystring({user_id : U_ID}),
+		type     : "GET",
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(data){
+			var $BasicInfo = $('.basicinfo.labels'),
+				$Gender    = $BasicInfo.find('div[name=gender]');
+			
+			 if (data.gender) {
+				$Gender.find("i").addClass("woman");
+				$Gender.find("span").text("女");
+			 } else {
+				$Gender.find("i").addClass("man");
+				$Gender.find("span").text("男");
+			 }
+
+			$('.header[name=name]').text(data.name);
+			$BasicInfo.find('div[name=age]').text(data.age);
+			$BasicInfo.find('div[name=ID]').text(data.id_number);
+			$BasicInfo.find('div[name=occupation]').text(data.occupation);
+			$BasicInfo.find('div[name=contact]').text(data.contact);
+		}
+	});
+	// GET: 初诊复诊 : TODO
+	$.ajax({
+		url      : URL_USERTOOTHINFO + toquerystring({user_id : U_ID}),
+		type     : "GET",
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(data){
+			var temp;
+		}
+	});
+
+
+	// **************************************************
+	// POST
+	// POST : 牙位
 	$('#ID_AddToothLocation').click(function(){
 		$('#ID_AddToothLocationModal').modal({
 			closable  : false,
 			onApprove : function(){
 
-				// 向服务器提交牙位数据 
 				$('#ID_AddToothLocationModal form').form({
-					fields: {
-						tooth_location: {
-							identifier: 'tooth_location',
-							rules: [
-								{
-									type   : 'empty',
-			            			prompt : '请选择病人牙齿部位'
-								}
-							]
-						},
-						doctor: {
-							identifier: 'doctor',
-							rules: [
-								{
-									type   : 'empty',
-			            			prompt : '请填写初诊医生'
-								}
-							]
-						}
-					},
-					inline    : true,
 					onSuccess : function(){
 
-						// FIXME: submit the tooth
-						$('#ID_AddToothLocationModal').modal('hide');
+						$.ajax({
+							url      : URL_TOOTH,
+							type     : "POST",
+							data     : toform({user_id : U_ID}) + $(this).serialize(),
+							async    : false, 
+							dataType : "json",
+							error    : function() {networkError();},
+							success  : function(data) {
+								
+								// TODO : reload and remove this item
+								// location.reload();
+								showToothLocationRecord({
+									id : data.id,  
+									tooth_location: $(this).form('get value', 'tooth_location'),
+									doctor: $(this).form('get value', 'doctor'),
+								});
 
-						showToothLocationRecord({
-							id : 6,  // FIXME: should form server
-							tooth_location: $(this).form('get value', 'tooth_location'),
-							doctor: $(this).form('get value', 'doctor'),
+
+								$('#ID_AddToothLocationModal').modal('hide');
+							}
 						});
 
 			        	return false;
@@ -115,10 +174,10 @@ $(document).ready(function(){
 		}).modal('show');
 	});
 
+
 	// **************************************************
 	// Function
 	function showToothLocationRecord(Data) {
-
 		var $ToothLocationRecord = $('.invisible.toothlocationrecord');
 
 		var $ClonedToothLocationRecord = $ToothLocationRecord.clone(true).removeClass('invisible');
