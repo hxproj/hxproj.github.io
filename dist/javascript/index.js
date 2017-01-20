@@ -12,9 +12,9 @@ $(document).ready(function(){
 
 	// Detail button
 	$('.detail.button').click(function(){
-		// TODO: Set parameters
-		redirection("medicalrecord.html", {uid : 1});
+		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
+	
 
 	// ***************************************************************
 	// Init
@@ -68,6 +68,7 @@ $(document).ready(function(){
 		},
 		inline: true
 	});
+
 
 	// ***************************************************************
 	// GET
@@ -173,6 +174,7 @@ $(document).ready(function(){
 			}
 		}).modal('show');
 	});
+
 
 	// ***************************************************************
 	// Function
