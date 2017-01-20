@@ -17,16 +17,7 @@ $(document).ready(function(){
 	});
 
 	// ***************************************************************
-	// Add Medical Record
-	$('.AddMedicalRecordButton').click(function(){
-		$('#MedicalRecordAddModal').modal({
-			closable  : false,
-  			onApprove : function() {
-  				$("#basicinfoform").submit();
-				return false;
-			}
-		}).modal('show');
-	});
+	// Init
 	$("#basicinfoform").form({
 		fields: {
 			name: {
@@ -74,29 +65,133 @@ $(document).ready(function(){
 					}
 				]
 			},
-			doctor: {
-				identifier: 'doctor',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写医生姓名'
-					}
-				]
-			}
 		},
-		inline: true,
-		onSuccess: function(){
-			$.ajax({
-  				url      : URL_USER,
-				type     : "post",
-				async    : false, 
-				data     : $(this).serialize(),
-				dataType : "json",
-				error    : function() {networkError();},
-				success  : function() {location.reload();}
-			});
+		inline: true
+	});
 
-			return false;
+	// ***************************************************************
+	// GET
+	$.ajax({
+		url      : URL_GETALLUSER,
+		type     : "GET",
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(data){
+			if (data.length) {
+				$('.invisible.table').show();
+
+				// 设置分页属性
+				/*
+				$.Page(
+					$('.record.segment'),
+				 	data.pages,
+				 	1,
+				 	URL_PAGE,
+				 	function() { networkError(); },
+				 	function(data) { showAllMedicalRecord(data); }
+				 );
+				*/
+	 			
+	 			// 显示当前页所有病历
+	 			showAllMedicalRecord(data);
+			} else {
+				$('.ui.message').show();
+			}
 		}
 	});
+
+
+	// ***************************************************************
+	// POST
+	$('.AddMedicalRecordButton').click(function(){
+		$('#MedicalRecordAddModal').modal({
+			closable  : false,
+  			onApprove : function() {
+				$("#basicinfoform").form({
+					onSuccess: function(){
+						submitUserInfo({
+							method : "POST",
+							info   : $(this).serialize()
+						});
+						return false;
+					}
+				}).submit();
+
+				return false;
+			}
+		}).modal('show');
+	});
+
+
+	// ***************************************************************
+	// PUT
+	$('.edit.button').click(function(){
+		var $MedicalRecord = $(this).parents('tr.record'),
+			$Modal         = $('#MedicalRecordAddModal');
+
+		$Modal.find("input[name=name]").val($MedicalRecord.find("td[name=name]").text());
+		$Modal.find("input[name=occupation]").val($MedicalRecord.find("td[name=occupation]").text());
+		$Modal.find("input[name=contact]").val($MedicalRecord.find("td[name=contact]").text());
+		$Modal.find('select[name=gender]').dropdown("set selected", $MedicalRecord.find("td[name=gender]").text());
+		$Modal.find("input[name=ID]").val($MedicalRecord.attr("id_number"));
+
+		$Modal.modal({
+			closable  : false,
+  			onApprove : function() {
+				$("#basicinfoform").form({
+					onSuccess: function(){
+						submitUserInfo({
+							method : "PUT",
+							info   : toform({user_id : $MedicalRecord.find("td[name=user_id]").text()}) + $(this).serialize()
+						});
+						return false;
+					}
+				}).submit();
+				return false;
+			}
+		}).modal('show');
+	});
+
+
+	// ***************************************************************
+	// DELETE
+	$('.delete.button').click(function(){
+		
+	});
+
+	// ***************************************************************
+	// Function
+	function showAllMedicalRecord(Data) {
+		$('tbody tr:visible').remove();
+		$.each(Data.reverse(), function(){ showMedicalRecord(this); });  // ?
+	}
+
+	function showMedicalRecord(UserData) {
+		$MedicalRecord = $('.invisible.record');
+
+		var $ClonedMedicalRecord = $MedicalRecord.clone(true).removeClass('invisible');
+		$ClonedMedicalRecord.attr("id_number", UserData.id_number);
+		$ClonedMedicalRecord.find('td[name=user_id]').text(UserData.user_id);
+		$ClonedMedicalRecord.find('td[name=name]').text(UserData.name);
+		$ClonedMedicalRecord.find('td[name=age]').text(UserData.age);
+		$ClonedMedicalRecord.find('td[name=gender]').text(UserData.gender == 0 ? "男" : "女");
+		$ClonedMedicalRecord.find('td[name=contact]').text(UserData.contact);
+		$ClonedMedicalRecord.find('td[name=occupation]').text(UserData.occupation); // 
+		$ClonedMedicalRecord.find('td[name=diagnose_list]').text(UserData.diagnose_list ? UserData.diagnose_list : "未进行诊断");
+		$ClonedMedicalRecord.find('td[name=in_date]').text(UserData.in_date);
+
+		$MedicalRecord.after($ClonedMedicalRecord);
+	}
+
+	function submitUserInfo(Data) {
+		$.ajax({
+			url      : URL_USER,
+			type     : Data.method,
+			async    : false, 
+			data     : Data.info,
+			dataType : "json",
+			error    : function() {networkError();},
+			success  : function() {location.reload();}
+		});
+	}
 });

@@ -33,7 +33,7 @@
 	</div> 
 
 	<div class="ui fluid container">
-		<table class="ui celled table">
+		<table class="ui center aligned celled invisible table">
 			<thead>
 				<tr>
 					<th class="positive collapsing">
@@ -46,25 +46,25 @@
 					<th>
 						年龄<i class="caret up icon"></i>
 					</th>
-					<th>诊断</th>
+					<th>职业</th>
+					<th>联系方式</th>
+					<th class="four wide">诊断</th>
 					<th>
 						最近就诊时间<i class="caret down icon"></i>
-					</th>
-					<th>
-						医生<i class="caret down icon"></i>
 					</th>
 					<th>管理</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>10001</td>
-					<td>张三</td>
-					<td>男</td>
-					<td>30</td>
-					<td>13牙深龋，12牙中龋</td>
-					<td>2016.07.16</td>
-					<td>程磊(主治医生)</td>
+				<tr class="invisible record">
+					<td name="user_id"></td>
+					<td name="name"></td>
+					<td name="age"></td>
+					<td name="gender"></td>
+					<td name="occupation"></td>
+					<td name="contact"></td>
+					<td name="diagnose_list">未诊断</td>
+					<td name="in_date"></td>
 					<td class="collapsing">
 						<div class="ui mini teal buttons">
 							<div class="ui animated detail button" tabindex="0">
@@ -75,57 +75,7 @@
 								<div class="hidden content"><i class="edit icon"></i></div>
 								<div class="visible content">修改</div>
 							</div>
-							<div class="ui vertical animated button" tabindex="0">
-								<div class="hidden content"><i class="trash icon"></i></div>
-								<div class="visible content">删除</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>10002</td>
-					<td>李四</td>
-					<td>男</td>
-					<td>26</td>
-					<td>53牙深龋</td>
-					<td>2016.08.25</td>
-					<td>程磊(主治医生)</td>
-					<td class="collapsing">
-						<div class="ui mini teal buttons">
-							<div class="ui animated detail button" tabindex="0">
-								<div class="hidden content"><i class="right chevron icon"></i></div>
-								<div class="visible content">详细</div>
-							</div>
-							<div class="ui animated edit button" tabindex="0">
-								<div class="hidden content"><i class="edit icon"></i></div>
-								<div class="visible content">修改</div>
-							</div>
-							<div class="ui vertical animated button" tabindex="0">
-								<div class="hidden content"><i class="trash icon"></i></div>
-								<div class="visible content">删除</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>10003</td>
-					<td>王麻子</td>
-					<td>男</td>
-					<td>15</td>
-					<td>53牙深龋</td>
-					<td>2016.09.25</td>
-					<td>程磊(主治医生)</td>
-					<td class="collapsing">
-						<div class="ui mini teal buttons">
-							<div class="ui animated detail button" tabindex="0">
-								<div class="hidden content"><i class="right chevron icon"></i></div>
-								<div class="visible content">详细</div>
-							</div>
-							<div class="ui animated edit button" tabindex="0">
-								<div class="hidden content"><i class="edit icon"></i></div>
-								<div class="visible content">修改</div>
-							</div>
-							<div class="ui vertical animated button" tabindex="0">
+							<div class="ui vertical animated delete button" tabindex="0">
 								<div class="hidden content"><i class="trash icon"></i></div>
 								<div class="visible content">删除</div>
 							</div>
@@ -135,70 +85,81 @@
 			</tbody>
 		</table>
 
-		<div class="ui right floated pagination menu" style="margin-right: 1em">
-			<a class="active item">1
-			</a>
-			<div class="disabled item">
-			...
+		<div class="ui hidden info message">
+			<div class="ui center aligned header">
+				<p>还未添加任何病历，请点击添加</p>
+				<div class="ui AddMedicalRecordButton teal large button"><i class="plus icon"></i>添加病历</div>
 			</div>
-			<a class="item">
-			10
-			</a>
-			<a class="item">
-			11
-			</a>
-			<a class="item">
-			12
-			</a>
+		</div>
+	</div>
+
+
+	<!--Add Medical Record Modal-->
+	<div class="ui modal" id="MedicalRecordAddModal">
+		<div class="header">添加病历</div>
+		<div class="content">
+		    <div class="description">
+				<form class="ui clearing form" id="basicinfoform">
+			    	<h3 class="ui blue header">基本信息</h3>
+				    <div class="three fields">
+				    	<div class="field">
+				    		<label>姓名</label>
+				    		<input type="text" name="name" placeholder="输入姓名">
+				    	</div>
+				    	<div class="field">
+				    		<label>性别</label>
+				    		<select name="gender" class="ui dropdown">
+			                <option value="">选择</option>
+			                <option value="0">男</option>
+			                <option value="1">女</option>
+			              	</select>
+				    	</div>
+				    	<div class="field">
+				    		<label>身份证号</label>
+				    		<input type="text" name="ID" placeholder="身份证号" value="512222198111056324">
+				    	</div>
+				    </div>	
+				    <div class="three fields">
+				    	<div class="field">
+				    		<label>职业</label>
+				    		<input type="text" name="occupation" placeholder="输入职业">
+				    	</div>
+				    	<div class="field">
+				    		<label>联系方式</label>
+				    		<input type="text" name="contact" placeholder="输入联系方式">
+				    	</div>
+				    </div>
+				</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui orange deny button">取消</div>
+			<div class="ui primary approve right labeled icon button">
+				添加<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
+
+	<!--异常提示-->
+	<div class="ui small modal" id="networkerror">
+		<div class="ui icon header">
+			<i class="orange warning sign icon"></i>
+			网络无法访问或服务器异常
 		</div>
 
-		<!--Add Medical Record Modal-->
-		<div class="ui modal" id="MedicalRecordAddModal">
-			<div class="header">添加病历</div>
-			<div class="content">
-			    <div class="description">
-					<form class="ui clearing form" id="basicinfoform">
-				    	<h3 class="ui blue header">基本信息</h3>
-					    <div class="three fields">
-					    	<div class="field">
-					    		<label>姓名</label>
-					    		<input type="text" name="name" placeholder="输入姓名">
-					    	</div>
-					    	<div class="field">
-					    		<label>性别</label>
-					    		<select name="gender" class="ui dropdown">
-				                <option value="">选择</option>
-				                <option value="0">男</option>
-				                <option value="1">女</option>
-				              	</select>
-					    	</div>
-					    	<div class="field">
-					    		<label>身份证号</label>
-					    		<input type="text" name="ID" placeholder="身份证号">
-					    	</div>
-					    </div>	
-					    <div class="three fields">
-					    	<div class="field">
-					    		<label>职业</label>
-					    		<input type="text" name="occupation" placeholder="输入职业">
-					    	</div>
-					    	<div class="field">
-					    		<label>联系方式</label>
-					    		<input type="text" name="contact" placeholder="输入联系方式">
-					    	</div>
-					    	<div class="field">
-					    		<label>主治医生</label>
-					    		<input type="text" name="doctor" placeholder="输入医生姓名">
-					    	</div>
-					    </div>
-					</form>
-			    </div>
-		  	</div>
-			<div class="actions">
-				<div class="ui orange deny button">取消</div>
-				<div class="ui primary approve right labeled icon button">
-					添加<i class="checkmark icon"></i>
-				</div>
+		<div class="content">
+			<p> 请尝试以下方法解决问题：</p>
+			<ol>
+				<li>重启服务器（电脑）</li>
+				<li>联系系统管理员</li>
+				<li>检查网络配置是否正确</li>
+			</ol>	
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>确认
 			</div>
 		</div>
 	</div>
