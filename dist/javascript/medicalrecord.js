@@ -74,7 +74,7 @@ $(document).ready(function(){
 	// **************************************************
 	// 删除牙位
 	$('.corner.delete_tooth_record').click(function(){
-		$DeleteToothRecord = $(this).parent();
+		var $DeleteToothRecord = $(this).parent();
 		$('#ID_DeleteModal').modal({
 			onApprove : function(){
 				$DeleteToothRecord.remove();

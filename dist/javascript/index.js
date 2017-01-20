@@ -156,14 +156,29 @@ $(document).ready(function(){
 	// ***************************************************************
 	// DELETE
 	$('.delete.button').click(function(){
-		
+		var $Record = $(this).parents('tr.record');
+		$('#ID_DeleteModal').modal({
+			onApprove : function(){
+
+				$.ajax({
+					url      : URL_USER + toquerystring({user_id : $Record.find("td[name=user_id]").text()}),
+					type     : "DELETE",
+					async    : false, 
+					dataType : "json",
+					error    : function() {networkError();},
+					success  : function() {location.reload();}
+				});
+
+				$Record.remove();  // FIXME: 如果reload了，则此处的remove可删除
+			}
+		}).modal('show');
 	});
 
 	// ***************************************************************
 	// Function
 	function showAllMedicalRecord(Data) {
 		$('tbody tr:visible').remove();
-		$.each(Data.reverse(), function(){ showMedicalRecord(this); });  // ?
+		$.each(Data.reverse(), function(){ showMedicalRecord(this); });
 	}
 
 	function showMedicalRecord(UserData) {
