@@ -1,7 +1,41 @@
 $(document).ready(function(){
 
 	// **************************************************
-	// POST
+	// INIT
+	// INIT PARAMENTERS
+	// TODO: Request Parameters From URL
+	var UID = 6,
+		TID = 1,
+		CID = 1,
+		IsEditMode = false;
+	// INIT SELECTOR
+	var $InfoSegement = $('table'),
+		$FormSegement = $('form');
+
+
+	// **************************************************
+	// GET
+	$.ajax({
+		url      : URL_DIFFICULTYASSE,
+		type     : "GET", 
+		data     : toform({case_id : CID}) + $(this).serialize(),
+		dataType : "json",
+		error    : function() {
+			// TODO: check the return data 
+			$FormSegement.show();
+		},
+		success  : function(vData) {
+			$InfoSegement.show();
+
+			IsEditMode = true;
+			setDefultFormData(vData);
+			showDifficultyAssessmentData(vData);
+		}
+	});
+
+
+	// **************************************************
+	// POST | PUT
 	$('form').form({
 		fields: {
 			tooth_surface_and_location: {
@@ -52,11 +86,10 @@ $(document).ready(function(){
 		},
 		inline: true,
 		onSuccess: function(){
-
 			$.ajax({
 				url      : URL_DIFFICULTYASSE,
-				type     : "POST", 
-				data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
+				type     : IsEditMode ? "PUT" : "POST", 
+				data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function() {location.reload();}
@@ -65,8 +98,60 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	
+
+
+	// **************************************************
+	// Other Envent
+	$('.edit.button').click(function(){
+		$InfoSegement.hide();
+   		$FormSegement.find('.submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
+		$FormSegement.show();
+	});
+
 
 	// **************************************************
 	// Function
+	function showDifficultyAssessmentData(vData) {
+		$('#tooth_surface_and_location').text(vData.tooth_surface_and_location);
+		$('#caries_depth').text(vData.caries_depth);
+		$('#technology_type').text(vData.technology_type);
+		$('#history_of_fill').text(vData.history_of_fill);
+		$('#mouth_opening').text(vData.mouth_opening);
+		$('#gag_reflex').text(vData.gag_reflex);
+		$('#saliva').text(vData.saliva);
+		$('#dental_phobia').text(vData.dental_phobia);
+		$('#difficulty_rating').text(vData.difficulty_rating);
+
+		var Level = "";
+		switch (vData.difficulty_level) {
+			case 1:  {
+				Level = "Ⅰ级"; 
+				$('#id_advice').text("建议转诊到A级医师进行处理");
+				break;
+			}
+			case 2:  {
+				Level = "Ⅱ级"; 
+				$('#id_advice').text("建议转诊到B级医师进行处理");
+				break;
+			}
+			case 3:  {
+				Level = "Ⅲ级"; 
+				$('#id_advice').text("建议转诊到C级医师进行处理");
+				break;
+			}
+		}
+		$('#difficulty_level').text(Level);
+	}
+
+	function setDefultFormData(vData) {
+		$('select[name=tooth_surface_and_location]').dropdown("set selected", vData.tooth_surface_and_location);
+		$('select[name=caries_depth]').dropdown("set selected", vData.caries_depth);
+		$('select[name=technology_type]').dropdown("set selected", vData.technology_type);
+		$('select[name=history_of_fill]').dropdown("set selected", vData.history_of_fill);
+		$('select[name=mouth_opening]').dropdown("set selected", vData.mouth_opening);
+		$('select[name=gag_reflex]').dropdown("set selected", vData.gag_reflex);
+		$('select[name=saliva]').dropdown("set selected", vData.saliva);
+		$('select[name=dental_phobia]').dropdown("set selected", vData.dental_phobia);
+		$('select[name=difficulty_rating]').dropdown("set selected", vData.difficulty_rating);
+	}
 });

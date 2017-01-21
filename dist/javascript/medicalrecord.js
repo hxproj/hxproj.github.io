@@ -55,14 +55,16 @@ $(document).ready(function(){
 			$BasicInfo.find('div[name=contact]').text(data.contact);
 		}
 	});
-	// GET: 初诊复诊 : TODO
+	// GET: 初诊复诊
 	$.ajax({
 		url      : URL_USERTOOTHINFO + toquerystring({user_id : U_ID}),
 		type     : "GET",
 		dataType : "json",
 		error    : function(){ networkError(); },
-		success  : function(data){
-			var temp;
+		success  : function(Data){
+			$.each(Data, function(){ 
+				showToothLocationRecord(this);
+			});  // .reverse()
 		}
 	});
 
@@ -178,6 +180,7 @@ $(document).ready(function(){
 	// **************************************************
 	// Function
 	function showToothLocationRecord(Data) {
+
 		var $ToothLocationRecord = $('.invisible.toothlocationrecord');
 
 		var $ClonedToothLocationRecord = $ToothLocationRecord.clone(true).removeClass('invisible');
@@ -186,6 +189,26 @@ $(document).ready(function(){
 		$ClonedToothLocationRecord.find('span[type=doctor]').text(Data.doctor);
 
 		$ToothLocationRecord.after($ClonedToothLocationRecord);
+
+		$.each(Data, function(index, element){ 
+			if (index != 0){
+				
+				$.ajax({
+					url      : URL_CASE + toquerystring({case_id : element.case_id}),
+					type     : "GET",
+					async    : false, 
+					dataType : "json",
+					error    : function() {networkError();},
+					success  : function(data) {
+						
+						showReExamination({
+							
+						});
+
+					}
+				});
+			}
+		});
 	}
 
 	function showReExamination(Data) {

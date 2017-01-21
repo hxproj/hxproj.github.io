@@ -8,6 +8,7 @@ $(document).ready(function(){
 	window.URL_GETALLUSER       = URL_SERVER + "/medical-case-of-illness/all-user";
 
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
+	window.URL_CASE             = URL_SERVER + "/medical-case-of-illness/case";
 
 
 	window.URL_MOUTHEXAM        = URL_SERVER + "/medical-case-of-illness/oral-examination";  // TODO
