@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="thirteen wide column">
-			<form class="ui clearing raised form segment">
+			<div class="ui raised segment">
 				<a class="ui blue ribbon label">初诊</a>
 				<span>2016-11-11</span>
 				<div class="ui center aligned basic segment">
@@ -59,90 +59,128 @@
 						<div class="ui label">11牙中龋</div>
 					</div>
 				</div>
-				<div class="ui divider"></div>
 
-				<h3 class="ui blue header">1. 诊断</h3>
-		    	<div class="two fields">
-					<div class="required field">
-						<label>龋损程度</label>
-						<select name="caries_degree" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="浅龋">浅龋</option>
-						<option value="中龋">中龋</option>
-						<option value="深龋">深龋</option>
-						</select>
+				<table class="ui invisible celled structured table">
+					<thead>
+						<tr>
+							<th class="center aligned" colspan="2"></th>
+						</tr>
+					</thead>
+		  			<tbody>
+						<tr>
+							<td class="positive collapsing">诊断</td>
+							<td id="ID_Description"></td>
+						</tr>
+						<tr>
+							<td class="positive collapsing">诊断图片</td>
+							<td class="negative" id="IMAGE" colspan="2">
+								<div class="ui hidden rounded image">
+									<a class="ui hidden right corner label"><i class="remove icon"></i></a>
+									<img style="max-width:100%; height:auto;">
+						    	</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="right aligned">
+								<div class="ui small teal buttons">
+									<div class="ui left labeled icon button"><i class="chevron left icon"></i>口腔检查</div>
+									<div class="ui right labeled icon button"><i class="chevron right icon"></i>难度评估</div>
+								</div>
+
+								<div class="ui blue edit small button">修改</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<form class="ui invisible clearing raised basic form segment">
+					<div class="ui divider"></div>
+					<h3 class="ui blue header">1. 诊断</h3>
+			    	<div class="two fields">
+						<div class="required field">
+							<label>龋损程度</label>
+							<select name="caries_degree" class="ui dropdown">
+							<option value="">选择</option>
+							<option value="浅龋">浅龋</option>
+							<option value="中龋">中龋</option>
+							<option value="深龋">深龋</option>
+							</select>
+						</div>
+
+						<div class="field">
+							<label>龋齿病种</label>
+							<select name="caries_type" class="ui dropdown">
+							<option value="无">无</option>
+							<option value="猛性龋">猛性龋</option>
+							<option value="隐匿性龋">隐匿性龋</option>
+							<option value="根面龋">根面龋</option>
+							<option value="继发龋">继发龋</option>
+							<option value="静止龋">静止龋</option>
+							<option value="酸蚀症">酸蚀症</option>
+							</select>
+						</div>
 					</div>
 
-					<div class="field">
-						<label>龋齿病种</label>
-						<select name="caries_type" class="ui dropdown">
-						<option value="无">无</option>
-						<option value="猛性龋">猛性龋</option>
-						<option value="隐匿性龋">隐匿性龋</option>
-						<option value="根面龋">根面龋</option>
-						<option value="继发龋">继发龋</option>
-						<option value="静止龋">静止龋</option>
-						<option value="酸蚀症">酸蚀症</option>
-						</select>
+					<h3 class="ui blue header">2. 治疗方案</h3>
+			    	<div class="two fields">
+						<div class="required field">
+							<label>治疗计划</label>
+							<select name="cure_plan" class="ui dropdown">
+							<option value="">选择</option>
+							<option value="牙非手术治疗">牙非手术治疗</option>
+							<option value="龋病微创修复">龋病微创修复</option>
+							<option value="复合树脂修复">复合树脂修复</option>
+							<option value="美容修复">美容修复</option>
+							<option value="间接修复">间接修复</option>
+							<option value="其它">其它</option>
+							</select>
+						</div>
+
+				    	<div class="invisible required select field" field="牙非手术治疗">
+				    		<label>牙非手术治疗</label>
+				    		<select name="specification1" class="ui dropdown">
+							<option value="药物治疗">药物治疗</option>
+							<option value="再矿化治疗">再矿化治疗</option>
+							<option value="窝沟封闭">窝沟封闭</option>
+			              	</select>
+				    	</div>
+				    	<div class="invisible required select field" field="龋病微创修复">
+				    		<label>龋病微创修复</label>
+				    		<select name="specification2" class="ui dropdown">
+							<option value="ART修复">ART修复</option>
+							<option value="预防性充填">预防性充填</option>
+							<option value="玻璃离子过渡性修复">玻璃离子过渡性修复</option>
+							<option value="釉质成型术">釉质成型术</option>
+							<option value="微打磨术">微打磨术</option>
+			              	</select>
+				    	</div>
+				    	<div class="invisible required select field" field="复合树脂修复">
+				    		<label>复合树脂修复</label>
+				    		<select name="specification3" class="ui dropdown">
+							<option value="牙数值直接充填修复">牙数值直接充填修复</option>
+							<option value="牙安抚治疗和树脂充填修复">牙安抚治疗和树脂充填修复</option>
+			              	</select>
+				    	</div>
+				    	<div class="invisible required select field" field="美容修复">
+				    		<label>美容修复</label>
+				    		<select name="specification4" class="ui dropdown">
+							<option value="渗透树脂修复">渗透树脂修复</option>
+							<option value="微创复合树脂分层修复">前牙微创复合树脂分层修复</option>
+			              	</select>
+				    	</div>
 					</div>
-				</div>
 
-				<h3 class="ui blue header">2. 治疗方案</h3>
-		    	<div class="two fields">
-					<div class="required field">
-						<label>治疗计划</label>
-						<select name="cure_plan" class="ui dropdown">
-						<option value="">选择</option>
-						<option value="牙非手术治疗">牙非手术治疗</option>
-						<option value="龋病微创修复">龋病微创修复</option>
-						<option value="复合树脂修复">复合树脂修复</option>
-						<option value="美容修复">美容修复</option>
-						<option value="间接修复">间接修复</option>
-						</select>
+					<input type="hidden" name="specification"/>
+
+					<div class="ui fluid file button">
+						<span class="FileLabel">选择诊断图片</span> 
+						<input type="file" name="file[]" multiple="multiple" id="imageupload">
 					</div>
 
-			    	<div class="invisible required select field" field="牙非手术治疗">
-			    		<label>牙非手术治疗</label>
-			    		<select name="specification1" class="ui dropdown">
-						<option value="药物治疗">药物治疗</option>
-						<option value="再矿化治疗">再矿化治疗</option>
-						<option value="窝沟封闭">窝沟封闭</option>
-		              	</select>
-			    	</div>
-			    	<div class="invisible required select field" field="龋病微创修复">
-			    		<label>龋病微创修复</label>
-			    		<select name="specification2" class="ui dropdown">
-						<option value="ART修复">ART修复</option>
-						<option value="预防性充填">预防性充填</option>
-						<option value="玻璃离子过渡性修复">玻璃离子过渡性修复</option>
-						<option value="釉质成型术">釉质成型术</option>
-						<option value="微打磨术">微打磨术</option>
-		              	</select>
-			    	</div>
-			    	<div class="invisible required select field" field="复合树脂修复">
-			    		<label>复合树脂修复</label>
-			    		<select name="specification3" class="ui dropdown">
-						<option value="牙数值直接充填修复">牙数值直接充填修复</option>
-						<option value="牙安抚治疗和树脂充填修复">牙安抚治疗和树脂充填修复</option>
-		              	</select>
-			    	</div>
-			    	<div class="invisible required select field" field="美容修复">
-			    		<label>美容修复</label>
-			    		<select name="specification4" class="ui dropdown">
-						<option value="渗透树脂修复">渗透树脂修复</option>
-						<option value="微创复合树脂分层修复">前牙微创复合树脂分层修复</option>
-		              	</select>
-			    	</div>
-				</div>
-
-				<div class="ui fluid file button">
-					<span class="FileLabel">选择诊断图片</span> 
-					<input type="file" name="file[]" multiple="multiple" id="imageupload">
-				</div>
-
-				<div class="ui hidden divider"></div>
-				<div class="ui right floated blue submit button">提交</div>
-			</form>
+					<div class="ui hidden divider"></div>
+					<div class="ui right floated blue small submit button">提交</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

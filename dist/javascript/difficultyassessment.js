@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$.ajax({
 		url      : URL_DIFFICULTYASSE,
 		type     : "GET", 
-		data     : toform({case_id : CID}) + $(this).serialize(),
+		data     : toform({case_id : CID}),
 		dataType : "json",
 		error    : function() {
 			// TODO: check the return data 
