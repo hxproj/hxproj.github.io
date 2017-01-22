@@ -179,7 +179,7 @@ $(document).ready(function(){
 		$.ajax({
 			url      : URL_IMAGEUPLOAD,
 			type     : "GET",
-			data     : {tooth_id : TID, type : Image_type},
+			data     : {case_id : CID, type : Image_type},
 			dataType : "json",
 			success  : function(FileData) {
 

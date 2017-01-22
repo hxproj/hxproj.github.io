@@ -6,7 +6,6 @@ $(document).ready(function(){
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
 	window.URL_USERTOOTHINFO    = URL_SERVER + "/medical-case-of-illness/user-tooth-info";
 	window.URL_GETALLUSER       = URL_SERVER + "/medical-case-of-illness/all-user";
-
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
 	window.URL_CASE             = URL_SERVER + "/medical-case-of-illness/case";
 

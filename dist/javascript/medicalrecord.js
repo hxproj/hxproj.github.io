@@ -15,8 +15,8 @@ $(document).ready(function(){
 					}
 				]
 			},
-			doctor: {
-				identifier: 'doctor',
+			judge_doctor: {
+				identifier: 'judge_doctor',
 				rules: [
 					{
 						type   : 'empty',
@@ -87,19 +87,7 @@ $(document).ready(function(){
 							async    : false, 
 							dataType : "json",
 							error    : function() {networkError();},
-							success  : function(data) {
-								
-								// TODO : reload and remove this item
-								// location.reload();
-								showToothLocationRecord({
-									id : data.id,  
-									tooth_location: $(this).form('get value', 'tooth_location'),
-									doctor: $(this).form('get value', 'doctor'),
-								});
-
-
-								$('#ID_AddToothLocationModal').modal('hide');
-							}
+							success  : function(data) {location.reload();}
 						});
 
 			        	return false;
@@ -143,12 +131,11 @@ $(document).ready(function(){
 		}).modal('show');
 	});
 
-
 	// **************************************************
-	// 添加复诊（处置or非处置）
+	// POST: 复诊（处置or非处置）
 	$('.add_re_examination.button').click(function(){
 
-		$ToothLocationRecord = $(this).parents('.toothlocationrecord');
+		var TID= $(this).parents('.toothlocationrecord').attr("tooth_id");
 
 		$('#ID_ReExaminationModal').modal({
 			closable  : false,
@@ -156,18 +143,17 @@ $(document).ready(function(){
 
 				$('#ID_ReExaminationModal form').form({
 					onSuccess : function(){
-
-						// FIXME: submit the tooth
-						$('#ID_ReExaminationModal').modal('hide');
-
-						showReExamination({
-							id             : 6,  // FIXME: should form server
-							handle         : $(this).form('get value', 'is_handle') == "是" ? true : false,
-							doctor         : $(this).form('get value', 'doctor'),
-							afterSelector  : $ToothLocationRecord.find('.after.divider')
+						$.ajax({
+							url      : URL_CASE,
+							type     : "POST",
+							data     : toform({tooth_id : TID}) + $(this).serialize(),
+							async    : false, 
+							dataType : "json",
+							error    : function() {networkError();},
+							success  : function(data) {location.reload();}
 						});
 
-			        	return false;
+						return false;
 					}
 				}).submit();
 
@@ -184,42 +170,41 @@ $(document).ready(function(){
 		var $ToothLocationRecord = $('.invisible.toothlocationrecord');
 
 		var $ClonedToothLocationRecord = $ToothLocationRecord.clone(true).removeClass('invisible');
-		$ClonedToothLocationRecord.attr("tooth_id", Data.id);
-		$ClonedToothLocationRecord.find('div[type=tooth_location]').text(Data.tooth_location);
-		$ClonedToothLocationRecord.find('span[type=doctor]').text(Data.doctor);
+		$ClonedToothLocationRecord.attr("tooth_id", Data.tooth_id);
+		$ClonedToothLocationRecord.find('div[type=tooth_location_number]').text(Data.tooth_location_number + "牙");
+
+		$.each(Data.cases, function() { 
+			showExamination({
+				Examination     : this,
+				$LocationRecord : $ClonedToothLocationRecord
+			}); 
+		});
 
 		$ToothLocationRecord.after($ClonedToothLocationRecord);
-
-		$.each(Data, function(index, element){ 
-			if (index != 0){
-				
-				$.ajax({
-					url      : URL_CASE + toquerystring({case_id : element.case_id}),
-					type     : "GET",
-					async    : false, 
-					dataType : "json",
-					error    : function() {networkError();},
-					success  : function(data) {
-						
-						showReExamination({
-							
-						});
-
-					}
-				});
-			}
-		});
 	}
+ 
+	function showExamination(Data) {
+		if (Data.Examination.case_type) {
+			var $ExaminationSelector;
+			Data.Examination.if_handle ? $ExaminationSelector = $('.invisible.handle.labels') : $ExaminationSelector = $('.invisible.nohandle.labels');
 
-	function showReExamination(Data) {
-		var $ReExaminationSelector;
-		Data.handle ? $ReExaminationSelector = $('.invisible.handle.labels') : $ReExaminationSelector = $('.invisible.nohandle.labels');
+			var $ClonedReExamination = $ExaminationSelector.clone(true).removeClass('invisible');
+			$ClonedReExamination.attr("case_id", Data.Examination.case_id);
+			$ClonedReExamination.find('span[type=doctor]').text(Data.Examination.judge_doctor);
+			$ClonedReExamination.find("div.time span").text("2016.11.20");
 
-		var $ClonedReExamination = $ReExaminationSelector.clone(true).removeClass('invisible');
-		$ClonedReExamination.attr("re_examination_id", Data.id);
-		$ClonedReExamination.find('span[type=doctor]').text(Data.doctor);
+			Data.$LocationRecord.find('.after.divider').after("<div class='ui hidden divider'></div>");
+			Data.$LocationRecord.find('.after.divider').after($ClonedReExamination);
 
-		Data.afterSelector.after("<div class='ui hidden divider'></div>")
-		Data.afterSelector.after($ClonedReExamination);
+			// TODO: step
+		} else {
+			var $FirstVisit = Data.$LocationRecord.find('.firstvisit.labels');
+
+			$FirstVisit.find("span[type=doctor]").text(Data.Examination.judge_doctor);
+			$FirstVisit.find("div.time span").text("2016.11.20");
+
+			// TODO: step
+		}
+
 	}
 });
