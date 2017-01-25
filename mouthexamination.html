@@ -67,25 +67,23 @@
 				<div class="three fields">
 					<div class="required field">
 						<label>牙位</label>
-						<div class="ui disabled input" id="addLocation">
+						<div class="ui disabled input" id="SelectToothLocation">
 							<input type="text" name="tooth_location" style="border-color: grey" placeholder="点击输入框选择牙位"/>
 						</div>
 					</div>
 					<input type="hidden" name="tooth_type"/>
-				</div>
-				<div class="three fields">
 					<div class="required field">
-						<label>龋坏累及牙面（不连接，比如“唇合面”，应“唇面合面”）</label>
+						<label>龋坏累及牙面</label>
 						<select name="caries_tired_display" class="ui dropdown" multiple="">
 						<option value="">选择</option>
-						<option value="唇">唇面</option>
-						<option value="舌">舌面</option>
-						<option value="腭">腭面</option>
-						<option value="颊">颊面</option>
-						<option value="近中">近中面</option>
-						<option value="远中">远中面</option>
-						<option value="根">根面</option>
-						<option value="合">合面</option>
+						<option value="唇面">唇面</option>
+						<option value="舌面">舌面</option>
+						<option value="腭面">腭面</option>
+						<option value="颊面">颊面</option>
+						<option value="近中面">近中面</option>
+						<option value="远中面">远中面</option>
+						<option value="根面">根面</option>
+						<option value="合面">合面</option>
 						</select>
 					</div>
 					<div class="required field">
@@ -98,6 +96,8 @@
 						<option value="近髓">近髓</option>
 						</select>
 					</div>
+				</div>
+				<div class="three fields">
 					<div class="required field">
 						<label>原填充体</label>
 						<select name="fill" class="ui dropdown">
@@ -109,8 +109,6 @@
 						<option value="其他">其他</option>
 						</select>
 					</div>
-				</div>
-				<div class="three fields">
 					<div class="required field">
 						<label>有无继发龋</label>
 						<select name="secondary" class="ui dropdown">
@@ -127,6 +125,8 @@
 						<option value="白垩色">白垩色</option>
 						</select>
 					</div>
+				</div>
+				<div class="three fields">
 					<div class="required field">
 						<label>质</label>
 						<select name="flex_of_caries" class="ui dropdown">
@@ -135,8 +135,6 @@
 						<option value="质软">软</option>
 						</select>
 					</div>
-				</div>
-				<div class="three fields">
 					<div class="required field">
 						<label>冷</label>
 						<select name="cold" class="ui dropdown">
@@ -159,6 +157,8 @@
 						<option value="热（+++）">+++</option>
 						</select>
 					</div>
+				</div>
+				<div class="three fields">
 					<div class="required field">
 						<label>探</label>
 						<select name="touch" class="ui dropdown">
@@ -170,8 +170,6 @@
 						<option value="探（+++）">+++</option>
 						</select>
 					</div>
-				</div>
-				<div class="three fields">
 					<div class="required field">
 						<label>叩</label>
 						<select name="bite" class="ui dropdown">
@@ -377,7 +375,7 @@
 					</div>
 					<div class="field">
 						<label>其他表现</label>
-						<input type="text" name="piece" placeholder="其他表现">
+						<input type="text" name="OtherExpression" placeholder="其他表现">
 					</div>
 				</div>
 
@@ -392,7 +390,7 @@
 		</div>
 	</div>
 
-	<div class="ui large modal" id="addLocationModal">
+	<div class="ui large modal" id="SelectToothLocationModal">
 		<div class="content">
 		    <div class="description">
 				<div id="context">

@@ -131,6 +131,7 @@ $(document).ready(function(){
 		}).modal('show');
 	});
 
+
 	// **************************************************
 	// POST: 复诊（处置or非处置）
 	$('.add_re_examination.button').click(function(){
@@ -164,6 +165,18 @@ $(document).ready(function(){
 
 
 	// **************************************************
+	// Other Envent
+	// OE: 跳转
+	$('.nohandle a.label, .handle a.label, .firstvisit a.label').click(function(){
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid  : U_ID,
+			tid  : $(this).parents('.toothlocationrecord.segment').attr('tooth_id'),
+			cid  : $(this).parents('.ui.labels').attr('case_id'),
+		}));
+	});
+
+
+	// **************************************************
 	// Function
 	function showToothLocationRecord(Data) {
 
@@ -191,7 +204,7 @@ $(document).ready(function(){
 			var $ClonedReExamination = $ExaminationSelector.clone(true).removeClass('invisible');
 			$ClonedReExamination.attr("case_id", Data.Examination.case_id);
 			$ClonedReExamination.find('span[type=doctor]').text(Data.Examination.judge_doctor);
-			$ClonedReExamination.find("div.time span").text("2016.11.20");
+			$ClonedReExamination.find("div.time span").text(Data.Examination.date);
 
 			Data.$LocationRecord.find('.after.divider').after("<div class='ui hidden divider'></div>");
 			Data.$LocationRecord.find('.after.divider').after($ClonedReExamination);
@@ -200,8 +213,9 @@ $(document).ready(function(){
 		} else {
 			var $FirstVisit = Data.$LocationRecord.find('.firstvisit.labels');
 
+			$FirstVisit.attr("case_id", Data.Examination.case_id);
 			$FirstVisit.find("span[type=doctor]").text(Data.Examination.judge_doctor);
-			$FirstVisit.find("div.time span").text("2016.11.20");
+			$FirstVisit.find("div.time span").text(Data.Examination.date);
 
 			// TODO: step
 		}

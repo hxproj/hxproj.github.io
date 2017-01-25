@@ -4,62 +4,56 @@ $(document).ready(function(){
 
 	
 	// **************************************************
-	// POST
-	$('form').form({
+	// INIT
+	// INIT PARAMENTERS
+	// TODO: Request Parameters From URL
+	var UID = Number(requestParameter("uid")),
+		TID = Number(requestParameter("tid")),
+		CID = Number(requestParameter("cid")),
+		IsEditMode = false;
+	// INIT SELECTOR
+	var $InfoSegement = $('table'),
+		$FormSegement = $('form');
+
+
+	// **************************************************
+	// POST | PUT
+	$('#ID_mainform').form({
 		fields: {
 			tooth_surface_and_location: {
-				identifier: 'tooth_surface_and_location',
+				identifier: 'tooth_location',
 				rules: [
 					{
 						type   : 'empty',
-						prompt : '请选择累及牙面及部位'
+						prompt : '请选择患牙位置'
 					}
 				]
 			},
-			caries_depth: {
-				identifier: 'caries_depth',
+			symptom: {
+				identifier: 'symptom',
 				rules: [
 					{
 						type   : 'empty',
-						prompt : '请选择龋损深度'
+						prompt : '症状'
 					}
 				]
 			},
-			technology_type: {
-				identifier: 'technology_type',
+			time_of_occurrence: {
+				identifier: 'time_of_occurrence',
 				rules: [
 					{
 						type   : 'empty',
-						prompt : '请选择技术类型'
-					}
-				]
-			},
-			history_of_fill: {
-				identifier: 'history_of_fill',
-				rules: [
-					{
-						type   : 'empty',
-						prompt : '请选择充填修复史及充填失败史'
-					}
-				]
-			},
-			difficulty_rating: {
-				identifier: 'difficulty_rating',
-				rules: [
-					{
-						type   : 'empty',
-						prompt : '请选择龋病风险难度分级'
+						prompt : '请选择病程时间'
 					}
 				]
 			}
 		},
 		inline: true,
 		onSuccess: function(){
-
 			$.ajax({
 				url      : URL_DIFFICULTYASSE,
-				type     : "POST", 
-				data     : toform({user_id : U_ID, tooth_id : T_ID}) + $(this).serialize(),
+				type     : IsEditMode ? "PUT" : "POST", 
+				data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function() {location.reload();}
@@ -68,7 +62,20 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	
+
+
+	// **************************************************
+	// Function
+	var $TimeofOccurrence = $('#ChiefComplaint input[name=time_of_occurrence]');
+	$TimeofOccurrence.parent().click(function(){
+		$('#ID_TimeModal').modal({
+
+		}).modal('show');
+	});
+	$('#ID_TimeModal a.label').click(function(){
+		$TimeofOccurrence.val($(this).text() + $(this).prevAll('div.label').text());
+		$('#ID_TimeModal').modal('hide');
+	});
 
 	// **************************************************
 	// Function

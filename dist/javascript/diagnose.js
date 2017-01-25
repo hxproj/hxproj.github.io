@@ -4,9 +4,9 @@ $(document).ready(function(){
 	// INIT
 	// INIT PARAMENTERS
 	// TODO: Request Parameters From URL
-	var UID = 6,
-		TID = 1,
-		CID = 1,
+	var UID = Number(requestParameter("uid")),
+		TID = Number(requestParameter("tid")),
+		CID = Number(requestParameter("cid")),
 		Image_type = 1,
 		IsEditMode = false;
 	// INIT SELECTOR

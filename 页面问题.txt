@@ -1,0 +1,19 @@
+1. 口腔检查：
+
+	添加项：
+    	OtherExpression = db.Column(db.String(300))
+	删除项：
+    	# treatment = db.Column(db.String(50))
+    	# orthodontic = db.Column(db.String(50))
+   	# loss_caries_index_up = db.Column(db.String(50))
+    	# loss_caries_surface_index_up = db.Column(db.String(50))
+   	# development_of_the_situation = db.Column(db.String(50))
+
+2. 风险评估：评估结果有误
+
+
+  "relative_illness": [
+    {
+      "key": "无",
+      "value": 1
+    },

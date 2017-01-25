@@ -4,9 +4,9 @@ $(document).ready(function(){
 	// INIT
 	// INIT PARAMENTERS
 	// TODO: Request Parameters From URL
-	var UID = 6,
-		TID = 1,
-		CID = 1,
+	var UID = Number(requestParameter("uid")),
+		TID = Number(requestParameter("tid")),
+		CID = Number(requestParameter("cid")),
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),
@@ -26,6 +26,11 @@ $(document).ready(function(){
 		},
 		success  : function(vData) {
 			$InfoSegement.show();
+
+			$.get(URL_CASE, {case_id : CID}, function(data){
+				$('#in_date').text(data.date);
+				data.case_type ? $('#case_type').text("复诊") : $('#case_type').text("初诊");
+			}, 'JSON');
 
 			IsEditMode = true;
 			setDefultFormData(vData);

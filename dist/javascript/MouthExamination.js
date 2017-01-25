@@ -4,9 +4,9 @@ $(document).ready(function(){
 	// INIT
 	// INIT PARAMENTERS
 	// TODO: Request Parameters From URL
-	var UID = 6,
-		TID = 1,
-		CID = 1,
+	var UID = Number(requestParameter("uid")),
+		TID = Number(requestParameter("tid")),
+		CID = Number(requestParameter("cid")),
 		Image_type = 1,
 		IsEditMode = false;
 	// INIT SELECTOR
@@ -144,29 +144,17 @@ $(document).ready(function(){
 		inline: true,
 		onSuccess: function(){
 
-			switch ($(this).form('get value', 'cure_plan')) {
-				case "牙非手术治疗": {
-					$(this).form('set value', 'specification', $(this).form('get value', 'specification1'));
-					break;
-				}
-				case "龋病微创修复": {
-					$(this).form('set value', 'specification', $(this).form('get value', 'specification2'));
-					break;
-				}
-				case "复合树脂修复": {
-					$(this).form('set value', 'specification', $(this).form('get value', 'specification3'));
-					break;
-				}
-				case "美容修复": {
-					$(this).form('set value', 'specification', $(this).form('get value', 'specification4'));
-					break;
-				}
-			}
+			var FormData = toform({
+				user_id  : UID, 
+				case_id  : CID,
+				tooth_id : TID,
+				caries_tired : $(this).form('get value', 'caries_tired_display')
+			}) + $(this).serialize();
 
 			$.ajax({
-				url      : URL_DIAGNOSE,
+				url      : URL_MOUTHEXAM,
 				type     : IsEditMode ? "PUT" : "POST", 
-				data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $(this).serialize(),
+				data     : FormData,
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function(data){
@@ -218,6 +206,30 @@ $(document).ready(function(){
 			$("div[field=" + CurePlan + "]").removeClass("invisible");
 		}
 	});
+
+
+	// **************************************************
+	// Other Envent
+	// 选择牙位
+	$('#SelectToothLocation').click(function(){
+		$('#SelectToothLocationModal').modal({
+			onApprove : function(){
+
+				var FormData = "";
+				$('#SelectToothLocationModal .segment.active .teal.label').each(function(){
+					FormData += $(this).text() + ",";
+				});
+
+				if (FormData.length > 0) {FormData = FormData.substring(0, FormData.length - 1);} 
+
+				$('#SelectToothLocation input').val(FormData);
+			}
+		}).modal('show');
+	});
+	$('#SelectToothLocationModal .ui.label').click(function(){ $(this).toggleClass('teal'); });
+
+	$('#context .menu .item').tab({ context: $('#context') });
+
 
 	// **************************************************
 	// Function

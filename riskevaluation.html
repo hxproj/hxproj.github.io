@@ -13,6 +13,7 @@
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/riskevaluation.js"></script>
 
 </head>
 
@@ -41,13 +42,11 @@
 		</div>
 
 		<div class="thirteen wide column">
-			<form class="ui clearing raised form segment">
-				<a class="ui blue ribbon label">初诊</a>
-				<span>2016-11-11</span>
+			<div class="ui raised segment">
+				<a class="ui blue ribbon label" id="case_type"></a>
+				<span id="in_date"></span>
 				<div class="ui center aligned basic segment">
-					<div class="ui large header">
-						【龋病风险评估（＞6岁）】
-					</div>
+					<div class="ui large header">【风险评估】</div>
 					<div class="ui teal labels">
 						<div class="ui label">张三</div>
 						<div class="ui label">男</div>
@@ -58,167 +57,267 @@
 						<div class="ui label">11牙中龋</div>
 					</div>
 				</div>
-				<div class="ui divider"></div>
 
-				<h3 class="ui blue header">1. 促进因素</h3>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>氟保护（饮水，氟制剂，专业涂氟，含氟牙膏）</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>含糖食物或饮料（果汁，含碳或不含碳的软饮料，功能饮料，糖浆）</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="只在饭点食用">只在饭点食用</option>
-			            <option value="经常食用或持续食用">经常食用或持续食用</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="field">
-			    		<label>母亲，照料者和/或兄弟姐妹（仅对6-14岁患者）的患龋经历</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="只在饭点食用">近2年内患龋</option>
-			            <option value="经常食用或持续食用">7-23个月内患龋</option>
-			            <option value="经常食用或持续食用">近6个月内患龋</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>建立患者档案，定期接受检查</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-				</div>
+				<!--table info-->
+				<table class="ui celled invisible structured table">
+					<thead>
+						<tr>
+							<th class="center aligned" colspan="3">风险评估表</th>
+						</tr>
+					</thead>
+		  			<tbody>
+						<tr>
+							<td class="positive collapsing" rowspan="4">促进因素</td>
+							<td class="collapsing">氟保护（饮水，氟制剂，专业涂氟，含氟牙膏）</td>
+							<td id="fluorine_protection"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">含糖食物或饮料（果汁，含碳或不含碳的软饮料，功能饮料，糖浆）</td>
+							<td id="sugary_foods"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">母亲，照料者和/或兄弟姐妹（仅对6-14岁患者）的患龋经历</td>
+							<td id="relative_illness"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">建立患者档案，定期接受检查</td>
+							<td id="need_record"></td>
+						</tr>
 
-				<h3 class="ui blue header">2. 一般健康情况</h3>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>酗酒，药物成瘾</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>放疗</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>饮食紊乱</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>服用唾液量减少的药物</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是">是</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>特殊医疗看护（发育性、身体、心理残疾以至于不能得到足够的口腔健康维护）</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="否">否</option>
-			            <option value="是（14岁以上）">是（14岁以上）</option>
-			            <option value="是（6-14岁）">是（6-14岁）</option>
-			          	</select>
-					</div>
-				</div>
+						<tr>
+							<td class="positive collapsing" rowspan="5">一般健康情况</td>
+							<td class="collapsing">酗酒，药物成瘾</td>
+							<td id="alcohol_drugs"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">放疗</td>
+							<td id="radiotherapy"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">饮食紊乱</td>
+							<td id="eating_disorders"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">服用唾液量减少的药物</td>
+							<td id="saliva_medicine"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">特殊医疗看护（发育性、身体、心理残疾以至于不能得到足够的口腔健康维护）</td>
+							<td id="special_care"></td>
+						</tr>
 
-				<h3 class="ui blue header">3. 临床检查</h3>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>在过去的3年内因龋缺失牙</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>软垢</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>特殊的牙体形态（影响口腔卫生）</label>
-			    		<select name="frequency_of_sweet" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>邻面龋（1或更多）</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>牙根暴露</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>充填有悬突，边缘微渗漏；食物嵌塞</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>矫治器、义齿（固定或可摘）</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-			    	<div class="required field">
-			    		<label>口干症</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="无">无</option>
-			            <option value="有">有</option>
-			          	</select>
-					</div>
-				</div>
-		    	<div class="two fields">
-			    	<div class="required field">
-			    		<label>成洞或未成洞（早期龋）的龋损或充填（肉眼可见或X线片可见）</label>
-			    		<select name="" class="ui dropdown">
-			            <option value="近3年内无龋损或充填">近3年内无龋损或充填</option>
-			            <option value="近3年内1-2个新发龋损">近3年内1-2个新发龋损</option>
-			            <option value="近3年内新发龋损多余3处">近3年内新发龋损多余3处</option>
-			          	</select>
-					</div>
-				</div>
+						<tr>
+							<td class="positive collapsing" rowspan="9">临床检查</td>
+							<td class="collapsing">在过去的3年内因龋缺失牙</td>
+							<td id="caries_lost"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">软垢</td>
+							<td id="soft_dirt"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">特殊的牙体形态（影响口腔卫生）</td>
+							<td id="special_tooth_shape"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">邻面龋（1或更多）</td>
+							<td id="adjacent_caries"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙根暴露</td>
+							<td id="tooth_exposure"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">充填有悬突，边缘微渗漏；食物嵌塞</td>
+							<td id="fill_overhang"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">矫治器、义齿（固定或可摘）</td>
+							<td id="appliance"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">口干症</td>
+							<td id="dry_syndrome"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">成洞或未成洞（早期龋）的龋损或充填（肉眼可见或X线片可见）</td>
+							<td id="hole"></td>
+						</tr>
 
-				<div class="ui hidden divider"></div>
-				<div class="ui right floated blue submit button">提交</div>
-			</form>
+						<tr>
+							<td class="positive collapsing">评估结果</td>
+							<td class="negative center aligned" colspan="2" id="risk_level"></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="right aligned">
+								<div class="ui blue edit small button">修改</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<form class="ui invisible clearing raised basic form segment">
+					<div class="ui divider"></div>
+					<h3 class="ui blue header">1. 促进因素</h3>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>氟保护（饮水，氟制剂，专业涂氟，含氟牙膏）</label>
+				    		<select name="fluorine_protection" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>含糖食物或饮料（果汁，含碳或不含碳的软饮料，功能饮料，糖浆）</label>
+				    		<select name="sugary_foods" class="ui dropdown">
+				            <option value="只在饭点食用">只在饭点食用</option>
+				            <option value="经常食用或持续食用">经常食用或持续食用</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="field">
+				    		<label>母亲，照料者和/或兄弟姐妹（仅对6-14岁患者）的患龋经历</label>
+				    		<select name="relative_illness" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="近2年内患龋">近2年内患龋</option>
+				            <option value="7-23个月内患龋">7-23个月内患龋</option>
+				            <option value="近6个月内患龋">近6个月内患龋</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>建立患者档案，定期接受检查</label>
+				    		<select name="need_record" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+					</div>
+
+					<h3 class="ui blue header">2. 一般健康情况</h3>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>酗酒，药物成瘾</label>
+				    		<select name="alcohol_drugs" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>放疗</label>
+				    		<select name="radiotherapy" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>饮食紊乱</label>
+				    		<select name="eating_disorders" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>服用唾液量减少的药物</label>
+				    		<select name="saliva_medicine" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是">是</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>特殊医疗看护（发育性、身体、心理残疾以至于不能得到足够的口腔健康维护）</label>
+				    		<select name="special_care" class="ui dropdown">
+				            <option value="否">否</option>
+				            <option value="是（14岁以上）">是（14岁以上）</option>
+				            <option value="是（6-14岁）">是（6-14岁）</option>
+				          	</select>
+						</div>
+					</div>
+
+					<h3 class="ui blue header">3. 临床检查</h3>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>在过去的3年内因龋缺失牙</label>
+				    		<select name="caries_lost" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>软垢</label>
+				    		<select name="soft_dirt" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>特殊的牙体形态（影响口腔卫生）</label>
+				    		<select name="special_tooth_shape" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>邻面龋（1或更多）</label>
+				    		<select name="adjacent_caries" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>牙根暴露</label>
+				    		<select name="tooth_exposure" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>充填有悬突，边缘微渗漏；食物嵌塞</label>
+				    		<select name="fill_overhang" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>矫治器、义齿（固定或可摘）</label>
+				    		<select name="appliance" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+				    	<div class="required field">
+				    		<label>口干症</label>
+				    		<select name="dry_syndrome" class="ui dropdown">
+				            <option value="无">无</option>
+				            <option value="有">有</option>
+				          	</select>
+						</div>
+					</div>
+			    	<div class="two fields">
+				    	<div class="required field">
+				    		<label>成洞或未成洞（早期龋）的龋损或充填（肉眼可见或X线片可见）</label>
+				    		<select name="hole" class="ui dropdown">
+				            <option value="近3年内无龋损或充填">近3年内无龋损或充填</option>
+				            <option value="近3年内1-2个新发龋损">近3年内1-2个新发龋损</option>
+				            <option value="近3年内新发龋损多余3处">近3年内新发龋损多余3处</option>
+				          	</select>
+						</div>
+					</div>
+
+					<div class="ui hidden divider"></div>
+					<div class="ui right floated blue small submit button">提交</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>
