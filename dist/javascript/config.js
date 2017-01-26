@@ -12,7 +12,7 @@ $(document).ready(function(){
 	window.URL_RISKEVALUATION   = URL_SERVER + "/medical-case-of-illness/risk-assessment";   // TODO
 	window.URL_DIAGNOSE			= URL_SERVER + "/medical-case-of-illness/diagnose";          // TODO
 	window.URL_DIFFICULTYASSE   = URL_SERVER + "/medical-case-of-illness/difficulty-assessment";
-
+	window.URL_PERSONALHISTORY  = URL_SERVER + "/medical-case-of-illness/personal-history";
 
 
 
@@ -21,7 +21,6 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
-	window.URL_PERSONAL_HISTORY = URL_SERVER + "/medical-case-of-illness/personal-history";
 	window.URL_PAGE             = URL_SERVER + "/medical-case-of-illness/index-info";
 	window.URL_PRESENTILLNESS   = URL_SERVER + "/medical-case-of-illness/illness-history";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";

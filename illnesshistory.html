@@ -41,9 +41,9 @@
 
 		<div class="thirteen wide column">
 
-			<div class="ui clearing raised form segment" id="ID_mainform">
+			<div class="ui raised segment">
 				<a class="ui blue ribbon label" id="case_type"></a>
-				<span id="in_date"></span> 
+				<span id="in_date"></span>
 				<div class="ui center aligned basic segment">
 					<div class="ui large header">【主诉&病史】</div>
 					<div class="ui teal labels">
@@ -57,8 +57,135 @@
 					</div>
 				</div>
 
-				<div class="ui basic form segment" id="ChiefComplaint">
-					<div class="ui divider"></div>
+
+				<!--table info-->
+				<table class="ui celled invisible structured table">
+					<thead>
+						<tr>
+							<th class="center aligned" colspan="3">风险评估表</th>
+						</tr>
+					</thead>
+		  			<tbody>
+						<tr>
+							<td class="positive collapsing" rowspan="4">促进因素</td>
+							<td class="collapsing">氟保护（饮水，氟制剂，专业涂氟，含氟牙膏）</td>
+							<td id="fluorine_protection"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">含糖食物或饮料（果汁，含碳或不含碳的软饮料，功能饮料，糖浆）</td>
+							<td id="sugary_foods"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">母亲，照料者和/或兄弟姐妹（仅对6-14岁患者）的患龋经历</td>
+							<td id="relative_illness"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">建立患者档案，定期接受检查</td>
+							<td id="need_record"></td>
+						</tr>
+
+						<tr>
+							<td class="positive collapsing" rowspan="5">一般健康情况</td>
+							<td class="collapsing">酗酒，药物成瘾</td>
+							<td id="alcohol_drugs"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">放疗</td>
+							<td id="radiotherapy"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">饮食紊乱</td>
+							<td id="eating_disorders"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">服用唾液量减少的药物</td>
+							<td id="saliva_medicine"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">特殊医疗看护（发育性、身体、心理残疾以至于不能得到足够的口腔健康维护）</td>
+							<td id="special_care"></td>
+						</tr>
+
+						<tr>
+							<td class="positive collapsing" rowspan="9">临床检查</td>
+							<td class="collapsing">在过去的3年内因龋缺失牙</td>
+							<td id="caries_lost"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">软垢</td>
+							<td id="soft_dirt"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">特殊的牙体形态（影响口腔卫生）</td>
+							<td id="special_tooth_shape"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">邻面龋（1或更多）</td>
+							<td id="adjacent_caries"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">牙根暴露</td>
+							<td id="tooth_exposure"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">充填有悬突，边缘微渗漏；食物嵌塞</td>
+							<td id="fill_overhang"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">矫治器、义齿（固定或可摘）</td>
+							<td id="appliance"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">口干症</td>
+							<td id="dry_syndrome"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">成洞或未成洞（早期龋）的龋损或充填（肉眼可见或X线片可见）</td>
+							<td id="hole"></td>
+						</tr>
+
+						<tr>
+							<td class="positive collapsing">评估结果</td>
+							<td class="negative center aligned" colspan="2" id="risk_level"></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="right aligned">
+								<div class="ui blue edit small button">修改</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<div class="ui ordered four top attached steps">
+					<!--completed-->
+					<div class="active step">
+						<div class="content">
+							<div class="title">主诉</div>
+							<div class="description">牙位病情描述</div>
+						</div>
+					</div>
+					<div class="disabled step">
+						<div class="content">
+							<div class="title">现病史</div>
+							<div class="description">牙位病情状况</div>
+						</div>
+					</div>
+					<div class="disabled step">
+						<div class="content">
+							<div class="title">个人史</div>
+							<div class="description">其它病史情况</div>
+						</div>
+					</div>
+					<div class="disabled step">
+						<div class="content">
+							<div class="title">确认</div>
+							<div class="description">确认输入信息</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ui clearing form segment" id="ChiefComplaint">
 					<h4 class="ui header">1. 主诉</h4>
 				    <div class="three fields">
 				    	<div class="field">
@@ -110,198 +237,201 @@
 						<label>补充主诉</label>
 						<textarea rows="3" name="additional"></textarea>
 					</div>
+
+					<div class="ui right floated blue small next button">下一步</div>
 				</div>
 
-				<div class="ui basic segment" id="PresentIllnessHistory">
+				<div class="ui invisible clearing form segment" id="PresentIllnessHistory">
 					<h4 class="ui header">2. 现病史</h4>
-
 					<div id="PresentIllnessContext">
 				  		<div class="ui blue pointing secondary fluid two item menu">
 							<a class="active item" data-tab="1">原发性龋病</a>
 							<a class="item" data-tab="2">继发性龋病</a>
 				  		</div>
 
-				  		<div class="ui tab clearing basic segment active" data-tab="1">
-				  			<form class="ui form">
-						    	<h3 class="ui locationdescription blue header"></h3>
-								<div class="three fields">
-							    	<div class="required field">
-							    		<label>近来症状是否加重</label>
-							    		<select name="is_very_bad" class="ui dropdown">
-							            <option value="近来症状未加重">否</option>
-							            <option value="近来症状加重">是</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无自发痛</label>
-							    		<select name="is_night_pain_self_pain" class="ui dropdown">
-							            <option value="患牙无自发痛">无</option>
-							            <option value="患牙有自发痛">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无夜间痛</label>
-							    		<select name="is_hypnalgia" class="ui dropdown">
-							            <option value="无夜间痛">无</option>
-							            <option value="有夜间痛">有</option>
-							          	</select>
-									</div>
+				  		<div class="ui tab form clearing basic segment active" data-tab="1">
+					    	<h3 class="ui locationdescription blue header"></h3>
+							<div class="three fields">
+						    	<div class="required field">
+						    		<label>近来症状是否加重</label>
+						    		<select name="is_very_bad" class="ui dropdown">
+						            <option value="近来症状未加重">否</option>
+						            <option value="近来症状加重">是</option>
+						          	</select>
 								</div>
-								<div class="three fields">
-							    	<div class="required field">
-							    		<label>有无牙齿敏感</label>
-							    		<select name="is_sensitive_cold_heat" class="ui dropdown">
-							            <option value="无冷热敏感">无</option>
-							            <option value="有冷热敏感">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无冷热刺激痛</label>
-							    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
-							            <option value="无冷热刺激痛">无</option>
-							            <option value="有冷热刺激痛">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无延缓痛</label>
-							    		<select name="is_delayed_pain" class="ui dropdown">
-							            <option value="无延缓痛">无</option>
-							            <option value="有延缓痛">有</option>
-							          	</select>
-									</div>
+						    	<div class="required field">
+						    		<label>有无自发痛</label>
+						    		<select name="is_night_pain_self_pain" class="ui dropdown">
+						            <option value="患牙无自发痛">无</option>
+						            <option value="患牙有自发痛">有</option>
+						          	</select>
 								</div>
-						    	<div class="three fields">
-							    	<div class="field">
-							    		<label>服用药物名称</label>
-										<input type="text" name="medicine_name_display" placeholder="药物名称">
-									</div>
-							    	<div class="field">
-							    		<label>症状是否缓解</label>
-							    		<select name="is_relief" class="ui dropdown">
-						                <option value="">选择</option>
-							            <option value="症状未缓解">否</option>
-							            <option value="症状缓解">是</option>
-							          	</select>
-									</div>
+						    	<div class="required field">
+						    		<label>有无夜间痛</label>
+						    		<select name="is_hypnalgia" class="ui dropdown">
+						            <option value="无夜间痛">无</option>
+						            <option value="有夜间痛">有</option>
+						          	</select>
 								</div>
+							</div>
+							<div class="three fields">
+						    	<div class="required field">
+						    		<label>有无牙齿敏感</label>
+						    		<select name="is_sensitive_cold_heat" class="ui dropdown">
+						            <option value="无冷热敏感">无</option>
+						            <option value="有冷热敏感">有</option>
+						          	</select>
+								</div>
+						    	<div class="required field">
+						    		<label>有无冷热刺激痛</label>
+						    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
+						            <option value="无冷热刺激痛">无</option>
+						            <option value="有冷热刺激痛">有</option>
+						          	</select>
+								</div>
+						    	<div class="required field">
+						    		<label>有无延缓痛</label>
+						    		<select name="is_delayed_pain" class="ui dropdown">
+						            <option value="无延缓痛">无</option>
+						            <option value="有延缓痛">有</option>
+						          	</select>
+								</div>
+							</div>
+					    	<div class="three fields">
+						    	<div class="field">
+						    		<label>服用药物名称</label>
+									<input type="text" name="medicine_name_display" placeholder="药物名称">
+								</div>
+						    	<div class="field">
+						    		<label>症状是否缓解</label>
+						    		<select name="is_relief" class="ui dropdown">
+					                <option value="">选择</option>
+						            <option value="症状未缓解">否</option>
+						            <option value="症状缓解">是</option>
+						          	</select>
+								</div>
+							</div>
 
-								<div class="field">
-									<label>补充现病史</label>
-									<textarea rows="3" name="time_of_occurrence"></textarea>
-								</div>
+							<div class="field">
+								<label>补充现病史</label>
+								<textarea rows="3" name="time_of_occurrence"></textarea>
+							</div>
 
-								<input name="is_primary" type="hidden" value="0">
-								<input name="fill_type" type="hidden" value="">
-								<input name="fill_state" type="hidden" value="">
-								<input name="cure_time" type="hidden" value="">
-							</form>
+							<input name="is_primary" type="hidden" value="0">
+							<input name="fill_type" type="hidden" value="">
+							<input name="fill_state" type="hidden" value="">
+							<input name="cure_time" type="hidden" value="">				
+
+							<div class="ui right floated blue small next button">下一步</div>
+							<div class="ui right floated blue small prev button">上一步</div>
 				  		</div>
 
-				  		<div class="ui tab clearing basic segment" data-tab="2">
-				  			<form class="ui form">
-						    	<h3 class="ui locationdescription blue header"></h3>
-					  			<div class="three fields">
-							    	<div class="required field">
-							    		<label>上次治疗时间</label>
-							    		<div class="ui disabled input" id="ID_CureTime">
-											<input type="text" name="cure_time" placeholder="单击选择治疗时间~~">
-										</div>
-									</div>
-							    	<div class="required field">
-							    		<label>修复体类型</label>
-							    		<select name="fill_type" class="ui dropdown">
-						                <option value="">选择</option>
-						                <option value="树脂充填体">树脂充填体</option>
-						                <option value="玻璃离子充填体">玻璃离子充填体</option>
-						                <option value="银汞合金充填体">银汞合金充填体</option>
-						                <option value="烤瓷冠">烤瓷冠</option>
-						                <option value="金属冠">金属冠</option>
-						                <option value="瓷嵌体">瓷嵌体</option>
-						                <option value="树脂嵌体">树脂嵌体</option>
-						                <option value="其它">其它</option>
-						              	</select>
-							    	</div>
-							    	<div class="required field">
-							    		<label>修复体状况</label>
-							    		<select name="fill_state" class="ui dropdown">
-						                <option value="">选择</option>
-						                <option value="今修复体完好">完好</option>
-						                <option value="今修复体折裂">折裂</option>
-						                <option value="今修复体脱落">脱落</option>
-						                <option value="今修复体缺损">缺损</option>
-						                <option value="今修复体变色">变色</option>
-						                <option value="今修复体松动">松动</option>
-						                <option value="今修复体不合适">不合适</option>
-						              	</select>
-							    	</div>
-								</div>
-								<div class="three fields">
-							    	<div class="required field">
-							    		<label>有无自发痛</label>
-							    		<select name="is_night_pain_self_pain" class="ui dropdown">
-							            <option value="患牙无自发痛">无</option>
-							            <option value="患牙有自发痛">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无夜间痛</label>
-							    		<select name="is_hypnalgia" class="ui dropdown">
-							            <option value="无夜间痛">无</option>
-							            <option value="有夜间痛">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无牙齿敏感</label>
-							    		<select name="is_sensitive_cold_heat" class="ui dropdown">
-							            <option value="无冷热敏感">无</option>
-							            <option value="有冷热敏感">有</option>
-							          	</select>
+				  		<div class="ui tab clearing basic form segment" data-tab="2">
+					    	<h3 class="ui locationdescription blue header"></h3>
+				  			<div class="three fields">
+						    	<div class="required field">
+						    		<label>上次治疗时间</label>
+						    		<div class="ui disabled input" id="ID_CureTime">
+										<input type="text" name="cure_time" placeholder="单击选择治疗时间~~">
 									</div>
 								</div>
-								<div class="three fields">
-							    	<div class="required field">
-							    		<label>有无冷热刺激痛</label>
-							    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
-							            <option value="无冷热刺激痛">无</option>
-							            <option value="有冷热刺激痛">有</option>
-							          	</select>
-									</div>
-							    	<div class="required field">
-							    		<label>有无延缓痛</label>
-							    		<select name="is_delayed_pain" class="ui dropdown">
-							            <option value="无延缓痛">无</option>
-							            <option value="有延缓痛">有</option>
-							          	</select>
-									</div>
+						    	<div class="required field">
+						    		<label>修复体类型</label>
+						    		<select name="fill_type" class="ui dropdown">
+					                <option value="">选择</option>
+					                <option value="树脂充填体">树脂充填体</option>
+					                <option value="玻璃离子充填体">玻璃离子充填体</option>
+					                <option value="银汞合金充填体">银汞合金充填体</option>
+					                <option value="烤瓷冠">烤瓷冠</option>
+					                <option value="金属冠">金属冠</option>
+					                <option value="瓷嵌体">瓷嵌体</option>
+					                <option value="树脂嵌体">树脂嵌体</option>
+					                <option value="其它">其它</option>
+					              	</select>
+						    	</div>
+						    	<div class="required field">
+						    		<label>修复体状况</label>
+						    		<select name="fill_state" class="ui dropdown">
+					                <option value="">选择</option>
+					                <option value="今修复体完好">完好</option>
+					                <option value="今修复体折裂">折裂</option>
+					                <option value="今修复体脱落">脱落</option>
+					                <option value="今修复体缺损">缺损</option>
+					                <option value="今修复体变色">变色</option>
+					                <option value="今修复体松动">松动</option>
+					                <option value="今修复体不合适">不合适</option>
+					              	</select>
+						    	</div>
+							</div>
+							<div class="three fields">
+						    	<div class="required field">
+						    		<label>有无自发痛</label>
+						    		<select name="is_night_pain_self_pain" class="ui dropdown">
+						            <option value="患牙无自发痛">无</option>
+						            <option value="患牙有自发痛">有</option>
+						          	</select>
 								</div>
-					  			<div class="three fields">
-							    	<div class="field">
-							    		<label>服用药物名称</label>
-										<input type="text" name="medicine_name_display" placeholder="药物名称">
-									</div>
-							    	<div class="field">
-							    		<label>症状是否缓解</label>
-							    		<select name="is_relief" class="ui dropdown">
-						                <option value="">选择</option>
-							            <option value="症状缓解">是</option>
-							            <option value="症状未缓解">否</option>
-							          	</select>
-									</div>
+						    	<div class="required field">
+						    		<label>有无夜间痛</label>
+						    		<select name="is_hypnalgia" class="ui dropdown">
+						            <option value="无夜间痛">无</option>
+						            <option value="有夜间痛">有</option>
+						          	</select>
 								</div>
+						    	<div class="required field">
+						    		<label>有无牙齿敏感</label>
+						    		<select name="is_sensitive_cold_heat" class="ui dropdown">
+						            <option value="无冷热敏感">无</option>
+						            <option value="有冷热敏感">有</option>
+						          	</select>
+								</div>
+							</div>
+							<div class="three fields">
+						    	<div class="required field">
+						    		<label>有无冷热刺激痛</label>
+						    		<select name="is_cold_hot_stimulationpain" class="ui dropdown">
+						            <option value="无冷热刺激痛">无</option>
+						            <option value="有冷热刺激痛">有</option>
+						          	</select>
+								</div>
+						    	<div class="required field">
+						    		<label>有无延缓痛</label>
+						    		<select name="is_delayed_pain" class="ui dropdown">
+						            <option value="无延缓痛">无</option>
+						            <option value="有延缓痛">有</option>
+						          	</select>
+								</div>
+						    	<div class="field">
+						    		<label>服用药物名称</label>
+									<input type="text" name="medicine_name_display" placeholder="药物名称">
+								</div>
+							</div>
+				  			<div class="three fields">
+						    	<div class="field">
+						    		<label>症状是否缓解</label>
+						    		<select name="is_relief" class="ui dropdown">
+					                <option value="">选择</option>
+						            <option value="症状缓解">是</option>
+						            <option value="症状未缓解">否</option>
+						          	</select>
+								</div>
+							</div>
 
-								<div class="field">
-									<label>补充现病史</label>
-									<textarea rows="3" name="time_of_occurrence"></textarea>
-								</div>
-							    	
-								<input name="is_primary" type="hidden" value="1">
-								<input name="is_very_bad" type="hidden" value="">
-							</form>
+							<div class="field">
+								<label>补充现病史</label>
+								<textarea rows="3" name="time_of_occurrence"></textarea>
+							</div>
+						    	
+							<input name="is_primary" type="hidden" value="1">
+							<input name="is_very_bad" type="hidden" value="">
+
+							<div class="ui right floated blue small next button">下一步</div>
+							<div class="ui right floated blue small prev button">上一步</div>
 				  		</div>
 			  		</div>
 				</div>
 
-				<div class="ui basic segment" id="PersonalHistory">
+				<div class="ui invisible basic clearing form segment" id="PersonalHistory">
 					<h4 class="ui header">3. 个人史</h4>
 					<h3 class="ui blue header">饮食习惯</h3>
 			    	<div class="three fields">
@@ -495,9 +625,22 @@
 						<label>患牙补充说明</label>
 						<textarea rows="3" name="time_of_occurrence"></textarea>
 					</div>
+
+
+					<div class="ui right floated blue small next button">下一步</div>
+					<div class="ui right floated blue small prev button">上一步</div>
 				</div>
 
-				<div class="ui right floated blue submit button">提交</div>
+				<div class="ui invisible basic clearing segment" id="ID_Confirm">
+					确认信息页面
+					确认信息页面
+					确认信息页面
+					确认信息页面
+					确认信息页面
+					<div class="ui right floated blue small confirm button">确认</div>
+					<div class="ui right floated blue small prev button">上一步</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
