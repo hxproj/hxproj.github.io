@@ -127,11 +127,11 @@ $(document).ready(function(){
 	// **************************************************
 	// Step
 	// Next Step
-	function nextStep(CurrentStepIndex, NextStepIndex, CurrentStepID, NextStepID) {
+	function nextStep(CurrentStepIndex, NextStepIndex, CurrentStepID, NextStepID, CallbackFun) {
 		$('.steps .step').eq(CurrentStepIndex).removeClass('active').addClass('completed');
 		$('.steps .step').eq(NextStepIndex).removeClass('disabled').addClass('active');
 
-		$(CurrentStepID).hide("normal", "linear");
+		$(CurrentStepID).hide("normal", "linear", CallbackFun);
 		$(NextStepID).show();
 	}
 	function prevStep(CurrentStepIndex, PrevStepIndex, CurrentStepID, PrevStepID) {
@@ -154,6 +154,7 @@ $(document).ready(function(){
 		$(this).parents('.form').submit();
 	});
 	// Step 2：现病史
+	var PresentIllnessHistoryForm;
 	$('#PresentIllnessHistory .form[data-tab=1]').form({
 		fields: PresentIllnessHistoryFields1,
 		inline: true,
@@ -174,14 +175,15 @@ $(document).ready(function(){
 		prevStep(1, 0, "#PresentIllnessHistory", "#ChiefComplaint");
 	});
 	$('#PresentIllnessHistory .next.button').click(function(){
-		$(this).parents('.tab.form').submit();
+		PresentIllnessHistoryForm = $(this).parents('.tab.form');
+		PresentIllnessHistoryForm.submit();
 	});
 	// Step 3: 个人史
 	$('#PersonalHistory').form({
 		fields: PersonalHistoryFields,
 		inline: true,
 		onSuccess: function() { 
-			nextStep(2, 3, "#PersonalHistory", "#ID_Confirm");
+			nextStep(2, 3, "#PersonalHistory", "#ID_Confirm", displayConfirmInfo);
 			return false; 
 		}
 	});
@@ -199,20 +201,73 @@ $(document).ready(function(){
 		// TODO: submit
 	});
 
+	function getFormData(Form, Field) {
+		return Form.form('get value', Field);
+	}
+	function displayConfirmInfo() {
+		// Form
+		var ChiefComplaintForm  = $('#ChiefComplaint'),
+			PersonalHistoryForm = $('#PersonalHistory');
+
+		// display confirm info
+		// 主诉
+		$('#CC_tooth_location').text(getFormData(ChiefComplaintForm, "tooth_location"));
+		$('#CC_symptom').text(getFormData(ChiefComplaintForm, "symptom"));
+		$('#CC_time_of_occurrence').text(getFormData(ChiefComplaintForm, "time_of_occurrence"));
+		$('#CC_additional').text(getFormData(ChiefComplaintForm, "additional"));
+
+		// 现病史
+		var temp = getFormData(PresentIllnessHistoryForm, "is_primary");
+		var Type = Number(getFormData(PresentIllnessHistoryForm, "is_primary"));
+		if (Type == 0) {
+			$('#PI_type').text("原发性龋病");
+			$('#PI_is_very_bad').parent().removeClass("disabled");
+
+			$('#PI_is_very_bad').text(getFormData(PresentIllnessHistoryForm, "is_very_bad"));
+			$('#PI_is_night_pain_self_pain').text(getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"));
+			$('#PI_is_hypnalgia').text(getFormData(PresentIllnessHistoryForm, "is_hypnalgia"));
+			$('#PI_is_sensitive_cold_heat').text(getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"));
+			$('#PI_is_cold_hot_stimulationpain').text(getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"));
+			$('#PI_is_delayed_pain').text(getFormData(PresentIllnessHistoryForm, "is_delayed_pain"));
+			$('#PI_medicine_name').text(getFormData(PresentIllnessHistoryForm, "medicine_name"));
+			$('#PI_is_relief').text(getFormData(PresentIllnessHistoryForm, "is_relief"));
+			$('#PI_additional').text(getFormData(PresentIllnessHistoryForm, "additional"));
+		} else {
+			$('#PI_type').text("继发性龋病");
+			$('#PI_cure_time').parent().removeClass("disabled");
+			$('#PI_fill_type').parent().removeClass("disabled");
+			$('#PI_fill_state').parent().removeClass("disabled");
+
+			$('#PI_cure_time').text(getFormData(PresentIllnessHistoryForm, "cure_time"));
+			$('#PI_fill_type').text(getFormData(PresentIllnessHistoryForm, "fill_type"));
+			$('#PI_fill_state').text(getFormData(PresentIllnessHistoryForm, "fill_state"));
+
+			$('#PI_is_night_pain_self_pain').text(getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"));
+			$('#PI_is_hypnalgia').text(getFormData(PresentIllnessHistoryForm, "is_hypnalgia"));
+			$('#PI_is_sensitive_cold_heat').text(getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"));
+			$('#PI_is_cold_hot_stimulationpain').text(getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"));
+			$('#PI_is_delayed_pain').text(getFormData(PresentIllnessHistoryForm, "is_delayed_pain"));
+			$('#PI_medicine_name').text(getFormData(PresentIllnessHistoryForm, "medicine_name"));
+			$('#PI_is_relief').text(getFormData(PresentIllnessHistoryForm, "is_relief"));
+			$('#PI_additional').text(getFormData(PresentIllnessHistoryForm, "additional"));
+		}
+	}
+
 
 
 	// **************************************************
 	// Other Event
-	var $TimeofOccurrence = $('#ChiefComplaint input[name=time_of_occurrence]');
-	$TimeofOccurrence.parent().click(function(){
+	$('#ChiefComplaint input[name=time_of_occurrence], #PresentIllnessHistory input[name=cure_time]').parent().click(function(){
 		$('#ID_TimeModal').modal('show');
-	});
-	$('#ID_TimeModal a.label').click(function(){
-		$TimeofOccurrence.val($(this).text() + $(this).prevAll('div.label').text());
-		$('#ID_TimeModal').modal('hide');
+
+		var $Input = $(this).find("input");
+		$('#ID_TimeModal a.label').unbind().click(function(){
+			$Input.val($(this).text() + $(this).prevAll('div.label').text());
+			$('#ID_TimeModal').modal('hide');
+		});
+
 	});
 
 	// **************************************************
 	// Function
-
 });

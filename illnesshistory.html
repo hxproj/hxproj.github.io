@@ -300,7 +300,7 @@
 					    	<div class="three fields">
 						    	<div class="field">
 						    		<label>服用药物名称</label>
-									<input type="text" name="medicine_name_display" placeholder="药物名称">
+									<input type="text" name="medicine_name" placeholder="药物名称">
 								</div>
 						    	<div class="field">
 						    		<label>症状是否缓解</label>
@@ -314,7 +314,7 @@
 
 							<div class="field">
 								<label>补充现病史</label>
-								<textarea rows="3" name="time_of_occurrence"></textarea>
+								<textarea rows="3" name="additional"></textarea>
 							</div>
 
 							<input name="is_primary" type="hidden" value="0">
@@ -403,7 +403,7 @@
 								</div>
 						    	<div class="field">
 						    		<label>服用药物名称</label>
-									<input type="text" name="medicine_name_display" placeholder="药物名称">
+									<input type="text" name="medicine_name" placeholder="药物名称">
 								</div>
 							</div>
 				  			<div class="three fields">
@@ -419,7 +419,7 @@
 
 							<div class="field">
 								<label>补充现病史</label>
-								<textarea rows="3" name="time_of_occurrence"></textarea>
+								<textarea rows="3" name="additional"></textarea>
 							</div>
 						    	
 							<input name="is_primary" type="hidden" value="1">
@@ -431,7 +431,7 @@
 			  		</div>
 				</div>
 
-				<div class="ui invisible basic clearing form segment" id="PersonalHistory">
+				<div class="ui invisible clearing form segment" id="PersonalHistory">
 					<h4 class="ui header">3. 个人史</h4>
 					<h3 class="ui blue header">饮食习惯</h3>
 			    	<div class="three fields">
@@ -631,15 +631,91 @@
 					<div class="ui right floated blue small prev button">上一步</div>
 				</div>
 
-				<div class="ui invisible basic clearing segment" id="ID_Confirm">
-					确认信息页面
-					确认信息页面
-					确认信息页面
-					确认信息页面
-					确认信息页面
-					<div class="ui right floated blue small confirm button">确认</div>
-					<div class="ui right floated blue small prev button">上一步</div>
-				</div>
+				<table class="ui celled invisible structured table" id="ID_Confirm">
+		  			<tbody>
+						<tr>
+							<td class="warning collapsing" rowspan="4">主诉</td>
+							<td class="collapsing">患牙位置</td>
+							<td id="CC_tooth_location"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">症状</td>
+							<td id="CC_symptom"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">病程时间</td>
+							<td id="CC_time_of_occurrence"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">补充主诉</td>
+							<td id="CC_additional"></td>
+						</tr>
+
+
+						<tr>
+							<td class="warning collapsing" rowspan="13">现病史</td>
+							<td class="collapsing">龋病类别</td>
+							<td id="PI_type"></td>
+						</tr>
+						<tr class="disabled">
+							<td class="collapsing">上次治疗时间</td>
+							<td id="PI_cure_time"></td>
+						</tr>
+						<tr class="disabled">
+							<td class="collapsing">修复体类型</td>
+							<td id="PI_fill_type"></td>
+						</tr>
+						<tr class="disabled">
+							<td class="collapsing">修复体状况</td>
+							<td id="PI_fill_state"></td>
+						</tr>
+						<tr class="disabled">
+							<td class="collapsing">近来症状是否加重</td>
+							<td id="PI_is_very_bad"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">有无自发痛</td>
+							<td id="PI_is_night_pain_self_pain"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">有无夜间痛</td>
+							<td id="PI_is_hypnalgia"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">有无牙齿敏感</td>
+							<td id="PI_is_sensitive_cold_heat"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">有无冷热刺激痛</td>
+							<td id="PI_is_cold_hot_stimulationpain"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">有无延缓痛</td>
+							<td id="PI_is_delayed_pain"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">服用药物名称</td>
+							<td id="PI_medicine_name"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">症状是否缓解</td>
+							<td id="PI_is_relief"></td>
+						</tr>
+						<tr>
+							<td class="collapsing">补充现病史</td>
+							<td id="PI_additional"></td>
+						</tr>
+
+						<tr>
+							<td colspan="3" class="right aligned">
+								<div class="ui right floated blue small confirm button">确认</div>
+								<div class="ui right floated blue small prev button">上一步</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!--ID_ChiefComplaintDescription ID_PresentIllnessHistoryDescription  ID_PersonalHistoryDescription-->
 
 			</div>
 		</div>
