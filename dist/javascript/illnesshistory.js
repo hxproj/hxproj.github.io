@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 	$('#PresentIllnessContext .menu .item').tab({ context: $('#PresentIllnessContext') });
-
 	
 	// **************************************************
 	// INIT
@@ -87,7 +86,7 @@ $(document).ready(function(){
 			]
 		},
 		time_of_teeth_brush_display: {
-			identifier: 'time_of_teeth_brush_display',
+			identifier: 'time_of_teeth_brush',
 			rules: [
 				{
 					type   : 'empty',
@@ -217,9 +216,7 @@ $(document).ready(function(){
 		$('#CC_additional').text(getFormData(ChiefComplaintForm, "additional"));
 
 		// 现病史
-		var temp = getFormData(PresentIllnessHistoryForm, "is_primary");
-		var Type = Number(getFormData(PresentIllnessHistoryForm, "is_primary"));
-		if (Type == 0) {
+		if (Number(getFormData(PresentIllnessHistoryForm, "is_primary")) == 0) {
 			$('#PI_type').text("原发性龋病");
 			$('#PI_is_very_bad').parent().removeClass("disabled");
 
@@ -251,13 +248,35 @@ $(document).ready(function(){
 			$('#PI_is_relief').text(getFormData(PresentIllnessHistoryForm, "is_relief"));
 			$('#PI_additional').text(getFormData(PresentIllnessHistoryForm, "additional"));
 		}
-	}
 
+		// 个人史
+		$('#PH_consumption_of_sweet').text(getFormData(PersonalHistoryForm, "consumption_of_sweet"));
+		$('#PH_frequency_of_sweet').text(getFormData(PersonalHistoryForm, "frequency_of_sweet"));
+		$('#PH_frequency_of_meal').text(getFormData(PersonalHistoryForm, "frequency_of_meal"));
+		$('#PH_is_carbonic_acid').text(getFormData(PersonalHistoryForm, "is_carbonic_acid"));
+		$('#PH_is_floss').text(getFormData(PersonalHistoryForm, "is_floss"));
+		$('#PH_times_of_teeth_brush').text(getFormData(PersonalHistoryForm, "times_of_teeth_brush"));
+		$('#PH_time_of_teeth_brush').text(getFormData(PersonalHistoryForm, "time_of_teeth_brush"));
+		$('#PH_long_of_teeth_brush').text(getFormData(PersonalHistoryForm, "long_of_teeth_brush"));
+		$('#PH_electric_tooth_brush').text(getFormData(PersonalHistoryForm, "electric_tooth_brush"));
+		$('#PH_is_fluorine').text(getFormData(PersonalHistoryForm, "is_fluorine"));
+		$('#PH_is_cavity_examination').text(getFormData(PersonalHistoryForm, "is_cavity_examination"));
+		$('#PH_is_periodontal_treatment').text(getFormData(PersonalHistoryForm, "is_periodontal_treatment"));
+		$('#PH_sjogren_syndrome').text(getFormData(PersonalHistoryForm, "sjogren_syndrome"));
+		$('#PH_salivary_gland_disease').text(getFormData(PersonalHistoryForm, "salivary_gland_disease"));
+		$('#PH_consciously_reduce_salivary_flow').text(getFormData(PersonalHistoryForm, "consciously_reduce_salivary_flow"));
+		$('#PH_development_of_the_situation').text(getFormData(PersonalHistoryForm, "development_of_the_situation"));
+		$('#PH_sjogren_syndrome').text(getFormData(PersonalHistoryForm, "sjogren_syndrome"));
+		$('#PH_loss_caries_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_index_up"));
+		$('#PH_loss_caries_surface_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_surface_index_up"));
+		$('#PH_orthodontic').text(getFormData(PersonalHistoryForm, "orthodontic"));
+		$('#PH_time_of_occurrence').text(getFormData(PersonalHistoryForm, "additional"));
+	}
 
 
 	// **************************************************
 	// Other Event
-	$('#ChiefComplaint input[name=time_of_occurrence], #PresentIllnessHistory input[name=cure_time]').parent().click(function(){
+	$('#ChiefComplaint input[name=time_of_occurrence], #ID_CureTime').parent().click(function(){
 		$('#ID_TimeModal').modal('show');
 
 		var $Input = $(this).find("input");
@@ -268,6 +287,4 @@ $(document).ready(function(){
 
 	});
 
-	// **************************************************
-	// Function
 });
