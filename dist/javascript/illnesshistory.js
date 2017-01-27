@@ -141,41 +141,31 @@ $(document).ready(function(){
 		$(PrevStepID).show();
 	}
 	// Step 1：主诉
-	$('#ChiefComplaint').form({
-		fields: ChiefComplaintFields,
-		inline: true,
-		onSuccess: function() { 
-			nextStep(0, 1, "#ChiefComplaint", "#PresentIllnessHistory");
-			return false; 
-		}
-	});
 	$('#ChiefComplaint .next.button').click(function(){
-		$(this).parents('.form').submit();
+		$(this).parents('.form').form({
+			fields: ChiefComplaintFields,
+			inline: true,
+			onSuccess: function() { 
+				nextStep(0, 1, "#ChiefComplaint", "#PresentIllnessHistory");
+				return false; 
+			}
+		}).submit();
 	});
 	// Step 2：现病史
-	var PresentIllnessHistoryForm;
-	$('#PresentIllnessHistory .form[data-tab=1]').form({
-		fields: PresentIllnessHistoryFields1,
-		inline: true,
-		onSuccess: function() { 
-			nextStep(1, 2, "#PresentIllnessHistory", "#PersonalHistory");
-			return false; 
-		}
-	});
-	$('#PresentIllnessHistory .form[data-tab=2]').form({
-		fields: PresentIllnessHistoryFields2,
-		inline: true,
-		onSuccess: function() { 
-			nextStep(1, 2, "#PresentIllnessHistory", "#PersonalHistory");
-			return false; 
-		}
-	});
 	$('#PresentIllnessHistory .prev.button').click(function(){
 		prevStep(1, 0, "#PresentIllnessHistory", "#ChiefComplaint");
 	});
+	var PresentIllnessHistoryForm;
 	$('#PresentIllnessHistory .next.button').click(function(){
-		PresentIllnessHistoryForm = $(this).parents('.tab.form');
-		PresentIllnessHistoryForm.submit();
+		PresentIllnessHistoryForm = $(this).parents('.ui.form');
+		PresentIllnessHistoryForm.form({
+			fields: $(this).parents('.tab.segment').attr("data-tab") == 1 ? PresentIllnessHistoryFields1 : PresentIllnessHistoryFields2,
+			inline: true,
+			onSuccess: function() { 
+				nextStep(1, 2, "#PresentIllnessHistory", "#PersonalHistory");
+				return false; 
+			}
+		}).submit();
 	});
 	// Step 3: 个人史
 	$('#PersonalHistory').form({
@@ -198,6 +188,29 @@ $(document).ready(function(){
 	});
 	$('#ID_Confirm .next.button').click(function(){
 		// TODO: submit
+
+		// submit tooth info
+		/*
+		$.ajax({
+			url      : URL_TOOTH,
+			type     : "PUT", 
+			data     : toform({tooth_id : TID}) + $('#ChiefComplaint form').serialize(),
+			dataType : "json",
+			error    : function() {
+				//$FormSegement.show();
+				alert("failed to submit...");
+			},
+			success  : function(vData) {
+				//$InfoSegement.show();
+
+				alert("submited...");
+				//IsEditMode = true;
+				//showData(vData);
+				//setDefultFormData(vData);
+				//$FormSegement.hide();
+			}
+		});
+		*/
 	});
 
 	function getFormData(Form, Field) {
