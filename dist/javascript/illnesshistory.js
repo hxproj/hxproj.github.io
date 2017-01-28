@@ -158,6 +158,7 @@ $(document).ready(function(){
 	var PresentIllnessHistoryForm;
 	$('#PresentIllnessHistory .next.button').click(function(){
 		PresentIllnessHistoryForm = $(this).parents('.ui.form');
+
 		PresentIllnessHistoryForm.form({
 			fields: $(this).parents('.tab.segment').attr("data-tab") == 1 ? PresentIllnessHistoryFields1 : PresentIllnessHistoryFields2,
 			inline: true,
@@ -187,30 +188,35 @@ $(document).ready(function(){
 		prevStep(3, 2, "#ID_Confirm", "#PersonalHistory");
 	});
 	$('#ID_Confirm .next.button').click(function(){
-		// TODO: submit
-
-		// submit tooth info
-		/*
+		// Submit tooth info
 		$.ajax({
 			url      : URL_TOOTH,
 			type     : "PUT", 
 			data     : toform({tooth_id : TID}) + $('#ChiefComplaint form').serialize(),
 			dataType : "json",
-			error    : function() {
-				//$FormSegement.show();
-				alert("failed to submit...");
-			},
-			success  : function(vData) {
-				//$InfoSegement.show();
-
-				alert("submited...");
-				//IsEditMode = true;
-				//showData(vData);
-				//setDefultFormData(vData);
-				//$FormSegement.hide();
-			}
+			error    : function() {},
+			success  : function(vData) {}
 		});
-		*/
+
+		// Submit presentillness
+		$.ajax({
+			url      : URL_PRESENTILLNESS,
+			type     : "POST", 
+			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + PresentIllnessHistoryForm.serialize(),
+			dataType : "json",
+			error    : function() {},
+			success  : function(vData) {}
+		});
+
+		// Submit personal history
+		$.ajax({
+			url      : URL_PERSONALHISTORY,
+			type     : "POST", 
+			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $('#PersonalHistory form').serialize(),
+			dataType : "json",
+			error    : function() {},
+			success  : function(vData) {}
+		});
 	});
 
 	function getFormData(Form, Field) {
