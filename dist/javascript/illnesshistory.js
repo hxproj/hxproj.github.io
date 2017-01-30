@@ -11,7 +11,7 @@ $(document).ready(function(){
 		CID = Number(requestParameter("cid")),
 		IsEditMode = false;
 	// INIT SELECTOR
-	var $InfoSegement = $('table'),
+	var $InfoSegement = $('#tableinfo'),
 		$FormSegement = $('form');
 	// INIT form fields validation
 	var ChiefComplaintFields = {
@@ -99,6 +99,43 @@ $(document).ready(function(){
 
 	// **************************************************
 	// GET
+	// GET：主诉
+	$.ajax({
+		url      : URL_TOOTH,
+		type     : "GET", 
+		data     : toform({tooth_id : TID}),
+		dataType : "json",
+		error    : function() {
+			// TODO: check the return data 
+			$FormSegement.show();
+		},
+		success  : function(vData) {
+			$InfoSegement.show();
+
+			IsEditMode = true;
+			displayChiefComplaintInfo(vData);
+			$FormSegement.hide();
+		}
+	});
+	// GET：现病史
+	$.ajax({
+		url      : URL_PRESENTILLNESS,
+		type     : "GET", 
+		data     : toform({case_id : CID}),
+		dataType : "json",
+		error    : function() {
+			// TODO: check the return data 
+			$FormSegement.show();
+		},
+		success  : function(vData) {
+			$InfoSegement.show();
+
+			IsEditMode = true;
+			displayPresentIllnessHistoryInfo(vData);
+			$FormSegement.hide();
+		}
+	});
+	// GET：个人史
 	$.ajax({
 		url      : URL_PERSONALHISTORY,
 		type     : "GET", 
@@ -112,15 +149,10 @@ $(document).ready(function(){
 			$InfoSegement.show();
 
 			IsEditMode = true;
-			showData(vData);
-			setDefultFormData(vData);
+			displayPersonalHistoryInfo(vData);
 			$FormSegement.hide();
 		}
 	});
-
-
-	// **************************************************
-	// POST | PUT
 
 
 	// **************************************************
@@ -305,5 +337,77 @@ $(document).ready(function(){
 		});
 
 	});
+
+
+
+	// **************************************************
+	// Function
+	function displayChiefComplaintInfo(vData) {
+		$('td[type=CC_tooth_location]').text(vData.tooth_location);
+		$('td[type=CC_symptom]').text(vData.symptom);
+		$('td[type=CC_time_of_occurrence]').text(vData.time_of_occurrence);
+		$('td[type=CC_additional]').text(vData.additional);
+	}
+
+	function displayPresentIllnessHistoryInfo(vData) {
+		if (vData.is_primary == 0) {
+			$('td[type=PI_type]').text("原发性龋病");
+
+			$('td[type=PI_is_very_bad]').parent().removeClass("disabled");
+
+			$('td[type=PI_is_very_bad]').text(vData.is_very_bad);
+			$('td[type=PI_is_night_pain_self_pain]').text(vData.is_night_pain_self_pain);
+			$('td[type=PI_is_hypnalgia]').text(vData.is_hypnalgia);
+			$('td[type=PI_is_sensitive_cold_heat]').text(vData.is_sensitive_cold_heat);
+			$('td[type=PI_is_cold_hot_stimulationpain]').text(vData.is_cold_hot_stimulationpain);
+			$('td[type=PI_is_delayed_pain]').text(vData.is_delayed_pain);
+			$('td[type=PI_medicine_name]').text(vData.medicine_name);
+			$('td[type=PI_is_relief]').text(vData.is_relief);
+			$('td[type=PI_additional]').text(vData.additional);
+		} else {
+			$('td[type=PI_type]').text("继发性龋病");
+
+			$('td[type=PI_type]').parent().removeClass("disabled");
+			$('td[type=PI_cure_time]').parent().removeClass("disabled");
+			$('td[type=PI_fill_type]').parent().removeClass("disabled");
+
+			$('td[type=PI_cure_time]').text(vData.cure_time);
+			$('td[type=PI_fill_type]').text(vData.fill_type);
+			$('td[type=PI_fill_state]').text(vData.fill_state);
+
+			$('td[type=PI_is_night_pain_self_pain]').text(vData.is_night_pain_self_pain);
+			$('td[type=PI_is_hypnalgia]').text(vData.is_hypnalgia);
+			$('td[type=PI_is_sensitive_cold_heat]').text(vData.is_sensitive_cold_heat);
+			$('td[type=PI_is_cold_hot_stimulationpain]').text(vData.is_cold_hot_stimulationpain);
+			$('td[type=PI_is_delayed_pain]').text(vData.is_delayed_pain);
+			$('td[type=PI_medicine_name]').text(vData.medicine_name);
+			$('td[type=PI_is_relief]').text(vData.is_relief);
+			$('td[type=PI_additional]').text(vData.additional);
+		}
+	}
+
+	function displayPersonalHistoryInfo(vData) {
+		$('td[type=PH_consumption_of_sweet]').text(vData.consumption_of_sweet);
+		$('td[type=PH_frequency_of_sweet]').text(vData.frequency_of_sweet);
+		$('td[type=PH_frequency_of_meal]').text(vData.frequency_of_meal);
+		$('td[type=PH_is_carbonic_acid]').text(vData.is_carbonic_acid);
+		$('td[type=PH_is_floss]').text(vData.is_floss);
+		$('td[type=PH_times_of_teeth_brush]').text(vData.times_of_teeth_brush);
+		$('td[type=PH_time_of_teeth_brush]').text(vData.time_of_teeth_brush);
+		$('td[type=PH_long_of_teeth_brush]').text(vData.long_of_teeth_brush);
+		$('td[type=PH_electric_tooth_brush]').text(vData.electric_tooth_brush);
+		$('td[type=PH_is_fluorine]').text(vData.is_fluorine);
+		$('td[type=PH_is_cavity_examination]').text(vData.is_cavity_examination);
+		$('td[type=PH_is_periodontal_treatment]').text(vData.is_periodontal_treatment);
+		$('td[type=PH_sjogren_syndrome]').text(vData.sjogren_syndrome);
+		$('td[type=PH_salivary_gland_disease]').text(vData.salivary_gland_disease);
+		$('td[type=PH_consciously_reduce_salivary_flow]').text(vData.consciously_reduce_salivary_flow);
+		$('td[type=PH_development_of_the_situation]').text(vData.development_of_the_situation);
+		$('td[type=PH_radiation_therapy_history]').text(vData.radiation_therapy_history);
+		$('td[type=PH_loss_caries_index_up]').text(vData.loss_caries_index_up);
+		$('td[type=PH_loss_caries_surface_index_up]').text(vData.loss_caries_surface_index_up);
+		$('td[type=PH_orthodontic]').text(vData.orthodontic);
+		$('td[type=PH_additional]').text(vData.additional);
+	}
 
 });
