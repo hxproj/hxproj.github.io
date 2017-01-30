@@ -187,7 +187,7 @@ $(document).ready(function(){
 	$('#ID_Confirm .prev.button').click(function(){
 		prevStep(3, 2, "#ID_Confirm", "#PersonalHistory");
 	});
-	$('#ID_Confirm .next.button').click(function(){
+	$('#ID_Confirm .confirm.button').click(function(){
 		// Submit tooth info
 		$.ajax({
 			url      : URL_TOOTH,
@@ -285,11 +285,11 @@ $(document).ready(function(){
 		$('#PH_salivary_gland_disease').text(getFormData(PersonalHistoryForm, "salivary_gland_disease"));
 		$('#PH_consciously_reduce_salivary_flow').text(getFormData(PersonalHistoryForm, "consciously_reduce_salivary_flow"));
 		$('#PH_development_of_the_situation').text(getFormData(PersonalHistoryForm, "development_of_the_situation"));
-		$('#PH_sjogren_syndrome').text(getFormData(PersonalHistoryForm, "sjogren_syndrome"));
+		$('#PH_radiation_therapy_history').text(getFormData(PersonalHistoryForm, "radiation_therapy_history"));
 		$('#PH_loss_caries_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_index_up"));
 		$('#PH_loss_caries_surface_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_surface_index_up"));
 		$('#PH_orthodontic').text(getFormData(PersonalHistoryForm, "orthodontic"));
-		$('#PH_time_of_occurrence').text(getFormData(PersonalHistoryForm, "additional"));
+		$('#PH_additional').text(getFormData(PersonalHistoryForm, "additional"));
 	}
 
 
