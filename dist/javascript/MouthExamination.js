@@ -16,14 +16,12 @@ $(document).ready(function(){
 
 	// **************************************************
 	// GET
-	/*
 	$.ajax({
-		url      : URL_DIAGNOSE,
+		url      : URL_MOUTHEXAM + toquerystring({case_id : CID}),
 		type     : "GET", 
-		data     : toform({case_id : CID}),
 		dataType : "json",
 		error    : function() {
-			// TODO: check the return data 
+			// TODO: check the return vData 
 			$FormSegement.show();
 		},
 		success  : function(vData) {
@@ -34,7 +32,6 @@ $(document).ready(function(){
 			setDefultFormData(vData);
 		}
 	});
-	*/
 
 
 	// **************************************************
@@ -157,7 +154,7 @@ $(document).ready(function(){
 				data     : FormData,
 				dataType : "json",
 				error    : function() {networkError();},
-				success  : function(data){
+				success  : function(vData){
 					
 					/*
 					// 上传图片
@@ -166,7 +163,7 @@ $(document).ready(function(){
 						type          : 'POST',  
 						fileElementId : 'imageupload',
 						dataType      : 'text',
-						data          : {tooth_id : data.tooth_id, picture_type : Image_type},
+						vData          : {tooth_id : vData.tooth_id, picture_type : Image_type},
 						async         : false,  
 						cache         : false,  
 						contentType   : false,  
@@ -191,25 +188,6 @@ $(document).ready(function(){
 
 	// **************************************************
 	// Other Envent
-	$('.edit.button').click(function(){
-		$InfoSegement.hide();
-   		$FormSegement.find('.submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
-		$FormSegement.show();
-	});
-
-
-	// **************************************************
-	// 具体治疗计划选择
-	$('select[name=cure_plan]').parent().dropdown({
-		onChange: function(CurePlan) { 
-			$('.select.field').addClass("invisible");
-			$("div[field=" + CurePlan + "]").removeClass("invisible");
-		}
-	});
-
-
-	// **************************************************
-	// Other Envent
 	// 选择牙位
 	$('#SelectToothLocation').click(function(){
 		$('#SelectToothLocationModal').modal({
@@ -227,122 +205,137 @@ $(document).ready(function(){
 		}).modal('show');
 	});
 	$('#SelectToothLocationModal .ui.label').click(function(){ $(this).toggleClass('teal'); });
-
 	$('#context .menu .item').tab({ context: $('#context') });
 
+	// 修改
+	$('.edit.button').click(function(){
+		$InfoSegement.hide();
+   		$FormSegement.find('.submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
+		$FormSegement.show();
+	});
 
 	// **************************************************
 	// Function
 	function showData(vData) {
-		// 获取牙位信息
-		var MouthData = null;
-		$.ajax({
-  			url      : URL_MOUTHEXAM,
-  			type     : "get",
-  			data     : {tooth_id : vData.tooth_id},
-  			dataType : "json",
-			async    : false,
-  			success  : function(data) { MouthData = data; }
-		})
+		// 牙体情况
+		var ME_Body_Text = vData.tooth_location + "牙";
+		ME_Body_Text += "龋坏累及" + vData.caries_tired + "，";
+		ME_Body_Text += "为" + vData.depth + "，";
 
-		var ToothLocation = "<bold>注：还未设置病人“牙位”和“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
-			Description   = "";
-	
-		if (MouthData != null) {
-    	ToothLocation = MouthData.tooth_location + "牙";
-			Description   = ToothLocation;
+		// 当原充填体选择“无”时，不进行任何语言描述，且不描述有无继发龋
+		if (vData.fill != "无") {
+			ME_Body_Text += "原充填体为" + vData.fill + "，";
+			ME_Body_Text += vData.secondary + "，";
+		};
 
-        $.each(MouthData.caries_tired.split(","), function(){
-          Description += this;
-        });
-        Description += "面" + vData.caries_degree;
+		ME_Body_Text += vData.color_of_caries + "，";
+		ME_Body_Text += vData.flex_of_caries + "，";
+		ME_Body_Text += vData.cold + "，";
+		ME_Body_Text += vData.hot + "，";
+		ME_Body_Text += vData.touch + "，";
+		ME_Body_Text += vData.bite;
 
-			if (vData.caries_type != "无") {
-        	Description += "<br/><br/>" + ToothLocation + vData.caries_type;
-   		}	
-		} else {
-			Description += vData.caries_degree;
+		// 如果牙齿活力值为空，则不显示
+		if (vData.vitality_value_of_teeth != "") {
+		ME_Body_Text += "，牙齿活力值：" + vData.vitality_value_of_teeth;
+		};
+		$('#ME_Body').text(ME_Body_Text);
 
-			if (vData.caries_type != "无") {
-        	Description += "<br/><br/>" + vData.caries_type;
-   		}	
-			Description += "<br/><br/>" + ToothLocation;
+
+		// 牙周情况
+		var ME_Around_Text = vData.gingival_hyperemia + "，";
+		ME_Around_Text += vData.gingival_color + "，";
+		ME_Around_Text += vData.tartar_up + "，";
+		ME_Around_Text += vData.tartar_down + "，";
+		ME_Around_Text += vData.bop + "，";
+		ME_Around_Text += vData.periodontal_pocket_depth + "，";
+
+		// 当选根分叉病变无时则不显示位置
+		if (vData.furcation != "根分叉病变无") {
+		ME_Around_Text += vData.furcation + "，";
+		ME_Around_Text += vData.location + "，";
 		}
-		$('#ID_Description').html(Description);
 
-	    // 显示诊断图片
-		$.ajax({
-			url      : URL_IMAGEUPLOAD,
-			type     : "GET",
-			data     : {case_id : CID, type : Image_type},
-			dataType : "json",
-			success  : function(FileData) {
+		ME_Around_Text += vData.fistula + "，";
+		ME_Around_Text += vData.overflow_pus + "，";
+		ME_Around_Text += vData.mobility;
+		$('#ME_Around').text(ME_Around_Text);
 
-				if (FileData.length == 0) {
-					$('#IMAGE').text("未添加任何图片，请点击右下角修改按钮添加");
-				} else {
-					$.each(FileData, function(){
-						var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
-						$ClonedImage.attr("value", this.img_id);
 
-						var ImagePath = this.path;
-						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-						window.loadImage(ImagePath, function(){
-							$ClonedImage.find('img').attr('src', ImagePath);
-							$ClonedImage.find('.corner').removeClass('hidden');
-						});
-						
-						$ClonedImage.find('.corner').bind('click', function(){
-							var $Image = $(this).parent();
-	                
-							$('#deletemodal').modal({
-								onApprove: function() {
-									$.ajax({
-										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-										type     : "DELETE",
-										data     : {},
-										dataType : "text",
-										error    : function(data) {
-											alert("删除文件失败，请检查网络设置。");
-										},
-										success  : function() {
-											$Image.remove();
-										}
-									});
-								}
-							}).modal('show');
-	          			});
+		// 患牙与邻牙接触关系
+		var ME_Neighbor_Text = "";
+		ME_Neighbor_Text += vData.relations_between_teeth + "，";
+		ME_Neighbor_Text += vData.is_teeth_crowd + "，";
+		ME_Neighbor_Text += vData.involution_teeth + "，";
+		ME_Neighbor_Text += vData.tooth_shape;
+		$('#ME_Neighbor').text(ME_Neighbor_Text);
 
-						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-					});
-				}
-			}
-		});
+
+		// X线片表现
+		var ME_X_Text = "";
+		ME_X_Text += vData.tooth_location + "牙";
+		ME_X_Text += vData.X_Ray_location;
+		ME_X_Text += vData.X_Ray_depth;
+		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常。";
+
+
+		// 如果CT表现和咬翼片表现为空时，则不显示
+		if (vData.CT_shows != "") {
+		ME_X_Text += "CT表现：" + vData.CT_shows;
+		if (vData.piece != "") {
+		ME_X_Text += "，";
+		};
+		}
+		if (vData.piece != "") {
+		ME_X_Text += "咬翼片表现：" + vData.piece;
+		}
+		$('#ME_X').text(ME_X_Text);
 	}
 
 	function setDefultFormData(vData) {
-        $('select[name=caries_degree]').dropdown("set selected", vData.caries_degree);
-        $('select[name=caries_type]').dropdown("set selected", vData.caries_type);
-        $('select[name=cure_plan]').dropdown("set selected", vData.cure_plan);
 
-		$("div[field=" + vData.cure_plan + "]").removeClass("invisible");
-		switch (vData.cure_plan) {
-			case "牙非手术治疗": {
-				$('select[name=specification1]').dropdown("set selected", vData.specification);
-				break;
-			}
-			case "龋病微创修复": {
-				$('select[name=specification2]').dropdown("set selected", vData.specification);
-				break;
-			}
-			case "复合树脂修复": {
-				$('select[name=specification3]').dropdown("set selected", vData.specification);
-				break;
-			}
-			case "美容修复": {
-				$('select[name=specification4]').dropdown("set selected", vData.specification);
-				break;
-			}
-		}
+		$('input[name=tooth_location]').val(vData.tooth_location);
+		$('input[name=tooth_type]').val(vData.tooth_type);
+
+		// 龋坏累及牙面去掉逗号
+		$.each(vData.caries_tired.split(","), function(){
+			$('select[name=caries_tired_display]').dropdown("set selected", this);
+		});
+
+		$('select[name=secondary]').dropdown("set selected", vData.secondary);
+		$('select[name=depth]').dropdown("set selected", vData.depth);
+		$('select[name=cold]').dropdown("set selected", vData.cold);
+		$('select[name=hot]').dropdown("set selected", vData.hot);
+		$('select[name=touch]').dropdown("set selected", vData.touch);
+		$('select[name=bite]').dropdown("set selected", vData.bite);
+		$('select[name=color_of_caries]').dropdown("set selected", vData.color_of_caries);
+		$('select[name=flex_of_caries]').dropdown("set selected", vData.flex_of_caries);
+		$('select[name=fill]').dropdown("set selected", vData.fill);
+		$('input[name=vitality_value_of_teeth]').val(vData.vitality_value_of_teeth);
+
+		$('select[name=gingival_hyperemia]').dropdown("set selected", vData.gingival_hyperemia);
+		$('select[name=gingival_color]').dropdown("set selected", vData.gingival_color);
+		$('select[name=tartar_up]').dropdown("set selected", vData.tartar_up);
+		$('select[name=tartar_down]').dropdown("set selected", vData.tartar_down);
+		$('select[name=bop]').dropdown("set selected", vData.bop);
+		$('select[name=periodontal_pocket_depth]').dropdown("set selected", vData.periodontal_pocket_depth);
+		$('select[name=furcation]').dropdown("set selected", vData.furcation);
+		$('select[name=location]').dropdown("set selected", vData.location);
+		$('select[name=mobility]').dropdown("set selected", vData.mobility);
+		$('select[name=fistula]').dropdown("set selected", vData.fistula);
+		$('select[name=overflow_pus]').dropdown("set selected", vData.overflow_pus);
+
+		$('select[name=relations_between_teeth]').dropdown("set selected", vData.relations_between_teeth);
+		$('select[name=is_teeth_crowd]').dropdown("set selected", vData.is_teeth_crowd);
+		$('select[name=involution_teeth]').dropdown("set selected", vData.involution_teeth);
+		$('select[name=tooth_shape]').dropdown("set selected", vData.tooth_shape);
+		$('select[name=X_Ray_location]').dropdown("set selected", vData.X_Ray_location);
+		$('select[name=X_Ray_depth]').dropdown("set selected", vData.X_Ray_depth);
+		$('select[name=X_Ray_fill_quality]').dropdown("set selected", vData.X_Ray_fill_quality);
+		$('input[name=CT_shows]').val(vData.CT_shows);
+		$('input[name=piece]').val(vData.piece);
+		$('input[name=OtherExpression]').val(vData.OtherExpression);
+
+		$('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 	}
 });
