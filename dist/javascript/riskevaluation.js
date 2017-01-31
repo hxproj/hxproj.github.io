@@ -62,6 +62,13 @@ $(document).ready(function(){
    		$FormSegement.find('.submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$FormSegement.show();
 	});
+	$('.manage.button').click(function(){
+		window.location = "manage.html" + toquerystring({
+			uid  : UID,
+			tid  : TID,
+			cid  : CID,
+		});
+	});
 
 
 	// **************************************************

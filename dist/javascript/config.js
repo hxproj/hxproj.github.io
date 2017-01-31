@@ -14,8 +14,7 @@ $(document).ready(function(){
 	window.URL_DIFFICULTYASSE   = URL_SERVER + "/medical-case-of-illness/difficulty-assessment";
 	window.URL_PRESENTILLNESS   = URL_SERVER + "/medical-case-of-illness/illness-history";
 	window.URL_PERSONALHISTORY  = URL_SERVER + "/medical-case-of-illness/personal-history";
-
-
+	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 
 
 
@@ -25,7 +24,6 @@ $(document).ready(function(){
 	window.URL_PAGE             = URL_SERVER + "/medical-case-of-illness/index-info";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
-	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
 	window.URL_IMAGEUPLOAD      = URL_SERVER + "/medical-case-of-illness/img";
