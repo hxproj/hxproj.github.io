@@ -136,6 +136,21 @@ $(document).ready(function(){
 		}
 	});
 
+	
+	// **************************************************
+	// 导航功能栏
+	$('#nav a').not('.active, .return').click(function(){
+		$(this).prop('href', $(this).prop('href') + toquerystring({
+			uid : UID,
+			tid : TID,
+			cid : CID,
+		}));
+	});
+	$('#nav a.return').click(function(){
+		$(this).prop('href', "medicalrecord.html" + toquerystring({uid  : UID}));
+	});
+	
+
 	// **************************************************
 	// Function
 	function showData(vData) {
