@@ -32,6 +32,19 @@ $(document).ready(function(){
 			setDefultFormData(vData);
 		}
 	});
+	// **************************************************
+	// GET: get case info and init nav
+	$.get(URL_CASE, {case_id : CID}, function(data){
+		$('#in_date').text(data.date);
+		data.case_type ? $('#case_type').text("复诊") : $('#case_type').text("初诊");
+
+		// nav.js
+		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.mouthexamination, {
+			UID : UID,
+			TID : TID,
+			CID : CID,
+		});
+	}, 'JSON');
 
 
 	// **************************************************
@@ -212,20 +225,6 @@ $(document).ready(function(){
 		$InfoSegement.hide();
    		$FormSegement.find('.submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 		$FormSegement.show();
-	});
-
-	
-	// **************************************************
-	// 导航功能栏
-	$('#nav a').not('.active, .return').click(function(){
-		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid : UID,
-			tid : TID,
-			cid : CID,
-		}));
-	});
-	$('#nav a.return').click(function(){
-		$(this).prop('href', "medicalrecord.html" + toquerystring({uid  : UID}));
 	});
 	
 

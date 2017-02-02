@@ -11,7 +11,7 @@ $(document).ready(function(){
 	// **************************************************
 	// GET
 	$.ajax({
-		url      : URL_MANAGE,
+		url      : URL_USPHS,
 		type     : "GET", 
 		data     : toform({case_id : CID}),
 		dataType : "JSON",
@@ -21,7 +21,6 @@ $(document).ready(function(){
 		},
 		success  : function(vData) {
 			
-			$('.invisible.segment[data-tab=' + vData.patient_type+ ']').show();
 		}
 	});
 	// **************************************************
@@ -31,7 +30,7 @@ $(document).ready(function(){
 		data.case_type ? $('#case_type').text("复诊") : $('#case_type').text("初诊");
 
 		// nav.js
-		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.manage, {
+		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.usphs, {
 			UID : UID,
 			TID : TID,
 			CID : CID,

@@ -153,6 +153,19 @@ $(document).ready(function(){
 			$FormSegement.hide();
 		}
 	});
+	// **************************************************
+	// GET: get case info and init nav
+	$.get(URL_CASE, {case_id : CID}, function(data){
+		$('#in_date').text(data.date);
+		data.case_type ? $('#case_type').text("复诊") : $('#case_type').text("初诊");
+
+		// nav.js
+		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.illnesshistory, {
+			UID : UID,
+			TID : TID,
+			CID : CID,
+		});
+	}, 'JSON');
 
 
 	// **************************************************
@@ -323,20 +336,6 @@ $(document).ready(function(){
 		$('#PH_orthodontic').text(getFormData(PersonalHistoryForm, "orthodontic"));
 		$('#PH_additional').text(getFormData(PersonalHistoryForm, "additional"));
 	}
-
-	
-	// **************************************************
-	// 导航功能栏
-	$('#nav a').not('.active, .return').click(function(){
-		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid : UID,
-			tid : TID,
-			cid : CID,
-		}));
-	});
-	$('#nav a.return').click(function(){
-		$(this).prop('href', "medicalrecord.html" + toquerystring({uid  : UID}));
-	});
 	
 
 	// **************************************************

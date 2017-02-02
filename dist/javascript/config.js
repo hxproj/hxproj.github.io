@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
-	window.URL_SERVER           = "http://192.168.191.1:9000"; //192.168.191.1
+	window.URL_SERVER           = "http://127.0.0.1:9000"; //192.168.191.1
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
 	window.URL_USERTOOTHINFO    = URL_SERVER + "/medical-case-of-illness/user-tooth-info";
 	window.URL_GETALLUSER       = URL_SERVER + "/medical-case-of-illness/all-user";
@@ -15,6 +15,7 @@ $(document).ready(function(){
 	window.URL_PRESENTILLNESS   = URL_SERVER + "/medical-case-of-illness/illness-history";
 	window.URL_PERSONALHISTORY  = URL_SERVER + "/medical-case-of-illness/personal-history";
 	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
+	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
 
 
 
@@ -23,7 +24,6 @@ $(document).ready(function(){
 	// FUNCTION: Server Application Interface
 	window.URL_PAGE             = URL_SERVER + "/medical-case-of-illness/index-info";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
-	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
 	window.URL_IMAGEUPLOAD      = URL_SERVER + "/medical-case-of-illness/img";
