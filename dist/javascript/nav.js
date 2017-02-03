@@ -57,15 +57,13 @@ function Nav($Selector, CaseType, IfHandle, NavItem, Parameters) {
 		}
 	}
 
-	$Selector.find("a").bind('click', function(){
-		window.location = $(this).prop('href') + toquerystring({
+	$.each($Selector.find("a"), function(){
+		$(this).prop('href', $(this).prop('href') + toquerystring({
 			uid : Parameters.UID,
 			tid : Parameters.TID,
 			cid : Parameters.CID,
-		});
-		
-		return false;
+		}));
 	});
 
-	$Selector.find("a[href^=" + NavItem + "]").addClass("blue active");
+	$Selector.find("a[href*=" + NavItem + "]").addClass("blue active");
 }

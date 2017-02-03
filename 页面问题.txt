@@ -1,19 +1,23 @@
-1. 口腔检查：
-
-	添加项：
-    	OtherExpression = db.Column(db.String(300))
-	删除项：
-    	# treatment = db.Column(db.String(50))
-    	# orthodontic = db.Column(db.String(50))
-   	# loss_caries_index_up = db.Column(db.String(50))
-    	# loss_caries_surface_index_up = db.Column(db.String(50))
-   	# development_of_the_situation = db.Column(db.String(50))
-
-2. 风险评估：评估结果有误
+2. 风险评估
+2.1. 选项“母亲，照料者和/或兄弟姐妹（仅对6-14岁患者）的患龋经历”，则该项不参与评级
 
 
-  "relative_illness": [
-    {
-      "key": "无",
-      "value": 1
-    },
+
+
+
+
+
+
+
+////////////////////////////////////////////////////
+// TODO: 低优先级
+
+1. 病历详细页（medicalrecord.html）：添加功能，双击“牙位”可修改牙位，双击“医生”可修改医生
+
+
+
+
+////////////////////////////////////////////////////
+// 李超需更改内容
+
+1. /medical-case-of-illness/all-user：需要分页（首页）

@@ -82,7 +82,26 @@ $(document).ready(function(){
 		$('#anatomic_form').text(vData.anatomic_form);
 		$('#edge_color').text(vData.edge_color);
 		$('#secondary_caries').text(vData.secondary_caries);
-		$('#usphs_level').text(vData.level);
+
+		switch (vData.level) {
+			case 'A': {
+				$('#usphs_level').text("A(临床可接受)");
+				break;
+			}
+			case 'B': {
+				$('#usphs_level').text("B(临床可接受)");
+				break;
+			}
+			case 'C': {
+				$('#usphs_level').text("C(临床不可接受)");
+				break;
+			}
+			case 'D': {
+				$('#usphs_level').text("D(临床不可接受)");
+				break;
+			}
+		}
+		
 	}
 
 	function setDefultFormData(vData) {
