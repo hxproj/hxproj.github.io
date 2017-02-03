@@ -49,9 +49,17 @@
 			</div>
 			
   			<div class="ui divider"></div>
-			<div class="ui teal labeled icon disabled small button">返回<i class="left angle icon"></i></div>
+			<a class="ui teal labeled icon small button" href="index.html">返回<i class="left angle icon"></i></a>
 			<div class="ui teal labeled icon disabled small button" data-tooltip="查看所有牙位详细信息">预览<i class="search icon"></i></div>
 			<div class="ui teal labeled icon small button" data-tooltip="添加牙位" id="ID_AddToothLocation">牙位<i class="add icon"></i></div>
+		</div>
+
+		<!--未添加任何-->
+		<div class="ui hidden icon message">
+			<i class="warning sign icon"></i>
+			<div class="ui center aligned header">
+				<p>还未添加任何初诊（牙位）信息，请单击“牙位”添加</p>
+			</div>
 		</div>
 
 		<!--Invisible: 不处置复诊-->
@@ -169,16 +177,16 @@
 		<div class="content">
 		    <div class="description">
 				<div id="context">
-					<div class="ui blue pointing fluid two item menu">
+					<div class="ui small blue pointing fluid two item menu">
 						<a class="active item" data-tab="1">恒牙列</a>
 						<a class="item" data-tab="2">乳牙列</a>
 					</div>
 
 					<div class="ui tab clearing basic segment active" data-tab="1">
-						<div class="ui equal width celled center aligned grid">
+						<div class="ui equal width internally celled center aligned grid">
 							<div class="row">
 								<div class="column">
-						    		<div class="ui large labels">
+						    		<div class="ui labels">
 							    		<a class="ui label" val="18">18</a>
 							    		<a class="ui label" val="17">17</a>
 							    		<a class="ui label" val="16">16</a>
@@ -190,7 +198,7 @@
 							    	</div>
 						    	</div>
 								<div class="column">
-							    	<div class="ui large labels">
+							    	<div class="ui labels">
 							    		<a class="ui label" val="21">21</a>
 							    		<a class="ui label" val="22">22</a>
 							    		<a class="ui label" val="23">23</a>
@@ -204,7 +212,7 @@
 							</div>
 							<div class="row">
 								<div class="column">
-						    		<div class="ui large labels">
+						    		<div class="ui labels">
 							    		<a class="ui label" val="48">48</a>
 							    		<a class="ui label" val="47">47</a>
 							    		<a class="ui label" val="46">46</a>
@@ -216,7 +224,7 @@
 							    	</div>
 						    	</div>
 								<div class="column">
-							    	<div class="ui large labels">
+							    	<div class="ui labels">
 							    		<a class="ui label" val="31">31</a>
 							    		<a class="ui label" val="32">32</a>
 							    		<a class="ui label" val="33">33</a>
@@ -232,10 +240,10 @@
 					</div>
 
 					<div class="ui tab clearing basic segment" data-tab="2">
-						<div class="ui equal width celled center aligned grid">
+						<div class="ui equal width internally celled center aligned grid">
 							<div class="row">
 								<div class="column">
-						    		<div class="ui large labels">
+						    		<div class="ui labels">
 							    		<a class="ui label" val="55">55</a>
 							    		<a class="ui label" val="54">54</a>
 							    		<a class="ui label" val="53">53</a>
@@ -244,7 +252,7 @@
 							    	</div>
 						    	</div>
 								<div class="column">
-							    	<div class="ui large labels">
+							    	<div class="ui labels">
 							    		<a class="ui label" val="61">61</a>
 							    		<a class="ui label" val="62">62</a>
 							    		<a class="ui label" val="63">63</a>
@@ -255,7 +263,7 @@
 							</div>
 							<div class="row">
 								<div class="column">
-							    	<div class="ui large labels">
+							    	<div class="ui labels">
 							    		<a class="ui label" val="81">81</a>
 							    		<a class="ui label" val="82">82</a>
 							    		<a class="ui label" val="83">83</a>
@@ -264,7 +272,7 @@
 									</div>
 						    	</div>
 								<div class="column">
-						    		<div class="ui large labels">
+						    		<div class="ui labels">
 							    		<a class="ui label" val="75">75</a>
 							    		<a class="ui label" val="74">74</a>
 							    		<a class="ui label" val="73">73</a>
@@ -279,8 +287,8 @@
 		    </div>
 	  	</div>
 		<div class="actions">
-			<div class="ui orange deny button">取消</div>
-			<div class="ui primary approve right labeled icon button">
+			<div class="ui small orange deny button">取消</div>
+			<div class="ui small primary approve right labeled icon button">
 				确定<i class="checkmark icon"></i>
 			</div>
 		</div>

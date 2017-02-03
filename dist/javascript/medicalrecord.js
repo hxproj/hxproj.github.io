@@ -4,29 +4,6 @@ $(document).ready(function(){
 	// INIT
  	var U_ID = Number(requestParameter("uid"));
 
-	$('#ID_AddToothLocationModal form').form({
-		fields: {
-			tooth_location: {
-				identifier: 'tooth_location',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择病人牙齿部位'
-					}
-				]
-			},
-			judge_doctor: {
-				identifier: 'judge_doctor',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写初诊医生'
-					}
-				]
-			}
-		}
-	});
-
 
 	// **************************************************
 	// GET
@@ -62,9 +39,14 @@ $(document).ready(function(){
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(Data){
-			$.each(Data, function(){ 
-				showToothLocationRecord(this);
-			});  // .reverse()
+			if (Data.length != 0) {
+				$.each(Data, function(){ 
+					showToothLocationRecord(this);
+				});  // .reverse() ? 
+			} else {
+				// 未添加牙位信息提示
+				$('.icon.message').transition('tada');
+			}
 		}
 	});
 
@@ -78,6 +60,27 @@ $(document).ready(function(){
 			onApprove : function(){
 
 				$('#ID_AddToothLocationModal form').form({
+					fields: {
+						tooth_location_number: {
+							identifier: 'tooth_location_number',
+							rules: [
+								{
+									type   : 'empty',
+			            			prompt : '请选择病人牙齿部位'
+								}
+							]
+						},
+						judge_doctor: {
+							identifier: 'judge_doctor',
+							rules: [
+								{
+									type   : 'empty',
+			            			prompt : '请填写初诊医生'
+								}
+							]
+						}
+					},
+					inline    : true,
 					onSuccess : function(){
 
 						$.ajax({
@@ -123,10 +126,16 @@ $(document).ready(function(){
 	// **************************************************
 	// 删除牙位
 	$('.corner.delete_tooth_record').click(function(){
-		var $DeleteToothRecord = $(this).parent();
+		var This_TID= $(this).parents('.toothlocationrecord').attr("tooth_id");
 		$('#ID_DeleteModal').modal({
 			onApprove : function(){
-				$DeleteToothRecord.remove();
+				$.ajax({
+					url      : URL_TOOTH + toquerystring({tooth_id : This_TID}),
+					type     : "DELETE",
+					async    : false, 
+					error    : function() {networkError();},
+					success  : function() {location.reload();}
+				});
 			}
 		}).modal('show');
 	});
