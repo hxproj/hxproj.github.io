@@ -35,8 +35,14 @@ $(document).ready(function(){
 	// **************************************************
 	// GET: get case info and init nav
 	$.get(URL_CASE, {case_id : CID}, function(data){
-		$('#in_date').text(data.date);
-		data.case_type ? $('#case_type').text("复诊") : $('#case_type').text("初诊");
+
+		if (data.case_type == 0) {
+			$('#case_type').text("初诊");
+			$('#in_date').text("初诊时间：" + data.date);
+		} else {
+			$('#case_type').text("复诊");
+			$('#in_date').text("复诊时间：" + data.date);
+		}
 
 		// nav.js
 		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.mouthexamination, {

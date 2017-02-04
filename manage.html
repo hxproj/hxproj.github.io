@@ -14,6 +14,7 @@
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
   	<script src="dist/javascript/nav.js"></script>
+  	<script src="dist/javascript/basicinfo.js"></script>
   	<script src="dist/javascript/manage.js"></script>
 
   	<style type="text/css">
@@ -40,19 +41,17 @@
 			<div class="ui clearing raised segment">
 				<a class="ui blue ribbon label" id="case_type"></a>
 				<span id="in_date"></span>
-				<div class="ui center aligned basic segment">
+				<div class="ui center aligned basic segment" id="ID_basicinfo">
 					<div class="ui large header">【龋病预后管理方案】</div>
 					<div class="ui teal labels">
-						<div class="ui label">张三</div>
-						<div class="ui label">男</div>
-						<div class="ui label">32岁</div>
-						<div class="ui label">50023119840312638X</div>
-						<div class="ui label">医生</div>
-						<div class="ui label">151846574201</div>
-						<div class="ui label">11牙中龋</div>
+						<div class="ui label" name="name"></div>
+						<div class="ui label" name="gender"><i class="icon"></i><span></span></div>
+						<div class="ui label" name="age"></div>
+						<div class="ui label" name="ID"></div>
+						<div class="ui label" name="occupation"></div>
+						<div class="ui label" name="contact"></div>
 					</div>
 				</div>
-				<div class="ui divider"></div>
 
 		  		<div class="ui invisible basic segment" data-tab="1">
 				    <h3 class="ui blue header">低风险患者：</h3>
@@ -96,7 +95,6 @@
 				    <h4 class="ui paragraph header">8. 窝沟封闭：可选择</h4>
 				    <h4 class="ui paragraph header">9. 当感觉口感时，饭后及吃零食后使用小苏打水漱口（患者唾液分泌存在障碍时选用）</h4>
 		  		</div>
-
 
 			    <div class="ui right floated blue edit small button">修改预后管理方案</div>
 		  	</div>

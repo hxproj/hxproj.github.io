@@ -11,6 +11,10 @@ body {
 	margin-bottom: 10em;
 }
 
+.ui.text.container {
+	margin: 4em 0;
+}
+
 /*
 .main.container {
 	margin-bottom: 10em;

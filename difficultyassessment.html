@@ -13,6 +13,7 @@
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
   	<script src="dist/javascript/nav.js"></script>
+  	<script src="dist/javascript/basicinfo.js"></script>
   	<script src="dist/javascript/difficultyassessment.js"></script>
 </head>
 
@@ -32,16 +33,15 @@
 			<div class="ui raised segment">
 				<a class="ui blue ribbon label" id="case_type"></a>
 				<span id="in_date"></span>
-				<div class="ui center aligned basic segment">
+				<div class="ui center aligned basic segment" id="ID_basicinfo">
 					<div class="ui large header">【难度评估】</div>
 					<div class="ui teal labels">
-						<div class="ui label">张三</div>
-						<div class="ui label">男</div>
-						<div class="ui label">32岁</div>
-						<div class="ui label">50023119840312638X</div>
-						<div class="ui label">医生</div>
-						<div class="ui label">151846574201</div>
-						<div class="ui label">11牙中龋</div>
+						<div class="ui label" name="name"></div>
+						<div class="ui label" name="gender"><i class="icon"></i><span></span></div>
+						<div class="ui label" name="age"></div>
+						<div class="ui label" name="ID"></div>
+						<div class="ui label" name="occupation"></div>
+						<div class="ui label" name="contact"></div>
 					</div>
 				</div>
 
