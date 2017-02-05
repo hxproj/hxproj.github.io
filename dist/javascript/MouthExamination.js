@@ -175,26 +175,22 @@ $(document).ready(function(){
 				error    : function() {networkError();},
 				success  : function(vData){
 					
-					/*
 					// 上传图片
 					$.ajaxFile({
-						url           : URL_IMAGEUPLOAD, 
+						url           : URL_IMAGE, 
 						type          : 'POST',  
 						fileElementId : 'imageupload',
 						dataType      : 'text',
-						vData          : {tooth_id : vData.tooth_id, picture_type : Image_type},
+						data          : {case_id : CID, picture_type : Image_type},
 						async         : false,  
 						cache         : false,  
 						contentType   : false,  
 						processData   : false,
-						success       : function() {
-							location.reload()
-						},
+						success       : function() {},
 						error         : function() {
 							alert("文件上传失败");
 						}
 					});
-					*/
 
 					location.reload();
 				}
@@ -296,7 +292,7 @@ $(document).ready(function(){
 		ME_X_Text += vData.tooth_location + "牙";
 		ME_X_Text += vData.X_Ray_location;
 		ME_X_Text += vData.X_Ray_depth;
-		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常。";
+		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常";
 
 
 		// 如果CT表现和咬翼片表现为空时，则不显示
@@ -355,6 +351,14 @@ $(document).ready(function(){
 		$('input[name=CT_shows]').val(vData.CT_shows);
 		$('input[name=piece]').val(vData.piece);
 		$('input[name=OtherExpression]').val(vData.OtherExpression);
+
+		$.ajax({
+			url      : URL_IMAGE,
+			type     : "GET",
+			data     : {case_id : CID, type : Image_type},
+			dataType : "json",
+			success  : function(FileData) {showImage(FileData);}
+		});
 
 		$('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 	}

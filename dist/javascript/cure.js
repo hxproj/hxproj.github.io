@@ -24,7 +24,7 @@ $(document).ready(function(){
 		}
 
 		// nav.js
-		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.riskevaluation, {
+		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.cure, {
 			UID : UID,
 			TID : TID,
 			CID : CID,

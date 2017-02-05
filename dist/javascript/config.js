@@ -16,9 +16,7 @@ $(document).ready(function(){
 	window.URL_PERSONALHISTORY  = URL_SERVER + "/medical-case-of-illness/personal-history";
 	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
-
-
-
+	window.URL_IMAGE            = URL_SERVER + "/medical-case-of-illness/img";
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
@@ -26,7 +24,6 @@ $(document).ready(function(){
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
-	window.URL_IMAGEUPLOAD      = URL_SERVER + "/medical-case-of-illness/img";
 
 	// ***************************************************************
 	// FUNCTION: System Common Functions
@@ -65,6 +62,47 @@ $(document).ready(function(){
 		Img.onload = function() {
 			callback(Img);
 		};
+	}
+	window.showImage = function(FileData) {
+
+		var $ImageSelector = $('#ID_IMAGE');
+
+		if (FileData.length == 0) {
+			$ImageSelector.text("未添加任何图片，请点击右下角修改按钮添加");
+		} else {
+			$.each(FileData, function(){
+				var $ClonedImage = $ImageSelector.find(".hidden.image").clone().removeClass('hidden');
+				$ClonedImage.attr("value", this.img_id);
+
+				var ImagePath = this.path;
+				//ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+				window.loadImage(ImagePath, function(){
+					$ClonedImage.find('img').attr('src', ImagePath);
+					$ClonedImage.find('.corner').removeClass('hidden');
+				});
+				
+				$ClonedImage.find('.corner').bind('click', function(){
+					var $Image = $(this).parent();
+
+					$('#deletemodal').modal({
+						onApprove: function() {
+							$.ajax({
+								url      : URL_IMAGE + toquerystring({picture_id : $Image.attr("value")}),
+								type     : "DELETE",
+								data     : {},
+								dataType : "text",
+								error    : function(data) {
+									alert("删除文件失败，请检查网络设置。");
+								},
+								success  : function() {location.reload();}
+							});
+						}
+					}).modal('show');
+				});
+
+				$ImageSelector.append($ClonedImage).append('<div class="ui hidden divider"></div>');
+			});
+		}
 	}
 
 	// ***************************************************************

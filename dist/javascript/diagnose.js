@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
-		Image_type = 1,
+		Image_type = 2,
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),
@@ -107,26 +107,21 @@ $(document).ready(function(){
 				error    : function() {networkError();},
 				success  : function(data){
 					
-					/*
-					// 上传图片
 					$.ajaxFile({
-						url           : URL_IMAGEUPLOAD, 
+						url           : URL_IMAGE, 
 						type          : 'POST',  
 						fileElementId : 'imageupload',
 						dataType      : 'text',
-						data          : {tooth_id : data.tooth_id, picture_type : Image_type},
+						data          : {case_id : CID, picture_type : Image_type},
 						async         : false,  
 						cache         : false,  
 						contentType   : false,  
 						processData   : false,
-						success       : function() {
-							location.reload()
-						},
+						success       : function() {},
 						error         : function() {
 							alert("文件上传失败");
 						}
 					});
-					*/
 
 					location.reload();
 				}
@@ -195,53 +190,12 @@ $(document).ready(function(){
 		}
 		$('#ID_Description').html(Description);
 
-	    // 显示诊断图片
 		$.ajax({
-			url      : URL_IMAGEUPLOAD,
+			url      : URL_IMAGE,
 			type     : "GET",
 			data     : {case_id : CID, type : Image_type},
 			dataType : "json",
-			success  : function(FileData) {
-
-				if (FileData.length == 0) {
-					$('#IMAGE').text("未添加任何图片，请点击右下角修改按钮添加");
-				} else {
-					$.each(FileData, function(){
-						var $ClonedImage = $('#IMAGE .hidden.image').clone().removeClass('hidden');
-						$ClonedImage.attr("value", this.img_id);
-
-						var ImagePath = this.path;
-						ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-						window.loadImage(ImagePath, function(){
-							$ClonedImage.find('img').attr('src', ImagePath);
-							$ClonedImage.find('.corner').removeClass('hidden');
-						});
-						
-						$ClonedImage.find('.corner').bind('click', function(){
-							var $Image = $(this).parent();
-	                
-							$('#deletemodal').modal({
-								onApprove: function() {
-									$.ajax({
-										url      : URL_IMAGEUPLOAD + toquerystring({picture_id : $Image.attr("value")}),
-										type     : "DELETE",
-										data     : {},
-										dataType : "text",
-										error    : function(data) {
-											alert("删除文件失败，请检查网络设置。");
-										},
-										success  : function() {
-											$Image.remove();
-										}
-									});
-								}
-							}).modal('show');
-	          			});
-
-						$('#IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-					});
-				}
-			}
+			success  : function(FileData) {showImage(FileData);}
 		});
 	}
 
