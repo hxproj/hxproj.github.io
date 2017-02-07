@@ -7,14 +7,25 @@ $(document).ready(function(){
 
 	// **************************************************
 	// GET
-	// GET: 用户基本信息
+	$.ajax({
+		url      : URL_USERTOOTHINFO + toquerystring({user_id : U_ID}),
+		type     : "GET",
+		dataType : "json",
+		error    : function(){ networkError(); },
+		success  : function(Data){
+			Data.length ? $.each(Data, function() {showToothLocationRecord(this);})
+			 : $('.icon.message').transition('tada'); 
+		}
+	});
+	// **************************************************
+	// GET: get user basic info
 	$.ajax({
 		url      : URL_USER + toquerystring({user_id : U_ID}),
 		type     : "GET",
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(data){
-			var $BasicInfo = $('.basicinfo.labels'),
+			var $BasicInfo = $('#ID_basicinfo'),
 				$Gender    = $BasicInfo.find('div[name=gender]');
 			
 			 if (data.gender) {
@@ -25,28 +36,11 @@ $(document).ready(function(){
 				$Gender.find("span").text("男");
 			 }
 
-			$('.header[name=name]').text(data.name);
+			$BasicInfo.find('div[name=name]').text(data.name);
 			$BasicInfo.find('div[name=age]').text(data.age);
 			$BasicInfo.find('div[name=ID]').text(data.id_number);
 			$BasicInfo.find('div[name=occupation]').text(data.occupation);
 			$BasicInfo.find('div[name=contact]').text(data.contact);
-		}
-	});
-	// GET: 初诊复诊
-	$.ajax({
-		url      : URL_USERTOOTHINFO + toquerystring({user_id : U_ID}),
-		type     : "GET",
-		dataType : "json",
-		error    : function(){ networkError(); },
-		success  : function(Data){
-			if (Data.length != 0) {
-				$.each(Data, function(){ 
-					showToothLocationRecord(this);
-				});  // .reverse() ? 
-			} else {
-				// 未添加牙位信息提示
-				$('.icon.message').transition('tada');
-			}
 		}
 	});
 
@@ -144,14 +138,24 @@ $(document).ready(function(){
 	// **************************************************
 	// POST: 复诊（处置or非处置）
 	$('.add_re_examination.button').click(function(){
-
 		var TID= $(this).parents('.toothlocationrecord').attr("tooth_id");
-
 		$('#ID_ReExaminationModal').modal({
 			closable  : false,
 			onApprove : function(){
 
 				$('#ID_ReExaminationModal form').form({
+					fields: {
+						judge_doctor: {
+							identifier: 'judge_doctor',
+							rules: [
+								{
+									type   : 'empty',
+			            			prompt : '请填写复诊医生'
+								}
+							]
+						}
+					},
+					inline    : true,
 					onSuccess : function(){
 						$.ajax({
 							url      : URL_CASE,
@@ -182,6 +186,21 @@ $(document).ready(function(){
 			tid  : $(this).parents('.toothlocationrecord.segment').attr('tooth_id'),
 			cid  : $(this).parents('.ui.labels').attr('case_id'),
 		}));
+	});
+	// OE: delete case
+	$('.case_delete').click(function(){
+		var This_CID= $(this).parents('.ui.labels').attr("case_id");
+		$('#ID_DeleteModal').modal({
+			onApprove : function(){
+				$.ajax({
+					url      : URL_CASE + toquerystring({case_id : This_CID}),
+					type     : "DELETE",
+					async    : false, 
+					error    : function() {networkError();},
+					success  : function() {location.reload();}
+				});
+			}
+		}).modal('show');
 	});
 
 

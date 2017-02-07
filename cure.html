@@ -48,9 +48,41 @@
 						<div class="ui label" name="contact"></div>
 					</div>
 				</div>
-				<div class="ui divider"></div>
 
-				<div id="context">
+				<table class="ui celled invisible structured table">
+					<thead>
+						<tr>
+							<th class="center aligned" colspan="2"></th>
+						</tr>
+					</thead>
+		  			<tbody>
+						<tr>
+							<td class="positive collapsing">处置</td>
+							<td id="Describe"></td>
+						</tr>
+						<tr>
+							<td class="positive collapsing">处置图片</td>
+							<td class="negative" id="IMAGE" colspan="2">
+								<div class="ui hidden rounded image">
+									<a class="ui hidden right corner label"><i class="remove icon"></i></a>
+									<img style="max-width:100%; height:auto;">
+						    	</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="right aligned">
+								<div class="ui small teal buttons">
+									<div class="ui left labeled icon button"><i class="chevron left icon"></i>难度评估</div>
+									<div class="ui right labeled icon button"><i class="chevron right icon"></i>USPHS</div>
+								</div>
+
+								<div class="ui blue edit small button">修改</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="ui clearing basic segment" id="context">
 			  		<div class="ui blue fluid stackable five item menu">
 						<a class="active item" data-tab="1">牙非手术治疗</a>
 						<a class="item" data-tab="2">龋病微创修复</a>
@@ -60,175 +92,143 @@
 			  		</div>
 
 <!--******************************************牙非手术治疗********************************-->
-					<div class="ui tab clearing segment active" data-tab="1">
-
-						<div id="noSurgicalContext">
-			    			<div class="ui stackable secondary pointing menu">
-								<a class="item active" data-tab="noSurgicalContext1">药物治疗</a>
-								<a class="item" data-tab="noSurgicalContext2">再矿化治疗</a>
-								<a class="item" data-tab="noSurgicalContext3">窝沟封闭</a>
-							</div>
-
-							<div class="ui active tab" data-tab="noSurgicalContext1">
-								<div class="ui hidden divider"></div>
-								<form class="ui form" id="CureForm1">
-									<div class="two fields">
-										<div class="required field">
-											<label>药物氟化物</label>
-											<select name="fluorination" class="ui dropdown">
-											<option value="">选择药物氟化物</option>
-											<option value="75%氟化钠甘油糊剂">75%氟化钠甘油糊剂</option>
-											<option value="8%氟化亚锡溶液">8%氟化亚锡溶液</option>
-											<option value="酸性磷酸氟化钠溶液">酸性磷酸氟化钠溶液</option>
-											<option value="1.5%APF凝胶">1.5%APF凝胶</option>
-											<option value="其它">其它</option>
-											</select>
-										</div>
-										<div class="required field">
-											<label>硝酸银</label>
-											<select name="silver_nitrate" class="ui dropdown">
-											<option value="">选择硝酸银</option>
-											<option value="10%硝酸银">10%硝酸银</option>
-											<option value="氨硝酸银">氨硝酸银</option>
-											<option value="其它">其它</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="ui fluid file button">
-										<span class="FileLabel">选择处置图片</span> 
-										<input type="file" name="file[]" multiple="multiple" id="imageupload1">
-									</div>
-									<div class="ui hidden divider"></div>
-
-									<!--hidden input-->
-									<input type="hidden" name="handle_type" value="0">
-									<input type="hidden" name="specific_method" value="药物治疗">
-
-									<!--useless input-->
-									<input type="hidden" name="additional_device" value="">
-									<input type="hidden" name="reagent" value="">
-									<input type="hidden" name="tools" value="">
-									<input type="hidden" name="lamp" value="">
-									<input type="hidden" name="check_time" value="">
-									<input type="hidden" name="time_of_etching" value="">
-
-						   			<div class="ui right floated blue submit button">提交</div>
-					    		</form>
-							</div>
-							
-							<div class="ui tab" data-tab="noSurgicalContext2">
-								<form class="ui form" id="CureForm2">
-									<div class="ui info message">
-										<ul class="list">
-											<li>患牙清洁，干燥</li>
-											<li>将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次</li>
-										</ul>
-									</div>
-
-									<div class="ui fluid file button">
-										<span class="FileLabel">选择处置图片</span> 
-										<input type="file" name="file[]" multiple="multiple" id="imageupload2">
-									</div>
-									<div class="ui hidden divider"></div>
-
-									<!--hidden input-->
-									<input type="hidden" name="handle_type" value="0">
-									<input type="hidden" name="specific_method" value="再矿化治疗">
-
-									<!--useless input-->
-									<input type="hidden" name="fluorination" value="">
-									<input type="hidden" name="silver_nitrate" value="">
-									<input type="hidden" name="additional_device" value="">
-									<input type="hidden" name="reagent" value="">
-									<input type="hidden" name="tools" value="">
-									<input type="hidden" name="lamp" value="">
-									<input type="hidden" name="check_time" value="">
-									<input type="hidden" name="time_of_etching" value="">
-				    				
-							   		<div class="ui right floated blue submit button">提交</div>
-						   		</form>
-							</div>
-
-							<div class="ui tab" data-tab="noSurgicalContext3">
-								<div class="ui hidden divider"></div>
-								<form class="ui form" id="CureForm3">
-									<div class="two fields">
-										<div class="required field">
-											<label>低速手机配套工具</label>
-											<select name="additional_device" class="ui dropdown">
-											<option value="">选择配套工具</option>
-											<option value="锥形小毛刷">锥形小毛刷</option>
-											<option value="橡皮杯">橡皮杯</option>
-											</select>
-										</div>
-										<div class="required field">
-											<label>蘸取试剂</label>
-											<select name="reagent" class="ui dropdown">
-											<option value="">选择试剂类型</option>
-											<option value="清洁剂">清洁剂</option>
-											<option value="含氟牙膏">含氟牙膏</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="two fields">
-										<div class="required field">
-											<label>酸蚀剂蘸取工具</label>
-											<select name="tools" class="ui dropdown">
-											<option value="">蘸取工具</option>
-											<option value="小棉球">小棉球</option>
-											<option value="细毛刷">细毛刷</option>
-											</select>
-										</div>
-										<div class="required field">
-											<label>酸蚀时间</label>
-											<select name="time_of_etching" class="ui dropdown">
-											<option value="">选择酸蚀时间</option>
-											<option value="酸蚀20-30秒">20-30秒</option>
-											<option value="酸蚀60秒">60秒</option>
-											</select>
-										</div>
-									</div>
-									<div class="two fields">
-										<div class="required field">
-											<label>固化方式</label>
-											<select name="lamp" class="ui dropdown">
-											<option value="">选择固化方式</option>
-											<option value="1-2分钟自行固化">自行固化</option>
-											<option value="光固化灯离牙尖1mm照射20-40秒">光固化</option>
-											</select>
-										</div>
-										<div class="required field">
-											<label>复查时间</label>
-											<select name="check_time" class="ui dropdown">
-											<option value="">选择复查时间</option>
-											<option value="1个月复查">1个月</option>
-											<option value="3个月复查">3个月</option>
-											<option value="半年复查">半年</option>
-											<option value="一年复查">一年</option>
-											<option value="两年复查">两年</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="ui fluid file button">
-										<span class="FileLabel">选择处置图片</span> 
-										<input type="file" name="file[]" multiple="multiple" id="imageupload3">
-									</div>
-									<div class="ui hidden divider"></div>
-									
-									<!--hidden input-->
-									<input type="hidden" name="handle_type" value="0">
-									<input type="hidden" name="specific_method" value="窝沟封闭">
-									<!--useless input-->
-									<input type="hidden" name="fluorination" value="">
-									<input type="hidden" name="silver_nitrate" value="">
-
-							   		<div class="ui right floated blue submit button">提交</div>
-						   		</form>
-							</div>
+					<div class="ui tab clearing segment active" id="noSurgicalContext" data-tab="1">
+		    			<div class="ui stackable secondary pointing menu">
+							<a class="item active" data-tab="noSurgicalContext1">药物治疗</a>
+							<a class="item" data-tab="noSurgicalContext2">再矿化治疗</a>
+							<a class="item" data-tab="noSurgicalContext3">窝沟封闭</a>
 						</div>
+
+						<form class="ui form active tab" data-tab="noSurgicalContext1">
+							<div class="two fields">
+								<div class="required field">
+									<label>药物氟化物</label>
+									<select name="fluorination" class="ui dropdown">
+									<option value="">选择药物氟化物</option>
+									<option value="75%氟化钠甘油糊剂">75%氟化钠甘油糊剂</option>
+									<option value="8%氟化亚锡溶液">8%氟化亚锡溶液</option>
+									<option value="酸性磷酸氟化钠溶液">酸性磷酸氟化钠溶液</option>
+									<option value="1.5%APF凝胶">1.5%APF凝胶</option>
+									<option value="其它">其它</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>硝酸银</label>
+									<select name="silver_nitrate" class="ui dropdown">
+									<option value="">选择硝酸银</option>
+									<option value="10%硝酸银">10%硝酸银</option>
+									<option value="氨硝酸银">氨硝酸银</option>
+									<option value="其它">其它</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload1">
+							</div>
+							<div class="ui hidden divider"></div>
+
+							<!--hidden input-->
+							<input type="hidden" name="handle_type" value="0">
+							<input type="hidden" name="specific_method" value="药物治疗">
+
+				   			<div class="ui right floated blue submit button">提交</div>
+						</form>
+						
+						<form class="ui form tab" data-tab="noSurgicalContext2">
+							<div class="ui info message">
+								<ul class="list">
+									<li>患牙清洁，干燥</li>
+									<li>将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次</li>
+								</ul>
+							</div>
+
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload2">
+							</div>
+							<div class="ui hidden divider"></div>
+
+							<!--hidden input-->
+							<input type="hidden" name="handle_type" value="0">
+							<input type="hidden" name="specific_method" value="再矿化治疗">
+		    				
+					   		<div class="ui right floated blue submit button">提交</div>
+				   		</form>
+
+						<form class="ui form tab" data-tab="noSurgicalContext3">
+							<div class="two fields">
+								<div class="required field">
+									<label>低速手机配套工具</label>
+									<select name="additional_device" class="ui dropdown">
+									<option value="">选择配套工具</option>
+									<option value="锥形小毛刷">锥形小毛刷</option>
+									<option value="橡皮杯">橡皮杯</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>蘸取试剂</label>
+									<select name="reagent" class="ui dropdown">
+									<option value="">选择试剂类型</option>
+									<option value="清洁剂">清洁剂</option>
+									<option value="含氟牙膏">含氟牙膏</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="two fields">
+								<div class="required field">
+									<label>酸蚀剂蘸取工具</label>
+									<select name="tools" class="ui dropdown">
+									<option value="">蘸取工具</option>
+									<option value="小棉球">小棉球</option>
+									<option value="细毛刷">细毛刷</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>酸蚀时间</label>
+									<select name="time_of_etching" class="ui dropdown">
+									<option value="">选择酸蚀时间</option>
+									<option value="酸蚀20-30秒">20-30秒</option>
+									<option value="酸蚀60秒">60秒</option>
+									</select>
+								</div>
+							</div>
+							<div class="two fields">
+								<div class="required field">
+									<label>固化方式</label>
+									<select name="lamp" class="ui dropdown">
+									<option value="">选择固化方式</option>
+									<option value="1-2分钟自行固化">自行固化</option>
+									<option value="光固化灯离牙尖1mm照射20-40秒">光固化</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>复查时间</label>
+									<select name="check_time" class="ui dropdown">
+									<option value="">选择复查时间</option>
+									<option value="1个月复查">1个月</option>
+									<option value="3个月复查">3个月</option>
+									<option value="半年复查">半年</option>
+									<option value="一年复查">一年</option>
+									<option value="两年复查">两年</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="ui fluid file button">
+								<span class="FileLabel">选择处置图片</span> 
+								<input type="file" name="file[]" multiple="multiple" id="imageupload3">
+							</div>
+							<div class="ui hidden divider"></div>
+							
+							<!--hidden input-->
+							<input type="hidden" name="handle_type" value="0">
+							<input type="hidden" name="specific_method" value="窝沟封闭">
+
+					   		<div class="ui right floated blue submit button">提交</div>
+				   		</form>
 					</div>
 
 

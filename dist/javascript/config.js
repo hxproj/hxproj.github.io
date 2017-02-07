@@ -17,11 +17,12 @@ $(document).ready(function(){
 	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
 	window.URL_IMAGE            = URL_SERVER + "/medical-case-of-illness/img";
+	
+	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
 	window.URL_PAGE             = URL_SERVER + "/medical-case-of-illness/index-info";
-	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
 

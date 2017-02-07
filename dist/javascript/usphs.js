@@ -10,6 +10,8 @@ $(document).ready(function(){
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),
 		$FormSegement = $('form');
+	// INIT Basic info
+	getBasicInfo(Nav_Item.usphs, UID, CID, TID);
 
 
 	// **************************************************
@@ -32,25 +34,6 @@ $(document).ready(function(){
 			$FormSegement.hide();
 		}
 	});
-	// **************************************************
-	// GET: get case info and init nav
-	$.get(URL_CASE, {case_id : CID}, function(data){
-
-		if (data.case_type == 0) {
-			$('#case_type').text("初诊");
-			$('#in_date').text("初诊时间：" + data.date);
-		} else {
-			$('#case_type').text("复诊");
-			$('#in_date').text("复诊时间：" + data.date);
-		}
-
-		// nav.js
-		Nav($('#nav'), data.case_type, data.if_handle, Nav_Item.usphs, {
-			UID : UID,
-			TID : TID,
-			CID : CID,
-		});
-	}, 'JSON');
 
 
 	// **************************************************

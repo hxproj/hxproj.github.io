@@ -39,13 +39,15 @@
 		
 		<!--基本信息-->
 		<div class="ui center aligned basic segment">
-			<div class="ui huge blue header" name="name"></div> 
-			<div class="ui basicinfo labels">
-				<div class="ui label" name="gender"><i class="icon"></i><span></span></div>
-				<div class="ui label" name="age"></div>
-				<div class="ui label" name="ID"></div>
-				<div class="ui label" name="occupation"></div>
-				<div class="ui label" name="contact"></div>
+			<div id="ID_basicinfo">
+				<div class="ui huge blue header" name="name"></div> 
+				<div class="ui basicinfo labels">
+					<div class="ui label" name="gender"><i class="icon"></i><span></span></div>
+					<div class="ui label" name="age"></div>
+					<div class="ui label" name="ID"></div>
+					<div class="ui label" name="occupation"></div>
+					<div class="ui label" name="contact"></div>
+				</div>
 			</div>
 			
   			<div class="ui divider"></div>
@@ -75,9 +77,9 @@
 			<a class="ui basic label" href="riskevaluation.html">风险评估</a>
 			<a class="ui basic label" href="manage.html">预后管理</a>
 			
-			<div class="ui basic label"><i class="trash icon"></i>删除</div>
 
 			<div class="ui time label" >复诊时间：<span></span></div>
+			<div class="ui basic label"><a class="case_delete"><i class="trash icon"></i>删除</a></div>
 		</div>
 
 		<!--Invisible: 处置复诊-->
@@ -97,9 +99,8 @@
 			<a class="ui basic label" href="cure.html">处置</a>
 			<a class="ui basic label" href="manage.html">预后管理</a>
 
-			<div class="ui basic label"><i class="trash icon"></i>删除</div>
-
 			<div class="ui time label" >复诊时间：<span></span></div>
+			<div class="ui basic label"><a class="case_delete"><i class="trash icon"></i>删除</a></div>
 		</div>
 
 		<!--Invisible: 病历-->
