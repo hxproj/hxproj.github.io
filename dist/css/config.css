@@ -15,6 +15,10 @@ body {
 	margin: 4em 0;
 }
 
+bold {
+	font-weight: bold;
+}
+
 /*
 .main.container {
 	margin-bottom: 10em;
