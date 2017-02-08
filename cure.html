@@ -291,8 +291,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -300,8 +300,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -444,7 +444,7 @@
 								<div class="field">
 									<label>垫底</label>
 									<select name="bottom" class="ui dropdown">
-									<option value="">选择</option>
+									<option value="">不使用垫底</option>
 									<option value="Dycal垫底">Dycal</option>
 									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
 									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
@@ -564,7 +564,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>修型工具</label>
-									<select name="modification" class="ui dropdown" multiple="">
+									<select name="modification" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="蜡刀修型">蜡刀</option>
 									<option value="瓷粉充填器修型">瓷粉充填器</option>
@@ -652,8 +652,8 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
+									<option value="使用阿替卡因">阿替卡因</option>
+									<option value="使用利多卡因">利多卡因</option>
 									<option value="其它">其它</option>
 									</select>
 								</div>
@@ -661,8 +661,8 @@
 									<label>局部麻醉</label>
 									<select name="part_anesthesia" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阻滞麻醉">阻滞麻醉</option>
-									<option value="浸润麻醉">浸润麻醉</option>
+									<option value="采用阻滞麻醉">阻滞麻醉</option>
+									<option value="采用浸润麻醉">浸润麻醉</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1131,7 +1131,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>修型工具</label>
-									<select name="modification" class="ui dropdown" multiple="">
+									<select name="modification" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="蜡刀修型">蜡刀</option>
 									<option value="瓷粉充填器修型">瓷粉充填器</option>
@@ -1295,7 +1295,7 @@
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
+									<select name="shape_of_hole" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -1310,7 +1310,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>制备洞形深度(mm)</label>
-									<input type="text" name="depth_of_hole_display" placeholder="mm">
+									<input type="text" name="depth_of_hole" placeholder="mm">
 								</div>
 							</div>
 
@@ -1507,7 +1507,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>修型工具</label>
-									<select name="modification" class="ui dropdown" multiple="">
+									<select name="modification" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="蜡刀修型">蜡刀</option>
 									<option value="瓷粉充填器修型">瓷粉充填器</option>
@@ -1639,16 +1639,8 @@
 									<label>渗透树脂套装</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="ICON">ICON</option>
+									<option value="使用ICON渗透树脂套装">ICON</option>
 									<option value="其它">其它</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>牙龈保护</label>
-									<select name="shape_of_hole" class="ui dropdown">
-									<option value="光固化树脂牙龈保护剂">光固化树脂牙龈保护剂</option>
-									<option value="橡皮障">橡皮障</option>
-									<option value="无">无</option>
 									</select>
 								</div>
 							</div>
@@ -1659,7 +1651,15 @@
 									<label>是否行微研磨</label>
 									<select name="depth_of_hole" class="ui dropdown">
 									<option value="否">否</option>
-									<option value="微研磨">是</option>
+									<option value="行微研磨">是</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>牙龈保护</label>
+									<select name="shape_of_hole" class="ui dropdown">
+									<option value="光固化树脂牙龈保护剂">光固化树脂牙龈保护剂</option>
+									<option value="橡皮障">橡皮障牙龈保护剂</option>
+									<option value="无">无</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1670,6 +1670,8 @@
 									<option value="其他">其他</option>
 									</select>
 								</div>
+							</div>
+							<div class="three fields">
 								<div class="required field">
 									<label>微研磨剂</label>
 									<select name="is_chock" class="ui dropdown">
@@ -1678,8 +1680,6 @@
 									<option value="其他">其他</option>
 									</select>
 								</div>
-							</div>
-							<div class="three fields">
 								<div class="required field">
 									<label>氟保护剂</label>
 									<select name="shade_guide" class="ui dropdown">
@@ -1734,7 +1734,7 @@
 							<input type="hidden" name="specific_method" value="渗透树脂修复">
 
 							<div class="ui hidden divider"></div>
-						    <div class="ui right floated blue submit button">提交</div>
+						    <div class="ui right floated blue small submit button">提交</div>
 						</form>
 
 						<!--微创复合树脂分层修复-->
@@ -1812,7 +1812,29 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">3. 比色</h4>
+							<h4 class="ui blue header">3. 邻面成形</h4>	
+							<div class="three fields">
+								<div class="required field">
+									<label>成形片</label>
+									<select name="is_piece" class="ui dropdown">
+									<option value="未使用成形片">不使用成形片</option>
+									<option value="Palodent豆瓣">Palodent豆瓣</option>
+									<option value="V3">V3</option>
+									<option value="其他">其他</option>
+									</select>
+								</div>
+								<div class="required field">
+									<label>楔子</label>
+									<select name="is_chock" class="ui dropdown">
+									<option value="未使用楔子">不使用楔子</option>
+									<option value="木楔">木楔</option>
+									<option value="Palodent V3">Palodent V3</option>
+									<option value="其他">其他</option>
+									</select>
+								</div>
+							</div>
+
+							<h4 class="ui blue header">4. 比色</h4>
 							<div class="three fields">
 								<div class="required field">
 									<label>比色板类型</label>
@@ -1845,28 +1867,6 @@
 									<option value="A4">A4</option>
 									<option value="C4">C4</option>
 									<option value="其它">其它</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">4. 邻面成形</h4>	
-							<div class="three fields">
-								<div class="required field">
-									<label>成形片</label>
-									<select name="is_piece" class="ui dropdown">
-									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
-									<option value="其他">其他</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>楔子</label>
-									<select name="is_chock" class="ui dropdown">
-									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -2084,7 +2084,7 @@
 							<input type="hidden" name="specific_method" value="微创复合树脂分层修复">
 
 							<div class="ui hidden divider"></div>
-						    <div class="ui right floated blue submit button">提交</div>
+						    <div class="ui right floated blue small submit button">提交</div>
 						</form>
 					</div>
 
