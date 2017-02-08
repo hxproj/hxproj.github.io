@@ -2197,20 +2197,19 @@
 								<option value="其他编号">其他编号</option>
 								</select>
 							</div>
-						</div>
-
-						<div class="three fields">
-							<div class="required field">
+							<div class="field">
 								<label>是否行直接充填</label>
 								<select name="is_chock" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
-							<div class="required field">
-								<label>充填材料（行直接充填才显示该项）</label>
+						</div>
+
+						<div class="three fields">
+							<div class="field">
+								<label>充填材料</label>
 								<select name="shade_guide" class="ui dropdown">
-								<option value="">选择</option>
 								<option value="3M树脂">3M树脂</option>
 								<option value="Kerr树脂">Kerr树脂</option>
 								<option value="Kuraray树脂">Kuraray树脂</option>
@@ -2221,7 +2220,7 @@
 						</div>
 						<div class="field">
 							<label>操作补充说明</label>
-							<input type="text" name="inlay"></input>
+							<textarea rows="3" name="inlay"></textarea>
 						</div>
 
 						<h4 class="ui blue header">5. 取模材料/方式</h4>
@@ -2263,7 +2262,6 @@
 							<div class="field">
 								<label>粘接剂</label>
 								<select name="bottom" class="ui dropdown">
-								<option value="">选择</option>
 								<option value="磷酸锌">磷酸锌</option>
 								<option value="磷酸锌丁香油">磷酸锌丁香油</option>
 								<option value="其他">其他</option>
@@ -2284,21 +2282,6 @@
 								</select>
 							</div>
 							<div class="required field">
-								<label>粘接剂成分</label>
-								<select name="full_etching" class="ui dropdown">
-								<option value="">选择</option>
-								<option value="羧酸锌水门汀">羧酸锌水门汀</option>
-								<option value="树脂加强型玻璃离子">树脂加强型玻璃离子</option>
-								<option value="3M Unicem树脂粘接剂">3M Unicem树脂粘接剂</option>
-								<option value="GC FujiCEM树脂粘接剂">GC FujiCEM树脂粘接剂</option>
-								<option value="帕娜比亚树脂粘接剂">帕娜比亚树脂粘接剂</option>
-								<option value="丁香油水门汀">丁香油水门汀</option>
-								<option value="GC暂时粘接剂">GC暂时粘接剂</option>
-								<option value="GC玻璃离子">GC玻璃离子</option>
-								<option value="其他">其他</option>
-								</select>
-							</div>
-							<div class="required field">
 								<label>氢氟酸酸蚀修复体时间</label>
 								<select name="illumination_time" class="ui dropdown">
 								<option value="无">无</option>
@@ -2310,15 +2293,15 @@
 								<option value="其他">其他</option>
 								</select>
 							</div>
-						</div>
-						<div class="three fields">
 							<div class="required field">
-								<label>是否涂布硅烷偶联剂（如果是‘否’则不显示）</label>
+								<label>是否涂布硅烷偶联剂</label>
 								<select name="resin" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
+						</div>
+						<div class="three fields">
 							<div class="field">
 								<label>磷酸酸蚀牙面时间</label>
 								<select name="time_of_lamp" class="ui dropdown">
@@ -2328,6 +2311,21 @@
 								<option value="40s">40s</option>
 								<option value="50s">50s</option>
 								<option value="60s">60s</option>
+								<option value="其他">其他</option>
+								</select>
+							</div>
+							<div class="required field">
+								<label>粘接剂成分</label>
+								<select name="full_etching" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="羧酸锌水门汀">羧酸锌水门汀</option>
+								<option value="树脂加强型玻璃离子">树脂加强型玻璃离子</option>
+								<option value="3M Unicem树脂粘接剂">3M Unicem树脂粘接剂</option>
+								<option value="GC FujiCEM树脂粘接剂">GC FujiCEM树脂粘接剂</option>
+								<option value="帕娜比亚树脂粘接剂">帕娜比亚树脂粘接剂</option>
+								<option value="丁香油水门汀">丁香油水门汀</option>
+								<option value="GC暂时粘接剂">GC暂时粘接剂</option>
+								<option value="GC玻璃离子">GC玻璃离子</option>
 								<option value="其他">其他</option>
 								</select>
 							</div>

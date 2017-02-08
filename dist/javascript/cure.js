@@ -251,11 +251,10 @@ $(document).ready(function(){
 	var indirectContextFields = [
 			new Field("tools"), new Field("shape_of_hole"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("is_piece"),
-			new Field("shade_guide"), new Field("modification"),
-			new Field("color_of_tooth"), new Field("disinfect"),
-			new Field("bottom"), new Field("coating_time"),
-			new Field("full_etching"), new Field("illumination_time"),
-			new Field("time_of_lamp"), new Field("observed_time"),
+			new Field("modification"), new Field("color_of_tooth"), 
+			new Field("disinfect"), new Field("coating_time"), 
+			new Field("full_etching"), new Field("illumination_time"), 
+			new Field("time_of_lamp"), new Field("observed_time"), 
 			new Field("lamp"), new Field("polishing"),
 		];
 	$('#indirectContext').form({
@@ -405,6 +404,7 @@ $(document).ready(function(){
 			};
 			// 间接修复
 			case 4: {
+				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				DescriptionStr = showIndirect(vData, DescriptionStr);
 				break;
 			};
@@ -795,8 +795,57 @@ $(document).ready(function(){
 	}
 	// 间接修复
 	function showIndirect(vData, vDescription) {
+		vDescription += "1. 嵌体修复材料类型：" + vData.modulo + NewLine;
 
-		
+		vDescription += "2. ";
+		// FIXME: add tooth location
+		if (vData.anesthesia_medicine != "无") {
+			vDescription += vData.anesthesia_medicine + "，";
+		}
+		if (vData.part_anesthesia != "无") {
+			vDescription += vData.part_anesthesia + "，";
+		}
+		vDescription += vData.rubber;
+		vDescription += NewLine;
+
+		vDescription += "3. ";
+		// FIXME: add tooth location
+		if (vData.microscope == "显微镜下") {
+			vDescription += vData.microscope + "，";
+		}
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.shape_of_hole + "制备洞形，深度：";
+		vDescription += vData.depth_of_hole + "mm。";
+		vDescription += "使用钻针" + vData.is_piece + "。";
+		if (vData.is_chock == "是") {
+			vDescription += "行直接充填，充填材料为：" + vData.shade_guide;
+		}
+		vDescription += NewLine;
+
+		// FIXME：补充说明
+		vDescription += "4. ";
+		vDescription += "使用" + vData.modification + "排龈，";
+		vDescription += vData.color_of_tooth + "取模";
+		vDescription += NewLine;
+
+		vDescription += "5. ";
+		if (vData.disinfect == "是") {
+			vDescription += "制作临时修复体，临时修复体粘接，粘接剂为" + vData.bottom;
+			vDescription += NewLine;
+
+			vDescription += "6. ";
+		}
+
+		vDescription += "复诊，去除临时修复体，试戴，调改接触点，检查有无翘动，固位好，边缘密合，";
+		vDescription += vData.coating_time + "氢氟酸酸蚀修复体" + vData.illumination_time + "冲洗、干燥，";
+		if (vData.resin == "是") {
+			vDescription += "涂布硅烷偶联剂，";
+		}
+		vDescription += "磷酸酸蚀牙面" + vData.time_of_lamp + "，";
+		vDescription += "涂布" + vData.full_etching + "粘接剂，";
+		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
+		vDescription += vData.lamp + "调合" + "，";
+		vDescription += vData.polishing + "抛光";
 		
 		return vDescription;
 	}
