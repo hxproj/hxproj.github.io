@@ -1630,14 +1630,14 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>是否使用咬合块</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="microscope" class="ui dropdown">
 									<option value="未使用咬合块">否</option>
 									<option value="使用咬合块">是</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>渗透树脂套装</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="ICON">ICON</option>
 									<option value="其它">其它</option>
@@ -1645,7 +1645,7 @@
 								</div>
 								<div class="required field">
 									<label>牙龈保护</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="shape_of_hole" class="ui dropdown">
 									<option value="光固化树脂牙龈保护剂">光固化树脂牙龈保护剂</option>
 									<option value="橡皮障">橡皮障</option>
 									<option value="无">无</option>
@@ -1657,14 +1657,14 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>是否行微研磨</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="depth_of_hole" class="ui dropdown">
 									<option value="否">否</option>
 									<option value="微研磨">是</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>低速手机</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="is_piece" class="ui dropdown">
 									<option value="无">无</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="其他">其他</option>
@@ -1672,7 +1672,7 @@
 								</div>
 								<div class="required field">
 									<label>微研磨剂</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="is_chock" class="ui dropdown">
 									<option value="无">无</option>
 									<option value="皓齿">皓齿Opalustre</option>
 									<option value="其他">其他</option>
@@ -1682,7 +1682,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>氟保护剂</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="shade_guide" class="ui dropdown">
 									<option value="无">无</option>
 									<option value="多乐氟">多乐氟</option>
 									<option value="其他">其他</option>
@@ -1694,7 +1694,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>酸蚀时间</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="coating_time" class="ui dropdown">
 									<option value="1min">1min</option>
 									<option value="2min">2min</option>
 									<option value="3min">3min</option>
@@ -1703,7 +1703,7 @@
 								</div>
 								<div class="required field">
 									<label>干燥剂次数</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="resin" class="ui dropdown">
 									<option value="1次">1次</option>
 									<option value="2次">2次</option>
 									<option value="3次">3次</option>
@@ -1712,7 +1712,7 @@
 								</div>
 								<div class="required field">
 									<label>光固化时间</label>
-									<select name="rubber" class="ui dropdown">
+									<select name="illumination_time" class="ui dropdown">
 									<option value="5s">5s</option>
 									<option value="10s">10s</option>
 									<option value="15s">15s</option>
@@ -1728,6 +1728,11 @@
 								<span class="FileLabel">选择处置图片</span> 
 								<input type="file" name="file[]" multiple="multiple" id="">
 							</div>
+
+							<!--hidden input-->
+							<input type="hidden" name="handle_type" value="3">
+							<input type="hidden" name="specific_method" value="渗透树脂修复">
+
 							<div class="ui hidden divider"></div>
 						    <div class="ui right floated blue submit button">提交</div>
 						</form>
@@ -1788,7 +1793,7 @@
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
+									<select name="shape_of_hole" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -1803,7 +1808,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>制备洞形深度(mm)</label>
-									<input type="text" name="depth_of_hole_display" placeholder="mm">
+									<input type="text" name="depth_of_hole" placeholder="mm">
 								</div>
 							</div>
 
@@ -2038,7 +2043,7 @@
 							<div class="three fields">
 								<div class="field">
 									<label>调合</label>
-									<select name="" class="ui dropdown" multiple="">
+									<select name="modulo" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="TF">TF</option>
 									<option value="TR">TR</option>
@@ -2059,7 +2064,7 @@
 								</div>
 								<div class="field">
 									<label>抛光</label>
-									<select name="" class="ui dropdown" multiple="">
+									<select name="polishing" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="皓齿抛光系统">皓齿抛光系统</option>
@@ -2073,6 +2078,11 @@
 								<span class="FileLabel">选择处置图片</span> 
 								<input type="file" name="file[]" multiple="multiple" id="">
 							</div>
+
+							<!--hidden input-->
+							<input type="hidden" name="handle_type" value="3">
+							<input type="hidden" name="specific_method" value="微创复合树脂分层修复">
+
 							<div class="ui hidden divider"></div>
 						    <div class="ui right floated blue submit button">提交</div>
 						</form>
@@ -2081,12 +2091,12 @@
 
 <!--**************************************************************************************-->
 <!--***********************************间接修复***************************************-->
-					<form class="ui tab clearing segment form" data-tab="5">
+					<form class="ui tab clearing segment form" id="indirectContext" data-tab="5">
 						<h4 class="ui blue header">1. 嵌体修复材料类型</h4>
 						<div class="three fields">
 							<div class="field">
 								<label>修复体类型</label>
-								<select name="" class="ui dropdown">
+								<select name="modulo" class="ui dropdown">
 								<option value="复合树脂嵌体">复合树脂嵌体</option>
 								<option value="复合树脂贴面">复合树脂贴面</option>
 								<option value="瓷嵌体瓷贴面">瓷嵌体瓷贴面</option>
@@ -2149,7 +2159,7 @@
 							</div>
 							<div class="required field">
 								<label>制备洞形位置</label>
-								<select name="shape_of_hole_display" class="ui dropdown" multiple="">
+								<select name="shape_of_hole" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="唇面">唇面</option>
 								<option value="颊面">颊面</option>
@@ -2164,11 +2174,11 @@
 						<div class="three fields">
 							<div class="required field">
 								<label>制备洞形深度(mm)</label>
-								<input type="text" name="depth_of_hole_display" placeholder="mm">
+								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
 							<div class="required field">
 								<label>钻针序列编号</label>
-								<select name="" class="ui dropdown" multiple="">
+								<select name="is_piece" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="TF">TF</option>
 								<option value="TR">TR</option>
@@ -2192,14 +2202,14 @@
 						<div class="three fields">
 							<div class="required field">
 								<label>是否行直接充填</label>
-								<select name="" class="ui dropdown">
+								<select name="is_chock" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
 							<div class="required field">
 								<label>充填材料（行直接充填才显示该项）</label>
-								<select name="" class="ui dropdown">
+								<select name="shade_guide" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="3M树脂">3M树脂</option>
 								<option value="Kerr树脂">Kerr树脂</option>
@@ -2211,15 +2221,15 @@
 						</div>
 						<div class="field">
 							<label>操作补充说明</label>
-							<input type="text" name="" ></input>
+							<input type="text" name="inlay"></input>
 						</div>
 
 						<h4 class="ui blue header">5. 取模材料/方式</h4>
 						<div class="three fields">
 							<div class="field">
 								<label>排龈</label>
-								<select name="" class="ui dropdown" multiple="">
-								<option value="无">无</option>
+								<select name="modification" class="ui dropdown" multiple="">
+								<option value="">选择</option>
 								<option value="排龈膏">排龈膏</option>
 								<option value="排龈线型号0">排龈线型号0</option>
 								<option value="排龈线型号00">排龈线型号00</option>
@@ -2229,7 +2239,8 @@
 							</div>
 							<div class="field">
 								<label>取模材料/方式</label>
-								<select name="" class="ui dropdown">
+								<select name="color_of_tooth" class="ui dropdown">
+								<option value="">选择</option>
 								<option value="藻酸盐">藻酸盐</option>
 								<option value="琼脂">琼脂</option>
 								<option value="硅橡胶">硅橡胶</option>
@@ -2243,7 +2254,7 @@
 						<div class="three fields">
 							<div class="field">
 								<label>是否制作临时修复体</label>
-								<select name="" class="ui dropdown">
+								<select name="disinfect" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="否">否</option>
 								<option value="是">是</option>
@@ -2251,7 +2262,7 @@
 							</div>
 							<div class="field">
 								<label>粘接剂</label>
-								<select name="" class="ui dropdown">
+								<select name="bottom" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="磷酸锌">磷酸锌</option>
 								<option value="磷酸锌丁香油">磷酸锌丁香油</option>
@@ -2264,7 +2275,7 @@
 						<div class="three fields">
 							<div class="required field">
 								<label>粘接剂品牌</label>
-								<select name="" class="ui dropdown">
+								<select name="coating_time" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="登士柏">登士柏</option>
 								<option value="3M">3M</option>
@@ -2274,7 +2285,7 @@
 							</div>
 							<div class="required field">
 								<label>粘接剂成分</label>
-								<select name="" class="ui dropdown">
+								<select name="full_etching" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="羧酸锌水门汀">羧酸锌水门汀</option>
 								<option value="树脂加强型玻璃离子">树脂加强型玻璃离子</option>
@@ -2289,7 +2300,7 @@
 							</div>
 							<div class="required field">
 								<label>氢氟酸酸蚀修复体时间</label>
-								<select name="" class="ui dropdown">
+								<select name="illumination_time" class="ui dropdown">
 								<option value="无">无</option>
 								<option value="25s">25s</option>
 								<option value="30s">30s</option>
@@ -2303,14 +2314,14 @@
 						<div class="three fields">
 							<div class="required field">
 								<label>是否涂布硅烷偶联剂（如果是‘否’则不显示）</label>
-								<select name="" class="ui dropdown">
+								<select name="resin" class="ui dropdown">
 								<option value="否">否</option>
 								<option value="是">是</option>
 								</select>
 							</div>
 							<div class="field">
 								<label>磷酸酸蚀牙面时间</label>
-								<select name="" class="ui dropdown">
+								<select name="time_of_lamp" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="25s">25s</option>
 								<option value="30s">30s</option>
@@ -2322,7 +2333,7 @@
 							</div>
 							<div class="field">
 								<label>光照时间</label>
-								<select name="" class="ui dropdown">
+								<select name="observed_time" class="ui dropdown">
 								<option value="">选择</option>
 								<option value="25s">25s</option>
 								<option value="30s">30s</option>
@@ -2336,7 +2347,7 @@
 						<div class="three fields">
 							<div class="field">
 								<label>调合</label>
-								<select name="" class="ui dropdown" multiple="">
+								<select name="lamp" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="TF">TF</option>
 								<option value="TR">TR</option>
@@ -2357,7 +2368,7 @@
 							</div>
 							<div class="field">
 								<label>抛光</label>
-								<select name="" class="ui dropdown" multiple="">
+								<select name="polishing" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="抛光杯">抛光杯</option>
 								<option value="皓齿抛光系统">皓齿抛光系统</option>
@@ -2371,6 +2382,11 @@
 							<span class="FileLabel">选择处置图片</span> 
 							<input type="file" name="file[]" multiple="multiple" id="">
 						</div>
+
+						<!--hidden input-->
+						<input type="hidden" name="handle_type" value="4">
+						<input type="hidden" name="specific_method" value="间接修复">
+
 						<div class="ui hidden divider"></div>
 					    <div class="ui right floated blue submit button">提交</div>
 					</form>

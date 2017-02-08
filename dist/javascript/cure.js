@@ -209,14 +209,63 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// 美容修复
 	// ----------------------------------------------------------------------
+	var lookFields1 = [
+			new Field("tools"),
+		],
+		lookFields2 = [
+			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
+			new Field("color_of_tooth"), new Field("disinfect"),
+			new Field("etching_type"),new Field("coating_time"), 
+			new Field("illumination_time"), new Field("resin"),
+			new Field("color_of_resin"), new Field("modification"), 
+			new Field("lamp"), new Field("time_of_lamp"), 
+			new Field("modulo"), new Field("polishing"), 
+		];
 	// **************************************************
 	// 渗透树脂修复
+	$('#lookContext form[data-tab=lookContext1]').form({
+		fields: ResinFields1,
+		inline: true,
+		onSuccess: function(){
+			submitForm($(this).serialize());
+			return false;
+		}
+	});
+
 	// **************************************************
 	// 微创复合树脂分层修复
+	$('#lookContext form[data-tab=lookContext2]').form({
+		fields: ResinFields2,
+		inline: true,
+		onSuccess: function(){
+			submitForm($(this).serialize());
+			return false;
+		}
+	});
+
 
 	// ----------------------------------------------------------------------
 	// 间接修复
 	// ----------------------------------------------------------------------
+	var indirectContextFields = [
+			new Field("tools"), new Field("shape_of_hole"),
+			new Field("depth_of_hole", [EmptyInput]), new Field("is_piece"),
+			new Field("shade_guide"), new Field("modification"),
+			new Field("color_of_tooth"), new Field("disinfect"),
+			new Field("bottom"), new Field("coating_time"),
+			new Field("full_etching"), new Field("illumination_time"),
+			new Field("time_of_lamp"), new Field("observed_time"),
+			new Field("lamp"), new Field("polishing"),
+		];
+	$('#indirectContext').form({
+		fields: indirectContextFields,
+		inline: true,
+		onSuccess: function(){
+			submitForm($(this).serialize());
+			return false;
+		}
+	});
 
 
 	// **************************************************
