@@ -211,4 +211,19 @@ $(document).ready(function(){
 			success  : function() {location.reload();}
 		});
 	}
+
+
+	// ***************************************************************
+	// SEARCH
+	// 搜索姓名
+	$('th .name.search').click(function(){
+		$('#SearchNameModal').modal("show");
+	});
+	$('th .name.search')
+
+
+	// 搜索年龄
+	$('th .age.search').click(function(){
+		$('#SearchAgeModal').modal("show");
+	});
 });
