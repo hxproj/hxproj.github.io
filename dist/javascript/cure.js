@@ -335,6 +335,7 @@ $(document).ready(function(){
 			};
 			// 龋病微创修复
 			case 1: {
+				setSurgicalSelectDefult(vData);
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "ART修复": {
@@ -366,6 +367,7 @@ $(document).ready(function(){
 			};
 			// 复合树脂修复
 			case 2: {
+				setSurgicalSelectDefult(vData);
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "牙树脂直接充填修复": {
@@ -385,6 +387,7 @@ $(document).ready(function(){
 			};
 			// 美容修复
 			case 3: {
+				setSurgicalSelectDefult(vData);
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "渗透树脂修复": {
@@ -404,6 +407,7 @@ $(document).ready(function(){
 			};
 			// 间接修复
 			case 4: {
+				setSurgicalSelectDefult(vData);
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				DescriptionStr = showIndirect(vData, DescriptionStr);
 				break;
@@ -868,6 +872,46 @@ $(document).ready(function(){
 		$('select[name=time_of_etching]').dropdown("set selected", vData.time_of_etching);
 		$('select[name=lamp]').dropdown("set selected", vData.lamp);
 		$('select[name=check_time]').dropdown("set selected", vData.check_time);
+	}
+	// 手术治疗
+	function setSurgicalSelectDefult(vData) {
+		$('select[name=anesthesia_medicine]').dropdown("set selected", vData.anesthesia_medicine);
+		$('select[name=part_anesthesia]').dropdown("set selected", vData.part_anesthesia);
+		$('select[name=rubber]').dropdown("set selected", vData.rubber);
+		$('select[name=microscope]').dropdown("set selected", vData.microscope);
+		$('select[name=tools]').dropdown("set selected", vData.tools);
+		
+		$('select[name=is_piece]').dropdown("set selected", vData.is_piece);
+		$('select[name=is_chock]').dropdown("set selected", vData.is_chock);
+		$('select[name=shade_guide]').dropdown("set selected", vData.shade_guide);
+		$('select[name=color_of_tooth]').dropdown("set selected", vData.color_of_tooth);
+		$('select[name=disinfect]').dropdown("set selected", vData.disinfect);
+		$('select[name=bottom]').dropdown("set selected", vData.bottom);
+		$('select[name=etching_type]').dropdown("set selected", vData.etching_type);
+		$('select[name=full_etching]').dropdown("set selected", vData.full_etching);
+		$('select[name=self_etching]').dropdown("set selected", vData.self_etching);
+		$('select[name=coating_time]').dropdown("set selected", vData.coating_time);
+		$('select[name=illumination_time]').dropdown("set selected", vData.illumination_time);
+		$('select[name=resin]').dropdown("set selected", vData.resin);
+		$('select[name=color_of_resin]').dropdown("set selected", vData.color_of_resin);
+		$('select[name=modification]').dropdown("set selected", vData.modification);
+		$('select[name=lamp]').dropdown("set selected", vData.lamp);
+		$('select[name=time_of_lamp]').dropdown("set selected", vData.time_of_lamp);
+		$('select[name=appease_medicine]').dropdown("set selected", vData.appease_medicine);
+		$('select[name=observed_time]').dropdown("set selected", vData.observed_time);
+		$('select[name=inlay]').dropdown("set selected", vData.inlay);
+
+		// multiple selection
+		$('select[name=shape_of_hole]').dropdown("set selected", vData.shape_of_hole);
+		$('select[name=modulo]').dropdown("set selected", vData.modulo);
+		$('select[name=polishing]').dropdown("set selected", vData.polishing);
+
+		// input
+		$('input[name=depth_of_hole]').val(vData.depth_of_hole);
+	}
+
+	function setIndirectDefault(vData) {
+
 	}
 
 
