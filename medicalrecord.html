@@ -12,6 +12,7 @@
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/basicinfo.js"></script>
   	<script src="dist/javascript/medicalrecord.js"></script>
 
   	<style type="text/css">
@@ -52,8 +53,7 @@
 			
   			<div class="ui divider"></div>
 			<a class="ui teal labeled icon small button" href="index.html">返回<i class="left angle icon"></i></a>
-			<div class="ui teal labeled icon disabled small button" data-tooltip="查看所有牙位详细信息">预览<i class="search icon"></i></div>
-			<div class="ui teal labeled icon small button" data-tooltip="添加牙位" id="ID_AddToothLocation">牙位<i class="add icon"></i></div>
+			<div class="ui teal labeled icon small button" data-tooltip="添加初诊与牙位" id="ID_AddToothLocation">牙位<i class="add icon"></i></div>
 		</div>
 
 		<!--未添加任何-->
@@ -108,10 +108,11 @@
 			<a class="ui right corner delete_tooth_record label">
 				<i class="delete icon"></i>
 			</a>
-			<div class="ui large center aligned header" type="tooth_location_number">牙位</div>
-
-			<div class="ui divider"></div>
-			<div class="ui hidden divider"></div>
+			<div class="ui basic center aligned segment">
+				<div class="ui large header" type="tooth_location_number"></div>
+				<div class="ui divider"></div>
+				<div class="ui add_re_examination mini teal button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
+			</div>
 
 			<!--初诊-->
 			<div class="ui firstvisit labels">
@@ -135,9 +136,9 @@
 
 			<div class="ui hidden after divider"></div>
 
-			<div class="ui right floated mini buttons">
-				<div class="ui add_re_examination button" data-tooltip="添加复诊"><i class="add icon"></i>复诊</div>
-				<div class="ui button" data-tooltip="查看当前牙位详细信息"><i class="search icon"></i>预览</div>
+			<div class="ui right floated teal mini buttons">
+				<a class="ui button" href="preview.html"><i class="search icon"></i>预览(病人版)</a>
+				<a class="ui button" href="preview.html"><i class="search icon"></i>预览(医生版)</a>
 			</div>
 		</div>
 

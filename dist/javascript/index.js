@@ -219,7 +219,13 @@ $(document).ready(function(){
 	$('th .name.search').click(function(){
 		$('#SearchNameModal').modal("show");
 	});
-	$('th .name.search')
+	$('#SearchNameModal button').click(function(){
+		redirection("search.html", {
+			table : "user",
+			field : "name", 
+			value : $(this).prev().val()
+		});
+	});
 
 
 	// 搜索年龄

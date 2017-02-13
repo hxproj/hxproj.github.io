@@ -3,6 +3,8 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
  	var U_ID = Number(requestParameter("uid"));
+	// INIT Basic info
+	getBasicInfo(undefined, U_ID, undefined, undefined);
 
 
 	// **************************************************
@@ -15,32 +17,6 @@ $(document).ready(function(){
 		success  : function(Data){
 			Data.length ? $.each(Data, function() {showToothLocationRecord(this);})
 			 : $('.icon.message').transition('tada'); 
-		}
-	});
-	// **************************************************
-	// GET: get user basic info
-	$.ajax({
-		url      : URL_USER + toquerystring({user_id : U_ID}),
-		type     : "GET",
-		dataType : "json",
-		error    : function(){ networkError(); },
-		success  : function(data){
-			var $BasicInfo = $('#ID_basicinfo'),
-				$Gender    = $BasicInfo.find('div[name=gender]');
-			
-			 if (data.gender) {
-				$Gender.find("i").addClass("woman");
-				$Gender.find("span").text("女");
-			 } else {
-				$Gender.find("i").addClass("man");
-				$Gender.find("span").text("男");
-			 }
-
-			$BasicInfo.find('div[name=name]').text(data.name);
-			$BasicInfo.find('div[name=age]').text(data.age);
-			$BasicInfo.find('div[name=ID]').text(data.id_number);
-			$BasicInfo.find('div[name=occupation]').text(data.occupation);
-			$BasicInfo.find('div[name=contact]').text(data.contact);
 		}
 	});
 
@@ -179,15 +155,7 @@ $(document).ready(function(){
 
 	// **************************************************
 	// Other Envent
-	// OE: 跳转
-	$('.nohandle a.label, .handle a.label, .firstvisit a.label').click(function(){
-		$(this).prop('href', $(this).prop('href') + toquerystring({
-			uid  : U_ID,
-			tid  : $(this).parents('.toothlocationrecord.segment').attr('tooth_id'),
-			cid  : $(this).parents('.ui.labels').attr('case_id'),
-		}));
-	});
-	// OE: delete case
+	// delete case
 	$('.case_delete').click(function(){
 		var This_CID= $(this).parents('.ui.labels').attr("case_id");
 		$('#ID_DeleteModal').modal({
@@ -217,6 +185,7 @@ $(document).ready(function(){
 		$.each(Data.cases, function() { 
 			showExamination({
 				Examination     : this,
+				TID             : Data.tooth_id,
 				$LocationRecord : $ClonedToothLocationRecord
 			}); 
 		});
@@ -237,7 +206,10 @@ $(document).ready(function(){
 			Data.$LocationRecord.find('.after.divider').after("<div class='ui hidden divider'></div>");
 			Data.$LocationRecord.find('.after.divider').after($ClonedReExamination);
 
+			setHref($ClonedReExamination, U_ID, Data.TID, Data.Examination.case_id);
+
 			// TODO: step
+			activeReExaminationStep($ClonedReExamination, Data.Examination.step, Data.Examination.if_handle);
 		} else {
 			var $FirstVisit = Data.$LocationRecord.find('.firstvisit.labels');
 
@@ -245,8 +217,47 @@ $(document).ready(function(){
 			$FirstVisit.find("span[type=doctor]").text(Data.Examination.judge_doctor);
 			$FirstVisit.find("div.time span").text(Data.Examination.date);
 
+			setHref($FirstVisit, U_ID, Data.TID, Data.Examination.case_id);
 			// TODO: step
+			activeFirstVisitStep($FirstVisit, Data.Examination.step);
 		}
-
+	}
+	function setHref($Case, UID, TID, CID) {
+		$.each($Case.find('a.label'), function(){
+			$(this).prop('href', $(this).prop('href') + toquerystring({
+				uid : UID,
+				tid : TID,
+				cid : CID,
+			}));
+		});
+	}
+	function activeFirstVisitStep($Case, Steps) {
+		if ($Case != undefined) {
+			var Labels = $Case.find('a.label');
+			$.each(Steps, function(){
+				Labels.eq(this - 1).addClass("blue");
+			});
+		}
+	}
+	function activeReExaminationStep($Case, Steps, IfHandle) {
+		if ($Case != undefined) {
+			var Labels = $Case.find('a.label');
+			$.each(Steps, function(){
+				if (this == 8) {
+					Labels.eq(0).addClass("blue");
+				} else {
+					if (IfHandle) {
+						Labels.eq(this - 1).addClass("blue");
+					} else {
+						if (this == 3) {
+							Labels.eq(1).addClass("blue");
+						}
+						if (this == 7) {
+							Labels.eq(2).addClass("blue");
+						}
+					}
+				}
+			});
+		}
 	}
 });

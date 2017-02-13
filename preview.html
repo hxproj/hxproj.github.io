@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Standard Meta -->
+  	<meta charset="utf-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+ 	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+
+  	<script src="dist/javascript/jquery.min.js"></script>
+  	<script src="dist/javascript/semantic/semantic.min.js"></script>  
+  	<script src="dist/javascript/config.js"></script>  
+  	<script src="dist/javascript/preview.js"></script>
+  	<script src="dist/FileSaver.min.js"></script>
+  	<script src="dist/javascript/jquery.wordexport.js"></script>
+
+  	<script type="text/javascript">
+  		$(document).ready(function(){
+
+  			var styles = "span{font-weight: bold;}";
+  			styles += ".ui.segment{word-break:break-all;word-wrap:break-word;}";
+
+  			$('#download').click(function(){
+  				$("#maincontent").wordExport('test', styles);
+  			});
+  		});
+  	</script>
+</head>
+
+<body>
+	<!-- Following Menu -->
+	<div class="ui blue inverted large top stackable menu">
+		<a href="index.html" class="center header item">
+			<img class="logo" src="dist/media/logo.png">
+			&nbsp;龋病防治难度评估及管理
+		</a>
+	    <a class="item" href="search.html">搜索</a>
+	    <a class="item" href="help.html">帮助</a>
+	</div> 
+
+	<div class="ui main container">
+		<h2 class="ui orange header">预览病人信息</h2>
+
+		<div class="ui segment" id="maincontent">
+			<div class="ui invisible basic segment" id="User">
+				<h3 class="ui blue header">【基本信息】</h3>
+				<p id="User_Description"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="ToothLocation">
+				<h3 class="ui blue header">【主诉】</h3>
+				<p id="ChiefComplaint"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="PresentIllness">
+				<h3 class="ui blue header">【现病史】</h3>
+				<p id="PI_Description"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="PersonalHistory">
+				<h3 class="ui blue header">【个人史】</h3>
+				<p id="PH_Eating_Habits"></p>
+				<p id="PH_Oral_Maintenance"></p>
+				<p id="PH_Sensitive"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="MouthExamination">
+				<h3 class="ui blue header">【口腔检查】</h3>
+				<p id="ME_Body"></p>
+				<p id="ME_Around"></p>
+				<p id="ME_Loss"></p>
+				<p id="ME_Condition"></p>
+				<p id="ME_Neighbor"></p>
+				<p id="ME_Cure"></p>
+				<p id="ME_X"></p>
+				<div id="ME_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+
+			<div class="ui invisible basic segment" id="Diagnose">
+				<h3 class="ui blue header">【诊断】</h3>
+				<p id="Diagnose_Description"></p>
+				<div id="Diagnose_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+
+			<div class="ui invisible basic segment" id="DifficultyAssessment">
+				<h3 class="ui blue header">【难度评估】</h3>
+				<p>
+					<span>龋损因素：</span>
+					<ul>
+						<li id="DA_tooth_surface_and_location"></li>
+						<li id="DA_caries_depth"></li>
+					</ul>
+				</p>
+				<p>
+					<span>技术因素：</span>
+					<ul>
+						<li id="DA_technology_type"></li>
+					</ul>
+				</p>
+				<p>
+					<span>充填修复史：</span>
+					<ul>
+						<li id="DA_history_of_fill"></li>
+					</ul>
+				</p>
+				<p>
+					<span>附加因素：</span>
+					<ul>
+						<li id="DA_mouth_opening"></li>
+						<li id="DA_gag_reflex"></li>
+						<li id="DA_saliva"></li>
+						<li id="DA_dental_phobia"></li>
+					</ul>
+				</p>
+				<p>
+					<span>预防管理难度：</span>
+					<ul>
+						<li id="DA_difficulty_rating"></li>
+					</ul>
+				</p>
+				<p id="DA_difficulty_level"></p>
+				<p id="DA_id_advice"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="Cure">
+				<h3 class="ui blue header">【处置】</h3>
+				<p id="Cure_Describe"></p>
+				<div id="Cure_IMAGE">
+					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
+				</div>
+			</div>
+
+			<div class="ui invisible basic segment" id="USPHS">
+				<h3 class="ui blue header">【USPHS评估】</h3>
+				<p id="USPHS_marginal_accuracy"></p>
+				<p id="USPHS_anatomic_form"></p>
+				<p id="USPHS_surfaceness"></p>
+				<p id="USPHS_edge_color"></p>
+				<p id="USPHS_occlusal_contact"></p>
+				<p id="USPHS_sensitivity_of_tooth"></p>
+				<p id="USPHS_secondary_caries"></p>
+				<p id="USPHS_integrity"></p>
+				<p id="USPHS_usphs_level"></p>
+			</div>
+
+			<div class="ui invisible basic segment" id="RiskEvaluation">
+				<h3 class="ui blue header">【龋病风险评估】</h3>
+				<p>
+					<span>患龋经历：</span>
+					<ul>
+						<li id="RE_early_carie"></li>
+						<li id="RE_can_see"></li>
+						<li id="RE_lost_tooth"></li>
+					</ul>
+				</p>
+				<p>
+					<span>全身状况：</span>
+					<ul>
+						<li id="RE_system_illness"></li>
+						<li id="RE_illness_name"></li>
+					</ul>
+				</p>
+				<p>
+					<span>饮食习惯：</span>
+					<ul>
+						<li id="RE_times_of_carbohydrate"></li>
+						<li id="RE_consumption_of_carbohydrate"></li>
+						<li id="RE_times_of_meal"></li>
+					</ul>
+				</p>
+				<p>
+					<span>临床试验：</span>
+					<ul>
+						<li id="RE_speed_of_saliva"></li>
+						<li id="RE_ablity_saliva"></li>
+						<li id="RE_bacteria"></li>
+						<li id="RE_consumption"></li>
+					</ul>
+				</p>
+				<p>
+					<span>保护因素：</span>
+					<ul>
+						<li id="RE_fluorine_with_water"></li>
+						<li id="RE_fluorine"></li>
+						<li id="RE_seal"></li>
+					</ul>
+				</p>
+				<p>
+					<span>生活习惯：</span>
+					<ul>
+						<li id="RE_times_of_tooth_brush"></li>
+						<li id="RE_long_of_tooth_brush"></li>
+						<li id="RE_health_care"></li>
+					</ul>
+				</p>
+			</div>
+
+			<div class="ui invisible basic segment" id="Manage">
+				<h3 class="ui blue header">【龋病预后管理】</h3>
+				<p id="Manage_Describe"></p>
+			</div>
+		</div>
+  	
+		<div class="ui right floated left labeled icon teal button" id="download"><i class="download icon"></i>下载病历</div>
+		<div class="ui right floated left labeled icon returnMedical teal button"><i class="chevron left icon"></i>返回病历</div>
+  	</div>
+
+  	<!-- 弹出层 -->
+	<div class="ui small basic modal" id="networkerror">
+		<div class="ui icon header">
+			<i class="orange warning sign icon"></i>
+			网络无法访问或服务器异常
+		</div>
+
+		<div class="content">
+			<p> 请尝试以下方法解决问题：</p>
+			<ol>
+				<li>重启服务器（电脑）</li>
+				<li>联系系统管理员</li>
+			</ol>	
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui ok basic inverted button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
