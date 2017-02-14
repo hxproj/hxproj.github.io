@@ -102,6 +102,7 @@ $(document).ready(function(){
 	// **************************************************
 	// GET
 	// GET：主诉
+	/*
 	$.ajax({
 		url      : URL_TOOTH,
 		type     : "GET", 
@@ -155,7 +156,7 @@ $(document).ready(function(){
 			$FormSegement.hide();
 		}
 	});
-
+	*/
 
 	// **************************************************
 	// Step

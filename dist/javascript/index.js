@@ -14,60 +14,6 @@ $(document).ready(function(){
 	$('.detail.button').click(function(){
 		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
-	
-
-	// ***************************************************************
-	// Init
-	$("#basicinfoform").form({
-		fields: {
-			name: {
-				identifier: 'name',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的姓名'
-					}
-				]
-			},
-			gender: {
-				identifier: 'gender',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的性别'
-					}
-				]
-			},
-			age: {
-				identifier: 'ID',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人身份证号'
-					}
-				]
-			},
-			occupation: {
-				identifier: 'occupation',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的职业'
-					}
-				]
-			},
-			contact: {
-				identifier: 'contact',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请填写病人的联系方式'
-					}
-				]
-			},
-		},
-		inline: true
-	});
 
 
 	// ***************************************************************
@@ -78,49 +24,22 @@ $(document).ready(function(){
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(data){
-			if (data.length) {
+			if (data.user_list.length) {
 				$('.invisible.table').show();
-
-				// 设置分页属性
-				/*
+				showAllMedicalRecord(data.user_list);
+	 			
 				$.Page(
-					$('.record.segment'),
+					$('table'),
 				 	data.pages,
 				 	1,
-				 	URL_PAGE,
+				 	URL_GETALLUSER,
 				 	function() { networkError(); },
-				 	function(data) { showAllMedicalRecord(data); }
+				 	function(data) { showAllMedicalRecord(data.user_list); }
 				 );
-				*/
-	 			
-	 			// 显示当前页所有病历
-	 			showAllMedicalRecord(data);
 			} else {
 				$('.ui.message').show();
 			}
 		}
-	});
-
-
-	// ***************************************************************
-	// POST
-	$('.AddMedicalRecordButton').click(function(){
-		$('#MedicalRecordAddModal').modal({
-			closable  : false,
-  			onApprove : function() {
-				$("#basicinfoform").form({
-					onSuccess: function(){
-						submitUserInfo({
-							method : "POST",
-							info   : $(this).serialize()
-						});
-						return false;
-					}
-				}).submit();
-
-				return false;
-			}
-		}).modal('show');
 	});
 
 
@@ -199,19 +118,7 @@ $(document).ready(function(){
 
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
-
-	function submitUserInfo(Data) {
-		$.ajax({
-			url      : URL_USER,
-			type     : Data.method,
-			async    : false, 
-			data     : Data.info,
-			dataType : "json",
-			error    : function() {networkError();},
-			success  : function() {location.reload();}
-		});
-	}
-
+	
 
 	// ***************************************************************
 	// SEARCH

@@ -12,23 +12,22 @@
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script>  
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/pagination.js"></script>
   	<script src="dist/javascript/index.js"></script>
+  	<script src="dist/javascript/postmedicalrecord.js"></script>
 </head>
 
 <body>
 
 	<div class="ui blue inverted large top stackable menu">
-		<a href="index.html" class="center header item">
-			<img class="logo image" src="dist/media/logo.png">
-			&nbsp;<div class="content">龋病防治难度评估及管理</div>
-		</a>
-	    <a class="item" href="search.html">搜索</a>
-	    <a class="item" href="help.html">帮助</a>
+		<a class="item" href="index.html"><i class='home icon'></i>主页</a>
+		<a class="item" href="keyword.html"><i class='search icon'></i>关键字检索</a>
+		<a class="item" href="help.html"><i class='help icon'></i>帮助</a>
 
 		<div class="right menu">
-	      	<div class="item">
-		        <a href="#" class="AddMedicalRecordButton"><i class="plus icon"></i>添加病历</a>
-	        </div>
+			<div class="item">
+				<a href="#" class="AddMedicalRecordButton"><i class="plus icon"></i>添加病历</a>
+			</div>
 		</div> 
 	</div> 
 
@@ -128,53 +127,6 @@
 			<div class="ui center aligned header">
 				<p>还未添加任何病历，请点击添加</p>
 				<div class="ui AddMedicalRecordButton teal large button"><i class="plus icon"></i>添加病历</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!--Add Medical Record Modal-->
-	<div class="ui modal" id="MedicalRecordAddModal">
-		<div class="header">添加病历</div>
-		<div class="content">
-		    <div class="description">
-				<form class="ui clearing form" id="basicinfoform">
-			    	<h3 class="ui blue header">基本信息</h3>
-				    <div class="three fields">
-				    	<div class="field">
-				    		<label>姓名</label>
-				    		<input type="text" name="name" placeholder="输入姓名">
-				    	</div>
-				    	<div class="field">
-				    		<label>性别</label>
-				    		<select name="gender" class="ui dropdown">
-			                <option value="">选择</option>
-			                <option value="0">男</option>
-			                <option value="1">女</option>
-			              	</select>
-				    	</div>
-				    	<div class="field">
-				    		<label>身份证号</label>
-				    		<input type="text" name="ID" placeholder="身份证号" value="512222198111056324">
-				    	</div>
-				    </div>	
-				    <div class="three fields">
-				    	<div class="field">
-				    		<label>职业</label>
-				    		<input type="text" name="occupation" placeholder="输入职业">
-				    	</div>
-				    	<div class="field">
-				    		<label>联系方式</label>
-				    		<input type="text" name="contact" placeholder="输入联系方式">
-				    	</div>
-				    </div>
-				</form>
-		    </div>
-	  	</div>
-		<div class="actions">
-			<div class="ui orange deny button">取消</div>
-			<div class="ui primary approve right labeled icon button">
-				添加<i class="checkmark icon"></i>
 			</div>
 		</div>
 	</div>

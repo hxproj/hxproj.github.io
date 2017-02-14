@@ -4,6 +4,7 @@ $(document).ready(function(){
 	// FUNCTION: Server Application Interface
 	window.URL_SERVER           = "http://127.0.0.1:9000"; //192.168.191.1
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
+	window.URL_USERALLTOOTHINFO = URL_SERVER + "/medical-case-of-illness/user-all-tooth-info";
 	window.URL_USERTOOTHINFO    = URL_SERVER + "/medical-case-of-illness/user-tooth-info";
 	window.URL_GETALLUSER       = URL_SERVER + "/medical-case-of-illness/all-user";
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
@@ -19,11 +20,6 @@ $(document).ready(function(){
 	window.URL_IMAGE            = URL_SERVER + "/medical-case-of-illness/img";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
-
-	// ***************************************************************
-	// FUNCTION: Server Application Interface
-	window.URL_PAGE             = URL_SERVER + "/medical-case-of-illness/index-info";
-	window.URL_DOC              = URL_SERVER + "/medical-case-of-illness/doc";
 
 	// ***************************************************************
 	// FUNCTION: System Common Functions

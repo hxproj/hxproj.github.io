@@ -10,7 +10,7 @@ $(document).ready(function(){
 	// **************************************************
 	// GET
 	$.ajax({
-		url      : URL_USERTOOTHINFO + toquerystring({user_id : U_ID}),
+		url      : URL_USERALLTOOTHINFO + toquerystring({user_id : U_ID}),
 		type     : "GET",
 		dataType : "json",
 		error    : function(){ networkError(); },
@@ -190,6 +190,13 @@ $(document).ready(function(){
 			}); 
 		});
 
+		$.each($ClonedToothLocationRecord.find('.right.buttons .button'), function(){
+			$(this).prop('href', $(this).prop('href') + toquerystring({
+				uid : U_ID,
+				tid : Data.tooth_id
+			}));
+		});
+
 		$ToothLocationRecord.after($ClonedToothLocationRecord);
 	}
  
@@ -206,10 +213,8 @@ $(document).ready(function(){
 			Data.$LocationRecord.find('.after.divider').after("<div class='ui hidden divider'></div>");
 			Data.$LocationRecord.find('.after.divider').after($ClonedReExamination);
 
-			setHref($ClonedReExamination, U_ID, Data.TID, Data.Examination.case_id);
-
-			// TODO: step
-			activeReExaminationStep($ClonedReExamination, Data.Examination.step, Data.Examination.if_handle);
+			setHref($ClonedReExamination.find('a.label'), U_ID, Data.TID, Data.Examination.case_id);
+			activeReExaminationStep($ClonedReExamination.find('a.label'), Data.Examination.step, Data.Examination.if_handle);
 		} else {
 			var $FirstVisit = Data.$LocationRecord.find('.firstvisit.labels');
 
@@ -217,13 +222,12 @@ $(document).ready(function(){
 			$FirstVisit.find("span[type=doctor]").text(Data.Examination.judge_doctor);
 			$FirstVisit.find("div.time span").text(Data.Examination.date);
 
-			setHref($FirstVisit, U_ID, Data.TID, Data.Examination.case_id);
-			// TODO: step
-			activeFirstVisitStep($FirstVisit, Data.Examination.step);
+			setHref($FirstVisit.find('a.label'), U_ID, Data.TID, Data.Examination.case_id);
+			activeFirstVisitStep($FirstVisit.find('a.label'), Data.Examination.step);
 		}
 	}
-	function setHref($Case, UID, TID, CID) {
-		$.each($Case.find('a.label'), function(){
+	function setHref($Items, UID, TID, CID) {
+		$.each($Items, function(){
 			$(this).prop('href', $(this).prop('href') + toquerystring({
 				uid : UID,
 				tid : TID,
@@ -231,29 +235,27 @@ $(document).ready(function(){
 			}));
 		});
 	}
-	function activeFirstVisitStep($Case, Steps) {
-		if ($Case != undefined) {
-			var Labels = $Case.find('a.label');
+	function activeFirstVisitStep($Items, Steps) {
+		if ($Items != undefined) {
 			$.each(Steps, function(){
-				Labels.eq(this - 1).addClass("blue");
+				$Items.eq(this - 1).addClass("blue");
 			});
 		}
 	}
-	function activeReExaminationStep($Case, Steps, IfHandle) {
-		if ($Case != undefined) {
-			var Labels = $Case.find('a.label');
+	function activeReExaminationStep($Items, Steps, IfHandle) {
+		if ($Items != undefined) {
 			$.each(Steps, function(){
 				if (this == 8) {
-					Labels.eq(0).addClass("blue");
+					$Items.eq(0).addClass("blue");
 				} else {
 					if (IfHandle) {
-						Labels.eq(this - 1).addClass("blue");
+						$Items.eq(this - 1).addClass("blue");
 					} else {
 						if (this == 3) {
-							Labels.eq(1).addClass("blue");
+							$Items.eq(1).addClass("blue");
 						}
 						if (this == 7) {
-							Labels.eq(2).addClass("blue");
+							$Items.eq(2).addClass("blue");
 						}
 					}
 				}
