@@ -9,20 +9,21 @@ jQuery.extend({
 	PaginationItem: "<a class='blue item' href='#'></a>",
 	MaxDisplayPages: 5,
 
-	requestPage: function($AfterSelector, TotalPageNums, PageNum, URL, ErrorFunc, SuccessFunc) {
+	requestPage: function($AfterSelector, TotalPageNums, PageNum, Order, OrderType, URL, ErrorFunc, SuccessFunc) {
+
 		$.ajax({
 			url      : URL,
 			type     : "get",
-			data     : {page : PageNum},
+			data     : {page : PageNum, order : Order, order_type : OrderType},
 			dataType : "json",
 			error    : ErrorFunc,
 			success  : SuccessFunc,
 		});
 
-		$.Page($AfterSelector, TotalPageNums, PageNum, URL, ErrorFunc, SuccessFunc);
+		$.Page($AfterSelector, TotalPageNums, PageNum, Order, OrderType, URL, ErrorFunc, SuccessFunc);
 	},
 
-	Page: function($AfterSelector, TotalPageNums, PageNum, URL, ErrorFunc, SuccessFunc) {
+	Page: function($AfterSelector, TotalPageNums, PageNum, Order, OrderType, URL, ErrorFunc, SuccessFunc) {
 
 		var $Menu = $('#Pagination');
 		if ($Menu.length > 0) {
@@ -48,8 +49,8 @@ jQuery.extend({
 			$RightItem = $Menu.find('.right.item');
 
 		// 设置首尾页点击事件
-		$LeftItem.unbind().bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, 1, URL, ErrorFunc, SuccessFunc)});
-		$RightItem.unbind().bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, TotalPageNums, URL, ErrorFunc, SuccessFunc)});
+		$LeftItem.unbind().bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, 1, Order, OrderType, URL, ErrorFunc, SuccessFunc)});
+		$RightItem.unbind().bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, TotalPageNums, Order, OrderType, URL, ErrorFunc, SuccessFunc)});
 
 		// 添加disable item
 		var $Item = $LeftItem;
@@ -61,7 +62,7 @@ jQuery.extend({
 			$Item = $Item.after($.PaginationItem).next().text(i);
 
 			i == PageNum ? $Item.addClass('active') : 
-					$Item.bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, Number(this.text), URL, ErrorFunc, SuccessFunc)});
+					$Item.bind('click', function(){$.requestPage($AfterSelector, TotalPageNums, Number(this.text), Order, OrderType, URL, ErrorFunc, SuccessFunc)});
 		}
 	},
 });

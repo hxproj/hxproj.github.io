@@ -18,6 +18,8 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// GET
+	getAllUserInfo("user_id", 1);
+	/*
 	$.ajax({
 		url      : URL_GETALLUSER,
 		type     : "GET",
@@ -41,6 +43,7 @@ $(document).ready(function(){
 			}
 		}
 	});
+	*/
 
 
 	// ***************************************************************
@@ -139,4 +142,48 @@ $(document).ready(function(){
 	$('th .age.search').click(function(){
 		$('#SearchAgeModal').modal("show");
 	});
+
+
+	// ***************************************************************
+	// SORT
+	// 姓名
+	$('th .name.sort').click(function(){
+		getAllUserInfo("name", 1);
+	});
+	$('th .in_date.sort').click(function(){
+		getAllUserInfo("in_date", 1);
+	});
+
+
+	// ***************************************************************
+	// FUNCTION
+	function getAllUserInfo(Order, OrderType) {
+		$.ajax({
+			url      : URL_GETALLUSER,
+			type     : "GET",
+			dataType : "json",
+			data     : {order : Order, order_type : OrderType},
+			error    : function(){ networkError(); },
+			success  : function(data){
+				if (data.user_list.length) {
+					$('.invisible.table').show();
+					showAllMedicalRecord(data.user_list);
+		 			
+					$.Page(
+						$('table'),
+					 	data.pages,
+					 	1,
+						Order,
+						OrderType,
+					 	URL_GETALLUSER,
+					 	function() { networkError(); },
+					 	function(data) { showAllMedicalRecord(data.user_list); }
+					 );
+				} else {
+					$('.ui.message').show();
+				}
+			}
+		});
+	}
+
 });
