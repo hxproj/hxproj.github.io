@@ -233,7 +233,7 @@ $(document).ready(function(){
 		$.ajax({
 			url      : URL_PERSONALHISTORY,
 			type     : IsEditMode ? "PUT" : "POST", 
-			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $('#PersonalHistory form').serialize(),
+			data     : toform({user_id : UID, case_id : CID, tooth_id : TID, time_of_teeth_brush : $('#PersonalHistory form').form('get value', "time_of_teeth_brush_display")}) + $('#PersonalHistory form').serialize(),
 			dataType : "json",
 			async    : false,
 			error    : function() {IsSubmited = false;},
@@ -259,7 +259,7 @@ $(document).ready(function(){
 		});
 
 		showPresentIllness($('#ID_Confirm'), {
-			is_primary : 0,
+			is_primary : getFormData(PresentIllnessHistoryForm, "is_primary"),
 			is_very_bad : getFormData(PresentIllnessHistoryForm, "is_very_bad"),
 			is_night_pain_self_pain : getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"),
 			is_hypnalgia : getFormData(PresentIllnessHistoryForm, "is_hypnalgia"),
@@ -281,7 +281,7 @@ $(document).ready(function(){
 			is_carbonic_acid : getFormData(PersonalHistoryForm, "is_carbonic_acid"),
 			is_floss : getFormData(PersonalHistoryForm, "is_floss"),
 			times_of_teeth_brush : getFormData(PersonalHistoryForm, "times_of_teeth_brush"),
-			time_of_teeth_brush : getFormData(PersonalHistoryForm, "time_of_teeth_brush"),
+			time_of_teeth_brush : getFormData(PersonalHistoryForm, "time_of_teeth_brush_display"),
 			long_of_teeth_brush : getFormData(PersonalHistoryForm, "long_of_teeth_brush"),
 			electric_tooth_brush : getFormData(PersonalHistoryForm, "electric_tooth_brush"),
 			is_fluorine : getFormData(PersonalHistoryForm, "is_fluorine"),
@@ -345,7 +345,7 @@ $(document).ready(function(){
 	// 现病史
 	function showPresentIllness($Item, vData) {
 		var $PresentIllness = $Item.find('div[type=presentillness]'),
-			DescribeText = !vData.is_primary ? "<span>原发性龋病：</span>" : "<span>有治疗史龋病：</span>";
+			DescribeText = !vData.is_primary ? "<span>原发性龋病：</span>" : "<span>继发性龋病：</span>";
 
 		$PresentIllness.find('p').remove();
 
@@ -376,6 +376,7 @@ $(document).ready(function(){
 
 			DescribeText += "，" + vData.is_relief;
 		}
+		DescribeText += "。";
 
 		appendpragraph($PresentIllness, DescribeText);
 
@@ -404,9 +405,9 @@ $(document).ready(function(){
 		// 口腔卫生维护
 		var Oral_Maintenance = "<span>口腔卫生维护：</span>";
 		Oral_Maintenance += vData.is_floss + "，";
-		Oral_Maintenance += vData.times_of_teeth_brush + "，";
 		Oral_Maintenance += vData.time_of_teeth_brush + "，";
-		Oral_Maintenance += vData.long_of_teeth_brush + "，";
+		Oral_Maintenance += vData.times_of_teeth_brush + "，";
+		Oral_Maintenance += "每次刷牙" + vData.long_of_teeth_brush + "，";
 		Oral_Maintenance += vData.electric_tooth_brush + "，";
 		Oral_Maintenance += vData.is_fluorine + "，";
 		Oral_Maintenance += vData.is_cavity_examination + "，";
@@ -416,13 +417,45 @@ $(document).ready(function(){
 
 		// 宿主易感性
 		var Sensitive = "<span>宿主易感性：</span>";
-		Sensitive += vData.salivary_gland_disease + "，";
 		Sensitive += vData.sjogren_syndrome + "，";
-		Sensitive += vData.consciously_reduce_salivary_flow;
-		Sensitive += "。";
+
+		vData.salivary_gland_disease ? Sensitive += "患有唾液腺疾病：" + vData.salivary_gland_disease :
+								Sensitive += "无唾液腺疾病";
+		Sensitive += "，";
+
+		vData.consciously_reduce_salivary_flow ? Sensitive += "自觉唾液流量减少" + vData.consciously_reduce_salivary_flow :
+								Sensitive += "唾液流量未明显减少";
+		Sensitive += "，";
+		Sensitive += vData.development_of_the_situation + "，";
+		Sensitive += vData.radiation_therapy_history + "。";
+
 		appendpragraph($PersonalHistory, Sensitive);
 
-		// TODO: add attribute
+		// DMFT/DMFS
+		if (vData.loss_caries_index_up || vData.loss_caries_surface_index_up) {
+			var DMFT_DMFS = "<span>DMFT/DMFS：</span>";
+
+			if (vData.loss_caries_index_up && vData.loss_caries_surface_index_up) {
+				DMFT_DMFS += "龋失补指数(DMFT)：" + vData.loss_caries_index_up + "，";
+				DMFT_DMFS += "龋失补牙面数(DMFS)：" + vData.loss_caries_surface_index_up;
+			} else {
+				if (vData.loss_caries_index_up) {
+					DMFT_DMFS += "龋失补指数(DMFT)：" + vData.loss_caries_index_up;
+				}
+				if (vData.loss_caries_surface_index_up) {
+					DMFT_DMFS += "龋失补牙面数(DMFS)：" + vData.loss_caries_surface_index_up;
+				}
+			}
+
+			appendpragraph($PersonalHistory, DMFT_DMFS);
+		}
+
+		// Other
+		appendpragraph($PersonalHistory, "<span>患牙其他治疗情况：</span>" + vData.orthodontic);
+		if (vData.additional) {
+			appendpragraph($PersonalHistory, "<span>患牙补充说明：</span>" + vData.additional);
+		}
+
 		$PersonalHistory.removeClass('invisible');
 	}
 
@@ -438,24 +471,52 @@ $(document).ready(function(){
         $('#ChiefComplaint input[name=time_of_occurrence]').val(ChiefComplaint.time_of_occurrence);
         $('#ChiefComplaint textarea[name=additional]').val(ChiefComplaint.additional);
 
-        // 现病史
-        // 原发性龋病
-        $('#PresentIllnessHistory select[name=is_very_bad]').dropdown("set selected", IllnessHistory.is_very_bad);
-        $('#PresentIllnessHistory select[name=is_night_pain_self_pain]').dropdown("set selected", IllnessHistory.is_night_pain_self_pain);
-        $('#PresentIllnessHistory select[name=is_hypnalgia]').dropdown("set selected", IllnessHistory.is_hypnalgia);
-        $('#PresentIllnessHistory select[name=is_sensitive_cold_heat]').dropdown("set selected", IllnessHistory.is_sensitive_cold_heat);
-        $('#PresentIllnessHistory select[name=is_cold_hot_stimulationpain]').dropdown("set selected", IllnessHistory.is_cold_hot_stimulationpain);
-        $('#PresentIllnessHistory select[name=is_delayed_pain]').dropdown("set selected", IllnessHistory.is_delayed_pain);
-        $('#PresentIllnessHistory input[name=medicine_name]').val(IllnessHistory.medicine_name);
-        $('#PresentIllnessHistory select[name=is_relief]').dropdown("set selected", IllnessHistory.is_relief);
-        $('#PresentIllnessHistory select[name=fill_type]').dropdown("set selected", IllnessHistory.fill_type);
-        $('#PresentIllnessHistory select[name=fill_state]').dropdown("set selected", IllnessHistory.fill_state);
-        $('#PresentIllnessHistory input[name=cure_time]').val(IllnessHistory.cure_time);
+		// 现病史
+		$('#PresentIllnessHistory select[name=is_very_bad]').dropdown("set selected", IllnessHistory.is_very_bad);
+		$('#PresentIllnessHistory select[name=is_night_pain_self_pain]').dropdown("set selected", IllnessHistory.is_night_pain_self_pain);
+		$('#PresentIllnessHistory select[name=is_hypnalgia]').dropdown("set selected", IllnessHistory.is_hypnalgia);
+		$('#PresentIllnessHistory select[name=is_sensitive_cold_heat]').dropdown("set selected", IllnessHistory.is_sensitive_cold_heat);
+		$('#PresentIllnessHistory select[name=is_cold_hot_stimulationpain]').dropdown("set selected", IllnessHistory.is_cold_hot_stimulationpain);
+		$('#PresentIllnessHistory select[name=is_delayed_pain]').dropdown("set selected", IllnessHistory.is_delayed_pain);
+		$('#PresentIllnessHistory select[name=is_relief]').dropdown("set selected", IllnessHistory.is_relief);
+		$('#PresentIllnessHistory select[name=fill_type]').dropdown("set selected", IllnessHistory.fill_type);
+		$('#PresentIllnessHistory select[name=fill_state]').dropdown("set selected", IllnessHistory.fill_state);
+		$('#PresentIllnessHistory input[name=medicine_name]').val(IllnessHistory.medicine_name);
+		$('#PresentIllnessHistory input[name=cure_time]').val(IllnessHistory.cure_time);
         $('#PresentIllnessHistory textarea[name=additional]').val(IllnessHistory.additional);
+        // Change Tab
+		var TabIndex = IllnessHistory.is_primary ? 2 : 1;
+		$('#PresentIllnessHistory .menu .active').removeClass("active");
+		$('#PresentIllnessHistory .segment.active').removeClass("active");
+		$('#PresentIllnessHistory .menu a[data-tab=' + TabIndex + ']').addClass("active");
+		$('#PresentIllnessHistory .segment[data-tab=' + TabIndex + ']').addClass("active");
 
-
+        // 个人史
+        $('#PersonalHistory select[name=consumption_of_sweet]').dropdown("set selected", PersonalHistory.consumption_of_sweet);
+        $('#PersonalHistory select[name=frequency_of_sweet]').dropdown("set selected", PersonalHistory.frequency_of_sweet);
+        $('#PersonalHistory select[name=frequency_of_meal]').dropdown("set selected", PersonalHistory.frequency_of_meal);
+        $('#PersonalHistory select[name=is_carbonic_acid]').dropdown("set selected", PersonalHistory.is_carbonic_acid);
+        $('#PersonalHistory select[name=is_floss]').dropdown("set selected", PersonalHistory.is_floss);
+        $('#PersonalHistory select[name=times_of_teeth_brush]').dropdown("set selected", PersonalHistory.times_of_teeth_brush);
+        $('#PersonalHistory select[name=long_of_teeth_brush]').dropdown("set selected", PersonalHistory.long_of_teeth_brush);
+        $('#PersonalHistory select[name=electric_tooth_brush]').dropdown("set selected", PersonalHistory.electric_tooth_brush);
+        $('#PersonalHistory select[name=is_fluorine]').dropdown("set selected", PersonalHistory.is_fluorine);
+        $('#PersonalHistory select[name=is_cavity_examination]').dropdown("set selected", PersonalHistory.is_cavity_examination);
+        $('#PersonalHistory select[name=is_periodontal_treatment]').dropdown("set selected", PersonalHistory.is_periodontal_treatment);
+        $('#PersonalHistory select[name=sjogren_syndrome]').dropdown("set selected", PersonalHistory.sjogren_syndrome);
+        $('#PersonalHistory select[name=electric_tooth_brush]').dropdown("set selected", PersonalHistory.electric_tooth_brush);
+        $('#PersonalHistory select[name=development_of_the_situation]').dropdown("set selected", PersonalHistory.development_of_the_situation);
+        $('#PersonalHistory input[name=salivary_gland_disease]').val(PersonalHistory.salivary_gland_disease);
+        $('#PersonalHistory input[name=consciously_reduce_salivary_flow]').val(PersonalHistory.consciously_reduce_salivary_flow);
+        $('#PersonalHistory input[name=loss_caries_index_up]').val(PersonalHistory.loss_caries_index_up);
+        $('#PersonalHistory input[name=loss_caries_surface_index_up]').val(PersonalHistory.loss_caries_surface_index_up);
+        $('#PersonalHistory textarea[name=additional]').val(PersonalHistory.additional);
+		
+		var SplitTime = PersonalHistory.time_of_teeth_brush.split(',');
+		for (var i=0; i<SplitTime.length; ++i){
+			$('#PersonalHistory select[name=time_of_teeth_brush_display]').dropdown("set selected", SplitTime[i]);
+		}
 	}
-
 
 	// ***************************************************************
 	// FUNCTION:
