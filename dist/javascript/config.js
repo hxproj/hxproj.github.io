@@ -20,6 +20,7 @@ $(document).ready(function(){
 	window.URL_IMAGE            = URL_SERVER + "/medical-case-of-illness/img";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
+	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";
 
 	// ***************************************************************
 	// FUNCTION: System Common Functions

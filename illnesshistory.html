@@ -51,190 +51,24 @@
 
 
 				<!--table info-->
-				<table class="ui celled invisible structured table" id="tableinfo">
-					<thead>
-						<tr>
-							<th class="center aligned" colspan="4">主诉&病史表</th>
-						</tr>
-					</thead>
-		  			<tbody>
-						<tr>
-							<td class="warning collapsing" rowspan="4">主诉</td>
-							<td class="collapsing">患牙位置</td>
-							<td type="CC_tooth_location" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">症状</td>
-							<td type="CC_symptom" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">病程时间</td>
-							<td type="CC_time_of_occurrence" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">补充主诉</td>
-							<td type="CC_additional" colspan="2"></td>
-						</tr>
+				<div class="ui invisible clearing basic segment" id="tableinfo">
+					<div class="ui invisible basic segment" type="chiefcomplaint">
+						<h3 class="ui blue header">【主诉】</h3>
+					</div>
 
-						<!--**********************现病史**********************-->
-						<tr>
-							<td class="warning collapsing" rowspan="13">现病史</td>
-							<td class="collapsing">龋病类别</td>
-							<td type="PI_type" colspan="2"></td>
-						</tr>
-						<tr class="disabled">
-							<td class="collapsing">上次治疗时间</td>
-							<td type="PI_cure_time" colspan="2"></td>
-						</tr>
-						<tr class="disabled">
-							<td class="collapsing">修复体类型</td>
-							<td type="PI_fill_type" colspan="2"></td>
-						</tr>
-						<tr class="disabled">
-							<td class="collapsing">修复体状况</td>
-							<td type="PI_fill_state" colspan="2"></td>
-						</tr>
-						<tr class="disabled">
-							<td class="collapsing">近来症状是否加重</td>
-							<td type="PI_is_very_bad" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">有无自发痛</td>
-							<td type="PI_is_night_pain_self_pain" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">有无夜间痛</td>
-							<td type="PI_is_hypnalgia" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">有无牙齿敏感</td>
-							<td type="PI_is_sensitive_cold_heat" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">有无冷热刺激痛</td>
-							<td type="PI_is_cold_hot_stimulationpain" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">有无延缓痛</td>
-							<td type="PI_is_delayed_pain" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">服用药物名称</td>
-							<td type="PI_medicine_name" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">症状是否缓解</td>
-							<td type="PI_is_relief" colspan="2"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">补充现病史</td>
-							<td type="PI_additional" colspan="2"></td>
-						</tr>
+					<div class="ui invisible basic segment" type="presentillness">
+						<h3 class="ui blue header">【现病史】</h3>
+					</div>
 
-						<!--**********************个人史**********************-->
-						<tr>
-							<td class="warning collapsing" rowspan="21">个人史</td>
-							<td class="collapsing" rowspan="4">饮食习惯</td>
-							<td class="collapsing">甜食，蛋白质类食物食用量</td>
-							<td type="PH_consumption_of_sweet"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">甜食，蛋白质类食物食用频率</td>
-							<td type="PH_frequency_of_sweet"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">日进食频率</td>
-							<td type="PH_frequency_of_meal"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">进食是否含碳酸</td>
-							<td type="PH_is_carbonic_acid"></td>
-						</tr>
-						<tr>
-							<td class="collapsing" rowspan="8">口腔卫生维护</td>
-							<td class="collapsing">是否使用牙线</td>
-							<td type="PH_is_floss"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">每天刷牙次数</td>
-							<td type="PH_times_of_teeth_brush"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">刷牙时间点</td>
-							<td type="PH_time_of_teeth_brush"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">刷牙时长</td>
-							<td type="PH_long_of_teeth_brush"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">是否使用电动牙刷</td>
-							<td type="PH_electric_tooth_brush"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">牙膏是否含氟</td>
-							<td type="PH_is_fluorine"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">是否定期口腔检查</td>
-							<td type="PH_is_cavity_examination"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">是否定期牙周洁治</td>
-							<td type="PH_is_periodontal_treatment"></td>
-						</tr>
-						<tr>
-							<td class="collapsing" rowspan="5">宿主易感性</td>
-							<td class="collapsing">是否有干燥综合征</td>
-							<td type="PH_sjogren_syndrome"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">唾液腺疾病或其他系统性疾病</td>
-							<td type="PH_salivary_gland_disease"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">自觉唾液流量减少时间</td>
-							<td type="PH_consciously_reduce_salivary_flow"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">牙齿发育情况</td>
-							<td type="PH_development_of_the_situation"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">是否有放射治疗史</td>
-							<td type="PH_radiation_therapy_history"></td>
-						</tr>
-						<tr>
-							<td class="collapsing" rowspan="2">DMFT/DMFS</td>
-							<td class="collapsing">龋失补指数(DMFT)</td>
-							<td type="PH_loss_caries_index_up"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">龋失补牙面数(DMFS)</td>
-							<td type="PH_loss_caries_surface_index_up"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">患牙其他治疗情况</td>
-							<td class="collapsing">有无正畸治疗史</td>
-							<td type="PH_orthodontic"></td>
-						</tr>
-						<tr>
-							<td class="collapsing">患牙补充说明</td>
-							<td type="PH_additional" colspan="2"></td>
-						</tr>
+					<div class="ui invisible basic segment" type="personalhistory">
+						<h3 class="ui blue header">【个人史】</h3>
+					</div>
 
-						<tr>
-							<td colspan="4" class="right aligned">
-								<div class="ui blue edit small button">修改</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
+					<div class="ui right floated blue edit small button">修改</div>
+				</div>
 
 				<!--form-->
-				<div class="ui clearing basic segment">
-
+				<div class="ui clearing invisible basic segment" id="formsegment">
 					<div class="ui ordered four top attached steps">
 						<!--completed-->
 						<div class="active step">
@@ -385,7 +219,7 @@
 								    		<label>服用药物名称</label>
 											<input type="text" name="medicine_name" placeholder="药物名称">
 										</div>
-								    	<div class="field">
+								    	<div class="required field">
 								    		<label>症状是否缓解</label>
 								    		<select name="is_relief" class="ui dropdown">
 							                <option value="">选择</option>
@@ -492,7 +326,7 @@
 										</div>
 									</div>
 						  			<div class="three fields">
-								    	<div class="field">
+								    	<div class="required field">
 								    		<label>症状是否缓解</label>
 								    		<select name="is_relief" class="ui dropdown">
 							                <option value="">选择</option>
@@ -719,181 +553,22 @@
 						</form>
 					</div>
 
-					<table class="ui celled invisible structured table" id="ID_Confirm">
-			  			<tbody>
-							<tr>
-								<td class="warning collapsing" rowspan="4">主诉</td>
-								<td class="collapsing">患牙位置</td>
-								<td id="CC_tooth_location" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">症状</td>
-								<td id="CC_symptom" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">病程时间</td>
-								<td id="CC_time_of_occurrence" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">补充主诉</td>
-								<td id="CC_additional" colspan="2">未填写</td>
-							</tr>
+					<div class="ui invisible clearing segment" id="ID_Confirm">
+						<div class="ui invisible basic segment" type="chiefcomplaint">
+							<h3 class="ui blue header">【主诉】</h3>
+						</div>
 
-							<!--**********************现病史**********************-->
-							<tr>
-								<td class="warning collapsing" rowspan="13">现病史</td>
-								<td class="collapsing">龋病类别</td>
-								<td id="PI_type" colspan="2"></td>
-							</tr>
-							<tr class="disabled">
-								<td class="collapsing">上次治疗时间</td>
-								<td id="PI_cure_time" colspan="2"></td>
-							</tr>
-							<tr class="disabled">
-								<td class="collapsing">修复体类型</td>
-								<td id="PI_fill_type" colspan="2"></td>
-							</tr>
-							<tr class="disabled">
-								<td class="collapsing">修复体状况</td>
-								<td id="PI_fill_state" colspan="2"></td>
-							</tr>
-							<tr class="disabled">
-								<td class="collapsing">近来症状是否加重</td>
-								<td id="PI_is_very_bad" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">有无自发痛</td>
-								<td id="PI_is_night_pain_self_pain" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">有无夜间痛</td>
-								<td id="PI_is_hypnalgia" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">有无牙齿敏感</td>
-								<td id="PI_is_sensitive_cold_heat" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">有无冷热刺激痛</td>
-								<td id="PI_is_cold_hot_stimulationpain" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">有无延缓痛</td>
-								<td id="PI_is_delayed_pain" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">服用药物名称</td>
-								<td id="PI_medicine_name" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">症状是否缓解</td>
-								<td id="PI_is_relief" colspan="2"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">补充现病史</td>
-								<td id="PI_additional" colspan="2"></td>
-							</tr>
+						<div class="ui invisible basic segment" type="presentillness">
+							<h3 class="ui blue header">【现病史】</h3>
+						</div>
 
-							<!--**********************个人史**********************-->
-							<tr>
-								<td class="warning collapsing" rowspan="21">个人史</td>
-								<td class="collapsing" rowspan="4">饮食习惯</td>
-								<td class="collapsing">甜食，蛋白质类食物食用量</td>
-								<td id="PH_consumption_of_sweet"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">甜食，蛋白质类食物食用频率</td>
-								<td id="PH_frequency_of_sweet"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">日进食频率</td>
-								<td id="PH_frequency_of_meal"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">进食是否含碳酸</td>
-								<td id="PH_is_carbonic_acid"></td>
-							</tr>
-							<tr>
-								<td class="collapsing" rowspan="8">口腔卫生维护</td>
-								<td class="collapsing">是否使用牙线</td>
-								<td id="PH_is_floss"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">每天刷牙次数</td>
-								<td id="PH_times_of_teeth_brush"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">刷牙时间点</td>
-								<td id="PH_time_of_teeth_brush"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">刷牙时长</td>
-								<td id="PH_long_of_teeth_brush"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">是否使用电动牙刷</td>
-								<td id="PH_electric_tooth_brush"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">牙膏是否含氟</td>
-								<td id="PH_is_fluorine"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">是否定期口腔检查</td>
-								<td id="PH_is_cavity_examination"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">是否定期牙周洁治</td>
-								<td id="PH_is_periodontal_treatment"></td>
-							</tr>
-							<tr>
-								<td class="collapsing" rowspan="5">宿主易感性</td>
-								<td class="collapsing">是否有干燥综合征</td>
-								<td id="PH_sjogren_syndrome"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">唾液腺疾病或其他系统性疾病</td>
-								<td id="PH_salivary_gland_disease"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">自觉唾液流量减少时间</td>
-								<td id="PH_consciously_reduce_salivary_flow"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">牙齿发育情况</td>
-								<td id="PH_development_of_the_situation"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">是否有放射治疗史</td>
-								<td id="PH_radiation_therapy_history"></td>
-							</tr>
-							<tr>
-								<td class="collapsing" rowspan="2">DMFT/DMFS</td>
-								<td class="collapsing">龋失补指数(DMFT)</td>
-								<td id="PH_loss_caries_index_up"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">龋失补牙面数(DMFS)</td>
-								<td id="PH_loss_caries_surface_index_up"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">患牙其他治疗情况</td>
-								<td class="collapsing">有无正畸治疗史</td>
-								<td id="PH_orthodontic"></td>
-							</tr>
-							<tr>
-								<td class="collapsing">患牙补充说明</td>
-								<td id="PH_additional" colspan="2"></td>
-							</tr>
+						<div class="ui invisible basic segment" type="personalhistory">
+							<h3 class="ui blue header">【个人史】</h3>
+						</div>
 
-							<tr>
-								<td colspan="4" class="right aligned">
-									<div class="ui right floated blue small confirm button">确认</div>
-									<div class="ui right floated blue small prev button">上一步</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+						<div class="ui right floated blue small confirm button">确认</div>
+						<div class="ui right floated blue small prev button">上一步</div>
+					</div>
 				</div>
 				<!--form-->
 

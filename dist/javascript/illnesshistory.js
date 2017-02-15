@@ -12,7 +12,7 @@ $(document).ready(function(){
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('#tableinfo'),
-		$FormSegement = $('form');
+		$FormSegement = $('#formsegment');
 	// INIT Basic info
 	getBasicInfo(Nav_Item.illnesshistory, UID, CID, TID);
 	// INIT form fields validation
@@ -46,9 +46,26 @@ $(document).ready(function(){
 		}
 	},
 	PresentIllnessHistoryFields1 = {
-		// Nothing
+		is_relief: {
+			identifier: 'is_relief',
+			rules: [
+				{
+					type   : 'empty',
+					prompt : '请选择症状是否缓解'
+				}
+			]
+		},
 	},
 	PresentIllnessHistoryFields2 = {
+		is_relief: {
+			identifier: 'is_relief',
+			rules: [
+				{
+					type   : 'empty',
+					prompt : '请选择症状是否缓解'
+				}
+			]
+		},
 		cure_time: {
 			identifier: 'cure_time',
 			rules: [
@@ -101,28 +118,8 @@ $(document).ready(function(){
 
 	// **************************************************
 	// GET
-	// GET：主诉
-	/*
 	$.ajax({
-		url      : URL_TOOTH,
-		type     : "GET", 
-		data     : toform({tooth_id : TID}),
-		dataType : "json",
-		error    : function() {
-			// TODO: check the return data 
-			$FormSegement.show();
-		},
-		success  : function(vData) {
-			$InfoSegement.show();
-
-			IsEditMode = true;
-			displayChiefComplaintInfo(vData);
-			$FormSegement.hide();
-		}
-	});
-	// GET：现病史
-	$.ajax({
-		url      : URL_PRESENTILLNESS,
+		url      : URL_ILLNESSHISTORY,
 		type     : "GET", 
 		data     : toform({case_id : CID}),
 		dataType : "json",
@@ -134,29 +131,14 @@ $(document).ready(function(){
 			$InfoSegement.show();
 
 			IsEditMode = true;
-			displayPresentIllnessHistoryInfo(vData);
+			showChiefComplaint($('#tableinfo'), vData.chief_complaint);
+			showPresentIllness($('#tableinfo'), vData.illness_history);
+			showPersonalHistory($('#tableinfo'), vData.personal_history);
+			setDefultFormData(vData);
 			$FormSegement.hide();
 		}
 	});
-	// GET：个人史
-	$.ajax({
-		url      : URL_PERSONALHISTORY,
-		type     : "GET", 
-		data     : toform({case_id : CID}),
-		dataType : "json",
-		error    : function() {
-			// TODO: check the return data 
-			$FormSegement.show();
-		},
-		success  : function(vData) {
-			$InfoSegement.show();
 
-			IsEditMode = true;
-			displayPersonalHistoryInfo(vData);
-			$FormSegement.hide();
-		}
-	});
-	*/
 
 	// **************************************************
 	// Step
@@ -223,35 +205,42 @@ $(document).ready(function(){
 		prevStep(3, 2, "#ID_Confirm", "#PersonalHistory");
 	});
 	$('#ID_Confirm .confirm.button').click(function(){
+
+		var IsSubmited = true;
 		// Submit tooth info
 		$.ajax({
 			url      : URL_TOOTH,
 			type     : "PUT", 
 			data     : toform({tooth_id : TID}) + $('#ChiefComplaint form').serialize(),
 			dataType : "json",
-			error    : function() {},
+			async    : false,
+			error    : function() {IsSubmited = false;},
 			success  : function(vData) {}
 		});
 
 		// Submit presentillness
 		$.ajax({
 			url      : URL_PRESENTILLNESS,
-			type     : "POST", 
+			type     : IsEditMode ? "PUT" : "POST", 
 			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + PresentIllnessHistoryForm.serialize(),
 			dataType : "json",
-			error    : function() {},
+			async    : false,
+			error    : function() {IsSubmited = false;},
 			success  : function(vData) {}
 		});
 
 		// Submit personal history
 		$.ajax({
 			url      : URL_PERSONALHISTORY,
-			type     : "POST", 
+			type     : IsEditMode ? "PUT" : "POST", 
 			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $('#PersonalHistory form').serialize(),
 			dataType : "json",
-			error    : function() {},
+			async    : false,
+			error    : function() {IsSubmited = false;},
 			success  : function(vData) {}
 		});
+
+		if (IsSubmited) {location.reload();}
 	});
 
 	function getFormData(Form, Field) {
@@ -262,69 +251,52 @@ $(document).ready(function(){
 		var ChiefComplaintForm  = $('#ChiefComplaint'),
 			PersonalHistoryForm = $('#PersonalHistory');
 
-		// display confirm info
-		// 主诉
-		$('#CC_tooth_location').text(getFormData(ChiefComplaintForm, "tooth_location"));
-		$('#CC_symptom').text(getFormData(ChiefComplaintForm, "symptom"));
-		$('#CC_time_of_occurrence').text(getFormData(ChiefComplaintForm, "time_of_occurrence"));
-		$('#CC_additional').text(getFormData(ChiefComplaintForm, "additional"));
+		showChiefComplaint($('#ID_Confirm'), {
+			tooth_location : getFormData(ChiefComplaintForm, "tooth_location"),
+			symptom : getFormData(ChiefComplaintForm, "symptom"),
+			time_of_occurrence : getFormData(ChiefComplaintForm, "time_of_occurrence"),
+			additional : getFormData(ChiefComplaintForm, "additional"),
+		});
 
-		// 现病史
-		if (Number(getFormData(PresentIllnessHistoryForm, "is_primary")) == 0) {
-			$('#PI_type').text("原发性龋病");
-			$('#PI_is_very_bad').parent().removeClass("disabled");
+		showPresentIllness($('#ID_Confirm'), {
+			is_primary : 0,
+			is_very_bad : getFormData(PresentIllnessHistoryForm, "is_very_bad"),
+			is_night_pain_self_pain : getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"),
+			is_hypnalgia : getFormData(PresentIllnessHistoryForm, "is_hypnalgia"),
+			is_sensitive_cold_heat : getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"),
+			is_cold_hot_stimulationpain : getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"),
+			is_delayed_pain : getFormData(PresentIllnessHistoryForm, "is_delayed_pain"),
+			medicine_name : getFormData(PresentIllnessHistoryForm, "medicine_name"),
+			is_relief : getFormData(PresentIllnessHistoryForm, "is_relief"),
+			additional : getFormData(PresentIllnessHistoryForm, "additional"),
+			fill_type : getFormData(PresentIllnessHistoryForm, "fill_type"),
+			fill_state : getFormData(PresentIllnessHistoryForm, "fill_state"),
+			cure_time : getFormData(PresentIllnessHistoryForm, "cure_time"),
+		});
 
-			$('#PI_is_very_bad').text(getFormData(PresentIllnessHistoryForm, "is_very_bad"));
-			$('#PI_is_night_pain_self_pain').text(getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"));
-			$('#PI_is_hypnalgia').text(getFormData(PresentIllnessHistoryForm, "is_hypnalgia"));
-			$('#PI_is_sensitive_cold_heat').text(getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"));
-			$('#PI_is_cold_hot_stimulationpain').text(getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"));
-			$('#PI_is_delayed_pain').text(getFormData(PresentIllnessHistoryForm, "is_delayed_pain"));
-			$('#PI_medicine_name').text(getFormData(PresentIllnessHistoryForm, "medicine_name"));
-			$('#PI_is_relief').text(getFormData(PresentIllnessHistoryForm, "is_relief"));
-			$('#PI_additional').text(getFormData(PresentIllnessHistoryForm, "additional"));
-		} else {
-			$('#PI_type').text("继发性龋病");
-			$('#PI_cure_time').parent().removeClass("disabled");
-			$('#PI_fill_type').parent().removeClass("disabled");
-			$('#PI_fill_state').parent().removeClass("disabled");
-
-			$('#PI_cure_time').text(getFormData(PresentIllnessHistoryForm, "cure_time"));
-			$('#PI_fill_type').text(getFormData(PresentIllnessHistoryForm, "fill_type"));
-			$('#PI_fill_state').text(getFormData(PresentIllnessHistoryForm, "fill_state"));
-
-			$('#PI_is_night_pain_self_pain').text(getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"));
-			$('#PI_is_hypnalgia').text(getFormData(PresentIllnessHistoryForm, "is_hypnalgia"));
-			$('#PI_is_sensitive_cold_heat').text(getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"));
-			$('#PI_is_cold_hot_stimulationpain').text(getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"));
-			$('#PI_is_delayed_pain').text(getFormData(PresentIllnessHistoryForm, "is_delayed_pain"));
-			$('#PI_medicine_name').text(getFormData(PresentIllnessHistoryForm, "medicine_name"));
-			$('#PI_is_relief').text(getFormData(PresentIllnessHistoryForm, "is_relief"));
-			$('#PI_additional').text(getFormData(PresentIllnessHistoryForm, "additional"));
-		}
-
-		// 个人史
-		$('#PH_consumption_of_sweet').text(getFormData(PersonalHistoryForm, "consumption_of_sweet"));
-		$('#PH_frequency_of_sweet').text(getFormData(PersonalHistoryForm, "frequency_of_sweet"));
-		$('#PH_frequency_of_meal').text(getFormData(PersonalHistoryForm, "frequency_of_meal"));
-		$('#PH_is_carbonic_acid').text(getFormData(PersonalHistoryForm, "is_carbonic_acid"));
-		$('#PH_is_floss').text(getFormData(PersonalHistoryForm, "is_floss"));
-		$('#PH_times_of_teeth_brush').text(getFormData(PersonalHistoryForm, "times_of_teeth_brush"));
-		$('#PH_time_of_teeth_brush').text(getFormData(PersonalHistoryForm, "time_of_teeth_brush"));
-		$('#PH_long_of_teeth_brush').text(getFormData(PersonalHistoryForm, "long_of_teeth_brush"));
-		$('#PH_electric_tooth_brush').text(getFormData(PersonalHistoryForm, "electric_tooth_brush"));
-		$('#PH_is_fluorine').text(getFormData(PersonalHistoryForm, "is_fluorine"));
-		$('#PH_is_cavity_examination').text(getFormData(PersonalHistoryForm, "is_cavity_examination"));
-		$('#PH_is_periodontal_treatment').text(getFormData(PersonalHistoryForm, "is_periodontal_treatment"));
-		$('#PH_sjogren_syndrome').text(getFormData(PersonalHistoryForm, "sjogren_syndrome"));
-		$('#PH_salivary_gland_disease').text(getFormData(PersonalHistoryForm, "salivary_gland_disease"));
-		$('#PH_consciously_reduce_salivary_flow').text(getFormData(PersonalHistoryForm, "consciously_reduce_salivary_flow"));
-		$('#PH_development_of_the_situation').text(getFormData(PersonalHistoryForm, "development_of_the_situation"));
-		$('#PH_radiation_therapy_history').text(getFormData(PersonalHistoryForm, "radiation_therapy_history"));
-		$('#PH_loss_caries_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_index_up"));
-		$('#PH_loss_caries_surface_index_up').text(getFormData(PersonalHistoryForm, "loss_caries_surface_index_up"));
-		$('#PH_orthodontic').text(getFormData(PersonalHistoryForm, "orthodontic"));
-		$('#PH_additional').text(getFormData(PersonalHistoryForm, "additional"));
+		showPersonalHistory($('#ID_Confirm'), {
+			consumption_of_sweet : getFormData(PersonalHistoryForm, "consumption_of_sweet"),
+			frequency_of_sweet : getFormData(PersonalHistoryForm, "frequency_of_sweet"),
+			frequency_of_meal : getFormData(PersonalHistoryForm, "frequency_of_meal"),
+			is_carbonic_acid : getFormData(PersonalHistoryForm, "is_carbonic_acid"),
+			is_floss : getFormData(PersonalHistoryForm, "is_floss"),
+			times_of_teeth_brush : getFormData(PersonalHistoryForm, "times_of_teeth_brush"),
+			time_of_teeth_brush : getFormData(PersonalHistoryForm, "time_of_teeth_brush"),
+			long_of_teeth_brush : getFormData(PersonalHistoryForm, "long_of_teeth_brush"),
+			electric_tooth_brush : getFormData(PersonalHistoryForm, "electric_tooth_brush"),
+			is_fluorine : getFormData(PersonalHistoryForm, "is_fluorine"),
+			is_cavity_examination : getFormData(PersonalHistoryForm, "is_cavity_examination"),
+			is_periodontal_treatment : getFormData(PersonalHistoryForm, "is_periodontal_treatment"),
+			sjogren_syndrome : getFormData(PersonalHistoryForm, "sjogren_syndrome"),
+			salivary_gland_disease : getFormData(PersonalHistoryForm, "salivary_gland_disease"),
+			consciously_reduce_salivary_flow : getFormData(PersonalHistoryForm, "consciously_reduce_salivary_flow"),
+			development_of_the_situation : getFormData(PersonalHistoryForm, "development_of_the_situation"),
+			radiation_therapy_history : getFormData(PersonalHistoryForm, "radiation_therapy_history"),
+			loss_caries_index_up : getFormData(PersonalHistoryForm, "loss_caries_index_up"),
+			loss_caries_surface_index_up : getFormData(PersonalHistoryForm, "loss_caries_surface_index_up"),
+			orthodontic : getFormData(PersonalHistoryForm, "orthodontic"),
+			additional : getFormData(PersonalHistoryForm, "additional"),
+		});
 	}
 	
 
@@ -338,79 +310,157 @@ $(document).ready(function(){
 			$Input.val($(this).text() + $(this).prevAll('div.label').text());
 			$('#ID_TimeModal').modal('hide');
 		});
+	});
 
+	$('.edit.button').click(function(){
+		var Cancel = "<div class='ui right floated teal small button' onclick='location.reload()'>取消</div>";
+		$InfoSegement.hide();
+   		$FormSegement.find('.confirm.button').text("确认修改").after(Cancel);
+   		$FormSegement.find('.next.button').after(Cancel);
+		$FormSegement.show();
 	});
 
 
 
 	// **************************************************
-	// Function
-	function displayChiefComplaintInfo(vData) {
-		$('td[type=CC_tooth_location]').text(vData.tooth_location);
-		$('td[type=CC_symptom]').text(vData.symptom);
-		$('td[type=CC_time_of_occurrence]').text(vData.time_of_occurrence);
-		$('td[type=CC_additional]').text(vData.additional);
-	}
+	// Function: show
+	// 主诉
+	function showChiefComplaint($Item, vData) {
+		var $ChiefComplaint = $Item.find('div[type=chiefcomplaint]'),
+			ChiefComplaint  = vData.tooth_location;
 
-	function displayPresentIllnessHistoryInfo(vData) {
-		if (vData.is_primary == 0) {
-			$('td[type=PI_type]').text("原发性龋病");
+		$ChiefComplaint.find('p').remove();
 
-			$('td[type=PI_is_very_bad]').parent().removeClass("disabled");
+		ChiefComplaint += vData.is_fill_tooth ? "要求补牙" : vData.symptom + vData.time_of_occurrence;
+		ChiefComplaint += "。";
+		appendpragraph($ChiefComplaint, ChiefComplaint);
 
-			$('td[type=PI_is_very_bad]').text(vData.is_very_bad);
-			$('td[type=PI_is_night_pain_self_pain]').text(vData.is_night_pain_self_pain);
-			$('td[type=PI_is_hypnalgia]').text(vData.is_hypnalgia);
-			$('td[type=PI_is_sensitive_cold_heat]').text(vData.is_sensitive_cold_heat);
-			$('td[type=PI_is_cold_hot_stimulationpain]').text(vData.is_cold_hot_stimulationpain);
-			$('td[type=PI_is_delayed_pain]').text(vData.is_delayed_pain);
-			$('td[type=PI_medicine_name]').text(vData.medicine_name);
-			$('td[type=PI_is_relief]').text(vData.is_relief);
-			$('td[type=PI_additional]').text(vData.additional);
-		} else {
-			$('td[type=PI_type]').text("继发性龋病");
-
-			$('td[type=PI_type]').parent().removeClass("disabled");
-			$('td[type=PI_cure_time]').parent().removeClass("disabled");
-			$('td[type=PI_fill_type]').parent().removeClass("disabled");
-
-			$('td[type=PI_cure_time]').text(vData.cure_time);
-			$('td[type=PI_fill_type]').text(vData.fill_type);
-			$('td[type=PI_fill_state]').text(vData.fill_state);
-
-			$('td[type=PI_is_night_pain_self_pain]').text(vData.is_night_pain_self_pain);
-			$('td[type=PI_is_hypnalgia]').text(vData.is_hypnalgia);
-			$('td[type=PI_is_sensitive_cold_heat]').text(vData.is_sensitive_cold_heat);
-			$('td[type=PI_is_cold_hot_stimulationpain]').text(vData.is_cold_hot_stimulationpain);
-			$('td[type=PI_is_delayed_pain]').text(vData.is_delayed_pain);
-			$('td[type=PI_medicine_name]').text(vData.medicine_name);
-			$('td[type=PI_is_relief]').text(vData.is_relief);
-			$('td[type=PI_additional]').text(vData.additional);
+		if (vData.additional) {
+			appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
 		}
+
+		$ChiefComplaint.removeClass('invisible');
 	}
 
-	function displayPersonalHistoryInfo(vData) {
-		$('td[type=PH_consumption_of_sweet]').text(vData.consumption_of_sweet);
-		$('td[type=PH_frequency_of_sweet]').text(vData.frequency_of_sweet);
-		$('td[type=PH_frequency_of_meal]').text(vData.frequency_of_meal);
-		$('td[type=PH_is_carbonic_acid]').text(vData.is_carbonic_acid);
-		$('td[type=PH_is_floss]').text(vData.is_floss);
-		$('td[type=PH_times_of_teeth_brush]').text(vData.times_of_teeth_brush);
-		$('td[type=PH_time_of_teeth_brush]').text(vData.time_of_teeth_brush);
-		$('td[type=PH_long_of_teeth_brush]').text(vData.long_of_teeth_brush);
-		$('td[type=PH_electric_tooth_brush]').text(vData.electric_tooth_brush);
-		$('td[type=PH_is_fluorine]').text(vData.is_fluorine);
-		$('td[type=PH_is_cavity_examination]').text(vData.is_cavity_examination);
-		$('td[type=PH_is_periodontal_treatment]').text(vData.is_periodontal_treatment);
-		$('td[type=PH_sjogren_syndrome]').text(vData.sjogren_syndrome);
-		$('td[type=PH_salivary_gland_disease]').text(vData.salivary_gland_disease);
-		$('td[type=PH_consciously_reduce_salivary_flow]').text(vData.consciously_reduce_salivary_flow);
-		$('td[type=PH_development_of_the_situation]').text(vData.development_of_the_situation);
-		$('td[type=PH_radiation_therapy_history]').text(vData.radiation_therapy_history);
-		$('td[type=PH_loss_caries_index_up]').text(vData.loss_caries_index_up);
-		$('td[type=PH_loss_caries_surface_index_up]').text(vData.loss_caries_surface_index_up);
-		$('td[type=PH_orthodontic]').text(vData.orthodontic);
-		$('td[type=PH_additional]').text(vData.additional);
+	// 现病史
+	function showPresentIllness($Item, vData) {
+		var $PresentIllness = $Item.find('div[type=presentillness]'),
+			DescribeText = !vData.is_primary ? "<span>原发性龋病：</span>" : "<span>有治疗史龋病：</span>";
+
+		$PresentIllness.find('p').remove();
+
+		if (!vData.is_primary) {
+			DescribeText += vData.is_very_bad + "，";
+			DescribeText += vData.is_night_pain_self_pain + "，";
+			DescribeText += vData.is_hypnalgia + "，";
+			DescribeText += vData.is_sensitive_cold_heat + "，";
+			DescribeText += vData.is_cold_hot_stimulationpain + "，";
+			DescribeText += vData.is_delayed_pain + "，";
+
+			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
+								DescribeText += "未服用任何药物";
+			
+			DescribeText += "，" + vData.is_relief;
+		} else {
+			DescribeText += "在" + vData.cure_time + "曾进行充填修复治疗，";
+			DescribeText += "为" + vData.fill_type + "，";
+			DescribeText += vData.fill_state + "，";
+			DescribeText += vData.is_night_pain_self_pain + "，";
+			DescribeText += vData.is_hypnalgia + "，";
+			DescribeText += vData.is_sensitive_cold_heat + "，";
+			DescribeText += vData.is_cold_hot_stimulationpain + "，";
+			DescribeText += vData.is_delayed_pain + "，";
+
+			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
+								DescribeText += "未服用任何药物";
+
+			DescribeText += "，" + vData.is_relief;
+		}
+
+		appendpragraph($PresentIllness, DescribeText);
+
+		if (vData.additional) {
+			appendpragraph($PresentIllness, "<span>补充现病史：</span>" + vData.additional);
+		}
+	
+		$PresentIllness.removeClass('invisible');
+	}
+
+	// 个人史
+	function showPersonalHistory($Item, vData) {
+		var $PersonalHistory = $Item.find('div[type=personalhistory]');
+
+		$PersonalHistory.find('p').remove();
+
+		// 饮食习惯
+		var Eating_Habits = "<span>饮食习惯：</span>";
+		Eating_Habits += vData.consumption_of_sweet + "，";
+		Eating_Habits += vData.frequency_of_sweet + "，";
+		Eating_Habits += vData.frequency_of_meal + "，";
+		Eating_Habits += vData.is_carbonic_acid;
+		Eating_Habits += "。";
+		appendpragraph($PersonalHistory, Eating_Habits);
+
+		// 口腔卫生维护
+		var Oral_Maintenance = "<span>口腔卫生维护：</span>";
+		Oral_Maintenance += vData.is_floss + "，";
+		Oral_Maintenance += vData.times_of_teeth_brush + "，";
+		Oral_Maintenance += vData.time_of_teeth_brush + "，";
+		Oral_Maintenance += vData.long_of_teeth_brush + "，";
+		Oral_Maintenance += vData.electric_tooth_brush + "，";
+		Oral_Maintenance += vData.is_fluorine + "，";
+		Oral_Maintenance += vData.is_cavity_examination + "，";
+		Oral_Maintenance += vData.is_periodontal_treatment;
+		Oral_Maintenance += "。";
+		appendpragraph($PersonalHistory, Oral_Maintenance);
+
+		// 宿主易感性
+		var Sensitive = "<span>宿主易感性：</span>";
+		Sensitive += vData.salivary_gland_disease + "，";
+		Sensitive += vData.sjogren_syndrome + "，";
+		Sensitive += vData.consciously_reduce_salivary_flow;
+		Sensitive += "。";
+		appendpragraph($PersonalHistory, Sensitive);
+
+		// TODO: add attribute
+		$PersonalHistory.removeClass('invisible');
+	}
+
+	function setDefultFormData(vData) {
+
+		var ChiefComplaint  = vData.chief_complaint,
+			IllnessHistory  = vData.illness_history,
+			PersonalHistory = vData.personal_history;
+
+		// 主诉
+        $('#ChiefComplaint select[name=tooth_location]').dropdown("set selected", ChiefComplaint.tooth_location);
+        $('#ChiefComplaint select[name=symptom]').dropdown("set selected", ChiefComplaint.symptom);
+        $('#ChiefComplaint input[name=time_of_occurrence]').val(ChiefComplaint.time_of_occurrence);
+        $('#ChiefComplaint textarea[name=additional]').val(ChiefComplaint.additional);
+
+        // 现病史
+        // 原发性龋病
+        $('#PresentIllnessHistory select[name=is_very_bad]').dropdown("set selected", IllnessHistory.is_very_bad);
+        $('#PresentIllnessHistory select[name=is_night_pain_self_pain]').dropdown("set selected", IllnessHistory.is_night_pain_self_pain);
+        $('#PresentIllnessHistory select[name=is_hypnalgia]').dropdown("set selected", IllnessHistory.is_hypnalgia);
+        $('#PresentIllnessHistory select[name=is_sensitive_cold_heat]').dropdown("set selected", IllnessHistory.is_sensitive_cold_heat);
+        $('#PresentIllnessHistory select[name=is_cold_hot_stimulationpain]').dropdown("set selected", IllnessHistory.is_cold_hot_stimulationpain);
+        $('#PresentIllnessHistory select[name=is_delayed_pain]').dropdown("set selected", IllnessHistory.is_delayed_pain);
+        $('#PresentIllnessHistory input[name=medicine_name]').val(IllnessHistory.medicine_name);
+        $('#PresentIllnessHistory select[name=is_relief]').dropdown("set selected", IllnessHistory.is_relief);
+        $('#PresentIllnessHistory select[name=fill_type]').dropdown("set selected", IllnessHistory.fill_type);
+        $('#PresentIllnessHistory select[name=fill_state]').dropdown("set selected", IllnessHistory.fill_state);
+        $('#PresentIllnessHistory input[name=cure_time]').val(IllnessHistory.cure_time);
+        $('#PresentIllnessHistory textarea[name=additional]').val(IllnessHistory.additional);
+
+
+	}
+
+
+	// ***************************************************************
+	// FUNCTION:
+	function appendpragraph($Item, Text) {
+		$Item.append("<p>" + Text + "</p>");
 	}
 
 });
