@@ -23,7 +23,7 @@ $(document).ready(function(){
 			BasicInfo += "病历录入时间：" + vData.in_date;
 
 			$('div[type=basicinfo] p').text(BasicInfo);
-			$('div[type=basicinfo] header').text(vData.name);
+			$('div[type=basicinfo] .header').text(vData.name);
 			$('div[type=basicinfo]').removeClass('invisible');
 		}
 	});
@@ -44,10 +44,10 @@ $(document).ready(function(){
 			$.each(vData.cases, function(){
 				// 处置
 				if (this.case_type == 0) {
-
 					showPresentIllness(this.case_id);
 					showPersonalHistory(this.case_id);
-
+					getAndShowMouthExamination(this.case_id);
+					getAndShowRiskEvaluationAndManage(this.case_id);
 				} 
 				// 复诊
 				else if (this.case_type == 1) {
@@ -56,7 +56,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-
 
 	// 主诉
 	function showChiefComplaint(vData) {
@@ -138,7 +137,6 @@ $(document).ready(function(){
 			data     : {case_id : case_id},
 			dataType : "json",
 			success  : function(vData){
-
 				var $PersonalHistory = $('div[type=personalhistory]');
 
 				// 饮食习惯
@@ -223,5 +221,155 @@ $(document).ready(function(){
 	// FUNCTION:
 	function appendpragraph($Item, Text) {
 		$Item.append("<p>" + Text + "</p>");
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 获取及显示口腔检查信息
+	function getAndShowMouthExamination(case_id) {
+		$.ajax({
+			url      : URL_MOUTHEXAM,
+			type     : "get",
+			data     : {case_id : case_id},
+			dataType : "json",
+			success  : function(vData){
+
+				var $MouthExam = $('div[type=mouthexamination]');
+
+				// 牙体情况
+				var MouthBody = "<span>牙体情况：</span>";
+				MouthBody += vData.tooth_location + "牙";
+				MouthBody += "龋坏累及" + vData.caries_tired + "，";
+				MouthBody += "为" + vData.depth + "，";			
+
+				if (vData.fill != "无") {
+					MouthBody += "原充填体为" + vData.fill + "，";
+					MouthBody += vData.secondary + "，";
+				}
+
+				MouthBody += vData.color_of_caries + "，";
+				MouthBody += vData.flex_of_caries + "，";
+				MouthBody += vData.cold + "，";
+				MouthBody += vData.hot + "，";
+				MouthBody += vData.touch + "，";
+				MouthBody += vData.bite;
+
+				if (vData.vitality_value_of_teeth != "") {
+					MouthBody += "，牙齿活力值：" + vData.vitality_value_of_teeth;
+				};
+
+				MouthBody += "。";
+				appendpragraph($MouthExam, MouthBody);
+
+				// 牙周情况
+				var MouthAround = "<span>牙周情况：</span>";
+				MouthAround += vData.gingival_hyperemia + "，";
+				MouthAround += vData.gingival_color + "，";
+				MouthAround += vData.tartar_up + "，";
+				MouthAround += vData.tartar_down + "，";
+				MouthAround += vData.bop + "，";
+				MouthAround += vData.periodontal_pocket_depth + "，";
+
+				if (vData.furcation != "根分叉病变无") {
+					MouthAround += vData.furcation + "，";
+					MouthAround += vData.location + "，";
+				}
+
+				MouthAround += vData.fistula + "，";
+				MouthAround += vData.overflow_pus + "，";
+				MouthAround += vData.mobility;
+				MouthAround += "。";
+				appendpragraph($MouthExam, MouthAround);
+
+				// 患牙与邻牙接触关系
+				var Neighbor = "<span>患牙与邻牙接触关系：</span>";
+				Neighbor += vData.relations_between_teeth + "，";
+				Neighbor += vData.is_teeth_crowd + "，";
+				Neighbor += vData.involution_teeth + "，";
+				Neighbor += vData.tooth_shape;
+				Neighbor += "。";
+				appendpragraph($MouthExam, Neighbor);
+
+				// X线片表现
+				var X_Ray = "<span>X线片表现：</span>";
+				X_Ray += vData.tooth_location + "牙";
+				X_Ray += vData.X_Ray_location + "，";
+				X_Ray += vData.X_Ray_depth + "，";
+				X_Ray += vData.X_Ray_fill_quality + "，根尖周组织无明显异常";
+
+				if (vData.CT_shows) {
+					X_Ray += "，CT表现：" + vData.CT_shows;
+				}
+				if (vData.piece) {
+					X_Ray += "，咬翼片表现：" + vData.piece;
+				}
+				if (vData.OtherExpression) {
+					X_Ray += "，其他表现：" + vData.OtherExpression;
+				}
+				X_Ray += "。";
+
+				appendpragraph($MouthExam, X_Ray);
+
+				/* TODO
+				// 显示口腔检查图片
+				$.ajax({
+				url      : URL_IMAGEUPLOAD,
+				type     : "GET",
+				data     : {tooth_id : T_ID, type : 0},
+				dataType : "json",
+				success  : function(FileData) {
+				$.each(FileData, function(){
+				var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
+				$ClonedImage.attr("value", this.img_id);
+
+				var ImagePath = this.path;
+				ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+				window.loadImage(ImagePath, function(){
+				$ClonedImage.attr('src', ImagePath);
+				});
+
+				$('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
+				});
+				}
+				});
+				*/
+
+				$MouthExam.removeClass('invisible');
+			}
+		});
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 获取及显示风险评估结果和龋病预后管理方案
+	function getAndShowRiskEvaluationAndManage(case_id) {
+		$.ajax({
+			url      : URL_RISKEVALUATION,
+			type     : "GET", 
+			data     : {case_id : case_id},
+			dataType : "json",
+			success  : function(vData) {
+				var Type = "";
+				switch (vData.risk_level) {
+					case 1:  {
+						Type = "低风险患者";
+						$('div[type=manage] .segment[data-tab=1]').show();
+						break;
+					}
+					case 2:  {
+						Type = "中风险患者";
+						$('div[type=manage] .segment[data-tab=2]').show();
+						break;
+					}
+					case 3:  {
+						Type = "高风险患者";
+						$('div[type=manage] .segment[data-tab=3]').show();
+						break;
+					}
+				}
+				appendpragraph($('div[type=riskevaluation]').removeClass('invisible'), "<span>风险评估结果：</span>" + Type);
+				$('div[type=manage]').show();
+			}
+		});
 	}
 });

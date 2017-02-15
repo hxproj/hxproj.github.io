@@ -45,47 +45,43 @@
 	<div class="ui main container">
 		<h2 class="ui orange header"></h2>
 
-		<div class="ui segment" id="maincontent">
+		<div class="ui basic segment" id="maincontent">
 			<div class="ui invisible basic segment" type="basicinfo">
-				<h3 class="ui blue header">TOM</h3>
+				<h3 class="ui blue header"></h3>
 				<p></p>
 			</div>
 
-			<div class="ui invisible basic segment" type="chiefcomplaint">
+			<div class="ui invisible raised segment" type="chiefcomplaint">
 				<h3 class="ui blue header">【主诉】</h3>
 			</div>
 
-			<div class="ui invisible basic segment" type="presentillness">
+			<div class="ui invisible raised segment" type="presentillness">
 				<h3 class="ui blue header">【现病史】</h3>
 			</div>
 
-			<div class="ui invisible basic segment" type="personalhistory">
+			<div class="ui invisible raised segment" type="personalhistory">
 				<h3 class="ui blue header">【个人史】</h3>
 			</div>
 
-			<div class="ui invisible basic segment" id="MouthExamination">
+			<div class="ui invisible raised segment" type="mouthexamination">
 				<h3 class="ui blue header">【口腔检查】</h3>
-				<p id="ME_Body"></p>
-				<p id="ME_Around"></p>
-				<p id="ME_Loss"></p>
-				<p id="ME_Condition"></p>
-				<p id="ME_Neighbor"></p>
-				<p id="ME_Cure"></p>
-				<p id="ME_X"></p>
-				<div id="ME_IMAGE">
+				<div type="image">
 					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
 				</div>
 			</div>
 
-			<div class="ui invisible basic segment" id="Diagnose">
+			<div class="ui invisible raised segment" type="riskevaluation">
+				<h3 class="ui blue header">【龋病风险评估】</h3>
+			</div>
+
+			<div class="ui invisible raised segment" type="diagnose">
 				<h3 class="ui blue header">【诊断】</h3>
-				<p id="Diagnose_Description"></p>
 				<div id="Diagnose_IMAGE">
 					<img class="ui hidden rounded image" style="max-width:100%; max-height:300px;">
 				</div>
 			</div>
 
-			<div class="ui invisible basic segment" id="DifficultyAssessment">
+			<div class="ui invisible raised segment" type="difficultyassessment">
 				<h3 class="ui blue header">【难度评估】</h3>
 				<p>
 					<span>龋损因素：</span>
@@ -146,61 +142,51 @@
 				<p id="USPHS_usphs_level"></p>
 			</div>
 
-			<div class="ui invisible basic segment" id="RiskEvaluation">
-				<h3 class="ui blue header">【龋病风险评估】</h3>
-				<p>
-					<span>患龋经历：</span>
-					<ul>
-						<li id="RE_early_carie"></li>
-						<li id="RE_can_see"></li>
-						<li id="RE_lost_tooth"></li>
-					</ul>
-				</p>
-				<p>
-					<span>全身状况：</span>
-					<ul>
-						<li id="RE_system_illness"></li>
-						<li id="RE_illness_name"></li>
-					</ul>
-				</p>
-				<p>
-					<span>饮食习惯：</span>
-					<ul>
-						<li id="RE_times_of_carbohydrate"></li>
-						<li id="RE_consumption_of_carbohydrate"></li>
-						<li id="RE_times_of_meal"></li>
-					</ul>
-				</p>
-				<p>
-					<span>临床试验：</span>
-					<ul>
-						<li id="RE_speed_of_saliva"></li>
-						<li id="RE_ablity_saliva"></li>
-						<li id="RE_bacteria"></li>
-						<li id="RE_consumption"></li>
-					</ul>
-				</p>
-				<p>
-					<span>保护因素：</span>
-					<ul>
-						<li id="RE_fluorine_with_water"></li>
-						<li id="RE_fluorine"></li>
-						<li id="RE_seal"></li>
-					</ul>
-				</p>
-				<p>
-					<span>生活习惯：</span>
-					<ul>
-						<li id="RE_times_of_tooth_brush"></li>
-						<li id="RE_long_of_tooth_brush"></li>
-						<li id="RE_health_care"></li>
-					</ul>
-				</p>
-			</div>
-
-			<div class="ui invisible basic segment" id="Manage">
+			<div class="ui invisible segment" type="manage">
 				<h3 class="ui blue header">【龋病预后管理】</h3>
-				<p id="Manage_Describe"></p>
+
+		  		<div class="ui invisible basic segment" data-tab="1">
+				    <h3 class="ui blue header">低风险患者：</h3>
+
+				    <h4 class="ui paragraph header">保持口腔卫生，减少糖摄入。对于口腔中存在修复体或者接受正畸治疗的患者强调口腔卫生及氟制剂使用，建议每3个月行涂氟治疗。</h4>
+				    <h4 class="ui paragraph header">1. 复诊检查周期：每6-12个月</h4>
+				    <h4 class="ui paragraph header">2. 影像学检查频率：每24-36个月</h4>
+				    <h4 class="ui paragraph header">3. 唾液检查（流速及细菌计数）：初次就诊可选择性进行（作为基线资料）</h4>
+				    <h4 class="ui paragraph header">4. 氯己定：仅唾液检测细菌培养计数高者使用</h4>
+				    <h4 class="ui paragraph header">5. 木糖醇：仅唾液检测细菌培养计数高者使用</h4>
+				    <h4 class="ui paragraph header">6. 氟制剂：普通非处方含氟牙膏（每天两次，早饭后及睡觉前）；当存在牙根暴露或者敏感时可进行涂氟治疗</h4>
+				    <h4 class="ui paragraph header">7. 再矿化制剂：不需要；当存在牙根暴露或者敏感时可使用</h4>
+				    <h4 class="ui paragraph header">8. 窝沟封闭：可选择</h4>
+		  		</div>
+
+		  		<div class="ui invisible basic segment" data-tab="2">
+				    <h3 class="ui blue header">中风险患者</h3>
+
+				    <h4 class="ui paragraph header">保持口腔卫生，减少糖摄入。对于口腔中存在修复体或者接受正畸治疗的患者强调口腔卫生及氟制剂使用，建议每3个月行涂氟治疗。</h4>
+				    <h4 class="ui paragraph header">1. 复诊检查周期：每4-6个月</h4>
+				    <h4 class="ui paragraph header">2. 影像学检查频率：每18-24个月</h4>
+				    <h4 class="ui paragraph header">3. 唾液检查（流速及细菌计数）：初次就诊可选择性进行（作为基线资料或者怀疑患者存在高致龋菌）</h4>
+				    <h4 class="ui paragraph header">4. 氯己定：仅唾液检测细菌培养计数高者使用</h4>
+				    <h4 class="ui paragraph header">5. 木糖醇： 推荐使用（一次两片，每天4次）</h4>
+				    <h4 class="ui paragraph header">6. 氟制剂：普通非处方含氟牙膏（每天两次，早饭后及睡觉前）； 可补充0.05%NaF漱口水每天漱口；可补充涂氟治疗</h4>
+				    <h4 class="ui paragraph header">7. 再矿化制剂：不需要；当存在牙根暴露或者敏感时可使用</h4>
+				    <h4 class="ui paragraph header">8. 窝沟封闭：可选择</h4>
+		  		</div>
+
+		  		<div class="ui invisible basic segment" data-tab="3">
+				    <h3 class="ui blue header">高风险患者</h3>
+				    
+				    <h4 class="ui paragraph header">保持口腔卫生，减少糖摄入。对于口腔中存在修复体或者接受正畸治疗的患者强调口腔卫生及氟制剂使用，建议每3个月行涂氟治疗。</h4>
+				    <h4 class="ui paragraph header">1. 复诊检查周期：每3-4个月（同时补充涂氟）</h4>
+				    <h4 class="ui paragraph header">2. 影像学检查频率：每6-18个月或直到无成洞性龋损</h4>
+				    <h4 class="ui paragraph header">3. 唾液检查（流速及细菌计数）：初次就诊及每次复诊</h4>
+				    <h4 class="ui paragraph header">4. 氯己定：每个月连续1周每天使用10ml 0.12%葡萄糖酸氯己定漱口1分钟。直到下一次复诊再评估</h4>
+				    <h4 class="ui paragraph header">5. 木糖醇： 推荐使用（一次两片，每天4次）</h4>
+				    <h4 class="ui paragraph header">6. 氟制剂：高含氟(1.1%NaF)牙膏（每天两次，早饭后及睡觉前）； 可补充0.2%NaF含氟漱口水每天漱口，使用1瓶之后换成0.05% NaF漱口水每天漱口2次；补充涂氟治疗</h4>
+				    <h4 class="ui paragraph header">7. 再矿化制剂：可选择</h4>
+				    <h4 class="ui paragraph header">8. 窝沟封闭：可选择</h4>
+				    <h4 class="ui paragraph header">9. 当感觉口感时，饭后及吃零食后使用小苏打水漱口（患者唾液分泌存在障碍时选用）</h4>
+		  		</div>
 			</div>
 		</div>
   	
