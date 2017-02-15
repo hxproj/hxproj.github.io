@@ -65,14 +65,16 @@ $(document).ready(function(){
 			type     : "get",
 			data     : {tooth_id : vData.tooth_id},
 			dataType : "json",
-			success  : function(Data){
-				var ChiefComplaint = Data.tooth_location;
-				ChiefComplaint += Data.is_fill_tooth ? "要求补牙" : Data.symptom + Data.time_of_occurrence;
-				ChiefComplaint += "。";
-				$('div[type=chiefcomplaint] p').text(ChiefComplaint);
-				// TODO: 补充主诉
+			success  : function(vData){
 
-				$('div[type=chiefcomplaint]').removeClass('invisible');
+				var $ChiefComplaint = $('div[type=chiefcomplaint]');
+
+				appendpragraph($ChiefComplaint, vData.tooth_location + vData.symptom + vData.time_of_occurrence + "。");
+				if (vData.additional) {
+					appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
+				}
+
+				$ChiefComplaint.removeClass('invisible');
 			}
 		});
 	}
@@ -84,35 +86,46 @@ $(document).ready(function(){
 			type     : "GET",
 			data     : {case_id : case_id},
 			dataType : "json",
-			success  : function(DATA) {
-				var DescribeText = !DATA.is_primary ? "<span>原发性龋病：</span>" : "<span>有治疗史龋病：</span>";
+			success  : function(vData) {
+				var $PresentIllness = $('div[type=presentillness]'),
+					DescribeText = !vData.is_primary ? "<span>原发性龋病：</span>" : "<span>继发性龋病：</span>";
 
-				if (!DATA.is_primary) {
-					DescribeText += DATA.is_very_bad + "，";
-					DescribeText += DATA.is_night_pain_self_pain + "，";
-					DescribeText += DATA.is_hypnalgia + "，";
-					DescribeText += DATA.is_sensitive_cold_heat + "，";
-					DescribeText += DATA.is_cold_hot_stimulationpain + "，";
-					DescribeText += DATA.is_delayed_pain + "，";
-					DescribeText += DATA.medicine_name + "，";
-					DescribeText += DATA.is_relief;
+				if (!vData.is_primary) {
+					DescribeText += vData.is_very_bad + "，";
+					DescribeText += vData.is_night_pain_self_pain + "，";
+					DescribeText += vData.is_hypnalgia + "，";
+					DescribeText += vData.is_sensitive_cold_heat + "，";
+					DescribeText += vData.is_cold_hot_stimulationpain + "，";
+					DescribeText += vData.is_delayed_pain + "，";
+
+					vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
+										DescribeText += "未服用任何药物";
+					
+					DescribeText += "，" + vData.is_relief;
 				} else {
-					DescribeText += "在" + DATA.cure_time + "曾进行充填修复治疗，";
-					DescribeText += "为" + DATA.fill_type + "，";
-					DescribeText += DATA.fill_state + "，";
-					DescribeText += DATA.is_night_pain_self_pain + "，";
-					DescribeText += DATA.is_hypnalgia + "，";
-					DescribeText += DATA.is_sensitive_cold_heat + "，";
-					DescribeText += DATA.is_cold_hot_stimulationpain + "，";
-					DescribeText += DATA.is_delayed_pain + "，";
-					DescribeText += DATA.medicine_name + "，";
-					DescribeText += DATA.is_relief;
+					DescribeText += "在" + vData.cure_time + "曾进行充填修复治疗，";
+					DescribeText += "为" + vData.fill_type + "，";
+					DescribeText += vData.fill_state + "，";
+					DescribeText += vData.is_night_pain_self_pain + "，";
+					DescribeText += vData.is_hypnalgia + "，";
+					DescribeText += vData.is_sensitive_cold_heat + "，";
+					DescribeText += vData.is_cold_hot_stimulationpain + "，";
+					DescribeText += vData.is_delayed_pain + "，";
+
+					vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
+										DescribeText += "未服用任何药物";
+
+					DescribeText += "，" + vData.is_relief;
 				}
 				DescribeText += "。";
 
-				$('div[type=presentillness] p').html(DescribeText);
+				appendpragraph($PresentIllness, DescribeText);
+
+				if (vData.additional) {
+					appendpragraph($PresentIllness, "<span>补充现病史：</span>" + vData.additional);
+				}
 			
-				$('div[type=presentillness]').removeClass('invisible');
+				$PresentIllness.removeClass('invisible');
 			}
 		});
 	}
@@ -124,40 +137,72 @@ $(document).ready(function(){
 			type     : "get",
 			data     : {case_id : case_id},
 			dataType : "json",
-			success  : function(DATA){
+			success  : function(vData){
+
 				var $PersonalHistory = $('div[type=personalhistory]');
+
 				// 饮食习惯
 				var Eating_Habits = "<span>饮食习惯：</span>";
-				Eating_Habits += DATA.consumption_of_sweet + "，";
-				Eating_Habits += DATA.frequency_of_sweet + "，";
-				Eating_Habits += DATA.frequency_of_meal + "，";
-				Eating_Habits += DATA.is_carbonic_acid;
+				Eating_Habits += vData.consumption_of_sweet + "，";
+				Eating_Habits += vData.frequency_of_sweet + "，";
+				Eating_Habits += vData.frequency_of_meal + "，";
+				Eating_Habits += vData.is_carbonic_acid;
 				Eating_Habits += "。";
 				appendpragraph($PersonalHistory, Eating_Habits);
 
 				// 口腔卫生维护
 				var Oral_Maintenance = "<span>口腔卫生维护：</span>";
-				Oral_Maintenance += DATA.is_floss + "，";
-				Oral_Maintenance += DATA.times_of_teeth_brush + "，";
-				Oral_Maintenance += DATA.time_of_teeth_brush + "，";
-				Oral_Maintenance += DATA.long_of_teeth_brush + "，";
-				Oral_Maintenance += DATA.electric_tooth_brush + "，";
-				Oral_Maintenance += DATA.is_fluorine + "，";
-				Oral_Maintenance += DATA.is_cavity_examination + "，";
-				Oral_Maintenance += DATA.is_periodontal_treatment;
+				Oral_Maintenance += vData.is_floss + "，";
+				Oral_Maintenance += vData.time_of_teeth_brush + "，";
+				Oral_Maintenance += vData.times_of_teeth_brush + "，";
+				Oral_Maintenance += "每次刷牙" + vData.long_of_teeth_brush + "，";
+				Oral_Maintenance += vData.electric_tooth_brush + "，";
+				Oral_Maintenance += vData.is_fluorine + "，";
+				Oral_Maintenance += vData.is_cavity_examination + "，";
+				Oral_Maintenance += vData.is_periodontal_treatment;
 				Oral_Maintenance += "。";
 				appendpragraph($PersonalHistory, Oral_Maintenance);
 
 				// 宿主易感性
 				var Sensitive = "<span>宿主易感性：</span>";
-				Sensitive += DATA.salivary_gland_disease + "，";
-				Sensitive += DATA.sjogren_syndrome + "，";
-				Sensitive += DATA.consciously_reduce_salivary_flow;
-				Sensitive += "。";
+				Sensitive += vData.sjogren_syndrome + "，";
+
+				vData.salivary_gland_disease ? Sensitive += "患有唾液腺疾病：" + vData.salivary_gland_disease :
+										Sensitive += "无唾液腺疾病";
+				Sensitive += "，";
+
+				vData.consciously_reduce_salivary_flow ? Sensitive += "自觉唾液流量减少" + vData.consciously_reduce_salivary_flow :
+										Sensitive += "唾液流量未明显减少";
+				Sensitive += "，";
+				Sensitive += vData.development_of_the_situation + "，";
+				Sensitive += vData.radiation_therapy_history + "。";
+
 				appendpragraph($PersonalHistory, Sensitive);
 
-				// TODO: add attribute
+				// DMFT/DMFS
+				if (vData.loss_caries_index_up || vData.loss_caries_surface_index_up) {
+					var DMFT_DMFS = "<span>DMFT/DMFS：</span>";
 
+					if (vData.loss_caries_index_up && vData.loss_caries_surface_index_up) {
+						DMFT_DMFS += "龋失补指数(DMFT)：" + vData.loss_caries_index_up + "，";
+						DMFT_DMFS += "龋失补牙面数(DMFS)：" + vData.loss_caries_surface_index_up;
+					} else {
+						if (vData.loss_caries_index_up) {
+							DMFT_DMFS += "龋失补指数(DMFT)：" + vData.loss_caries_index_up;
+						}
+						if (vData.loss_caries_surface_index_up) {
+							DMFT_DMFS += "龋失补牙面数(DMFS)：" + vData.loss_caries_surface_index_up;
+						}
+					}
+
+					appendpragraph($PersonalHistory, DMFT_DMFS);
+				}
+
+				// Other
+				appendpragraph($PersonalHistory, "<span>患牙其他治疗情况：</span>" + vData.orthodontic);
+				if (vData.additional) {
+					appendpragraph($PersonalHistory, "<span>患牙补充说明：</span>" + vData.additional);
+				}
 
 				$PersonalHistory.removeClass('invisible');
 			}

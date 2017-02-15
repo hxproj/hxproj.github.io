@@ -326,15 +326,10 @@ $(document).ready(function(){
 	// Function: show
 	// 主诉
 	function showChiefComplaint($Item, vData) {
-		var $ChiefComplaint = $Item.find('div[type=chiefcomplaint]'),
-			ChiefComplaint  = vData.tooth_location;
-
+		var $ChiefComplaint = $Item.find('div[type=chiefcomplaint]');
 		$ChiefComplaint.find('p').remove();
 
-		ChiefComplaint += vData.is_fill_tooth ? "要求补牙" : vData.symptom + vData.time_of_occurrence;
-		ChiefComplaint += "。";
-		appendpragraph($ChiefComplaint, ChiefComplaint);
-
+		appendpragraph($ChiefComplaint, vData.tooth_location + vData.symptom + vData.time_of_occurrence + "。");
 		if (vData.additional) {
 			appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
 		}
