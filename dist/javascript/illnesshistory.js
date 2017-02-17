@@ -259,7 +259,7 @@ $(document).ready(function(){
 		});
 
 		showPresentIllness($('#ID_Confirm'), {
-			is_primary : getFormData(PresentIllnessHistoryForm, "is_primary"),
+			is_primary : Number(getFormData(PresentIllnessHistoryForm, "is_primary")),
 			is_very_bad : getFormData(PresentIllnessHistoryForm, "is_very_bad"),
 			is_night_pain_self_pain : getFormData(PresentIllnessHistoryForm, "is_night_pain_self_pain"),
 			is_hypnalgia : getFormData(PresentIllnessHistoryForm, "is_hypnalgia"),
