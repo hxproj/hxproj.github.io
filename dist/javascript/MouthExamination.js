@@ -188,17 +188,36 @@ $(document).ready(function(){
 	// Other Envent
 	// 选择牙位
 	$('#SelectToothLocation').click(function(){
+		// 设置当前默认选项值
+		var ThisInput = $(this).find('input').val();
+		if (ThisInput) {
+			$.each(ThisInput.split("、"), function(){
+				$('#SelectToothLocationModal').find(".ui.label[val=" + this + "]").addClass('teal');
+			});
+		};
+
+		// Set tab
+		/*
+		if (DATA != null && DATA.tooth_type != undefined) {
+			$('#context .menu .active').removeClass("active");
+			$('#context .segment.active').removeClass("active");
+			$('#context .menu a[data-tab=' + DATA.tooth_type + ']').addClass("active");
+			$('#context .segment[data-tab=' + DATA.tooth_type + ']').addClass("active");
+		}
+		*/
+
 		$('#SelectToothLocationModal').modal({
 			onApprove : function(){
 
 				var FormData = "";
 				$('#SelectToothLocationModal .segment.active .teal.label').each(function(){
-					FormData += $(this).text() + ",";
+					FormData += $(this).text() + "、";
 				});
 
 				if (FormData.length > 0) {FormData = FormData.substring(0, FormData.length - 1);} 
 
-				$('#SelectToothLocation input').val(FormData);
+				$('#SelectToothLocation input[name=tooth_location]').val(FormData);
+				$('#SelectToothLocation input[name=tooth_type]').val($('#SelectToothLocationModal.modal .item.active').attr('data-tab'));
 			}
 		}).modal('show');
 	});

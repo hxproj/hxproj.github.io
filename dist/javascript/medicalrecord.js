@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 			var FormData = "";
 			$('.modal .segment.active .teal.label').each(function(){
-				FormData += $(this).text() + ",";
+				FormData += $(this).text() + "、";
 			});
 
 			if (FormData.length > 0) {FormData = FormData.substring(0, FormData.length - 1);} 

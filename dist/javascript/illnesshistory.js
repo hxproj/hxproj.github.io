@@ -5,7 +5,6 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
 	// INIT PARAMENTERS
-	// TODO: Request Parameters From URL
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
@@ -124,7 +123,6 @@ $(document).ready(function(){
 		data     : toform({case_id : CID}),
 		dataType : "json",
 		error    : function() {
-			// TODO: check the return data 
 			$FormSegement.show();
 		},
 		success  : function(vData) {

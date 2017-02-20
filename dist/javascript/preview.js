@@ -48,6 +48,7 @@ $(document).ready(function(){
 					showPersonalHistory(this.case_id);
 					getAndShowMouthExamination(this.case_id);
 					getAndShowRiskEvaluationAndManage(this.case_id);
+					getAndShowDifficultyAssessment(this.case_id);
 				} 
 				// 复诊
 				else if (this.case_type == 1) {
@@ -335,6 +336,48 @@ $(document).ready(function(){
 				*/
 
 				$MouthExam.removeClass('invisible');
+			}
+		});
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 获取及显示难度评估
+	function getAndShowDifficultyAssessment(case_id) {
+		$.ajax({
+			url      : URL_DIFFICULTYASSE,
+			type     : "GET", 
+			data     : {case_id : case_id},
+			dataType : "json",
+			success  : function(vData) {
+
+				var $DifficultyAssessment = $('div[type=difficultyassessment]');
+
+				var Level  = "<span>难度等级：</span>",
+					Advice = "<span>转诊意见：</span>";
+
+				switch (vData.difficulty_level) {
+					case 1:  {
+						Level  += "Ⅰ级"; 
+						Advice += "建议转诊到A级医师进行处理";
+						break;
+					}
+					case 2:  {
+						Level  += "Ⅱ级"; 
+						Advice += "建议转诊到B级医师进行处理";
+						break;
+					}
+					case 3:  {
+						Level  += "Ⅲ级"; 
+						Advice += "建议转诊到C级医师进行处理";
+						break;
+					}
+				}
+
+				appendpragraph($DifficultyAssessment, Level);
+				appendpragraph($DifficultyAssessment, Advice);
+
+				$DifficultyAssessment.removeClass('invisible');
 			}
 		});
 	}
