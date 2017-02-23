@@ -48,6 +48,10 @@ $(document).ready(function(){
 			"</div>"
 		);
 
+		/*
+		/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+		*/
+
 		// ***************************************************************
 		// POST
 		$('.AddMedicalRecordButton').click(function(){

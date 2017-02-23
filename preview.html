@@ -47,9 +47,9 @@
 
 		<div id="maincontent">
 			<!--basic info-->
-			<div class="ui raised segment">
+			<div class="ui raised segment" id="basicinfo">
 				<a class="ui blue ribbon label">基本信息</a>
-				<a>2017年6月</a>
+				<a type="time">2017年6月</a>
 				<div class="ui invisible basic segment" type="basicinfo">
 					<h3 class="ui blue header"></h3>
 					<p></p>
@@ -68,10 +68,15 @@
 				</div>
 			</div>
 
-			<!--初诊-->
-			<div class="ui raised segment">
-				<a class="ui blue ribbon label">初诊</a>
-				<span>2017年8月</span>
+			<!--诊断-->
+			<div class="ui invisible case raised segment">
+				<a class="ui blue ribbon label" type="casetype">Case</a>
+				<a type="casetime">Time</a>
+
+				<div class="ui invisible basic segment" type="usphs">
+					<h3 class="ui blue header">【USPHS评估】</h3>
+				</div>
+
 				<div class="ui invisible basic segment" type="mouthexamination">
 					<h3 class="ui blue header">【口腔检查】</h3>
 					<div type="image">

@@ -64,6 +64,10 @@
 							<td id="ID_Description"></td>
 						</tr>
 						<tr>
+							<td class="positive collapsing">治疗方案</td>
+							<td id="ID_Plan">FIXME: 治疗方案有待描述</td>
+						</tr>
+						<tr>
 							<td class="positive collapsing">诊断图片</td>
 							<td class="negative" id="ID_IMAGE" colspan="2">
 								<div class="ui hidden rounded image">
@@ -172,6 +176,21 @@
 		
 		<div class="center aligned three wide column">
 			<div class="ui vertical container stackable menu" id="nav">
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除图片 -->
+	<div class="ui small modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除图片
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
+				<i class="checkmark icon"></i>确认
 			</div>
 		</div>
 	</div>

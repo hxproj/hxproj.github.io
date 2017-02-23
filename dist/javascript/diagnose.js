@@ -3,7 +3,6 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
 	// INIT PARAMENTERS
-	// TODO: Request Parameters From URL
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
@@ -24,7 +23,6 @@ $(document).ready(function(){
 		data     : toform({case_id : CID}),
 		dataType : "json",
 		error    : function() {
-			// TODO: check the return data 
 			$FormSegement.show();
 		},
 		success  : function(vData) {
@@ -140,9 +138,8 @@ $(document).ready(function(){
 		// 获取牙位信息
 		var MouthData = null;
 		$.ajax({
-  			url      : URL_MOUTHEXAM,
+  			url      : URL_MOUTHEXAM + toquerystring({case_id : CID}),
   			type     : "get",
-  			data     : {tooth_id : vData.tooth_id},
   			dataType : "json",
 			async    : false,
   			success  : function(data) { MouthData = data; }
@@ -152,23 +149,25 @@ $(document).ready(function(){
 			Description   = "";
 	
 		if (MouthData != null) {
-    	ToothLocation = MouthData.tooth_location + "牙";
+			ToothLocation = MouthData.tooth_location + "牙";
 			Description   = ToothLocation;
 
-        $.each(MouthData.caries_tired.split(","), function(){
-          Description += this;
-        });
-        Description += "面" + vData.caries_degree;
+			/*
+			$.each(MouthData.caries_tired.split(","), function(){
+			Description += this;
+			});
+			*/
+        	Description += MouthData.caries_tired;
+        	Description += vData.caries_degree;
 
 			if (vData.caries_type != "无") {
-        	Description += "<br/><br/>" + ToothLocation + vData.caries_type;
-   		}	
+				Description += "<br/><br/>" + ToothLocation + vData.caries_type;
+			}	
 		} else {
 			Description += vData.caries_degree;
-
 			if (vData.caries_type != "无") {
-        	Description += "<br/><br/>" + vData.caries_type;
-   		}	
+				Description += "<br/><br/>" + vData.caries_type;
+			}	
 			Description += "<br/><br/>" + ToothLocation;
 		}
 		$('#ID_Description').html(Description);

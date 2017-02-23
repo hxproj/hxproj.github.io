@@ -22,6 +22,7 @@ $(document).ready(function(){
 			BasicInfo += "身份证号：" + vData.id_number + Fcomma;
 			BasicInfo += "病历录入时间：" + vData.in_date;
 
+			$('#basicinfo a[type="time"]').text(vData.in_date);
 			$('div[type=basicinfo] p').text(BasicInfo);
 			$('div[type=basicinfo] .header').text(vData.name);
 			$('div[type=basicinfo]').removeClass('invisible');
@@ -39,21 +40,45 @@ $(document).ready(function(){
 			var ToothLocation = vData.tooth_location_number + "牙";
 			$('.orange.header').text("病人牙位信息：" + ToothLocation);
 
-			showChiefComplaint(vData);
+			var $Case = $('.invisible.case');
 
-			$.each(vData.cases, function(){
-				// 处置
+			$.each(vData.cases.reverse(), function(){
+				var $ClonedCase = $Case.clone().removeClass('invisible');
+				$ClonedCase.find('a[type=casetime]').text(this.date);
+
+				// 初诊
 				if (this.case_type == 0) {
+					$ClonedCase.find('a[type=casetype]').text("初诊");
+					// 病史
+					showChiefComplaint(vData);
 					showPresentIllness(this.case_id);
 					showPersonalHistory(this.case_id);
-					getAndShowMouthExamination(this.case_id);
-					getAndShowRiskEvaluationAndManage(this.case_id);
-					getAndShowDifficultyAssessment(this.case_id);
+
+					getAndShowMouthExamination($ClonedCase, this.case_id);
+					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+					getAndShowDifficultyAssessment($ClonedCase, this.case_id);
+					getAndShowCurePlan($ClonedCase, this.case_id);
 				} 
 				// 复诊
 				else if (this.case_type == 1) {
+					$ClonedCase.find('a[type=casetype]').text("复诊");
+					// 非处置复诊
+					if(this.if_handle == 0) {
+						// TODO: add usphs
+						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+					}
+					// 处置复诊
+					else if (this.if_handle == 1) {
+						// TODO: add usphs
+						getAndShowMouthExamination($ClonedCase, this.case_id);
+						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+						getAndShowDifficultyAssessment($ClonedCase, this.case_id);
+						getAndShowCurePlan($ClonedCase, this.case_id);
+					}
 
 				}
+
+				$Case.after($ClonedCase);
 			});
 		}
 	});
@@ -74,7 +99,7 @@ $(document).ready(function(){
 					appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
 				}
 
-				$ChiefComplaint.removeClass('invisible');
+				$ChiefComplaint.show();
 			}
 		});
 	}
@@ -227,7 +252,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 获取及显示口腔检查信息
-	function getAndShowMouthExamination(case_id) {
+	function getAndShowMouthExamination($Case, case_id) {
 		$.ajax({
 			url      : URL_MOUTHEXAM,
 			type     : "get",
@@ -235,7 +260,7 @@ $(document).ready(function(){
 			dataType : "json",
 			success  : function(vData){
 
-				var $MouthExam = $('div[type=mouthexamination]');
+				var $MouthExam = $Case.find('div[type=mouthexamination]');
 
 				// 牙体情况
 				var MouthBody = "<span>牙体情况：</span>";
@@ -343,7 +368,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 获取及显示难度评估
-	function getAndShowDifficultyAssessment(case_id) {
+	function getAndShowDifficultyAssessment($Case, case_id) {
 		$.ajax({
 			url      : URL_DIFFICULTYASSE,
 			type     : "GET", 
@@ -351,7 +376,7 @@ $(document).ready(function(){
 			dataType : "json",
 			success  : function(vData) {
 
-				var $DifficultyAssessment = $('div[type=difficultyassessment]');
+				var $DifficultyAssessment = $Case.find('div[type=difficultyassessment]');
 
 				var Level  = "<span>难度等级：</span>",
 					Advice = "<span>转诊意见：</span>";
@@ -385,7 +410,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: 获取及显示风险评估结果和龋病预后管理方案
-	function getAndShowRiskEvaluationAndManage(case_id) {
+	function getAndShowRiskEvaluationAndManage($Case, case_id) {
 		$.ajax({
 			url      : URL_RISKEVALUATION,
 			type     : "GET", 
@@ -396,23 +421,34 @@ $(document).ready(function(){
 				switch (vData.risk_level) {
 					case 1:  {
 						Type = "低风险患者";
-						$('div[type=manage] .segment[data-tab=1]').show();
+						$Case.find('div[type=manage] .segment[data-tab=1]').show();
 						break;
 					}
 					case 2:  {
 						Type = "中风险患者";
-						$('div[type=manage] .segment[data-tab=2]').show();
+						$Case.find('div[type=manage] .segment[data-tab=2]').show();
 						break;
 					}
 					case 3:  {
 						Type = "高风险患者";
-						$('div[type=manage] .segment[data-tab=3]').show();
+						$Case.find('div[type=manage] .segment[data-tab=3]').show();
 						break;
 					}
 				}
-				appendpragraph($('div[type=riskevaluation]').removeClass('invisible'), "<span>风险评估结果：</span>" + Type);
-				$('div[type=manage]').show();
+
+				appendpragraph($Case.find('div[type=riskevaluation]').show(), "<span>风险评估结果：</span>" + Type);
+				$Case.find('div[type=manage]').show();
 			}
 		});
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 获取及显示风险评估结果和龋病预后管理方案
+	function getAndShowCurePlan($Case, case_id) {
+		var $Cure = $Case.find('div[type=cure]');
+
+		appendpragraph($Cure, "<span>FIXME: TODO</span>");
+		$Cure.show();
 	}
 });

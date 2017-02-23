@@ -87,12 +87,9 @@ $(document).ready(function(){
 					url      : URL_USER + toquerystring({user_id : $Record.find("td[name=user_id]").text()}),
 					type     : "DELETE",
 					async    : false, 
-					dataType : "json",
 					error    : function() {networkError();},
 					success  : function() {location.reload();}
 				});
-
-				$Record.remove();  // FIXME: 如果reload了，则此处的remove可删除
 			}
 		}).modal('show');
 	});
