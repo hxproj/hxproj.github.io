@@ -136,49 +136,55 @@ $(document).ready(function(){
 	// Function
 	function showData(vData) {
 		// 获取牙位信息
-		var MouthData = null;
 		$.ajax({
-  			url      : URL_MOUTHEXAM + toquerystring({case_id : CID}),
-  			type     : "get",
-  			dataType : "json",
-			async    : false,
-  			success  : function(data) { MouthData = data; }
+			url      : URL_TOOTH + toquerystring({tooth_id : TID}),
+			type     : "get",
+			dataType : "json",
+			success  : function(ToothInfo) { 
+
+				var MouthexamInfo = null;
+				$.ajax({
+					url      : URL_MOUTHEXAM + toquerystring({case_id : CID}),
+					type     : "get",
+					dataType : "json",
+					async    : true,
+					success  : function(data) { 
+						MouthexamInfo = data; 
+					}
+				})
+
+				// show diagnose
+				var ToothLocation = ToothInfo.tooth_location_number + "牙",
+					DiagnoseText  = ToothLocation;
+
+				if (MouthexamInfo != null) {
+					DiagnoseText += MouthexamInfo.caries_tired;
+				}
+
+				DiagnoseText += vData.caries_degree;
+				if (vData.caries_type != "无") {
+					DiagnoseText += "<br/><br/>" + ToothLocation + vData.caries_type;
+				}	
+				$('#id_diagnose').html(DiagnoseText);
+
+				// show plan
+				var PlanText = "FIXME: design plan";
+				$('#id_plan').html(PlanText);
+
+
+				// show image
+				$.ajax({
+					url      : URL_IMAGE,
+					type     : "GET",
+					data     : {case_id : CID, type : Image_type},
+					dataType : "json",
+					success  : function(FileData) {showImage(FileData);}
+				});
+			}
 		})
 
-		var ToothLocation = "<bold>注：还未设置病人“牙位”和“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
+		var ToothLocation = "<bold>注：暂未设置病人“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
 			Description   = "";
-	
-		if (MouthData != null) {
-			ToothLocation = MouthData.tooth_location + "牙";
-			Description   = ToothLocation;
-
-			/*
-			$.each(MouthData.caries_tired.split(","), function(){
-			Description += this;
-			});
-			*/
-        	Description += MouthData.caries_tired;
-        	Description += vData.caries_degree;
-
-			if (vData.caries_type != "无") {
-				Description += "<br/><br/>" + ToothLocation + vData.caries_type;
-			}	
-		} else {
-			Description += vData.caries_degree;
-			if (vData.caries_type != "无") {
-				Description += "<br/><br/>" + vData.caries_type;
-			}	
-			Description += "<br/><br/>" + ToothLocation;
-		}
-		$('#ID_Description').html(Description);
-
-		$.ajax({
-			url      : URL_IMAGE,
-			type     : "GET",
-			data     : {case_id : CID, type : Image_type},
-			dataType : "json",
-			success  : function(FileData) {showImage(FileData);}
-		});
 	}
 
 	function setDefultFormData(vData) {
