@@ -190,8 +190,10 @@ $(document).ready(function(){
 			}); 
 		});
 
-		$.each($ClonedToothLocationRecord.find('.right.buttons .button'), function(){
+		// 设置“预览链接”
+		$.each($ClonedToothLocationRecord.find('.right.buttons .button'), function(index){
 			$(this).prop('href', $(this).prop('href') + toquerystring({
+				preview_type : index,
 				uid : U_ID,
 				tid : Data.tooth_id
 			}));

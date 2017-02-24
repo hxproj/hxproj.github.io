@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
 	// INIT
-	var UID = Number(requestParameter("uid")),
-		TID = Number(requestParameter("tid"));
+	var UID  = Number(requestParameter("uid")),
+		TID  = Number(requestParameter("tid")),
+		TYPE = Number(requestParameter("preview_type")); 
 
 	// Text format
 	var Fcomma = "，";
@@ -37,51 +38,103 @@ $(document).ready(function(){
 		dataType : "json",
 		error    : function(){ networkError(); },
 		success  : function(vData){
+
 			var ToothLocation = vData.tooth_location_number + "牙";
-			$('.orange.header').text("病人牙位信息：" + ToothLocation);
+			$('.orange.header').text("牙位：" + ToothLocation);
+			
+			if (TYPE == 0) {
+				showMedicalRecord_Patient(vData);
+			} else if(TYPE == 1) {
+				showMedicalRecord_Doctor(vData);
+			}
+		}
+	});
 
-			var $Case = $('.invisible.case');
+	// 病人版
+	function showMedicalRecord_Patient(vData) {
 
-			$.each(vData.cases.reverse(), function(){
-				var $ClonedCase = $Case.clone().removeClass('invisible');
-				$ClonedCase.find('a[type=casetime]').text(this.date);
+		var $Case = $('.invisible.case');
+		$.each(vData.cases.reverse(), function(){
+			var $ClonedCase = $Case.clone().removeClass('invisible');
+			$ClonedCase.find('a[type=casetime]').text(this.date);
 
-				// 初诊
-				if (this.case_type == 0) {
-					$ClonedCase.find('a[type=casetype]').text("初诊");
-					// 病史
-					showChiefComplaint(vData);
-					showPresentIllness(this.case_id);
-					showPersonalHistory(this.case_id);
+			// 初诊
+			if (this.case_type == 0) {
+				$ClonedCase.find('a[type=casetype]').text("初诊");
+				// 病史
+				showChiefComplaint(vData);
+				showPresentIllness(this.case_id);
+				showPersonalHistory(this.case_id);
 
+				getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+				getAndShowDifficultyAssessment($ClonedCase, this.case_id);
+				getAndShowCurePlan($ClonedCase, this.case_id);
+			} 
+			// 复诊
+			else if (this.case_type == 1) {
+				$ClonedCase.find('a[type=casetype]').text("复诊");
+				// 非处置复诊
+				if(this.if_handle == 0) {
+					getAndShowUSPHS($ClonedCase, this.case_id);
+					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+				}
+				// 处置复诊
+				else if (this.if_handle == 1) {
+					getAndShowUSPHS($ClonedCase, this.case_id);
+					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+					getAndShowDifficultyAssessment($ClonedCase, this.case_id);
+					getAndShowCurePlan($ClonedCase, this.case_id);
+				}
+
+			}
+
+			$Case.after($ClonedCase);
+		});
+
+	}
+	// 医生版
+	function showMedicalRecord_Doctor(vData) {
+
+		var $Case = $('.invisible.case');
+		$.each(vData.cases.reverse(), function(){
+			var $ClonedCase = $Case.clone().removeClass('invisible');
+			$ClonedCase.find('a[type=casetime]').text(this.date);
+
+			// 初诊
+			if (this.case_type == 0) {
+				$ClonedCase.find('a[type=casetype]').text("初诊");
+				// 病史
+				showChiefComplaint(vData);
+				showPresentIllness(this.case_id);
+				showPersonalHistory(this.case_id);
+
+				getAndShowMouthExamination($ClonedCase, this.case_id);
+				getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+				getAndShowDifficultyAssessment($ClonedCase, this.case_id);
+				getAndShowCurePlan($ClonedCase, this.case_id);
+			} 
+			// 复诊
+			else if (this.case_type == 1) {
+				$ClonedCase.find('a[type=casetype]').text("复诊");
+				// 非处置复诊
+				if(this.if_handle == 0) {
+					getAndShowUSPHS($ClonedCase, this.case_id);
+					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
+				}
+				// 处置复诊
+				else if (this.if_handle == 1) {
+					getAndShowUSPHS($ClonedCase, this.case_id);
 					getAndShowMouthExamination($ClonedCase, this.case_id);
 					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 					getAndShowDifficultyAssessment($ClonedCase, this.case_id);
 					getAndShowCurePlan($ClonedCase, this.case_id);
-				} 
-				// 复诊
-				else if (this.case_type == 1) {
-					$ClonedCase.find('a[type=casetype]').text("复诊");
-					// 非处置复诊
-					if(this.if_handle == 0) {
-						getAndShowUSPHS($ClonedCase, this.case_id);
-						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
-					}
-					// 处置复诊
-					else if (this.if_handle == 1) {
-						getAndShowUSPHS($ClonedCase, this.case_id);
-						getAndShowMouthExamination($ClonedCase, this.case_id);
-						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
-						getAndShowDifficultyAssessment($ClonedCase, this.case_id);
-						getAndShowCurePlan($ClonedCase, this.case_id);
-					}
-
 				}
 
-				$Case.after($ClonedCase);
-			});
-		}
-	});
+			}
+
+			$Case.after($ClonedCase);
+		});
+	}
 
 	// 主诉
 	function showChiefComplaint(vData) {
@@ -99,7 +152,7 @@ $(document).ready(function(){
 					appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
 				}
 
-				$ChiefComplaint.show();
+				$ChiefComplaint.removeClass('invisible');
 			}
 		});
 	}
@@ -421,23 +474,23 @@ $(document).ready(function(){
 				switch (vData.risk_level) {
 					case 1:  {
 						Type = "低风险患者";
-						$Case.find('div[type=manage] .segment[data-tab=1]').show();
+						$Case.find('div[type=manage] .segment[data-tab=1]').removeClass('invisible');
 						break;
 					}
 					case 2:  {
 						Type = "中风险患者";
-						$Case.find('div[type=manage] .segment[data-tab=2]').show();
+						$Case.find('div[type=manage] .segment[data-tab=2]').removeClass('invisible');
 						break;
 					}
 					case 3:  {
 						Type = "高风险患者";
-						$Case.find('div[type=manage] .segment[data-tab=3]').show();
+						$Case.find('div[type=manage] .segment[data-tab=3]').removeClass('invisible');
 						break;
 					}
 				}
 
-				appendpragraph($Case.find('div[type=riskevaluation]').show(), "<span>风险评估结果：</span>" + Type);
-				$Case.find('div[type=manage]').show();
+				appendpragraph($Case.find('div[type=riskevaluation]').removeClass('invisible'), "<span>风险评估结果：</span>" + Type);
+				$Case.find('div[type=manage]').removeClass('invisible');
 			}
 		});
 	}
@@ -448,7 +501,7 @@ $(document).ready(function(){
 	function getAndShowCurePlan($Case, case_id) {
 		var $Cure = $Case.find('div[type=cure]');
 
-		appendpragraph($Cure.show(), "<span>FIXME: TODO</span>");
+		appendpragraph($Cure.removeClass('invisible'), "<span>FIXME: TODO</span>");
 	}
 
 
@@ -484,7 +537,7 @@ $(document).ready(function(){
 					}
 				}
 
-				appendpragraph($USPHS.show(), USPHS);
+				appendpragraph($USPHS.removeClass('invisible'), USPHS);
 			}
 		});
 	}
