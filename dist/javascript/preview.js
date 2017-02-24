@@ -64,12 +64,12 @@ $(document).ready(function(){
 					$ClonedCase.find('a[type=casetype]').text("复诊");
 					// 非处置复诊
 					if(this.if_handle == 0) {
-						// TODO: add usphs
+						getAndShowUSPHS($ClonedCase, this.case_id);
 						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 					}
 					// 处置复诊
 					else if (this.if_handle == 1) {
-						// TODO: add usphs
+						getAndShowUSPHS($ClonedCase, this.case_id);
 						getAndShowMouthExamination($ClonedCase, this.case_id);
 						getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 						getAndShowDifficultyAssessment($ClonedCase, this.case_id);
@@ -448,7 +448,44 @@ $(document).ready(function(){
 	function getAndShowCurePlan($Case, case_id) {
 		var $Cure = $Case.find('div[type=cure]');
 
-		appendpragraph($Cure, "<span>FIXME: TODO</span>");
-		$Cure.show();
+		appendpragraph($Cure.show(), "<span>FIXME: TODO</span>");
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 显示USPHS
+	function getAndShowUSPHS($Case, case_id) {
+		$.ajax({
+			url      : URL_USPHS,
+			type     : "GET", 
+			data     : {case_id : case_id},
+			dataType : "json",
+			success  : function(vData) {
+
+				var $USPHS = $Case.find('div[type=usphs]'),
+					USPHS  = "<span>USPHS评估结果：</span>";
+
+				switch (vData.level) {
+					case 'A': {
+						USPHS += "A(临床可接受)";
+						break;
+					}
+					case 'B': {
+						USPHS += "B(临床可接受)";
+						break;
+					}
+					case 'C': {
+						USPHS += "C(临床不可接受)";
+						break;
+					}
+					case 'D': {
+						USPHS += "D(临床不可接受)";
+						break;
+					}
+				}
+
+				appendpragraph($USPHS.show(), USPHS);
+			}
+		});
 	}
 });

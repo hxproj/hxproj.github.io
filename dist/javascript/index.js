@@ -15,42 +15,28 @@ $(document).ready(function(){
 		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
 
+	// Get all user info
+	getAllUserInfo("user_id", 1);
+
 
 	// ***************************************************************
-	// GET
-	getAllUserInfo("user_id", 1);
-	/*
-	$.ajax({
-		url      : URL_GETALLUSER,
-		type     : "GET",
-		dataType : "json",
-		error    : function(){ networkError(); },
-		success  : function(data){
-			if (data.user_list.length) {
-				$('.invisible.table').show();
-				showAllMedicalRecord(data.user_list);
-	 			
-				$.Page(
-					$('table'),
-				 	data.pages,
-				 	1,
-				 	URL_GETALLUSER,
-				 	function() { networkError(); },
-				 	function(data) { showAllMedicalRecord(data.user_list); }
-				 );
-			} else {
-				$('.ui.message').show();
+	// POST
+	$('.AddMedicalRecordButton').click(function(){
+		$('#ID_AddMedicalRecordModal').modal({
+			closable  : false,
+			onApprove : function() {
+				submitMedicalRecordForm("POST");
+				return false;
 			}
-		}
+		}).modal('show');
 	});
-	*/
 
 
 	// ***************************************************************
 	// PUT
 	$('.edit.button').click(function(){
 		var $MedicalRecord = $(this).parents('tr.record'),
-			$Modal         = $('#MedicalRecordAddModal');
+			$Modal         = $('#ID_AddMedicalRecordModal');
 
 		$Modal.find("input[name=name]").val($MedicalRecord.find("td[name=name]").text());
 		$Modal.find("input[name=occupation]").val($MedicalRecord.find("td[name=occupation]").text());
@@ -61,15 +47,7 @@ $(document).ready(function(){
 		$Modal.modal({
 			closable  : false,
   			onApprove : function() {
-				$("#basicinfoform").form({
-					onSuccess: function(){
-						submitUserInfo({
-							method : "PUT",
-							info   : toform({user_id : $MedicalRecord.find("td[name=user_id]").text()}) + $(this).serialize()
-						});
-						return false;
-					}
-				}).submit();
+				submitMedicalRecordForm("PUT", toform({user_id : $MedicalRecord.find("td[name=user_id]").text()}));
 				return false;
 			}
 		}).modal('show');
@@ -82,11 +60,9 @@ $(document).ready(function(){
 		var $Record = $(this).parents('tr.record');
 		$('#ID_DeleteModal').modal({
 			onApprove : function(){
-
 				$.ajax({
 					url      : URL_USER + toquerystring({user_id : $Record.find("td[name=user_id]").text()}),
 					type     : "DELETE",
-					async    : false, 
 					error    : function() {networkError();},
 					success  : function() {location.reload();}
 				});
@@ -181,6 +157,75 @@ $(document).ready(function(){
 				}
 			}
 		});
+	}
+
+	function submitMedicalRecordForm(Method, Data) {
+		$("#ID_AddMedicalRecordModal form").form({
+			fields : {
+				name: {
+					identifier: 'name',
+					rules: [
+						{
+							type   : 'empty',
+		        			prompt : '请填写病人的姓名'
+						}
+					]
+				},
+				gender: {
+					identifier: 'gender',
+					rules: [
+						{
+							type   : 'empty',
+		        			prompt : '请填写病人的性别'
+						}
+					]
+				},
+				ID: {
+					identifier: 'ID',
+					rules: [
+						{
+							type  : 'regExp[/^[0-9]{6}(19|20)?[0-9]{2}(0[1-9]|1[12])(0[1-9]|[12][0-9]|3[01])[0-9]{3}([0-9]|X)?$/i]',
+		        			prompt : '请填写正确的身份证号'
+						}
+					]
+				},
+				occupation: {
+					identifier: 'occupation',
+					rules: [
+						{
+							type   : 'empty',
+		        			prompt : '请填写病人的职业'
+						}
+					]
+				},
+				contact: {
+					identifier: 'contact',
+					rules: [
+						{
+							type   : 'empty',
+		        			prompt : '请填写病人的联系方式'
+						}
+					]
+				},
+			},
+			inline    : true,
+			onSuccess : function(){
+				var FormData = $(this).serialize();
+				if (Data != undefined) {
+					FormData = Data + FormData;
+				}
+
+				$.ajax({
+					url      : URL_USER,
+					type     : Method,
+					data     : FormData,
+					dataType : "json",
+					error    : function() {networkError();},
+					success  : function() {location.reload();}
+				});
+				return false;
+			}
+		}).submit();
 	}
 
 });
