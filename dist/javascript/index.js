@@ -220,7 +220,16 @@ $(document).ready(function(){
 					type     : Method,
 					data     : FormData,
 					dataType : "json",
-					error    : function() {networkError();},
+					error    : function(jqXHR) {
+						// 用户病历重复，跳转到相应病历
+						if (jqXHR.responseText != undefined) {
+							var Response = JSON.parse(jqXHR.responseText);
+							alert("已添加该身份证号的病历，即将跳转至相关病历...");
+							redirection("medicalrecord.html", {uid : Response.user_id});
+						} else {
+							networkError();
+						}
+					},
 					success  : function() {location.reload();}
 				});
 				return false;
