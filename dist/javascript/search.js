@@ -3,18 +3,12 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
 	// INIT PARAMENTERS
-	var Table = requestParameter("table"),
-		Field = requestParameter("field"),
-		Value = requestParameter("value"),
-		QueryString;
+	var parameter  = requestParameter("parameter"),
+	    value      = requestParameter("value"),
+	    pre_value  = requestParameter("pre_value"),
+	    post_value = requestParameter("post_value");
 
-	QueryString = toquerystring({
-			table : Table,
-			page  : 1,
-	}) + "&" + Field + "=" + Value;
-
-
-	// INIT Table animation
+	// Table active animate
 	$('table tbody tr').hover(
 		function(){
 			$(this).addClass('active');
@@ -24,90 +18,15 @@ $(document).ready(function(){
 		}
 	);
 
-
-
-	// ***************************************************************
-	// GET
-	$.ajax({
-		url      : URL_SEARCH + QueryString,
-		type     : "GET",
-		dataType : "json",
-		error    : function(){ networkError(); },
-		success  : function(data){
-			if (data.info_list.length) {
-				$('.invisible.table').show();
-
-				// 设置分页属性
-				/*
-				$.Page(
-					$('.record.segment'),
-				 	data.pages,
-				 	1,
-				 	URL_PAGE,
-				 	function() { networkError(); },
-				 	function(data) { showAllMedicalRecord(data); }
-				 );
-				*/
-	 			
-	 			// 显示当前页所有病历
-	 			showAllMedicalRecord(data.info_list);
-			} else {
-				$('.ui.message').show();
-			}
-		}
+	// Detail button
+	$('.detail.button').click(function(){
+		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
 
 
 	// ***************************************************************
-	// POST
-	$('.AddMedicalRecordButton').click(function(){
-		$('#MedicalRecordAddModal').modal({
-			closable  : false,
-  			onApprove : function() {
-				$("#basicinfoform").form({
-					onSuccess: function(){
-						submitUserInfo({
-							method : "POST",
-							info   : $(this).serialize()
-						});
-						return false;
-					}
-				}).submit();
-
-				return false;
-			}
-		}).modal('show');
-	});
-
-
-	// ***************************************************************
-	// PUT
-	$('.edit.button').click(function(){
-		var $MedicalRecord = $(this).parents('tr.record'),
-			$Modal         = $('#MedicalRecordAddModal');
-
-		$Modal.find("input[name=name]").val($MedicalRecord.find("td[name=name]").text());
-		$Modal.find("input[name=occupation]").val($MedicalRecord.find("td[name=occupation]").text());
-		$Modal.find("input[name=contact]").val($MedicalRecord.find("td[name=contact]").text());
-		$Modal.find('select[name=gender]').dropdown("set selected", $MedicalRecord.find("td[name=gender]").text());
-		$Modal.find("input[name=ID]").val($MedicalRecord.attr("id_number"));
-
-		$Modal.modal({
-			closable  : false,
-  			onApprove : function() {
-				$("#basicinfoform").form({
-					onSuccess: function(){
-						submitUserInfo({
-							method : "PUT",
-							info   : toform({user_id : $MedicalRecord.find("td[name=user_id]").text()}) + $(this).serialize()
-						});
-						return false;
-					}
-				}).submit();
-				return false;
-			}
-		}).modal('show');
-	});
+	// Search
+	searchAndShowResult("user_id", 2);
 
 
 	// ***************************************************************
@@ -116,17 +35,12 @@ $(document).ready(function(){
 		var $Record = $(this).parents('tr.record');
 		$('#ID_DeleteModal').modal({
 			onApprove : function(){
-
 				$.ajax({
 					url      : URL_USER + toquerystring({user_id : $Record.find("td[name=user_id]").text()}),
 					type     : "DELETE",
-					async    : false, 
-					dataType : "json",
 					error    : function() {networkError();},
 					success  : function() {location.reload();}
 				});
-
-				$Record.remove();  // FIXME: 如果reload了，则此处的remove可删除
 			}
 		}).modal('show');
 	});
@@ -156,20 +70,66 @@ $(document).ready(function(){
 		$MedicalRecord.after($ClonedMedicalRecord);
 	}
 
-	function submitUserInfo(Data) {
+
+	// ***************************************************************
+	// SORT
+	function changesort($Item, Type) {
+
+		var $Icon = $Item.find('i.icon');
+		// 按人名拼音a-z
+		if ($Icon.hasClass('down')) {
+			searchAndShowResult(Type, 1);
+			$Icon.removeClass('down').addClass('up');
+		} 
+		// 按人名拼音z-a
+		else if ($Icon.hasClass('up'))
+		{
+			searchAndShowResult(Type, 2);
+			$Icon.removeClass('up').addClass('down');
+		}
+	}
+	// 姓名
+	$('th .name.sort').click(function() { changesort($(this), "name"); });
+	$('th .in_date.sort').click(function() { changesort($(this), "in_date"); });
+	$('th .age.sort').click(function() { changesort($(this), "age"); });
+	$('th .uid.sort').click(function() { changesort($(this), "user_id"); });
+
+
+	// ***************************************************************
+	// FUNCTION
+	function searchAndShowResult(Order, OrderType) {
+
+		var queryURL = URL_GETALLUSER + toquerystring({
+			order      : Order,
+			order_type : OrderType,
+			parameter  : parameter,
+			value      : value,
+			pre_value  : pre_value,
+			post_value : post_value,
+		});
+
 		$.ajax({
-			url      : URL_USER,
-			type     : Data.method,
-			async    : false, 
-			data     : Data.info,
+			url      : queryURL,
+			type     : "GET",
 			dataType : "json",
-			error    : function() {networkError();},
-			success  : function() {location.reload();}
+			error    : function(){ networkError(); },
+			success  : function(data){
+				if (data.user_list.length) {
+					$('.invisible.table').show();
+					showAllMedicalRecord(data.user_list);
+		 			
+					$.Page(
+						$('table'),
+					 	data.pages,
+					 	1,
+					 	queryURL,
+					 	function() { networkError(); },
+					 	function(data) { showAllMedicalRecord(data.user_list); }
+					 );
+				} else {
+					$('.ui.message').show();
+				}
+			}
 		});
 	}
-
-	// Detail button
-	$('.detail.button').click(function(){
-		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
-	});
 });

@@ -98,22 +98,49 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// SEARCH
-	// 搜索姓名
 	$('th .name.search').click(function(){
 		$('#SearchNameModal').modal("show");
 	});
-	$('#SearchNameModal button').click(function(){
-		redirection("search.html", {
-			table : "user",
-			field : "name", 
-			value : $(this).prev().val()
-		});
-	});
-
-
-	// 搜索年龄
 	$('th .age.search').click(function(){
 		$('#SearchAgeModal').modal("show");
+	});
+	$('th .in_date.search').click(function(){
+		$('#SearchTimeModal').modal("show");
+	});
+	// 绑定相关事件
+	$('#SearchNameModal button').click(function(){
+		redirection("search.html", {
+			parameter : "name",
+			value     : $(this).prev().val()
+		});
+	});
+	$('#SearchAgeModal #id_age button').click(function(){
+		redirection("search.html", {
+			parameter : "age",
+			value     : $(this).prev().val()
+		});
+	});
+	$('#SearchAgeModal #id_age_segment button').click(function(){
+		var $input = $(this).parent();
+		redirection("search.html", {
+			parameter  : "age",
+			pre_value  : $input.find('input[placeholder=min]').val(),
+			post_value : $input.find('input[placeholder=max]').val()
+		});
+	});
+	$('#SearchTimeModal #id_time button').click(function(){
+		redirection("search.html", {
+			parameter : "in_date",
+			value     : $(this).prev().val()
+		});
+	});
+	$('#SearchTimeModal #id_time_segment button').click(function(){
+		var $input = $(this).parent();
+		redirection("search.html", {
+			parameter  : "in_date",
+			pre_value  : $input.find('input[placeholder=min]').val(),
+			post_value : $input.find('input[placeholder=max]').val()
+		});
 	});
 
 
@@ -144,11 +171,16 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION
 	function getAllUserInfo(Order, OrderType) {
+
+		var queryURL = URL_GETALLUSER + toquerystring({
+			order : Order,
+			order_type : OrderType,
+		});
+
 		$.ajax({
-			url      : URL_GETALLUSER,
+			url      : queryURL,
 			type     : "GET",
 			dataType : "json",
-			data     : {order : Order, order_type : OrderType},
 			error    : function(){ networkError(); },
 			success  : function(data){
 				if (data.user_list.length) {
@@ -159,9 +191,7 @@ $(document).ready(function(){
 						$('table'),
 					 	data.pages,
 					 	1,
-						Order,
-						OrderType,
-					 	URL_GETALLUSER,
+					 	queryURL,
 					 	function() { networkError(); },
 					 	function(data) { showAllMedicalRecord(data.user_list); }
 					 );

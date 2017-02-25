@@ -28,7 +28,7 @@ $(document).ready(function(){
 	window.requestParameter = function(Name) {
 		var REG = new RegExp("(^|&)" + Name + "=([^&]*)(&|$)","i");
 		var r = window.location.search.substr(1).match(REG);
-		if (r!=null) return (r[2]); return null;
+		if (r!=null) return (r[2]); return "";
 	};
 
 	window.networkError = function() { $('#networkerror').modal('show'); }

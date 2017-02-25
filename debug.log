@@ -171,3 +171,5 @@
 [0225/160332:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: 已尝试访问正在退出的过程。  (0xc000010a)
 [0225/162607:ERROR:process_info.cc(608)] range at 0xfe8ef000, size 0x230 fully unreadable
 [0225/162607:ERROR:process_info.cc(608)] range at 0xfe8ee000, size 0xf84 fully unreadable
+[0225/214658:ERROR:process_info.cc(608)] range at 0xffd63000, size 0x230 fully unreadable
+[0225/214658:ERROR:process_info.cc(608)] range at 0xffd6d000, size 0xf84 fully unreadable
