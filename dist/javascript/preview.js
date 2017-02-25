@@ -61,10 +61,6 @@ $(document).ready(function(){
 			// 初诊
 			if (this.case_type == 0) {
 				$ClonedCase.find('a[type=casetype]').text("初诊");
-				// 病史
-				showChiefComplaint(vData);
-				showPresentIllness(this.case_id);
-				showPersonalHistory(this.case_id);
 
 				getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 				getAndShowDifficultyAssessment($ClonedCase, this.case_id);

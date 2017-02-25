@@ -172,26 +172,4 @@ $(document).ready(function(){
 	$('.detail.button').click(function(){
 		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
-	
-
-
-	// ***************************************************************
-	// SEARCH
-	// 搜索姓名
-	$('th .name.search').click(function(){
-		$('#SearchNameModal').modal("show");
-	});
-	$('#SearchNameModal button').click(function(){
-		redirection("search.html", {
-			table : "user",
-			field : "name", 
-			value : $(this).prev().val()
-		});
-	});
-
-
-	// 搜索年龄
-	$('th .age.search').click(function(){
-		$('#SearchAgeModal').modal("show");
-	});
 });
