@@ -3,7 +3,6 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
 	// INIT PARAMENTERS
-	// TODO: Request Parameters From URL
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
@@ -23,7 +22,7 @@ $(document).ready(function(){
 		type     : "GET", 
 		dataType : "json",
 		error    : function() {
-			// TODO: check the return vData 
+			setDefultToothLocationInfo();
 			$FormSegement.show();
 		},
 		success  : function(vData) {
@@ -189,22 +188,16 @@ $(document).ready(function(){
 	// 选择牙位
 	$('#SelectToothLocation').click(function(){
 		// 设置当前默认选项值
-		var ThisInput = $(this).find('input').val();
-		if (ThisInput) {
-			$.each(ThisInput.split("、"), function(){
-				$('#SelectToothLocationModal').find(".ui.label[val=" + this + "]").addClass('teal');
-			});
-		};
+		var TabIndex;
+		$.each($(this).find('input').val().split("、"), function(){
+			TabIndex = $('#SelectToothLocationModal').find(".ui.label[val=" + this + "]").addClass('teal').parents('.basic.segment').attr("data-tab");
+		});
 
 		// Set tab
-		/*
-		if (DATA != null && DATA.tooth_type != undefined) {
-			$('#context .menu .active').removeClass("active");
-			$('#context .segment.active').removeClass("active");
-			$('#context .menu a[data-tab=' + DATA.tooth_type + ']').addClass("active");
-			$('#context .segment[data-tab=' + DATA.tooth_type + ']').addClass("active");
-		}
-		*/
+		$('#context .menu .active').removeClass("active");
+		$('#context .segment.active').removeClass("active");
+		$('#context .menu a[data-tab=' + TabIndex + ']').addClass("active");
+		$('#context .segment[data-tab=' + TabIndex + ']').addClass("active");
 
 		$('#SelectToothLocationModal').modal({
 			onApprove : function(){
@@ -255,7 +248,7 @@ $(document).ready(function(){
 
 		// 如果牙齿活力值为空，则不显示
 		if (vData.vitality_value_of_teeth != "") {
-		ME_Body_Text += "，牙齿活力值：" + vData.vitality_value_of_teeth;
+		ME_Body_Text += "，牙髓电活力值：" + vData.vitality_value_of_teeth;
 		};
 		$('#ME_Body').text(ME_Body_Text);
 
@@ -294,20 +287,36 @@ $(document).ready(function(){
 		ME_X_Text += vData.tooth_location + "牙";
 		ME_X_Text += vData.X_Ray_location;
 		ME_X_Text += vData.X_Ray_depth;
-		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常";
+		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常。";
 
 
 		// 如果CT表现和咬翼片表现为空时，则不显示
 		if (vData.CT_shows != "") {
-		ME_X_Text += "CT表现：" + vData.CT_shows;
-		if (vData.piece != "") {
-		ME_X_Text += "，";
-		};
+			ME_X_Text += "CT表现：" + vData.CT_shows;
+			if (vData.piece != "" || vData.OtherExpression != "") {
+				ME_X_Text += "，";
+			};
 		}
 		if (vData.piece != "") {
-		ME_X_Text += "咬翼片表现：" + vData.piece;
+			ME_X_Text += "咬翼片表现：" + vData.piece;
+			if (vData.OtherExpression != "") {
+				ME_X_Text += "，";
+			};
+		}
+		if (vData.OtherExpression != "") {
+			ME_X_Text += "其它表现：" + vData.OtherExpression;
 		}
 		$('#ME_X').text(ME_X_Text);
+	}
+
+	function setDefultToothLocationInfo() {
+		// 远程获取牙位
+		$.ajax({
+			url      : URL_TOOTH + toquerystring({tooth_id : TID}),
+			type     : "GET",
+			dataType : "json",
+			success  : function(ToothInfo) { $('input[name=tooth_location]').val(ToothInfo.tooth_location_number);}
+		});
 	}
 
 	function setDefultFormData(vData) {

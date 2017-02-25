@@ -73,7 +73,7 @@ $(document).ready(function(){
 		fields: NoSurgical_MedicalCure_Fields,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -81,7 +81,7 @@ $(document).ready(function(){
 	// 再矿化治疗
 	$('#noSurgicalContext form[data-tab=noSurgicalContext2]').form({
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -91,7 +91,7 @@ $(document).ready(function(){
 		fields: NoSurgical_PitFissure_Fields,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -125,7 +125,7 @@ $(document).ready(function(){
 		fields: MinimalFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -135,7 +135,7 @@ $(document).ready(function(){
 		fields: MinimalFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -145,7 +145,7 @@ $(document).ready(function(){
 		fields: MinimalFields3,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -153,7 +153,7 @@ $(document).ready(function(){
 	// 釉质成型术 & 微打磨术
 	$('#minimalContext form[data-tab=minimalContext4], #minimalContext form[data-tab=minimalContext5]').form({
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -191,7 +191,7 @@ $(document).ready(function(){
 		fields: ResinFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -201,7 +201,7 @@ $(document).ready(function(){
 		fields: ResinFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -228,7 +228,7 @@ $(document).ready(function(){
 		fields: ResinFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -239,7 +239,7 @@ $(document).ready(function(){
 		fields: ResinFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -261,7 +261,7 @@ $(document).ready(function(){
 		fields: indirectContextFields,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize());
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -278,7 +278,7 @@ $(document).ready(function(){
 
 	// **************************************************
 	// Function: Submit
-	function submitForm(vData) {
+	function submitForm(vData, FileID) {
 		$.ajax({
 			url      : URL_CURE,
 			type     : IsEditMode ? "PUT" : "POST", 
@@ -286,14 +286,26 @@ $(document).ready(function(){
 			dataType : "json",
 			error    : function() {networkError();},
 			success  : function(data) {
-				submitImage();
+				$.ajaxFile({
+					url           : URL_IMAGE, 
+					type          : 'POST',  
+					fileElementId : FileID,
+					dataType      : 'text',
+					data          : {case_id : CID, picture_type : Image_type},
+					async         : false,  
+					cache         : false,  
+					contentType   : false,  
+					processData   : false,
+					success       : function() {},
+					error         : function() {
+						alert("文件上传失败");
+					}
+				});
+
 				location.reload();
 			}
 		});
 	};
-	function submitImage(vImage) {
-	}
-
 
 	// **************************************************
 	// Function: show data and set default selection
@@ -416,6 +428,15 @@ $(document).ready(function(){
 				showErrorInfo();
 			};
 		}
+
+		// show image
+		$.ajax({
+			url      : URL_IMAGE,
+			type     : "GET",
+			data     : {case_id : CID, type : Image_type},
+			dataType : "json",
+			success  : function(FileData) {showImage(FileData);}
+		});
 
 		$('#Describe').html(DescriptionStr);
 	}
