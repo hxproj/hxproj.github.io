@@ -16,7 +16,7 @@ $(document).ready(function(){
 	});
 
 	// Get all user info
-	getAllUserInfo("user_id", 1);
+	getAllUserInfo("user_id", 2);
 
 
 	// ***************************************************************
@@ -119,13 +119,26 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// SORT
+	function changesort($Item, Type) {
+
+		var $Icon = $Item.find('i.icon');
+		// 按人名拼音a-z
+		if ($Icon.hasClass('down')) {
+			getAllUserInfo(Type, 1);
+			$Icon.removeClass('down').addClass('up');
+		} 
+		// 按人名拼音z-a
+		else if ($Icon.hasClass('up'))
+		{
+			getAllUserInfo(Type, 2);
+			$Icon.removeClass('up').addClass('down');
+		}
+	}
 	// 姓名
-	$('th .name.sort').click(function(){
-		getAllUserInfo("name", 1);
-	});
-	$('th .in_date.sort').click(function(){
-		getAllUserInfo("in_date", 1);
-	});
+	$('th .name.sort').click(function() { changesort($(this), "name"); });
+	$('th .in_date.sort').click(function() { changesort($(this), "in_date"); });
+	$('th .age.sort').click(function() { changesort($(this), "age"); });
+	$('th .uid.sort').click(function() { changesort($(this), "user_id"); });
 
 
 	// ***************************************************************
