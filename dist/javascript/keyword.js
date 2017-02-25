@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
 	// ***************************************************************
 	// FUNCTION: 设置tab可选性
 	$('#context .menu .item').tab({ context: $('#context') });
@@ -49,7 +48,7 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 页面跳转
 	function search(Parameters) {
-		window.location.href = "SearchResult.html" + toquerystring({
+		window.location.href = "keywordsearch.html" + toquerystring({
 			type   : Parameters.DataBaseTableName,
 			name   : Parameters.DataBaseFieldName,
 			value  : Parameters.SearchItemValue,

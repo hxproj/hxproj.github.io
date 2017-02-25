@@ -7,6 +7,11 @@ $(document).ready(function(){
 	    value      = requestParameter("value"),
 	    pre_value  = requestParameter("pre_value"),
 	    post_value = requestParameter("post_value");
+	var Table       = requestParameter("type"),
+		Field       = requestParameter("name"),
+		Value       = requestParameter("value"),
+		Search      = requestParameter("search"),
+		QueryString = URL_SEARCH + toquerystring({table : Table}) + "&" + Field + "=" + Value;
 
 	// Table active animate
 	$('table tbody tr').hover(
