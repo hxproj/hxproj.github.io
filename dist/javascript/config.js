@@ -18,6 +18,7 @@ $(document).ready(function(){
 	window.URL_MANAGE           = URL_SERVER + "/medical-case-of-illness/prognosis";
 	window.URL_USPHS            = URL_SERVER + "/medical-case-of-illness/usphs";
 	window.URL_IMAGE            = URL_SERVER + "/medical-case-of-illness/img";
+	window.URL_File             = URL_SERVER + "/medical-case-of-illness/file";
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";

@@ -62,6 +62,7 @@ $(document).ready(function(){
 			if (this.case_type == 0) {
 				$ClonedCase.find('a[type=casetype]').text("初诊");
 
+				getAndShowDiagnose($ClonedCase, case_id);
 				getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 				getAndShowDifficultyAssessment($ClonedCase, this.case_id);
 				getAndShowCurePlan($ClonedCase, this.case_id);
@@ -77,6 +78,7 @@ $(document).ready(function(){
 				// 处置复诊
 				else if (this.if_handle == 1) {
 					getAndShowUSPHS($ClonedCase, this.case_id);
+					getAndShowDiagnose($ClonedCase, this.case_id);
 					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 					getAndShowDifficultyAssessment($ClonedCase, this.case_id);
 					getAndShowCurePlan($ClonedCase, this.case_id);
@@ -104,6 +106,7 @@ $(document).ready(function(){
 				showPresentIllness(this.case_id);
 				showPersonalHistory(this.case_id);
 
+				getAndShowDiagnose($ClonedCase, this.case_id);
 				getAndShowMouthExamination($ClonedCase, this.case_id);
 				getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 				getAndShowDifficultyAssessment($ClonedCase, this.case_id);
@@ -120,6 +123,7 @@ $(document).ready(function(){
 				// 处置复诊
 				else if (this.if_handle == 1) {
 					getAndShowUSPHS($ClonedCase, this.case_id);
+					getAndShowDiagnose($ClonedCase, this.case_id);
 					getAndShowMouthExamination($ClonedCase, this.case_id);
 					getAndShowRiskEvaluationAndManage($ClonedCase, this.case_id);
 					getAndShowDifficultyAssessment($ClonedCase, this.case_id);
@@ -315,7 +319,10 @@ $(document).ready(function(){
 				var MouthBody = "<span>牙体情况：</span>";
 				MouthBody += vData.tooth_location + "牙";
 				MouthBody += "龋坏累及" + vData.caries_tired + "，";
-				MouthBody += "为" + vData.depth + "，";			
+				if (vData.depth != "近髓") {
+					MouthBody += "深达";
+				}
+				MouthBody += vData.depth + "，";		
 
 				if (vData.fill != "无") {
 					MouthBody += "原充填体为" + vData.fill + "，";
@@ -385,29 +392,8 @@ $(document).ready(function(){
 
 				appendpragraph($MouthExam, X_Ray);
 
-				/* TODO
+				// TODO
 				// 显示口腔检查图片
-				$.ajax({
-				url      : URL_IMAGEUPLOAD,
-				type     : "GET",
-				data     : {tooth_id : T_ID, type : 0},
-				dataType : "json",
-				success  : function(FileData) {
-				$.each(FileData, function(){
-				var $ClonedImage = $('#ME_IMAGE .hidden.image').clone().removeClass('hidden');
-				$ClonedImage.attr("value", this.img_id);
-
-				var ImagePath = this.path;
-				ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
-				window.loadImage(ImagePath, function(){
-				$ClonedImage.attr('src', ImagePath);
-				});
-
-				$('#ME_IMAGE').append($ClonedImage).append('<div class="ui hidden divider"></div>');
-				});
-				}
-				});
-				*/
 
 				$MouthExam.removeClass('invisible');
 			}
@@ -458,6 +444,58 @@ $(document).ready(function(){
 
 
 	// ***************************************************************
+	// FUNCTION: 获取诊断及治疗计划
+	function getAndShowDiagnose($Case, case_id) {
+		$.ajax({
+			url      : URL_DIAGNOSE,
+			type     : "GET", 
+			data     : toform({case_id : case_id}),
+			dataType : "json",
+			success  : function(vData) {
+				// 获取牙位信息
+				$.ajax({
+					url      : URL_TOOTH + toquerystring({tooth_id : TID}),
+					type     : "get",
+					dataType : "json",
+					success  : function(ToothInfo) { 
+
+						var $Diagnose     = $Case.find('div[type=diagnose]'),
+							Diagnose      = "<span>诊断：</span>",
+							ToothLocation = ToothInfo.tooth_location_number + "牙";
+
+						Diagnose += ToothLocation;
+						Diagnose += vData.caries_degree;
+						if (vData.caries_type != "无") {
+							Diagnose += "<br/><br/>" + ToothLocation + vData.caries_type;
+						}	
+						appendpragraph($Diagnose, Diagnose);
+
+						// show plan
+						var CurePlan = "<span>治疗计划：</span>" + vData.cure_plan
+						if (vData.specification != "") {
+							CurePlan += "（" + vData.specification + "）";
+						}
+						appendpragraph($Diagnose, CurePlan);
+
+						$Diagnose.removeClass('invisible');
+						// show image
+						/*
+						$.ajax({
+							url      : URL_IMAGE,
+							type     : "GET",
+							data     : {case_id : CID, type : Image_type},
+							dataType : "json",
+							success  : function(FileData) {showImage(FileData);}
+						});
+						*/
+					}
+				})
+			}
+		});
+	}
+
+
+	// ***************************************************************
 	// FUNCTION: 获取及显示风险评估结果和龋病预后管理方案
 	function getAndShowRiskEvaluationAndManage($Case, case_id) {
 		$.ajax({
@@ -497,7 +535,9 @@ $(document).ready(function(){
 	function getAndShowCurePlan($Case, case_id) {
 		var $Cure = $Case.find('div[type=cure]');
 
-		appendpragraph($Cure.removeClass('invisible'), "<span>FIXME: TODO</span>");
+		appendpragraph($Cure, "<span>FIXME: TODO</span>");
+
+		$Cure.removeClass('invisible')
 	}
 
 

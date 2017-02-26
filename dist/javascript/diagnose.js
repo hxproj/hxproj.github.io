@@ -62,7 +62,7 @@ $(document).ready(function(){
 		onSuccess: function(){
 
 			switch ($(this).form('get value', 'cure_plan')) {
-				case "牙非手术治疗": {
+				case "非手术治疗": {
 					$(this).form('set value', 'specification', $(this).form('get value', 'specification1'));
 					break;
 				}
@@ -142,24 +142,9 @@ $(document).ready(function(){
 			dataType : "json",
 			success  : function(ToothInfo) { 
 
-				var MouthexamInfo = null;
-				$.ajax({
-					url      : URL_MOUTHEXAM + toquerystring({case_id : CID}),
-					type     : "get",
-					dataType : "json",
-					async    : true,
-					success  : function(data) { 
-						MouthexamInfo = data; 
-					}
-				})
-
 				// show diagnose
 				var ToothLocation = ToothInfo.tooth_location_number + "牙",
 					DiagnoseText  = ToothLocation;
-
-				if (MouthexamInfo != null) {
-					DiagnoseText += MouthexamInfo.caries_tired;
-				}
 
 				DiagnoseText += vData.caries_degree;
 				if (vData.caries_type != "无") {
@@ -168,7 +153,10 @@ $(document).ready(function(){
 				$('#id_diagnose').html(DiagnoseText);
 
 				// show plan
-				var PlanText = "FIXME: design plan";
+				var PlanText = vData.cure_plan
+				if (vData.specification != "") {
+					PlanText += "（" + vData.specification + "）";
+				}
 				$('#id_plan').html(PlanText);
 
 
@@ -182,9 +170,6 @@ $(document).ready(function(){
 				});
 			}
 		})
-
-		var ToothLocation = "<bold>注：暂未设置病人“累及牙面”，请到“口腔检查”功能项中完善相关信息</bold>",
-			Description   = "";
 	}
 
 	function setDefultFormData(vData) {
@@ -194,7 +179,7 @@ $(document).ready(function(){
 
 		$("div[field=" + vData.cure_plan + "]").removeClass("invisible");
 		switch (vData.cure_plan) {
-			case "牙非手术治疗": {
+			case "非手术治疗": {
 				$('select[name=specification1]').dropdown("set selected", vData.specification);
 				break;
 			}

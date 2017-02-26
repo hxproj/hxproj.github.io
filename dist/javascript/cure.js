@@ -56,7 +56,7 @@ $(document).ready(function(){
 		Rule == undefined ? this.rules = [Empty] : this.rules = Rule;
 	}
 	// ----------------------------------------------------------------------
-	// 牙非手术治疗
+	// 非手术治疗
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var NoSurgical_MedicalCure_Fields = [
@@ -186,7 +186,7 @@ $(document).ready(function(){
 			new Field("modulo"), new Field("polishing"), 
 		];
 	// **************************************************
-	// 牙树脂直接充填修复
+	// 树脂直接充填修复
 	$('#resinContext form[data-tab=resinContext1]').form({
 		fields: ResinFields1,
 		inline: true,
@@ -196,7 +196,7 @@ $(document).ready(function(){
 		}
 	});
 	// **************************************************
-	// 牙安抚治疗&树脂充填修复
+	// 安抚治疗&树脂充填修复
 	$('#resinContext form[data-tab=resinContext2]').form({
 		fields: ResinFields2,
 		inline: true,
@@ -317,7 +317,7 @@ $(document).ready(function(){
 
 		var DescriptionStr;
 		switch (vData.handle_type) {
-			// 牙非手术治疗
+			// 非手术治疗
 			case 0: {
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>";
 				switch (vData.specific_method) {
@@ -382,11 +382,11 @@ $(document).ready(function(){
 				setSurgicalSelectDefult(vData);
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
-					case "牙树脂直接充填修复": {
+					case "树脂直接充填修复": {
 						DescriptionStr = showResin1(vData, DescriptionStr);
 						break;
 					}
-					case "牙安抚治疗&树脂充填修复": {
+					case "安抚治疗&树脂充填修复": {
 						DescriptionStr = showResin2(vData, DescriptionStr);
 						break;
 					}
@@ -450,7 +450,7 @@ $(document).ready(function(){
 		return vDescription;
 	}
 	function shownoSurgical3(vData, vDescription) {
-		vDescription  +=  "1. 清洁牙面： 在低速手机上装好" + vData.additional_device 
+		vDescription  +=  "<br/><br/>1. 清洁牙面： 在低速手机上装好" + vData.additional_device 
 						+ "，蘸取适量" + vData.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
 						+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + vData.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上。" + vData.time_of_etching + NewLine
 						+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物" + NewLine

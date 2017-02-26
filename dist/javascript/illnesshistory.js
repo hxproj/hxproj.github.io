@@ -94,17 +94,8 @@ $(document).ready(function(){
 		}
 	},
 	PersonalHistoryFields = {
-		times_of_teeth_brush: {
-			identifier: 'times_of_teeth_brush',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择每天刷牙次数'
-				}
-			]
-		},
 		time_of_teeth_brush_display: {
-			identifier: 'time_of_teeth_brush',
+			identifier: 'time_of_teeth_brush_display',
 			rules: [
 				{
 					type   : 'empty',
