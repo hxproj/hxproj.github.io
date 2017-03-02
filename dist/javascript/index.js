@@ -108,38 +108,128 @@ $(document).ready(function(){
 		$('#SearchTimeModal').modal("show");
 	});
 	// 绑定相关事件
-	$('#SearchNameModal button').click(function(){
-		redirection("search.html", {
-			parameter : "name",
-			value     : $(this).prev().val()
-		});
+	// Search name
+	$('#SearchNameModal form').form({
+		fields: {
+			search: {
+				identifier: 'search',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : 'Please input something to search...'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "name",
+				value     : $(this).form('get value', "search")
+			});
+			
+			return false;
+		}
 	});
-	$('#SearchAgeModal #id_age button').click(function(){
-		redirection("search.html", {
-			parameter : "age",
-			value     : $(this).prev().val()
-		});
+	// Search age
+	$('#id_age').form({
+		fields: {
+			empty: {
+				identifier: 'age',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : 'Please input something to search...'
+					}
+				]
+			},
+			number: {
+				identifier: 'age',
+				rules: [
+					{
+						type   : 'integer',
+						prompt : 'Input value must be a number...'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "age",
+				value     : $(this).form('get value', "age")
+			});
+			
+			return false;
+		}
 	});
 	$('#SearchAgeModal #id_age_segment button').click(function(){
-		var $input = $(this).parent();
+		var $input = $(this).parent(),
+			MinAge = $input.find('input[placeholder=min]').val(),
+			MaxAge = $input.find('input[placeholder=max]').val();
+
+		if (MinAge == "") {
+			alert("must input a min value");
+			return false;
+		}
+		if (MaxAge == "") {
+			alert("must input a max value");
+			return false;
+		}
+		if (MinAge > MaxAge) {
+			alert("min value must smaller than max value");
+			return false;
+		}
 		redirection("search.html", {
 			parameter  : "age",
-			pre_value  : $input.find('input[placeholder=min]').val(),
-			post_value : $input.find('input[placeholder=max]').val()
+			pre_value  : MinAge,
+			post_value : MaxAge
 		});
 	});
-	$('#SearchTimeModal #id_time button').click(function(){
-		redirection("search.html", {
-			parameter : "in_date",
-			value     : $(this).prev().val()
-		});
+	// Search time
+	$('#id_time').form({
+		fields: {
+			time: {
+				identifier: 'time',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : 'Please input something to search...'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "in_date",
+				value     : $(this).form('get value', "time")
+			});
+			
+			return false;
+		}
 	});
 	$('#SearchTimeModal #id_time_segment button').click(function(){
-		var $input = $(this).parent();
+		var $input = $(this).parent(),
+			MinAge = $input.find('input[placeholder=min]').val(),
+			MaxAge = $input.find('input[placeholder=max]').val();
+
+		if (MinAge == "") {
+			alert("must input a min value");
+			return false;
+		}
+		if (MaxAge == "") {
+			alert("must input a max value");
+			return false;
+		}
+		if (MinAge > MaxAge) {
+			alert("min value must smaller than max value");
+			return false;
+		}
 		redirection("search.html", {
 			parameter  : "in_date",
-			pre_value  : $input.find('input[placeholder=min]').val(),
-			post_value : $input.find('input[placeholder=max]').val()
+			pre_value  : MinAge,
+			post_value : MaxAge
 		});
 	});
 

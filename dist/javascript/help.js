@@ -27,8 +27,11 @@ $(document).ready(function(){
 
 		$File.attr("id", vData.file_id);
 		$File.find('td[type=file_name] span').text(vData.name);
-		$File.find('td[type=file_name] a').attr("href", vData.path);
 		$File.find('td[type=file_in_date]').text(vData.in_date);
+
+		var href = vData.path;
+		href = href.substring(href.lastIndexOf("Medical_Case\\"), href.length);
+		$File.find('td[type=file_name] a').attr("href", href);
 
 		$Tbody.append($File);
 	}

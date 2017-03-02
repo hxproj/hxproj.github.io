@@ -466,9 +466,14 @@ $(document).ready(function(){
 						Diagnose += ToothLocation;
 						Diagnose += vData.caries_degree;
 						if (vData.caries_type != "无") {
-							Diagnose += "<br/><br/>" + ToothLocation + vData.caries_type;
+							Diagnose += "，" + ToothLocation + vData.caries_type;
 						}	
 						appendpragraph($Diagnose, Diagnose);
+
+						// other diagnose
+						if (vData.additional != "") {
+							appendpragraph($Diagnose, "<span>其他诊断：</span>" + vData.additional);
+						}
 
 						// show plan
 						var CurePlan = "<span>治疗计划：</span>" + vData.cure_plan
