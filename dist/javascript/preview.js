@@ -105,6 +105,7 @@ $(document).ready(function(){
 				showChiefComplaint(vData);
 				showPresentIllness(this.case_id);
 				showPersonalHistory(this.case_id);
+				showPastHistory(this.case_id);
 
 				getAndShowDiagnose($ClonedCase, this.case_id);
 				getAndShowMouthExamination($ClonedCase, this.case_id);
@@ -282,6 +283,41 @@ $(document).ready(function(){
 				}
 
 				$PersonalHistory.removeClass('invisible');
+			}
+		});
+	}
+
+	// 既往史
+	function showPastHistory(case_id) {
+		$.ajax({
+			url      : URL_PASTHISTORY,
+			type     : "GET",
+			data     : {case_id : case_id},
+			dataType : "json",
+			success  : function(vData) {
+				var $PastHistory = $('div[type=pasthistory]');
+
+				var systemillness = "<span>系统病史：</span>";
+				if (vData.systemillness != "") {
+					systemillness += "患有" + vData.systemillness + "系统性疾病，";
+				} else {
+					systemillness += "无高血压、心脏病、糖尿病等系统性疾病，";
+				}
+				if (vData.infectiousdisease != "") {
+					systemillness += "患有" + vData.infectiousdisease + "传染性疾病";
+				} else {
+					systemillness += "无肝炎、结核等传染性疾病";
+				}
+				systemillness += "。";
+				appendpragraph($PastHistory, systemillness);
+
+				if (vData.dragallergy != "") {
+					appendpragraph($PastHistory, "<span>药物过敏史：</span>" + vData.dragallergy + "。");
+				} else {
+					appendpragraph($PastHistory, "<span>药物过敏史：</span>" + "无药物过敏史。");
+				}
+
+				$PastHistory.show();
 			}
 		});
 	}
@@ -466,9 +502,14 @@ $(document).ready(function(){
 						Diagnose += ToothLocation;
 						Diagnose += vData.caries_degree;
 						if (vData.caries_type != "无") {
-							Diagnose += "<br/><br/>" + ToothLocation + vData.caries_type;
+							Diagnose += "，" + ToothLocation + vData.caries_type;
 						}	
 						appendpragraph($Diagnose, Diagnose);
+
+						// other diagnose
+						if (vData.additional != "") {
+							appendpragraph($Diagnose, "<span>其他诊断：</span>" + vData.additional);
+						}
 
 						// show plan
 						var CurePlan = "<span>治疗计划：</span>" + vData.cure_plan

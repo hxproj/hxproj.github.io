@@ -22,6 +22,7 @@ $(document).ready(function(){
 	window.URL_CURE             = URL_SERVER + "/medical-case-of-illness/handle";
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";
+	window.URL_PASTHISTORY      = URL_SERVER + "/medical-case-of-illness/past-history";
 
 
 	// ***************************************************************

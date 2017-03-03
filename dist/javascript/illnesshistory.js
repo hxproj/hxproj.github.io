@@ -123,6 +123,8 @@ $(document).ready(function(){
 			showChiefComplaint($('#tableinfo'), vData.chief_complaint);
 			showPresentIllness($('#tableinfo'), vData.illness_history);
 			showPersonalHistory($('#tableinfo'), vData.personal_history);
+			showPastHistory($('#tableinfo'), vData.past_history);
+
 			setDefultFormData(vData);
 			$FormSegement.hide();
 		}
@@ -179,7 +181,7 @@ $(document).ready(function(){
 		fields: PersonalHistoryFields,
 		inline: true,
 		onSuccess: function() { 
-			nextStep(2, 3, "#PersonalHistory", "#ID_Confirm", displayConfirmInfo);
+			nextStep(2, 3, "#PersonalHistory", "#PastHistory");
 			return false; 
 		}
 	});
@@ -189,9 +191,17 @@ $(document).ready(function(){
 	$('#PersonalHistory .next.button').click(function(){
 		$(this).parents('.form').submit();
 	});
-	// Step 4：确认
+	// Step 4：既往史
+	$('#PastHistory .prev.button').click(function(){
+		prevStep(3, 2, "#PastHistory", "#PersonalHistory");
+	});
+	$('#PastHistory .next.button').click(function(){
+		nextStep(3, 4, "#PastHistory", "#ID_Confirm", displayConfirmInfo);
+	});
+
+	// Step 5：确认
 	$('#ID_Confirm .prev.button').click(function(){
-		prevStep(3, 2, "#ID_Confirm", "#PersonalHistory");
+		prevStep(4, 3, "#ID_Confirm", "#PastHistory");
 	});
 	$('#ID_Confirm .confirm.button').click(function(){
 
@@ -229,6 +239,19 @@ $(document).ready(function(){
 			success  : function(vData) {}
 		});
 
+		// Submit personal history
+		$.ajax({
+			url      : URL_PASTHISTORY,
+			type     : IsEditMode ? "PUT" : "POST", 
+			data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $('#PastHistory form').serialize(),
+			dataType : "json",
+			async    : false,
+			error    : function() {IsSubmited = false;},
+			success  : function(vData) {}
+		});
+
+
+
 		if (IsSubmited) {location.reload();}
 	});
 
@@ -238,7 +261,8 @@ $(document).ready(function(){
 	function displayConfirmInfo() {
 		// Form
 		var ChiefComplaintForm  = $('#ChiefComplaint'),
-			PersonalHistoryForm = $('#PersonalHistory');
+			PersonalHistoryForm = $('#PersonalHistory'),
+			PastHistoryForm     = $('#PastHistory');
 
 		showChiefComplaint($('#ID_Confirm'), {
 			tooth_location : getFormData(ChiefComplaintForm, "tooth_location"),
@@ -285,6 +309,12 @@ $(document).ready(function(){
 			loss_caries_surface_index_up : getFormData(PersonalHistoryForm, "loss_caries_surface_index_up"),
 			orthodontic : getFormData(PersonalHistoryForm, "orthodontic"),
 			additional : getFormData(PersonalHistoryForm, "additional"),
+		});
+
+		showPastHistory($('#ID_Confirm'), {
+			systemillness : getFormData(PastHistoryForm, "systemillness"),
+			infectiousdisease : getFormData(PastHistoryForm, "infectiousdisease"),
+			dragallergy : getFormData(PastHistoryForm, "dragallergy"),
 		});
 	}
 	
@@ -367,14 +397,13 @@ $(document).ready(function(){
 		if (vData.additional) {
 			appendpragraph($PresentIllness, "<span>补充现病史：</span>" + vData.additional);
 		}
-	
+
 		$PresentIllness.removeClass('invisible');
 	}
 
 	// 个人史
 	function showPersonalHistory($Item, vData) {
 		var $PersonalHistory = $Item.find('div[type=personalhistory]');
-
 		$PersonalHistory.find('p').remove();
 
 		// 饮食习惯
@@ -435,19 +464,47 @@ $(document).ready(function(){
 		}
 
 		// Other
-		appendpragraph($PersonalHistory, "<span>患牙其他治疗情况：</span>" + vData.orthodontic);
+		appendpragraph($PersonalHistory, "<span>患牙其他治疗情况：</span>" + vData.orthodontic + "。");
 		if (vData.additional) {
-			appendpragraph($PersonalHistory, "<span>患牙补充说明：</span>" + vData.additional);
+			appendpragraph($PersonalHistory, "<span>患牙补充说明：</span>" + vData.additional + "。");
 		}
 
 		$PersonalHistory.removeClass('invisible');
+	}
+
+	function showPastHistory($Item, vData) {
+		var $PastHistory = $Item.find('div[type=pasthistory]');
+		$PastHistory.find('p').remove();
+
+		var systemillness = "<span>系统病史：</span>";
+		if (vData.systemillness != "") {
+			systemillness += "患有" + vData.systemillness + "系统性疾病，";
+		} else {
+			systemillness += "无高血压、心脏病、糖尿病等系统性疾病，";
+		}
+		if (vData.infectiousdisease != "") {
+			systemillness += "患有" + vData.infectiousdisease + "传染性疾病";
+		} else {
+			systemillness += "无肝炎、结核等传染性疾病";
+		}
+		systemillness += "。";
+		appendpragraph($PastHistory, systemillness);
+
+		if (vData.dragallergy != "") {
+			appendpragraph($PastHistory, "<span>药物过敏史：</span>" + vData.dragallergy + "。");
+		} else {
+			appendpragraph($PastHistory, "<span>药物过敏史：</span>" + "无药物过敏史。");
+		}
+
+		$PastHistory.removeClass('invisible');
 	}
 
 	function setDefultFormData(vData) {
 
 		var ChiefComplaint  = vData.chief_complaint,
 			IllnessHistory  = vData.illness_history,
-			PersonalHistory = vData.personal_history;
+			PersonalHistory = vData.personal_history,
+			PastHistory     = vData.past_history;
 
 		// 主诉
         $('#ChiefComplaint select[name=tooth_location]').dropdown("set selected", ChiefComplaint.tooth_location);
@@ -500,6 +557,11 @@ $(document).ready(function(){
 		for (var i=0; i<SplitTime.length; ++i){
 			$('#PersonalHistory select[name=time_of_teeth_brush_display]').dropdown("set selected", SplitTime[i]);
 		}
+
+		// 既往史
+		 $('#PastHistory textarea[name=systemillness]').val(PastHistory.systemillness);
+		 $('#PastHistory textarea[name=infectiousdisease]').val(PastHistory.infectiousdisease);
+		 $('#PastHistory textarea[name=dragallergy]').val(PastHistory.dragallergy);
 	}
 
 	// ***************************************************************

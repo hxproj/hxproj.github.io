@@ -182,7 +182,7 @@ $(document).ready(function(){
 		$ClonedToothLocationRecord.attr("tooth_id", Data.tooth_id);
 		$ClonedToothLocationRecord.find('div[type=tooth_location_number]').text(Data.tooth_location_number + "牙");
 
-		$.each(Data.cases, function() { 
+		$.each(Data.cases.reverse(), function() { 
 			showExamination({
 				Examination     : this,
 				TID             : Data.tooth_id,

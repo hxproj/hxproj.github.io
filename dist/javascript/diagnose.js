@@ -141,24 +141,28 @@ $(document).ready(function(){
 			type     : "get",
 			dataType : "json",
 			success  : function(ToothInfo) { 
+				var $Description = $('#id_description');
 
-				// show diagnose
+				// diagnose
 				var ToothLocation = ToothInfo.tooth_location_number + "牙",
-					DiagnoseText  = ToothLocation;
-
+					DiagnoseText  = "<span>诊断：</span>" + ToothLocation;
 				DiagnoseText += vData.caries_degree;
 				if (vData.caries_type != "无") {
-					DiagnoseText += "<br/><br/>" + ToothLocation + vData.caries_type;
-				}	
-				$('#id_diagnose').html(DiagnoseText);
+					DiagnoseText += "，" + ToothLocation + vData.caries_type;
+				}		
+				appendpragraph($Description, DiagnoseText);
 
-				// show plan
-				var PlanText = vData.cure_plan
+				// other diagnose
+				if (vData.additional != "") {
+					appendpragraph($Description, "<span>其他诊断：</span>" + vData.additional);
+				}
+
+				// plan
+				var PlanText = "<span>治疗计划：</span>" + vData.cure_plan
 				if (vData.specification != "") {
 					PlanText += "（" + vData.specification + "）";
 				}
-				$('#id_plan').html(PlanText);
-
+				appendpragraph($Description, PlanText);
 
 				// show image
 				$.ajax({
@@ -176,6 +180,7 @@ $(document).ready(function(){
         $('select[name=caries_degree]').dropdown("set selected", vData.caries_degree);
         $('select[name=caries_type]').dropdown("set selected", vData.caries_type);
         $('select[name=cure_plan]').dropdown("set selected", vData.cure_plan);
+        $('textarea[name=additional]').val(vData.additional);
 
 		$("div[field=" + vData.cure_plan + "]").removeClass("invisible");
 		switch (vData.cure_plan) {
@@ -196,5 +201,12 @@ $(document).ready(function(){
 				break;
 			}
 		}
+	}
+
+
+	// ***************************************************************
+	// FUNCTION:
+	function appendpragraph($Item, Text) {
+		$Item.append("<p>" + Text + "</p>");
 	}
 });

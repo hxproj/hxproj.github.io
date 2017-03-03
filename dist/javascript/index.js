@@ -108,38 +108,122 @@ $(document).ready(function(){
 		$('#SearchTimeModal').modal("show");
 	});
 	// 绑定相关事件
-	$('#SearchNameModal button').click(function(){
-		redirection("search.html", {
-			parameter : "name",
-			value     : $(this).prev().val()
-		});
+	// Search name
+	$('#SearchNameModal form').form({
+		fields: {
+			search: {
+				identifier: 'search',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请输入需要搜索的内容'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "name",
+				value     : $(this).form('get value', "search")
+			});
+			
+			return false;
+		}
 	});
-	$('#SearchAgeModal #id_age button').click(function(){
-		redirection("search.html", {
-			parameter : "age",
-			value     : $(this).prev().val()
-		});
+	// Search age
+	$('#id_age').form({
+		fields: {
+			number: {
+				identifier: 'age',
+				rules: [
+					{
+						type   : 'integer[1..120]',
+						prompt : '请输入正确的年龄数据'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "age",
+				value     : $(this).form('get value', "age")
+			});
+			
+			return false;
+		}
 	});
 	$('#SearchAgeModal #id_age_segment button').click(function(){
-		var $input = $(this).parent();
+		var $input = $(this).parent(),
+			MinAge = Number($input.find('input[placeholder=min]').val()),
+			MaxAge = Number($input.find('input[placeholder=max]').val());
+
+		var $Message = $('#id_age_segment div.message');
+		if (isNaN(MinAge) || MinAge < 1 || MinAge > 120) {
+			$Message.transition('tada').find('li').text("请输入正确的较小年龄");
+			return false;
+		}
+		if (isNaN(MaxAge) || MaxAge < 1 || MaxAge > 120) {
+			$Message.transition('tada').find('li').text("请输入正确的较大年龄");
+			return false;
+		}
+		if (MinAge >= MaxAge) {
+			$Message.transition('tada').find('li').text("较大年龄必须比必较小年龄大");
+			return false;
+		}
 		redirection("search.html", {
 			parameter  : "age",
-			pre_value  : $input.find('input[placeholder=min]').val(),
-			post_value : $input.find('input[placeholder=max]').val()
+			pre_value  : MinAge,
+			post_value : MaxAge
 		});
 	});
-	$('#SearchTimeModal #id_time button').click(function(){
-		redirection("search.html", {
-			parameter : "in_date",
-			value     : $(this).prev().val()
-		});
+	// Search time
+	$('#id_time').form({
+		fields: {
+			time: {
+				identifier: 'time',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请输入最近就诊时间'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "in_date",
+				value     : $(this).form('get value', "time")
+			});
+			
+			return false;
+		}
 	});
 	$('#SearchTimeModal #id_time_segment button').click(function(){
-		var $input = $(this).parent();
+		var $input  = $(this).parent(),
+			MinTime = Number($input.find('input[placeholder=min]').val()),
+			MaxTime = Number($input.find('input[placeholder=max]').val());
+
+		var $Message = $('#id_time_segment div.message');
+		if (isNaN(MinTime) || MinTime < 1 || MinTime > 120) {
+			$Message.transition('tada').find('li').text("请输入正确的较小就诊时间");
+			return false;
+		}
+		if (isNaN(MaxTime) || MaxTime < 1 || MaxTime > 120) {
+			$Message.transition('tada').find('li').text("请输入正确的较大就诊时间");
+			return false;
+		}
+		if (MinTime >= MaxTime) {
+			$Message.transition('tada').find('li').text("较大就诊时间必须比必较小就诊时间大");
+			return false;
+		}
+
 		redirection("search.html", {
 			parameter  : "in_date",
-			pre_value  : $input.find('input[placeholder=min]').val(),
-			post_value : $input.find('input[placeholder=max]').val()
+			pre_value  : MinTime,
+			post_value : MaxTime
 		});
 	});
 

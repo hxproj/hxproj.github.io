@@ -60,29 +60,35 @@
 						<h3 class="ui blue header">【个人史】</h3>
 					</div>
 
+					<div class="ui invisible basic segment" type="pasthistory">
+						<h3 class="ui blue header">【既往史】</h3>
+					</div>
+
 					<div class="ui right floated blue edit small button">修改</div>
 				</div>
 
 				<!--form-->
 				<div class="ui clearing invisible basic segment" id="formsegment">
-					<div class="ui ordered four top attached steps">
+					<div class="ui ordered five top attached steps">
 						<!--completed-->
 						<div class="active step">
 							<div class="content">
 								<div class="title">主诉</div>
-								<div class="description">牙位病情描述</div>
 							</div>
 						</div>
 						<div class="disabled step">
 							<div class="content">
 								<div class="title">现病史</div>
-								<div class="description">牙位病情状况</div>
 							</div>
 						</div>
 						<div class="disabled step">
 							<div class="content">
 								<div class="title">个人史</div>
-								<div class="description">其它病史情况</div>
+							</div>
+						</div>
+						<div class="disabled step">
+							<div class="content">
+								<div class="title">既往史</div>
 							</div>
 						</div>
 						<div class="disabled step">
@@ -543,6 +549,26 @@
 								<textarea rows="3" name="additional"></textarea>
 							</div>
 
+							<div class="ui right floated blue small next button">下一步</div>
+							<div class="ui right floated blue small prev button">上一步</div>
+						</form>
+					</div>
+
+					<div class="ui invisible clearing segment" id="PastHistory">
+						<form class="ui form">
+							<h4 class="ui header">4. 既往史</h4>
+							<div class="field">
+								<label>系统性疾病</label>
+								<textarea rows="3" name="systemillness" placeholder="高血压、心脏病、糖尿病..."></textarea>
+							</div>
+							<div class="field">
+								<label>传染性疾病</label>
+								<textarea rows="3" name="infectiousdisease" placeholder="肝炎、结核..."></textarea>
+							</div>
+							<div class="field">
+								<label>药物过敏史</label>
+								<textarea rows="3" name="dragallergy"></textarea>
+							</div>
 
 							<div class="ui right floated blue small next button">下一步</div>
 							<div class="ui right floated blue small prev button">上一步</div>
@@ -550,16 +576,20 @@
 					</div>
 
 					<div class="ui invisible clearing segment" id="ID_Confirm">
-						<div class="ui invisible basic segment" type="chiefcomplaint">
+						<div class="ui basic segment" type="chiefcomplaint">
 							<h3 class="ui blue header">【主诉】</h3>
 						</div>
 
-						<div class="ui invisible basic segment" type="presentillness">
+						<div class="ui basic segment" type="presentillness">
 							<h3 class="ui blue header">【现病史】</h3>
 						</div>
 
-						<div class="ui invisible basic segment" type="personalhistory">
+						<div class="ui basic segment" type="personalhistory">
 							<h3 class="ui blue header">【个人史】</h3>
+						</div>
+
+						<div class="ui basic segment" type="pasthistory">
+							<h3 class="ui blue header">【既往史】</h3>
 						</div>
 
 						<div class="ui right floated blue small confirm button">确认</div>

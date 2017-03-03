@@ -133,23 +133,6 @@
 		</div>
 	</div>
 
-	<!--Search Name Modal-->
-	<div class="ui modal " id="SearchNameModal">
-		<div class="content">
-		    <div class="description">
-				<div class="ui basic segment">
-					<div class="ui fluid action input">
-						<input type="text" placeholder="输入姓名...">
-						<button class="ui teal button">搜索</button>
-					</div>
-				</div>
-		    </div>
-	  	</div>
-		<div class="actions">
-			<div class="ui blue deny button">取消</div>
-		</div>
-	</div>
-
 
 	<!--添加病历-->
 	<div class='ui modal' id='ID_AddMedicalRecordModal'>
@@ -197,35 +180,65 @@
 		</div>
 	</div>
 
+
+	<!--Search Name Modal-->
+	<div class="ui modal " id="SearchNameModal">
+		<div class="content">
+		    <div class="description">
+		    	<form class="ui form">
+					<div class="field">
+						<div class="ui fluid action input">
+							<input type="text" name="search" placeholder="输入姓名...">
+							<div class="ui submit teal button">搜索</div>
+						</div>
+					</div>
+				</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui blue deny button">取消</div>
+		</div>
+	</div>
+
+
 	<!--Search Age Modal-->
 	<div class="ui modal" id="SearchAgeModal">
 		<div class="content">
 		    <div class="description">
-				<div class="ui basic segment" id="id_age">
-					<div class="ui blue header">年龄</div>
-					<div class="ui fluid action input">
-						<input type="text" placeholder="输入年龄...">
-						<button class="ui teal button">搜索</button>
+				<form class="ui basic form segment" id="id_age">
+					<div class="field">
+						<div class="ui blue header">年龄</div>
+						<div class="ui fluid action input">
+							<input type="text" name="age" placeholder="输入年龄...">
+							<div class="ui teal submit button">搜索</div>
+						</div>
 					</div>
+				</form>
+
+				<div class="ui invisible blue labels">
+					<a class="ui label" value="1~10岁">0~10岁</a>
+					<a class="ui label" value="11~18岁">11~18岁</a>
+					<a class="ui label" value="19~25岁">19~25岁</a>
+					<a class="ui label" value="26~32岁">26~32岁</a>
+					<a class="ui label" value="33~39岁">33~39岁</a>
+					<a class="ui label" value="40~46岁">40~46岁</a>
+					<a class="ui label" value="47~53岁">47~53岁</a>
+					<a class="ui label" value="53~59岁">53~59岁</a>
+					<a class="ui label" value="59~65岁">59~65岁</a>
 				</div>
+
 				<div class="ui basic segment" id="id_age_segment">
-					<div class="ui invisible blue labels">
-						<a class="ui label" value="1~10岁">0~10岁</a>
-						<a class="ui label" value="11~18岁">11~18岁</a>
-						<a class="ui label" value="19~25岁">19~25岁</a>
-						<a class="ui label" value="26~32岁">26~32岁</a>
-						<a class="ui label" value="33~39岁">33~39岁</a>
-						<a class="ui label" value="40~46岁">40~46岁</a>
-						<a class="ui label" value="47~53岁">47~53岁</a>
-						<a class="ui label" value="53~59岁">53~59岁</a>
-						<a class="ui label" value="59~65岁">59~65岁</a>
-					</div>
 					<div class="ui blue header">年龄段</div>
 					<div class="ui small labeled action input">
 						<input type="text" placeholder="min" style="width:4em">
 						<div class="ui basic label">~</div>
 						<input type="text" placeholder="max" style="width:4em">
 						<button class="ui teal button">确定</button>
+					</div>
+					<div class="ui hidden negative message">
+						<ui class="list">
+							<li></li>
+						</ui>
 					</div>
 				</div>
 		    </div>
@@ -239,13 +252,15 @@
 	<div class="ui modal" id="SearchTimeModal">
 		<div class="content">
 		    <div class="description">
-				<div class="ui basic segment" id="id_time">
-					<div class="ui blue header">最近就诊时间</div>
-					<div class="ui fluid action input">
-						<input type="text" placeholder="输入最近就诊时间...">
-						<button class="ui teal button">搜索</button>
+				<form class="ui basic form segment" id="id_time">
+					<div class="field">
+						<div class="ui blue header">最近就诊时间</div>
+						<div class="ui fluid action input">
+							<input type="text" name="time" placeholder="输入最近就诊时间...">
+							<div class="ui teal submit button">搜索</div>
+						</div>
 					</div>
-				</div>
+				</form>
 
 				<div class="ui basic segment" id="id_time_segment">
 					<div class="ui blue header">就诊时间段</div>
@@ -256,11 +271,15 @@
 					</div>
 					<div class="ui hidden divider"></div>
 					<div class="ui small labeled action input">
-						<div class="ui label">就诊时间段</div>
 						<input type="text" placeholder="min" style="width:8em">
 						<div class="ui basic label">~</div>
 						<input type="text" placeholder="max" style="width:8em">
 						<button class="ui teal button">确定</button>
+					</div>
+					<div class="ui hidden negative message">
+						<ui class="list">
+							<li></li>
+						</ui>
 					</div>
 				</div>
 		    </div>
