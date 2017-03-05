@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// POST
-	$('.AddMedicalRecordButton').click(function(){
+	$('a[type=add_medical_record]').click(function(){
 		$('#ID_AddMedicalRecordModal').modal({
 			closable  : false,
 			onApprove : function() {
@@ -87,8 +87,8 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('td[name=name]').text(UserData.name);
 		$ClonedMedicalRecord.find('td[name=age]').text(UserData.age);
 		$ClonedMedicalRecord.find('td[name=gender]').text(UserData.gender == 0 ? "男" : "女");
+		$ClonedMedicalRecord.find('td[name=occupation]').text(UserData.occupation);
 		$ClonedMedicalRecord.find('td[name=contact]').text(UserData.contact);
-		$ClonedMedicalRecord.find('td[name=occupation]').text(UserData.occupation); // 
 		$ClonedMedicalRecord.find('td[name=diagnose_list]').text(UserData.diagnose_list ? UserData.diagnose_list : "未进行诊断");
 		$ClonedMedicalRecord.find('td[name=in_date]').text(UserData.in_date);
 

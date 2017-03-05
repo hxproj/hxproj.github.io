@@ -253,17 +253,17 @@
 									<option value="高速牙钻法">高速牙钻法</option>
 									<option value="低速手机去龋">低速手机去龋</option>
 									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法">空气喷砂法</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="伢典">伢典</option>
+									<option value="微创车针去龋">微创车针去龋</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole" class="ui dropdown" multiple="">
+									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -335,20 +335,20 @@
 									<label>去龋方式</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="高速牙钻法">高速牙钻法</option>
+									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
 									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法">空气喷砂法</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="伢典">伢典</option>
+									<option value="微创车针去龋">微创车针去龋</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole" class="ui dropdown" multiple="">
+									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -373,8 +373,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -382,8 +382,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -441,7 +441,7 @@
 								<div class="field">
 									<label>垫底</label>
 									<select name="bottom" class="ui dropdown">
-									<option value="">不使用垫底</option>
+									<option value="无">不使用垫底</option>
 									<option value="Dycal垫底">Dycal</option>
 									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
 									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
@@ -576,6 +576,7 @@
 									<option value="LED灯">LED灯</option>
 									<option value="离子弧光灯">离子弧光灯</option>
 									<option value="氩激光灯">氩激光灯</option>
+									<option value="其它">其它</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -597,7 +598,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>调合</label>
-									<select name="modulo" class="ui dropdown" multiple="">
+									<select name="compromise_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="TF">TF</option>
 									<option value="TR">TR</option>
@@ -613,17 +614,15 @@
 									<option value="BR">BR</option>
 									<option value="BC">BC</option>
 									<option value="DI">DI</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>抛光</label>
-									<select name="polishing" class="ui dropdown" multiple="">
+									<select name="polishing_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="皓齿抛光系统">皓齿抛光系统</option>
 									<option value="彩虹抛光系统">彩虹抛光系统</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -681,17 +680,23 @@
 									</select>
 								</div>
 								<div class="required field">
-									<label>去龋工具</label>
+									<label>去龋方式</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="高速手机">高速手机</option>
-									<option value="低速手机">低速手机</option>
-									<option value="挖匙">挖匙</option>
+									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
+									<option value="低速手机去龋">低速手机去龋</option>
+									<option value="挖匙去龋">挖匙去龋</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
+									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
+									<option value="超声去龋">超声去龋</option>
+									<option value="激光去龋">激光去龋</option>
+									<option value="微创车针去龋">微创车针去龋</option>
+									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole" class="ui dropdown" multiple="">
+									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -716,8 +721,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -725,8 +730,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -868,8 +873,8 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
+									<option value="使用阿替卡因">阿替卡因</option>
+									<option value="使用利多卡因">利多卡因</option>
 									<option value="其它">其它</option>
 									</select>
 								</div>
@@ -877,8 +882,8 @@
 									<label>局部麻醉</label>
 									<select name="part_anesthesia" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阻滞麻醉">阻滞麻醉</option>
-									<option value="浸润麻醉">浸润麻醉</option>
+									<option value="采用阻滞麻醉">阻滞麻醉</option>
+									<option value="采用浸润麻醉">浸润麻醉</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -903,20 +908,20 @@
 									<label>去龋方式</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="高速牙钻法">高速牙钻法</option>
+									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
 									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法">空气喷砂法</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="伢典">伢典</option>
+									<option value="微创车针去龋">微创车针去龋</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole" class="ui dropdown" multiple="">
+									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -941,8 +946,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -950,8 +955,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1010,7 +1015,7 @@
 								<div class="field">
 									<label>垫底</label>
 									<select name="bottom" class="ui dropdown">
-									<option value="">选择</option>
+									<option value="无">不使用垫底</option>
 									<option value="Dycal垫底">Dycal</option>
 									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
 									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
@@ -1164,9 +1169,9 @@
 
 							<h3 class="ui blue header">9. 调合，抛光</h3>
 							<div class="three fields">
-								<div class="field">
+								<div class="required field">
 									<label>调合</label>
-									<select name="modulo" class="ui dropdown" multiple="">
+									<select name="compromise_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="TF">TF</option>
 									<option value="TR">TR</option>
@@ -1182,17 +1187,15 @@
 									<option value="BR">BR</option>
 									<option value="BC">BC</option>
 									<option value="DI">DI</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
-								<div class="field">
+								<div class="required field">
 									<label>抛光</label>
-									<select name="polishing" class="ui dropdown" multiple="">
+									<select name="polishing_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="皓齿抛光系统">皓齿抛光系统</option>
 									<option value="彩虹抛光系统">彩虹抛光系统</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -1244,8 +1247,8 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
+									<option value="使用阿替卡因">阿替卡因</option>
+									<option value="使用利多卡因">利多卡因</option>
 									<option value="其它">其它</option>
 									</select>
 								</div>
@@ -1253,8 +1256,8 @@
 									<label>局部麻醉</label>
 									<select name="part_anesthesia" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阻滞麻醉">阻滞麻醉</option>
-									<option value="浸润麻醉">浸润麻醉</option>
+									<option value="采用阻滞麻醉">阻滞麻醉</option>
+									<option value="采用浸润麻醉">浸润麻醉</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1279,14 +1282,14 @@
 									<label>去龋方式</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="高速牙钻法">高速牙钻法</option>
+									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
 									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法">空气喷砂法</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="伢典">伢典</option>
+									<option value="微创车针去龋">微创车针去龋</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1317,8 +1320,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1326,8 +1329,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1386,7 +1389,7 @@
 								<div class="field">
 									<label>垫底</label>
 									<select name="bottom" class="ui dropdown">
-									<option value="">选择</option>
+									<option value="无">不使用垫底</option>
 									<option value="Dycal垫底">Dycal</option>
 									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
 									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
@@ -1519,6 +1522,7 @@
 									<option value="LED灯">LED灯</option>
 									<option value="离子弧光灯">离子弧光灯</option>
 									<option value="氩激光灯">氩激光灯</option>
+									<option value="其它">其它</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1535,12 +1539,12 @@
 									</select>
 								</div>
 							</div>
-																
+
 							<h3 class="ui blue header">9. 调合，抛光</h3>
 							<div class="three fields">
-								<div class="field">
+								<div class="required field">
 									<label>调合</label>
-									<select name="modulo" class="ui dropdown" multiple="">
+									<select name="compromise_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="TF">TF</option>
 									<option value="TR">TR</option>
@@ -1556,17 +1560,15 @@
 									<option value="BR">BR</option>
 									<option value="BC">BC</option>
 									<option value="DI">DI</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
-								<div class="field">
+								<div class="required field">
 									<label>抛光</label>
-									<select name="polishing" class="ui dropdown" multiple="">
+									<select name="polishing_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="皓齿抛光系统">皓齿抛光系统</option>
 									<option value="彩虹抛光系统">彩虹抛光系统</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -1603,8 +1605,8 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
+									<option value="使用阿替卡因">阿替卡因</option>
+									<option value="使用利多卡因">利多卡因</option>
 									<option value="其它">其它</option>
 									</select>
 								</div>
@@ -1612,8 +1614,8 @@
 									<label>局部麻醉</label>
 									<select name="part_anesthesia" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阻滞麻醉">阻滞麻醉</option>
-									<option value="浸润麻醉">浸润麻醉</option>
+									<option value="采用阻滞麻醉">阻滞麻醉</option>
+									<option value="采用浸润麻醉">浸润麻醉</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1646,16 +1648,16 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>是否行微研磨</label>
-									<select name="depth_of_hole" class="ui dropdown">
+									<select name="inlay" class="ui dropdown">
 									<option value="否">否</option>
 									<option value="行微研磨">是</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>牙龈保护</label>
-									<select name="shape_of_hole" class="ui dropdown">
+									<select name="modulo" class="ui dropdown">
 									<option value="光固化树脂牙龈保护剂">光固化树脂牙龈保护剂</option>
-									<option value="橡皮障">橡皮障牙龈保护剂</option>
+									<option value="橡皮障">橡皮障</option>
 									<option value="无">无</option>
 									</select>
 								</div>
@@ -1742,8 +1744,8 @@
 									<label>麻醉药物</label>
 									<select name="anesthesia_medicine" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
+									<option value="使用阿替卡因">阿替卡因</option>
+									<option value="使用利多卡因">利多卡因</option>
 									<option value="其它">其它</option>
 									</select>
 								</div>
@@ -1751,8 +1753,8 @@
 									<label>局部麻醉</label>
 									<select name="part_anesthesia" class="ui dropdown">
 									<option value="无">无</option>
-									<option value="阻滞麻醉">阻滞麻醉</option>
-									<option value="浸润麻醉">浸润麻醉</option>
+									<option value="采用阻滞麻醉">阻滞麻醉</option>
+									<option value="采用浸润麻醉">浸润麻醉</option>
 									</select>
 								</div>
 								<div class="required field">
@@ -1777,20 +1779,20 @@
 									<label>去龋方式</label>
 									<select name="tools" class="ui dropdown">
 									<option value="">选择</option>
-									<option value="高速牙钻法">高速牙钻法</option>
+									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
 									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法">空气喷砂法</option>
+									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
 									<option value="激光去龋">激光去龋</option>
-									<option value="伢典">伢典</option>
+									<option value="微创车针去龋">微创车针去龋</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="required field">
 									<label>制备洞形位置</label>
-									<select name="shape_of_hole" class="ui dropdown" multiple="">
+									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="唇面">唇面</option>
 									<option value="颊面">颊面</option>
@@ -1815,8 +1817,8 @@
 									<label>成形片</label>
 									<select name="is_piece" class="ui dropdown">
 									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣">Palodent豆瓣</option>
-									<option value="V3">V3</option>
+									<option value="使用Palodent豆瓣成形片">Palodent豆瓣</option>
+									<option value="使用V3成形片">V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1824,8 +1826,8 @@
 									<label>楔子</label>
 									<select name="is_chock" class="ui dropdown">
 									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3">Palodent V3</option>
+									<option value="使用木楔">木楔</option>
+									<option value="使用Palodent V3楔子">Palodent V3</option>
 									<option value="其他">其他</option>
 									</select>
 								</div>
@@ -1884,7 +1886,7 @@
 								<div class="field">
 									<label>垫底</label>
 									<select name="bottom" class="ui dropdown">
-									<option value="">选择</option>
+									<option value="无">不使用垫底</option>
 									<option value="Dycal垫底">Dycal</option>
 									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
 									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
@@ -2002,7 +2004,7 @@
 							<div class="three fields">
 								<div class="required field">
 									<label>修型工具</label>
-									<select name="modification" class="ui dropdown" multiple="">
+									<select name="modification" class="ui dropdown">
 									<option value="">选择</option>
 									<option value="蜡刀">蜡刀</option>
 									<option value="瓷粉充填器">瓷粉充填器</option>
@@ -2038,9 +2040,9 @@
 
 							<h3 class="ui blue header">9. 调合，抛光</h3>
 							<div class="three fields">
-								<div class="field">
+								<div class="required field">
 									<label>调合</label>
-									<select name="modulo" class="ui dropdown" multiple="">
+									<select name="compromise_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="TF">TF</option>
 									<option value="TR">TR</option>
@@ -2056,17 +2058,15 @@
 									<option value="BR">BR</option>
 									<option value="BC">BC</option>
 									<option value="DI">DI</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
-								<div class="field">
+								<div class="required field">
 									<label>抛光</label>
-									<select name="polishing" class="ui dropdown" multiple="">
+									<select name="polishing_display" class="ui dropdown" multiple="">
 									<option value="">选择</option>
 									<option value="抛光杯">抛光杯</option>
 									<option value="皓齿抛光系统">皓齿抛光系统</option>
 									<option value="彩虹抛光系统">彩虹抛光系统</option>
-									<option value="其他">其他</option>
 									</select>
 								</div>
 							</div>
@@ -2108,8 +2108,8 @@
 								<label>麻醉药物</label>
 								<select name="anesthesia_medicine" class="ui dropdown">
 								<option value="无">无</option>
-								<option value="阿替卡因">阿替卡因</option>
-								<option value="利多卡因">利多卡因</option>
+								<option value="使用阿替卡因">阿替卡因</option>
+								<option value="使用利多卡因">利多卡因</option>
 								<option value="其它">其它</option>
 								</select>
 							</div>
@@ -2117,8 +2117,8 @@
 								<label>局部麻醉</label>
 								<select name="part_anesthesia" class="ui dropdown">
 								<option value="无">无</option>
-								<option value="阻滞麻醉">阻滞麻醉</option>
-								<option value="浸润麻醉">浸润麻醉</option>
+								<option value="采用阻滞麻醉">阻滞麻醉</option>
+								<option value="采用浸润麻醉">浸润麻醉</option>
 								</select>
 							</div>
 							<div class="required field">
@@ -2143,14 +2143,14 @@
 								<label>去龋方式</label>
 								<select name="tools" class="ui dropdown">
 								<option value="">选择</option>
-								<option value="高速牙钻法">高速牙钻法</option>
+								<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 								<option value="低速手机去龋">低速手机去龋</option>
 								<option value="挖匙去龋">挖匙去龋</option>
-								<option value="空气喷砂法">空气喷砂法</option>
+								<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 								<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 								<option value="超声去龋">超声去龋</option>
 								<option value="激光去龋">激光去龋</option>
-								<option value="伢典">伢典</option>
+								<option value="微创车针去龋">微创车针去龋</option>
 								<option value="其他">其他</option>
 								</select>
 							</div>
@@ -2339,10 +2339,12 @@
 								</select>
 							</div>
 						</div>
+
+						<h3 class="ui blue header">9. 调合，抛光</h3>
 						<div class="three fields">
-							<div class="field">
+							<div class="required field">
 								<label>调合</label>
-								<select name="lamp" class="ui dropdown" multiple="">
+								<select name="compromise_display" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="TF">TF</option>
 								<option value="TR">TR</option>
@@ -2358,17 +2360,15 @@
 								<option value="BR">BR</option>
 								<option value="BC">BC</option>
 								<option value="DI">DI</option>
-								<option value="其他">其他</option>
 								</select>
 							</div>
-							<div class="field">
+							<div class="required field">
 								<label>抛光</label>
-								<select name="polishing" class="ui dropdown" multiple="">
+								<select name="polishing_display" class="ui dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="抛光杯">抛光杯</option>
 								<option value="皓齿抛光系统">皓齿抛光系统</option>
 								<option value="彩虹抛光系统">彩虹抛光系统</option>
-								<option value="其他">其他</option>
 								</select>
 							</div>
 						</div>
@@ -2383,7 +2383,7 @@
 						<input type="hidden" name="specific_method" value="间接修复">
 
 						<div class="ui hidden divider"></div>
-					    <div class="ui right floated blue submit button">提交</div>
+					    <div class="ui right floated blue small submit button">提交</div>
 					</form>
 				</div>
 			</div>

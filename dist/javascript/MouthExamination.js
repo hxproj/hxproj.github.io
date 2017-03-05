@@ -231,10 +231,7 @@ $(document).ready(function(){
 		// 牙体情况
 		var ME_Body_Text = vData.tooth_location + "牙";
 		ME_Body_Text += "龋坏累及" + vData.caries_tired + "，";
-		if (vData.depth != "近髓") {
-			ME_Body_Text += "深达";
-		}
-		ME_Body_Text += vData.depth + "，";
+		ME_Body_Text += "深达" + vData.depth + "，";
 
 		// 当原充填体选择“无”时，不进行任何语言描述，且不描述有无继发龋
 		if (vData.fill != "无") {

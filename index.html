@@ -19,14 +19,13 @@
 <body>
 
 	<div class="ui blue inverted large top stackable menu">
-		<a class="item" href="index.html"><i class='home icon'></i>主页</a>
+
+		<a class="item" href="index.html"><i class='home icon'></i>龋病防治管理系统</a>
 		<a class="item" href="keyword.html"><i class='search icon'></i>关键字检索</a>
 		<a class="item" href="help.html"><i class='help icon'></i>帮助</a>
 
 		<div class="right menu">
-			<div class="item">
-				<a href="#" class="AddMedicalRecordButton"><i class="plus icon"></i>添加病历</a>
-			</div>
+			<a class="item" type="add_medical_record"><i class="plus icon"></i>添加病历</a>
 		</div> 
 	</div> 
 
@@ -83,6 +82,11 @@
 					</th>
 					<th>
 						<div class="ui large basic label" style="border: none">
+							<a class="detail">初诊医生</a> 
+						</div>
+					</th>
+					<th>
+						<div class="ui large basic label" style="border: none">
 							<a class="sort in_date detail">
 								最近就诊时间<i class="caret down icon"></i>
 							</a> 
@@ -104,6 +108,7 @@
 					<td name="occupation"></td>
 					<td name="contact"></td>
 					<td name="diagnose_list">未诊断</td>
+					<td name="doctor"></td>
 					<td name="in_date"></td>
 					<td class="collapsing">
 						<div class="ui mini teal buttons">
@@ -127,8 +132,8 @@
 
 		<div class="ui hidden info message">
 			<div class="ui center aligned header">
-				<p>还未添加任何病历，请点击添加</p>
-				<div class="ui AddMedicalRecordButton teal large button"><i class="plus icon"></i>添加病历</div>
+				<p>暂未添加任何病历，请点击添加</p>
+				<a class="ui teal large button" type="add_medical_record"><i class="plus icon"></i>添加病历</a>
 			</div>
 		</div>
 	</div>

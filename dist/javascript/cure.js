@@ -101,21 +101,21 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var MinimalFields1 = [
-			new Field("tools"), new Field("shape_of_hole"),
+			new Field("tools"), new Field("shape_of_hole_display"),
 			new Field("depth_of_hole", [EmptyInput])
 		],
 		MinimalFields2 = [
-			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("tools"), new Field("shape_of_hole_display"), 
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("modulo"), new Field("polishing"),
+			new Field("compromise_display"), new Field("polishing_display"),
 		],
 		MinimalFields3 = [
-			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("tools"), new Field("shape_of_hole_display"), 
 			new Field("depth_of_hole", [EmptyInput]), 
 			new Field("disinfect"), new Field("modulo"),
 		];
@@ -125,7 +125,7 @@ $(document).ready(function(){
 		fields: MinimalFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -135,7 +135,12 @@ $(document).ready(function(){
 		fields: MinimalFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+			var AddtionForm = toform({
+				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
+				compromise    : $(this).form('get value', "compromise_display"),
+				polishing     : $(this).form('get value', "polishing_display"),
+			});
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -145,7 +150,7 @@ $(document).ready(function(){
 		fields: MinimalFields3,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -164,26 +169,26 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var ResinFields1 = [
-			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("tools"), new Field("shape_of_hole_display"), 
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("modulo"), new Field("polishing"), 
+			new Field("compromise_display"), new Field("polishing_display"),
 		],
 		ResinFields2 = [
 			new Field("appease_medicine"), new Field("observed_time"), 
 			new Field("anesthesia_medicine"),
-			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("tools"), new Field("shape_of_hole_display"), 
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("modulo"), new Field("polishing"), 
+			new Field("compromise_display"), new Field("polishing_display"),
 		];
 	// **************************************************
 	// 树脂直接充填修复
@@ -191,7 +196,14 @@ $(document).ready(function(){
 		fields: ResinFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+
+			var AddtionForm = toform({
+				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
+				compromise    : $(this).form('get value', "compromise_display"),
+				polishing     : $(this).form('get value', "polishing_display"),
+			});
+
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -201,7 +213,14 @@ $(document).ready(function(){
 		fields: ResinFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+
+			var AddtionForm = toform({
+				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
+				compromise    : $(this).form('get value', "compromise_display"),
+				polishing     : $(this).form('get value', "polishing_display"),
+			});
+
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -213,14 +232,14 @@ $(document).ready(function(){
 			new Field("tools"),
 		],
 		lookFields2 = [
-			new Field("tools"), new Field("shape_of_hole"), 
+			new Field("tools"), new Field("shape_of_hole_display"), 
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("modulo"), new Field("polishing"), 
+			new Field("compromise_display"), new Field("polishing_display"),
 		];
 	// **************************************************
 	// 渗透树脂修复
@@ -239,7 +258,14 @@ $(document).ready(function(){
 		fields: ResinFields2,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+
+			var AddtionForm = toform({
+				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
+				compromise    : $(this).form('get value', "compromise_display"),
+				polishing     : $(this).form('get value', "polishing_display"),
+			});
+
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -249,19 +275,26 @@ $(document).ready(function(){
 	// 间接修复
 	// ----------------------------------------------------------------------
 	var indirectContextFields = [
-			new Field("tools"), new Field("shape_of_hole"),
+			new Field("tools"), new Field("shape_of_hole_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("is_piece"),
 			new Field("modification"), new Field("color_of_tooth"), 
 			new Field("disinfect"), new Field("coating_time"), 
 			new Field("full_etching"), new Field("illumination_time"), 
 			new Field("time_of_lamp"), new Field("observed_time"), 
-			new Field("lamp"), new Field("polishing"),
+			new Field("compromise_display"), new Field("polishing_display"),
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"));
+
+			var AddtionForm = toform({
+				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
+				compromise    : $(this).form('get value', "compromise_display"),
+				polishing     : $(this).form('get value', "polishing_display"),
+			});
+
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
 			return false;
 		}
 	});
@@ -351,22 +384,27 @@ $(document).ready(function(){
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "ART修复": {
+						ChangeTabActive($('#minimalContext a').removeClass('active'), $('#minimalContext .ui.tab').removeClass('active'), 0);
 						DescriptionStr = showMinimal1(vData, DescriptionStr);
 						break;
 					}
 					case "预防性充填": {
+						ChangeTabActive($('#minimalContext a').removeClass('active'), $('#minimalContext .ui.tab').removeClass('active'), 1);
 						DescriptionStr = showMinimal2(vData, DescriptionStr);
 						break;
 					}
 					case "玻璃离子过渡性修复": {
+						ChangeTabActive($('#minimalContext a').removeClass('active'), $('#minimalContext .ui.tab').removeClass('active'), 2);
 						DescriptionStr = showMinimal3(vData, DescriptionStr);
 						break;
 					}
 					case "釉质成型术": {
+						ChangeTabActive($('#minimalContext a').removeClass('active'), $('#minimalContext .ui.tab').removeClass('active'), 3);
 						DescriptionStr = showMinimal4(vData, DescriptionStr);
 						break;
 					}
 					case "微打磨术": {
+						ChangeTabActive($('#minimalContext a').removeClass('active'), $('#minimalContext .ui.tab').removeClass('active'), 4);
 						DescriptionStr = showMinimal5(vData, DescriptionStr);
 						break;
 					}
@@ -383,10 +421,12 @@ $(document).ready(function(){
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "树脂直接充填修复": {
+						ChangeTabActive($('#resinContext a').removeClass('active'), $('#resinContext .ui.tab').removeClass('active'), 0);
 						DescriptionStr = showResin1(vData, DescriptionStr);
 						break;
 					}
 					case "安抚治疗&树脂充填修复": {
+						ChangeTabActive($('#resinContext a').removeClass('active'), $('#resinContext .ui.tab').removeClass('active'), 1);
 						DescriptionStr = showResin2(vData, DescriptionStr);
 						break;
 					}
@@ -403,10 +443,12 @@ $(document).ready(function(){
 				DescriptionStr = "<bold>" + vData.specific_method + "：</bold>" + NewLine;
 				switch (vData.specific_method) {
 					case "渗透树脂修复": {
+						ChangeTabActive($('#lookContext a').removeClass('active'), $('#lookContext .ui.tab').removeClass('active'), 0);
 						DescriptionStr = showLook1(vData, DescriptionStr);
 						break;
 					}
 					case "微创复合树脂分层修复": {
+						ChangeTabActive($('#lookContext a').removeClass('active'), $('#lookContext .ui.tab').removeClass('active'), 1);
 						DescriptionStr = showLook2(vData, DescriptionStr);
 						break;
 					}
@@ -452,7 +494,7 @@ $(document).ready(function(){
 	function shownoSurgical3(vData, vDescription) {
 		vDescription  +=  "<br/><br/>1. 清洁牙面： 在低速手机上装好" + vData.additional_device 
 						+ "，蘸取适量" + vData.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
-						+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + vData.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上。" + vData.time_of_etching + NewLine
+						+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + vData.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上，" + vData.time_of_etching + NewLine
 						+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物" + NewLine
 						+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上" + NewLine
 						+ "5. " + vData.lamp + NewLine
@@ -466,7 +508,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -492,7 +534,7 @@ $(document).ready(function(){
 
 		vDescription += "2. 干燥，隔湿，";
 		vDescription += vData.is_piece + "，";
-		vDescription += vData.is_chock + NewLine;
+		vDescription += "使用" + vData.is_chock + NewLine;
 
 		vDescription += "3. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";
@@ -528,7 +570,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.modulo + "调合" + "，";
+		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		return vDescription;
@@ -614,7 +656,7 @@ $(document).ready(function(){
 
 		vDescription += "5. ";
 		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.bottom != "") {
+		if (vData.bottom != "无") {
 			vDescription += "，" + vData.bottom;
 		}
 		vDescription += NewLine;
@@ -640,7 +682,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.modulo + "调合" + "，";
+		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 		
 		return vDescription;
@@ -685,7 +727,7 @@ $(document).ready(function(){
 
 		vDescription += "5. ";
 		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.bottom != "") {
+		if (vData.bottom != "无") {
 			vDescription += "，" + vData.bottom;
 		}
 		vDescription += NewLine;
@@ -711,7 +753,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.modulo + "调合" + "，";
+		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		return vDescription;
@@ -726,18 +768,22 @@ $(document).ready(function(){
 		if (vData.part_anesthesia != "无") {
 			vDescription += vData.part_anesthesia + "，";
 		}
-		vDescription += vData.rubber + "，";
-		vDescription += vData.microscope + "，";
+		if (vData.rubber == "使用开口器") {
+			vDescription += vData.rubber + "，";
+		}
+		if (vData.microscope == "使用咬合块") {
+			vDescription += vData.microscope + "，";
+		}
 		vDescription += vData.tools;
 		vDescription += NewLine;
 
 		vDescription += "2. ";
 		// FIXME: add tooth location
-		if (vData.depth_of_hole != "否") {
-			vDescription += vData.depth_of_hole;
+		if (vData.inlay != "否") {
+			vDescription += vData.inlay;
 
-			if (vData.shape_of_hole != "无") {
-				vDescription += "，" + vData.shape_of_hole + "保护牙龈";
+			if (vData.modulo != "无") {
+				vDescription += "：" + vData.modulo + "保护牙龈";
 			}
 			if (vData.is_piece != "无") {
 				vDescription += "，低速手机装上" + vData.is_piece;
@@ -787,7 +833,7 @@ $(document).ready(function(){
 
 		vDescription += "5. ";
 		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.bottom != "") {
+		if (vData.bottom != "无") {
 			vDescription += "，" + vData.bottom;
 		}
 		vDescription += NewLine;
@@ -813,7 +859,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.modulo + "调合" + "，";
+		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 		
 		return vDescription;
@@ -869,7 +915,7 @@ $(document).ready(function(){
 		vDescription += "磷酸酸蚀牙面" + vData.time_of_lamp + "，";
 		vDescription += "涂布" + vData.full_etching + "粘接剂，";
 		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
-		vDescription += vData.lamp + "调合" + "，";
+		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 		
 		return vDescription;
@@ -909,8 +955,6 @@ $(document).ready(function(){
 		$('select[name=disinfect]').dropdown("set selected", vData.disinfect);
 		$('select[name=bottom]').dropdown("set selected", vData.bottom);
 		$('select[name=etching_type]').dropdown("set selected", vData.etching_type);
-		$('select[name=full_etching]').dropdown("set selected", vData.full_etching);
-		$('select[name=self_etching]').dropdown("set selected", vData.self_etching);
 		$('select[name=coating_time]').dropdown("set selected", vData.coating_time);
 		$('select[name=illumination_time]').dropdown("set selected", vData.illumination_time);
 		$('select[name=resin]').dropdown("set selected", vData.resin);
@@ -921,14 +965,34 @@ $(document).ready(function(){
 		$('select[name=appease_medicine]').dropdown("set selected", vData.appease_medicine);
 		$('select[name=observed_time]').dropdown("set selected", vData.observed_time);
 		$('select[name=inlay]').dropdown("set selected", vData.inlay);
+		$('select[name=modulo]').dropdown("set selected", vData.modulo);
 
 		// multiple selection
-		$('select[name=shape_of_hole]').dropdown("set selected", vData.shape_of_hole);
-		$('select[name=modulo]').dropdown("set selected", vData.modulo);
-		$('select[name=polishing]').dropdown("set selected", vData.polishing);
+		if (vData.shape_of_hole != undefined && vData.shape_of_hole != null) {
+			$.each(vData.shape_of_hole.split(','), function(){
+				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
+			});
+		}
+		if (vData.compromise != undefined && vData.compromise != null) {
+			$.each(vData.compromise.split(','), function(){
+				$('select[name=compromise_display]').dropdown("set selected", this);
+			});
+		}
+		if (vData.polishing != undefined && vData.polishing != null) {
+			$.each(vData.polishing.split(','), function(){
+				$('select[name=polishing_display]').dropdown("set selected", this);
+			});
+		}
 
 		// input
 		$('input[name=depth_of_hole]').val(vData.depth_of_hole);
+
+
+		// 设置酸蚀粘接系统类型
+		$('select[name=etching_type]').dropdown("set selected", vData.etching_type);
+		changeEtching(vData.etching_type);
+		$('select[name=full_etching]').dropdown("set selected", vData.full_etching);
+		$('select[name=self_etching]').dropdown("set selected", vData.self_etching);
 	}
 
 	function setIndirectDefault(vData) {
@@ -941,5 +1005,25 @@ $(document).ready(function(){
 	function ChangeTabActive($Context, $TabSegment, Index){
 		$Context.eq(Index).addClass('active');
 		$TabSegment.eq(Index).addClass('active');
+	}
+
+
+	// ***************************************************************
+	// FUNCTION: 酸蚀粘接系统类型选择
+	$('select[name=etching_type]').parent().dropdown({
+		onChange: function(value, text, $selected) { changeEtching(value); }
+	});
+
+	function changeEtching(EtchingType) {
+		var $FullEtching = $('.tag_full_etching'),
+			$SelfEtching = $('.tag_self_etching');
+
+		if (EtchingType == "全酸蚀粘接系统") {
+			$SelfEtching.addClass('invisible');
+			$FullEtching.removeClass('invisible');
+		} else if (EtchingType == "自酸蚀粘接系统") {
+			$FullEtching.addClass('invisible');
+			$SelfEtching.removeClass('invisible');
+		}
 	}
 });
