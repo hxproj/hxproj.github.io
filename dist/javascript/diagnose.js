@@ -16,7 +16,18 @@ $(document).ready(function(){
 
 
 	// **************************************************
-	// GET
+	// GET:
+	var ToothInfo;
+	$.ajax({
+		url      : URL_TOOTH + toquerystring({tooth_id : TID}),
+		type     : "get",
+		async    : false,
+		dataType : "json",
+		success  : function(vData) {
+			ToothInfo = vData;
+			$('.header[type=toothlocation]').text("牙位：" + vData.tooth_location_number + "牙");
+		}
+	});
 	$.ajax({
 		url      : URL_DIAGNOSE,
 		type     : "GET", 
@@ -33,6 +44,7 @@ $(document).ready(function(){
 			setDefultFormData(vData);
 		}
 	});
+
 
 
 	// **************************************************
@@ -135,45 +147,38 @@ $(document).ready(function(){
 	// **************************************************
 	// Function
 	function showData(vData) {
-		// 获取牙位信息
+
+		var $Description = $('#id_description');
+
+		// diagnose
+		var ToothLocation = ToothInfo.tooth_location_number + "牙",
+			DiagnoseText  = "<span>诊断：</span>" + ToothLocation;
+		DiagnoseText += vData.caries_degree;
+		if (vData.caries_type != "无") {
+			DiagnoseText += "，" + ToothLocation + vData.caries_type;
+		}		
+		appendpragraph($Description, DiagnoseText);
+
+		// other diagnose
+		if (vData.additional != "") {
+			appendpragraph($Description, "<span>其他诊断：</span>" + vData.additional);
+		}
+
+		// plan
+		var PlanText = "<span>治疗计划：</span>" + vData.cure_plan
+		if (vData.specification != "") {
+			PlanText += "（" + vData.specification + "）";
+		}
+		appendpragraph($Description, PlanText);
+
+		// show image
 		$.ajax({
-			url      : URL_TOOTH + toquerystring({tooth_id : TID}),
-			type     : "get",
+			url      : URL_IMAGE,
+			type     : "GET",
+			data     : {case_id : CID, type : Image_type},
 			dataType : "json",
-			success  : function(ToothInfo) { 
-				var $Description = $('#id_description');
-
-				// diagnose
-				var ToothLocation = ToothInfo.tooth_location_number + "牙",
-					DiagnoseText  = "<span>诊断：</span>" + ToothLocation;
-				DiagnoseText += vData.caries_degree;
-				if (vData.caries_type != "无") {
-					DiagnoseText += "，" + ToothLocation + vData.caries_type;
-				}		
-				appendpragraph($Description, DiagnoseText);
-
-				// other diagnose
-				if (vData.additional != "") {
-					appendpragraph($Description, "<span>其他诊断：</span>" + vData.additional);
-				}
-
-				// plan
-				var PlanText = "<span>治疗计划：</span>" + vData.cure_plan
-				if (vData.specification != "") {
-					PlanText += "（" + vData.specification + "）";
-				}
-				appendpragraph($Description, PlanText);
-
-				// show image
-				$.ajax({
-					url      : URL_IMAGE,
-					type     : "GET",
-					data     : {case_id : CID, type : Image_type},
-					dataType : "json",
-					success  : function(FileData) {showImage(FileData);}
-				});
-			}
-		})
+			success  : function(FileData) {showImage(FileData);}
+		});
 	}
 
 	function setDefultFormData(vData) {
