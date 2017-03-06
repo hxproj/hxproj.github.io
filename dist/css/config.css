@@ -22,3 +22,7 @@ bold {
 span {
 	font-weight: bold;
 }
+
+.ui.menu .logo.item {
+	font-size: 120%;
+}
