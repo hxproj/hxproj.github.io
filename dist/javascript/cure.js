@@ -20,6 +20,14 @@ $(document).ready(function(){
 
 	// **************************************************
 	// GET
+	var ToothLocation = "";
+	$.ajax({
+		url      : URL_TOOTH + toquerystring({tooth_id : TID}),
+		type     : "get",
+		async    : false,
+		dataType : "json",
+		success  : function(vData) { ToothLocation = vData.tooth_location_number + "牙，"; }
+	});
 	$.ajax({
 		url      : URL_CURE,
 		type     : "GET", 
@@ -486,15 +494,15 @@ $(document).ready(function(){
 	}
 	// 非手术治疗
 	function shownoSurgical1(vData, vDescription) {
-		vDescription += "将" + vData.fluorination + "，" + vData.silver_nitrate + "涂布于龋损处30s";
+		vDescription += ToothLocation + "将" + vData.fluorination + "，" + vData.silver_nitrate + "涂布于龋损处30s";
 		return vDescription;
 	}
 	function shownoSurgical2(vData, vDescription) {
-		vDescription += "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
+		vDescription += ToothLocation + "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
 		return vDescription;
 	}
 	function shownoSurgical3(vData, vDescription) {
-		vDescription  +=  "<br/><br/>1. 清洁牙面： 在低速手机上装好" + vData.additional_device 
+		vDescription  +=  "<br/><br/>1. " + ToothLocation + "清洁牙面： 在低速手机上装好" + vData.additional_device 
 						+ "，蘸取适量" + vData.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
 						+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + vData.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上，" + vData.time_of_etching + NewLine
 						+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物" + NewLine
@@ -506,7 +514,7 @@ $(document).ready(function(){
 	// 龋病微创修复
 	function showMinimal1(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -526,7 +534,7 @@ $(document).ready(function(){
 	}
 	function showMinimal2(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -579,7 +587,7 @@ $(document).ready(function(){
 	}
 	function showMinimal3(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
 		}
@@ -590,7 +598,6 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		// FIXME: add tooth location
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -615,12 +622,14 @@ $(document).ready(function(){
 		return vDescription;
 	}
 	function showMinimal4(vData, vDescription) {
-		vDescription += "用火焰状金刚砂针磨去浅的沟裂，将釉质磨圆钝，形成光滑、蝶形的利于清洁的表面";
+		vDescription += ToothLocation + "用火焰状金刚砂针磨去浅的沟裂，将釉质磨圆钝，形成光滑、蝶形的利于清洁的表面";
 		
 		return vDescription;
 	}
 	function showMinimal5(vData, vDescription) {
-		vDescription += "1. 低速手机装上" + vData.microscope + "蘸取适量牙膏于牙面，来回刷洗无龋牙面及窝沟1min，彻底冲洗清洁" + NewLine;
+		vDescription += "1. ";
+		vDescription += ToothLocation;
+		vDescription += "低速手机装上" + vData.microscope + "蘸取适量牙膏于牙面，来回刷洗无龋牙面及窝沟1min，彻底冲洗清洁" + NewLine;
 		vDescription += "2. 涂抹约2～3mm厚的磨膏层于牙面，低速手机装上" + vData.modulo
 			 + "蘸取6.6%盐酸及碳化硅微粒的水溶性磨砂膏剂来进行微打磨，轻微加力，在牙齿表面打磨(2-3min，4-6min)。在每次微打磨之后，使用清水冲洗干净";
 		
@@ -629,7 +638,7 @@ $(document).ready(function(){
 	// 复合树脂修复
 	function showResin1(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
 		}
@@ -640,7 +649,6 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		// FIXME: add tooth location
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -700,7 +708,7 @@ $(document).ready(function(){
 		vDescription += "<bold>复诊：</bold>" + NewLine;
 		
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
 		}
@@ -711,7 +719,6 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		// FIXME: add tooth location
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -763,7 +770,7 @@ $(document).ready(function(){
 	// 美容修复
 	function showLook1(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
 		}
@@ -780,7 +787,6 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		// FIXME: add tooth location
 		if (vData.inlay != "否") {
 			vDescription += vData.inlay;
 
@@ -806,7 +812,7 @@ $(document).ready(function(){
 	}
 	function showLook2(vData, vDescription) {
 		vDescription += "1. ";
-		// FIXME: add tooth location
+		vDescription += ToothLocation;
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
 		}
@@ -817,7 +823,6 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		// FIXME: add tooth location
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
@@ -868,9 +873,10 @@ $(document).ready(function(){
 	}
 	// 间接修复
 	function showIndirect(vData, vDescription) {
-		vDescription += "1. 嵌体修复材料类型：" + vData.inlay + NewLine;
+		vDescription += "嵌体修复材料类型：" + vData.inlay + NewLine;
 
-		vDescription += "2. ";
+		vDescription += "1. ";
+		vDescription += ToothLocation;
 		// FIXME: add tooth location
 		if (vData.anesthesia_medicine != "无") {
 			vDescription += vData.anesthesia_medicine + "，";
@@ -881,7 +887,7 @@ $(document).ready(function(){
 		vDescription += vData.rubber;
 		vDescription += NewLine;
 
-		vDescription += "3. ";
+		vDescription += "2. ";
 		// FIXME: add tooth location
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
@@ -900,17 +906,17 @@ $(document).ready(function(){
 			vDescription += NewLine;
 		}
 
-		vDescription += "4. ";
+		vDescription += "3. ";
 		vDescription += "使用" + vData.gingival_retraction + "排龈，";
 		vDescription += vData.modulo + "取模";
 		vDescription += NewLine;
 
-		vDescription += "5. ";
+		vDescription += "4. ";
 		if (vData.disinfect == "是") {
 			vDescription += "制作临时修复体，临时修复体粘接，粘接剂为" + vData.bottom;
 			vDescription += NewLine;
 
-			vDescription += "6. ";
+			vDescription += "5. ";
 		}
 
 		vDescription += "复诊，去除临时修复体，试戴，调改接触点，检查有无翘动，固位好，边缘密合，";
