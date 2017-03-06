@@ -277,11 +277,11 @@ $(document).ready(function(){
 	var indirectContextFields = [
 			new Field("tools"), new Field("shape_of_hole_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("is_piece"),
-			new Field("modification"), new Field("color_of_tooth"), 
-			new Field("disinfect"), new Field("coating_time"), 
-			new Field("full_etching"), new Field("illumination_time"), 
-			new Field("time_of_lamp"), new Field("observed_time"), 
+			new Field("drill_needle_display"), new Field("gingival_retraction_display"),
+			new Field("disinfect"), new Field("time_of_lamp"),
+			new Field("full_etching"), new Field("observed_time"),
 			new Field("compromise_display"), new Field("polishing_display"),
+			new Field("modulo"), new Field("coating_time"),
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
@@ -292,6 +292,8 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
+				drill_needle  : $(this).form('get value', "drill_needle_display"),
+				gingival_retraction     : $(this).form('get value', "gingival_retraction_display"),
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"));
@@ -866,7 +868,7 @@ $(document).ready(function(){
 	}
 	// 间接修复
 	function showIndirect(vData, vDescription) {
-		vDescription += "1. 嵌体修复材料类型：" + vData.modulo + NewLine;
+		vDescription += "1. 嵌体修复材料类型：" + vData.inlay + NewLine;
 
 		vDescription += "2. ";
 		// FIXME: add tooth location
@@ -884,19 +886,19 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm。";
-		vDescription += "使用钻针" + vData.is_piece + "。";
+		vDescription += "使用钻针" + vData.drill_needle + "。";
 		if (vData.is_chock == "是") {
-			vDescription += "行直接充填，充填材料为：" + vData.shade_guide;
+			vDescription += "行直接充填，充填材料为：" + vData.shade_guide + "。";
 		}
 		vDescription += NewLine;
 
 		// FIXME：补充说明
 		vDescription += "4. ";
-		vDescription += "使用" + vData.modification + "排龈，";
-		vDescription += vData.color_of_tooth + "取模";
+		vDescription += "使用" + vData.gingival_retraction + "排龈，";
+		vDescription += vData.modulo + "取模";
 		vDescription += NewLine;
 
 		vDescription += "5. ";
@@ -908,7 +910,12 @@ $(document).ready(function(){
 		}
 
 		vDescription += "复诊，去除临时修复体，试戴，调改接触点，检查有无翘动，固位好，边缘密合，";
-		vDescription += vData.coating_time + "氢氟酸酸蚀修复体" + vData.illumination_time + "冲洗、干燥，";
+		vDescription += vData.coating_time + "氢氟酸酸蚀修复体";
+		if (vData.illumination_time != "无") {
+			vDescription += vData.illumination_time;
+		}
+		vDescription += "，冲洗、干燥，";
+		
 		if (vData.resin == "是") {
 			vDescription += "涂布硅烷偶联剂，";
 		}
@@ -983,9 +990,20 @@ $(document).ready(function(){
 				$('select[name=polishing_display]').dropdown("set selected", this);
 			});
 		}
+		if (vData.drill_needle != undefined && vData.drill_needle != null) {
+			$.each(vData.drill_needle.split(','), function(){
+				$('select[name=drill_needle_display]').dropdown("set selected", this);
+			});
+		}
+		if (vData.gingival_retraction != undefined && vData.gingival_retraction != null) {
+			$.each(vData.gingival_retraction.split(','), function(){
+				$('select[name=gingival_retraction_display]').dropdown("set selected", this);
+			});
+		}
 
 		// input
 		$('input[name=depth_of_hole]').val(vData.depth_of_hole);
+		$('textarea[name=additional]').val(vData.additional);
 
 
 		// 设置酸蚀粘接系统类型
