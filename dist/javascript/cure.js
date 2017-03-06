@@ -895,7 +895,11 @@ $(document).ready(function(){
 		}
 		vDescription += NewLine;
 
-		// FIXME：补充说明
+		if (vData.additional != "") {
+			vDescription += "<span>操作补充说明：</span>" + vData.additional;
+			vDescription += NewLine;
+		}
+
 		vDescription += "4. ";
 		vDescription += "使用" + vData.gingival_retraction + "排龈，";
 		vDescription += vData.modulo + "取模";
@@ -915,7 +919,7 @@ $(document).ready(function(){
 			vDescription += vData.illumination_time;
 		}
 		vDescription += "，冲洗、干燥，";
-		
+
 		if (vData.resin == "是") {
 			vDescription += "涂布硅烷偶联剂，";
 		}
