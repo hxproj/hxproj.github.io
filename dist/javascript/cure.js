@@ -583,6 +583,10 @@ $(document).ready(function(){
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
+		if (vData.compromise_polishing_additional != "") {
+			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
+		}
+
 		return vDescription;
 	}
 	function showMinimal3(vData, vDescription) {
@@ -694,6 +698,10 @@ $(document).ready(function(){
 		vDescription += "9. ";
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
+
+		if (vData.compromise_polishing_additional != "") {
+			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
+		}
 		
 		return vDescription;
 	}
@@ -764,6 +772,10 @@ $(document).ready(function(){
 		vDescription += "9. ";
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
+
+		if (vData.compromise_polishing_additional != "") {
+			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
+		}
 
 		return vDescription;
 	}
@@ -868,6 +880,10 @@ $(document).ready(function(){
 		vDescription += "9. ";
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
+
+		if (vData.compromise_polishing_additional != "") {
+			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
+		}
 		
 		return vDescription;
 	}
@@ -934,6 +950,10 @@ $(document).ready(function(){
 		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
+
+		if (vData.compromise_polishing_additional != "") {
+			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
+		}
 		
 		return vDescription;
 	}
@@ -1014,6 +1034,7 @@ $(document).ready(function(){
 		// input
 		$('input[name=depth_of_hole]').val(vData.depth_of_hole);
 		$('textarea[name=additional]').val(vData.additional);
+		$('textarea[name=compromise_polishing_additional]').val(vData.compromise_polishing_additional);
 
 
 		// 设置酸蚀粘接系统类型
