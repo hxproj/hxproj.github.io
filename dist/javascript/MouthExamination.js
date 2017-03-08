@@ -138,6 +138,24 @@ $(document).ready(function(){
 					}
 				]
 			},
+			cold_delay: {
+				identifier: 'cold_delay',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请选择该项选项'
+					}
+				]
+			},
+			hot_delay: {
+				identifier: 'hot_delay',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请选择该项选项'
+					}
+				]
+			},
 		},
 		inline: true,
 		onSuccess: function(){
@@ -242,7 +260,9 @@ $(document).ready(function(){
 		ME_Body_Text += vData.color_of_caries + "，";
 		ME_Body_Text += vData.flex_of_caries + "，";
 		ME_Body_Text += vData.cold + "，";
+		ME_Body_Text += vData.cold_delay + "，";
 		ME_Body_Text += vData.hot + "，";
+		ME_Body_Text += vData.hot_delay + "，";
 		ME_Body_Text += vData.touch + "，";
 		ME_Body_Text += vData.bite;
 
@@ -332,7 +352,9 @@ $(document).ready(function(){
 		$('select[name=secondary]').dropdown("set selected", vData.secondary);
 		$('select[name=depth]').dropdown("set selected", vData.depth);
 		$('select[name=cold]').dropdown("set selected", vData.cold);
+		$('select[name=cold_delay]').dropdown("set selected", vData.cold_delay);
 		$('select[name=hot]').dropdown("set selected", vData.hot);
+		$('select[name=hot_delay]').dropdown("set selected", vData.hot_delay);
 		$('select[name=touch]').dropdown("set selected", vData.touch);
 		$('select[name=bite]').dropdown("set selected", vData.bite);
 		$('select[name=color_of_caries]').dropdown("set selected", vData.color_of_caries);
