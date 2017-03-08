@@ -34,6 +34,30 @@ $(document).ready(function(){
 			showDifficultyAssessmentData(vData);
 		}
 	});
+	// 如果已进行风险评估，设置龋病难度等级
+	$.ajax({
+		url      : URL_RISKEVALUATION,
+		type     : "GET", 
+		data     : toform({case_id : CID}),
+		dataType : "json",
+		success  : function(vData) {
+			switch (vData.risk_level) {
+				case 1: {
+					$('select[name=difficulty_rating]').dropdown("set selected", "低风险患者");
+					break;
+				};
+				case 2: {
+					$('select[name=difficulty_rating]').dropdown("set selected", "中风险患者");
+					break;
+				};
+				case 3: {
+					$('select[name=difficulty_rating]').dropdown("set selected", "高风险患者");
+					break;
+				};
+				default: 
+			}
+		}
+	});
 
 
 	// **************************************************

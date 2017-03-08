@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
-		Image_type = 3,
+		Image_type = IMAGE_TYPE.CURE,
 		IsEditMode = false,
 		NewLine    = "<br/><br/>";
 

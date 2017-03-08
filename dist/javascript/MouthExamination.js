@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
-		Image_type = 1,
+		Image_type = IMAGE_TYPE.MOUTHEXAM,
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),

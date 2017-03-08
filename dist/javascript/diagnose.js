@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
-		Image_type = 2,
+		Image_type = IMAGE_TYPE.DIAGNOSE,
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),
@@ -111,9 +111,7 @@ $(document).ready(function(){
 						contentType   : false,  
 						processData   : false,
 						success       : function() {},
-						error         : function() {
-							alert("文件上传失败");
-						}
+						error         : function() {alert("文件上传失败");}
 					});
 
 					location.reload();

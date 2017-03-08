@@ -8,10 +8,12 @@
 	<link rel="SHORTCUT ICON" href="dist/media/logo.png">
  	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+ 	<link rel="stylesheet" type="text/css" href="dist/css/file.css">
  	
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
   	<script src="dist/javascript/semantic/semantic.min.js"></script> 
   	<script src="dist/javascript/config.js"></script>
+  	<script src="dist/javascript/file.js"></script>
   	<script src="dist/javascript/nav.js"></script> 
   	<script src="dist/javascript/basicinfo.js"></script>
   	<script src="dist/javascript/usphs.js"></script> 
@@ -75,6 +77,15 @@
 						<tr>
 							<td class="positive collapsing">评估等级</td>
 							<td  class="center aligned negative" id="usphs_level" colsapn="2"></td>
+						</tr>
+						<tr>
+							<td class="positive collapsing">诊断图片</td>
+							<td class="negative" id="ID_IMAGE" colspan="2">
+								<div class="ui hidden rounded image">
+									<a class="ui hidden right corner label"><i class="remove icon"></i></a>
+									<img style="max-width:100%; height:auto;">
+						    	</div>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="right aligned">
@@ -198,6 +209,11 @@
 					    </div>
 					</div>
 
+					<div class="ui fluid file button">
+						<span class="FileLabel">添加图片</span> 
+						<input type="file" name="file[]" multiple="multiple" id="imageupload">
+					</div>
+
 					<div class="ui hidden divider"></div>
 					<div class="ui right floated blue small submit button">提交</div>
 				</form>
@@ -206,6 +222,21 @@
 		
 		<div class="center aligned three wide column">
 			<div class="ui vertical container stackable menu" id="nav">
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除图片 -->
+	<div class="ui small modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除图片
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
+				<i class="checkmark icon"></i>确认
 			</div>
 		</div>
 	</div>

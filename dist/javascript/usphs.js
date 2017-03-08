@@ -6,6 +6,7 @@ $(document).ready(function(){
 	var UID = Number(requestParameter("uid")),
 		TID = Number(requestParameter("tid")),
 		CID = Number(requestParameter("cid")),
+		Image_type = IMAGE_TYPE.USPHS,
 		IsEditMode = false;
 	// INIT SELECTOR
 	var $InfoSegement = $('table'),
@@ -46,7 +47,24 @@ $(document).ready(function(){
 				data     : toform({user_id : UID, case_id : CID, tooth_id : TID}) + $(this).serialize(),
 				dataType : "json",
 				error    : function() {networkError();},
-				success  : function() {location.reload();}
+				success  : function() {
+					
+					$.ajaxFile({
+						url           : URL_IMAGE, 
+						type          : 'POST',  
+						fileElementId : 'imageupload',
+						dataType      : 'text',
+						data          : {case_id : CID, picture_type : Image_type},
+						async         : false,  
+						cache         : false,  
+						contentType   : false,  
+						processData   : false,
+						success       : function() {},
+						error         : function() {alert("文件上传失败");}
+					});
+					
+					location.reload();
+				}
 			});
 			
 			return false;
@@ -90,7 +108,15 @@ $(document).ready(function(){
 				break;
 			}
 		}
-		
+
+		// show image
+		$.ajax({
+			url      : URL_IMAGE,
+			type     : "GET",
+			data     : {case_id : CID, type : Image_type},
+			dataType : "json",
+			success  : function(FileData) {showImage(FileData);}
+		});
 	}
 
 	function setDefultFormData(vData) {

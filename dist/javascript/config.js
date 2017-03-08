@@ -24,6 +24,14 @@ $(document).ready(function(){
 	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";
 	window.URL_PASTHISTORY      = URL_SERVER + "/medical-case-of-illness/past-history";
 
+	// ***************************************************************
+	// FUNCTION: IMAGE_TYPE
+	window.IMAGE_TYPE = {
+		MOUTHEXAM : 1,
+		DIAGNOSE  : 2,
+		CURE      : 3,
+		USPHS     : 4,
+	};
 
 	// ***************************************************************
 	// FUNCTION: System Common Functions
