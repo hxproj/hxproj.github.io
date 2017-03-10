@@ -7,7 +7,7 @@ body {
 	display: none;
 }
 
-.ui.container {
+.ui.main.container {
 	margin-bottom: 10em;
 }
 
@@ -24,5 +24,6 @@ span {
 }
 
 .ui.menu .logo.item {
-	font-size: 120%;
+	font-size: larger;
+	font-weight: bolder;
 }

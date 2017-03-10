@@ -17,83 +17,55 @@
 </head>
 
 <body>
-
 	<div class="ui blue inverted large top stackable menu">
-		<a class="logo item" href="index.html">龋病防治管理系统</a>
-		<a class="item" href="index.html"><i class='home icon'></i>主页</a>
-		<a class="item" href="keyword.html"><i class='search icon'></i>关键字检索</a>
-		<a class="item" href="help.html"><i class='help icon'></i>帮助</a>
+		<div class="ui container">
+			<a class="logo item" href="index.html">龋病防治管理系统</a>
+			<a class="item" href="index.html"><i class='home icon'></i>主页</a>
+			<a class="item" href="keyword.html"><i class='search icon'></i>关键字检索</a>
+			<a class="item" href="help.html"><i class='help icon'></i>帮助</a>
 
-		<a class="right menu">
-			<a class="item" type="add_medical_record"><i class="plus icon"></i>添加病历</a>
-		</a> 
+			<a class="right menu">
+				<a class="item" type="add_medical_record"><i class="plus icon"></i>添加病历</a>
+			</a> 
+		</div> 
 	</div> 
 
-	<div class="ui fluid container">
+	<div class="ui main container">
 		<table class="ui center aligned celled invisible table">
 			<thead>
 				<tr>
 					<th class="positive collapsing">
-						<div class="ui large basic label" style="border: none">
-							<a class="sort uid detail">
-								编号<i class="caret down icon"></i>
-							</a> 
-						</div>
+						<a class="sort uid detail">
+							编号<i class="caret down icon"></i>
+						</a> 
 					</th>
 					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="sort name detail">
-								姓名<i class="caret down icon"></i>
-							</a> 
-							<a class="search name detail">
-								<i class="search icon"></i>
-							</a>
-						</div>
+						<a class="sort name detail">
+							姓名<i class="caret down icon"></i>
+						</a> 
+						<a class="search name detail" style="position: absolute;">
+							<i class="search icon"></i>
+						</a>
 					</th>
 					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="sort age detail">
-								年龄<i class="caret down icon"></i>
-							</a> 
-							<a class="age search detail">
-								<i class="search icon"></i>
-							</a>
-						</div>
+						<a class="sort age detail">
+							年龄<i class="caret down icon"></i>
+						</a> 
+						<a class="age search detail">
+							<i class="search icon"></i>
+						</a>
 					</th>
+					<th><a class="detail">性别</a></th>
+					<th><a class="detail">联系</a></th>
+					<th><a class="detail">诊断</a></th>
+					<th><a class="detail">医生</a></th>
 					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="detail">性别</a> 
-						</div>
-					</th>
-					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="detail">职业</a> 
-						</div>
-					</th>
-					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="detail">联系方式</a> 
-						</div>
-					</th>
-					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="detail">诊断</a> 
-						</div>
-					</th>
-					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="detail">初诊医生</a> 
-						</div>
-					</th>
-					<th>
-						<div class="ui large basic label" style="border: none">
-							<a class="sort in_date detail">
-								最近就诊时间<i class="caret down icon"></i>
-							</a> 
-							<a class="in_date search detail">
-								<i class="search icon"></i>
-							</a>
-						</div>
+						<a class="sort in_date detail">
+							最近就诊时间<i class="caret down icon"></i>
+						</a> 
+						<a class="in_date search detail">
+							<i class="search icon"></i>
+						</a>
 					</th>
 					<th></th>
 				</tr>
@@ -105,10 +77,10 @@
 					<td name="name"></td>
 					<td name="age"></td>
 					<td name="gender"></td>
-					<td name="occupation"></td>
+					<td class="invisible" name="occupation"></td>
 					<td name="contact"></td>
 					<td name="diagnose_list">未诊断</td>
-					<td name="doctor"></td>
+					<td name="doctor">程磊</td>
 					<td name="in_date"></td>
 					<td class="collapsing">
 						<div class="ui mini teal buttons">
