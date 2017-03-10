@@ -23,7 +23,11 @@ span {
 	font-weight: bold;
 }
 
-.ui.menu .logo.item {
+.ui.menu .logo span {
 	font-size: larger;
 	font-weight: bolder;
+}
+
+.ui.menu .logo.item img {
+	margin-right: 0.5em;
 }
