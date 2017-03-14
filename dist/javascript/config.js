@@ -24,14 +24,6 @@ $(document).ready(function(){
 	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";
 	window.URL_PASTHISTORY      = URL_SERVER + "/medical-case-of-illness/past-history";
 
-	// ***************************************************************
-	// FUNCTION: IMAGE_TYPE
-	window.IMAGE_TYPE = {
-		MOUTHEXAM : 1,
-		DIAGNOSE  : 2,
-		CURE      : 3,
-		USPHS     : 4,
-	};
 
 	// ***************************************************************
 	// FUNCTION: System Common Functions
@@ -58,6 +50,15 @@ $(document).ready(function(){
 		return querystring.length > 0 ? querystring.substring(0, querystring.length - 1) : querystring;
 	};
 
+
+	// ***************************************************************
+	// FUNCTION: IMAGE_TYPE
+	window.IMAGE_TYPE = {
+		MOUTHEXAM : 1,
+		DIAGNOSE  : 2,
+		CURE      : 3,
+		USPHS     : 4,
+	};
 	window.loadImage = function(url, callback){
 		var Img = new Image();
 		Img.src = url;
@@ -111,6 +112,25 @@ $(document).ready(function(){
 				$ImageSelector.append($ClonedImage).append('<div class="ui hidden divider"></div>');
 			});
 		}
+	}
+	window.showPreviewImage = function(FileData, $ImageSelector) {
+
+		if ($ImageSelector.length == 0) {
+			return;
+		}
+
+		$.each(FileData, function(){
+			var $ClonedImage = $ImageSelector.find(".hidden.image").clone().removeClass('hidden');
+			$ClonedImage.attr("value", this.img_id);
+
+			var ImagePath = this.path;
+			//ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+			window.loadImage(ImagePath, function(){
+				$ClonedImage.attr('src', ImagePath);
+			});
+
+			$ImageSelector.append($ClonedImage).append('<div class="ui hidden divider"></div>');
+		});
 	}
 
 	// ***************************************************************
