@@ -23,6 +23,7 @@ $(document).ready(function(){
 	window.URL_SEARCH           = URL_SERVER + "/medical-case-of-illness/search-by-conditons";
 	window.URL_ILLNESSHISTORY   = URL_SERVER + "/medical-case-of-illness/self-say-history";
 	window.URL_PASTHISTORY      = URL_SERVER + "/medical-case-of-illness/past-history";
+	window.URL_SELECTION        = URL_SERVER + "/medical-case-of-illness/selections";
 
 
 	// ***************************************************************
@@ -48,6 +49,15 @@ $(document).ready(function(){
 		var querystring = "?" + window.toform(parameters);
 		// Delete the last charactor '&' if exist
 		return querystring.length > 0 ? querystring.substring(0, querystring.length - 1) : querystring;
+	};
+
+
+	// ***************************************************************
+	// FUNCTION: data_table
+	window.TABLE = {
+		DIAGNOSE              : "diagnose",
+		DIFFICULTY_ASSESSMENT : "",
+		MOUTHEXAM             : "oral-examination",
 	};
 
 

@@ -17,6 +17,7 @@
   	<script src="dist/javascript/file.js"></script>
   	<script src="dist/javascript/nav.js"></script>
   	<script src="dist/javascript/basicinfo.js"></script>
+  	<script src="dist/javascript/other.js"></script>
   	<script src="dist/javascript/mouthexamination.js"></script>
 
 </head>
@@ -129,7 +130,7 @@
 					<div class="three fields">
 						<div class="required field">
 							<label>原填充体</label>
-							<select name="fill" class="ui dropdown">
+							<select name="fill" class="ui search dropdown">
 							<option value="无">无</option>
 							<option value="复合树脂">复合树脂</option>
 							<option value="银汞合金">银汞合金</option>
@@ -365,19 +366,18 @@
 					</div>
 					<div class="three fields">
 						<div class="required field">
-							<label>牙体形态</label>
-							<select name="tooth_shape" class="ui dropdown">
-							<option value="牙体形态正常">正常</option>
-							<option value="牙体形态为畸形舌侧沟">畸形舌侧沟</option>
-							<option value="牙体形态为畸形中央尖">畸形中央尖</option>
-							<option value="牙体形态为过大牙">过大牙</option>
-							<option value="牙体形态为过小牙">过小牙</option>
-							<option value="牙体形态为融合牙">融合牙</option>
-							<option value="牙体形态为双生牙">双生牙</option>
-							<option value="牙体形态为结合牙">结合牙</option>
-							<option value="牙体形态为牙内陷">牙内陷</option>
-							<option value="牙体形态为釉珠">釉珠</option>
-							<option value="其它">其它</option>
+							<label>牙体形态 <i class="blue edit icon"></i></label>
+							<select name="tooth_shape" class="ui search dropdown">
+							<option value="牙体形态正常" type="original">正常</option>
+							<option value="牙体形态为畸形舌侧沟" type="original">畸形舌侧沟</option>
+							<option value="牙体形态为畸形中央尖" type="original">畸形中央尖</option>
+							<option value="牙体形态为过大牙" type="original">过大牙</option>
+							<option value="牙体形态为过小牙" type="original">过小牙</option>
+							<option value="牙体形态为融合牙" type="original">融合牙</option>
+							<option value="牙体形态为双生牙" type="original">双生牙</option>
+							<option value="牙体形态为结合牙" type="original">结合牙</option>
+							<option value="牙体形态为牙内陷" type="original">牙内陷</option>
+							<option value="牙体形态为釉珠" type="original">釉珠</option>
 							</select>
 						</div>
 					</div>

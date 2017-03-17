@@ -7,20 +7,11 @@ $(document).ready(function(){
 	    value      = requestParameter("value"),
 	    pre_value  = requestParameter("pre_value"),
 	    post_value = requestParameter("post_value");
-	var Table       = requestParameter("type"),
-		Field       = requestParameter("name"),
-		Value       = requestParameter("value"),
-		Search      = requestParameter("search"),
-		QueryString = URL_SEARCH + toquerystring({table : Table}) + "&" + Field + "=" + Value;
 
 	// Table active animate
 	$('table tbody tr').hover(
-		function(){
-			$(this).addClass('active');
-		},
-		function(){
-			$(this).removeClass('active');
-		}
+		function() { $(this).addClass('active'); },
+		function() { $(this).removeClass('active'); }
 	);
 
 	// Detail button
@@ -119,6 +110,8 @@ $(document).ready(function(){
 			dataType : "json",
 			error    : function(){ networkError(); },
 			success  : function(data){
+				showSearchResult(data.user_list.length);
+
 				if (data.user_list.length) {
 					$('.invisible.table').show();
 					showAllMedicalRecord(data.user_list);
@@ -131,10 +124,34 @@ $(document).ready(function(){
 					 	function() { networkError(); },
 					 	function(data) { showAllMedicalRecord(data.user_list); }
 					 );
-				} else {
-					$('.ui.message').show();
 				}
 			}
 		});
+	}
+
+	function showSearchResult(dataLength) {
+
+		var Message = "";
+		dataLength ? Message += "搜索内容：" : Message += "未搜索到相关内容：";
+
+		if (parameter == "name") {
+			Message += decodeURI(value);
+		} else if (parameter == "age") {
+			if (value != "") {
+				Message += value + "岁";
+			} else if (pre_value != "" && post_value != "") {
+				Message += pre_value + "岁 ~ " + post_value + "岁";
+			}
+		} else if (parameter == "in_date") {
+			Message += "诊断时间（"
+			if (value != "") {
+				Message += value;
+			} else if (pre_value != "" && post_value != "") {
+				Message += pre_value + " ~ " + post_value;
+			}
+			Message += "）";
+		}
+
+		$('#message .header').text(Message);
 	}
 });

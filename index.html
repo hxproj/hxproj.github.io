@@ -8,9 +8,12 @@
 	<link rel="SHORTCUT ICON" href="dist/media/logo_head.png">
  	<link rel="stylesheet" type="text/css" href="dist/css/semantic.min.css">
  	<link rel="stylesheet" type="text/css" href="dist/css/config.css">
+	<link rel="stylesheet" type="text/css" href="dist/daterangepicker/daterangepicker.css">
  	
   	<script src="dist/javascript/semantic/jquery.min.js"></script>
-  	<script src="dist/javascript/semantic/semantic.min.js"></script>  
+  	<script src="dist/javascript/semantic/semantic.min.js"></script>
+	<script src="dist/daterangepicker/moment.min.js"></script>
+	<script src="dist/daterangepicker/jquery.daterangepicker.min.js"></script>
   	<script src="dist/javascript/config.js"></script>
   	<script src="dist/javascript/pagination.js"></script>
   	<script src="dist/javascript/index.js"></script>
@@ -33,7 +36,7 @@
 	</div> 
 
 	<div class="ui main container">
-		<table class="ui center aligned celled invisible table">
+		<table class="ui center aligned celled invisible table" id="all_user_info">
 			<thead>
 				<tr>
 					<th class="positive collapsing">
@@ -235,31 +238,15 @@
 					<div class="field">
 						<div class="ui blue header">最近就诊时间</div>
 						<div class="ui fluid action input">
-							<input type="text" name="time" placeholder="输入最近就诊时间...">
+							<input type="text" name="time" placeholder="输入最近就诊时间..." id="data-range">
 							<div class="ui teal submit button">搜索</div>
 						</div>
 					</div>
 				</form>
-
-				<div class="ui basic segment" id="id_time_segment">
-					<div class="ui blue header">就诊时间段</div>
-					<div class="ui invisible blue labels">
-						<a class="ui label" value="2010~2012">2010~2012</a>
-						<a class="ui label" value="2013~2014">2013~2014</a>
-						<a class="ui label" value="2015~2017">2015~2017</a>
-					</div>
-					<div class="ui hidden divider"></div>
-					<div class="ui small labeled action input">
-						<input type="text" placeholder="min" style="width:8em">
-						<div class="ui basic label">~</div>
-						<input type="text" placeholder="max" style="width:8em">
-						<button class="ui teal button">确定</button>
-					</div>
-					<div class="ui hidden negative message">
-						<ui class="list">
-							<li></li>
-						</ui>
-					</div>
+				<div class="ui invisible blue labels">
+					<a class="ui label" value="2010~2012">2010~2012</a>
+					<a class="ui label" value="2013~2014">2013~2014</a>
+					<a class="ui label" value="2015~2017">2015~2017</a>
 				</div>
 		    </div>
 	  	</div>

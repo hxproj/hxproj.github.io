@@ -160,12 +160,13 @@ $(document).ready(function(){
 		inline: true,
 		onSuccess: function(){
 
-			var FormData = toform({
+			var $ThisForm = $(this),
+				FormData  = toform({
 				user_id  : UID, 
 				case_id  : CID,
 				tooth_id : TID,
-				caries_tired : $(this).form('get value', 'caries_tired_display')
-			}) + $(this).serialize();
+				caries_tired : $ThisForm.form('get value', 'caries_tired_display')
+			}) + $ThisForm.serialize();
 
 			$.ajax({
 				url      : URL_MOUTHEXAM,
@@ -191,14 +192,25 @@ $(document).ready(function(){
 							alert("文件上传失败");
 						}
 					});
-
-					location.reload();
+				},
+				complete : function() {
+					addOtherOption([{
+						table_name : TABLE.MOUTHEXAM,
+						filed      : "tooth_shape",
+						value      : $ThisForm.form('get value', 'tooth_shape'),
+					}]);
 				}
 			});
 
 			return false;
 		}
 	});
+
+	// **************************************************
+	// add other options
+	function addOtherOption(TableName, Fields) {
+
+	}
 
 
 	// **************************************************

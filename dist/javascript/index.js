@@ -193,38 +193,19 @@ $(document).ready(function(){
 		},
 		inline    : true,
 		onSuccess : function(){
-			redirection("search.html", {
-				parameter : "in_date",
-				value     : $(this).form('get value', "time")
-			});
-			
-			return false;
-		}
-	});
-	$('#SearchTimeModal #id_time_segment button').click(function(){
-		var $input  = $(this).parent(),
-			MinTime = Number($input.find('input[placeholder=min]').val()),
-			MaxTime = Number($input.find('input[placeholder=max]').val());
+			var Input = $(this).form('get value', "time"),
+				Times = Input.split(" to ");
 
-		var $Message = $('#id_time_segment div.message');
-		if (isNaN(MinTime) || MinTime < 1 || MinTime > 120) {
-			$Message.transition('tada').find('li').text("请输入正确的较小就诊时间");
-			return false;
-		}
-		if (isNaN(MaxTime) || MaxTime < 1 || MaxTime > 120) {
-			$Message.transition('tada').find('li').text("请输入正确的较大就诊时间");
-			return false;
-		}
-		if (MinTime >= MaxTime) {
-			$Message.transition('tada').find('li').text("较大就诊时间必须比必较小就诊时间大");
-			return false;
-		}
+			if (Times != undefined && Times.length == 2) {
+				redirection("search.html", {
+					parameter  : "in_date",
+					pre_value  : Times[0],
+					post_value : Times[1]
+				});
+			}
 
-		redirection("search.html", {
-			parameter  : "in_date",
-			pre_value  : MinTime,
-			post_value : MaxTime
-		});
+			return false;
+		}
 	});
 
 
@@ -272,7 +253,7 @@ $(document).ready(function(){
 					showAllMedicalRecord(data.user_list);
 		 			
 					$.Page(
-						$('table'),
+						$('#all_user_info'),
 					 	data.pages,
 					 	1,
 					 	queryURL,
@@ -364,4 +345,28 @@ $(document).ready(function(){
 		}).submit();
 	}
 
+
+	// ***************************************************************
+	// FUNCTION：选择时间范围
+	$('#data-range').dateRangePicker(
+	{
+		hoveringTooltip: false,
+		endDate: getCurrentDate(),
+	});
+	function getCurrentDate() {
+		var CurrentDate = new window.Date(),
+			Year  = CurrentDate.getFullYear(),
+			Month = CurrentDate.getMonth() + 1, 
+			Day   = CurrentDate.getDate(),
+			Separator = "-";
+
+		var DataStr = Year + Separator;
+
+		if (Month < 10) {DataStr += "0";}
+		DataStr += Month + Separator;
+		if (Day < 10) {DataStr += "0";}
+		DataStr += Day;
+
+		return DataStr;
+	}
 });
