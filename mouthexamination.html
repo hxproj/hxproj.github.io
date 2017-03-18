@@ -129,14 +129,13 @@
 					</div>
 					<div class="three fields">
 						<div class="required field">
-							<label>原填充体</label>
+							<label>原填充体 <i class="blue edit icon" type="selection_edit"></i></label>
 							<select name="fill" class="ui search dropdown">
 							<option value="无">无</option>
 							<option value="复合树脂">复合树脂</option>
 							<option value="银汞合金">银汞合金</option>
 							<option value="玻璃离子">玻璃离子</option>
 							<option value="磷酸锌">磷酸锌</option>
-							<option value="其他">其他</option>
 							</select>
 						</div>
 						<div class="required field">
@@ -366,7 +365,7 @@
 					</div>
 					<div class="three fields">
 						<div class="required field">
-							<label>牙体形态 <i class="blue edit icon"></i></label>
+							<label>牙体形态 <i class="blue edit icon" type="selection_edit"></i></label>
 							<select name="tooth_shape" class="ui search dropdown">
 							<option value="牙体形态正常" type="original">正常</option>
 							<option value="牙体形态为畸形舌侧沟" type="original">畸形舌侧沟</option>
@@ -565,6 +564,38 @@
 	</div>
 	
 
+  	<!-- 编辑其他 -->
+	<div class="ui small coupled modal" id="edit_option_modal">
+		<div class="ui header"></div>
+
+		<div class="content">
+			<div class="ui blue labels">
+			</div>
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>完成
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除 -->
+	<div class="ui small coupled modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
+
+
   	<!-- 网络错误 -->
 	<div class="ui small modal" id="networkerror">
 		<div class="ui icon header">
@@ -583,21 +614,6 @@
 
 		<div class="center aligned actions">
 			<div class="ui blue ok button">
-				<i class="checkmark icon"></i>确认
-			</div>
-		</div>
-	</div>
-
-  	<!-- 确认删除图片 -->
-	<div class="ui small modal" id="deletemodal">
-		<div class="ui icon header">
-			<i class="red warning sign icon"></i>
-			确定删除图片
-		</div>
-
-		<div class="center aligned actions">
-			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
-			<div class="ui basic blue ok button">
 				<i class="checkmark icon"></i>确认
 			</div>
 		</div>

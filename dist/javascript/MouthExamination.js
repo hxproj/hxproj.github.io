@@ -14,6 +14,13 @@ $(document).ready(function(){
 	// INIT Basic info
 	getBasicInfo(Nav_Item.mouthexamination, UID, CID, TID);
 
+	// **************************************************
+	// GET Addition Option of Selection
+	window.getOtherOption({
+		table_name : TABLE.MOUTHEXAM,
+		fields     : ["tooth_shape", "fill"]
+	});
+
 
 	// **************************************************
 	// GET
@@ -194,24 +201,34 @@ $(document).ready(function(){
 					});
 				},
 				complete : function() {
-					addOtherOption([{
+					addOtherOption({
+						form       : $ThisForm,
 						table_name : TABLE.MOUTHEXAM,
-						filed      : "tooth_shape",
-						value      : $ThisForm.form('get value', 'tooth_shape'),
-					}]);
+						fields     : ["tooth_shape", "fill"]
+					});
+
+					/*
+					addOtherOption({
+						form       : $ThisForm,
+						table_name : TABLE.MOUTHEXAM,
+						fields     : [{
+							field       : "tooth_shape",
+							is_multiple : false
+						},
+						{
+							field       : "fill",
+							is_multiple : false
+						}]
+					});
+					*/
+
+					location.reload();
 				}
 			});
 
 			return false;
 		}
 	});
-
-	// **************************************************
-	// add other options
-	function addOtherOption(TableName, Fields) {
-
-	}
-
 
 	// **************************************************
 	// Other Envent
