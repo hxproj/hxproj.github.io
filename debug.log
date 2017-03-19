@@ -745,3 +745,6 @@
 [0314/193213.995:ERROR:process_reader_win.cc(233)] ReadMemory at 0x4e5e000 of 139264 bytes failed: 仅完成部分的 ReadProcessMemory 或 WriteProcessMemory 请求。 (0x12B)
 [0314/193213.995:ERROR:crash_report_exception_handler.cc(111)] WriteEverything failed
 [0314/193214.001:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: 已尝试访问正在退出的过程。  (0xc000010a)
+[0319/190546.350:ERROR:process_info.cc(608)] range at 0xfff36000, size 0x230 fully unreadable
+[0319/190546.357:ERROR:process_info.cc(608)] range at 0xfff3f000, size 0xf84 fully unreadable
+[0319/190546.389:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: 已尝试访问正在退出的过程。  (0xc000010a)

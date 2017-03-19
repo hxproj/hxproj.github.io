@@ -107,6 +107,13 @@ $(document).ready(function(){
 
 
 	// **************************************************
+	// GET Addition Option of Selection
+	window.getOtherOption({
+		table_name : TABLE.PERSONAL_HISTORY,
+		fields     : ["development_of_the_situation"]
+	});
+
+	// **************************************************
 	// GET
 	$.ajax({
 		url      : URL_ILLNESSHISTORY,
@@ -236,7 +243,14 @@ $(document).ready(function(){
 			dataType : "json",
 			async    : false,
 			error    : function() {IsSubmited = false;},
-			success  : function(vData) {}
+			success  : function(vData) {},
+			complete : function() {
+				addOtherOption({
+					form       : $('#PersonalHistory form'),
+					table_name : TABLE.PERSONAL_HISTORY,
+					fields     : ["development_of_the_situation"]
+				});
+			}
 		});
 
 		// Submit personal history

@@ -30,10 +30,11 @@ $(document).ready(function(){
 
 		$.each(parameters.fields, function(Index, Field){
 			var InputValues = parameters.form.form('get value', Field);
+
 			if (InputValues instanceof Array) {
 				// 多选
 				$.each(InputValues, function(){
-					if ($("select[name=" + Field + "] option[value=" + this + "]").hasClass('addition')) {
+					if ($("select[name=" + Field + "] option[value=" + escapeJquery(this) + "]").hasClass('addition')) {
 						submitOtherOption({
 							table_name : parameters.table_name,
 							filed      : Field,
@@ -43,8 +44,8 @@ $(document).ready(function(){
 				});
 			} 
 			else {
-				// 单选
-				if ($("select[name=" + Field + "] option[value=" + InputValues + "]").hasClass('addition')) {
+				// 单选。其中，escapeJquery处理选项值中可能出现的特殊符号
+				if ($("select[name=" + Field + "] option[value=" + escapeJquery(InputValues) + "]").hasClass('addition')) {
 					submitOtherOption({
 						table_name : parameters.table_name,
 						filed      : Field,
@@ -94,7 +95,7 @@ $(document).ready(function(){
 							field : Field,
 							value : Value
 						}, function() {
-							$Field.find("option[value=" + Value + "]").remove();
+							$Field.find('select').dropdown('restore defaults').find("option[value=" + Value + "]").remove();
 						});
 					}
 				}).modal('show');

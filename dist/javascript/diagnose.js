@@ -16,6 +16,13 @@ $(document).ready(function(){
 
 
 	// **************************************************
+	// GET Addition Option of Selection
+	window.getOtherOption({
+		table_name : TABLE.DIAGNOSE,
+		fields     : ["cure_plan"]
+	});
+
+	// **************************************************
 	// GET:
 	var ToothInfo;
 	$.ajax({
@@ -99,7 +106,6 @@ $(document).ready(function(){
 				dataType : "json",
 				error    : function() {networkError();},
 				success  : function(data){
-					
 					$.ajaxFile({
 						url           : URL_IMAGE, 
 						type          : 'POST',  
@@ -112,6 +118,13 @@ $(document).ready(function(){
 						processData   : false,
 						success       : function() {},
 						error         : function() {alert("文件上传失败");}
+					});
+				},
+				complete : function() {
+					addOtherOption({
+						form       : $('form'),
+						table_name : TABLE.DIAGNOSE,
+						fields     : ["cure_plan"]
 					});
 
 					location.reload();
@@ -135,6 +148,7 @@ $(document).ready(function(){
 	// **************************************************
 	// 具体治疗计划选择
 	$('select[name=cure_plan]').parent().dropdown({
+		allowAdditions: true, 
 		onChange: function(CurePlan) { 
 			$('.select.field').addClass("invisible");
 			$("div[field=" + CurePlan + "]").removeClass("invisible");

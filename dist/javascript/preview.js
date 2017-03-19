@@ -425,8 +425,11 @@ $(document).ready(function(){
 				Neighbor += vData.relations_between_teeth + "，";
 				Neighbor += vData.is_teeth_crowd + "，";
 				Neighbor += vData.involution_teeth + "，";
-				Neighbor += vData.tooth_shape;
-				Neighbor += "。";
+				Neighbor += "牙体形态";
+				if (vData.tooth_shape != "正常") {
+					Neighbor += "为";
+				}
+				Neighbor += vData.tooth_shape + "。";
 				appendpragraph($MouthExam, Neighbor);
 
 				// X线片表现
@@ -780,7 +783,13 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "2. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "3. 处理剂清洁窝洞，彻底冲洗，吹干" + NewLine;
@@ -800,8 +809,14 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "2. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
-		vDescription += "使用" + vData.is_chock + NewLine;
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
+		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "3. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";
@@ -867,13 +882,19 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "3. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "4. ";
 		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.bottom != "无") {
-			vDescription += "，" + vData.bottom;
+		if (vData.modification != "无") {
+			vDescription += "，" + vData.modification;
 		}
 		vDescription += NewLine;
 
@@ -918,7 +939,13 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "3. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "4. ";
@@ -992,7 +1019,13 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "3. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "4. ";
@@ -1052,30 +1085,30 @@ $(document).ready(function(){
 		if (vData.microscope == "使用咬合块") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools;
+		vDescription += vData.penetration_resin;
 		vDescription += NewLine;
 
 		vDescription += "2. ";
-		if (vData.inlay != "否") {
-			vDescription += vData.inlay;
+		if (vData.is_micro != "否") {
+			vDescription += vData.is_micro;
 
 			if (vData.modulo != "无") {
 				vDescription += "：" + vData.modulo + "保护牙龈";
 			}
-			if (vData.is_piece != "无") {
-				vDescription += "，低速手机装上" + vData.is_piece;
+			if (vData.low_mobile != "无") {
+				vDescription += "，低速手机装上" + vData.low_mobile;
 			}
-			if (vData.is_chock != "无") {
-				vDescription += "，" + vData.is_chock + "微研磨剂打磨";
+			if (vData.micro != "无") {
+				vDescription += "，" + vData.micro + "微研磨剂打磨";
 			}
-			if (vData.shade_guide != "无") {
-				vDescription += "，冲洗，吹干，涂布" + vData.shade_guide + "氟保护剂";
+			if (vData.fluoride_protector != "无") {
+				vDescription += "，冲洗，吹干，涂布" + vData.fluoride_protector + "氟保护剂";
 			}
 			vDescription += "。";
 		}
-		vDescription += "酸蚀剂酸蚀病变区域及周围牙体组织" + vData.coating_time + "，";
-		vDescription += "涂布干燥剂" + vData.resin + "，";
-		vDescription += "涂布渗透树脂，光固化" + vData.illumination_time;
+		vDescription += "酸蚀剂酸蚀病变区域及周围牙体组织" + vData.acid_time + "，";
+		vDescription += "涂布干燥剂" + vData.dry_times + "，";
+		vDescription += "涂布渗透树脂，光固化" + vData.time_of_lamp;
 	
 		return vDescription;
 	}
@@ -1100,7 +1133,13 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
 		vDescription += "3. 干燥，隔湿，";
+		if (vData.is_piece != "未使用成形片") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_piece + "，";
+		if (vData.is_chock != "未使用楔子") {
+			vDescription += "使用";
+		}
 		vDescription += vData.is_chock + NewLine;
 
 		vDescription += "4. ";
@@ -1146,7 +1185,7 @@ $(document).ready(function(){
 	}
 	// 间接修复
 	function showIndirect(vData, vDescription) {
-		vDescription += "嵌体修复材料类型：" + vData.inlay + NewLine;
+		vDescription += "嵌体修复材料类型：" + vData.prosthesis_type + NewLine;
 
 		vDescription += "1. ";
 		vDescription += ToothLocation;
@@ -1170,7 +1209,7 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm。";
 		vDescription += "使用钻针" + vData.drill_needle + "。";
 		if (vData.is_chock == "是") {
-			vDescription += "行直接充填，充填材料为：" + vData.shade_guide + "。";
+			vDescription += "行直接充填，充填材料为：" + vData.fill_material + "。";
 		}
 		vDescription += NewLine;
 
@@ -1185,25 +1224,25 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "4. ";
-		if (vData.disinfect == "是") {
-			vDescription += "制作临时修复体，临时修复体粘接，粘接剂为" + vData.bottom;
+		if (vData.etching_type == "是") {
+			vDescription += "制作临时修复体，临时修复体粘接，粘接剂为" + vData.bind_material;
 			vDescription += NewLine;
 
 			vDescription += "5. ";
 		}
 
 		vDescription += "复诊，去除临时修复体，试戴，调改接触点，检查有无翘动，固位好，边缘密合，";
-		vDescription += vData.coating_time + "氢氟酸酸蚀修复体";
-		if (vData.illumination_time != "无") {
-			vDescription += vData.illumination_time;
+		vDescription += vData.bind_type + "氢氟酸酸蚀修复体";
+		if (vData.fluoride_acid_time != "无") {
+			vDescription += vData.fluoride_acid_time;
 		}
 		vDescription += "，冲洗、干燥，";
 
-		if (vData.resin == "是") {
+		if (vData.silicon == "是") {
 			vDescription += "涂布硅烷偶联剂，";
 		}
-		vDescription += "磷酸酸蚀牙面" + vData.time_of_lamp + "，";
-		vDescription += "涂布" + vData.full_etching + "粘接剂，";
+		vDescription += "磷酸酸蚀牙面" + vData.phosphorus_acid_time + "，";
+		vDescription += "涂布" + vData.bind_type_component + "粘接剂，";
 		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
 		vDescription += vData.compromise + "调合" + "，";
 		vDescription += vData.polishing + "抛光";
@@ -1214,7 +1253,6 @@ $(document).ready(function(){
 		
 		return vDescription;
 	}
-
 	// Handle error
 	function showErrorInfo() {
 		// TODO: design error UI

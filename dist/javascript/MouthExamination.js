@@ -207,21 +207,6 @@ $(document).ready(function(){
 						fields     : ["tooth_shape", "fill"]
 					});
 
-					/*
-					addOtherOption({
-						form       : $ThisForm,
-						table_name : TABLE.MOUTHEXAM,
-						fields     : [{
-							field       : "tooth_shape",
-							is_multiple : false
-						},
-						{
-							field       : "fill",
-							is_multiple : false
-						}]
-					});
-					*/
-
 					location.reload();
 				}
 			});
@@ -327,7 +312,13 @@ $(document).ready(function(){
 		ME_Neighbor_Text += vData.relations_between_teeth + "，";
 		ME_Neighbor_Text += vData.is_teeth_crowd + "，";
 		ME_Neighbor_Text += vData.involution_teeth + "，";
+
+		ME_Neighbor_Text += "牙体形态";
+		if (vData.tooth_shape != "正常") {
+			ME_Neighbor_Text += "为";
+		}
 		ME_Neighbor_Text += vData.tooth_shape;
+		
 		$('#ME_Neighbor').text(ME_Neighbor_Text);
 
 

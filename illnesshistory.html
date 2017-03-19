@@ -14,6 +14,7 @@
   	<script src="dist/javascript/config.js"></script>
   	<script src="dist/javascript/nav.js"></script>
   	<script src="dist/javascript/basicinfo.js"></script>
+  	<script src="dist/javascript/other.js"></script>
   	<script src="dist/javascript/illnesshistory.js"></script>
 </head>
 
@@ -501,8 +502,8 @@
 					    	</div>
 							<div class="three fields">
 								<div class="required field">
-									<label>牙齿发育情况</label>
-									<select name="development_of_the_situation" class="ui dropdown">
+									<label>牙齿发育情况 <i class="blue edit icon" type="selection_edit"></i></label>
+									<select name="development_of_the_situation" class="ui search dropdown">
 									<option value="无异常情况">无异常情况</option>
 									<option value="釉质发育不全">釉质发育不全</option>
 									<option value="牙本质发育不全">牙本质发育不全</option>
@@ -608,7 +609,37 @@
 			</div>
 		</div>
 	</div>
+	
+  	<!-- 编辑其他 -->
+	<div class="ui small coupled modal" id="edit_option_modal">
+		<div class="ui header"></div>
 
+		<div class="content">
+			<div class="ui blue labels">
+			</div>
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>完成
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除 -->
+	<div class="ui small coupled modal" id="deletemodal">
+		<div class="ui icon header">
+			<i class="red warning sign icon"></i>
+			确定删除
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui basic orange cancel button"><i class="remove icon"></i> 取消 </div>
+			<div class="ui basic blue ok button">
+				<i class="checkmark icon"></i>确认
+			</div>
+		</div>
+	</div>
 
 	<!--病程时间Modal-->
 	<div class="ui small modal" id="ID_TimeModal">

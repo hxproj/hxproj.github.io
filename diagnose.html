@@ -17,6 +17,7 @@
   	<script src="dist/javascript/file.js"></script>
   	<script src="dist/javascript/nav.js"></script>
   	<script src="dist/javascript/basicinfo.js"></script>
+  	<script src="dist/javascript/other.js"></script>
   	<script src="dist/javascript/diagnose.js"></script>
 
 </head>
@@ -116,15 +117,14 @@
 					<h3 class="ui blue header">2. 治疗方案</h3>
 			    	<div class="two fields">
 						<div class="required field">
-							<label>治疗计划</label>
-							<select name="cure_plan" class="ui dropdown">
+							<label>治疗计划 <i class="blue edit icon" type="selection_edit"></i></label>
+							<select name="cure_plan" class="ui search dropdown">
 							<option value="">选择</option>
 							<option value="非手术治疗">非手术治疗</option>
 							<option value="龋病微创修复">龋病微创修复</option>
 							<option value="复合树脂修复">复合树脂修复</option>
 							<option value="美容修复">美容修复</option>
 							<option value="间接修复">间接修复</option>
-							<option value="其它">其它</option>
 							</select>
 						</div>
 
@@ -180,12 +180,28 @@
 			</div>
 		</div>
 	</div>
+	
+  	<!-- 编辑其他 -->
+	<div class="ui small coupled modal" id="edit_option_modal">
+		<div class="ui header"></div>
 
-  	<!-- 确认删除图片 -->
-	<div class="ui small modal" id="deletemodal">
+		<div class="content">
+			<div class="ui blue labels">
+			</div>
+		</div>
+
+		<div class="center aligned actions">
+			<div class="ui blue ok button">
+				<i class="checkmark icon"></i>完成
+			</div>
+		</div>
+	</div>
+
+  	<!-- 确认删除 -->
+	<div class="ui small coupled modal" id="deletemodal">
 		<div class="ui icon header">
 			<i class="red warning sign icon"></i>
-			确定删除图片
+			确定删除
 		</div>
 
 		<div class="center aligned actions">

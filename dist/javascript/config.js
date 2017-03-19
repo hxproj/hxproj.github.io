@@ -55,9 +55,11 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: data_table
 	window.TABLE = {
-		DIAGNOSE              : "diagnose",
-		DIFFICULTY_ASSESSMENT : "",
-		MOUTHEXAM             : "oral-examination",
+		PERSONAL_HISTORY : "personal_history",
+		DIAGNOSE         : "diagnose",
+		MOUTHEXAM        : "oral-examination",
+		CURE_SURGICAL    : "surgical",
+		CURE_NONSURGICAL : "non_surgical"
 	};
 
 
@@ -146,6 +148,32 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: Page Common Settings
 	$('.ui.dropdown').dropdown();
+
+
+	// ***************************************************************
+	// FUNCTION: 处理jquery的一些特殊选择器符号，jquery不支持的特殊符号
+	window.escapeJquery = function(srcString) {
+		// 转义之后的结果
+		var escapseResult = srcString;
+
+		// javascript正则表达式中的特殊字符
+		var jsSpecialChars = ["\\", "^", "$", "*", "?", ".", "+", "(", ")", "[", " ", 
+		"]", "|", "{", "}"];
+
+		// jquery中的特殊字符,不是正则表达式中的特殊字符
+		var jquerySpecialChars = ["~", "`", "@", "#", "%", "&", "=", "'", "\"",
+		":", ";", "<", ">", ",", "/"];
+
+		for (var i = 0; i < jsSpecialChars.length; i++) {
+			escapseResult = escapseResult.replace(new RegExp("\\" + jsSpecialChars[i], "g"), "\\" + jsSpecialChars[i]);
+		}
+
+		for (var i = 0; i < jquerySpecialChars.length; i++) {
+			escapseResult = escapseResult.replace(new RegExp(jquerySpecialChars[i], "g"), "\\" + jquerySpecialChars[i]);
+		}
+
+		return escapseResult;
+	}
 });
 
 jQuery.extend({
