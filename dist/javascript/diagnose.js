@@ -58,15 +58,6 @@ $(document).ready(function(){
 	// POST
 	$('form').form({
 		fields: {
-			caries_degree: {
-				identifier: 'caries_degree',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择龋损程度'
-					}
-				]
-			},
 			cure_plan: {
 				identifier: 'cure_plan',
 				rules: [

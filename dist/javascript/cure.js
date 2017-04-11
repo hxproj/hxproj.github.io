@@ -30,7 +30,7 @@ $(document).ready(function(){
 	window.getOtherOption({
 		table_name : TABLE.CURE_SURGICAL,
 		fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", "anesthesia_medicine",
-			"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "appease_medicine"]
+			"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp", "appease_medicine"]
 	}); 
 	window.getOtherOption({
 		table_name : TABLE.CURE_SURGICAL,
@@ -42,7 +42,6 @@ $(document).ready(function(){
 	}); 
 
 	
-
 	// **************************************************
 	// GET
 	var ToothLocation = "";
@@ -149,7 +148,7 @@ $(document).ready(function(){
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
-			new Field("color_of_resin"), new Field("modification"), 
+			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
 			new Field("compromise_display"), new Field("polishing_display"),
 		],
@@ -184,13 +183,14 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
+				modification  : $(this).form('get value', "modification_display"),
 			});
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#minimalContext form[data-tab=minimalContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
 					fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
-						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp"]
+						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp"]
 				});
 			});
 			return false;
@@ -232,7 +232,7 @@ $(document).ready(function(){
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
-			new Field("color_of_resin"), new Field("modification"), 
+			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
 			new Field("compromise_display"), new Field("polishing_display"),
 		],
@@ -244,7 +244,7 @@ $(document).ready(function(){
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
-			new Field("color_of_resin"), new Field("modification"), 
+			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
 			new Field("compromise_display"), new Field("polishing_display"),
 		];
@@ -259,6 +259,7 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
+				modification  : $(this).form('get value', "modification_display"),
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
@@ -266,7 +267,7 @@ $(document).ready(function(){
 					form       : $('#resinContext form[data-tab=resinContext1]'),
 					table_name : TABLE.CURE_SURGICAL,
 					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
-						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp"]
+						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
 				});
 			});
 			return false;
@@ -283,6 +284,7 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
+				modification  : $(this).form('get value', "modification_display"),
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
@@ -290,7 +292,7 @@ $(document).ready(function(){
 					form       : $('#resinContext form[data-tab=resinContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
 					fields     : ["appease_medicine", "anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
-						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp"]
+						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
 				});
 			});
 			return false;
@@ -309,7 +311,7 @@ $(document).ready(function(){
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
-			new Field("color_of_resin"), new Field("modification"), 
+			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
 			new Field("compromise_display"), new Field("polishing_display"),
 		];
@@ -319,11 +321,16 @@ $(document).ready(function(){
 		fields: ResinFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
+
+			var AddtionForm = toform({
+				modification  : $(this).form('get value', "modification_display"),
+			});
+
+			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#lookContext form[data-tab=lookContext1]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "penetration_resin", "low_mobile", "micro", "fluoride_protector", "acid_time", "dry_times"]
+					fields     : ["anesthesia_medicine", "penetration_resin", "low_mobile", "micro", "fluoride_protector", "acid_time", "dry_times", "modification_display"]
 				});
 			});
 			return false;
@@ -720,8 +727,8 @@ $(document).ready(function(){
 
 		vDescription += "4. ";
 		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.modification != "无") {
-			vDescription += "，" + vData.modification;
+		if (vData.appease_medicine != "无") {
+			vDescription += "，" + vData.appease_medicine;
 		}
 		vDescription += NewLine;
 
@@ -1170,6 +1177,11 @@ $(document).ready(function(){
 		if (vData.gingival_retraction != undefined && vData.gingival_retraction != null) {
 			$.each(vData.gingival_retraction.split(','), function(){
 				$('select[name=gingival_retraction_display]').dropdown("set selected", this);
+			});
+		}
+		if (vData.modification != undefined && vData.modification != null) {
+			$.each(vData.modification.split(','), function(){
+				$('select[name=modification_display]').dropdown("set selected", this);
 			});
 		}
 
