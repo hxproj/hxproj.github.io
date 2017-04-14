@@ -176,7 +176,7 @@
 							<div class="two fields">
 								<div class="required field">
 									<label>酸蚀剂蘸取工具</label>
-									<select name="tools" class="ui dropdown">
+									<select name="non_surgical_tools" class="ui dropdown">
 									<option value="">蘸取工具</option>
 									<option value="小棉球">小棉球</option>
 									<option value="细毛刷">细毛刷</option>
@@ -194,7 +194,7 @@
 							<div class="two fields">
 								<div class="required field">
 									<label>固化方式</label>
-									<select name="lamp" class="ui dropdown">
+									<select name="non_surgical_lamp" class="ui dropdown">
 									<option value="">选择固化方式</option>
 									<option value="1-2分钟自行固化">自行固化</option>
 									<option value="光固化灯离牙尖1mm照射20-40秒">光固化</option>
@@ -2138,6 +2138,14 @@
 						<h4 class="ui blue header">7. 戴牙</h4>
 						<div class="three fields">
 							<div class="required field">
+								<label>试戴</label>
+								<select name="compromise" class="ui dropdown">
+								<option value="">选择</option>
+								<option value="复合树脂贴面">复合树脂贴面</option>
+								<option value="成品">成品</option>
+								</select>
+							</div>
+							<div class="required field">
 								<label>粘接剂品牌 <i class="blue edit icon" type="selection_edit"></i></label>
 								<select name="bind_type" class="ui search dropdown">
 								<option value="">选择</option>
@@ -2157,6 +2165,8 @@
 								<option value="60s">60s</option>
 								</select>
 							</div>
+						</div>
+						<div class="three fields">
 							<div class="required field">
 								<label>是否涂布硅烷偶联剂</label>
 								<select name="silicon" class="ui dropdown">
@@ -2164,8 +2174,6 @@
 								<option value="是">是</option>
 								</select>
 							</div>
-						</div>
-						<div class="three fields">
 							<div class="field">
 								<label>磷酸酸蚀牙面时间 <i class="blue edit icon" type="selection_edit"></i></label>
 								<select name="phosphorus_acid_time" class="ui search dropdown">
@@ -2191,6 +2199,8 @@
 								<option value="GC玻璃离子">GC玻璃离子</option>
 								</select>
 							</div>
+						</div>
+						<div class="three fields">
 							<div class="field">
 								<label>光照时间</label>
 								<select name="observed_time" class="ui dropdown">

@@ -96,8 +96,8 @@ $(document).ready(function(){
 		],
 		NoSurgical_PitFissure_Fields = [
 			new Field("additional_device"), new Field("reagent"), 
-			new Field("tools"), new Field("time_of_etching"), 
-			new Field("lamp"), new Field("check_time")
+			new Field("non_surgical_tools"), new Field("time_of_etching"), 
+			new Field("non_surgical_lamp"), new Field("check_time")
 		];
 	// **************************************************
 	// 药物治疗
@@ -365,7 +365,8 @@ $(document).ready(function(){
 			new Field("gingival_retraction_display"), new Field("modulo"),
 			new Field("etching_type"), new Field("bind_type"),
 			new Field("phosphorus_acid_time"), new Field("bind_type_component"),
-			new Field("observed_time"), new Field("polishing_display")
+			new Field("observed_time"), new Field("polishing_display"),
+			new Field("compromise")
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
@@ -588,12 +589,12 @@ $(document).ready(function(){
 	}
 	function shownoSurgical3(vData, vDescription) {
 		vDescription  +=  "<br/><br/>1. " + ToothLocation + "清洁牙面： 在低速手机上装好" + vData.additional_device 
-						+ "，蘸取适量" + vData.reagent + "于牙面，对牙面和窝沟来回刷洗1分钟，同时不断滴水保持毛刷湿润" + NewLine
-						+ "2. 用棉纱球隔湿，压缩空气牙面吹干，" + vData.tools + "蘸取酸蚀剂置于牙尖斜面的2/3上，" + vData.time_of_etching + NewLine
+						+ "，蘸取适量" + vData.reagent + "于牙面，来回刷洗牙面及窝沟1分钟,滴水保持毛刷湿润" + NewLine
+						+ "2. 用棉纱球隔湿，压缩空气吹干牙面，" + vData.non_surgical_tools + "蘸取酸蚀剂置于牙尖斜面的2/3上，" + vData.time_of_etching + NewLine
 						+ "3. 流水冲洗牙面10-15秒，去除牙釉质表面和反应沉淀物" + NewLine
 						+ "4. 洗刷笔蘸取适量封闭剂沿窝沟从远中向近中涂布在酸蚀后的牙面上" + NewLine
-						+ "5. " + vData.lamp + NewLine
-						+ "6. 探针进行检查，调合，" + vData.check_time;
+						+ "5. " + vData.non_surgical_lamp + NewLine
+						+ "6. 探针检查，调合，" + vData.check_time;
 		return vDescription;
 	}
 	// 龋病微创修复
@@ -1069,7 +1070,7 @@ $(document).ready(function(){
 			vDescription += "5. ";
 		}
 
-		vDescription += "复诊，去除临时修复体，试戴，调改接触点，经检查无翘动，固位良好，边缘密合，";
+		vDescription += "复诊，去除临时修复体，试戴" + vData.compromise + "，调改接触点，经检查无翘动，固位良好，边缘密合，";
 		vDescription += vData.bind_type + "氢氟酸酸蚀修复体";
 		if (vData.fluoride_acid_time != "无") {
 			vDescription += vData.fluoride_acid_time;
@@ -1136,6 +1137,7 @@ $(document).ready(function(){
 		$('select[name=observed_time]').dropdown("set selected", vData.observed_time);
 		$('select[name=inlay]').dropdown("set selected", vData.inlay);
 		$('select[name=modulo]').dropdown("set selected", vData.modulo);
+		$('select[name=compromise]').dropdown("set selected", vData.compromise);
 
 		// additional parameters
 		$('select[name=dry_times]').dropdown("set selected", vData.dry_times);
