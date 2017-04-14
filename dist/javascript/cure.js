@@ -150,7 +150,7 @@ $(document).ready(function(){
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("compromise_display"), new Field("polishing_display"),
+			new Field("polishing_display"),
 		],
 		MinimalFields3 = [
 			new Field("tools"), new Field("shape_of_hole_display"), 
@@ -181,7 +181,6 @@ $(document).ready(function(){
 		onSuccess: function(){
 			var AddtionForm = toform({
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
 			});
@@ -234,7 +233,7 @@ $(document).ready(function(){
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("compromise_display"), new Field("polishing_display"),
+			new Field("polishing_display"),
 		],
 		ResinFields2 = [
 			new Field("appease_medicine"), new Field("observed_time"), 
@@ -246,7 +245,7 @@ $(document).ready(function(){
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("compromise_display"), new Field("polishing_display"),
+			new Field("polishing_display"),
 		];
 	// **************************************************
 	// 树脂直接充填修复
@@ -257,7 +256,6 @@ $(document).ready(function(){
 
 			var AddtionForm = toform({
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
 			});
@@ -282,7 +280,6 @@ $(document).ready(function(){
 
 			var AddtionForm = toform({
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
 			});
@@ -313,7 +310,7 @@ $(document).ready(function(){
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("compromise_display"), new Field("polishing_display"),
+			new Field("polishing_display"),
 		];
 	// **************************************************
 	// 渗透树脂修复
@@ -322,15 +319,11 @@ $(document).ready(function(){
 		inline: true,
 		onSuccess: function(){
 
-			var AddtionForm = toform({
-				modification  : $(this).form('get value', "modification_display"),
-			});
-
-			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#lookContext form[data-tab=lookContext1]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "penetration_resin", "low_mobile", "micro", "fluoride_protector", "acid_time", "dry_times", "modification_display"]
+					fields     : ["anesthesia_medicine", "penetration_resin", "low_mobile", "micro", "fluoride_protector", "acid_time", "dry_times"]
 				});
 			});
 			return false;
@@ -346,8 +339,8 @@ $(document).ready(function(){
 
 			var AddtionForm = toform({
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
+				modification  : $(this).form('get value', "modification_display"),
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
@@ -355,7 +348,7 @@ $(document).ready(function(){
 					form       : $('#lookContext form[data-tab=lookContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
 					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
-						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp"]
+						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
 				});
 			});
 			return false;
@@ -372,8 +365,7 @@ $(document).ready(function(){
 			new Field("gingival_retraction_display"), new Field("modulo"),
 			new Field("etching_type"), new Field("bind_type"),
 			new Field("phosphorus_acid_time"), new Field("bind_type_component"),
-			new Field("observed_time"), new Field("compromise_display"),
-			new Field("polishing_display")
+			new Field("observed_time"), new Field("polishing_display")
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
@@ -382,7 +374,6 @@ $(document).ready(function(){
 
 			var AddtionForm = toform({
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				compromise    : $(this).form('get value', "compromise_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				drill_needle  : $(this).form('get value', "drill_needle_display"),
 				gingival_retraction : $(this).form('get value', "gingival_retraction_display"),
@@ -592,7 +583,7 @@ $(document).ready(function(){
 		return vDescription;
 	}
 	function shownoSurgical2(vData, vDescription) {
-		vDescription += ToothLocation + "患牙清洁，干燥，将矿化液浸湿的小棉球置于患牙牙面，反复涂搽3-4次";
+		vDescription += ToothLocation + "清洁患牙，干燥；使用矿化液浸湿的小棉球反复涂搽患牙表面3-4次";
 		return vDescription;
 	}
 	function shownoSurgical3(vData, vDescription) {
@@ -638,7 +629,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -677,17 +668,16 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "7. ";
-		vDescription += "树脂：" + vData.resin + "，";
-		vDescription += "颜色：" + vData.color_of_resin;
+		vDescription += "采用" + vData.resin + "树脂充填，";
+		vDescription += "树脂颜色" + vData.color_of_resin;
 		vDescription += NewLine;
 
-		vDescription += "8. " + vData.modification + "，";
+		vDescription += "8. " + vData.modification + "修型，";
 		vDescription += vData.lamp + "光照" + vData.time_of_lamp;
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
-		vDescription += vData.polishing + "抛光";
+		vDescription += "调合，" + vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
 			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
@@ -698,11 +688,15 @@ $(document).ready(function(){
 	function showMinimal3(vData, vDescription) {
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.rubber;
 		vDescription += NewLine;
@@ -711,7 +705,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -728,7 +722,7 @@ $(document).ready(function(){
 		vDescription += "4. ";
 		vDescription += vData.disinfect + "窝洞消毒";
 		if (vData.appease_medicine != "无") {
-			vDescription += "，" + vData.appease_medicine;
+			vDescription += "，" + vData.appease_medicine + "间接盖髓";
 		}
 		vDescription += NewLine;
 
@@ -738,7 +732,7 @@ $(document).ready(function(){
 		return vDescription;
 	}
 	function showMinimal4(vData, vDescription) {
-		vDescription += ToothLocation + "用火焰状金刚砂针磨去浅的沟裂，将釉质磨圆钝，形成光滑、蝶形的利于清洁的表面";
+		vDescription += ToothLocation + "用火焰状金刚砂针磨去釉质表面浅沟裂，使其圆钝，形成光滑、蝶形的利于清洁的表面";
 		
 		return vDescription;
 	}
@@ -746,8 +740,8 @@ $(document).ready(function(){
 		vDescription += "1. ";
 		vDescription += ToothLocation;
 		vDescription += "低速手机装上" + vData.microscope + "蘸取适量牙膏于牙面，来回刷洗无龋牙面及窝沟1min，彻底冲洗清洁" + NewLine;
-		vDescription += "2. 涂抹约2～3mm厚的磨膏层于牙面，低速手机装上" + vData.modulo
-			 + "蘸取6.6%盐酸及碳化硅微粒的水溶性磨砂膏剂来进行微打磨，轻微加力，在牙齿表面打磨(2-3min，4-6min)。在每次微打磨之后，使用清水冲洗干净";
+		vDescription += "2. 于牙面涂抹约 2 ～ 3 mm 厚的磨膏层，低速手机装上" + vData.modulo
+			 + "蘸取6.6% 盐酸及碳化硅微粒的水溶性磨砂膏剂，轻微加力，在牙齿表面打磨(2-3min,4-6min)。每次微打磨之后，用水冲洗干净";
 		
 		return vDescription;
 	}
@@ -755,11 +749,15 @@ $(document).ready(function(){
 	function showResin1(vData, vDescription) {
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.rubber;
 		vDescription += NewLine;
@@ -768,7 +766,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -805,17 +803,16 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "7. ";
-		vDescription += "树脂：" + vData.resin + "，";
-		vDescription += "颜色：" + vData.color_of_resin;
+		vDescription += "采用" + vData.resin + "树脂充填，";
+		vDescription += "树脂颜色" + vData.color_of_resin;
 		vDescription += NewLine;
 
-		vDescription += "8. " + vData.modification + "，";
+		vDescription += "8. " + vData.modification + "修型，";
 		vDescription += vData.lamp + "光照" + vData.time_of_lamp;
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
-		vDescription += vData.polishing + "抛光";
+		vDescription += "调合，" + vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
 			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
@@ -826,7 +823,7 @@ $(document).ready(function(){
 	function showResin2(vData, vDescription) {
 		// 初诊
 		vDescription += "<bold>初诊：</bold>";
-		vDescription += "使用"+ vData.appease_medicine + "，";
+		vDescription += "使用"+ vData.appease_medicine + "安抚，";
 		vDescription += "观察" + vData.observed_time;
 		vDescription += NewLine;
 
@@ -835,11 +832,15 @@ $(document).ready(function(){
 		
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.rubber;
 		vDescription += NewLine;
@@ -848,7 +849,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -885,17 +886,16 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "7. ";
-		vDescription += "树脂：" + vData.resin + "，";
-		vDescription += "颜色：" + vData.color_of_resin;
+		vDescription += "采用" + vData.resin + "树脂充填，";
+		vDescription += "树脂颜色" + vData.color_of_resin;
 		vDescription += NewLine;
 
-		vDescription += "8. " + vData.modification + "，";
+		vDescription += "8. " + vData.modification + "修型，";
 		vDescription += vData.lamp + "光照" + vData.time_of_lamp;
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
-		vDescription += vData.polishing + "抛光";
+		vDescription += "调合，" + vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
 			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
@@ -907,17 +907,15 @@ $(document).ready(function(){
 	function showLook1(vData, vDescription) {
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
-		}
-		if (vData.rubber == "使用开口器") {
-			vDescription += vData.rubber + "，";
-		}
-		if (vData.microscope == "使用咬合块") {
-			vDescription += vData.microscope + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.penetration_resin;
 		vDescription += NewLine;
@@ -949,11 +947,15 @@ $(document).ready(function(){
 	function showLook2(vData, vDescription) {
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.rubber;
 		vDescription += NewLine;
@@ -962,7 +964,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -999,17 +1001,16 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "7. ";
-		vDescription += "树脂：" + vData.resin + "，";
-		vDescription += "颜色：" + vData.color_of_resin;
+		vDescription += "采用" + vData.resin + "树脂充填，";
+		vDescription += "树脂颜色" + vData.color_of_resin;
 		vDescription += NewLine;
 
-		vDescription += "8. " + vData.modification + "，";
+		vDescription += "8. " + vData.modification + "修型，";
 		vDescription += vData.lamp + "光照" + vData.time_of_lamp;
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
-		vDescription += vData.polishing + "抛光";
+		vDescription += "调合，" + vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
 			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
@@ -1023,12 +1024,15 @@ $(document).ready(function(){
 
 		vDescription += "1. ";
 		vDescription += ToothLocation;
-		// FIXME: add tooth location
-		if (vData.anesthesia_medicine != "无") {
-			vDescription += vData.anesthesia_medicine + "，";
-		}
-		if (vData.part_anesthesia != "无") {
-			vDescription += vData.part_anesthesia + "，";
+		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
+			vDescription += "行";
+			if (vData.anesthesia_medicine != "无") {
+				vDescription += vData.anesthesia_medicine;
+			}
+			if (vData.part_anesthesia != "无") {
+				vDescription += vData.part_anesthesia;
+			}
+			vDescription += "麻醉，";
 		}
 		vDescription += vData.rubber;
 		vDescription += NewLine;
@@ -1043,7 +1047,7 @@ $(document).ready(function(){
 		vDescription += vData.depth_of_hole + "mm。";
 		vDescription += "使用钻针" + vData.drill_needle + "。";
 		if (vData.is_chock == "是") {
-			vDescription += "行直接充填，充填材料为：" + vData.fill_material + "。";
+			vDescription += "使用" + vData.fill_material + "，行直接充填。";
 		}
 		vDescription += NewLine;
 
@@ -1059,13 +1063,13 @@ $(document).ready(function(){
 
 		vDescription += "4. ";
 		if (vData.etching_type == "是") {
-			vDescription += "制作临时修复体，临时修复体粘接，粘接剂为" + vData.bind_material;
+			vDescription += "制作临时修复体，" + vData.bind_material + "粘接临时修复体";
 			vDescription += NewLine;
 
 			vDescription += "5. ";
 		}
 
-		vDescription += "复诊，去除临时修复体，试戴，调改接触点，检查有无翘动，固位好，边缘密合，";
+		vDescription += "复诊，去除临时修复体，试戴，调改接触点，经检查无翘动，固位良好，边缘密合，";
 		vDescription += vData.bind_type + "氢氟酸酸蚀修复体";
 		if (vData.fluoride_acid_time != "无") {
 			vDescription += vData.fluoride_acid_time;
@@ -1077,9 +1081,8 @@ $(document).ready(function(){
 		}
 		vDescription += "磷酸酸蚀牙面" + vData.phosphorus_acid_time + "，";
 		vDescription += "涂布" + vData.bind_type_component + "粘接剂，";
-		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
-		vDescription += vData.compromise + "调合" + "，";
-		vDescription += vData.polishing + "抛光";
+		vDescription += "修复体就位，光照" + vData.observed_time + "，去除多余粘接剂，";
+		vDescription += "调合，" + vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
 			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
@@ -1157,11 +1160,6 @@ $(document).ready(function(){
 		if (vData.shape_of_hole != undefined && vData.shape_of_hole != null) {
 			$.each(vData.shape_of_hole.split(','), function(){
 				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
-			});
-		}
-		if (vData.compromise != undefined && vData.compromise != null) {
-			$.each(vData.compromise.split(','), function(){
-				$('select[name=compromise_display]').dropdown("set selected", this);
 			});
 		}
 		if (vData.polishing != undefined && vData.polishing != null) {
