@@ -129,8 +129,8 @@
 					              	</select>
 						    	</div>
 						    	<div class="field">
-						    		<label>症状</label>
-						    		<select name="symptom" class="ui dropdown">
+						    		<label>症状 <i class="blue edit icon" type="selection_edit"></i></label>
+						    		<select name="symptom" class="ui search dropdown">
 					                <option value="">选择</option>
 					                <option value="颜色变化">颜色变化</option>
 					                <option value="有洞">有洞</option>
@@ -367,10 +367,11 @@
 						    	<div class="required field">
 						    		<label>甜食，蛋白质类食物食用量</label>
 						    		<select name="consumption_of_sweet" class="ui dropdown">
-						            <option value="甜食或蛋白质类食物食用量<125g"><125g</option>
-						            <option value="甜食或蛋白质类食物食用量125-249g">125-249g</option>
-						            <option value="甜食或蛋白质类食物食用量250-500g">250-500g</option>
-						            <option value="甜食或蛋白质类食物食用量>500g">>500g</option>
+						            <option value="不详">不详</option>
+						            <option value="<125g"><125g</option>
+						            <option value="125-249g">125-249g</option>
+						            <option value="250-500g">250-500g</option>
+						            <option value=">500g">>500g</option>
 						          	</select>
 								</div>
 						    	<div class="required field">
@@ -455,6 +456,7 @@
 						    	<div class="required field">
 						    		<label>牙膏是否含氟</label>
 						    		<select name="is_fluorine" class="ui dropdown">
+						            <option value="牙膏是否含氟不详">不详</option>
 						            <option value="牙膏不含氟">否</option>
 						            <option value="牙膏含氟">是</option>
 						          	</select>

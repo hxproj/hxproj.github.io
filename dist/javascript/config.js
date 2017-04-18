@@ -55,6 +55,7 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: data_table
 	window.TABLE = {
+		CHIEF_COMPLAINT  : "chief_complaint",
 		PERSONAL_HISTORY : "personal_history",
 		DIAGNOSE         : "diagnose",
 		MOUTHEXAM        : "oral-examination",

@@ -73,30 +73,12 @@ $(document).ready(function(){
 					}
 				]
 			},
-			caries_depth: {
-				identifier: 'caries_depth',
-				rules: [
-					{
-						type   : 'empty',
-						prompt : '请选择龋损深度'
-					}
-				]
-			},
 			technology_type: {
 				identifier: 'technology_type',
 				rules: [
 					{
 						type   : 'empty',
 						prompt : '请选择技术类型'
-					}
-				]
-			},
-			history_of_fill: {
-				identifier: 'history_of_fill',
-				rules: [
-					{
-						type   : 'empty',
-						prompt : '请选择充填修复史及充填失败史'
 					}
 				]
 			},

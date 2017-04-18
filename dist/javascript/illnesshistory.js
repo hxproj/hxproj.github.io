@@ -15,36 +15,7 @@ $(document).ready(function(){
 	// INIT Basic info
 	getBasicInfo(Nav_Item.illnesshistory, UID, CID, TID);
 	// INIT form fields validation
-	var ChiefComplaintFields = {
-		tooth_surface_and_location: {
-			identifier: 'tooth_location',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择患牙位置'
-				}
-			]
-		},
-		symptom: {
-			identifier: 'symptom',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '症状'
-				}
-			]
-		},
-		time_of_occurrence: {
-			identifier: 'time_of_occurrence',
-			rules: [
-				{
-					type   : 'empty',
-					prompt : '请选择病程时间'
-				}
-			]
-		}
-	},
-	PresentIllnessHistoryFields1 = {
+	var PresentIllnessHistoryFields1 = {
 		is_relief: {
 			identifier: 'is_relief',
 			rules: [
@@ -112,6 +83,11 @@ $(document).ready(function(){
 		table_name : TABLE.PERSONAL_HISTORY,
 		fields     : ["development_of_the_situation"]
 	});
+	window.getOtherOption({
+		table_name : TABLE.CHIEF_COMPLAINT,
+		fields     : ["symptom"]
+	});
+	
 
 	// **************************************************
 	// GET
@@ -158,8 +134,6 @@ $(document).ready(function(){
 	// Step 1：主诉
 	$('#ChiefComplaint .next.button').click(function(){
 		$(this).parents('.form').form({
-			fields: ChiefComplaintFields,
-			inline: true,
 			onSuccess: function() { 
 				nextStep(0, 1, "#ChiefComplaint", "#PresentIllnessHistory");
 				return false; 
@@ -221,7 +195,14 @@ $(document).ready(function(){
 			dataType : "json",
 			async    : false,
 			error    : function() {IsSubmited = false;},
-			success  : function(vData) {}
+			success  : function(vData) {},
+			complete : function() {
+				addOtherOption({
+					form       : $('#ChiefComplaint form'),
+					table_name : TABLE.CHIEF_COMPLAINT,
+					fields     : ["symptom"]
+				});
+			}
 		});
 
 		// Submit presentillness
@@ -362,7 +343,7 @@ $(document).ready(function(){
 		var $ChiefComplaint = $Item.find('div[type=chiefcomplaint]');
 		$ChiefComplaint.find('p').remove();
 
-		appendpragraph($ChiefComplaint, vData.tooth_location + vData.symptom + vData.time_of_occurrence + "。");
+		appendpragraph($ChiefComplaint, vData.tooth_location + vData.symptom + vData.time_of_occurrence);
 		if (vData.additional) {
 			appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
 		}
@@ -373,7 +354,7 @@ $(document).ready(function(){
 	// 现病史
 	function showPresentIllness($Item, vData) {
 		var $PresentIllness = $Item.find('div[type=presentillness]'),
-			DescribeText = !vData.is_primary ? "<span>原发性龋病：</span>" : "<span>继发性龋病：</span>";
+			DescribeText    = "";
 
 		$PresentIllness.find('p').remove();
 
@@ -422,7 +403,7 @@ $(document).ready(function(){
 
 		// 饮食习惯
 		var Eating_Habits = "<span>饮食习惯：</span>";
-		Eating_Habits += vData.consumption_of_sweet + "，";
+		Eating_Habits += "甜食或蛋白质类食物食用量" + vData.consumption_of_sweet + "，";
 		Eating_Habits += vData.frequency_of_sweet + "，";
 		Eating_Habits += vData.frequency_of_meal + "，";
 		Eating_Habits += vData.is_carbonic_acid;
@@ -491,24 +472,14 @@ $(document).ready(function(){
 		$PastHistory.find('p').remove();
 
 		var systemillness = "<span>系统病史：</span>";
-		if (vData.systemillness != "") {
-			systemillness += "患有" + vData.systemillness + "系统性疾病，";
-		} else {
-			systemillness += "无高血压、心脏病、糖尿病等系统性疾病，";
-		}
-		if (vData.infectiousdisease != "") {
-			systemillness += "患有" + vData.infectiousdisease + "传染性疾病";
-		} else {
-			systemillness += "无肝炎、结核等传染性疾病";
-		}
-		systemillness += "。";
+		systemillness += vData.systemillness != "" ? vData.systemillness : "否认";
 		appendpragraph($PastHistory, systemillness);
 
-		if (vData.dragallergy != "") {
-			appendpragraph($PastHistory, "<span>药物过敏史：</span>" + vData.dragallergy + "。");
-		} else {
-			appendpragraph($PastHistory, "<span>药物过敏史：</span>" + "无药物过敏史。");
-		}
+		var infectiousdisease = "<span>传染性疾病：</span>";
+		infectiousdisease += vData.infectiousdisease != "" ? vData.infectiousdisease : "否认";
+		appendpragraph($PastHistory, infectiousdisease);
+
+		vData.dragallergy != "" ? appendpragraph($PastHistory, "<span>药物过敏史：</span>" + vData.dragallergy) : appendpragraph($PastHistory, "<span>药物过敏史：</span>" + "无药物过敏史");
 
 		$PastHistory.removeClass('invisible');
 	}
