@@ -57,18 +57,6 @@ $(document).ready(function(){
 	// **************************************************
 	// POST
 	$('form').form({
-		fields: {
-			cure_plan: {
-				identifier: 'cure_plan',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择治疗方案'
-					}
-				]
-			},
-		},
-		inline: true,
 		onSuccess: function(){
 
 			switch ($(this).form('get value', 'cure_plan')) {
@@ -168,11 +156,13 @@ $(document).ready(function(){
 		}
 
 		// plan
-		var PlanText = "<span>治疗计划：</span>" + vData.cure_plan
-		if (vData.specification != "") {
-			PlanText += "（" + vData.specification + "）";
+		if (vData.cure_plan != " ") {
+			var PlanText = "<span>治疗计划：</span>" + vData.cure_plan
+			if (vData.specification != "") {
+				PlanText += "（" + vData.specification + "）";
+			}
+			appendpragraph($Description, PlanText);
 		}
-		appendpragraph($Description, PlanText);
 
 		// show image
 		$.ajax({

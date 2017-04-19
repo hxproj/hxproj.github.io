@@ -118,24 +118,6 @@ $(document).ready(function(){
 					}
 				]
 			},
-			X_Ray_depth: {
-				identifier: 'X_Ray_depth',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择该项选项'
-					}
-				]
-			},
-			X_Ray_fill_quality: {
-				identifier: 'X_Ray_fill_quality',
-				rules: [
-					{
-						type   : 'empty',
-            			prompt : '请选择该项选项'
-					}
-				]
-			},
 			bop: {
 				identifier: 'bop',
 				rules: [
@@ -297,8 +279,10 @@ $(document).ready(function(){
 
 		// 当选根分叉病变无时则不显示位置
 		if (vData.furcation != "根分叉病变无") {
-		ME_Around_Text += vData.furcation + "，";
-		ME_Around_Text += vData.location + "，";
+			ME_Around_Text += vData.furcation + "，";
+			if (vData.location != " ") {
+				ME_Around_Text += vData.location + "，";
+			}
 		}
 
 		ME_Around_Text += vData.fistula + "，";
@@ -324,11 +308,14 @@ $(document).ready(function(){
 
 		// X线片表现
 		var ME_X_Text = "";
-		ME_X_Text += vData.tooth_location + "牙";
-		ME_X_Text += vData.X_Ray_location;
-		ME_X_Text += vData.X_Ray_depth;
-		ME_X_Text += vData.X_Ray_fill_quality + "，根尖周组织无明显异常。";
 
+		if (vData.X_Ray_Visible == "visible") {
+			ME_X_Text += vData.tooth_location + "牙";
+			ME_X_Text += vData.X_Ray_location;
+			ME_X_Text += vData.X_Ray_depth;
+			ME_X_Text += vData.X_Ray_fill_quality + "，";
+			ME_X_Text += vData.X_Ray_fill_round + "。";
+		}
 
 		// 如果CT表现和咬翼片表现为空时，则不显示
 		if (vData.CT_shows != "") {
@@ -401,9 +388,15 @@ $(document).ready(function(){
 		$('select[name=X_Ray_location]').dropdown("set selected", vData.X_Ray_location);
 		$('select[name=X_Ray_depth]').dropdown("set selected", vData.X_Ray_depth);
 		$('select[name=X_Ray_fill_quality]').dropdown("set selected", vData.X_Ray_fill_quality);
+		$('select[name=X_Ray_Visible]').dropdown("set selected", vData.X_Ray_Visible);
+		$('select[name=X_Ray_fill_round]').dropdown("set selected", vData.X_Ray_fill_round);
 		$('input[name=CT_shows]').val(vData.CT_shows);
 		$('input[name=piece]').val(vData.piece);
 		$('input[name=OtherExpression]').val(vData.OtherExpression);
+
+		if (vData.X_Ray_Visible == "visible") {
+			$('#X_Ray').show();
+		}
 
 		$.ajax({
 			url      : URL_IMAGE,
@@ -415,4 +408,12 @@ $(document).ready(function(){
 
 		$('#submit .submit.button').text("确认修改").after('<div class="ui right floated teal small button" onclick="location.reload()">取消</div>');
 	}
+
+
+	// X线片是否可见
+	$('select[name=X_Ray_Visible]').parent().dropdown({
+		onChange: function(CurePlan) { 
+			CurePlan == "visible" ? $('#X_Ray').show() :  $('#X_Ray').hide();
+		}
+	});
 });

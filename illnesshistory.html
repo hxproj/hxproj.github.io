@@ -112,7 +112,7 @@
 						    	<div class="field">
 						    		<label>患牙位置</label>
 						    		<select name="tooth_location" class="ui dropdown">
-					                <option value="">选择</option>
+					                <option value=" ">选择</option>
 									<option value="上前牙">上前牙</option>
 									<option value="下前牙">下前牙</option>
 									<option value="左上前牙">左上前牙</option>
@@ -131,7 +131,7 @@
 						    	<div class="field">
 						    		<label>症状 <i class="blue edit icon" type="selection_edit"></i></label>
 						    		<select name="symptom" class="ui search dropdown">
-					                <option value="">选择</option>
+					                <option value=" ">选择</option>
 					                <option value="颜色变化">颜色变化</option>
 					                <option value="有洞">有洞</option>
 					                <option value="冷热敏感">冷热敏感</option>
@@ -703,7 +703,10 @@
 				</div>
 		    </div>
 	  	</div>
-		<div class="actions"><div class="ui orange deny button">取消</div></div>
+		<div class="actions">
+			<div class="ui ok button">清空</div>
+			<div class="ui blue deny button">取消</div>
+		</div>
 	</div>
 </body>
 </html>

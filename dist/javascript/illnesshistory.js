@@ -316,6 +316,11 @@ $(document).ready(function(){
 
 	// **************************************************
 	// Other Event
+	$('#ID_TimeModal').modal({
+		onApprove : function() {
+			$('input[name=time_of_occurrence]').val("");
+		}
+	});
 	$('#ChiefComplaint input[name=time_of_occurrence], #ID_CureTime').parent().click(function(){
 		$('#ID_TimeModal').modal('show');
 
@@ -345,7 +350,7 @@ $(document).ready(function(){
 
 		appendpragraph($ChiefComplaint, vData.tooth_location + vData.symptom + vData.time_of_occurrence);
 		if (vData.additional) {
-			appendpragraph($ChiefComplaint, "<span>补充主诉：</span>" + vData.additional);
+			appendpragraph($ChiefComplaint, vData.additional);
 		}
 
 		$ChiefComplaint.removeClass('invisible');

@@ -608,15 +608,14 @@ $(document).ready(function(){
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
-		vDescription += "2. 干燥，隔湿，";
+		vDescription += "2. 干燥，隔湿";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "3. 处理剂清洁窝洞，彻底冲洗，吹干" + NewLine;
 		vDescription += "4. 干燥隔湿，使用玻璃离子充填龋洞" + NewLine;
@@ -634,15 +633,14 @@ $(document).ready(function(){
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
-		vDescription += "2. 干燥，隔湿，";
+		vDescription += "2. 干燥，隔湿";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "3. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";
@@ -712,13 +710,12 @@ $(document).ready(function(){
 
 		vDescription += "3. 干燥，隔湿，";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "4. ";
 		vDescription += vData.disinfect + "窝洞消毒";
@@ -773,13 +770,12 @@ $(document).ready(function(){
 
 		vDescription += "3. 干燥，隔湿，";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "4. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";
@@ -856,13 +852,12 @@ $(document).ready(function(){
 
 		vDescription += "3. 干燥，隔湿，";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "4. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";
@@ -971,13 +966,12 @@ $(document).ready(function(){
 
 		vDescription += "3. 干燥，隔湿，";
 		if (vData.is_piece != "未使用成形片") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_piece;
 		}
-		vDescription += vData.is_piece + "，";
 		if (vData.is_chock != "未使用楔子") {
-			vDescription += "使用";
+			vDescription += "，使用" + vData.is_chock;
 		}
-		vDescription += vData.is_chock + NewLine;
+		vDescription += NewLine;
 
 		vDescription += "4. ";
 		vDescription += vData.shade_guide + "比色，选择牙色";

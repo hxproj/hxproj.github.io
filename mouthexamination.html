@@ -149,16 +149,16 @@
 						<div class="required field">
 							<label>颜色</label>
 							<select name="color_of_caries" class="ui dropdown">
-							<option value="颜色正常">正常</option>
-							<option value="颜色棕褐">棕褐</option>
-							<option value="颜色黑">黑</option>
-							<option value="颜色白垩色">白垩色</option>
+							<option value="色正常">正常</option>
+							<option value="色棕褐">棕褐</option>
+							<option value="色黑">黑</option>
+							<option value="白垩色">白垩色</option>
 							</select>
 						</div>
 					</div>
 					<div class="three fields">
 						<div class="required field">
-							<label>质</label>
+							<label>质地</label>
 							<select name="flex_of_caries" class="ui dropdown">
 							<option value="">选择</option>
 							<option value="质硬">硬</option>
@@ -166,25 +166,25 @@
 							</select>
 						</div>
 						<div class="required field">
-							<label>探</label>
+							<label>探诊</label>
 							<select name="touch" class="ui dropdown">
 							<option value="">选择</option>
-							<option value="探（-）">-</option>
-							<option value="探（+-）">+-</option>
-							<option value="探（+）">+</option>
-							<option value="探（++）">++</option>
-							<option value="探（+++）">+++</option>
+							<option value="探诊（-）">-</option>
+							<option value="探诊（+-）">+-</option>
+							<option value="探诊（+）">+</option>
+							<option value="探诊（++）">++</option>
+							<option value="探诊（+++）">+++</option>
 							</select>
 						</div>
 						<div class="required field">
-							<label>叩</label>
+							<label>叩诊</label>
 							<select name="bite" class="ui dropdown">
 							<option value="">选择</option>
-							<option value="叩（-）">-</option>
-							<option value="叩（+-）">+-</option>
-							<option value="叩（+）">+</option>
-							<option value="叩（++）">++</option>
-							<option value="叩（+++）">+++</option>
+							<option value="叩诊（-）">-</option>
+							<option value="叩诊（+-）">+-</option>
+							<option value="叩诊（+）">+</option>
+							<option value="叩诊（++）">++</option>
+							<option value="叩诊（+++）">+++</option>
 							</select>
 						</div>
 					</div>
@@ -194,18 +194,18 @@
 							<input type="text" name="vitality_value_of_teeth" placeholder="填写牙髓电活力值">
 						</div>
 						<div class="required field">
-							<label>冷</label>
+							<label>冷诊</label>
 							<select name="cold" class="ui dropdown">
 							<option value="">选择</option>
-							<option value="冷（-）">-</option>
-							<option value="冷（+-）">+-</option>
-							<option value="冷（+）">+</option>
-							<option value="冷（++）">++</option>
-							<option value="冷（+++）">+++</option>
+							<option value="冷诊（-）">-</option>
+							<option value="冷诊（+-）">+-</option>
+							<option value="冷诊（+）">+</option>
+							<option value="冷诊（++）">++</option>
+							<option value="冷诊（+++）">+++</option>
 							</select>
 						</div>
 						<div class="required field">
-							<label>有无延缓痛（冷）</label>
+							<label>有无延缓痛（冷诊）</label>
 							<select name="cold_delay" class="ui dropdown">
 							<option value="">选择</option>
 							<option value="有延缓痛">有延缓痛</option>
@@ -215,18 +215,18 @@
 					</div>
 					<div class="three fields">
 						<div class="required field">
-							<label>热</label>
+							<label>热诊</label>
 							<select name="hot" class="ui dropdown">
 							<option value="">选择</option>
-							<option value="热（-）">-</option>
-							<option value="热（+-）">+-</option>
-							<option value="热（+）">+</option>
-							<option value="热（++）">++</option>
-							<option value="热（+++）">+++</option>
+							<option value="热诊（-）">-</option>
+							<option value="热诊（+-）">+-</option>
+							<option value="热诊（+）">+</option>
+							<option value="热诊（++）">++</option>
+							<option value="热诊（+++）">+++</option>
 							</select>
 						</div>
 						<div class="required field">
-							<label>有无延缓痛（热）</label>
+							<label>有无延缓痛（热诊）</label>
 							<select name="hot_delay" class="ui dropdown">
 							<option value="">选择</option>
 							<option value="有延缓痛">有延缓痛</option>
@@ -302,9 +302,10 @@
 							<option value="根分叉病变Ⅳ度">Ⅳ度</option>
 							</select>
 						</div>
-						<div class="required field">
+						<div class="field">
 							<label>根分叉病变位置</label>
 							<select name="location" class="ui dropdown">
+							<option value=" ">选择</option>
 							<option value="位于唇侧">唇侧</option>
 							<option value="位于颊侧">颊侧</option>
 							<option value="位于舌侧">舌侧</option>
@@ -384,33 +385,6 @@
 
 					<h3 class="ui blue header">影像学表现</h3>
 					<div class="three fields">
-						<div class="required field">
-							<label>部位</label>
-							<select name="X_Ray_location" class="ui dropdown">
-							<option value="近中邻面">近中邻面</option>
-							<option value="远中邻面">远中邻面</option>
-							<option value="合面">合面</option>
-							</select>
-						</div>
-						<div class="required field">
-							<label>程度</label>
-							<select name="X_Ray_depth" class="ui dropdown">
-							<option value="">选择</option>
-							<option value="釉质层">釉质层</option>
-							<option value="本质浅层">本质浅层</option>
-							<option value="近髓">近髓</option>
-							</select>
-						</div>
-						<div class="required field">
-							<label>影像特点</label>
-							<select name="X_Ray_fill_quality" class="ui dropdown">
-							<option value="">选择</option>
-							<option value="低密度影">低密度影像</option>
-							<option value="高密度影像">高密度影像</option>
-							</select>
-						</div>
-					</div>
-					<div class="three fields">
 						<div class="field">
 							<label>CT表现</label>
 							<input type="text" name="CT_shows" placeholder="CT表现">
@@ -422,6 +396,54 @@
 						<div class="field">
 							<label>其他表现</label>
 							<input type="text" name="OtherExpression" placeholder="其他表现">
+						</div>
+					</div>
+
+					<div class="three fields">
+						<div class="field">
+							<label>X线片是否可见</label>
+							<select name="X_Ray_Visible" class="ui dropdown">
+							<option value="invisible">X线片未见明显异常</option>
+							<option value="visible">X线片可见</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="ui invisible segment" id="X_Ray">
+						<h4 class="ui blue header">X线片可见</h4>
+						<div class="two fields">
+							<div class="field">
+								<label>部位</label>
+								<select name="X_Ray_location" class="ui dropdown">
+								<option value="近中邻面">近中邻面</option>
+								<option value="远中邻面">远中邻面</option>
+								<option value="合面">合面</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>程度</label>
+								<select name="X_Ray_depth" class="ui dropdown">
+								<option value="釉质层">釉质层</option>
+								<option value="本质浅层">本质浅层</option>
+								<option value="近髓">近髓</option>
+								</select>
+							</div>
+						</div>
+						<div class="two fields">
+							<div class="field">
+								<label>影像特点</label>
+								<select name="X_Ray_fill_quality" class="ui dropdown">
+								<option value="低密度影像">低密度影像</option>
+								<option value="高密度影像">高密度影像</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>根尖周情况</label>
+								<select name="X_Ray_fill_round" class="ui dropdown">
+								<option value="无根尖周阴影">无根尖周阴影</option>
+								<option value="根尖周阴影">根尖周阴影</option>
+								</select>
+							</div>
 						</div>
 					</div>
 
