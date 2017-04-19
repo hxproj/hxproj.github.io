@@ -118,6 +118,12 @@
 									</select>
 								</div>
 							</div>
+							<div class="two fields">
+								<div class="field">
+									<label>涂布时间(秒/s)</label>
+									<input type="text" name="non_surgical_coating_time" placeholder="涂布时间">
+								</div>
+							</div>
 
 							<div class="ui fluid file button">
 								<span class="FileLabel">选择处置图片</span> 
@@ -247,10 +253,9 @@
 								<div class="required field">
 									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
+									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
@@ -329,10 +334,9 @@
 								<div class="required field">
 									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
+									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
@@ -652,10 +656,9 @@
 								<div class="required field">
 									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
+									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
@@ -729,8 +732,8 @@
 							<h4 class="ui blue header">5. 玻璃离子</h4>
 							<div class="three fields">
 								<div class="required field">
-									<label>玻璃离子充填</label>
-									<select name="modulo" class="ui dropdown">
+									<label>玻璃离子充填 <i class="blue edit icon" type="selection_edit"></i></label>
+									<select name="glass_ionomer" class="ui search dropdown">
 									<option value="">选择</option>
 									<option value="Fuji Cem GC">Fuji Cem GC</option>
 									<option value="Fuji Plus GC">Fuji Plus GC</option>
@@ -780,7 +783,7 @@
 							<h4 class="ui blue header">1. 无龋牙面及窝沟清洗</h4>
 							<div class="three fields">
 								<div class="field">
-									<label>低速手机</label>
+									<label>低速手机配套工具</label>
 									<select name="microscope" class="ui dropdown">
 									<option value="锥形小毛刷">锥形小毛刷</option>
 									<option value="橡皮杯">橡皮杯</option>
@@ -875,10 +878,9 @@
 								<div class="required field">
 									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
+									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
@@ -1179,314 +1181,6 @@
 								</div>
 							</div>
 
-							<h4 class="ui blue header">复诊</h4>
-							<h4 class="ui blue header">1. 麻醉药物</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>麻醉药物 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="anesthesia_medicine" class="ui search dropdown">
-									<option value="无">无</option>
-									<option value="阿替卡因">阿替卡因</option>
-									<option value="利多卡因">利多卡因</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>局部麻醉</label>
-									<select name="part_anesthesia" class="ui dropdown">
-									<option value="无">无</option>
-									<option value="阻滞">阻滞麻醉</option>
-									<option value="浸润">浸润麻醉</option>
-									<option value="表面">表面麻醉</option>
-									<option value="冷冻">冷冻麻醉</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>隔湿方法</label>
-									<select name="rubber" class="ui dropdown">
-									<option value="未使用橡皮障">未使用橡皮障</option>
-									<option value="使用橡皮障">使用橡皮障</option>
-									<option value="棉卷隔湿法">棉卷隔湿法</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">2. 备洞</h4>
-							<div class="three fields">
-								<div class="field">
-									<label>是否使用显微镜</label>
-									<select name="microscope" class="ui dropdown">
-									<option value="否">否</option>
-									<option value="显微镜下">是</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
-									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
-									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
-									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
-									<option value="超声去龋">超声去龋</option>
-									<option value="激光去龋">激光去龋</option>
-									<option value="微创车针去龋">微创车针去龋</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>制备洞形位置</label>
-									<select name="shape_of_hole_display" class="ui dropdown" multiple="">
-									<option value="">选择</option>
-									<option value="唇面">唇面</option>
-									<option value="颊面">颊面</option>
-									<option value="腭面">腭面</option>
-									<option value="近中面">近中面</option>
-									<option value="远中面">远中面</option>
-									<option value="合面">合面</option>
-									<option value="根面">根面</option>
-									</select>
-								</div>
-							</div>
-							<div class="three fields">
-								<div class="required field">
-									<label>制备洞形深度(mm)</label>
-									<input type="text" name="depth_of_hole" placeholder="mm">
-								</div>
-							</div>
-
-							<h4 class="ui blue header">3. 成型</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>成形片 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="is_piece" class="ui search dropdown">
-									<option value="未使用成形片">不使用成形片</option>
-									<option value="Palodent豆瓣成形片">Palodent豆瓣</option>
-									<option value="V3成形片">V3</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>楔子 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="is_chock" class="ui search dropdown">
-									<option value="未使用楔子">不使用楔子</option>
-									<option value="木楔">木楔</option>
-									<option value="Palodent V3楔子">Palodent V3</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">4. 比色</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>比色板类型 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="shade_guide" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="Vita比色板">Vita比色板</option>
-									<option value="Chromascop比色板">Chromascop比色板</option>
-									<option value="Vitapan 3D-Master比色板">Vitapan 3D-Master比色板</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>牙色 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="color_of_tooth" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="B1">B1</option>
-									<option value="A1">A1</option>
-									<option value="A2">A2</option>
-									<option value="D2">D2</option>
-									<option value="B2">B2</option>
-									<option value="C1">C1</option>
-									<option value="C2">C2</option>
-									<option value="D4">D4</option>
-									<option value="D3">D3</option>
-									<option value="A3">A3</option>
-									<option value="B3">B3</option>
-									<option value="A3.5">A3.5</option>
-									<option value="B4">B4</option>
-									<option value="C3">C3</option>
-									<option value="A4">A4</option>
-									<option value="C4">C4</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">5. 窝洞处理</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>窝洞消毒 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="disinfect" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="75%乙醇">75%乙醇</option>
-									<option value="氯己定">氯己定</option>
-									<option value="25%麝香草酚乙醇溶液">25%麝香草酚乙醇溶液</option>
-									<option value="樟脑酚">樟脑酚</option>
-									</select>
-								</div>
-								<div class="field">
-									<label>垫底 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="bottom" class="ui search dropdown">
-									<option value="无">不使用垫底</option>
-									<option value="Dycal垫底">Dycal</option>
-									<option value="光固化氢氧化钙垫底">光固化氢氧化钙</option>
-									<option value="化学固化玻璃离子垫底">化学固化玻璃离子</option>
-									<option value="光固化玻璃离子垫底">光固化玻璃离子</option>
-									<option value="流体树脂垫底">流体树脂</option>
-									<option value="氧化锌丁香油+磷酸锌垫底">氧化锌丁香油+磷酸锌</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">6. 粘接剂</h4>
-							<div class="fields">
-								<div class="five wide required field">
-									<label>酸蚀粘接系统类型</label>
-									<select name="etching_type" class="ui dropdown">
-									<option value="">选择</option>
-									<option value="全酸蚀粘接系统">全酸蚀粘接系统</option>
-									<option value="自酸蚀粘接系统">自酸蚀粘接系统</option>
-									</select>
-								</div>
-								<div class="eight wide required invisible tag_full_etching field">
-									<label>全酸蚀粘接系统 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="full_etching" class="ui search dropdown">
-									<option value="Scotchbond Multi-purpose(3M ESPE)">Scotchbond Multi-purpose(3M ESPE)</option>
-									<option value="All-Bond2(Bisco)">All-Bond2(Bisco)</option>
-									<option value="Amalgambond(Parkell)">Amalgambond(Parkell)</option>
-									<option value="Gluma Comfort Bond(Hereaus Kulzer)">Gluma Comfort Bond(Hereaus Kulzer)</option>
-									<option value="Adper Single Bond Plus(3M ESPE)">Adper Single Bond Plus(3M ESPE)</option>
-									<option value="Prime&Bond NT(Dentsply)">Prime&Bond NT(Dentsply)</option>
-								</select>
-								</div>
-								<div class="eight wide required invisible tag_self_etching field">
-									<label>自酸蚀粘接系统 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="self_etching" class="ui search dropdown">
-									<option value="Optibond Solo Plus SE(Kerr)">Optibond Solo Plus SE(Kerr)</option>
-									<option value="Adhese(Vivadent)">Adhese(Vivadent)</option>
-									<option value="Clearfil SE Bond(Kuraray)">Clearfil SE Bond(Kuraray)</option>
-									<option value="XENO Ⅲ(Dentsply)">XENO Ⅲ(Dentsply)</option>
-									<option value="Adper PromptL-Pop(3M ESPE)">Adper PromptL-Pop(3M ESPE)</option>
-									<option value="iBOND SelfEtch(Hereaus Kulzer)">iBOND SelfEtch(Hereaus Kulzer)</option>
-									<option value="G-Bond(GC)">G-Bond(GC)</option>
-									<option value="XENOIV(Dentsply)">XENOIV(Dentsply)</option>
-									</select>
-								</div>
-							</div>
-							<div class="three fields">
-								<div class="required field">
-									<label>涂布时间</label>
-									<select name="coating_time" class="ui dropdown">
-									<option value="">选择</option>
-									<option value="<5s"><5s</option>
-									<option value="5s-10s">5s-10s</option>
-									<option value="10s-15s">10s-15s</option>
-									<option value="15s-20s">15s-20s</option>
-									<option value=">20s">>20s</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>光照时间</label>
-									<select name="illumination_time" class="ui dropdown">
-									<option value="">选择</option>
-									<option value="5s">5s</option>
-									<option value="10s">10s</option>
-									<option value="15s">15s</option>
-									<option value="20s">20s</option>
-									<option value="25s">25s</option>
-									<option value="30s">30s</option>
-									<option value="40s">40s</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">7. 树脂</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>树脂 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="resin" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="3M">3M</option>
-									<option value="Kerr">Kerr</option>
-									<option value="Kuraray">Kuraray</option>
-									<option value="幻彩">幻彩</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>树脂颜色 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="color_of_resin" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="B1">B1</option>
-									<option value="A1">A1</option>
-									<option value="A2">A2</option>
-									<option value="D2">D2</option>
-									<option value="B2">B2</option>
-									<option value="C1">C1</option>
-									<option value="C2">C2</option>
-									<option value="D4">D4</option>
-									<option value="D3">D3</option>
-									<option value="A3">A3</option>
-									<option value="B3">B3</option>
-									<option value="A3.5">A3.5</option>
-									<option value="B4">B4</option>
-									<option value="C3">C3</option>
-									<option value="A4">A4</option>
-									<option value="C4">C4</option>
-									</select>
-								</div>
-							</div>
-
-							<h4 class="ui blue header">8. 修型固化</h4>
-							<div class="three fields">
-								<div class="required field">
-									<label>修型工具 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="modification_display" class="ui multiple search dropdown">
-									<option value="">选择</option>
-									<option value="蜡刀">蜡刀</option>
-									<option value="瓷粉充填器">瓷粉充填器</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>光固化灯类型 <i class="blue edit icon" type="selection_edit"></i></label>
-									<select name="lamp" class="ui search dropdown">
-									<option value="">选择</option>
-									<option value="普通卤光灯">普通卤光灯</option>
-									<option value="速效卤光灯">速效卤光灯</option>
-									<option value="LED灯">LED灯</option>
-									<option value="离子弧光灯">离子弧光灯</option>
-									<option value="氩激光灯">氩激光灯</option>
-									</select>
-								</div>
-								<div class="required field">
-									<label>光固化灯光照时间</label>
-									<select name="time_of_lamp" class="ui dropdown">
-									<option value="">选择</option>
-									<option value="5s">5s</option>
-									<option value="10s">10s</option>
-									<option value="15s">15s</option>
-									<option value="20s">20s</option>
-									<option value="25s">25s</option>
-									<option value="30s">30s</option>
-									<option value="40s">40s</option>
-									</select>
-								</div>
-							</div>
-
-							<h3 class="ui blue header">9. 调合，抛光</h3>
-							<div class="three fields">
-								<div class="required field">
-									<label>抛光</label>
-									<select name="polishing_display" class="ui dropdown" multiple="">
-									<option value="">选择</option>
-									<option value="抛光杯">抛光杯</option>
-									<option value="皓齿抛光系统">皓齿抛光系统</option>
-									<option value="彩虹抛光系统">彩虹抛光系统</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="field">
-								<label>调合抛光补充说明</label>
-								<textarea rows="3" name="compromise_polishing_additional"></textarea>
-							</div>
-
 							<div class="ui fluid file button">
 								<span class="FileLabel">选择处置图片</span> 
 								<input type="file" name="file[]" multiple="multiple" id="resin2">
@@ -1673,10 +1367,9 @@
 								<div class="required field">
 									<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 									<select name="tools" class="ui search dropdown">
-									<option value="">选择</option>
+									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 									<option value="低速手机去龋">低速手机去龋</option>
-									<option value="挖匙去龋">挖匙去龋</option>
 									<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 									<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 									<option value="超声去龋">超声去龋</option>
@@ -2010,10 +1703,9 @@
 							<div class="required field">
 								<label>去龋方式 <i class="blue edit icon" type="selection_edit"></i></label>
 								<select name="tools" class="ui search dropdown">
-								<option value="">选择</option>
+								<option value="挖匙去龋">挖匙去龋</option>
 								<option value="高速牙钻法去龋">高速牙钻法去龋</option>
 								<option value="低速手机去龋">低速手机去龋</option>
-								<option value="挖匙去龋">挖匙去龋</option>
 								<option value="空气喷砂法去龋">空气喷砂法去龋</option>
 								<option value="Carisolv化学去龋">Carisolv化学去龋</option>
 								<option value="超声去龋">超声去龋</option>
@@ -2041,8 +1733,8 @@
 								<input type="text" name="depth_of_hole" placeholder="mm">
 							</div>
 							<div class="required field">
-								<label>钻针序列编号</label>
-								<select name="drill_needle_display" class="ui dropdown" multiple="">
+								<label>钻针序列编号 <i class="blue edit icon" type="selection_edit"></i></label>
+								<select name="drill_needle_display" class="ui search dropdown" multiple="">
 								<option value="">选择</option>
 								<option value="TF">TF</option>
 								<option value="TR">TR</option>

@@ -29,8 +29,8 @@ $(document).ready(function(){
 	// 手术治疗
 	window.getOtherOption({
 		table_name : TABLE.CURE_SURGICAL,
-		fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", "anesthesia_medicine",
-			"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp", "appease_medicine"]
+		fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", "anesthesia_medicine", "drill_needle_display",
+			"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp", "appease_medicine", "glass_ionomer"]
 	}); 
 	window.getOtherOption({
 		table_name : TABLE.CURE_SURGICAL,
@@ -92,7 +92,8 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var NoSurgical_MedicalCure_Fields = [
-			new Field("fluorination"), new Field("silver_nitrate")
+			new Field("fluorination"), new Field("silver_nitrate"),
+			new Field("non_surgical_coating_time")
 		],
 		NoSurgical_PitFissure_Fields = [
 			new Field("additional_device"), new Field("reagent"), 
@@ -139,23 +140,20 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var MinimalFields1 = [
-			new Field("tools"), new Field("shape_of_hole_display"),
-			new Field("depth_of_hole", [EmptyInput])
+			new Field("shape_of_hole_display"), new Field("depth_of_hole", [EmptyInput])
 		],
 		MinimalFields2 = [
-			new Field("tools"), new Field("shape_of_hole_display"), 
+			new Field("shape_of_hole_display"), new Field("polishing_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
-			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("polishing_display"),
+			new Field("lamp"), new Field("time_of_lamp"),
 		],
 		MinimalFields3 = [
-			new Field("tools"), new Field("shape_of_hole_display"), 
-			new Field("depth_of_hole", [EmptyInput]), 
-			new Field("disinfect"), new Field("modulo"),
+			new Field("shape_of_hole_display"), new Field("depth_of_hole", [EmptyInput]), 
+			new Field("disinfect"), new Field("glass_ionomer"),
 		];
 	// **************************************************
 	// ART修复
@@ -205,7 +203,7 @@ $(document).ready(function(){
 				addOtherOption({
 					form       : $('#minimalContext form[data-tab=minimalContext3]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "disinfect"]
+					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "disinfect", "glass_ionomer"]
 				});
 			});
 			return false;
@@ -226,26 +224,16 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var ResinFields1 = [
-			new Field("tools"), new Field("shape_of_hole_display"), 
+			new Field("shape_of_hole_display"), new Field("polishing_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("polishing_display"),
 		],
 		ResinFields2 = [
 			new Field("appease_medicine"), new Field("observed_time"), 
-			new Field("anesthesia_medicine"),
-			new Field("tools"), new Field("shape_of_hole_display"), 
-			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
-			new Field("color_of_tooth"), new Field("disinfect"),
-			new Field("etching_type"),new Field("coating_time"), 
-			new Field("illumination_time"), new Field("resin"),
-			new Field("color_of_resin"), new Field("modification_display"), 
-			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("polishing_display"),
 		];
 	// **************************************************
 	// 树脂直接充填修复
@@ -277,19 +265,11 @@ $(document).ready(function(){
 		fields: ResinFields2,
 		inline: true,
 		onSuccess: function(){
-
-			var AddtionForm = toform({
-				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
-				polishing     : $(this).form('get value', "polishing_display"),
-				modification  : $(this).form('get value', "modification_display"),
-			});
-
-			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
+			submitForm($(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#resinContext form[data-tab=resinContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["appease_medicine", "anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
-						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
+					fields     : ["appease_medicine"]
 				});
 			});
 			return false;
@@ -303,14 +283,13 @@ $(document).ready(function(){
 			new Field("penetration_resin"),
 		],
 		lookFields2 = [
-			new Field("tools"), new Field("shape_of_hole_display"), 
+			new Field("shape_of_hole_display"), new Field("polishing_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
 			new Field("illumination_time"), new Field("resin"),
 			new Field("color_of_resin"), new Field("modification_display"), 
 			new Field("lamp"), new Field("time_of_lamp"), 
-			new Field("polishing_display"),
 		];
 	// **************************************************
 	// 渗透树脂修复
@@ -360,13 +339,12 @@ $(document).ready(function(){
 	// 间接修复
 	// ----------------------------------------------------------------------
 	var indirectContextFields = [
-			new Field("tools"), new Field("shape_of_hole_display"),
+			new Field("shape_of_hole_display"), new Field("compromise"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("drill_needle_display"),
 			new Field("gingival_retraction_display"), new Field("modulo"),
 			new Field("etching_type"), new Field("bind_type"),
 			new Field("phosphorus_acid_time"), new Field("bind_type_component"),
 			new Field("observed_time"), new Field("polishing_display"),
-			new Field("compromise")
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
@@ -384,7 +362,7 @@ $(document).ready(function(){
 				addOtherOption({
 					form       : $('#indirectContext'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "prosthesis_type", "fill_material", "bind_type", "bind_material", "fluoride_acid_time", "phosphorus_acid_time", "bind_type_component"]
+					fields     : ["anesthesia_medicine", "tools", "prosthesis_type", "fill_material", "bind_type", "bind_material", "fluoride_acid_time", "phosphorus_acid_time", "bind_type_component", "drill_needle_display"]
 				});
 			});
 			return false;
@@ -580,7 +558,7 @@ $(document).ready(function(){
 	}
 	// 非手术治疗
 	function shownoSurgical1(vData, vDescription) {
-		vDescription += ToothLocation + "将" + vData.fluorination + "，" + vData.silver_nitrate + "涂布于龋损处30s";
+		vDescription += ToothLocation + "将" + vData.fluorination + "，" + vData.silver_nitrate + "涂布于龋损处" + vData.non_surgical_coating_time + "s";
 		return vDescription;
 	}
 	function shownoSurgical2(vData, vDescription) {
@@ -724,7 +702,7 @@ $(document).ready(function(){
 		}
 		vDescription += NewLine;
 
-		vDescription += "5. " + vData.modulo + "玻璃离子充填" + NewLine;
+		vDescription += "5. " + vData.glass_ionomer + "玻璃离子充填" + NewLine;
 		vDescription += "6. 修型，调合，涂凡士林";
 		
 		return vDescription;
@@ -819,83 +797,9 @@ $(document).ready(function(){
 	}
 	function showResin2(vData, vDescription) {
 		// 初诊
-		vDescription += "<bold>初诊：</bold>";
 		vDescription += "使用"+ vData.appease_medicine + "安抚，";
 		vDescription += "观察" + vData.observed_time;
 		vDescription += NewLine;
-
-		// 复诊：1. 
-		vDescription += "<bold>复诊：</bold>" + NewLine;
-		
-		vDescription += "1. ";
-		vDescription += ToothLocation;
-		if (vData.anesthesia_medicine != "无" || vData.part_anesthesia != "无") {
-			vDescription += "行";
-			if (vData.anesthesia_medicine != "无") {
-				vDescription += vData.anesthesia_medicine;
-			}
-			if (vData.part_anesthesia != "无") {
-				vDescription += vData.part_anesthesia;
-			}
-			vDescription += "麻醉，";
-		}
-		vDescription += vData.rubber;
-		vDescription += NewLine;
-
-		vDescription += "2. ";
-		if (vData.microscope == "显微镜下") {
-			vDescription += vData.microscope + "，";
-		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
-		vDescription += vData.shape_of_hole + "制备洞形，深度：";
-		vDescription += vData.depth_of_hole + "mm" + NewLine;
-
-		vDescription += "3. 干燥，隔湿，";
-		if (vData.is_piece != "未使用成形片") {
-			vDescription += "，使用" + vData.is_piece;
-		}
-		if (vData.is_chock != "未使用楔子") {
-			vDescription += "，使用" + vData.is_chock;
-		}
-		vDescription += NewLine;
-
-		vDescription += "4. ";
-		vDescription += vData.shade_guide + "比色，选择牙色";
-		vDescription += vData.color_of_tooth + NewLine;
-
-		vDescription += "5. ";
-		vDescription += vData.disinfect + "窝洞消毒";
-		if (vData.bottom != "无") {
-			vDescription += "，" + vData.bottom;
-		}
-		vDescription += NewLine;
-
-		vDescription += "6. ";
-		vDescription += vData.etching_type + "：";
-		if (vData.etching_type == "全酸蚀粘接系统") {
-			vDescription += vData.full_etching + "，";
-		} else {
-			vDescription += vData.self_etching + "，";
-		}
-		vDescription += "涂布" + vData.coating_time + "，";
-		vDescription += "光照" + vData.illumination_time;
-		vDescription += NewLine;
-
-		vDescription += "7. ";
-		vDescription += "采用" + vData.resin + "树脂充填，";
-		vDescription += "树脂颜色" + vData.color_of_resin;
-		vDescription += NewLine;
-
-		vDescription += "8. " + vData.modification + "修型，";
-		vDescription += vData.lamp + "光照" + vData.time_of_lamp;
-		vDescription += NewLine;
-
-		vDescription += "9. ";
-		vDescription += "调合，" + vData.polishing + "抛光";
-
-		if (vData.compromise_polishing_additional != "") {
-			vDescription += "。调和抛光补充说明：" + vData.compromise_polishing_additional;
-		}
 
 		return vDescription;
 	}
@@ -1096,6 +1000,8 @@ $(document).ready(function(){
 	function setnoSurgical1DefultFormData(vData) {
 		$('select[name=fluorination]').dropdown("set selected", vData.fluorination);
 		$('select[name=silver_nitrate]').dropdown("set selected", vData.silver_nitrate);
+
+		$('input[name=non_surgical_coating_time]').val(vData.non_surgical_coating_time);
 	}
 	function setnoSurgical3DefultFormData(vData) {
 		$('select[name=additional_device]').dropdown("set selected", vData.additional_device);
@@ -1151,6 +1057,7 @@ $(document).ready(function(){
 		$('select[name=phosphorus_acid_time]').dropdown("set selected", vData.phosphorus_acid_time);
 		$('select[name=silicon]').dropdown("set selected", vData.silicon);
 
+		$('select[name=glass_ionomer]').dropdown("set selected", vData.glass_ionomer);
 
 		// multiple selection
 		if (vData.shape_of_hole != undefined && vData.shape_of_hole != null) {
