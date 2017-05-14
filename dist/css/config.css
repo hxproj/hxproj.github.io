@@ -1,6 +1,7 @@
 body {
-	background : url(../media/bg.gif);
-	font-family: 'Microsoft YaHei UI', '微软雅黑', 'Tahoma';
+	background-image : url(../media/bg2.jpg);
+	background-size : cover;
+	font-family : 'Microsoft YaHei UI', '微软雅黑', 'Tahoma';
 }
 
 .invisible {
@@ -26,8 +27,9 @@ span {
 .ui.menu .logo span {
 	font-size: larger;
 	font-weight: bolder;
+	margin-left: 0.5em;
 }
 
 .ui.menu .logo.item img {
-	margin-right: 0.5em;
+	width: 3.5em;
 }

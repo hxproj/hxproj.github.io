@@ -1,23 +1,15 @@
 $(document).ready(function(){
 
-	// Table active animate
 	$('table tbody tr').hover(
-		function(){
-			$(this).addClass('active');
-		},
-		function(){
-			$(this).removeClass('active');
-		}
+		function() { $(this).addClass('active'); },
+		function() { $(this).removeClass('active'); }
 	);
 
-	// Detail button
 	$('.detail.button').click(function(){
 		redirection("medicalrecord.html", {uid : $(this).parents('tr.record').find("td[name=user_id]").text()});
 	});
 
-	// Get all user info
 	getAllUserInfo("user_id", 2);
-
 
 	// ***************************************************************
 	// POST
@@ -86,6 +78,7 @@ $(document).ready(function(){
 		$ClonedMedicalRecord.find('td[name=user_id]').text(UserData.user_id);
 		$ClonedMedicalRecord.find('td[name=name]').text(UserData.name);
 		$ClonedMedicalRecord.find('td[name=age]').text(UserData.age);
+		$ClonedMedicalRecord.find('td[name=doctor]').text(UserData.doctor);
 		$ClonedMedicalRecord.find('td[name=gender]').text(UserData.gender == 0 ? "男" : "女");
 		$ClonedMedicalRecord.find('td[name=occupation]').text(UserData.occupation);
 		$ClonedMedicalRecord.find('td[name=contact]').text(UserData.contact);

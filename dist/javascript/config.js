@@ -2,16 +2,16 @@ $(document).ready(function(){
 
 	// ***************************************************************
 	// FUNCTION: Server Application Interface
-	window.URL_SERVER           = "http://127.0.0.1:9000"; //192.168.191.1
+	window.URL_SERVER           = "http://127.0.0.1:9000";
 	window.URL_USER             = URL_SERVER + "/medical-case-of-illness/user";
 	window.URL_USERALLTOOTHINFO = URL_SERVER + "/medical-case-of-illness/user-all-tooth-info";
 	window.URL_USERTOOTHINFO    = URL_SERVER + "/medical-case-of-illness/user-tooth-info";
 	window.URL_GETALLUSER       = URL_SERVER + "/medical-case-of-illness/all-user";
 	window.URL_TOOTH            = URL_SERVER + "/medical-case-of-illness/tooth-location-record";
 	window.URL_CASE             = URL_SERVER + "/medical-case-of-illness/case";
-	window.URL_MOUTHEXAM        = URL_SERVER + "/medical-case-of-illness/oral-examination";  // TODO
-	window.URL_RISKEVALUATION   = URL_SERVER + "/medical-case-of-illness/risk-assessment";   // TODO
-	window.URL_DIAGNOSE			= URL_SERVER + "/medical-case-of-illness/diagnose";          // TODO
+	window.URL_MOUTHEXAM        = URL_SERVER + "/medical-case-of-illness/oral-examination";
+	window.URL_RISKEVALUATION   = URL_SERVER + "/medical-case-of-illness/risk-assessment";
+	window.URL_DIAGNOSE			= URL_SERVER + "/medical-case-of-illness/diagnose";
 	window.URL_DIFFICULTYASSE   = URL_SERVER + "/medical-case-of-illness/difficulty-assessment";
 	window.URL_PRESENTILLNESS   = URL_SERVER + "/medical-case-of-illness/illness-history";
 	window.URL_PERSONALHISTORY  = URL_SERVER + "/medical-case-of-illness/personal-history";

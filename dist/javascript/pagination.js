@@ -1,6 +1,6 @@
 jQuery.extend({
 
-	PaginationBody: "<div class='ui right floated blue inverted borderless menu' id='Pagination'>"
+	PaginationBody: "<div class='ui right floated menu' id='Pagination'>"
 		+ "<a class='left item' href='#''><i class='angle double left icon'></i></a>"
 		+ "<a class='right item' href='#''><i class='angle double right icon'></i></a>"			
 		+ "</div>",	
