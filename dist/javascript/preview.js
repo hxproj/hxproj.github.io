@@ -24,7 +24,7 @@ $(document).ready(function(){
 			BasicInfo += vData.occupation + Fcomma; 
 			BasicInfo += "联系方式：" + vData.contact + Fcomma;
 			BasicInfo += "身份证号：" + vData.id_number + Fcomma;
-			BasicInfo += "病历录入时间：" + vData.in_date;
+			BasicInfo += "病历录入时间：" + vData.in_date; 
 
 			$('#basicinfo a[type="time"]').text(vData.in_date);
 			$('div[type=basicinfo] p').text(BasicInfo);
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		success  : function(vData){
 
 			ToothLocation = vData.tooth_location_number + "牙";
-			$('.orange.header').text("病人" + ToothLocation + "信息预览");
+			$('#preview_header').text("病人" + ToothLocation + "信息预览");
 			
 			if (TYPE == 0) {
 				showMedicalRecord_Patient(vData);
