@@ -1,6 +1,7 @@
 body {
 	background-image : url(../media/bg2.jpg);
 	background-size : cover;
+	background-attachment: fixed;
 	font-family : 'Microsoft YaHei UI', '微软雅黑', 'Tahoma';
 }
 
@@ -33,11 +34,11 @@ span {
 	width: 3.5em;
 }
 
-.ui.secondary.menu a.item {
+#main_menu a.item {
 	color:rgba(255,255,255,.9);
 	font-weight: bolder;
 }
 
-.ui.secondary.menu a.item:hover {
+#main_menu a.item:hover {
 	color: #fff;
 }

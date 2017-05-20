@@ -6,53 +6,75 @@ $(document).ready(function(){
 	
 	// ***************************************************************
 	// FUNCTION: 点击标签
-	$('.segment a.label').click(function(){
-		var DataBaseTableName = $(this).parents('.ui.segment').attr('id'),
+	$('.ui.table a.label').click(function(){
+		var DataBaseTableName = $(this).parents('.ui.table').attr('id'),
 			DataBaseFieldName = $(this).parents('.ui.labels').attr('value'),
-			SearchItemName    = $(this).text(),
-			SearchItemValue   = $(this).attr('value');
-
-		DataBaseFieldName == "other" ? DataBaseFieldName = $(this).attr('filed') : 
-			SearchItemName = SearchItemName + "(" + $(this).parents('td').prev().text() + ")";
+			SearchItemValue   = $(this).text(),
+			SearchItemName    = $(this).parents('td').prev().text();
 
 		search({
 			DataBaseTableName : DataBaseTableName,
 			DataBaseFieldName : DataBaseFieldName,
+			SearchItemValue   : SearchItemValue,
 			SearchItemName    : SearchItemName,
-			SearchItemValue   : SearchItemValue
 		});
 	});
 
-	// ***************************************************************
-	// FUNCTION: 搜索
-	var $SearchButton = $('#id_search .ui.button'),
-		$SearchInput  = $('#id_search input');
-	// 点击
-	$SearchButton.click(function(){
-		var InputValue = $SearchInput.val();
-		if (InputValue == "") {
-			$('.ui.message').transition('drop');
-			return false;
-		}
-
-		search({
-			DataBaseTableName : "user",
-			DataBaseFieldName : "name",
-			SearchItemName    : InputValue,
-			SearchItemValue   : InputValue
-		});
-	});
 	// Enter
-	$('body').keydown(function(){ if (event.keyCode == "13") { $SearchButton.click(); } });
+	// $('body').keydown(function(){ if (event.keyCode == "13") { $SearchButton.click(); } });
 
 	// ***************************************************************
 	// FUNCTION: 页面跳转
 	function search(Parameters) {
 		window.location.href = "keywordsearch.html" + toquerystring({
-			type   : Parameters.DataBaseTableName,
-			name   : Parameters.DataBaseFieldName,
-			value  : Parameters.SearchItemValue,
-			search : Parameters.SearchItemName
+			type     : Parameters.DataBaseTableName,
+			name     : Parameters.DataBaseFieldName,
+			value    : Parameters.SearchItemValue,
+			itemName : Parameters.SearchItemName,
 		});
 	}
+
+
+	// ***************************************************************
+	// FUNCTION: 搜索内容
+	$('.search.detail').click(function(){
+
+		var DataBaseTableName = $(this).parents('.ui.table').attr('id'),
+			$Item             = $(this).parents('tr'),
+			DataBaseFieldName = $Item.find('.ui.labels').attr('value'),
+			SearchItemName    = $Item.find('td:first').text();
+
+		var $Modal = $('#SearchModal');
+		$Modal.find('.form .ui.header').text(SearchItemName);
+		$Modal.find('.form input[name=DataBaseTableName]').val(DataBaseTableName);
+		$Modal.find('.form input[name=DataBaseFieldName]').val(DataBaseFieldName);
+		$Modal.find('.form input[name=SearchItemName]').val(SearchItemName);
+		$Modal.modal("show");
+	});
+
+	$('#SearchModal form').form({
+		fields: {
+			search: {
+				identifier: 'search',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请输入需要搜索的内容'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			
+			search({
+				DataBaseTableName : $(this).form('get value', "DataBaseTableName"),
+				DataBaseFieldName : $(this).form('get value', "DataBaseFieldName"),
+				SearchItemValue   : $(this).form('get value', "search"),
+				SearchItemName    : $(this).form('get value', "SearchItemName"),
+			});
+
+			return false;
+		}
+	});
 })

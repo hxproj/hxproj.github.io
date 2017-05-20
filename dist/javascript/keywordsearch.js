@@ -3,10 +3,10 @@ $(document).ready(function(){
 	// **************************************************
 	// INIT
 	// INIT PARAMENTERS
-	var table       = requestParameter("type"),
-		field       = requestParameter("name"),
-		value       = requestParameter("value"),
-		search      = requestParameter("search");
+	var table    = requestParameter("type"),
+		field    = requestParameter("name"),
+		value    = requestParameter("value"),
+		itemName = requestParameter("itemName");
 
 	var QueryString = URL_SEARCH + toquerystring({table : table, page : 1}) + "&" + field + "=" + value;
 
@@ -24,12 +24,12 @@ $(document).ready(function(){
 		error    : function(){ networkError(); },
 		success  : function(vData){
 			if (vData.searched == "ok") {
-				$('.search.label').text("搜索结果：" + decodeURI(search));
+				$('.search.label').text(decodeURI(itemName + ": " + value));
 	 			
 	 			// 显示当前页所有病历
 	 			showAllCase(vData.info_list);
 			} else {
-				$('.search.label').text("没有搜索到'" + decodeURI(search) + "'相关病历");
+				$('.search.label').text("未搜索到“" + decodeURI(itemName+ "(" + value + ")") + "”相关病历");
 			}
 		}
 	});

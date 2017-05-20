@@ -477,11 +477,11 @@ $(document).ready(function(){
 		$PastHistory.find('p').remove();
 
 		var systemillness = "<span>系统病史：</span>";
-		systemillness += vData.systemillness != "" ? vData.systemillness : "否认";
+		systemillness += vData.systemillness != "" ? vData.systemillness : "否认高血压、冠心病等心血管疾病、糖尿病等系统性疾病";
 		appendpragraph($PastHistory, systemillness);
 
 		var infectiousdisease = "<span>传染性疾病：</span>";
-		infectiousdisease += vData.infectiousdisease != "" ? vData.infectiousdisease : "否认";
+		infectiousdisease += vData.infectiousdisease != "" ? vData.infectiousdisease : "否认肝炎等传染性疾病";
 		appendpragraph($PastHistory, infectiousdisease);
 
 		vData.dragallergy != "" ? appendpragraph($PastHistory, "<span>药物过敏史：</span>" + vData.dragallergy) : appendpragraph($PastHistory, "<span>药物过敏史：</span>" + "无药物过敏史");
