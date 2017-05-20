@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 	// **************************************************
 	// upload file
-	$('div[type=upload]').click(function(){
+	$('a[type=upload]').click(function(){
 		$('#id_uploadmodal').modal({
 			closable  : false,
 			onApprove : function() {

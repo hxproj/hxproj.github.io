@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<div class="ui large top stackable inverted secondary menu">
+	<div class="ui large top stackable secondary menu">
 		<div class="ui container">
 			<a class="logo item" href="index.html">
 				<img src="dist/media/logo.png"><span>龋病防治管理系统</span>
@@ -31,7 +31,7 @@
 		<!--context-->
 		<div class="ui basic segment" id="context">
 	  		<div class="ui fluid eight item pointing labeled icon menu">
-				<a class="active orange item" data-tab="1"><i class="history icon"></i>个人史</a>
+				<a class="active orange item" data-tab="1"><i class="history icon"></i>主诉&病史</a>
 				<a class="pink item" data-tab="2"><i class="add square icon"></i>口腔检查</a>
 				<a class="red item" data-tab="3"><i class="heartbeat icon"></i>诊断</a>
 				<a class="olive item" data-tab="4"><i class="bar chart icon"></i>难度评估</a>
@@ -42,6 +42,56 @@
 	  		</div>
 
 			<div class="ui active raised tab segment" id="personal_history" data-tab="1">
+
+				<h3 class="ui orange header">主诉</h3>
+				<table class="ui very basic table">
+		  			<tbody>
+						<tr>
+							<td class="collapsing">患牙位置</td>
+							<td>
+								<div class="ui blue labels" value="tooth_location">
+									<a class="ui label" value="上前牙">上前牙</a>
+									<a class="ui label" value="下前牙">下前牙</a>
+									<a class="ui label" value="左上前牙">左上前牙</a>
+									<a class="ui label" value="左下前牙">左下前牙</a>
+									<a class="ui label" value="右上前牙">右上前牙</a>
+									<a class="ui label" value="右下前牙">右下前牙</a>
+									<a class="ui label" value="上后牙">上后牙</a>
+									<a class="ui label" value="下后牙">下后牙</a>
+									<a class="ui label" value="左上后牙">左上后牙</a>
+									<a class="ui label" value="左下后牙">左下后牙</a>
+									<a class="ui label" value="右上后牙">右上后牙</a>
+									<a class="ui label" value="右下后牙">右下后牙</a>
+									<a class="ui label" value="口内多颗牙">口内多颗牙</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="collapsing">症状
+								<a class="age search detail">
+									<i class="search icon"></i>
+								</a>
+							</td>
+							<td>
+								<div class="ui blue labels" value="symptom">
+									<a class="ui label" value="颜色变化">颜色变化</a>
+									<a class="ui label" value="有洞">有洞</a>
+									<a class="ui label" value="冷热敏感">冷热敏感</a>
+									<a class="ui label" value="充填体松动">充填体松动</a>
+									<a class="ui label" value="充填体脱落">充填体脱落</a>
+									<a class="ui label" value="食物嵌塞">食物嵌塞</a>
+									<a class="ui label" value="折裂">折裂</a>
+									<a class="ui label" value="咬合痛">咬合痛</a>
+									<a class="ui label" value="牙体缺损">牙体缺损</a>
+									<a class="ui label" value="要求补牙">要求补牙</a>
+									<a class="ui label" value="外伤">外伤</a>
+									<a class="ui label" value="充填体缺损">充填体缺损</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
 				<h3 class="ui orange header">个人史</h3>
 				<table class="ui very basic table">
 		  			<tbody>

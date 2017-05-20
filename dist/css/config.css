@@ -26,10 +26,18 @@ span {
 
 .ui.menu .logo span {
 	font-size: larger;
-	font-weight: bolder;
 	margin-left: 0.5em;
 }
 
 .ui.menu .logo.item img {
 	width: 3.5em;
+}
+
+.ui.secondary.menu a.item {
+	color:rgba(255,255,255,.9);
+	font-weight: bolder;
+}
+
+.ui.secondary.menu a.item:hover {
+	color: #fff;
 }
