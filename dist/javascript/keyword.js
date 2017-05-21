@@ -9,12 +9,14 @@ $(document).ready(function(){
 	$('.ui.table a.label').click(function(){
 		var DataBaseTableName = $(this).parents('.ui.table').attr('id'),
 			DataBaseFieldName = $(this).parents('.ui.labels').attr('value'),
-			SearchItemValue   = $(this).text(),
+			SearchItemText    = $(this).text(),
+			SearchItemValue   = $(this).attr('value') == undefined ? SearchItemText : $(this).attr('value'),
 			SearchItemName    = $(this).parents('td').prev().text();
 
 		search({
 			DataBaseTableName : DataBaseTableName,
 			DataBaseFieldName : DataBaseFieldName,
+			SearchItemText    : SearchItemText,
 			SearchItemValue   : SearchItemValue,
 			SearchItemName    : SearchItemName,
 		});
@@ -29,11 +31,11 @@ $(document).ready(function(){
 		window.location.href = "keywordsearch.html" + toquerystring({
 			type     : Parameters.DataBaseTableName,
 			name     : Parameters.DataBaseFieldName,
+			text     : Parameters.SearchItemText,
 			value    : Parameters.SearchItemValue,
 			itemName : Parameters.SearchItemName,
 		});
 	}
-
 
 	// ***************************************************************
 	// FUNCTION: 搜索内容
@@ -70,6 +72,7 @@ $(document).ready(function(){
 			search({
 				DataBaseTableName : $(this).form('get value', "DataBaseTableName"),
 				DataBaseFieldName : $(this).form('get value', "DataBaseFieldName"),
+				SearchItemText    : $(this).form('get value', "search"),
 				SearchItemValue   : $(this).form('get value', "search"),
 				SearchItemName    : $(this).form('get value', "SearchItemName"),
 			});

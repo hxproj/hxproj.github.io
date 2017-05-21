@@ -5,6 +5,7 @@ $(document).ready(function(){
 	// INIT PARAMENTERS
 	var table    = requestParameter("type"),
 		field    = requestParameter("name"),
+		text     = requestParameter("text"),
 		value    = requestParameter("value"),
 		itemName = requestParameter("itemName");
 
@@ -24,12 +25,12 @@ $(document).ready(function(){
 		error    : function(){ networkError(); },
 		success  : function(vData){
 			if (vData.searched == "ok") {
-				$('.search.label').text(decodeURI(itemName + ": " + value));
+				$('.search.label').text(decodeURI(itemName + ": " + text));
 	 			
 	 			// 显示当前页所有病历
 	 			showAllCase(vData.info_list);
 			} else {
-				$('.search.label').text("未搜索到“" + decodeURI(itemName+ "(" + value + ")") + "”相关病历");
+				$('.search.label').text("未搜索到“" + decodeURI(itemName+ "(" + text + ")") + "”相关病历");
 			}
 		}
 	});
