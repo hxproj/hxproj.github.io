@@ -27,12 +27,20 @@ $(document).ready(function(){
 			if (vData.searched == "ok") {
 				$('.search.label').text(decodeURI(itemName + ": " + text));
 	 			
-	 			// 显示当前页所有病历
 	 			showAllCase(vData.info_list);
 			} else {
 				$('.search.label').text("未搜索到“" + decodeURI(itemName+ "(" + text + ")") + "”相关病历");
 			}
 		}
+	});
+
+
+	// ***************************************************************
+	// 返回
+	$('#return').click(function(){
+		redirection("keyword.html", {table : table});
+
+		return false;
 	});
 
 

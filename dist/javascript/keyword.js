@@ -1,5 +1,17 @@
 $(document).ready(function(){
 
+	var Table = requestParameter("Table");
+	if (Table != undefined && Table != "") {
+		var $Table = $("table[tid=" + Table + "]");
+		if ($Table.length > 0) {
+			var TabIndex = $Table.parents('.tab.segment').attr('data-tab');
+			$('#context .menu .active').removeClass("active");
+			$('#context .segment.active').removeClass("active");
+			$('#context .menu a[data-tab=' + TabIndex + ']').addClass("active");
+			$('#context .segment[data-tab=' + TabIndex + ']').addClass("active");
+		}
+	}
+
 	// ***************************************************************
 	// FUNCTION: 设置tab可选性
 	$('#context .menu .item').tab({ context: $('#context') });
