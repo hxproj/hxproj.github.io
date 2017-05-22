@@ -7,7 +7,7 @@ $(document).ready(function(){
 	// ***************************************************************
 	// FUNCTION: 点击标签
 	$('.ui.table a.label').click(function(){
-		var DataBaseTableName = $(this).parents('.ui.table').attr('id'),
+		var DataBaseTableName = $(this).parents('.ui.table').attr('tid'),
 			DataBaseFieldName = $(this).parents('.ui.labels').attr('value'),
 			SearchItemText    = $(this).text(),
 			SearchItemValue   = $(this).attr('value') == undefined ? SearchItemText : $(this).attr('value'),
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		window.location.href = "keywordsearch.html" + toquerystring({
 			type     : Parameters.DataBaseTableName,
 			name     : Parameters.DataBaseFieldName,
-			text     : Parameters.SearchItemText,
+			text     : encodeURI(Parameters.SearchItemText),
 			value    : Parameters.SearchItemValue,
 			itemName : Parameters.SearchItemName,
 		});
