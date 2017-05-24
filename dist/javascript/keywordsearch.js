@@ -28,6 +28,16 @@ $(document).ready(function(){
 				$('.search.label').text(decodeURI(itemName + ": " + text));
 	 			
 	 			showAllCase(vData.info_list);
+
+	 			var QueryURL = URL_SEARCH + toquerystring({table : table}) + "&" + field + "=" + value;
+				$.Page(
+					$('#main_info'),
+				 	vData.pages,
+				 	1,
+				 	QueryURL,
+				 	function() { networkError(); },
+				 	function(data) { showAllCase(data.info_list); }
+				 );
 			} else {
 				$('.search.label').text("未搜索到“" + decodeURI(itemName+ "(" + text + ")") + "”相关病历");
 			}
@@ -47,9 +57,9 @@ $(document).ready(function(){
 	// ***************************************************************
 	// Show
 	function showAllCase(vData) {
-		$.each(vData, function(){
-			showCase(this);
-		});
+		$('.ui.items .item').remove();
+		
+		$.each(vData, function(){ showCase(this); });
 	}
 	function showCase(vCase) {
 		var $Item = $InvisibleItem.clone(false).removeClass('invisible');

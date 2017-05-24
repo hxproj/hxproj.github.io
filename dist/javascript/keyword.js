@@ -53,7 +53,7 @@ $(document).ready(function(){
 	// FUNCTION: 搜索内容
 	$('.search.detail').click(function(){
 
-		var DataBaseTableName = $(this).parents('.ui.table').attr('id'),
+		var DataBaseTableName = $(this).parents('.ui.table').attr('tid'),
 			$Item             = $(this).parents('tr'),
 			DataBaseFieldName = $Item.find('.ui.labels').attr('value'),
 			SearchItemName    = $Item.find('td:first').text();
