@@ -273,7 +273,6 @@ $(document).ready(function(){
 			is_hypnalgia : getFormData(PresentIllnessHistoryForm, "is_hypnalgia"),
 			is_sensitive_cold_heat : getFormData(PresentIllnessHistoryForm, "is_sensitive_cold_heat"),
 			is_cold_hot_stimulationpain : getFormData(PresentIllnessHistoryForm, "is_cold_hot_stimulationpain"),
-			is_delayed_pain : getFormData(PresentIllnessHistoryForm, "is_delayed_pain"),
 			medicine_name : getFormData(PresentIllnessHistoryForm, "medicine_name"),
 			is_relief : getFormData(PresentIllnessHistoryForm, "is_relief"),
 			additional : getFormData(PresentIllnessHistoryForm, "additional"),
@@ -368,7 +367,6 @@ $(document).ready(function(){
 			DescribeText += vData.is_hypnalgia + "，";
 			DescribeText += vData.is_sensitive_cold_heat + "，";
 			DescribeText += vData.is_cold_hot_stimulationpain + "，";
-			DescribeText += vData.is_delayed_pain + "，";
 
 			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
 								DescribeText += "未服用任何药物";
@@ -382,7 +380,6 @@ $(document).ready(function(){
 			DescribeText += vData.is_hypnalgia + "，";
 			DescribeText += vData.is_sensitive_cold_heat + "，";
 			DescribeText += vData.is_cold_hot_stimulationpain + "，";
-			DescribeText += vData.is_delayed_pain + "，";
 
 			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
 								DescribeText += "未服用任何药物";
@@ -430,8 +427,8 @@ $(document).ready(function(){
 		var Sensitive = "<span>宿主易感性：</span>";
 		Sensitive += vData.sjogren_syndrome + "，";
 
-		vData.salivary_gland_disease ? Sensitive += "患有唾液腺疾病：" + vData.salivary_gland_disease :
-								Sensitive += "无唾液腺疾病";
+		vData.salivary_gland_disease ? Sensitive += "患有影响易感性的疾病：" + vData.salivary_gland_disease :
+								Sensitive += "无影响易感性的疾病";
 		Sensitive += "，";
 
 		vData.consciously_reduce_salivary_flow ? Sensitive += "自觉唾液流量减少" + vData.consciously_reduce_salivary_flow :
@@ -506,7 +503,6 @@ $(document).ready(function(){
 		$('#PresentIllnessHistory select[name=is_hypnalgia]').dropdown("set selected", IllnessHistory.is_hypnalgia);
 		$('#PresentIllnessHistory select[name=is_sensitive_cold_heat]').dropdown("set selected", IllnessHistory.is_sensitive_cold_heat);
 		$('#PresentIllnessHistory select[name=is_cold_hot_stimulationpain]').dropdown("set selected", IllnessHistory.is_cold_hot_stimulationpain);
-		$('#PresentIllnessHistory select[name=is_delayed_pain]').dropdown("set selected", IllnessHistory.is_delayed_pain);
 		$('#PresentIllnessHistory select[name=is_relief]').dropdown("set selected", IllnessHistory.is_relief);
 		$('#PresentIllnessHistory select[name=fill_type]').dropdown("set selected", IllnessHistory.fill_type);
 		$('#PresentIllnessHistory select[name=fill_state]').dropdown("set selected", IllnessHistory.fill_state);

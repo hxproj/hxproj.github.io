@@ -154,6 +154,7 @@ $(document).ready(function(){
 				user_id  : UID, 
 				case_id  : CID,
 				tooth_id : TID,
+				location : $ThisForm.form('get value', 'location_display'),
 				caries_tired : $ThisForm.form('get value', 'caries_tired_display')
 			}) + $ThisForm.serialize();
 
@@ -280,8 +281,8 @@ $(document).ready(function(){
 		// 当选根分叉病变无时则不显示位置
 		if (vData.furcation != "根分叉病变无") {
 			ME_Around_Text += vData.furcation + "，";
-			if (vData.location != " ") {
-				ME_Around_Text += vData.location + "，";
+			if (vData.location != "") {
+				ME_Around_Text += "位于" + vData.location + "，";
 			}
 		}
 
@@ -351,9 +352,12 @@ $(document).ready(function(){
 		$('input[name=tooth_location]').val(vData.tooth_location);
 		$('input[name=tooth_type]').val(vData.tooth_type);
 
-		// 龋坏累及牙面去掉逗号
 		$.each(vData.caries_tired.split(","), function(){
 			$('select[name=caries_tired_display]').dropdown("set selected", this);
+		});
+
+		$.each(vData.location.split(","), function(){
+			$('select[name=location_display]').dropdown("set selected", this);
 		});
 
 		$('select[name=secondary]').dropdown("set selected", vData.secondary);
@@ -376,7 +380,6 @@ $(document).ready(function(){
 		$('select[name=bop]').dropdown("set selected", vData.bop);
 		$('select[name=periodontal_pocket_depth]').dropdown("set selected", vData.periodontal_pocket_depth);
 		$('select[name=furcation]').dropdown("set selected", vData.furcation);
-		$('select[name=location]').dropdown("set selected", vData.location);
 		$('select[name=mobility]').dropdown("set selected", vData.mobility);
 		$('select[name=fistula]').dropdown("set selected", vData.fistula);
 		$('select[name=overflow_pus]').dropdown("set selected", vData.overflow_pus);

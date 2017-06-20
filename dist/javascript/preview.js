@@ -202,7 +202,6 @@ $(document).ready(function(){
 			DescribeText += vData.is_hypnalgia + "，";
 			DescribeText += vData.is_sensitive_cold_heat + "，";
 			DescribeText += vData.is_cold_hot_stimulationpain + "，";
-			DescribeText += vData.is_delayed_pain + "，";
 
 			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
 								DescribeText += "未服用任何药物";
@@ -216,7 +215,6 @@ $(document).ready(function(){
 			DescribeText += vData.is_hypnalgia + "，";
 			DescribeText += vData.is_sensitive_cold_heat + "，";
 			DescribeText += vData.is_cold_hot_stimulationpain + "，";
-			DescribeText += vData.is_delayed_pain + "，";
 
 			vData.medicine_name ? DescribeText += "服用" + vData.medicine_name :
 								DescribeText += "未服用任何药物";
@@ -263,8 +261,8 @@ $(document).ready(function(){
 		var Sensitive = "<span>宿主易感性：</span>";
 		Sensitive += vData.sjogren_syndrome + "，";
 
-		vData.salivary_gland_disease ? Sensitive += "患有唾液腺疾病：" + vData.salivary_gland_disease :
-								Sensitive += "无唾液腺疾病";
+		vData.salivary_gland_disease ? Sensitive += "患有影响易感性的疾病：" + vData.salivary_gland_disease :
+								Sensitive += "无影响易感性的疾病";
 		Sensitive += "，";
 
 		vData.consciously_reduce_salivary_flow ? Sensitive += "自觉唾液流量减少" + vData.consciously_reduce_salivary_flow :
@@ -410,7 +408,9 @@ $(document).ready(function(){
 
 				if (vData.furcation != "根分叉病变无") {
 					MouthAround += vData.furcation + "，";
-					MouthAround += vData.location + "，";
+					if (vData.location != "") {
+						MouthAround += "位于" + vData.location + "，";
+					}
 				}
 
 				MouthAround += vData.fistula + "，";
