@@ -283,8 +283,7 @@ $(document).ready(function(){
 		});
 
 		showPersonalHistory($('#ID_Confirm'), {
-			consumption_of_sweet : getFormData(PersonalHistoryForm, "consumption_of_sweet"),
-			frequency_of_sweet : getFormData(PersonalHistoryForm, "frequency_of_sweet"),
+			is_like_sweet : getFormData(PersonalHistoryForm, "is_like_sweet"),
 			frequency_of_meal : getFormData(PersonalHistoryForm, "frequency_of_meal"),
 			is_carbonic_acid : getFormData(PersonalHistoryForm, "is_carbonic_acid"),
 			is_floss : getFormData(PersonalHistoryForm, "is_floss"),
@@ -408,10 +407,9 @@ $(document).ready(function(){
 
 		// 饮食习惯
 		var Eating_Habits = "<span>饮食习惯：</span>";
-		Eating_Habits += "甜食或蛋白质类食物食用量" + vData.consumption_of_sweet + "，";
-		Eating_Habits += vData.frequency_of_sweet + "，";
 		Eating_Habits += vData.frequency_of_meal + "，";
-		Eating_Habits += vData.is_carbonic_acid;
+		Eating_Habits += vData.is_carbonic_acid + "，";
+		Eating_Habits += vData.is_like_sweet;
 		Eating_Habits += "。";
 		appendpragraph($PersonalHistory, Eating_Habits);
 
@@ -523,8 +521,7 @@ $(document).ready(function(){
 		$('#PresentIllnessHistory .segment[data-tab=' + TabIndex + ']').addClass("active");
 
         // 个人史
-        $('#PersonalHistory select[name=consumption_of_sweet]').dropdown("set selected", PersonalHistory.consumption_of_sweet);
-        $('#PersonalHistory select[name=frequency_of_sweet]').dropdown("set selected", PersonalHistory.frequency_of_sweet);
+        $('#PersonalHistory select[name=is_like_sweet]').dropdown("set selected", PersonalHistory.is_like_sweet);
         $('#PersonalHistory select[name=frequency_of_meal]').dropdown("set selected", PersonalHistory.frequency_of_meal);
         $('#PersonalHistory select[name=is_carbonic_acid]').dropdown("set selected", PersonalHistory.is_carbonic_acid);
         $('#PersonalHistory select[name=is_floss]').dropdown("set selected", PersonalHistory.is_floss);

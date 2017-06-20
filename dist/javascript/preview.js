@@ -240,10 +240,9 @@ $(document).ready(function(){
 
 		// 饮食习惯
 		var Eating_Habits = "<span>饮食习惯：</span>";
-		Eating_Habits += vData.consumption_of_sweet + "，";
-		Eating_Habits += vData.frequency_of_sweet + "，";
 		Eating_Habits += vData.frequency_of_meal + "，";
-		Eating_Habits += vData.is_carbonic_acid;
+		Eating_Habits += vData.is_carbonic_acid + "，";
+		Eating_Habits += vData.is_like_sweet;
 		Eating_Habits += "。";
 		appendpragraph($PersonalHistory, Eating_Habits);
 
