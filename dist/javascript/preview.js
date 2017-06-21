@@ -777,7 +777,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -851,7 +851,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
+		vDescription += "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
@@ -979,7 +979,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
+		vDescription += "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
@@ -1059,7 +1059,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
+		vDescription += "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
@@ -1173,7 +1173,7 @@ $(document).ready(function(){
 		vDescription += NewLine;
 
 		vDescription += "9. ";
-		vDescription += vData.compromise + "调合" + "，";
+		vDescription += "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {
@@ -1203,7 +1203,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm。";
 		vDescription += "使用钻针" + vData.drill_needle + "。";
@@ -1243,7 +1243,7 @@ $(document).ready(function(){
 		vDescription += "磷酸酸蚀牙面" + vData.phosphorus_acid_time + "，";
 		vDescription += "涂布" + vData.bind_type_component + "粘接剂，";
 		vDescription += "修复体就位，临时光照" + vData.observed_time + "，去除多余粘接剂，";
-		vDescription += vData.compromise + "调合" + "，";
+		vDescription += "调合" + "，";
 		vDescription += vData.polishing + "抛光";
 
 		if (vData.compromise_polishing_additional != "") {

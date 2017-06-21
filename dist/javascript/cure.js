@@ -29,7 +29,7 @@ $(document).ready(function(){
 	// 手术治疗
 	window.getOtherOption({
 		table_name : TABLE.CURE_SURGICAL,
-		fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", "anesthesia_medicine", "drill_needle_display",
+		fields     : ["tools_display", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", "anesthesia_medicine", "drill_needle_display",
 			"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp", "appease_medicine", "glass_ionomer"]
 	}); 
 	window.getOtherOption({
@@ -140,10 +140,11 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var MinimalFields1 = [
-			new Field("shape_of_hole_display"), new Field("depth_of_hole", [EmptyInput])
+			new Field("shape_of_hole_display"), new Field("depth_of_hole", [EmptyInput]), 
+			new Field("tools_display"),
 		],
 		MinimalFields2 = [
-			new Field("shape_of_hole_display"), new Field("polishing_display"),
+			new Field("shape_of_hole_display"), new Field("tools_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
@@ -153,7 +154,8 @@ $(document).ready(function(){
 		],
 		MinimalFields3 = [
 			new Field("shape_of_hole_display"), new Field("depth_of_hole", [EmptyInput]), 
-			new Field("disinfect"), new Field("glass_ionomer"),
+			new Field("disinfect"), new Field("glass_ionomer"), 
+			new Field("tools_display"),
 		];
 	// **************************************************
 	// ART修复
@@ -161,11 +163,11 @@ $(document).ready(function(){
 		fields: MinimalFields1,
 		inline: true,
 		onSuccess: function(){
-			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
+			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display"), tools : $(this).form('get value', "tools_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#minimalContext form[data-tab=minimalContext1]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["tools", "is_piece", "is_chock"]
+					fields     : ["tools_display", "is_piece", "is_chock"]
 				});
 			});
 			return false;
@@ -181,12 +183,13 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
+				tools         : $(this).form('get value', "tools_display")
 			});
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#minimalContext form[data-tab=minimalContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
+					fields     : ["tools_display", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
 						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "modification_display", "lamp"]
 				});
 			});
@@ -199,11 +202,11 @@ $(document).ready(function(){
 		fields: MinimalFields3,
 		inline: true,
 		onSuccess: function(){
-			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
+			submitForm(toform({shape_of_hole : $(this).form('get value', "shape_of_hole_display"), tools : $(this).form('get value', "tools_display")}) + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#minimalContext form[data-tab=minimalContext3]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "disinfect", "glass_ionomer"]
+					fields     : ["anesthesia_medicine", "tools_display", "is_piece", "is_chock", "disinfect", "glass_ionomer"]
 				});
 			});
 			return false;
@@ -224,7 +227,7 @@ $(document).ready(function(){
 	// ----------------------------------------------------------------------
 	// INIT fields and rules;
 	var ResinFields1 = [
-			new Field("shape_of_hole_display"), new Field("polishing_display"),
+			new Field("shape_of_hole_display"), new Field("tools_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
@@ -246,13 +249,14 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
+				tools         : $(this).form('get value', "tools_display")
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#resinContext form[data-tab=resinContext1]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
+					fields     : ["anesthesia_medicine", "tools_display", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
 						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
 				});
 			});
@@ -283,7 +287,7 @@ $(document).ready(function(){
 			new Field("penetration_resin"),
 		],
 		lookFields2 = [
-			new Field("shape_of_hole_display"), new Field("polishing_display"),
+			new Field("shape_of_hole_display"), new Field("tools_display"),
 			new Field("depth_of_hole", [EmptyInput]), new Field("shade_guide"), 
 			new Field("color_of_tooth"), new Field("disinfect"),
 			new Field("etching_type"),new Field("coating_time"), 
@@ -294,7 +298,7 @@ $(document).ready(function(){
 	// **************************************************
 	// 渗透树脂修复
 	$('#lookContext form[data-tab=lookContext1]').form({
-		fields: ResinFields1,
+		fields: lookFields1,
 		inline: true,
 		onSuccess: function(){
 
@@ -312,7 +316,7 @@ $(document).ready(function(){
 	// **************************************************
 	// 微创复合树脂分层修复
 	$('#lookContext form[data-tab=lookContext2]').form({
-		fields: ResinFields2,
+		fields: lookFields2,
 		inline: true,
 		onSuccess: function(){
 
@@ -320,13 +324,14 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				modification  : $(this).form('get value', "modification_display"),
+				tools         : $(this).form('get value', "tools_display")
 			});
 
 			submitForm(AddtionForm + $(this).serialize(), $(this).find('input[type=file]').attr("id"), function() {
 				addOtherOption({
 					form       : $('#lookContext form[data-tab=lookContext2]'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
+					fields     : ["anesthesia_medicine", "tools_display", "is_piece", "is_chock", "shade_guide", "color_of_tooth", "disinfect", 
 						"bottom", "full_etching", "self_etching", "resin", "color_of_resin", "lamp", "modification_display"]
 				});
 			});
@@ -344,7 +349,7 @@ $(document).ready(function(){
 			new Field("gingival_retraction_display"), new Field("modulo"),
 			new Field("etching_type"), new Field("bind_type"),
 			new Field("phosphorus_acid_time"), new Field("bind_type_component"),
-			new Field("observed_time"), new Field("polishing_display"),
+			new Field("observed_time"), new Field("tools_display"),
 		];
 	$('#indirectContext').form({
 		fields: indirectContextFields,
@@ -355,6 +360,7 @@ $(document).ready(function(){
 				shape_of_hole : $(this).form('get value', "shape_of_hole_display"),
 				polishing     : $(this).form('get value', "polishing_display"),
 				drill_needle  : $(this).form('get value', "drill_needle_display"),
+				tools         : $(this).form('get value', "tools_display"),
 				gingival_retraction : $(this).form('get value', "gingival_retraction_display"),
 			});
 
@@ -362,7 +368,7 @@ $(document).ready(function(){
 				addOtherOption({
 					form       : $('#indirectContext'),
 					table_name : TABLE.CURE_SURGICAL,
-					fields     : ["anesthesia_medicine", "tools", "prosthesis_type", "fill_material", "bind_type", "bind_material", "fluoride_acid_time", "phosphorus_acid_time", "bind_type_component", "drill_needle_display"]
+					fields     : ["anesthesia_medicine", "tools_display", "prosthesis_type", "fill_material", "bind_type", "bind_material", "fluoride_acid_time", "phosphorus_acid_time", "bind_type_component", "drill_needle_display"]
 				});
 			});
 			return false;
@@ -582,7 +588,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -607,7 +613,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -682,7 +688,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -742,7 +748,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -864,7 +870,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm" + NewLine;
 
@@ -941,7 +947,7 @@ $(document).ready(function(){
 		if (vData.microscope == "显微镜下") {
 			vDescription += vData.microscope + "，";
 		}
-		vDescription += vData.tools + "，以龋蚀显示剂指示，继续去净龋坏，";
+		vDescription += vData.tools + "去龋，以龋蚀显示剂指示，继续去净龋坏，";
 		vDescription += vData.shape_of_hole + "制备洞形，深度：";
 		vDescription += vData.depth_of_hole + "mm。";
 		vDescription += "使用钻针" + vData.drill_needle + "。";
@@ -1006,7 +1012,6 @@ $(document).ready(function(){
 	function setnoSurgical3DefultFormData(vData) {
 		$('select[name=additional_device]').dropdown("set selected", vData.additional_device);
 		$('select[name=reagent]').dropdown("set selected", vData.reagent);
-		$('select[name=tools]').dropdown("set selected", vData.tools);
 		$('select[name=time_of_etching]').dropdown("set selected", vData.time_of_etching);
 		$('select[name=lamp]').dropdown("set selected", vData.lamp);
 		$('select[name=check_time]').dropdown("set selected", vData.check_time);
@@ -1017,7 +1022,6 @@ $(document).ready(function(){
 		$('select[name=part_anesthesia]').dropdown("set selected", vData.part_anesthesia);
 		$('select[name=rubber]').dropdown("set selected", vData.rubber);
 		$('select[name=microscope]').dropdown("set selected", vData.microscope);
-		$('select[name=tools]').dropdown("set selected", vData.tools);
 		
 		$('select[name=is_piece]').dropdown("set selected", vData.is_piece);
 		$('select[name=is_chock]').dropdown("set selected", vData.is_chock);
@@ -1065,7 +1069,7 @@ $(document).ready(function(){
 				$('select[name=shape_of_hole_display]').dropdown("set selected", this);
 			});
 		}
-		if (vData.polishing != undefined && vData.polishing != null) {
+		if (vData.polishing != undefined && vData.polishing != null && vData.polishing != "") {
 			$.each(vData.polishing.split(','), function(){
 				$('select[name=polishing_display]').dropdown("set selected", this);
 			});
@@ -1083,6 +1087,11 @@ $(document).ready(function(){
 		if (vData.modification != undefined && vData.modification != null) {
 			$.each(vData.modification.split(','), function(){
 				$('select[name=modification_display]').dropdown("set selected", this);
+			});
+		}
+		if (vData.tools != undefined && vData.tools != null) {
+			$.each(vData.tools.split(','), function(){
+				$('select[name=tools_display]').dropdown("set selected", this);
 			});
 		}
 
