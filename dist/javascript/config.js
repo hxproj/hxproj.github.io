@@ -97,7 +97,7 @@ $(document).ready(function(){
 				$ClonedImage.attr("value", this.img_id);
 
 				var ImagePath = this.path;
-				//ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+				ImagePath = ImagePath.substring(ImagePath.lastIndexOf("ImageFile\\"), ImagePath.length);
 				window.loadImage(ImagePath, function(){
 					$ClonedImage.find('img').attr('src', ImagePath);
 					$ClonedImage.find('.corner').removeClass('hidden');
@@ -137,7 +137,7 @@ $(document).ready(function(){
 			$ClonedImage.attr("value", this.img_id);
 
 			var ImagePath = this.path;
-			//ImagePath = ImagePath.substring(ImagePath.lastIndexOf("Medical_Case\\"), ImagePath.length);
+			ImagePath = ImagePath.substring(ImagePath.lastIndexOf("ImageFile\\"), ImagePath.length);
 			window.loadImage(ImagePath, function(){
 				$ClonedImage.attr('src', ImagePath);
 			});
