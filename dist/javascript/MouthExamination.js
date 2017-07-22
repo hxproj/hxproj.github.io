@@ -316,6 +316,8 @@ $(document).ready(function(){
 			ME_X_Text += vData.X_Ray_depth;
 			ME_X_Text += vData.X_Ray_fill_quality + "，";
 			ME_X_Text += vData.X_Ray_fill_round + "。";
+		} else {
+			ME_X_Text += "X线片未见明显异常。";
 		}
 
 		// 如果CT表现和咬翼片表现为空时，则不显示

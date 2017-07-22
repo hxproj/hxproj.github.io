@@ -373,25 +373,25 @@ $(document).ready(function(){
 				var MouthBody = "<span>牙体情况：</span>";
 				MouthBody += vData.tooth_location + "牙";
 				MouthBody += "龋坏累及" + vData.caries_tired + "，";
-				if (vData.depth != "近髓") {
-					MouthBody += "深达";
-				}
-				MouthBody += vData.depth + "，";		
+				MouthBody += "深达" + vData.depth + "，";
 
+				// 当原充填体选择“无”时，不进行任何语言描述，且不描述有无继发龋
 				if (vData.fill != "无") {
 					MouthBody += "原充填体为" + vData.fill + "，";
 					MouthBody += vData.secondary + "，";
-				}
+				};
 
 				MouthBody += vData.color_of_caries + "，";
 				MouthBody += vData.flex_of_caries + "，";
 				MouthBody += vData.cold + "，";
+				MouthBody += vData.cold_delay + "，";
 				MouthBody += vData.hot + "，";
+				MouthBody += vData.hot_delay + "，";
 				MouthBody += vData.touch + "，";
 				MouthBody += vData.bite;
 
 				if (vData.vitality_value_of_teeth != "") {
-					MouthBody += "，牙齿活力值：" + vData.vitality_value_of_teeth;
+					MouthBody += "，牙髓电活力值：" + vData.vitality_value_of_teeth;
 				};
 
 				MouthBody += "。";
@@ -432,22 +432,34 @@ $(document).ready(function(){
 				appendpragraph($MouthExam, Neighbor);
 
 				// X线片表现
-				var X_Ray = "<span>X线片表现：</span>";
-				X_Ray += vData.tooth_location + "牙";
-				X_Ray += vData.X_Ray_location + "，";
-				X_Ray += vData.X_Ray_depth + "，";
-				X_Ray += vData.X_Ray_fill_quality + "，根尖周组织无明显异常";
+				var X_Ray = "<span>影像学表现：</span>";
 
-				if (vData.CT_shows) {
-					X_Ray += "，CT表现：" + vData.CT_shows;
+				if (vData.X_Ray_Visible == "visible") {
+					X_Ray += vData.tooth_location + "牙";
+					X_Ray += vData.X_Ray_location;
+					X_Ray += vData.X_Ray_depth;
+					X_Ray += vData.X_Ray_fill_quality + "，";
+					X_Ray += vData.X_Ray_fill_round + "。";
+				} else {
+					X_Ray += "X线片未见明显异常。";
 				}
-				if (vData.piece) {
-					X_Ray += "，咬翼片表现：" + vData.piece;
+
+				// 如果CT表现和咬翼片表现为空时，则不显示
+				if (vData.CT_shows != "") {
+					X_Ray += "CT表现：" + vData.CT_shows;
+					if (vData.piece != "" || vData.OtherExpression != "") {
+						X_Ray += "，";
+					};
 				}
-				if (vData.OtherExpression) {
-					X_Ray += "，其他表现：" + vData.OtherExpression;
+				if (vData.piece != "") {
+					X_Ray += "咬翼片表现：" + vData.piece;
+					if (vData.OtherExpression != "") {
+						X_Ray += "，";
+					};
 				}
-				X_Ray += "。";
+				if (vData.OtherExpression != "") {
+					X_Ray += "其它表现：" + vData.OtherExpression;
+				}
 
 				appendpragraph($MouthExam, X_Ray);
 
