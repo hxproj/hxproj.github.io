@@ -63,7 +63,12 @@
 					<th><a class="detail">性别</a></th>
 					<th><a class="detail">联系方式</a></th>
 					<th><a class="detail">诊断</a></th>
-					<th><a class="detail">医生</a></th>
+					<th>
+						<a class="detail">医生</a>
+						<a class="doctor search detail">
+							<i class="search icon"></i>
+						</a>
+					</th>
 					<th>
 						<a class="sort in_date detail">
 							最近就诊时间<i class="caret down icon"></i>
@@ -150,13 +155,15 @@
 				    		<input type='text' name='contact' placeholder='输入联系方式'>
 				    	</div>
 				    </div>
+
+				    <input type='hidden' name='main_doctor'>
 				</form>
 		    </div>
 	  	</div>
 		<div class='actions'>
 			<div class='ui orange deny button'>取消</div>
 			<div class='ui primary approve right labeled icon button'>
-				添加<i class='checkmark icon'></i>
+				确定<i class='checkmark icon'></i>
 			</div>
 		</div>
 	</div>
@@ -167,8 +174,29 @@
 		    <div class="description">
 		    	<form class="ui form">
 					<div class="field">
+						<div class="ui blue header">病人姓名</div>
 						<div class="ui fluid action input">
 							<input type="text" name="search" placeholder="输入姓名...">
+							<div class="ui submit teal button">搜索</div>
+						</div>
+					</div>
+				</form>
+		    </div>
+	  	</div>
+		<div class="actions">
+			<div class="ui blue deny button">取消</div>
+		</div>
+	</div>
+
+	<!--Search Doctor Modal-->
+	<div class="ui modal " id="SearchDoctorModal">
+		<div class="content">
+		    <div class="description">
+		    	<form class="ui form">
+					<div class="field">
+						<div class="ui blue header">医生</div>
+						<div class="ui fluid action input">
+							<input type="text" name="search" placeholder="输入医生...">
 							<div class="ui submit teal button">搜索</div>
 						</div>
 					</div>

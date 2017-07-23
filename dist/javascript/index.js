@@ -34,6 +34,7 @@ $(document).ready(function(){
 		$Modal.find("input[name=occupation]").val($MedicalRecord.find("td[name=occupation]").text());
 		$Modal.find("input[name=contact]").val($MedicalRecord.find("td[name=contact]").text());
 		$Modal.find('select[name=gender]').dropdown("set selected", $MedicalRecord.find("td[name=gender]").text());
+		$Modal.find("input[name=main_doctor]").val($MedicalRecord.find("td[name=doctor]").text());
 		$Modal.find("input[name=ID]").val($MedicalRecord.attr("id_number"));
 
 		$Modal.modal({
@@ -94,6 +95,9 @@ $(document).ready(function(){
 	$('th .name.search').click(function(){
 		$('#SearchNameModal').modal("show");
 	});
+	$('th .doctor.search').click(function(){
+		$('#SearchDoctorModal').modal("show");
+	});
 	$('th .age.search').click(function(){
 		$('#SearchAgeModal').modal("show");
 	});
@@ -124,6 +128,31 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+
+	// Search doctor
+	$('#SearchDoctorModal form').form({
+		fields: {
+			search: {
+				identifier: 'search',
+				rules: [
+					{
+						type   : 'empty',
+						prompt : '请输入需要搜索的内容'
+					}
+				]
+			},
+		},
+		inline    : true,
+		onSuccess : function(){
+			redirection("search.html", {
+				parameter : "doctor",
+				value     : $(this).form('get value', "search")
+			});
+			
+			return false;
+		}
+	});
+
 	// Search age
 	$('#id_age').form({
 		fields: {
